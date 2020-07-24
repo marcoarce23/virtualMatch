@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> {
         appBar: AppBar(
             backgroundColor: AppTheme.themeBlackGrey,
             toolbarOpacity: 1.0,
-            iconTheme: IconThemeData(color: AppTheme.themeColorRojo, size: 12),
+            iconTheme: IconThemeData(color: AppTheme.themeDefault, size: 12),
             elevation: 5,
             title: Row(
               children: <Widget>[
@@ -66,7 +66,7 @@ class _HomePageState extends State<HomePage> {
                 sizedBox(10.0, 0.0),
                 FaIcon(
                   FontAwesomeIcons.playstation,
-                  color: AppTheme.themeColorRojo,
+                  color: AppTheme.themeDefault,
                   size: 18,
                 ),
               ],
@@ -173,7 +173,7 @@ class _HomePageState extends State<HomePage> {
             title: Text('Menu')),
       ],
       currentIndex: _selectedIndex,
-      selectedItemColor: AppTheme.themeColorRojo,
+      selectedItemColor: AppTheme.themeDefault,
       onTap: _onItemTapped,
     );
   }
@@ -285,7 +285,7 @@ class _HomePageState extends State<HomePage> {
                   //Icon(icono, color: Colors.white, size: 42.0),
                 ),
                 Text(texto,
-                    style: TextStyle(color: AppTheme.themeColorRojo, fontSize: size)),
+                    style: TextStyle(color: AppTheme.themeDefault, fontSize: size)),
               ],
             ),
           ),

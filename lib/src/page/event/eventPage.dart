@@ -47,7 +47,7 @@ class _EventAllPageState extends State<EventAllPage> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         toolbarOpacity: 0.7,
-        iconTheme: IconThemeData(color: AppTheme.themeVino, size: 12),
+        iconTheme: IconThemeData(color: AppTheme.themeDefault, size: 12),
         elevation: 0,
         title: Text("EVENTOS", style: kTitleAppBar),
         actions: <Widget>[
@@ -78,7 +78,7 @@ class _EventAllPageState extends State<EventAllPage> {
         ],
         currentIndex: page,
         unselectedItemColor: Colors.black54,
-        selectedItemColor: AppTheme.themeVino,
+        selectedItemColor: AppTheme.themeDefault,
         onTap: _onItemTapped,
       ),
       body: optionPage[page],

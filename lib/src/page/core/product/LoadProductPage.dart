@@ -14,7 +14,7 @@ import 'package:virtual_match/src/model/Const.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityMap.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
-import 'package:virtual_match/src/page/home/FabCircularMenuPage.dart';
+import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/provider/provider.dart';
 import 'package:virtual_match/src/style/Style.dart';

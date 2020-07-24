@@ -42,7 +42,7 @@ class _AboutPageState extends State<AboutPage> {
       height: 8.0,
       width: isActive ? 24.0 : 16.0,
       decoration: BoxDecoration(
-        color: isActive ? AppTheme.themeVino : Colors.black54,
+        color: isActive ? AppTheme.themeDefault : Colors.black54,
         borderRadius: BorderRadius.all(Radius.circular(12)),
       ),
     );
@@ -86,7 +86,7 @@ class _AboutPageState extends State<AboutPage> {
                     child: Text(
                       'Iniciar',
                       style: TextStyle(
-                        color: AppTheme.themeVino,
+                        color: AppTheme.themeDefault,
                         fontSize: 22.0,
                       ),
                     ),
@@ -136,7 +136,7 @@ class _AboutPageState extends State<AboutPage> {
                                       SizedBox(width: 11.0),
                                       FaIcon(
                                           FontAwesomeIcons.handHoldingMedical,
-                                          color: AppTheme.themeVino,
+                                          color: AppTheme.themeDefault,
                                           size: 35.0),
                                       SizedBox(width: 11.0),
                                       Expanded(
@@ -155,7 +155,7 @@ class _AboutPageState extends State<AboutPage> {
                                     children: <Widget>[
                                       SizedBox(width: 11.0),
                                       FaIcon(FontAwesomeIcons.handHoldingHeart,
-                                          color: AppTheme.themeVino,
+                                          color: AppTheme.themeDefault,
                                           size: 35.0),
                                       SizedBox(width: 11.0),
                                       Expanded(
@@ -174,7 +174,7 @@ class _AboutPageState extends State<AboutPage> {
                                     children: <Widget>[
                                       SizedBox(width: 11.0),
                                       FaIcon(FontAwesomeIcons.handHoldingWater,
-                                          color: AppTheme.themeVino,
+                                          color: AppTheme.themeDefault,
                                           size: 35.0),
                                       SizedBox(width: 10.0),
                                       Expanded(
@@ -224,7 +224,7 @@ class _AboutPageState extends State<AboutPage> {
                                     children: <Widget>[
                                       SizedBox(width: 10.0),
                                       FaIcon(FontAwesomeIcons.peopleCarry,
-                                          color: AppTheme.themeVino,
+                                          color: AppTheme.themeDefault,
                                           size: 35.0),
                                       SizedBox(width: 10.0),
                                       Expanded(
@@ -243,7 +243,7 @@ class _AboutPageState extends State<AboutPage> {
                                     children: <Widget>[
                                       SizedBox(width: 10.0),
                                       FaIcon(FontAwesomeIcons.peopleArrows,
-                                          color: AppTheme.themeVino,
+                                          color: AppTheme.themeDefault,
                                           size: 35.0),
                                       SizedBox(width: 13.0),
                                       Expanded(
@@ -262,7 +262,7 @@ class _AboutPageState extends State<AboutPage> {
                                     children: <Widget>[
                                       SizedBox(width: 10.0),
                                       FaIcon(FontAwesomeIcons.diagnoses,
-                                          color: AppTheme.themeVino,
+                                          color: AppTheme.themeDefault,
                                           size: 35.0),
                                       SizedBox(width: 10.0),
                                       Expanded(
@@ -316,7 +316,7 @@ class _AboutPageState extends State<AboutPage> {
                                       children: <Widget>[
                                         SizedBox(width: 10.0),
                                         FaIcon(FontAwesomeIcons.firstAid,
-                                            color: AppTheme.themeVino,
+                                            color: AppTheme.themeDefault,
                                             size: 30.0),
                                         SizedBox(width: 10.0),
                                         Expanded(
@@ -335,7 +335,7 @@ class _AboutPageState extends State<AboutPage> {
                                       children: <Widget>[
                                         SizedBox(width: 10.0),
                                         FaIcon(FontAwesomeIcons.listUl,
-                                            color: AppTheme.themeVino,
+                                            color: AppTheme.themeDefault,
                                             size: 30.0),
                                         SizedBox(width: 10.0),
                                         Expanded(
@@ -354,7 +354,7 @@ class _AboutPageState extends State<AboutPage> {
                                       children: <Widget>[
                                         SizedBox(width: 10.0),
                                         FaIcon(FontAwesomeIcons.users,
-                                            color: AppTheme.themeVino,
+                                            color: AppTheme.themeDefault,
                                             size: 30.0),
                                         SizedBox(width: 10.0),
                                         Expanded(
@@ -373,7 +373,7 @@ class _AboutPageState extends State<AboutPage> {
                                     //   children: <Widget>[
                                     //     SizedBox(width: 10.0),
                                     //     FaIcon(FontAwesomeIcons.diagnoses,
-                                    //         color: AppTheme.themeVino,
+                                    //         color: AppTheme.themeDefault,
                                     //         size: 35.0),
                                     //     SizedBox(width: 10.0),
                                     //     Expanded(
@@ -419,14 +419,14 @@ class _AboutPageState extends State<AboutPage> {
                                 Text(
                                   'Siguiente',
                                   style: TextStyle(
-                                    color: AppTheme.themeVino,
+                                    color: AppTheme.themeDefault,
                                     fontSize: 22.0,
                                   ),
                                 ),
                                 SizedBox(width: 10.0),
                                 Icon(
                                   Icons.arrow_forward,
-                                  color: AppTheme.themeVino,
+                                  color: AppTheme.themeDefault,
                                   size: 30.0,
                                 ),
                               ],
@@ -463,7 +463,7 @@ class _AboutPageState extends State<AboutPage> {
                         Text(
                           'Comenzar',
                           style: TextStyle(
-                            color: AppTheme.themeVino,
+                            color: AppTheme.themeDefault,
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold,
                           ),
@@ -471,7 +471,7 @@ class _AboutPageState extends State<AboutPage> {
                         SizedBox(width: 10.0),
                         FaIcon(
                           FontAwesomeIcons.handshake,
-                          color: AppTheme.themeVino,
+                          color: AppTheme.themeDefault,
                           size: 18,
                         ),
                       ],

@@ -356,7 +356,7 @@ class _AlbumLoadPagePageState extends State<AlbumLoadPage> {
         SizedBox(width: 15.0),
         DropdownButton(
           value: _opcionTipo,
-          icon: FaIcon(FontAwesomeIcons.sort, color: AppTheme.themeVino),
+          icon: FaIcon(FontAwesomeIcons.sort, color: AppTheme.themeDefault),
           items: getTipo(),
           onChanged: (value) {
             setState(() {

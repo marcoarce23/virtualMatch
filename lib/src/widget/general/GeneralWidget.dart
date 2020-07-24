@@ -19,7 +19,7 @@ Widget copyRigth() {
           FaIcon(
             //  FontAwesomeIcons.earlybirds,
             FontAwesomeIcons.playstation,
-            color: AppTheme.themeColorRojo,
+            color: AppTheme.themeDefault,
             size: 18,
           ),
         ],
@@ -31,7 +31,7 @@ Widget copyRigth() {
 Divider divider() {
   return Divider(
     thickness: 2.0,
-    color: AppTheme.themeColorRojo,
+    color: AppTheme.themeDefault,
     endIndent: 20.0,
     indent: 20.0,
   );

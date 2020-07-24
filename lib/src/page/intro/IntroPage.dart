@@ -137,7 +137,7 @@ class _IntroPageState extends State<IntroPage> {
                                       SizedBox(width: 11.0),
                                       FaIcon(
                                           FontAwesomeIcons.handHoldingMedical,
-                                          color: AppTheme.themeVino,
+                                          color: AppTheme.themeDefault,
                                           size: 35.0),
                                       SizedBox(width: 11.0),
                                       Expanded(
@@ -156,7 +156,7 @@ class _IntroPageState extends State<IntroPage> {
                                     children: <Widget>[
                                       SizedBox(width: 11.0),
                                       FaIcon(FontAwesomeIcons.handHoldingHeart,
-                                          color: AppTheme.themeVino,
+                                          color: AppTheme.themeDefault,
                                           size: 35.0),
                                       SizedBox(width: 11.0),
                                       Expanded(
@@ -175,7 +175,7 @@ class _IntroPageState extends State<IntroPage> {
                                     children: <Widget>[
                                       SizedBox(width: 11.0),
                                       FaIcon(FontAwesomeIcons.handHoldingWater,
-                                          color: AppTheme.themeVino,
+                                          color: AppTheme.themeDefault,
                                           size: 35.0),
                                       SizedBox(width: 10.0),
                                       Expanded(
@@ -225,7 +225,7 @@ class _IntroPageState extends State<IntroPage> {
                                     children: <Widget>[
                                       SizedBox(width: 10.0),
                                       FaIcon(FontAwesomeIcons.peopleCarry,
-                                          color: AppTheme.themeVino,
+                                          color: AppTheme.themeDefault,
                                           size: 35.0),
                                       SizedBox(width: 10.0),
                                       Expanded(
@@ -244,7 +244,7 @@ class _IntroPageState extends State<IntroPage> {
                                     children: <Widget>[
                                       SizedBox(width: 10.0),
                                       FaIcon(FontAwesomeIcons.peopleArrows,
-                                          color: AppTheme.themeVino,
+                                          color: AppTheme.themeDefault,
                                           size: 35.0),
                                       SizedBox(width: 13.0),
                                       Expanded(
@@ -263,7 +263,7 @@ class _IntroPageState extends State<IntroPage> {
                                     children: <Widget>[
                                       SizedBox(width: 10.0),
                                       FaIcon(FontAwesomeIcons.diagnoses,
-                                          color: AppTheme.themeVino,
+                                          color: AppTheme.themeDefault,
                                           size: 35.0),
                                       SizedBox(width: 10.0),
                                       Expanded(
@@ -321,7 +321,7 @@ class _IntroPageState extends State<IntroPage> {
                                       children: <Widget>[
                                         SizedBox(width: 10.0),
                                         FaIcon(FontAwesomeIcons.firstAid,
-                                            color: AppTheme.themeVino,
+                                            color: AppTheme.themeDefault,
                                             size: 30.0),
                                         SizedBox(width: 10.0),
                                         Expanded(
@@ -340,7 +340,7 @@ class _IntroPageState extends State<IntroPage> {
                                       children: <Widget>[
                                         SizedBox(width: 10.0),
                                         FaIcon(FontAwesomeIcons.listUl,
-                                            color: AppTheme.themeVino,
+                                            color: AppTheme.themeDefault,
                                             size: 30.0),
                                         SizedBox(width: 10.0),
                                         Expanded(
@@ -359,7 +359,7 @@ class _IntroPageState extends State<IntroPage> {
                                       children: <Widget>[
                                         SizedBox(width: 10.0),
                                         FaIcon(FontAwesomeIcons.users,
-                                            color: AppTheme.themeVino,
+                                            color: AppTheme.themeDefault,
                                             size: 30.0),
                                         SizedBox(width: 10.0),
                                         Expanded(
@@ -378,7 +378,7 @@ class _IntroPageState extends State<IntroPage> {
                                     //   children: <Widget>[
                                     //     SizedBox(width: 10.0),
                                     //     FaIcon(FontAwesomeIcons.diagnoses,
-                                    //         color: AppTheme.themeVino,
+                                    //         color: AppTheme.themeDefault,
                                     //         size: 35.0),
                                     //     SizedBox(width: 10.0),
                                     //     Expanded(

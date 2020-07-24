@@ -16,7 +16,7 @@ import 'package:virtual_match/src/page/people/PlayerPage.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/widget/general/SharedWidget.dart';
-import 'package:virtual_match/src/widget/image/imageOval.dart';
+import 'package:virtual_match/src/widget/image/imageOvalWidget.dart';
 
 class CustomListTile extends StatelessWidget {
   final IconData icon;

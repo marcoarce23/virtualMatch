@@ -14,7 +14,7 @@ class SplashPage extends StatelessWidget {
       top: true,
       bottom: true,
       child: SplashScreen(
-        backgroundColor: Colors.white, //AppTheme.themeVino,
+        backgroundColor: Colors.white, //AppTheme.themeDefault,
         seconds: 4,
         navigateAfterSeconds: new LoginPage(),
         photoSize: 200,

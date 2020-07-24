@@ -100,9 +100,11 @@ flutter:
   assets:
     - assets/
     - assets/image/
-    - assets/loading/
-    - assets/flare/
-
+    - assets/ico/
+    - assets/map/
+    - assets/rrss/
+    - assets/general/
+    - assets/core/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

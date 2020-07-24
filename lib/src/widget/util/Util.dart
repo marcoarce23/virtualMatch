@@ -25,7 +25,6 @@ class RadialProgress extends StatefulWidget {
   _RadialProgressState createState() => _RadialProgressState();
 }
 
-
 class _RadialProgressState extends State<RadialProgress>
     with SingleTickerProviderStateMixin {
   AnimationController _radialProgressAnimationController;
@@ -75,7 +74,6 @@ class _RadialProgressState extends State<RadialProgress>
   }
 }
 
-
 class RadialPainter extends CustomPainter {
   double progressInDegrees, width;
   final Color progressColor, progressBackgroundColor;
@@ -114,7 +112,6 @@ class RadialPainter extends CustomPainter {
   }
 }
 
-
 class GeneralWidget {
   GeneralWidget._();
 
@@ -143,7 +140,7 @@ class GeneralWidget {
   //       fondoModaro,
   //       ImageOpaqueNetworkCustomize(
   //           'http://res.cloudinary.com/propia/image/upload/v1592167496/djsbl74vjdwtso6zrst7.jpg',
-  //           AppTheme.themeVino,
+  //           AppTheme.themeDefault,
   //           Size(MediaQuery.of(context).size.width, 310),
   //           0.68,
   //           BoxFit.cover),
@@ -155,7 +152,7 @@ class GeneralWidget {
   //               child: RadialProgress(
   //                 width: 3,
   //                 goalCompleted: 0.90,
-  //                 progressColor: AppTheme.themeVino,
+  //                 progressColor: AppTheme.themeDefault,
   //                 progressBackgroundColor: Colors.white,
   //                 child: Container(
   //                     child: ImageOvalNetwork(
@@ -177,10 +174,10 @@ class GeneralWidget {
       end: Alignment.bottomRight,
       stops: [0.1, 0.4, 0.7, 0.9],
       colors: [
-        AppTheme.themeVino,
-        AppTheme.themeVino,
-        AppTheme.themeVino,
-        AppTheme.themeVino,
+        AppTheme.themeDefault,
+        AppTheme.themeDefault,
+        AppTheme.themeDefault,
+        AppTheme.themeDefault,
       ],
     ));
   }
@@ -285,7 +282,7 @@ class GeneralWidget {
       width: size.width * 0.94,
       height: height,
       decoration: BoxDecoration(
-          // color: AppTheme.themeVino,
+          // color: AppTheme.themeDefault,
           gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomRight,
@@ -314,7 +311,7 @@ class GeneralWidget {
           SizedBox(width: 15.0),
           Text(text,
               style: TextStyle(
-                color: AppTheme.themeVino, //Colors.white70,
+                color: AppTheme.themeDefault, //Colors.white70,
                 fontSize: 16.0,
                 height: 1.5,
               )),
@@ -330,7 +327,7 @@ class GeneralWidget {
       width: size.width * 0.92,
       height: height,
       decoration: BoxDecoration(
-          color: AppTheme.themeVino,
+          color: AppTheme.themeDefault,
           //     gradient:LinearGradient(
           // begin: Alignment.topCenter,
           // end: Alignment.bottomRight,
@@ -376,7 +373,7 @@ class GeneralWidget {
   Divider divider() {
     return Divider(
       thickness: 1.5,
-      color: AppTheme.themeVino,
+      color: AppTheme.themeDefault,
       endIndent: 20.0,
       indent: 20.0,
     );

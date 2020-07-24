@@ -339,7 +339,7 @@ class _LoginPageState extends State<LoginPage> {
       child: RaisedButton.icon(
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-        color: AppTheme.themeVino,
+        color: AppTheme.themeDefault,
         textColor: Colors.white,
         label: Text(
           text,

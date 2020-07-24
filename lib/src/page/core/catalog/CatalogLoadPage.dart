@@ -264,7 +264,7 @@ class _CatalogLoadPageState extends State<CatalogLoadPage> {
               'Imágen del catálogo',
               AppTheme.themeGrey),
         ),
-         showPictureOval(photo, image, 130.0),
+        showPictureOval(photo, image, 130.0),
         divider(),
 
         _text(
@@ -362,7 +362,7 @@ class _CatalogLoadPageState extends State<CatalogLoadPage> {
         SizedBox(width: 15.0),
         DropdownButton(
           value: _opcionTipo,
-          icon: FaIcon(FontAwesomeIcons.sort, color: AppTheme.themeVino),
+          icon: FaIcon(FontAwesomeIcons.sort, color: AppTheme.themeDefault),
           items: getTipo(),
           onChanged: (value) {
             setState(() {

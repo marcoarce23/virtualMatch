@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:virtual_match/src/model/Const.dart';
 import 'package:virtual_match/src/page/people/InfluencerListPage.dart';
-import 'package:virtual_match/src/widget/image/imageOval.dart';
+import 'package:virtual_match/src/widget/image/imageOvalWidget.dart';
 
 class NotificationLocalPage extends StatelessWidget {
   @override
