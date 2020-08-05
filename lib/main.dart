@@ -70,7 +70,7 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(builder: (_) => new LoginService()),
       ],
       child: MaterialApp(
-          title: 'Material App',
+          title: 'Virtual Match',
           //  theme: miTema,
           debugShowCheckedModeBanner: false,
           localizationsDelegates: [
@@ -89,6 +89,21 @@ class _MyAppState extends State<MyApp> {
             'splash': (BuildContext context) => new SplashPage(),
             'login': (BuildContext context) => new LogOnPage(),
             'event': (BuildContext context) => new EventAllPage(),
+            'multimedia': (BuildContext context) => new EventAllPage(),
+            'new': (BuildContext context) => new EventAllPage(),
+            'notification': (BuildContext context) => new EventAllPage(),
+            'organization': (BuildContext context) => new EventAllPage(),
+            'player': (BuildContext context) => new EventAllPage(),
+            'album': (BuildContext context) => new EventAllPage(),
+            'comment': (BuildContext context) => new EventAllPage(),
+            'mini': (BuildContext context) => new EventAllPage(),
+            'tourment': (BuildContext context) => new EventAllPage(),
+            'faq': (BuildContext context) => new EventAllPage(),
+            'score': (BuildContext context) => new EventAllPage(),
+            'result': (BuildContext context) => new EventAllPage(),
+            'ranking': (BuildContext context) => new EventAllPage(),
+            'eleven': (BuildContext context) => new EventAllPage(),
+            'fixture': (BuildContext context) => new EventAllPage(),
           }),
     );
   }

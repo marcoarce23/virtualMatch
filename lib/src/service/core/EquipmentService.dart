@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:virtual_match/src/api/organization/ApiAdd.dart';
-import 'package:virtual_match/src/api/organization/ApiDelete.dart';
-import 'package:virtual_match/src/api/organization/ApiUpdate.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
+import 'package:virtual_match/src/api/core/equipment/ApiAdd.dart';
+import 'package:virtual_match/src/api/core/equipment/ApiUpdate.dart';
+import 'package:virtual_match/src/api/core/equipment/ApiDelete.dart';
 
-class OrganizationService with ChangeNotifier {
+class EquipentService with ChangeNotifier {
   bool isLoading = true;
 
   final _apiAdd = new ApiAdd();

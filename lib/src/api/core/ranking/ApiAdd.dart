@@ -5,7 +5,7 @@ import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/api/core/ranking/ApiResource.dart';
 import 'package:virtual_match/src/api/dataMap.dart';
 
-class ApiAddEvent {
+class ApiAdd {
   Future<Map<String, dynamic>> add(IEntityMap entity) async {
     String _body = json.encode(entity.toJson());
     print('body: $_body');

@@ -5,7 +5,7 @@ import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/api/dataMap.dart';
 import 'package:virtual_match/src/api/core/equipment/ApiResource.dart';
 
-class ApiDeleteEvent {
+class ApiDelete {
   Future<Map<String, dynamic>> delete(IEntityMap entity) async {
     String _body = json.encode(entity.toJson());
     print('body: $_body');

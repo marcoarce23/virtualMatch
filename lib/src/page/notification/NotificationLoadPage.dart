@@ -102,7 +102,7 @@ class _NotificationLoadPageState extends State<NotificationLoadPage> {
 
 //DEFINICION DE BLOC Y MODEL
   NotificacionModel entity = new NotificacionModel();
-  NotificationService entityBloc;
+  NotificationService entityService;
 
   //DEFINICION DE VARIABLES
   bool _save = false;
@@ -117,7 +117,7 @@ class _NotificationLoadPageState extends State<NotificationLoadPage> {
 
   @override
   Widget build(BuildContext context) {
-    entityBloc = Provider.of<NotificationService>(context);
+    entityService = Provider.of<NotificationService>(context);
 
     final NotificacionModel entityModel =
         ModalRoute.of(context).settings.arguments;
@@ -270,7 +270,7 @@ class _NotificationLoadPageState extends State<NotificationLoadPage> {
 
     setState(() => _save = true);
     loadingEntity();
-    executeCUD(entityBloc, entity);
+    executeCUD(entityService, entity);
     setState(() => _save = false);
   }
 

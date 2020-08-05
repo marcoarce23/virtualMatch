@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/api/dataMap.dart';
-import 'package:virtual_match/src/api/core/ranking/ApiResource.dart';
+import 'package:virtual_match/src/api/core/valoration/ApiResource.dart';
 
 class ApiDelete {
   Future<Map<String, dynamic>> delete(IEntityMap entity) async {
