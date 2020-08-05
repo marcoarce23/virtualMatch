@@ -5,8 +5,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:virtual_match/src/bloc/event/EventBloc.dart';
-import 'package:virtual_match/src/bloc/image/ImageUploadBloc.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/NoticiaEventoModel.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
@@ -14,7 +12,8 @@ import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
-import 'package:virtual_match/src/provider/provider.dart';
+import 'package:virtual_match/src/service/EventService.dart';
+import 'package:virtual_match/src/service/ImageService.dart';
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
@@ -99,9 +98,9 @@ class _EventLoadPageState extends State<EventLoadPage> {
   final controllerDirigidoA = TextEditingController();
   final controllerUbicacion = TextEditingController();
 //DEFINICION DE BLOC Y MODEL
-  EventBloc entityBloc;
+  EventService entityBloc;
   NoticiaEventoModel entity = new NoticiaEventoModel();
-  ImageBloc entityImage = new ImageBloc();
+  ImageService entityImage = new ImageService();
 
   //DEFINICION DE VARIABLES
   bool _save = false;
@@ -153,7 +152,8 @@ class _EventLoadPageState extends State<EventLoadPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
-                  text('CARGAR IMAGEN DEL EVENTO', AppTheme.themeBlackGrey, 1, 15.0),
+                  text('CARGAR IMAGEN DEL EVENTO', AppTheme.themeBlackGrey, 1,
+                      15.0),
                   _crearIconAppImagenes(),
                   _crearIconAppCamara(),
                 ],
@@ -343,7 +343,7 @@ class _EventLoadPageState extends State<EventLoadPage> {
     entity.states = StateEntity.Insert;
   }
 
-  void executeCUD(EventBloc entityBloc, NoticiaEventoModel entity) async {
+  void executeCUD(EventService entityBloc, NoticiaEventoModel entity) async {
     try {
       await entityBloc.repository(entity).then((result) {
         if (result["TIPO_RESPUESTA"] == '0')

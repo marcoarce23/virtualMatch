@@ -7,17 +7,14 @@ import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:getwidget/getwidget.dart';
-import 'package:virtual_match/src/bloc/image/ImageUploadBloc.dart';
 
-import 'package:virtual_match/src/bloc/product/ProductBloc.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/ProductModel.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/Preference.dart';
-
-import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
-import 'package:virtual_match/src/provider/provider.dart';
+import 'package:virtual_match/src/service/ImageService.dart';
+import 'package:virtual_match/src/service/core/AlbumService.dart';
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
@@ -119,8 +116,8 @@ class _LoadProductPageState extends State<LoadProductPage> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final myController = TextEditingController();
 
-  ProductBloc entityBloc;
-  ImageBloc entityImage = new ImageBloc();
+  AlbumService entityBloc;
+  ImageService entityImage = new ImageService();
   ProductModel entity = new ProductModel();
   bool _save = false;
   int valueImage = 0;
@@ -479,7 +476,7 @@ class _LoadProductPageState extends State<LoadProductPage> {
   }
 
   void executeCUD(
-      ProductBloc entityBloc, ProductModel entity, var _result) async {
+      AlbumService entityBloc, ProductModel entity, var _result) async {
     try {
       await entityBloc.repository(entity).then((respuesta) {
         loading();

@@ -6,9 +6,11 @@ import 'package:virtual_match/src/page/core/product/LoadProductPage.dart';
 import 'package:virtual_match/src/page/event/EventLoadPage.dart';
 import 'package:virtual_match/src/page/login/LogOnPage.dart';
 import 'package:virtual_match/src/page/login/LoginPage.dart';
+import 'package:virtual_match/src/page/multimedia/MultimediaLoadPage.dart';
 import 'package:virtual_match/src/page/new/NewLoadPage.dart';
 import 'package:virtual_match/src/page/notification/NotificationLoadPage.dart';
 import 'package:virtual_match/src/page/notification/NotificationLocalPage.dart';
+import 'package:virtual_match/src/page/notification/NotificationPage.dart';
 import 'package:virtual_match/src/page/organization/OrganizationPage.dart';
 import 'package:virtual_match/src/page/people/PlayerPage.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
@@ -123,7 +125,7 @@ class DrawerMenu extends StatelessWidget {
         CustomListTile(Icons.shop, '   Crear Evento',
             () => navegation(context, EventAllPage())),
         CustomListTile(Icons.shop, '   Cargar Multimedia',
-            () => navegation(context, ProductAllPage())),
+            () => navegation(context, MultimediaAllPage())),
 
         CustomListTile(Icons.supervised_user_circle, '    Sobre Virtual Match',
             () => navegation(context, OrganizationPage())),

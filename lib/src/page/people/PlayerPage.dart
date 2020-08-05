@@ -7,16 +7,16 @@ import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:getwidget/getwidget.dart';
-import 'package:virtual_match/src/bloc/image/ImageUploadBloc.dart';
-
-import 'package:virtual_match/src/bloc/product/ProductBloc.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/ProductModel.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/page/people/InfluencerListPage.dart';
-import 'package:virtual_match/src/provider/provider.dart';
+import 'package:virtual_match/src/service/ImageService.dart';
+import 'package:virtual_match/src/service/NotificactionService.dart';
+import 'package:virtual_match/src/service/core/PlayerService.dart';
+
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
@@ -118,8 +118,8 @@ class _LoadClientPageState extends State<LoadClientPage> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final myController = TextEditingController();
 
-  ProductBloc entityBloc;
-  ImageBloc entityImage = new ImageBloc();
+  PlayerService entityBloc;
+  ImageService entityImage = new ImageService();
   ProductModel entity = new ProductModel();
   bool _save = false;
   int valueImage = 0;
@@ -515,7 +515,7 @@ class _LoadClientPageState extends State<LoadClientPage> {
   }
 
   void executeCUD(
-      ProductBloc entityBloc, ProductModel entity, var _result) async {
+      PlayerService entityBloc, ProductModel entity, var _result) async {
     try {
       await entityBloc.repository(entity).then((respuesta) {
         loading();

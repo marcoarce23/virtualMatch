@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
-import 'package:virtual_match/src/bloc/new/NewBloc.dart';
+import 'package:provider/provider.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/NoticiaEventoModel.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
@@ -12,7 +12,8 @@ import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
-import 'package:virtual_match/src/provider/provider.dart';
+import 'package:virtual_match/src/service/NewService.dart';
+
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
@@ -51,32 +52,37 @@ class _NewAllPagePageState extends State<NewAllPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: appBar('CREA NUEVA NOTICIA'),
-      drawer: DrawerMenu(),
-      bottomNavigationBar: BottomNavigationBar(
-        elevation: 21.0,
-        backgroundColor: AppTheme.themeDefault,
-        items: [
-          BottomNavigationBarItem(
-              icon: FaIcon(
-                FontAwesomeIcons.newspaper,
-                size: 25,
-              ),
-              title: Text('Noticias')),
-          BottomNavigationBarItem(
-              icon: FaIcon(
-                FontAwesomeIcons.paperPlane,
-                size: 25,
-              ),
-              title: Text('Listado Noticias')),
-        ],
-        currentIndex: page,
-        unselectedItemColor: Colors.purple,
-        selectedItemColor: AppTheme.themeWhite,
-        onTap: _onItemTapped,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(builder: (_) => new NewService()),
+      ],
+      child: Scaffold(
+        appBar: appBar('CREA NUEVA NOTICIA'),
+        drawer: DrawerMenu(),
+        bottomNavigationBar: BottomNavigationBar(
+          elevation: 21.0,
+          backgroundColor: AppTheme.themeDefault,
+          items: [
+            BottomNavigationBarItem(
+                icon: FaIcon(
+                  FontAwesomeIcons.newspaper,
+                  size: 25,
+                ),
+                title: Text('Noticias')),
+            BottomNavigationBarItem(
+                icon: FaIcon(
+                  FontAwesomeIcons.paperPlane,
+                  size: 25,
+                ),
+                title: Text('Listado Noticias')),
+          ],
+          currentIndex: page,
+          unselectedItemColor: Colors.purple,
+          selectedItemColor: AppTheme.themeWhite,
+          onTap: _onItemTapped,
+        ),
+        body: optionPage[page],
       ),
-      body: optionPage[page],
     );
   }
 }
@@ -93,11 +99,11 @@ class _NewLoadPageState extends State<NewLoadPage> {
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final controllerNoticia = TextEditingController();
-final controllerDetalle = TextEditingController();
-final controllerDirigidoA = TextEditingController();
-final controllerUbicacion = TextEditingController();
+  final controllerDetalle = TextEditingController();
+  final controllerDirigidoA = TextEditingController();
+  final controllerUbicacion = TextEditingController();
 //DEFINICION DE BLOC Y MODEL
-  NewBloc entityBloc;
+  NewService entityService;
   NoticiaEventoModel entity = new NoticiaEventoModel();
 
   //DEFINICION DE VARIABLES
@@ -113,7 +119,7 @@ final controllerUbicacion = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    //   entityBloc = Provider.productBloc(context);
+    entityService = Provider.of<NewService>(context);
     final NoticiaEventoModel entityModel =
         ModalRoute.of(context).settings.arguments;
 
@@ -286,7 +292,7 @@ final controllerUbicacion = TextEditingController();
 
     setState(() => _save = true);
     loadingEntity();
-    executeCUD(entityBloc, entity);
+    executeCUD(entityService, entity);
     setState(() => _save = false);
   }
 
@@ -305,7 +311,7 @@ final controllerUbicacion = TextEditingController();
     entity.states = StateEntity.Insert;
   }
 
-  void executeCUD(NewBloc entityBloc, NoticiaEventoModel entity) async {
+  void executeCUD(NewService entityBloc, NoticiaEventoModel entity) async {
     try {
       await entityBloc.repository(entity).then((result) {
         if (result["TIPO_RESPUESTA"] == '0')

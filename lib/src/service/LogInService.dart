@@ -4,7 +4,7 @@ import 'package:virtual_match/src/api/notification/ApiAdd.dart';
 import 'package:virtual_match/src/api/notification/ApiUpdate.dart';
 import 'package:virtual_match/src/api/notification/ApiDelete.dart';
 
-class NotificationService with ChangeNotifier {
+class LoginService with ChangeNotifier {
   bool isLoading = true;
 
   final _apiAdd = new ApiAdd();

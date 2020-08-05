@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
+import 'package:provider/provider.dart';
 import 'package:virtual_match/src/page/general/ViewPage.dart';
 import 'package:virtual_match/src/page/intro/IntroPage.dart';
 import 'package:virtual_match/src/page/login/LoginClipperPage.dart';
-import 'package:virtual_match/src/provider/Provider.dart';
+import 'package:virtual_match/src/service/LogInService.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/general/CallWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
@@ -19,13 +20,12 @@ class LogOnPage extends StatefulWidget {
 }
 
 class _LogOnPageState extends State<LogOnPage> {
-
- 
+  LoginService loginService;
 
   @override
   Widget build(BuildContext context) {
-  
-   final bloc = Provider.of(context);
+    loginService = Provider.of<LoginService>(context);
+
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(

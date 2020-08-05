@@ -51,32 +51,37 @@ class _NotificationAllPageState extends State<NotificationAllPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: appBar('CREA NUEVA NOTIFICACIÓN'),
-      drawer: DrawerMenu(),
-      bottomNavigationBar: BottomNavigationBar(
-        elevation: 21.0,
-        backgroundColor: AppTheme.themeDefault,
-        items: [
-          BottomNavigationBarItem(
-              icon: FaIcon(
-                FontAwesomeIcons.newspaper,
-                size: 25,
-              ),
-              title: Text('Notificaciones')),
-          BottomNavigationBarItem(
-              icon: FaIcon(
-                FontAwesomeIcons.paperPlane,
-                size: 25,
-              ),
-              title: Text('Listado Notificación')),
-        ],
-        currentIndex: page,
-        unselectedItemColor: Colors.purple,
-        selectedItemColor: AppTheme.themeWhite,
-        onTap: _onItemTapped,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(builder: (_) => new NotificationService()),
+      ],
+      child: Scaffold(
+        appBar: appBar('CREA NUEVA NOTIFICACIÓN'),
+        drawer: DrawerMenu(),
+        bottomNavigationBar: BottomNavigationBar(
+          elevation: 21.0,
+          backgroundColor: AppTheme.themeDefault,
+          items: [
+            BottomNavigationBarItem(
+                icon: FaIcon(
+                  FontAwesomeIcons.newspaper,
+                  size: 25,
+                ),
+                title: Text('Notificaciones')),
+            BottomNavigationBarItem(
+                icon: FaIcon(
+                  FontAwesomeIcons.paperPlane,
+                  size: 25,
+                ),
+                title: Text('Listado Notificación')),
+          ],
+          currentIndex: page,
+          unselectedItemColor: Colors.purple,
+          selectedItemColor: AppTheme.themeWhite,
+          onTap: _onItemTapped,
+        ),
+        body: optionPage[page],
       ),
-      body: optionPage[page],
     );
   }
 }
@@ -112,7 +117,6 @@ class _NotificationLoadPageState extends State<NotificationLoadPage> {
 
   @override
   Widget build(BuildContext context) {
-    
     entityBloc = Provider.of<NotificationService>(context);
 
     final NotificacionModel entityModel =
@@ -136,7 +140,6 @@ class _NotificationLoadPageState extends State<NotificationLoadPage> {
       ),
       floatingActionButton: floatButton(AppTheme.themeDefault, context,
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
-      // ),
     );
   }
 

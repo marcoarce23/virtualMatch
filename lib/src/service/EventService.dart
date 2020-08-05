@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
-import 'package:virtual_match/src/api/notification/ApiAdd.dart';
-import 'package:virtual_match/src/api/notification/ApiUpdate.dart';
-import 'package:virtual_match/src/api/notification/ApiDelete.dart';
+import 'package:virtual_match/src/api/event/ApiAdd.dart';
+import 'package:virtual_match/src/api/event/ApiUpdate.dart';
+import 'package:virtual_match/src/api/event/ApiDelete.dart';
 
-class NotificationService with ChangeNotifier {
+class EventService with ChangeNotifier {
   bool isLoading = true;
 
   final _apiAdd = new ApiAdd();
