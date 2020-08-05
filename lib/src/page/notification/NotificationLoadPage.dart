@@ -5,7 +5,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:provider/provider.dart';
-import 'package:virtual_match/src/bloc/notification/NotificationBloc.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/NotificacionModel.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
@@ -97,8 +96,8 @@ class _NotificationLoadPageState extends State<NotificationLoadPage> {
   final controllerDetalle = TextEditingController();
 
 //DEFINICION DE BLOC Y MODEL
-  NotificationBloc entityBloc;
   NotificacionModel entity = new NotificacionModel();
+  NotificationService entityBloc;
 
   //DEFINICION DE VARIABLES
   bool _save = false;
@@ -113,7 +112,8 @@ class _NotificationLoadPageState extends State<NotificationLoadPage> {
 
   @override
   Widget build(BuildContext context) {
-    final entityaBloc = Provider.of<NotificationService>(context);
+    
+    entityBloc = Provider.of<NotificationService>(context);
 
     final NotificacionModel entityModel =
         ModalRoute.of(context).settings.arguments;
@@ -283,9 +283,11 @@ class _NotificationLoadPageState extends State<NotificationLoadPage> {
     print('EL ENTITY NOTIFICA: ${entity.detalle}');
   }
 
-  void executeCUD(NotificationBloc entityBloc, NotificacionModel entity) async {
+  void executeCUD(
+      NotificationService entityBloc, NotificacionModel entity) async {
     try {
       await entityBloc.repository(entity).then((result) {
+        print('EL RESULTTTTT: ${result["TIPO_RESPUESTA"]}');
         if (result["TIPO_RESPUESTA"] == '0')
           showSnackbar(STATUS_OK, scaffoldKey);
         else
