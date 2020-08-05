@@ -10,9 +10,10 @@ import 'package:getwidget/getwidget.dart';
 import 'package:virtual_match/src/bloc/image/ImageUploadBloc.dart';
 
 import 'package:virtual_match/src/bloc/product/ProductBloc.dart';
-import 'package:virtual_match/src/model/Const.dart';
+import 'package:virtual_match/src/model/entity/EntityMap/ProductModel.dart';
+import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/Preference.dart';
-import 'package:virtual_match/src/model/entity/EntityMap.dart';
+
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
@@ -124,7 +125,7 @@ class _LoadProductPageState extends State<LoadProductPage> {
   bool _save = false;
   int valueImage = 0;
   File photo;
-  String image = imgDefault;
+  String image = IMAGE_DEFAULT;
   final picker = ImagePicker();
   String imagePDF =
       'https://res.cloudinary.com/propia/image/upload/v1592950093/rohprekln9plcyolgw0d.jpg';
@@ -159,7 +160,7 @@ class _LoadProductPageState extends State<LoadProductPage> {
     if (valueImage == 1) image = imagePDF;
     if (valueImage == 2) image = imageVideo;
 
-    entityBloc = Provider.productosBloc(context);
+    entityBloc = Provider.productBloc(context);
 
     final ProductModel entityModel = ModalRoute.of(context).settings.arguments;
 
@@ -467,14 +468,14 @@ class _LoadProductPageState extends State<LoadProductPage> {
   }
 
   void loadingEntity() {
-    entity.idBrandModel = 0;
-    entity.brand = myController.text;
-    entity.model = 'objetivo.objectValue';
-    entity.type = 'objetivo.objectValue';
-    entity.user = 'marce';
-    entity.photo =
-        'https://res.cloudinary.com/propia/image/upload/v1594411679/fqnpfloqjctcbwja3pfy.jpg';
-    entity.states = StateEntity.Insert;
+    // entity.idBrandModel = 0;
+    // entity.brand = myController.text;
+    // entity.model = 'objetivo.objectValue';
+    // entity.type = 'objetivo.objectValue';
+    // entity.user = 'marce';
+    // entity.photo =
+    //     'https://res.cloudinary.com/propia/image/upload/v1594411679/fqnpfloqjctcbwja3pfy.jpg';
+    // entity.states = StateEntity.Insert;
   }
 
   void executeCUD(
@@ -512,7 +513,7 @@ class _LoadProductPageState extends State<LoadProductPage> {
     if (photo != null) {
       image = await entityImage.uploadImageFile(photo);
       setState(() {
-        entity.photo = image;
+        entity.foto = image;
 
         //print('cargadod e iagen ${entity.foto}');
       });
@@ -525,7 +526,7 @@ class _LoadProductPageState extends State<LoadProductPage> {
     if (photo != null) {
       image = await entityImage.uploadImage(file);
       setState(() {
-        entity.photo = image;
+        entity.foto = image;
         //print('cargadod e iagen ${entity.foto}');
       });
     }
@@ -536,7 +537,7 @@ class _LoadProductPageState extends State<LoadProductPage> {
 
     image = await entityImage.uploadVideo(file);
     setState(() {
-      entity.photo = image;
+      entity.foto = image;
       //print('cargadod e iagen ${entity.foto}');
     });
   }

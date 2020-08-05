@@ -213,6 +213,7 @@ Widget floatButton(
             builder: (context) => page,
           ));
     },
+    elevation: 2.0,
     child: icon,
     backgroundColor: color,
   );

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:virtual_match/src/model/entity/EntityMap.dart';
+import 'package:virtual_match/src/model/entity/EntityMap/ProductModel.dart';
 
 class CardSwiper extends StatelessWidget {
   final List<ProductModel> peliculas;
@@ -21,14 +21,14 @@ class CardSwiper extends StatelessWidget {
           // peliculas[index].idBrandModel= '${ peliculas[index].idBrandModel.toString() }-tarjeta';
 
           return Hero(
-            tag: peliculas[index].idBrandModel,
+            tag: peliculas[index].idOrganizacion,
             child: ClipRRect(
                 borderRadius: BorderRadius.circular(20.0),
                 child: GestureDetector(
                   onTap: () => Navigator.pushNamed(context, 'Detalle',
                       arguments: peliculas[index]),
                   child: FadeInImage(
-                    image: NetworkImage(peliculas[index].photo),
+                    image: NetworkImage(peliculas[index].foto),
                     placeholder: AssetImage('assets/image/mario_logo.png'),
                     fit: BoxFit.cover,
                   ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:virtual_match/src/model/Preference.dart';
-import 'package:virtual_match/src/page/event/EventPage.dart';
+import 'package:virtual_match/src/page/event/EventLoadPage.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:virtual_match/src/page/intro/SplashPage.dart';
 import 'package:virtual_match/src/page/login/LogOnPage.dart';
@@ -106,7 +106,6 @@ class _MyAppState extends State<MyApp> {
         'splash': (BuildContext context) => new SplashPage(),
         'login': (BuildContext context) => new LoginPage(),
         'event': (BuildContext context) => new EventAllPage(),
-
       },
     ));
   }

@@ -475,7 +475,7 @@ class _IntroPageState extends State<IntroPage> {
                         ),
                         SizedBox(width: 10.0),
                         FaIcon(
-                          FontAwesomeIcons.handshake,
+                          FontAwesomeIcons.playstation,
                           color: AppTheme.themeDefault,
                           size: 18,
                         ),

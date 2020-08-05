@@ -2,14 +2,17 @@ import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:virtual_match/src/model/Const.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:virtual_match/src/model/util/Const.dart';
 
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/page/core/foldable/FoldablePage.dart';
 import 'package:virtual_match/src/page/faq/FaqPage.dart';
 import 'package:virtual_match/src/page/general/ViewPage.dart';
+import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
 import 'package:virtual_match/src/page/image/ImagePanoramaPage.dart';
 import 'package:virtual_match/src/page/people/InfluencerListPage.dart';
+import 'package:virtual_match/src/page/people/PlayerListPage.dart';
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
@@ -30,6 +33,9 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
   int valorExpedido = 60;
   File photo;
+  File _imageFile;
+
+  final GlobalKey<FabCircularMenuState> fabKey = GlobalKey();
 
   @override
   void initState() {
@@ -72,34 +78,134 @@ class _HomePageState extends State<HomePage> {
               ],
             )),
         body: metodoHome(),
-        drawer: DrawerMenu(), // drawer(context),
+        drawer: DrawerMenu(),
+        floatingActionButton: Builder(
+          builder: (context) => FabCircularMenu(
+            key: fabKey,
+            // Cannot be `Alignment.center`
+            alignment: Alignment.bottomRight,
+            ringColor: Colors.white.withAlpha(25),
+            ringDiameter: 500.0,
+            ringWidth: 150.0,
+            fabSize: 64.0,
+            fabElevation: 8.0,
+
+            // Also can use specific color based on wether
+            // the menu is open or not:
+            // fabOpenColor: Colors.white
+            // fabCloseColor: Colors.white
+            // These properties take precedence over fabColor
+            fabColor: AppTheme.themeWhite,
+            fabOpenIcon: Icon(Icons.menu, color: AppTheme.themeBlackGrey),
+            fabCloseIcon: Icon(Icons.close, color: AppTheme.themeBlackGrey),
+            fabMargin: const EdgeInsets.all(16.0),
+            animationDuration: const Duration(milliseconds: 800),
+            animationCurve: Curves.easeInOutCirc,
+            onDisplayChange: (isOpen) {
+              _showSnackBar(context,
+                  "Menu Virtual Match ${isOpen ? "abierto" : "cerrado"}");
+            },
+            children: <Widget>[
+              RawMaterialButton(
+                onPressed: () {
+                  _showSnackBar(context, "Selecciono  1");
+                },
+                shape: CircleBorder(),
+                padding: const EdgeInsets.all(24.0),
+                child: FaIcon(FontAwesomeIcons.shoppingCart,
+                    color: AppTheme.themeDefault, size: 25.0),
+              ),
+              RawMaterialButton(
+                onPressed: () async {
+                  _imageFile =
+                      await ImagePicker.pickImage(source: ImageSource.gallery);
+                  setState(() {});
+                },
+                shape: CircleBorder(),
+                padding: const EdgeInsets.all(24.0),
+                child: FaIcon(FontAwesomeIcons.images,
+                    color: AppTheme.themeDefault, size: 25.0),
+              ),
+              RawMaterialButton(
+                onPressed: () async {
+                  _imageFile =
+                      await ImagePicker.pickImage(source: ImageSource.gallery);
+                  setState(() {});
+                },
+                shape: CircleBorder(),
+                padding: const EdgeInsets.all(24.0),
+                child: FaIcon(FontAwesomeIcons.images,
+                    color: AppTheme.themeDefault, size: 25.0),
+              ),
+              RawMaterialButton(
+                onPressed: () {
+                  navegation(context, EmployeeListPage());
+                },
+                shape: CircleBorder(),
+                padding: const EdgeInsets.all(24.0),
+                child: FaIcon(FontAwesomeIcons.users,
+                    color: AppTheme.themeDefault, size: 25.0),
+              ),
+              RawMaterialButton(
+                onPressed: () {
+                  _showSnackBar(context, "Selecciono Cerrar Menu Circular");
+                  fabKey.currentState.close();
+                },
+                shape: CircleBorder(),
+                padding: const EdgeInsets.all(24.0),
+                child: FaIcon(FontAwesomeIcons.timesCircle,
+                    color: AppTheme.themeDefault, size: 25.0),
+              )
+            ],
+          ),
+        ), // drawer(context),
         bottomNavigationBar: _bottomNavigationBar(context),
       ),
     );
   }
 
+  void _showSnackBar(BuildContext context, String message) {
+    Scaffold.of(context).showSnackBar(SnackBar(
+      content: Text(message),
+      duration: const Duration(milliseconds: 1000),
+      backgroundColor: Colors.pinkAccent,
+    ));
+  }
+
   Widget metodoHome() {
     return Stack(
       children: <Widget>[
-         // fondoApp(),
+        // fondoApp(),
 
         SingleChildScrollView(
           child: Center(
             child: Column(
               children: <Widget>[
                 Container(
+                  decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomRight,
+                    stops: [0.1, 0.4, 0.7, 0.9],
+                    colors: [
+                      Colors.red,
+                      Colors.red,
+                      Colors.red,
+                      Colors.red,
+                    ],
+                  )),
                   child: Column(
                     children: <Widget>[],
                   ),
                 ),
                 //  _crearExpedido(),
-                showPictureOval(photo, imgDefault, 130.0),
-                _botonesRedondeados(),
+                showPictureOval(photo, IMAGE_DEFAULT, 130.0),
+                //    _botonesRedondeados(),
 
-                Text(
-                  'versión 1.0.0',
-                  textAlign: TextAlign.left,
-                ),
+                // Text(
+                //   'versión 1.0.0',
+                //   textAlign: TextAlign.left,
+                // ),
               ],
             ),
           ),
@@ -133,7 +239,6 @@ class _HomePageState extends State<HomePage> {
       }
     });
   }
-
 
   Widget _bottomNavigationBar(BuildContext context) {
     return BottomNavigationBar(
@@ -285,7 +390,8 @@ class _HomePageState extends State<HomePage> {
                   //Icon(icono, color: Colors.white, size: 42.0),
                 ),
                 Text(texto,
-                    style: TextStyle(color: AppTheme.themeDefault, fontSize: size)),
+                    style: TextStyle(
+                        color: AppTheme.themeDefault, fontSize: size)),
               ],
             ),
           ),

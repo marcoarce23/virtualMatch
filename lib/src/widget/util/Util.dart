@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:vector_math/vector_math_64.dart' as math;
 
@@ -383,6 +384,14 @@ class GeneralWidget {
     return SizedBox(
       width: ancho,
       height: alto,
+    );
+  }
+
+  Widget messageText() {
+    return Text(
+      '(*) Campos obligatorios. ',
+      style: kCamposTitleStyle,
+      textAlign: TextAlign.left,
     );
   }
 }

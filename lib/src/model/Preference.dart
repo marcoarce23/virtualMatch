@@ -1,4 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:virtual_match/src/model/util/Const.dart';
+
 
 class Preferense {
   static final Preferense _instancia = new Preferense._internal();
@@ -100,7 +102,7 @@ class Preferense {
   }
 
   get departament {
-    return _prefs.getString('departament') ?? 'Cochabamba';
+    return _prefs.getString('departament') ?? 'La Paz';
   }
 
   set departament(String value) {
@@ -118,7 +120,7 @@ class Preferense {
 
   get avatarImage {
     return _prefs.getString('avatarImage') ??
-        'http://res.cloudinary.com/propia/image/upload/v1592167496/djsbl74vjdwtso6zrst7.jpg';
+        IMAGE_LOGO;
   }
 
   set avatarImage(String value) {

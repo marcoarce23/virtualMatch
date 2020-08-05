@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:virtual_match/src/page/login/LoginPage.dart';
+import 'package:virtual_match/src/page/login/LogOnPage.dart';
 import 'package:splashscreen/splashscreen.dart';
 
 class SplashPage extends StatelessWidget {
@@ -16,10 +16,10 @@ class SplashPage extends StatelessWidget {
       child: SplashScreen(
         backgroundColor: Colors.white, //AppTheme.themeDefault,
         seconds: 4,
-        navigateAfterSeconds: new LoginPage(),
+        navigateAfterSeconds: new LogOnPage(),
         photoSize: 200,
         image: Image(
-          image: AssetImage('assets/icon.png'),
+          image: AssetImage('assets/ico/ico.png'),
           fit: BoxFit.cover,
         ),
       ),

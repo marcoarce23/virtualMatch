@@ -1,15 +1,13 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:virtual_match/src/model/Const.dart';
+import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/Preference.dart';
-import 'package:virtual_match/src/page/core/album/AlbumLoadPage.dart';
-import 'package:virtual_match/src/page/core/album/AlbumPage.dart';
-import 'package:virtual_match/src/page/core/catalog/CatalogLoadPage.dart';
-import 'package:virtual_match/src/page/core/foldable/FoldablePage.dart';
 import 'package:virtual_match/src/page/core/product/LoadProductPage.dart';
-import 'package:virtual_match/src/page/intro/IntroPage.dart';
+import 'package:virtual_match/src/page/event/EventLoadPage.dart';
 import 'package:virtual_match/src/page/login/LogOnPage.dart';
 import 'package:virtual_match/src/page/login/LoginPage.dart';
+import 'package:virtual_match/src/page/new/NewLoadPage.dart';
+import 'package:virtual_match/src/page/notification/NotificationLoadPage.dart';
 import 'package:virtual_match/src/page/notification/NotificationLocalPage.dart';
 import 'package:virtual_match/src/page/organization/OrganizationPage.dart';
 import 'package:virtual_match/src/page/people/PlayerPage.dart';
@@ -71,12 +69,12 @@ class DrawerMenu extends StatelessWidget {
               child: Column(
             children: <Widget>[
               Material(
-                  borderRadius: BorderRadius.all(Radius.circular(50.0)),
-                  elevation: 60.0,
+                  borderRadius: BorderRadius.all(Radius.circular(60.0)),
+                  elevation: 10.0,
                   child: Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: ImageOvalNetwork(
-                        imageNetworkUrl: imgLogo,
+                        imageNetworkUrl: IMAGE_LOGO,
                         sizeImage: Size.fromWidth(70)),
                   )),
               Flexible(
@@ -105,20 +103,28 @@ class DrawerMenu extends StatelessWidget {
         ),
         CustomListTile(Icons.notification_important, '   Notificaciones',
             () => navegation(context, NotificationLocalPage())),
-      
-      CustomListTile(Icons.gamepad, '   Jugador Virtual Match',
+
+        CustomListTile(Icons.beenhere, '   SorojCHiBolviia',
+            () => navegation(context, NotificationLocalPage())),
+
+        CustomListTile(Icons.bubble_chart, '   Jugador Virtual Match',
             () => navegation(context, PlayerAllPage())),
 
         CustomListTile(Icons.add_photo_alternate, '    Galería Multimedia',
             () => navegation(context, LoginPage())),
-        CustomListTile(Icons.card_giftcard, '   Ultimas Noticias',
-            () => navegation(context, AlbumFlowPage())),
-     
+        // CustomListTile(Icons.card_giftcard, '   Ultimas Noticias',
+        //     () => navegation(context, AlbumFlowPage())),
+
+        CustomListTile(Icons.shop, '   Crear Notificaciones',
+            () => navegation(context, NotificationAllPage())),
+
         CustomListTile(Icons.shop, '   Crear Noticias',
-            () => navegation(context, ProductAllPage())),
+            () => navegation(context, NewAllPage())),
+        CustomListTile(Icons.shop, '   Crear Evento',
+            () => navegation(context, EventAllPage())),
         CustomListTile(Icons.shop, '   Cargar Multimedia',
             () => navegation(context, ProductAllPage())),
-       
+
         CustomListTile(Icons.supervised_user_circle, '    Sobre Virtual Match',
             () => navegation(context, OrganizationPage())),
         CustomListTile(

@@ -2,14 +2,14 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import 'package:virtual_match/src/model/entity/IEntity.dart';
-import 'package:virtual_match/src/provider/ApiResource.dart';
 import 'package:virtual_match/src/provider/dataMap.dart';
+import 'package:virtual_match/src/provider/event/ApiResource.dart';
 
 class ApiDeleteEvent {
   Future<Map<String, dynamic>> delete(IEntityMap entity) async {
     String _body = json.encode(entity.toJson());
     print('body: $_body');
-    final apiRest = eventResource['delete'][0]
+    final apiRest = api['delete'][0]
         .toString(); // eventResourceAdd['add'][0].toString()   ;
     //RouteAdd().postEvent(); // METODO QUE OBTENFA EL POST DEL EVENTO; MULTIMEDIA, VOLUTNARIO; HORARIO
     print('url: $apiRest');

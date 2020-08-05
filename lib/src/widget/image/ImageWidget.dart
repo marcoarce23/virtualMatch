@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/widget/image/imageOvalWidget.dart';
 import 'package:virtual_match/src/widget/util/Util.dart';
 
@@ -22,8 +23,7 @@ Widget showPictureRectangle(File file, String picture, double heigth) {
     );
   } else {
     return Image(
-      image: AssetImage(file?.path ??
-          'https://image.made-in-china.com/43f34j00oCvQJWGmlslI/Zapatillas-Marcas-De-Deporte-China-Fabricante-Zapatos-PARA-Correr-Tenis-Running.jpg'),
+      image: AssetImage(file?.path ?? IMAGE_LOGO),
       height: heigth,
       fit: BoxFit.cover,
     );
@@ -41,26 +41,24 @@ Widget showPictureOval(File file, String image, double heigth) {
 
   return Stack(
     children: <Widget>[
-    
-      Positioned(top: 90.0, left: 30.0, child: circulo),
-      Positioned(top: 20.0, right: 30.0, child: circulo),
-      Positioned(bottom: -50.0, right: -10.0, child: circulo),
-      Positioned(bottom: 120.0, right: 20.0, child: circulo),
-      Positioned(bottom: -50.0, left: -20.0, child: circulo),
+      // Positioned(top: 90.0, left: 30.0, child: circulo),
+      // Positioned(top: 20.0, right: 30.0, child: circulo),
+      // Positioned(bottom: -50.0, right: -10.0, child: circulo),
+      // Positioned(bottom: 120.0, right: 20.0, child: circulo),
+      // Positioned(bottom: -50.0, left: -20.0, child: circulo),
       Container(
         padding: EdgeInsets.only(top: 10.0),
         child: Column(
           children: <Widget>[
             Align(
               child: RadialProgress(
-                progressColor: Colors.yellow,
-                progressBackgroundColor: Colors.green,
+                progressColor: Colors.pinkAccent,
+                progressBackgroundColor: Colors.white,
                 width: 4,
                 goalCompleted: 0.85,
                 child: Container(
                     child: ImageOvalNetwork(
-                        imageNetworkUrl: image,
-                        sizeImage: Size.fromWidth(90))),
+                        imageNetworkUrl: image, sizeImage: Size.fromWidth(90))),
               ),
             ),
           ],

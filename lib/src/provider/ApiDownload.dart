@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
-import 'package:virtual_match/src/service/apiUpload.dart';
 import 'package:mime_type/mime_type.dart';
+import 'package:virtual_match/src/provider/IApiUpload.dart';
 
 class ApiDownload {
   Future<String> uploadImage(File imagen) async {
@@ -18,14 +18,15 @@ class ApiDownload {
     final streamResponse = await imageUploadRequest.send();
     final resp = await http.Response.fromStream(streamResponse);
 
-    if (resp.statusCode != 200 && resp.statusCode != 201) {
-      print('Algo salio mal IMAGENNNN ${resp.body}');
-      return null;
-    }
+return respData(resp);
+    // if (resp.statusCode != 200 && resp.statusCode != 201) {
+    //   print('Algo salio mal IMAGENNNN ${resp.body}');
+    //   return null;
+    // }
 
-    final respData = json.decode(resp.body);
-    print(respData);
-    return respData['secure_url'];
+    // final respData = json.decode(resp.body);
+    // print(respData);
+    // return respData['secure_url'];
   }
 
   Future<String> uploadImagenFile(String imagen) async {
@@ -40,14 +41,15 @@ class ApiDownload {
     final streamResponse = await imageUploadRequest.send();
     final resp = await http.Response.fromStream(streamResponse);
 
-    if (resp.statusCode != 200 && resp.statusCode != 201) {
-      print('Algo salio mal PDF ${resp.body}');
-      return null;
-    }
+    return respData(resp);
+    // if (resp.statusCode != 200 && resp.statusCode != 201) {
+    //   print('Algo salio mal PDF ${resp.body}');
+    //   return null;
+    // }
 
-    final respData = json.decode(resp.body);
-    print(respData);
-    return respData['secure_url'];
+    // final respData = json.decode(resp.body);
+    // print(respData);
+    // return respData['secure_url'];
   }
 
   Future<String> uploadVideo(String imagen) async {
@@ -62,6 +64,19 @@ class ApiDownload {
     final streamResponse = await imageUploadRequest.send();
     final resp = await http.Response.fromStream(streamResponse);
 
+    return respData(resp);
+
+    // if (resp.statusCode != 200 && resp.statusCode != 201) {
+    //   print('Algo salio mal videooo ${resp.body}');
+    //   return null;
+    // }
+
+    // final respData = json.decode(resp.body);
+    // print(respData);
+    // return respData['secure_url'];
+  }
+
+  dynamic respData(http.Response resp) {
     if (resp.statusCode != 200 && resp.statusCode != 201) {
       print('Algo salio mal videooo ${resp.body}');
       return null;

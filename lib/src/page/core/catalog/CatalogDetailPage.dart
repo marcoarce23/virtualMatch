@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:virtual_match/src/model/entity/EntityMap.dart';
+import 'package:virtual_match/src/model/entity/EntityMap/ProductModel.dart';
 
 class CatalogDetail extends StatelessWidget {
   @override
@@ -35,11 +35,11 @@ class CatalogDetail extends StatelessWidget {
       flexibleSpace: FlexibleSpaceBar(
         centerTitle: true,
         title: Text(
-          pelicula.type,
+          pelicula.direccion,
           style: TextStyle(color: Colors.white, fontSize: 16.0),
         ),
         background: FadeInImage(
-          image: NetworkImage(pelicula.photo),
+          image: NetworkImage(pelicula.foto),
           placeholder: AssetImage('assets/img/loading.gif'),
           fadeInDuration: Duration(microseconds: 150),
           fit: BoxFit.cover,
@@ -54,11 +54,11 @@ class CatalogDetail extends StatelessWidget {
       child: Row(
         children: <Widget>[
           Hero(
-            tag: pelicula.idBrandModel,
+            tag: pelicula.idOrganizacion,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20.0),
               child: Image(
-                image: NetworkImage(pelicula.photo),
+                image: NetworkImage(pelicula.foto),
                 height: 150.0,
               ),
             ),
@@ -68,16 +68,16 @@ class CatalogDetail extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text(pelicula.model,
+                Text(pelicula.facebook,
                     style: Theme.of(context).textTheme.title,
                     overflow: TextOverflow.ellipsis),
-                Text(pelicula.brand,
+                Text(pelicula.direccion,
                     style: Theme.of(context).textTheme.subhead,
                     overflow: TextOverflow.ellipsis),
                 Row(
                   children: <Widget>[
                     Icon(Icons.star_border),
-                    Text(pelicula.brand.toString(),
+                    Text(pelicula.correo.toString(),
                         style: Theme.of(context).textTheme.subhead)
                   ],
                 )
@@ -93,7 +93,7 @@ class CatalogDetail extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
       child: Text(
-        pelicula.type,
+        pelicula.direccion,
         textAlign: TextAlign.justify,
       ),
     );
@@ -133,14 +133,14 @@ class CatalogDetail extends StatelessWidget {
         ClipRRect(
           borderRadius: BorderRadius.circular(20.0),
           child: FadeInImage(
-            image: NetworkImage(actor.photo),
+            image: NetworkImage(actor.foto),
             placeholder: AssetImage('assets/img/no-image.jpg'),
             height: 150.0,
             fit: BoxFit.cover,
           ),
         ),
         Text(
-          actor.brand,
+          actor.direccion,
           overflow: TextOverflow.ellipsis,
         )
       ],

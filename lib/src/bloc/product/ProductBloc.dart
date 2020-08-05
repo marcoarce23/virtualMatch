@@ -1,9 +1,9 @@
 import 'dart:async';
+import 'package:virtual_match/src/model/entity/EntityFromJson/EventModel.dart';
+import 'package:virtual_match/src/provider/Event/ApiUpdate.dart';
 import 'package:virtual_match/src/provider/event/ApiDelete.dart';
-import 'package:virtual_match/src/provider/ApiUpdate.dart';
 import 'package:rxdart/rxdart.dart';
 
-import 'package:virtual_match/src/model/entity/EntityMap.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/provider/event/ApiAdd.dart';
 import 'package:virtual_match/src/bloc/util/validator.dart';

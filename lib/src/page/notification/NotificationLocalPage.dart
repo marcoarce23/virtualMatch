@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:virtual_match/src/model/Const.dart';
+import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/page/people/InfluencerListPage.dart';
 import 'package:virtual_match/src/widget/image/imageOvalWidget.dart';
 
@@ -242,7 +242,7 @@ class NotificationLocalPage extends StatelessWidget {
                                       height: 80,
                                       width: 80,
                                       child: ImageOvalNetwork(
-                                          imageNetworkUrl: imgLogo,
+                                          imageNetworkUrl: IMAGE_LOGO,
                                           sizeImage: Size.fromWidth(35)),
                                     ),
                                   )
@@ -325,7 +325,7 @@ class NotificationLocalPage extends StatelessWidget {
                                       height: 80,
                                       width: 80,
                                       child: ImageOvalNetwork(
-                                          imageNetworkUrl: imgLogo,
+                                          imageNetworkUrl: IMAGE_LOGO,
                                           sizeImage: Size.fromWidth(35)),
                                     ),
                                   )

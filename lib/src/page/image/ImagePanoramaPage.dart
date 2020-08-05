@@ -38,6 +38,7 @@ class _ImapePanoramaPageState extends State<ImapePanoramaPage> {
             : Image.asset('assets/panorama.jpg'),
       ),
       drawer: DrawerMenu(),
+
       floatingActionButton: Builder(
         builder: (context) => FabCircularMenu(
           key: fabKey,
@@ -62,7 +63,7 @@ class _ImapePanoramaPageState extends State<ImapePanoramaPage> {
           animationCurve: Curves.easeInOutCirc,
           onDisplayChange: (isOpen) {
             _showSnackBar(
-                context, "Menu emergente ${isOpen ? "abierto" : "cerrado"}");
+                context, "Menu Virtual Match ${isOpen ? "abierto" : "cerrado"}");
           },
           children: <Widget>[
             RawMaterialButton(
@@ -88,6 +89,7 @@ class _ImapePanoramaPageState extends State<ImapePanoramaPage> {
             RawMaterialButton(
               onPressed: () {
                 navegation(context, EmployeeListPage());
+                
               },
               shape: CircleBorder(),
               padding: const EdgeInsets.all(24.0),

@@ -10,7 +10,7 @@ import 'package:virtual_match/src/widget/general/CallWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/widget/general/SenWidget.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:virtual_match/src/model/Const.dart';
+import 'package:virtual_match/src/model/util/Const.dart';
 
 class LogOnPage extends StatelessWidget {
   @override
@@ -61,7 +61,7 @@ class LogOnPage extends StatelessWidget {
           _gmailButton(),
           //   _facebookButton(context),
           //_emailButton(context),
-          _button(context, 'Visita anónima', 18.0, 20.0),
+          _button(context, 'Virtual Match', 18.0, 20.0),
           _twitterEvelopeButtons(context),
           sizedBox(0.0, 8.0),
           _egree(context),
@@ -84,7 +84,9 @@ class LogOnPage extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Image(image: AssetImage("assets/google_logo.png"), height: 20.0),
+            Image(
+                image: AssetImage("assets/general/google_logo.png"),
+                height: 20.0),
             Padding(
               padding: const EdgeInsets.only(left: 10),
               child: Text(
@@ -113,9 +115,7 @@ class LogOnPage extends StatelessWidget {
             padding: EdgeInsets.all(0),
             shape: CircleBorder(),
             onPressed: () {
-              ViewPage(
-                  title: titleRRSS,
-                  url: facebook);
+              ViewPage(title: titleRRSS, url: facebook);
             },
             child: Icon(
               FontAwesomeIcons.facebookF,
@@ -135,9 +135,7 @@ class LogOnPage extends StatelessWidget {
             padding: EdgeInsets.all(0),
             shape: CircleBorder(),
             onPressed: () {
-              ViewPage(
-                  title: 'Instagram - virtual_match',
-                  url: instagram);
+              ViewPage(title: 'Instagram - virtual_match', url: instagram);
             },
             child: Icon(
               FontAwesomeIcons.instagram,
@@ -229,7 +227,7 @@ class LogOnPage extends StatelessWidget {
       textStyle: TextStyle(fontSize: fontSize),
       textColor: AppTheme.themeWhite,
       color: AppTheme.themeBlackBlack,
-      icon: FaIcon(FontAwesomeIcons.checkCircle, color: AppTheme.themeWhite),
+      icon: FaIcon(FontAwesomeIcons.playstation, color: AppTheme.themeWhite),
       shape: GFButtonShape.pills,
       onPressed: () => navegation(context, IntroPage()),
     );
