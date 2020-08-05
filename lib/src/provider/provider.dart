@@ -20,24 +20,24 @@ import 'package:virtual_match/src/bloc/product/ProductBloc.dart';
 
 class Provider extends InheritedWidget {
   final _loginBloc = new LoginBloc();
-  final _eventBloc = new EventBloc();
-  final _multimediaBloc = new MultimediaBloc();
-  final _newBloc = new NewBloc();
-  final _messageBloc = new MessageBloc();
-  final _commentsBloc = new CommentBloc();
-  final _organizationBloc = new OrganizationBloc();
-  final _notificationBloc = new NotificationBloc();
-  // Bloc del core del sistema
-  final _albumBloc = new AlbumBloc();
-  final _panoramaBloc = new PanoramaBloc();
-  final _catalogBloc = new CatalogBloc();
-  final _foldeableBloc = new FoldeableBloc();
-  //final _miniTournmentBloc = new MiniTourmentBloc();
-  final _playerBloc = new PlayerBloc();
-  final _productBloc = new ProductBloc();
-  final _rankingBloc = new RankingBloc();
-  final _resultBloc = new ResultBloc();
-  final _scoreBloc = new ScoreBloc();
+  // final _eventBloc = new EventBloc();
+  // final _multimediaBloc = new MultimediaBloc();
+  // final _newBloc = new NewBloc();
+  // final _messageBloc = new MessageBloc();
+  // final _commentsBloc = new CommentBloc();
+  // final _organizationBloc = new OrganizationBloc();
+  //final _notificationBloc = new NotificationBloc();
+  // // Bloc del core del sistema
+  // final _albumBloc = new AlbumBloc();
+  // final _panoramaBloc = new PanoramaBloc();
+  // final _catalogBloc = new CatalogBloc();
+  // final _foldeableBloc = new FoldeableBloc();
+  // //final _miniTournmentBloc = new MiniTourmentBloc();
+  // final _playerBloc = new PlayerBloc();
+  // final _productBloc = new ProductBloc();
+  // final _rankingBloc = new RankingBloc();
+  // final _resultBloc = new ResultBloc();
+  // final _scoreBloc = new ScoreBloc();
 
   static Provider _instancia;
 
@@ -60,107 +60,113 @@ class Provider extends InheritedWidget {
         ._loginBloc;
   }
 
-// PARA LO STANDARD
+//   static NotificationBloc notificationBloc(BuildContext context) {
+//     return (context.inheritFromWidgetOfExactType(Provider) as Provider)
+//         ._notificationBloc;
+//   }
 
-  static CommentBloc commentsBloc(BuildContext context) {
-    return (context.dependOnInheritedWidgetOfExactType(aspect: Provider)
-            as Provider)
-        ._commentsBloc;
-  }
+// // PARA LO STANDARD
 
-  // static NotificationBloc notificationBloc(BuildContext context) {
-  //   return (context.dependOnInheritedWidgetOfExactType(aspect: Provider)
-  //           as Provider)
-  //       ._notificationBloc;
-  // }
+//   static CommentBloc commentsBloc(BuildContext context) {
+//     return (context.dependOnInheritedWidgetOfExactType(aspect: Provider)
+//             as Provider)
+//         ._commentsBloc;
+//   }
 
-  //   static NotificationBloc notificationBloc(BuildContext context) {
-  //   return (context.dependOnInheritedWidgetOfExactType(aspect: Provider)
-  //           as Provider)
-  //       ._notificationBloc;
-  // }
+//   // static NotificationBloc notificationBloc(BuildContext context) {
+//   //   return (context.dependOnInheritedWidgetOfExactType(aspect: Provider)
+//   //           as Provider)
+//   //       ._notificationBloc;
+//   // }
 
-  static ProductBloc productBloc(BuildContext context) {
-    return (context.dependOnInheritedWidgetOfExactType(aspect: Provider)
-            as Provider)
-        ._productBloc;
-  }
+//   //   static NotificationBloc notificationBloc(BuildContext context) {
+//   //   return (context.dependOnInheritedWidgetOfExactType(aspect: Provider)
+//   //           as Provider)
+//   //       ._notificationBloc;
+//   // }
 
-  static NotificationBloc notificationBloc(BuildContext context) {
-    return (context.inheritFromWidgetOfExactType(NotificationBloc) as Provider)
-        ._notificationBloc;
-  }
+//   static ProductBloc productBloc(BuildContext context) {
+//     return (context.dependOnInheritedWidgetOfExactType(aspect: Provider)
+//             as Provider)
+//         ._productBloc;
+//   }
 
-  static MessageBloc messageBloc(BuildContext context) {
-    return (context.dependOnInheritedWidgetOfExactType(aspect: Provider)
-            as Provider)
-        ._messageBloc;
-  }
+//   static EventBloc eventBloc(BuildContext context) {
+//     return (context.dependOnInheritedWidgetOfExactType(aspect: Provider)
+//             as Provider)
+//         ._eventBloc;
+//   }
 
-  static MultimediaBloc multimediaBloc(BuildContext context) {
-    return (context.dependOnInheritedWidgetOfExactType(aspect: Provider)
-            as Provider)
-        ._multimediaBloc;
-  }
+//   static MessageBloc messageBloc(BuildContext context) {
+//     return (context.dependOnInheritedWidgetOfExactType(aspect: Provider)
+//             as Provider)
+//         ._messageBloc;
+//   }
 
-  static OrganizationBloc organizationBloc(BuildContext context) {
-    return (context.dependOnInheritedWidgetOfExactType(aspect: Provider)
-            as Provider)
-        ._organizationBloc;
-  }
+//   static MultimediaBloc multimediaBloc(BuildContext context) {
+//     return (context.dependOnInheritedWidgetOfExactType(aspect: Provider)
+//             as Provider)
+//         ._multimediaBloc;
+//   }
 
-  static NewBloc newBloc(BuildContext context) {
-    return (context.dependOnInheritedWidgetOfExactType(aspect: Provider)
-            as Provider)
-        ._newBloc;
-  }
+//   static OrganizationBloc organizationBloc(BuildContext context) {
+//     return (context.dependOnInheritedWidgetOfExactType(aspect: Provider)
+//             as Provider)
+//         ._organizationBloc;
+//   }
 
-  static CatalogBloc catalogBloc(BuildContext context) {
-    return (context.dependOnInheritedWidgetOfExactType(aspect: Provider)
-            as Provider)
-        ._catalogBloc;
-  }
+//   static NewBloc newBloc(BuildContext context) {
+//     return (context.dependOnInheritedWidgetOfExactType(aspect: Provider)
+//             as Provider)
+//         ._newBloc;
+//   }
 
-// PROVIDER DEL CORE
-  static AlbumBloc albumBloc(BuildContext context) {
-    return (context.dependOnInheritedWidgetOfExactType(aspect: Provider)
-            as Provider)
-        ._albumBloc;
-  }
+//   static CatalogBloc catalogBloc(BuildContext context) {
+//     return (context.dependOnInheritedWidgetOfExactType(aspect: Provider)
+//             as Provider)
+//         ._catalogBloc;
+//   }
 
-  static PanoramaBloc panoramaBloc(BuildContext context) {
-    return (context.dependOnInheritedWidgetOfExactType(aspect: Provider)
-            as Provider)
-        ._panoramaBloc;
-  }
+// // PROVIDER DEL CORE
+//   static AlbumBloc albumBloc(BuildContext context) {
+//     return (context.dependOnInheritedWidgetOfExactType(aspect: Provider)
+//             as Provider)
+//         ._albumBloc;
+//   }
 
-  static FoldeableBloc foldeableBloc(BuildContext context) {
-    return (context.dependOnInheritedWidgetOfExactType(aspect: Provider)
-            as Provider)
-        ._foldeableBloc;
-  }
+//   static PanoramaBloc panoramaBloc(BuildContext context) {
+//     return (context.dependOnInheritedWidgetOfExactType(aspect: Provider)
+//             as Provider)
+//         ._panoramaBloc;
+//   }
 
-  static PlayerBloc playerBloc(BuildContext context) {
-    return (context.dependOnInheritedWidgetOfExactType(aspect: Provider)
-            as Provider)
-        ._playerBloc;
-  }
+//   static FoldeableBloc foldeableBloc(BuildContext context) {
+//     return (context.dependOnInheritedWidgetOfExactType(aspect: Provider)
+//             as Provider)
+//         ._foldeableBloc;
+//   }
 
-  static ResultBloc resultBloc(BuildContext context) {
-    return (context.dependOnInheritedWidgetOfExactType(aspect: Provider)
-            as Provider)
-        ._resultBloc;
-  }
+//   static PlayerBloc playerBloc(BuildContext context) {
+//     return (context.dependOnInheritedWidgetOfExactType(aspect: Provider)
+//             as Provider)
+//         ._playerBloc;
+//   }
 
-  static RankingBloc rankingBloc(BuildContext context) {
-    return (context.dependOnInheritedWidgetOfExactType(aspect: Provider)
-            as Provider)
-        ._rankingBloc;
-  }
+//   static ResultBloc resultBloc(BuildContext context) {
+//     return (context.dependOnInheritedWidgetOfExactType(aspect: Provider)
+//             as Provider)
+//         ._resultBloc;
+//   }
 
-  static ScoreBloc scoreBloc(BuildContext context) {
-    return (context.dependOnInheritedWidgetOfExactType(aspect: Provider)
-            as Provider)
-        ._scoreBloc;
-  }
+//   static RankingBloc rankingBloc(BuildContext context) {
+//     return (context.dependOnInheritedWidgetOfExactType(aspect: Provider)
+//             as Provider)
+//         ._rankingBloc;
+//   }
+
+//   static ScoreBloc scoreBloc(BuildContext context) {
+//     return (context.dependOnInheritedWidgetOfExactType(aspect: Provider)
+//             as Provider)
+//         ._scoreBloc;
+//   }
 }

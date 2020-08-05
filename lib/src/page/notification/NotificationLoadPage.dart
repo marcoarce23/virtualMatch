@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
+import 'package:provider/provider.dart';
 import 'package:virtual_match/src/bloc/notification/NotificationBloc.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/NotificacionModel.dart';
@@ -12,7 +13,7 @@ import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
-import 'package:virtual_match/src/provider/provider.dart';
+import 'package:virtual_match/src/service/NotificactionService.dart';
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
@@ -112,12 +113,16 @@ class _NotificationLoadPageState extends State<NotificationLoadPage> {
 
   @override
   Widget build(BuildContext context) {
-    //  entityBloc = Provider.notificationBloc(context);
+    final entityaBloc = Provider.of<NotificationService>(context);
 
     final NotificacionModel entityModel =
         ModalRoute.of(context).settings.arguments;
 
     if (entityModel != null) entity = entityModel;
+
+    // return ChangeNotifierProvider(
+    //   builder: (_) => new NotificationService(),
+    //   child:
 
     return Scaffold(
       key: scaffoldKey,
@@ -131,6 +136,7 @@ class _NotificationLoadPageState extends State<NotificationLoadPage> {
       ),
       floatingActionButton: floatButton(AppTheme.themeDefault, context,
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
+      // ),
     );
   }
 

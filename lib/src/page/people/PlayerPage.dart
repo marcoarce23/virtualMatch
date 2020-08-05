@@ -152,7 +152,7 @@ class _LoadClientPageState extends State<LoadClientPage> {
     if (valueImage == 1) image = imagePDF;
     if (valueImage == 2) image = imageVideo;
 
-    entityBloc = Provider.productBloc(context);
+    //entityBloc = Provider.productBloc(context);
 
     final ProductModel entityModel = ModalRoute.of(context).settings.arguments;
 

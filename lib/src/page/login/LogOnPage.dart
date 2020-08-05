@@ -5,6 +5,7 @@ import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:virtual_match/src/page/general/ViewPage.dart';
 import 'package:virtual_match/src/page/intro/IntroPage.dart';
 import 'package:virtual_match/src/page/login/LoginClipperPage.dart';
+import 'package:virtual_match/src/provider/Provider.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/general/CallWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
@@ -12,9 +13,19 @@ import 'package:virtual_match/src/widget/general/SenWidget.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 
-class LogOnPage extends StatelessWidget {
+class LogOnPage extends StatefulWidget {
+  @override
+  _LogOnPageState createState() => _LogOnPageState();
+}
+
+class _LogOnPageState extends State<LogOnPage> {
+
+ 
+
   @override
   Widget build(BuildContext context) {
+  
+   final bloc = Provider.of(context);
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(

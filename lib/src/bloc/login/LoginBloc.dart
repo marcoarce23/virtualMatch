@@ -1,31 +1,23 @@
 import 'dart:async';
-import 'package:virtual_match/src/bloc/util/validator.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:virtual_match/src/bloc/util/validator.dart';
+import 'package:virtual_match/src/model/entity/EntityFromJson/LogOnModel.dart';
+import 'package:virtual_match/src/model/entity/EntityMap/NotificacionModel.dart';
+import 'package:virtual_match/src/model/entity/IEntity.dart';
+import 'package:virtual_match/src/provider/notification/ApiAdd.dart';
+import 'package:virtual_match/src/provider/notification/ApiDelete.dart';
+import 'package:virtual_match/src/provider/notification/ApiUpdate.dart';
+//import 'package:rxdart/rxdart.dart';
 
 class LoginBloc with Validators {
-  //asignacion del stream (todos lso campos)
-  final _emailController = BehaviorSubject<String>();
-  final _passwordController = BehaviorSubject<String>();
+  final _controller = new BehaviorSubject<List<LoginModel>>();
+  final _loadingController = new BehaviorSubject<bool>();
 
-  // Recuperar los datos del Stream
-  Stream<String> get emailStream =>
-      _emailController.stream.transform(validarEmail);
-  Stream<String> get passwordStream =>
-      _passwordController.stream.transform(validarPassword);
-
-  Stream<bool> get formValidStream =>
-      Observable.combineLatest2(emailStream, passwordStream, (e, p) => true);
-
-  // Insertar valores al Stream
-  Function(String) get changeEmail => _emailController.sink.add;
-  Function(String) get changePassword => _passwordController.sink.add;
-
-  // Obtener el último valor ingresado a los streams
-  String get email => _emailController.value;
-  String get password => _passwordController.value;
+  Stream<List<LoginModel>> get loginStream => _controller.stream;
+  Stream<bool> get loading => _loadingController.stream;
 
   dispose() {
-    _emailController?.close();
-    _passwordController?.close();
+    _controller?.close();
+    _loadingController?.close();
   }
 }
