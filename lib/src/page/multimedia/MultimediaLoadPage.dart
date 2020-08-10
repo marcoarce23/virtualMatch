@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:provider/provider.dart';
+import 'package:virtual_match/src/model/entity/EntityMap/MultimediaModel.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/NoticiaEventoModel.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
@@ -56,7 +57,7 @@ class _MultimediaAllPageState extends State<MultimediaAllPage> {
         ChangeNotifierProvider(builder: (_) => new MultimediaService()),
       ],
       child: Scaffold(
-        appBar: appBar('CREA NUEVA NOTICIA'),
+        appBar: appBar('CREAR MULTIMEDIA'),
         drawer: DrawerMenu(),
         bottomNavigationBar: BottomNavigationBar(
           elevation: 21.0,
@@ -103,7 +104,8 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
   final controllerUbicacion = TextEditingController();
 //DEFINICION DE BLOC Y MODEL
   MultimediaService entityService;
-  NoticiaEventoModel entity = new NoticiaEventoModel();
+  MultimediaModel entity = new MultimediaModel();
+  final prefs = new Preferense();
 
   //DEFINICION DE VARIABLES
   bool _save = false;
@@ -118,12 +120,16 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
 
   @override
   Widget build(BuildContext context) {
+    entity.states = StateEntity.Insert;
     entityService = Provider.of<MultimediaService>(context);
-    
-    final NoticiaEventoModel entityModel =
+
+    final MultimediaModel entityModel =
         ModalRoute.of(context).settings.arguments;
 
-    if (entityModel != null) entity = entityModel;
+    if (entityModel != null) {
+      entity = entityModel;
+      entity.states = StateEntity.Update;
+    }
 
     return Scaffold(
       key: scaffoldKey,
@@ -182,7 +188,7 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
 
         _text(
             controllerDetalle,
-            entity.objetivo,
+            entity.resumen,
             'Detalle de la noticia',
             140,
             2,
@@ -193,8 +199,8 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
             AppTheme.themeDefault,
             Colors.red),
         _text(
-            controllerDirigidoA,
-            entity.titulo,
+            controllerUbicacion,
+            entity.enlace,
             'PARTICIPANTES'.toUpperCase(),
             140,
             2,
@@ -204,18 +210,7 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             Colors.red),
-        _text(
-            controllerUbicacion,
-            entity.titulo,
-            'UBICACIÓN'.toUpperCase(),
-            160,
-            2,
-            'Ingrese lugar o ruta digital',
-            true,
-            FaIcon(FontAwesomeIcons.mapMarked, color: AppTheme.themeGrey),
-            AppTheme.themeDefault,
-            AppTheme.themeDefault,
-            Colors.red),
+
         //  _comboBox('Tipo.', myController.text),
         Text(
           '(*) Campos obligatorios. ',
@@ -297,25 +292,26 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
   }
 
   void loadingEntity() {
-    entity.idNoticiaEvento = 0;
-    entity.idOrganizacion = 1;
-    entity.idPersonal = 1;
+    entity.idMultimedia = 0;
+    entity.idOrganizacion = 2;
+    entity.idaCategoria = 10;
     entity.titulo = controllerNoticia.text;
-    entity.objetivo = controllerDetalle.text;
-    entity.dirigidoA = controllerDirigidoA.text;
-    entity.ubicacionUrl = controllerUbicacion.text;
-    entity.usuario = 'marce';
-    entity.fecha = '02/04/2020';
-    entity.hora = '23:12';
+    entity.resumen = controllerDetalle.text;
+    entity.fechaInicio = '2020-08-10';
+    entity.fechaFin = '2020-08-10';
+    entity.usuarioAuditoria = prefs.email;
+    entity.fechaAuditoria = '2020-08-10 08:25';
     entity.foto = IMAGE_LOGO;
-    entity.states = StateEntity.Insert;
+    entity.enlace = controllerUbicacion.text;
   }
 
   void executeCUD(
-      MultimediaService entityService, NoticiaEventoModel entity) async {
+      MultimediaService entityService, MultimediaModel entity) async {
     try {
       await entityService.repository(entity).then((result) {
-        if (result["TIPO_RESPUESTA"] == '0')
+        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
+
+        if (result["tipo_mensaje"] == '0')
           showSnackbar(STATUS_OK, scaffoldKey);
         else
           showSnackbar(STATUS_ERROR, scaffoldKey);

@@ -2,6 +2,9 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/Preference.dart';
+import 'package:virtual_match/src/page/core/equipment/EquipmentLoadPage.dart';
+import 'package:virtual_match/src/page/core/player/PlayerLoadPage.dart';
+import 'package:virtual_match/src/page/core/tourment/TourmentLoadPage.dart';
 import 'package:virtual_match/src/page/event/EventLoadPage.dart';
 import 'package:virtual_match/src/page/login/LogOnPage.dart';
 import 'package:virtual_match/src/page/login/LoginPage.dart';
@@ -9,7 +12,6 @@ import 'package:virtual_match/src/page/multimedia/MultimediaLoadPage.dart';
 import 'package:virtual_match/src/page/new/NewLoadPage.dart';
 import 'package:virtual_match/src/page/notification/NotificationLoadPage.dart';
 import 'package:virtual_match/src/page/organization/OrganizationPage.dart';
-import 'package:virtual_match/src/page/people/PlayerPage.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/widget/general/SharedWidget.dart';
@@ -109,15 +111,15 @@ class DrawerMenu extends StatelessWidget {
         CustomListTile(Icons.bubble_chart, '   Jugador Virtual Match',
             () => navegation(context, PlayerAllPage())),
 
-        CustomListTile(Icons.add_photo_alternate, '    Galería Multimedia',
-            () => navegation(context, LoginPage())),
-        // CustomListTile(Icons.card_giftcard, '   Ultimas Noticias',
-        //     () => navegation(context, AlbumFlowPage())),
+        CustomListTile(Icons.add_photo_alternate, '    Crea tu equipo',
+            () => navegation(context, EquipmentAllPage())),
+        CustomListTile(Icons.card_giftcard, '   Crea tu torneo',
+            () => navegation(context, TourmentAllPage())),
 
         CustomListTile(Icons.shop, '   Crear Notificaciones',
             () => navegation(context, NotificationAllPage())),
 
-        CustomListTile(Icons.shop, '   Crear Noticias',
+        CustomListTile(Icons.shop, '   Crear Noticias-Evento',
             () => navegation(context, NewAllPage())),
         CustomListTile(Icons.shop, '   Crear Evento',
             () => navegation(context, EventAllPage())),

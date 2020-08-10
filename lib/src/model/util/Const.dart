@@ -17,6 +17,7 @@ const String keyFCM =
     "key=AAAAxotDu0w:APA91bGSP8HuiwfdXoSb7cN0-U6WTW4eU_-Qj_c9Hd0msRD7becPLVV5rI0Ihj12KWeKYCc7pUuBTPr-R4Uq2oHgumcrj2ADS3_-rzKwTsT_567-1QFJ1NJjLmhNAa3Qt3Z3XG1rv3ol";
 const String contentTypeJSON = "application/json";
 
-
-const String URL_CLOUDY = 'https://api.cloudinary.com/v1_1/propia/video/upload?upload_preset=luwzr1vw';
+const String URL_CLOUDY =
+    'https://api.cloudinary.com/v1_1/propia/video/upload?upload_preset=luwzr1vw';
 const String SECURE_URL = 'secure_url';
+const String API = 'http://xcoavx-001-site10.ftempurl.com';

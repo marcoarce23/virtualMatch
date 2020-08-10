@@ -13,10 +13,12 @@ class NoticiaEventoModel implements IEntityMap {
   String fecha;
   String hora;
   String foto;
-  String usuario;
+  String usuarioAuditoria;
+  String fechaAuditoria;
 
   NoticiaEventoModel(
-      {this.states = StateEntity.None,
+  {
+      this.states = StateEntity.None,
       this.idNoticiaEvento = 0,
       this.idOrganizacion,
       this.idPersonal,
@@ -27,19 +29,23 @@ class NoticiaEventoModel implements IEntityMap {
       this.fecha,
       this.hora,
       this.foto,
-      this.usuario});
+      this.usuarioAuditoria,
+      this.fechaAuditoria
+      }
+      );
 
   Map<String, dynamic> toJson() => {
-        "ID_NOTICIA_EVENTO": idNoticiaEvento,
-        "ID_ORGANIZACION": idOrganizacion,
-        "ID_PERSONAL": idPersonal,
-        "TITULO": titulo,
-        "OBJETIVO": objetivo,
-        "DIRIGIDOA": dirigidoA,
-        "UBICACION_URL": ubicacionUrl,
-        "FECHA": fecha,
-        "HORA": hora,
-        "FOTO": foto,
-        "USUARIO": usuario,
+        "idNoticiaEvento": idNoticiaEvento,
+        "idOrganizacion": idOrganizacion,
+        "idPersonal": idPersonal,
+        "titulo": titulo,
+        "objetivo": objetivo,
+        "dirigidoa": dirigidoA,
+        "ubicacionUrl": ubicacionUrl,
+        "fecha": fecha,
+        "hora": hora,
+        "foto": foto,
+        "usuarioAuditoria": usuarioAuditoria,
+        "fechaAuditoria": fechaAuditoria,
       };
 }

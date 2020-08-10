@@ -8,7 +8,8 @@ class NotificacionModel implements IEntityMap {
   String titulo;
   String detalle;
   String foto;
-  String usuario;
+  String usuarioAuditoria;
+  String fechaAuditoria;
 
   NotificacionModel(
       {this.states = StateEntity.None,
@@ -17,14 +18,16 @@ class NotificacionModel implements IEntityMap {
       this.titulo,
       this.detalle,
       this.foto,
-      this.usuario});
+      this.usuarioAuditoria,
+      this.fechaAuditoria});
 
   Map<String, dynamic> toJson() => {
-        "ID_NOTIFICACION": idNotificacion,
-        "ID_ORGANIZACION": idOrganizacion,
-        "TITULO": titulo,
-        "DETALLE": detalle,
-        "FOTO": foto,
-        "usuarioAuditoria": usuario,
+        "idNotificacion": idNotificacion,
+        "idOrganizacion": idOrganizacion,
+        "titulo": titulo,
+        "detalle": detalle,
+        "foto": foto,
+        "usuarioAuditoria": usuarioAuditoria,
+        "fechaAuditoria": fechaAuditoria,
       };
 }

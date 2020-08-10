@@ -8,13 +8,13 @@ import 'package:virtual_match/src/model/util/Const.dart';
 
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/page/core/foldable/FoldablePage.dart';
+import 'package:virtual_match/src/page/core/player/PlayerLoadPage.dart';
 import 'package:virtual_match/src/page/event/EventLoadPage.dart';
 import 'package:virtual_match/src/page/faq/FaqPage.dart';
 import 'package:virtual_match/src/page/general/ViewPage.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
 import 'package:virtual_match/src/page/image/ImagePanoramaPage.dart';
 import 'package:virtual_match/src/page/people/InfluencerListPage.dart';
-import 'package:virtual_match/src/page/people/PlayerListPage.dart';
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
@@ -141,7 +141,7 @@ class _HomePageState extends State<HomePage> {
               ),
               RawMaterialButton(
                 onPressed: () {
-                  navegation(context, EmployeeListPage());
+                  navegation(context, PlayerLoadPage());
                 },
                 shape: CircleBorder(),
                 padding: const EdgeInsets.all(24.0),

@@ -336,10 +336,11 @@ class _EventLoadPageState extends State<EventLoadPage> {
     entity.objetivo = controllerDetalle.text;
     entity.dirigidoA = controllerDirigidoA.text;
     entity.ubicacionUrl = controllerUbicacion.text;
-    entity.usuario = 'marce';
+    entity.usuarioAuditoria = '';
     entity.fecha = '02/04/2020';
     entity.hora = '23:12';
     entity.foto = IMAGE_LOGO;
+    entity.fechaAuditoria = '';
     entity.states = StateEntity.Insert;
   }
 

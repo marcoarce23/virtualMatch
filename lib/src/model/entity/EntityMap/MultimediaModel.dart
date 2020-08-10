@@ -12,7 +12,8 @@ class MultimediaModel implements IEntityMap {
   String fechaFin;
   String enlace;
   String foto;
-  String usuario;
+  String usuarioAuditoria;
+  String fechaAuditoria;
 
   MultimediaModel(
       {this.states = StateEntity.None,
@@ -25,18 +26,20 @@ class MultimediaModel implements IEntityMap {
       this.fechaFin,
       this.enlace,
       this.foto,
-      this.usuario});
+      this.usuarioAuditoria,
+      this.fechaAuditoria});
 
   Map<String, dynamic> toJson() => {
-        "ID_MULTIMEDIA": idMultimedia,
-        "ID_ORGANIZACION": idOrganizacion,
-        "IDA_CATEGORIA": idaCategoria,
-        "TITULO": titulo,
-        "RESUMEN": resumen,
-        "FECHAINICIO": fechaInicio,
-        "FECHAFIN": fechaFin,
-        "ENLACE": enlace,
-        "FOTO": enlace,
-        "USUARIO": usuario,
+        "idMultimedia": idMultimedia,
+        "idOrganizacion": idOrganizacion,
+        "idaCategoria": idaCategoria,
+        "titulo": titulo,
+        "resumen": resumen,
+        "fechainicio": fechaInicio,
+        "fechafin": fechaFin,
+        "enlace": enlace,
+        "foto": enlace,
+        "usuarioAuditoria": usuarioAuditoria,
+        "fechaAuditoria": fechaAuditoria
       };
 }

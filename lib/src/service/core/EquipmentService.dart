@@ -4,7 +4,7 @@ import 'package:virtual_match/src/api/core/equipment/ApiAdd.dart';
 import 'package:virtual_match/src/api/core/equipment/ApiUpdate.dart';
 import 'package:virtual_match/src/api/core/equipment/ApiDelete.dart';
 
-class EquipentService with ChangeNotifier {
+class EquipmentService with ChangeNotifier {
   bool isLoading = true;
 
   final _apiAdd = new ApiAdd();

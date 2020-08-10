@@ -57,7 +57,7 @@ class _NewAllPagePageState extends State<NewAllPage> {
         ChangeNotifierProvider(builder: (_) => new NewService()),
       ],
       child: Scaffold(
-        appBar: appBar('CREA NUEVA NOTICIA'),
+        appBar: appBar('CREA NOTICIA-EVENTO'),
         drawer: DrawerMenu(),
         bottomNavigationBar: BottomNavigationBar(
           elevation: 21.0,
@@ -105,6 +105,7 @@ class _NewLoadPageState extends State<NewLoadPage> {
 //DEFINICION DE BLOC Y MODEL
   NewService entityService;
   NoticiaEventoModel entity = new NoticiaEventoModel();
+  final prefs = new Preferense();
 
   //DEFINICION DE VARIABLES
   bool _save = false;
@@ -119,11 +120,16 @@ class _NewLoadPageState extends State<NewLoadPage> {
 
   @override
   Widget build(BuildContext context) {
+    entity.states = StateEntity.Insert;
     entityService = Provider.of<NewService>(context);
+
     final NoticiaEventoModel entityModel =
         ModalRoute.of(context).settings.arguments;
 
-    if (entityModel != null) entity = entityModel;
+    if (entityModel != null) {
+      entity = entityModel;
+      entity.states = StateEntity.Update;
+    }
 
     return Scaffold(
       key: scaffoldKey,
@@ -298,23 +304,24 @@ class _NewLoadPageState extends State<NewLoadPage> {
 
   void loadingEntity() {
     entity.idNoticiaEvento = 0;
-    entity.idOrganizacion = 1;
-    entity.idPersonal = 1;
+    entity.idOrganizacion = 2;
+    entity.idPersonal = 3;
     entity.titulo = controllerNoticia.text;
     entity.objetivo = controllerDetalle.text;
     entity.dirigidoA = controllerDirigidoA.text;
     entity.ubicacionUrl = controllerUbicacion.text;
-    entity.usuario = 'marce';
-    entity.fecha = '02/04/2020';
+    entity.usuarioAuditoria = prefs.email;
+    entity.fecha = '10/08/2020';
     entity.hora = '23:12';
     entity.foto = IMAGE_LOGO;
-    entity.states = StateEntity.Insert;
+    entity.fechaAuditoria = '2020-08-10 08:25';
   }
 
   void executeCUD(NewService entityBloc, NoticiaEventoModel entity) async {
     try {
-      await entityBloc.repository(entity).then((result) {
-        if (result["TIPO_RESPUESTA"] == '0')
+      await entityService.repository(entity).then((result) {
+        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
+        if (result["tipo_mensaje"] == '0')
           showSnackbar(STATUS_OK, scaffoldKey);
         else
           showSnackbar(STATUS_ERROR, scaffoldKey);

@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:virtual_match/src/page/core/player/PlayerLoadPage.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
-import 'package:virtual_match/src/page/people/PlayerListPage.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
@@ -88,7 +88,7 @@ class _ImapePanoramaPageState extends State<ImapePanoramaPage> {
             ),
             RawMaterialButton(
               onPressed: () {
-                navegation(context, EmployeeListPage());
+                navegation(context, PlayerLoadPage());
                 
               },
               shape: CircleBorder(),

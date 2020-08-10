@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
-import 'package:virtual_match/src/api/notification/ApiAdd.dart';
-import 'package:virtual_match/src/api/notification/ApiUpdate.dart';
-import 'package:virtual_match/src/api/notification/ApiDelete.dart';
+import 'package:virtual_match/src/api/multimedia/ApiAdd.dart';
+import 'package:virtual_match/src/api/multimedia/ApiUpdate.dart';
+import 'package:virtual_match/src/api/multimedia/ApiDelete.dart';
 
 class MultimediaService with ChangeNotifier {
   bool isLoading = true;

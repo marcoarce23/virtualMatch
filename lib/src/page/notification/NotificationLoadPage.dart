@@ -119,11 +119,15 @@ class _NotificationLoadPageState extends State<NotificationLoadPage> {
   @override
   Widget build(BuildContext context) {
     entityService = Provider.of<NotificationService>(context);
+    entity.states = StateEntity.Insert;
 
     final NotificacionModel entityModel =
         ModalRoute.of(context).settings.arguments;
 
-    if (entityModel != null) entity = entityModel;
+    if (entityModel != null) {
+      entity = entityModel;
+      entity.states = StateEntity.Update;
+    }
 
     // return ChangeNotifierProvider(
     //   builder: (_) => new NotificationService(),
@@ -280,9 +284,10 @@ class _NotificationLoadPageState extends State<NotificationLoadPage> {
     entity.idOrganizacion = 1;
     entity.titulo = controllerTitulo.text;
     entity.detalle = controllerDetalle.text;
-    entity.usuario = prefs.email;
+    entity.usuarioAuditoria = prefs.email;
     entity.foto = IMAGE_LOGO;
-    entity.states = StateEntity.Insert;
+    entity.fechaAuditoria = '2020-08-10 08:25';
+    // entity.states = StateEntity.Insert;
 
     print('EL ENTITY NOTIFICA: ${entity.detalle}');
   }
@@ -291,8 +296,8 @@ class _NotificationLoadPageState extends State<NotificationLoadPage> {
       NotificationService entityService, NotificacionModel entity) async {
     try {
       await entityService.repository(entity).then((result) {
-        print('EL RESULTTTTT: ${result["TIPO_RESPUESTA"]}');
-        if (result["TIPO_RESPUESTA"] == '0')
+        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
+        if (result["tipo_mensaje"] == '0')
           showSnackbar(STATUS_OK, scaffoldKey);
         else
           showSnackbar(STATUS_ERROR, scaffoldKey);

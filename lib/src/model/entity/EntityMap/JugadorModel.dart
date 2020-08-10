@@ -17,10 +17,11 @@ class JugadorModel implements IEntityMap {
   String facebook;
   String twitter;
   String foto;
-  String user;
+  String usuarioAuditoria;
+  String fechaAuditoria;
 
   JugadorModel(
-      {this.states = StateEntity.None,
+  {   this.states = StateEntity.None,
       this.idJugador = 0,
       this.idOrganizacion,
       this.idaDepartamento,
@@ -35,23 +36,25 @@ class JugadorModel implements IEntityMap {
       this.facebook,
       this.twitter,
       this.foto,
-      this.user});
+      this.usuarioAuditoria,
+      this.fechaAuditoria});
 
   Map<String, dynamic> toJson() => {
-        "ID_JUGADOR": idJugador,
-        "ID_ORGANIZACION": idOrganizacion,
-        "IDA_DEPARTAMENTO": idaDepartamento,
-        "ID_LOGIN": idLogin,
-        "ID_PSDN": idPsdn,
-        "NOMBRE": nombre,
-        "APELLIDO": apellido,
-        "CORREO": correo,
-        "TELEFONO": telefono,
-        "IDA_SEXO": idaSexo,
-        "INFORMACION_COMPLEMENTARIA": informacionComplementaria,
-        "FACEBOOK": facebook,
-        "TWITTER": twitter,
-        "FOTO": foto,
-        "USUARIO": user,
+        "idJugador": idJugador,
+        "idOrganizacion": idOrganizacion,
+        "idaDepartamento": idaDepartamento,
+        "idLogin": idLogin,
+        "idPsdn": idPsdn,
+        "nombre": nombre,
+        "apellido": apellido,
+        "correo": correo,
+        "telefono": telefono,
+        "idaSexo": idaSexo,
+        "informacionComplementaria": informacionComplementaria,
+        "facebook": facebook,
+        "twitter": twitter,
+        "foto": foto,
+        "usuarioAuditoria": usuarioAuditoria,
+        "fechaAuditoria": fechaAuditoria,
       };
 }

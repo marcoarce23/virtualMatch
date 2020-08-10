@@ -3,12 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:virtual_match/src/example/VideoApp.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/page/event/EventLoadPage.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
-import 'package:virtual_match/src/page/intro/IntroPage.dart';
 import 'package:virtual_match/src/page/intro/SplashPage.dart';
 import 'package:virtual_match/src/page/login/LogOnPage.dart';
 import 'package:virtual_match/src/service/LogInService.dart';
@@ -69,9 +67,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     Function duringSplash = () {
-    print('Something background process');
     int a = 123 + 23;
-    print(a);
 
     if (a > 100)
       return 1;
