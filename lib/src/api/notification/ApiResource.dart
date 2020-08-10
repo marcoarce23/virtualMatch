@@ -12,10 +12,5 @@ Map<String, List<String>> api = {
     'http://covid19.ruta88.net/COVID/Evento/srvEvento.svc/ListaEventos',
     '_DevuelveListaEventosResult'
   ],
-
-   'update': [
-    '',
-    ''
-  ],
+  'update': ['', ''],
 };
-

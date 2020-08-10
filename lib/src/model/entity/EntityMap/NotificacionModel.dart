@@ -1,4 +1,3 @@
-
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 
 class NotificacionModel implements IEntityMap {
@@ -26,6 +25,6 @@ class NotificacionModel implements IEntityMap {
         "TITULO": titulo,
         "DETALLE": detalle,
         "FOTO": foto,
-        "USUARIO": usuario,
+        "usuarioAuditoria": usuario,
       };
 }

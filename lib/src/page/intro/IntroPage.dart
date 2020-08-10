@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/style/Style.dart';
 
@@ -141,13 +142,26 @@ class _IntroPageState extends State<IntroPage> {
                                           size: 35.0),
                                       SizedBox(width: 11.0),
                                       Expanded(
-                                        child: AutoSizeText(
-                                          'Para todas las personas que requieren de una ayuda médica gratuita y virtual.',
-                                          style: kSubtitleStyleBlack,
-                                          softWrap: true,
-                                          overflow: TextOverflow.clip,
-                                          textAlign: TextAlign.justify,
+                                        child: Shimmer.fromColors(
+                                          baseColor: Colors.red,
+                                          highlightColor: Colors.yellow,
+                                          child: Text(
+                                            'Shimmesdsdsdsdr',
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                              fontSize: 40.0,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
                                         ),
+
+                                        // AutoSizeText(
+                                        //   'Para todas las personas que requieren de una ayuda médica gratuita y virtual.',
+                                        //   style: kSubtitleStyleBlack,
+                                        //   softWrap: true,
+                                        //   overflow: TextOverflow.clip,
+                                        //   textAlign: TextAlign.justify,
+                                        // ),
                                       ),
                                     ],
                                   ),

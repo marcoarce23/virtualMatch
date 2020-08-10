@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:ui';
+import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
@@ -7,6 +8,7 @@ import 'package:virtual_match/src/model/util/Const.dart';
 
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/page/core/foldable/FoldablePage.dart';
+import 'package:virtual_match/src/page/event/EventLoadPage.dart';
 import 'package:virtual_match/src/page/faq/FaqPage.dart';
 import 'package:virtual_match/src/page/general/ViewPage.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
@@ -159,8 +161,36 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ), // drawer(context),
-        bottomNavigationBar: _bottomNavigationBar(context),
+        bottomNavigationBar: convexAppBar(),
       ),
+    );
+  }
+
+  Widget convexAppBar() {
+    return ConvexAppBar.badge(
+      {0: '99+', 1: Icons.assistant_photo, 2: Colors.redAccent},
+
+      backgroundColor: AppTheme.themeBlackBlack,
+      style: TabStyle.reactCircle,
+      elevation: 3.0,
+      items: [
+        TabItem(icon: Icons.home, title: 'Home'),
+        TabItem(icon: Icons.map, title: 'Discovery'),
+        TabItem(icon: Icons.add, title: 'Add', isIconBlend: true),
+        TabItem(icon: Icons.message, title: 'Message'),
+        TabItem(icon: Icons.people, title: 'Profile'),
+      ],
+      initialActiveIndex: 2, //optional, default as 0
+      onTap: (value) {
+        setState(() {
+          if (value == 0)  navegation(context, EventAllPage());
+          if (value == 1)  navegation(context, EventAllPage());
+          if (value == 2)  navegation(context, EventAllPage());
+          if (value == 3)  navegation(context, EventAllPage());
+          if (value == 4)  navegation(context, EventAllPage());
+          
+        });
+      },
     );
   }
 

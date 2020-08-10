@@ -37,7 +37,7 @@ class Preferense {
 
   // GET y SET del correo
   get email {
-    return _prefs.getString('email') ?? '-1';
+    return _prefs.getString('email') ?? 'marcoarce23@gmail.com';
   }
 
   set email(String value) {

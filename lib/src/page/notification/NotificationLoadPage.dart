@@ -103,6 +103,7 @@ class _NotificationLoadPageState extends State<NotificationLoadPage> {
 //DEFINICION DE BLOC Y MODEL
   NotificacionModel entity = new NotificacionModel();
   NotificationService entityService;
+  final prefs = new Preferense();
 
   //DEFINICION DE VARIABLES
   bool _save = false;
@@ -279,7 +280,7 @@ class _NotificationLoadPageState extends State<NotificationLoadPage> {
     entity.idOrganizacion = 1;
     entity.titulo = controllerTitulo.text;
     entity.detalle = controllerDetalle.text;
-    entity.usuario = 'marce';
+    entity.usuario = prefs.email;
     entity.foto = IMAGE_LOGO;
     entity.states = StateEntity.Insert;
 
@@ -287,9 +288,9 @@ class _NotificationLoadPageState extends State<NotificationLoadPage> {
   }
 
   void executeCUD(
-      NotificationService entityBloc, NotificacionModel entity) async {
+      NotificationService entityService, NotificacionModel entity) async {
     try {
-      await entityBloc.repository(entity).then((result) {
+      await entityService.repository(entity).then((result) {
         print('EL RESULTTTTT: ${result["TIPO_RESPUESTA"]}');
         if (result["TIPO_RESPUESTA"] == '0')
           showSnackbar(STATUS_OK, scaffoldKey);

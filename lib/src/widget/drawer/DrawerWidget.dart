@@ -2,15 +2,12 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/Preference.dart';
-import 'package:virtual_match/src/page/core/product/LoadProductPage.dart';
 import 'package:virtual_match/src/page/event/EventLoadPage.dart';
 import 'package:virtual_match/src/page/login/LogOnPage.dart';
 import 'package:virtual_match/src/page/login/LoginPage.dart';
 import 'package:virtual_match/src/page/multimedia/MultimediaLoadPage.dart';
 import 'package:virtual_match/src/page/new/NewLoadPage.dart';
 import 'package:virtual_match/src/page/notification/NotificationLoadPage.dart';
-import 'package:virtual_match/src/page/notification/NotificationLocalPage.dart';
-import 'package:virtual_match/src/page/notification/NotificationPage.dart';
 import 'package:virtual_match/src/page/organization/OrganizationPage.dart';
 import 'package:virtual_match/src/page/people/PlayerPage.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
@@ -104,10 +101,10 @@ class DrawerMenu extends StatelessWidget {
           )),
         ),
         CustomListTile(Icons.notification_important, '   Notificaciones',
-            () => navegation(context, NotificationLocalPage())),
+            () => navegation(context, NotificationLoadPage())),
 
         CustomListTile(Icons.beenhere, '   SorojCHiBolviia',
-            () => navegation(context, NotificationLocalPage())),
+            () => navegation(context, NotificationLoadPage())),
 
         CustomListTile(Icons.bubble_chart, '   Jugador Virtual Match',
             () => navegation(context, PlayerAllPage())),
