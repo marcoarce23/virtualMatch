@@ -9,11 +9,13 @@ import 'package:getwidget/getwidget.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
+import 'package:virtual_match/src/model/entity/EntityFromJson/ClasificadorModel.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/JugadorModel.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
+import 'package:virtual_match/src/service/ClasificadorService.dart';
 import 'package:virtual_match/src/service/ImageService.dart';
 import 'package:virtual_match/src/service/core/PlayerService.dart';
 import 'package:virtual_match/src/style/Style.dart';
@@ -90,7 +92,7 @@ class _PlayerAllPagePageState extends State<PlayerAllPage> {
 }
 
 class PlayerLoadPage extends StatefulWidget {
-  static final String routeName = 'eventLoad';
+  static final String routeName = 'playerLoad';
 
   @override
   _PlayerLoadPageState createState() => _PlayerLoadPageState();
@@ -104,11 +106,13 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
   PlayerService entityService;
   ImageService entityImage = new ImageService();
   JugadorModel entity = new JugadorModel();
+  ClasificadorService entityGet = ClasificadorService();
   final prefs = new Preferense();
 
   //
   bool _save = false;
   int valueImage = 0;
+  int optionValues = 74;
   File photo;
   String image = IMAGE_DEFAULT;
 
@@ -220,7 +224,8 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
         showPictureOval(photo, image, 70.0),
         divider(),
 
-        _tipo('Departamento : ', getTipo()),
+        //     _tipo('Departamento : ', getTipo()),
+        _comboBox('Departamento', this.optionValues.toString()),
 
         _text(
             myController,
@@ -292,11 +297,7 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
             AppTheme.themeDefault,
             Colors.red),
 
-        //  _comboBox('Tipo.', myController.text),
-
-        _tipo('Departamento', getTipo()),
-        _tipo('Departamento', getTipo()),
-        _posibleVenta('Cliente para venta'),
+//        _posibleVenta('Cliente para venta'),
 
         Text(
           '(*) Campos obligatorios. ',
@@ -360,79 +361,48 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
     );
   }
 
-  List<DropdownMenuItem<String>> getTipo() {
-    List<DropdownMenuItem<String>> lista = new List();
-
-    _listTipo.forEach((tipoPrioridad) {
-      lista.add(DropdownMenuItem(
-        child: Text(tipoPrioridad),
-        value: tipoPrioridad,
-      ));
-    });
-    return lista;
-  }
-
-  Widget _tipo(String label, List<DropdownMenuItem<String>> list) {
-    return Row(
-      children: <Widget>[
-        SizedBox(width: 35.0),
-        Text(label),
-        SizedBox(width: 15.0),
-        DropdownButton(
-          value: _opcionTipo,
-          icon: FaIcon(FontAwesomeIcons.sort, color: AppTheme.themeDefault),
-          items: list,
-          onChanged: (value) {
-            setState(() {
-              _opcionTipo = value;
-            });
-          },
-        ),
-      ],
-    );
-  }
-
-  Widget _comboBox(String label, String values) {
-    return Center(child: FutureBuilder(
-        // future: generic.getAll(new GetClasificador(),
-        //     urlGetClasificador + '53', primaryKeyGetClasifidor),
-        builder: (context, AsyncSnapshot snapshot) {
-      if (snapshot.hasData) {
-        return Row(
-          children: <Widget>[
-            SizedBox(width: 35.0),
-            Text(label),
-            SizedBox(width: 15.0),
-            DropdownButton(
-              icon: FaIcon(FontAwesomeIcons.sort, color: AppTheme.themeDefault),
-              value: values,
-              items: getDropDown(snapshot),
-              onChanged: (value) {
-                setState(() {
-                  values = value;
-                });
-              },
-            ),
-          ],
-        );
-      } else {
-        return GFLoader(type: GFLoaderType.circle, size: 35.0);
-      }
-    }));
-  }
-
-  List<DropdownMenuItem<String>> getDropDown(AsyncSnapshot snapshot) {
+List<DropdownMenuItem<String>> getDropDown(AsyncSnapshot snapshot) {
     List<DropdownMenuItem<String>> lista = new List();
 
     for (var i = 0; i < snapshot.data.length; i++) {
-      // GetClasificador item = snapshot.data[i];
-      final item = snapshot.data[i];
+      ClasificadorModel item = snapshot.data[i];
       lista.add(DropdownMenuItem(
         child: Text(item.nombre),
-        value: item.id.toString(),
+        value: item.idClasificador.toString(),
       ));
     }
     return lista;
+  }
+
+
+  Widget _comboBox(String label, String values) {
+    return Center(
+        child: FutureBuilder(
+            future: entityGet.get(new ClasificadorModel(), this.optionValues),
+            builder: (context, AsyncSnapshot snapshot) {
+              if (snapshot.hasData) {
+                return Row(
+                  children: <Widget>[
+                    SizedBox(width: 35.0),
+                    Text(label),
+                    SizedBox(width: 15.0),
+                    DropdownButton(
+                      icon: FaIcon(FontAwesomeIcons.sort,
+                          color: AppTheme.themeDefault),
+                      value: values,
+                      items: getDropDown(snapshot),
+                      onChanged: (value) {
+                        setState(() {
+                          values = value;
+                        });
+                      },
+                    ),
+                  ],
+                );
+              } else {
+                return GFLoader(type: GFLoaderType.circle, size: 35.0);
+              }
+            }));
   }
 
   Widget _button(String text, double fontSize, double edgeInsets) {

@@ -28,34 +28,6 @@ class NewService with ChangeNotifier {
         break;
       default:
     }
-
-// METODO GET LIST
-//  List<IEntity<String, dynamic>> service(IEntityMap entity) async {
-//     var result;
-//     print('STATE ENTIRY: ${entity.states}');
-
-//     isLoading = true;
-//     switch (entity.states) {
-//       case StateEntity.Insert:
-//         result = await _apiAdd.add(entity);
-//         break;
-//       case StateEntity.Delete:
-//         result = await _apiDelete.delete(entity);
-//         break;
-//       case StateEntity.Update:
-//         result = await _apiUpdate.update(entity);
-//         break;
-//       default:
-//     }
-
-    ///
-    ///
-    ///
-    ///
-////
-    ///
-    ///
-    ///
     print('DEL VALOR DE EVENT BLOC: $result');
     isLoading = false;
     notifyListeners();
