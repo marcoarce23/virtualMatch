@@ -1,9 +1,9 @@
 import 'package:virtual_match/src/model/util/Const.dart';
 
 Map<String, List<String>> api = {
-  'add': [API + '/api/Equipo', ''],
-  'getEvento': [API + '/api/Equipo', ''],
-  'delete': [API + '/api/Equipo', ''],
-  'getListaEventos': [API + '/api/Equipo', ''],
-  'update': [API + '/api/Equipo', ''],
+  'add': [API + '/api/Clasificador', ''],
+  'get': [API + '/api/Clasificador/getClasificador', ''],
+  'delete': [API + '/api/Clasificador', ''],
+  'getId': [API + '/api/Clasificador', ''],
+  'update': [API + '/api/Clasificador', ''],
 };

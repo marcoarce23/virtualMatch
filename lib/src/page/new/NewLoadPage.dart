@@ -46,7 +46,6 @@ class _NewAllPagePageState extends State<NewAllPage> {
   @override
   void initState() {
     prefs.lastPage = NewAllPage.routeName;
-    page = 0;
     super.initState();
   }
 
@@ -289,8 +288,6 @@ class _NewLoadPageState extends State<NewLoadPage> {
   }
 
   _submit() async {
-    //var _result;
-
     if (!formKey.currentState.validate()) return;
     formKey.currentState.save();
 

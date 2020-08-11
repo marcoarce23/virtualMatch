@@ -24,6 +24,7 @@ import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/model/util/Validator.dart' as validator;
+import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 import 'package:virtual_match/src/widget/image/ImageWidget.dart';
 
 class PlayerAllPage extends StatefulWidget {
@@ -112,24 +113,14 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
   //
   bool _save = false;
   int valueImage = 0;
-  int optionValues = 74;
   File photo;
   String image = IMAGE_DEFAULT;
 
   String _pdfPath = '';
-  List<String> _listTipo = [
-    'Prioritario',
-    'Potencial',
-    'Información',
-    'Conocer servicios',
-    'Interesado',
-  ];
-  String _opcionTipo = '';
+  String _opcionDepartamento = '7';
 
   @override
   void initState() {
-    _opcionTipo = 'Potencial';
-    // prefs.ultimaPagina = CitizenHelpModule.routeName;
     super.initState();
   }
 
@@ -225,7 +216,7 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
         divider(),
 
         //     _tipo('Departamento : ', getTipo()),
-        _comboBox('Departamento', this.optionValues.toString()),
+        _comboBox('Departamento', _opcionDepartamento),
 
         _text(
             myController,
@@ -306,6 +297,7 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
         ),
 
         _button('Guardar', 18.0, 20.0),
+       // gfCard(),
       ],
     );
   }
@@ -361,7 +353,7 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
     );
   }
 
-List<DropdownMenuItem<String>> getDropDown(AsyncSnapshot snapshot) {
+  List<DropdownMenuItem<String>> getDropDown(AsyncSnapshot snapshot) {
     List<DropdownMenuItem<String>> lista = new List();
 
     for (var i = 0; i < snapshot.data.length; i++) {
@@ -374,11 +366,10 @@ List<DropdownMenuItem<String>> getDropDown(AsyncSnapshot snapshot) {
     return lista;
   }
 
-
   Widget _comboBox(String label, String values) {
     return Center(
         child: FutureBuilder(
-            future: entityGet.get(new ClasificadorModel(), this.optionValues),
+            future: entityGet.get(new ClasificadorModel(), 3),
             builder: (context, AsyncSnapshot snapshot) {
               if (snapshot.hasData) {
                 return Row(
@@ -389,11 +380,11 @@ List<DropdownMenuItem<String>> getDropDown(AsyncSnapshot snapshot) {
                     DropdownButton(
                       icon: FaIcon(FontAwesomeIcons.sort,
                           color: AppTheme.themeDefault),
-                      value: values,
+                      value: _opcionDepartamento,
                       items: getDropDown(snapshot),
                       onChanged: (value) {
                         setState(() {
-                          values = value;
+                          _opcionDepartamento = value;
                         });
                       },
                     ),
@@ -435,7 +426,7 @@ List<DropdownMenuItem<String>> getDropDown(AsyncSnapshot snapshot) {
   void loadingEntity() {
     entity.idJugador = 0;
     entity.idOrganizacion = 2;
-    entity.idaDepartamento = 100;
+    entity.idaDepartamento = int.parse(_opcionDepartamento);
     entity.idLogin = 1;
     entity.idPsdn = '2468';
     entity.nombre = 'maro antonio';

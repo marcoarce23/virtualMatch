@@ -1,7 +1,7 @@
 import 'package:http/http.dart' as http;
 import 'package:virtual_match/src/api/DataMap.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
-import 'package:virtual_match/src/api/organization/ApiResource.dart';
+import 'package:virtual_match/src/api/notification/ApiResource.dart';
 
 class ApiGet {
   Future<List<IEntityJson>> get(IEntityJson entity, int value) async {

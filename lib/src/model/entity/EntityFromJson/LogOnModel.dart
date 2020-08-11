@@ -1,4 +1,4 @@
-import 'package:virtual_match/src/model/entity/iEntity.dart';
+import 'package:virtual_match/src/model/entity/IEntity.dart';
 
 class LoginModel implements IEntityJson {
   String idUsuario;

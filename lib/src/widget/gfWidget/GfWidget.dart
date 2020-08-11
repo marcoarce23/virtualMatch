@@ -1,8 +1,142 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/page/intro/IntroPage.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
+
+GFListTile gfListTile(Widget title, Widget subTitle, Widget description,
+    IconData icon, Widget avatar, EdgeInsets padding, EdgeInsets margin) {
+  return GFListTile(
+      avatar: avatar,
+      title: title,
+      subTitle: subTitle,
+      description: description,
+      padding: padding,
+      margin: margin,
+      icon: FaIcon(icon));
+}
+
+GFShimmer gfsShimmerWidget(
+  Widget widget,
+  Color color1,
+  Color color2,
+  Color color3,
+  Color color4,
+  Color color5,
+) {
+  return GFShimmer(
+    child: widget,
+    showGradient: true,
+    showShimmerEffect: true,
+    gradient: LinearGradient(
+      begin: Alignment.bottomRight,
+      end: Alignment.centerLeft,
+      stops: const <double>[0, 0.3, 0.6, 0.9, 1],
+      colors: [
+        color1,
+        color2,
+        color3,
+        color4,
+        color5,
+      ],
+    ),
+  );
+}
+
+GFShimmer gfsShimmerText(
+  String text,
+  double fontSize,
+  Color color1,
+  Color color2,
+  Color color3,
+  Color color4,
+  Color color5,
+) {
+  return GFShimmer(
+    child: Text(
+      text,
+      style: TextStyle(fontSize: fontSize, fontWeight: FontWeight.w700),
+    ),
+    showGradient: true,
+    showShimmerEffect: true,
+    gradient: LinearGradient(
+      begin: Alignment.bottomRight,
+      end: Alignment.centerLeft,
+      stops: const <double>[0, 0.3, 0.6, 0.9, 1],
+      colors: [
+        color1,
+        color2,
+        color3,
+        color4,
+        color5,
+      ],
+    ),
+  );
+}
+
+GFCard gfCard(String textButton, String textContext, String textTitle,
+    double elevation, Function iconFuction, Function onPressed) {
+  return GFCard(
+    boxFit: BoxFit.cover,
+    image: Image.network(IMAGE_LOGO),
+    elevation: elevation,
+    title: GFListTile(
+        title: Text(textTitle),
+        icon: GFIconButton(
+          onPressed: iconFuction,
+          icon: Icon(Icons.favorite_border),
+          type: GFButtonType.transparent,
+        )),
+    content: Text(textContext),
+    buttonBar: GFButtonBar(
+      alignment: WrapAlignment.start,
+      children: <Widget>[
+        GFButton(
+          onPressed: onPressed,
+          text: textButton,
+        ),
+      ],
+    ),
+  );
+}
+
+GFCard gfCardAdvanced(
+    String textButton,
+    String textContext,
+    String textTitle,
+    String textSubTitle,
+    double elevation,
+    Widget avatar,
+    Function iconFuction,
+    Function onPressed) {
+  return GFCard(
+    boxFit: BoxFit.cover,
+    image: Image.network(IMAGE_LOGO),
+    border:
+        Border.all(color: Colors.black, width: 2.0, style: BorderStyle.solid),
+    elevation: elevation,
+    title: GFListTile(
+        title: Text(textTitle),
+        subTitle: Text(textSubTitle),
+        avatar: avatar,
+        icon: GFIconButton(
+          onPressed: iconFuction,
+          icon: Icon(Icons.favorite_border),
+          type: GFButtonType.transparent,
+        )),
+    content: Text(textContext),
+    buttonBar: GFButtonBar(
+      alignment: WrapAlignment.start,
+      children: <Widget>[
+        GFButton(
+          onPressed: onPressed,
+          text: textButton,
+        ),
+      ],
+    ),
+  );
+}
 
 GFAccordion accordion(String title, String content,
     Color expandedTitlebackgroundColor, Color collapsedTitlebackgroundColor) {

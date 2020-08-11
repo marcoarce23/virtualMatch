@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:virtual_match/src/model/Preference.dart';
+import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/page/event/EventLoadPage.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
@@ -67,15 +68,15 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     Function duringSplash = () {
-    int a = 123 + 23;
+      int a = 123 + 23;
 
-    if (a > 100)
-      return 1;
-    else
-      return 2;
-  };
+      if (a > 100)
+        return 1;
+      else
+        return 2;
+    };
 
-  Map<int, Widget> op = {1: HomePage(), 2: HomePage()};
+    //Map<int, Widget> option = {1: HomePage(), 2: HomePage()};
 
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
 
@@ -84,7 +85,7 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(builder: (_) => new LoginService()),
       ],
       child: MaterialApp(
-          title: 'Virtual Match',
+          title: TITLE,
           theme: ThemeData(
             textTheme: GoogleFonts.latoTextTheme(
               Theme.of(context).textTheme,
@@ -102,22 +103,18 @@ class _MyAppState extends State<MyApp> {
 
           // initialRoute: prefs.ultimaPagina,
           home: AnimatedSplash(
-              imagePath: 'assets/ico/ico.png',
-              home: HomePage(),
-              customFunction: duringSplash,
-              duration: 3500,
-              type: AnimatedSplashType.BackgroundProcess,
-              outputAndHome: op,
-            ),
-          
-          
-          
-          
-          
+            imagePath: ASSETS_ICON,
+            home: HomePage(),
+            customFunction: duringSplash,
+            duration: 3500,
+            type: AnimatedSplashType.BackgroundProcess,
+            //  outputAndHome: option,
+          ),
+
           //new HomePage(), //MapAdressModule(),
 
           routes: <String, WidgetBuilder>{
-            'splash': (BuildContext context) => new SplashPage(),
+            //        'splash': (BuildContext context) => new SplashPage(),
             'login': (BuildContext context) => new LogOnPage(),
             'event': (BuildContext context) => new EventAllPage(),
             'multimedia': (BuildContext context) => new EventAllPage(),

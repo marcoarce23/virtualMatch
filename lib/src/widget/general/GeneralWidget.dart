@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/general/OpenWebWidget.dart';
@@ -15,7 +16,7 @@ Widget copyRigth() {
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Text('virtual_match@2020. ', style: kTitleCursive4Style),
+          Text(VIRTUAL_MATCH, style: kCopyRigthStyle),
           FaIcon(
             //  FontAwesomeIcons.earlybirds,
             FontAwesomeIcons.playstation,
