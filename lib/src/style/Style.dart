@@ -12,7 +12,7 @@ final kTitleAppBar = TextStyle(
 var kTitleStyleBlack = TextStyle(
   color: Colors.black54,
   fontFamily: 'CM Sans Serif',
-  fontSize: 23.0,
+  fontSize: 20.0,
   height: 1.0,
 );
 

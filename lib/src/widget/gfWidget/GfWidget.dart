@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/page/intro/IntroPage.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 
+final prefs = new Preferense();
+
 GFListTile gfListTile(Widget title, Widget subTitle, Widget description,
-    IconData icon, Widget avatar, EdgeInsets padding, EdgeInsets margin) {
+    FaIcon icon, Widget avatar, EdgeInsets padding, EdgeInsets margin) {
   return GFListTile(
       avatar: avatar,
       title: title,
@@ -14,7 +17,20 @@ GFListTile gfListTile(Widget title, Widget subTitle, Widget description,
       description: description,
       padding: padding,
       margin: margin,
-      icon: FaIcon(icon));
+      icon: icon
+      );
+}
+
+GFListTile gfListTileText(String title, String subTitle, FaIcon icon,
+    Widget avatar, EdgeInsets padding, EdgeInsets margin) {
+  return GFListTile(
+      avatar: avatar,
+      titleText: title,
+      subtitleText: subTitle,
+      padding: padding,
+       margin: margin,
+       icon: icon,
+      );
 }
 
 GFShimmer gfsShimmerWidget(
@@ -255,7 +271,7 @@ GFLoader loading() {
   return GFLoader(type: GFLoaderType.circle);
 }
 
-GFAvatar avatar(String image, int type, double size) {
+GFAvatar avatarSquare(String image,  double size) {
   return GFAvatar(
     backgroundImage: NetworkImage(image),
     shape: GFAvatarShape.square,
@@ -263,7 +279,17 @@ GFAvatar avatar(String image, int type, double size) {
   );
 }
 
-GFProgressBar progressCircle(String text, int type, double fontSize) {
+GFAvatar avatarCircle(String image, double size) {
+  return GFAvatar(
+    backgroundImage: NetworkImage(image),
+    backgroundColor: Colors.black,
+    foregroundColor: Colors.black,
+    shape: GFAvatarShape.circle,
+    size: size,
+  );
+}
+
+GFProgressBar progressCircle(String text, double fontSize) {
   return GFProgressBar(
     percentage: 0.5,
     lineHeight: 20,
@@ -306,13 +332,11 @@ GFDrawer drawer(BuildContext context) {
           // margin: EdgeInsets.all(10) ,
           currentAccountPicture: GFAvatar(
             radius: 80.0,
-            backgroundImage: NetworkImage(
-                "https://cdn.pixabay.com/photo/2017/12/03/18/04/christmas-balls-2995437_960_720.jpg"),
+            backgroundImage: NetworkImage(IMAGE_LOGO),
           ),
           otherAccountsPictures: <Widget>[
             Image(
-              image: NetworkImage(
-                  "https://cdn.pixabay.com/photo/2019/12/20/00/03/road-4707345_960_720.jpg"),
+              image: NetworkImage(IMAGE_LOGO),
               fit: BoxFit.cover,
             ),
             GFAvatar(
@@ -323,8 +347,8 @@ GFDrawer drawer(BuildContext context) {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text('Marco ANtonio'),
-              Text('marcoarce23@gmail.com'),
+              Text(prefs.nameUser),
+              Text(prefs.email),
             ],
           ),
         ),

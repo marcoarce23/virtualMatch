@@ -11,6 +11,7 @@ import 'package:virtual_match/src/page/login/LoginPage.dart';
 import 'package:virtual_match/src/page/multimedia/MultimediaLoadPage.dart';
 import 'package:virtual_match/src/page/new/NewLoadPage.dart';
 import 'package:virtual_match/src/page/notification/NotificationLoadPage.dart';
+import 'package:virtual_match/src/page/notification/NotificationPage.dart';
 import 'package:virtual_match/src/page/organization/OrganizationPage.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
@@ -83,7 +84,7 @@ class DrawerMenu extends StatelessWidget {
                   children: <Widget>[
                     Expanded(
                       child: Text(
-                        'Marcelo Sanchez', //prefs.nameUser,
+                       prefs.nameUser,
                         style: TextStyle(
                             color: AppTheme.themeWhite, fontSize: 18.0),
                         softWrap: true,
@@ -91,7 +92,7 @@ class DrawerMenu extends StatelessWidget {
                       ),
                     ),
                     AutoSizeText(
-                      'marcelo.sanchez@gmail.com', //;prefs.email,
+                     prefs.email,
                       style:
                           TextStyle(color: AppTheme.themeWhite, fontSize: 16.0),
                       maxLines: 2,
@@ -103,7 +104,7 @@ class DrawerMenu extends StatelessWidget {
           )),
         ),
         CustomListTile(Icons.notification_important, '   Notificaciones',
-            () => navegation(context, NotificationLoadPage())),
+            () => navegation(context, NotificationPage())),
 
         CustomListTile(Icons.beenhere, '   SorojCHiBolviia',
             () => navegation(context, NotificationLoadPage())),

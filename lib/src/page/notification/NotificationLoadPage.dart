@@ -58,7 +58,7 @@ class _NotificationAllPageState extends State<NotificationAllPage> {
         ChangeNotifierProvider(builder: (_) => new NotificationService()),
       ],
       child: Scaffold(
-        appBar: appBar('CREA NUEVA NOTIFICACIÓN'),
+        appBar: appBar('NOTIFICACIONES'),
         drawer: DrawerMenu(),
         bottomNavigationBar: BottomNavigationBar(
           elevation: 21.0,

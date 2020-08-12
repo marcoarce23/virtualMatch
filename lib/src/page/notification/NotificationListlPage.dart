@@ -3,13 +3,11 @@ import 'package:provider/provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
-import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/NotificactionService.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
-import 'package:virtual_match/src/widget/image/imageOvalWidget.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/NotificacionModel.dart';
 
 class NotificationListPage extends StatefulWidget {
@@ -37,16 +35,34 @@ class _NotificationListPageState extends State<NotificationListPage> {
 
   @override
   Widget build(BuildContext context) {
-    entityService = Provider.of<NotificationService>(context);
+    final size = MediaQuery.of(context).size;
+   // entityService = Provider.of<NotificationService>(context);
     return Scaffold(
       body: SafeArea(
         child: Container(
-          decoration: boxDecoration(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
+              backgroundBasic(context),
+              Container(
+                width: size.width * 0.95,
+                margin: EdgeInsets.symmetric(vertical: 0.0),
+                // decoration: boxDecoration(),
+                child: Column(
+                  children: <Widget>[
+                    gfListTileText(
+                        'NOTIFICACIÓN: Virtual Match',
+                        'Porque formas parte de la familia, te tenemos informado.',
+                        FaIcon(FontAwesomeIcons.infoCircle),
+                        avatarSquare(IMAGE_DEFAULT, 35.0),
+                        EdgeInsets.all(5.0),
+                        EdgeInsets.all(3.0)),
+                  ],
+                ),
+              ),
               divider(),
-              futureItemsEntity(context),
+              sizedBox(0.0, 7.0),
+              futureBuilder(context),
               copyRigth(),
             ],
           ),
@@ -57,7 +73,7 @@ class _NotificationListPageState extends State<NotificationListPage> {
     );
   }
 
-  Widget futureItemsEntity(BuildContext context) {
+  Widget futureBuilder(BuildContext context) {
     return FutureBuilder(
         future: entityGet.get(new NotificacionModel()),
         builder: (context, AsyncSnapshot snapshot) {
@@ -66,12 +82,12 @@ class _NotificationListPageState extends State<NotificationListPage> {
               return loading();
               break;
             default:
-              return listItems(context, snapshot);
+              return listView(context, snapshot);
           }
         });
   }
 
-  Widget listItems(BuildContext context, AsyncSnapshot snapshot) {
+  Widget listView(BuildContext context, AsyncSnapshot snapshot) {
     final size = MediaQuery.of(context).size;
 
     return Expanded(
@@ -83,80 +99,72 @@ class _NotificationListPageState extends State<NotificationListPage> {
         itemBuilder: (context, index) {
           NotificacionModel entity = snapshot.data[index];
 
-          return Flexible(
-            child: Column(
-              children: <Widget>[
-                Container(
-                  width: size.width * 0.97,
-                  margin: EdgeInsets.symmetric(vertical: 0.0),
-                  decoration: boxDecoration(),
-                  child: Column(
-                    children: <Widget>[
-                      ListTile(
-                        leading: iconEntity(entity),
-                        title: listEntity(context, entity),
-                      ),
-                    ],
-                  ),
+          return Column(
+            children: <Widget>[
+              Container(
+                width: size.width * 0.95,
+                margin: EdgeInsets.symmetric(vertical: 0.0),
+                decoration: boxDecoration(),
+                child: Column(
+                  children: <Widget>[
+                    gfListTileText(
+                        entity.titulo.toUpperCase(),
+                        entity.titulo,
+                        FaIcon(FontAwesomeIcons.playstation),
+                        avatarCircle(IMAGE_LOGO, 35.0),
+                        EdgeInsets.all(5.0),
+                        EdgeInsets.all(3.0)),
+                    // ListTile(
+                    //   leading: avatarCircle(IMAGE_LOGO, 35.0),
+                    //   title: listItem(context, entity),
+                    // ),
+                  ],
                 ),
-                sizedBox(0.0, 8.0),
-                divider(),
-              ],
-            ),
+              ),
+              sizedBox(0.0, 8.0),
+            ],
           );
         },
       ),
     );
   }
 
-  Widget listEntity(BuildContext context, NotificacionModel entity) {
-    return Row(
-      children: <Widget>[
-        Flexible(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                  width: MediaQuery.of(context).size.width - 110,
-                  child: Row(
-                    children: <Widget>[
-                      Icon(
-                        Icons.person,
-                        color: AppTheme.themeDefault,
-                        size: 15,
-                      ),
-                      Text('entity.titulo', style: kTitleStyleBlack),
-                    ],
-                  )),
-              Container(
-                  child: Row(
-                children: <Widget>[
-                  Icon(
-                    Icons.phone_android,
-                    color: AppTheme.themeDefault,
-                    size: 15,
-                  ),
-                  Text(
-                    'Telefono: ',
-                    style: kSubTitleCardStyle,
-                  ),
-                ],
-              )),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  Container iconEntity(NotificacionModel entity) {
-    return Container(
-        child: Column(
-      children: <Widget>[
-        ImageOvalNetwork(
-            imageNetworkUrl: IMAGE_LOGO, sizeImage: Size.fromWidth(50)),
-      ],
-    ));
-  }
+  // Widget listItem(BuildContext context, NotificacionModel entity) {
+  //   return Wrap(
+  //     children: <Widget>[
+  //       Column(
+  //         mainAxisAlignment: MainAxisAlignment.start,
+  //         crossAxisAlignment: CrossAxisAlignment.start,
+  //         children: <Widget>[
+  //           Container(
+  //               width: MediaQuery.of(context).size.width - 110,
+  //               child: Row(
+  //                 children: <Widget>[
+  //                   Icon(
+  //                     Icons.person,
+  //                     color: AppTheme.themeDefault,
+  //                     size: 15,
+  //                   ),
+  //                   Text('${entity.titulo}', style: kSubTitleCardStyle),
+  //                 ],
+  //               )),
+  //           Container(
+  //               child: Row(
+  //             children: <Widget>[
+  //               Icon(
+  //                 Icons.phone_android,
+  //                 color: AppTheme.themeDefault,
+  //                 size: 15,
+  //               ),
+  //               Text(
+  //                 '${entity.titulo}',
+  //                 style: kSubSubTitleCardStyle,
+  //               ),
+  //             ],
+  //           )),
+  //         ],
+  //       ),
+  //     ],
+  //   );
+  // }
 }
