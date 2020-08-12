@@ -8,7 +8,6 @@ import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/page/event/EventLoadPage.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
-import 'package:virtual_match/src/page/intro/SplashPage.dart';
 import 'package:virtual_match/src/page/login/LogOnPage.dart';
 import 'package:virtual_match/src/service/LogInService.dart';
 
@@ -76,7 +75,7 @@ class _MyAppState extends State<MyApp> {
         return 2;
     };
 
-    //Map<int, Widget> option = {1: HomePage(), 2: HomePage()};
+    Map<int, Widget> option = {1: HomePage(), 2: HomePage()};
 
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
 
@@ -108,7 +107,7 @@ class _MyAppState extends State<MyApp> {
             customFunction: duringSplash,
             duration: 3500,
             type: AnimatedSplashType.BackgroundProcess,
-            //  outputAndHome: option,
+            outputAndHome: option,
           ),
 
           //new HomePage(), //MapAdressModule(),

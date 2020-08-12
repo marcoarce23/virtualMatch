@@ -12,6 +12,7 @@ import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
+import 'package:virtual_match/src/page/notification/NotificationListlPage.dart';
 import 'package:virtual_match/src/service/NotificactionService.dart';
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
@@ -34,6 +35,7 @@ class _NotificationAllPageState extends State<NotificationAllPage> {
   final prefs = new Preferense();
   final List<Widget> optionPage = [
     NotificationLoadPage(),
+    NotificationListPage()
   ];
 
   void _onItemTapped(int index) {
