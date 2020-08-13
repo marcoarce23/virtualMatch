@@ -5,7 +5,7 @@ import 'package:virtual_match/src/theme/Theme.dart';
 const String fontName = 'WorkSans';
 
 final kTitleAppBar = TextStyle(
-  color: AppTheme.themeDefault,
+  color: AppTheme.themeWhite,
   fontSize: 17,
 );
 

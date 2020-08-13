@@ -10,6 +10,7 @@ import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/page/core/foldable/FoldablePage.dart';
 import 'package:virtual_match/src/page/core/player/PlayerLoadPage.dart';
 import 'package:virtual_match/src/page/event/EventLoadPage.dart';
+import 'package:virtual_match/src/page/faq/FaqListPage.dart';
 import 'package:virtual_match/src/page/faq/FaqPage.dart';
 import 'package:virtual_match/src/page/general/ViewPage.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
@@ -60,9 +61,9 @@ class _HomePageState extends State<HomePage> {
       top: true,
       child: Scaffold(
         appBar: AppBar(
-            backgroundColor: AppTheme.themeBlackGrey,
-            toolbarOpacity: 1.0,
-            iconTheme: IconThemeData(color: AppTheme.themeDefault, size: 12),
+            backgroundColor: AppTheme.themeBlackBlack,
+            // toolbarOpacity: 1.0,
+            iconTheme: IconThemeData(color: AppTheme.themeWhite, size: 15),
             elevation: 5,
             title: Row(
               children: <Widget>[
@@ -71,11 +72,11 @@ class _HomePageState extends State<HomePage> {
                   style: kTitleAppBar,
                   textAlign: TextAlign.center,
                 ),
-                sizedBox(10.0, 0.0),
+                sizedBox(125.0, 0.0),
                 FaIcon(
                   FontAwesomeIcons.playstation,
-                  color: AppTheme.themeDefault,
-                  size: 18,
+                  color: AppTheme.themeWhite,
+                  size: 25,
                 ),
               ],
             )),
@@ -170,25 +171,24 @@ class _HomePageState extends State<HomePage> {
     return ConvexAppBar.badge(
       {0: '99+', 1: Icons.assistant_photo, 2: Colors.redAccent},
 
-      backgroundColor: AppTheme.themeBlackBlack,
+      backgroundColor: AppTheme.themeDefault,
       style: TabStyle.reactCircle,
       elevation: 3.0,
       items: [
-        TabItem(icon: Icons.home, title: 'Home'),
-        TabItem(icon: Icons.map, title: 'Discovery'),
-        TabItem(icon: Icons.add, title: 'Add', isIconBlend: true),
-        TabItem(icon: Icons.message, title: 'Message'),
-        TabItem(icon: Icons.people, title: 'Profile'),
+        TabItem(icon: Icons.next_week, title: 'Noticias'),
+        TabItem(icon: Icons.event_available, title: 'Evento'),
+        TabItem(icon: Icons.add, title: 'Torneo', isIconBlend: true),
+        TabItem(icon: Icons.gamepad, title: 'Jugadores'),
+        TabItem(icon: Icons.notifications_active, title: 'Notific'),
       ],
       initialActiveIndex: 2, //optional, default as 0
       onTap: (value) {
         setState(() {
-          if (value == 0)  navegation(context, EventAllPage());
-          if (value == 1)  navegation(context, EventAllPage());
-          if (value == 2)  navegation(context, EventAllPage());
-          if (value == 3)  navegation(context, EventAllPage());
-          if (value == 4)  navegation(context, EventAllPage());
-          
+          if (value == 0) navegation(context, EventAllPage());
+          if (value == 1) navegation(context, EventAllPage());
+          if (value == 2) navegation(context, EventAllPage());
+          if (value == 3) navegation(context, EventAllPage());
+          if (value == 4) navegation(context, FaqListPage());
         });
       },
     );

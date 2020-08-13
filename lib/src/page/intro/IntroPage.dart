@@ -8,6 +8,7 @@ import 'package:virtual_match/src/style/Style.dart';
 
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 
 class IntroPage extends StatefulWidget {
   static final String routeName = 'IntroPage';
@@ -56,24 +57,25 @@ class _IntroPageState extends State<IntroPage> {
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
         child: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              // begin: Alignment.topCenter,
-              // end: Alignment.bottomRight,
-              // stops: [0.1, 0.4, 0.7, 0.9],
-              colors: [
-                Colors.white,
-                Colors.white,
-                Colors.white,
-                Colors.white,
-              ],
-            ),
-          ),
+          // decoration: BoxDecoration(
+          //   gradient: LinearGradient(
+          //     // begin: Alignment.topCenter,
+          //     // end: Alignment.bottomRight,
+          //     // stops: [0.1, 0.4, 0.7, 0.9],
+          //     colors: [
+          //       Colors.white,
+          //       Colors.white,
+          //       Colors.white,
+          //       Colors.white,
+          //     ],
+          //   ),
+          // ),
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: 20.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
+                //    backgroundBasic(context),
                 Container(
                   alignment: Alignment.centerRight,
                   child: FlatButton(

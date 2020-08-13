@@ -122,8 +122,7 @@ class DrawerMenu extends StatelessWidget {
 
         CustomListTile(Icons.shop, '   Crear Noticias-Evento',
             () => navegation(context, NewAllPage())),
-        CustomListTile(Icons.shop, '   Crear Evento',
-            () => navegation(context, EventAllPage())),
+
         CustomListTile(Icons.shop, '   Cargar Multimedia',
             () => navegation(context, MultimediaAllPage())),
 

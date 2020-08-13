@@ -170,7 +170,6 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         sizedBox(0.0, 7.0),
-
         _text(
             controllerNoticia,
             entity.nombre,
@@ -183,7 +182,6 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             Colors.red),
-
         _text(
             controllerDetalle,
             entity.detalle,
@@ -196,37 +194,11 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             Colors.red),
-        // _text(
-        //     controllerDirigidoA,
-        //     entity.titulo,
-        //     'PARTICIPANTES'.toUpperCase(),
-        //     140,
-        //     2,
-        //     'Ingrese quienes participan',
-        //     true,
-        //     FaIcon(FontAwesomeIcons.userFriends, color: AppTheme.themeGrey),
-        //     AppTheme.themeDefault,
-        //     AppTheme.themeDefault,
-        //     Colors.red),
-        // _text(
-        //     controllerUbicacion,
-        //     entity.titulo,
-        //     'UBICACIÓN'.toUpperCase(),
-        //     160,
-        //     2,
-        //     'Ingrese lugar o ruta digital',
-        //     true,
-        //     FaIcon(FontAwesomeIcons.mapMarked, color: AppTheme.themeGrey),
-        //     AppTheme.themeDefault,
-        //     AppTheme.themeDefault,
-        //     Colors.red),
-        //  _comboBox('Tipo.', myController.text),
         Text(
           '(*) Campos obligatorios. ',
           style: kCamposTitleStyle,
           textAlign: TextAlign.left,
         ),
-
         _button('Guardar', 18.0, 20.0),
       ],
     );

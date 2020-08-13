@@ -4,15 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:virtual_match/src/model/entity/EntityFromJson/ClasificadorModel.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/MultimediaModel.dart';
-import 'package:virtual_match/src/model/entity/EntityMap/NoticiaEventoModel.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
+import 'package:virtual_match/src/service/ClasificadorService.dart';
 import 'package:virtual_match/src/service/MultimediaService.dart';
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
@@ -20,6 +22,7 @@ import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/model/util/Validator.dart' as validator;
+import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 import 'package:virtual_match/src/widget/image/ImageWidget.dart';
 
 class MultimediaAllPage extends StatefulWidget {
@@ -57,7 +60,7 @@ class _MultimediaAllPageState extends State<MultimediaAllPage> {
         ChangeNotifierProvider(builder: (_) => new MultimediaService()),
       ],
       child: Scaffold(
-        appBar: appBar('CREAR MULTIMEDIA'),
+        appBar: appBar('MULTIMEDIA'),
         drawer: DrawerMenu(),
         bottomNavigationBar: BottomNavigationBar(
           elevation: 21.0,
@@ -102,14 +105,22 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
   final controllerDetalle = TextEditingController();
   final controllerDirigidoA = TextEditingController();
   final controllerUbicacion = TextEditingController();
+  TextEditingController _inputFieldDateInicioController =
+      new TextEditingController();
+  TextEditingController _inputFieldDateFinController =
+      new TextEditingController();
+
 //DEFINICION DE BLOC Y MODEL
   MultimediaService entityService;
   MultimediaModel entity = new MultimediaModel();
+  ClasificadorService entityGet = ClasificadorService();
   final prefs = new Preferense();
 
   //DEFINICION DE VARIABLES
   bool _save = false;
   File photo;
+  String _fecha = '';
+  int typeMaterial = 14;
 
   @override
   void initState() {
@@ -172,7 +183,7 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         sizedBox(0.0, 7.0),
-
+        _combox('Seleccionar multimedia:'.toUpperCase()),
         _text(
             controllerNoticia,
             entity.titulo,
@@ -210,7 +221,8 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             Colors.red),
-
+        _initDate('FECHA DE INICIO'),
+        _endDate('FECHA DE FIN'),
         //  _comboBox('Tipo.', myController.text),
         Text(
           '(*) Campos obligatorios. ',
@@ -264,6 +276,130 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
     );
   }
 
+  List<DropdownMenuItem<String>> getDropDown(AsyncSnapshot snapshot) {
+    List<DropdownMenuItem<String>> lista = new List();
+
+    for (var i = 0; i < snapshot.data.length; i++) {
+      ClasificadorModel item = snapshot.data[i];
+      lista.add(DropdownMenuItem(
+        child: Text(item.nombre),
+        value: item.idClasificador.toString(),
+      ));
+    }
+    return lista;
+  }
+
+  Widget _combox(String text) {
+    return Center(
+        child: FutureBuilder(
+            future: entityGet.get(new ClasificadorModel(), 13),
+            builder: (context, AsyncSnapshot snapshot) {
+              if (snapshot.hasData) {
+                return Row(
+                  children: <Widget>[
+                    sizedBox(15.0, 35.0),
+                    Text(text),
+                    sizedBox(10.0, 15.0),
+                    DropdownButton(
+                      icon: FaIcon(FontAwesomeIcons.sort,
+                          color: AppTheme.themeDefault),
+                      value: typeMaterial.toString(), //valor
+                      items: getDropDown(snapshot),
+                      onChanged: (value) {
+                        setState(() {
+                          typeMaterial = int.parse(value);
+                          //print('valorTipoMaterial $valorTipoMaterial');
+                        });
+                      },
+                    ),
+                  ],
+                );
+              } else {
+                return loading();
+              }
+            }));
+  }
+
+  _selectDateInicio(BuildContext context) async {
+    DateTime picked = await showDatePicker(
+        context: context,
+        initialDate: new DateTime.now(),
+        firstDate: new DateTime(2020, 4),
+        lastDate: new DateTime(2025, 12),
+        locale: Locale('es', 'ES'));
+
+    if (picked != null) {
+      setState(() {
+        _fecha = DateFormat("dd/MM/yyyy").format(picked);
+        _inputFieldDateInicioController.text = _fecha;
+        entity.fechaInicio = _inputFieldDateInicioController.text;
+      });
+    }
+  }
+
+  _selectDateFin(BuildContext context) async {
+    DateTime picked = await showDatePicker(
+        context: context,
+        initialDate: new DateTime.now(),
+        firstDate: new DateTime(2020, 4),
+        lastDate: new DateTime(2025, 12),
+        locale: Locale('es', 'ES'));
+
+    if (picked != null) {
+      setState(() {
+        _fecha = DateFormat("dd/MM/yyyy").format(picked);
+        _inputFieldDateFinController.text = _fecha;
+        entity.fechaFin = _inputFieldDateFinController.text;
+      });
+    }
+  }
+
+  Widget _initDate(String text) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
+      child: TextField(
+        enableInteractiveSelection: false,
+        controller: _inputFieldDateInicioController,
+        decoration: InputDecoration(
+            // border: OutlineInputBorder(
+            //   borderRadius: BorderRadius.circular(20.0)
+            // ),
+            hintText: text,
+            labelText: text,
+            //    suffixIcon: Icon(Icons.perm_contact_calendar),
+            icon: FaIcon(FontAwesomeIcons.calendarAlt,
+                color: AppTheme.themeDefault)),
+        onTap: () {
+          FocusScope.of(context).requestFocus(new FocusNode());
+          _selectDateInicio(context);
+        },
+      ),
+    );
+  }
+
+  Widget _endDate(String text) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
+      child: TextField(
+        enableInteractiveSelection: false,
+        controller: _inputFieldDateFinController,
+        decoration: InputDecoration(
+            // border: OutlineInputBorder(
+            //   borderRadius: BorderRadius.circular(20.0)
+            // ),
+            hintText: text,
+            labelText: text,
+            //    suffixIcon: Icon(Icons.perm_contact_calendar),
+            icon: FaIcon(FontAwesomeIcons.calendarAlt,
+                color: AppTheme.themeDefault)),
+        onTap: () {
+          FocusScope.of(context).requestFocus(new FocusNode());
+          _selectDateFin(context);
+        },
+      ),
+    );
+  }
+
   Widget _button(String text, double fontSize, double edgeInsets) {
     return GFButton(
       padding: EdgeInsets.symmetric(horizontal: edgeInsets),
@@ -293,12 +429,12 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
 
   void loadingEntity() {
     entity.idMultimedia = 0;
-    entity.idOrganizacion = 2;
-    entity.idaCategoria = 10;
+    entity.idOrganizacion = int.parse(prefs.idInstitution);
+    entity.idaCategoria = typeMaterial;
     entity.titulo = controllerNoticia.text;
     entity.resumen = controllerDetalle.text;
-    entity.fechaInicio = '2020-08-10';
-    entity.fechaFin = '2020-08-10';
+    entity.fechaInicio = _inputFieldDateInicioController.text;
+    entity.fechaFin = _inputFieldDateFinController.text;
     entity.usuarioAuditoria = prefs.email;
     entity.fechaAuditoria = '2020-08-10 08:25';
     entity.foto = IMAGE_LOGO;

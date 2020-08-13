@@ -1,7 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 
-
 class Preferense {
   static final Preferense _instancia = new Preferense._internal();
 
@@ -70,7 +69,7 @@ class Preferense {
   }
 
   get idInstitution {
-    return _prefs.getString('idInstitution') ?? '-1';
+    return _prefs.getString('idInstitution') ?? '2';
   }
 
   set idInstitution(String value) {
@@ -78,7 +77,7 @@ class Preferense {
   }
 
   get userId {
-    return _prefs.getString('userId') ?? '-1';
+    return _prefs.getString('userId') ?? '1';
   }
 
   set userId(String value) {
@@ -86,7 +85,7 @@ class Preferense {
   }
 
   get idPersonal {
-    return _prefs.getString('idPersonal') ?? '-1';
+    return _prefs.getString('idPersonal') ?? '3';
   }
 
   set idPersonal(String value) {
@@ -119,8 +118,7 @@ class Preferense {
   }
 
   get avatarImage {
-    return _prefs.getString('avatarImage') ??
-        IMAGE_LOGO;
+    return _prefs.getString('avatarImage') ?? IMAGE_LOGO;
   }
 
   set avatarImage(String value) {
