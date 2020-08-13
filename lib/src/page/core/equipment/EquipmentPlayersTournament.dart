@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:intl/intl.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/ListadoJugadoresModel.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/service/core/EquipmentService.dart';
+import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 
@@ -31,8 +31,7 @@ class _EquipmentPlayersTournamentState
 
   Widget futureBuilder(BuildContext context) {
     return FutureBuilder(
-        future: entityGet.getTodosJugadores(
-            new ListadoJugadoresModel(), widget.idTorneo),
+        future: entityGet.getId(new ListadoJugadoresModel(), widget.idTorneo),
         builder: (context, AsyncSnapshot snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
@@ -61,42 +60,45 @@ class _EquipmentPlayersTournamentState
   Widget showPlayers(ListadoJugadoresModel entity) {
     return gfListTile(
         Text(entity.nombreEquipo),
-        Row(
-          children: <Widget>[
-            Text(entity.detalleEquipo),
-            SizedBox(
-              width: 5,
-            ),
-            FaIcon(
-              FontAwesomeIcons.trophy,
-              size: 10,
-              color: Colors.green,
-            ),
-            Text('20 ganados'),
-            SizedBox(
-              width: 5,
-            ),
-            FaIcon(
-              FontAwesomeIcons.handPointDown,
-              size: 10,
-              color: Colors.red,
-            ),
-            Text('10 Perdidos'),
-          ],
-        ),
-        Row(
-          children: <Widget>[
-            avatarCircle(
-                (entity.fotoJugador == null ? IMAGE_LOGO : entity.fotoJugador),
-                15),
-            Text(entity.nombreJugador + ' ' + entity.apellidoJugador),
-          ],
-        ),
+        _showPlayerDetail(entity),
+        _showAvatarDetail(entity),
         null,
         avatarCircle((entity.fotoEquipo ?? IMAGE_LOGO), 35),
         EdgeInsets.all(5.0),
         EdgeInsets.all(3.0));
 
     //Text(entity.nombreEquipo);
+  }
+
+  Widget _showPlayerDetail(ListadoJugadoresModel entity) {
+    return Row(
+      children: <Widget>[
+        Text(entity.detalleEquipo),
+        sizedBox(5, 0),
+        FaIcon(
+          FontAwesomeIcons.trophy,
+          size: 10,
+          color: Colors.green,
+        ),
+        Text('20 ganados'),
+        sizedBox(5, 0),
+        FaIcon(
+          FontAwesomeIcons.handPointDown,
+          size: 10,
+          color: Colors.red,
+        ),
+        Text('10 Perdidos'),
+      ],
+    );
+  }
+
+  Widget _showAvatarDetail(ListadoJugadoresModel entity) {
+    return Row(
+      children: <Widget>[
+        avatarCircle(
+            (entity.fotoJugador == null ? IMAGE_LOGO : entity.fotoJugador), 15),
+        Text(entity.nombreJugador + ' ' + entity.apellidoJugador),
+      ],
+    );
   }
 }

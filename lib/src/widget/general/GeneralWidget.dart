@@ -281,6 +281,7 @@ Widget floatButton(
 
 showSnackbar(String message, GlobalKey<ScaffoldState> scaffoldKey) {
   final snackbar = SnackBar(
+    backgroundColor:  Colors.pinkAccent,
     content: Text(message),
     duration: Duration(milliseconds: 1500),
   );

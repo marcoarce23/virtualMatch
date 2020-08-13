@@ -22,9 +22,6 @@ class NotificationService with ChangeNotifier {
       case StateEntity.Insert:
         result = await _apiAdd.add(entity);
         break;
-      case StateEntity.Delete:
-        result = await _apiDelete.delete(entity);
-        break;
       case StateEntity.Update:
         result = await _apiUpdate.update(entity);
         break;
@@ -37,7 +34,16 @@ class NotificationService with ChangeNotifier {
     return result;
   }
 
-Future<List<IEntityJson>> get(IEntityJson entityJson) async {
+  Future<Map<String, dynamic>> delete(String id, String usuario) async {
+    var result;
+    isLoading = true;
+    result = await _apiDelete.delete(id, usuario);
+    isLoading = false;
+    notifyListeners();
+    return result;
+  }
+
+  Future<List<IEntityJson>> get(IEntityJson entityJson) async {
     var _result = await _apiGet.get(entityJson);
 
     isLoading = false;

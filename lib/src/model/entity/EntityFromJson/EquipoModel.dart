@@ -1,15 +1,20 @@
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 
 class EquipoModel implements IEntityJson {
-  int idClasificador;
+  int idEquipo;
+  int idJugador;
   String nombre;
-  int estado;
+   String detalle;
+  String foto;
 
-  EquipoModel({this.idClasificador, this.nombre, this.estado});
+   EquipoModel({this.idEquipo, this.idJugador, this.nombre, this.detalle, this.foto});
 
   fromJson(Map<String, dynamic> json) => new EquipoModel(
-        idClasificador: json["idClasificador"],
+        idEquipo: json["idEquipo"],
+        idJugador: json["idJugador"],
         nombre: json["nombre"],
-        estado: json["estado"],
+        detalle: json["detalle"],
+        foto: json["foto"],
+
       );
 }
