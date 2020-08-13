@@ -181,8 +181,8 @@ BoxDecoration containerImage() {
 
 boxDecoration() {
   return BoxDecoration(
-     borderRadius: BorderRadius.circular(8.0),
-     boxShadow: <BoxShadow>[
+      borderRadius: BorderRadius.circular(8.0),
+      boxShadow: <BoxShadow>[
         BoxShadow(
             color: Colors.black,
             blurRadius: 7.0,
@@ -190,39 +190,40 @@ boxDecoration() {
             spreadRadius: 4.0)
       ],
       gradient: LinearGradient(
-    begin: Alignment.topCenter,
-    end: Alignment.bottomRight,
-    stops: [0.1, 0.4, 0.7, 0.9],
-    colors: [
-      // Color.fromRGBO(113, 113, 113, 1.0),
-      // Color.fromRGBO(93, 93, 93, 3.0),
-      // Color.fromRGBO(48, 50, 48, 1.0),
-      // Color.fromRGBO(22, 23, 22, 1.0),
+        begin: Alignment.topCenter,
+        end: Alignment.bottomRight,
+        stops: [0.1, 0.4, 0.7, 0.9],
+        colors: [
+          // Color.fromRGBO(113, 113, 113, 1.0),
+          // Color.fromRGBO(93, 93, 93, 3.0),
+          // Color.fromRGBO(48, 50, 48, 1.0),
+          // Color.fromRGBO(22, 23, 22, 1.0),
 
-      // Color.fromRGBO(113, 113, 113, 1.0),
-      // Color.fromRGBO(93, 93, 93, 3.0),
-      // Color.fromRGBO(48, 50, 48, 1.0),
-      // Color.fromRGBO(22, 23, 22, 1.0),
+          // Color.fromRGBO(113, 113, 113, 1.0),
+          // Color.fromRGBO(93, 93, 93, 3.0),
+          // Color.fromRGBO(48, 50, 48, 1.0),
+          // Color.fromRGBO(22, 23, 22, 1.0),
 
-      Colors.white,Colors.white,Colors.white,Colors.white,
-
-    ],
-  ));
+          Colors.white, Colors.white, Colors.white, Colors.white,
+        ],
+      ));
 }
 
 boxDecorationMenu() {
   return BoxDecoration(
-      gradient: LinearGradient(
-    begin: Alignment.topCenter,
-    end: Alignment.bottomRight,
-    stops: [0.1, 0.4, 0.7, 0.9],
-    colors: [
-      Color.fromRGBO(113, 113, 113, 1.0),
-      Color.fromRGBO(93, 93, 93, 3.0),
-      Color.fromRGBO(48, 50, 48, 1.0),
-      Color.fromRGBO(22, 23, 22, 1.0),
-    ],
-  ));
+    color: AppTheme.themeBlackBlack,
+  );
+  //     gradient: LinearGradient(
+  //   begin: Alignment.topCenter,
+  //   end: Alignment.bottomRight,
+  //   stops: [0.1, 0.4, 0.7, 0.9],
+  //   colors: [
+  //     Color.fromRGBO(113, 113, 113, 1.0),
+  //     Color.fromRGBO(93, 93, 93, 3.0),
+  //     Color.fromRGBO(48, 50, 48, 1.0),
+  //     Color.fromRGBO(22, 23, 22, 1.0),
+  //   ],
+  // ));
 }
 
 Widget generaHttpText(String cadena, String text) {

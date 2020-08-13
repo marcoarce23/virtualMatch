@@ -75,7 +75,7 @@ class _MyAppState extends State<MyApp> {
         return 2;
     };
 
-    Map<int, Widget> option = {1: HomePage(), 2: HomePage()};
+    Map<int, Widget> option = {1: HomePage(), 2: LogOnPage()};
 
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
 
@@ -103,7 +103,7 @@ class _MyAppState extends State<MyApp> {
           // initialRoute: prefs.ultimaPagina,
           home: AnimatedSplash(
             imagePath: ASSETS_ICON,
-            home: HomePage(),
+            home: LogOnPage(),
             customFunction: duringSplash,
             duration: 3500,
             type: AnimatedSplashType.BackgroundProcess,

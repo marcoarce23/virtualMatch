@@ -425,9 +425,9 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
 
   void loadingEntity() {
     entity.idJugador = 0;
-    entity.idOrganizacion = 2;
+    entity.idOrganizacion = prefs.idInstitution;
     entity.idaDepartamento = int.parse(_opcionDepartamento);
-    entity.idLogin = 1;
+    entity.idLogin = prefs.userId;
     entity.idPsdn = '2468';
     entity.nombre = 'maro antonio';
     entity.apellido = 'arce';

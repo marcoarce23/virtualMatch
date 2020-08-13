@@ -8,6 +8,7 @@ class AppTheme {
   static const Color themeDefault =
       Colors.black; //Colors.red; //84, 153, 199,1.0);
   static const Color themeOrange = Colors.orange;
+  static const Color themePink = Colors.pinkAccent;
   static const Color themeGrey = Colors.grey;
   static const Color themeBlackGrey = Colors.black87;
 }

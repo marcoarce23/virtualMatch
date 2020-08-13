@@ -4,6 +4,7 @@ import 'package:getwidget/getwidget.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/page/intro/IntroPage.dart';
+import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 
 final prefs = new Preferense();
@@ -17,20 +18,19 @@ GFListTile gfListTile(Widget title, Widget subTitle, Widget description,
       description: description,
       padding: padding,
       margin: margin,
-      icon: icon
-      );
+      icon: icon);
 }
 
 GFListTile gfListTileText(String title, String subTitle, FaIcon icon,
     Widget avatar, EdgeInsets padding, EdgeInsets margin) {
   return GFListTile(
-      avatar: avatar,
-      titleText: title,
-      subtitleText: subTitle,
-      padding: padding,
-       margin: margin,
-       icon: icon,
-      );
+    avatar: avatar,
+    titleText: title,
+    subtitleText: subTitle,
+    padding: padding,
+    margin: margin,
+    icon: icon,
+  );
 }
 
 GFShimmer gfsShimmerWidget(
@@ -157,18 +157,17 @@ GFCard gfCardAdvanced(
 GFAccordion accordion(String title, String content,
     Color expandedTitlebackgroundColor, Color collapsedTitlebackgroundColor) {
   return GFAccordion(
+    textStyle: TextStyle(color: Colors.white),
     title: title,
     content: content,
     contentPadding: EdgeInsets.all(5.0),
-    collapsedIcon: Icon(Icons.add),
-    expandedIcon: Icon(Icons.minimize),
+    collapsedIcon: Icon(Icons.add, color: AppTheme.themeWhite),
+    expandedIcon: Icon(Icons.minimize, color: AppTheme.themeWhite),
     expandedTitlebackgroundColor: expandedTitlebackgroundColor,
     collapsedTitlebackgroundColor: collapsedTitlebackgroundColor,
     showAccordion: true,
     titleborder: Border.all(
-        color: collapsedTitlebackgroundColor,
-        width: 0.5,
-        style: BorderStyle.solid),
+        color: AppTheme.themeWhite, width: 0.5, style: BorderStyle.solid),
     contentBorder: Border.all(
         color: collapsedTitlebackgroundColor,
         width: 0.5,
@@ -271,7 +270,7 @@ GFLoader loading() {
   return GFLoader(type: GFLoaderType.circle);
 }
 
-GFAvatar avatarSquare(String image,  double size) {
+GFAvatar avatarSquare(String image, double size) {
   return GFAvatar(
     backgroundImage: NetworkImage(image),
     shape: GFAvatarShape.square,

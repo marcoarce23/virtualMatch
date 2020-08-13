@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/NoticiaEventoModel.dart';
 import 'package:virtual_match/src/model/Preference.dart';
@@ -107,11 +108,19 @@ class _NewLoadPageState extends State<NewLoadPage> {
   final prefs = new Preferense();
 
   //DEFINICION DE VARIABLES
+
+  TextEditingController _inputFieldDateController = new TextEditingController();
+  TextEditingController _inputFieldTimeController = new TextEditingController();
+
   bool _save = false;
   File photo;
+  String _fecha = '';
+  TimeOfDay _time;
 
   @override
   void initState() {
+    _time = TimeOfDay.now();
+    _fecha = DateTime.now().toString().substring(0, 10);
     super.initState();
   }
 
@@ -175,12 +184,12 @@ class _NewLoadPageState extends State<NewLoadPage> {
         _text(
             controllerNoticia,
             entity.titulo,
-            'NOTICIA'.toUpperCase(),
+            'NOTICIA/EVENTO'.toUpperCase(),
             100,
             2,
             'Ingrese la noticia',
             true,
-            FaIcon(FontAwesomeIcons.newspaper, color: AppTheme.themeGrey),
+            FaIcon(FontAwesomeIcons.newspaper, color: AppTheme.themeDefault),
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             Colors.red),
@@ -191,36 +200,38 @@ class _NewLoadPageState extends State<NewLoadPage> {
             'Detalle de la noticia',
             140,
             2,
-            'Ingrese Detalle de la noticia',
+            'Ingrese Detalle de la noticia/evento'.toUpperCase(),
             true,
-            FaIcon(FontAwesomeIcons.wpforms, color: Colors.black26),
+            FaIcon(FontAwesomeIcons.wpforms, color: AppTheme.themeDefault),
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             Colors.red),
         _text(
             controllerDirigidoA,
             entity.titulo,
-            'PARTICIPANTES'.toUpperCase(),
+            'DIRIGIDO A:'.toUpperCase(),
             140,
             2,
             'Ingrese quienes participan',
             true,
-            FaIcon(FontAwesomeIcons.userFriends, color: AppTheme.themeGrey),
+            FaIcon(FontAwesomeIcons.userFriends, color: AppTheme.themeDefault),
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             Colors.red),
         _text(
             controllerUbicacion,
             entity.titulo,
-            'UBICACIÓN'.toUpperCase(),
+            'UBICACIÓN/PUBLICACION'.toUpperCase(),
             160,
             2,
             'Ingrese lugar o ruta digital',
             true,
-            FaIcon(FontAwesomeIcons.mapMarked, color: AppTheme.themeGrey),
+            FaIcon(FontAwesomeIcons.mapMarked, color: AppTheme.themeDefault),
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             Colors.red),
+        _date('FECHA NOTICIA/EVENTO'),
+        _hour('HORA NOTICIA/EVENTO'),
         //  _comboBox('Tipo.', myController.text),
         Text(
           '(*) Campos obligatorios. ',
@@ -274,6 +285,93 @@ class _NewLoadPageState extends State<NewLoadPage> {
     );
   }
 
+  _selectDate(BuildContext context) async {
+    DateTime picked = await showDatePicker(
+        context: context,
+        initialDate: new DateTime.now(),
+        firstDate: new DateTime(2020, 4),
+        lastDate: new DateTime(2025, 12),
+        locale: Locale('es', 'ES'));
+
+    if (picked != null) {
+      setState(() {
+        _fecha = DateFormat("dd/MM/yyyy").format(picked);
+        _inputFieldDateController.text = _fecha;
+        //print(_inputFieldDateController.text);
+      });
+    }
+  }
+
+  _selectTime(BuildContext context) async {
+    TimeOfDay picked = await showTimePicker(
+      context: context,
+      initialTime: _time,
+
+      builder: (BuildContext context, Widget child) {
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
+          child: child,
+        );
+      },
+      //    locale: Locale('es', 'ES')
+    );
+
+    if (picked != null) {
+      setState(() {
+        _time = picked;
+        _inputFieldTimeController.text = _time.hour.toString() +
+            ':' +
+            _time.minute
+                .toString(); //TimeOfDay(hour: _time.hour, minute: _time.minute).toString();
+      });
+    }
+  }
+
+  Widget _date(String text) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
+      child: TextField(
+        enableInteractiveSelection: false,
+        controller: _inputFieldDateController,
+        decoration: InputDecoration(
+            // border: OutlineInputBorder(
+            //   borderRadius: BorderRadius.circular(20.0)
+            // ),
+            hintText: text,
+            labelText: text,
+            //    suffixIcon: Icon(Icons.perm_contact_calendar),
+            icon: FaIcon(FontAwesomeIcons.calendarAlt,
+                color: AppTheme.themeDefault)),
+        onTap: () {
+          FocusScope.of(context).requestFocus(new FocusNode());
+          _selectDate(context);
+        },
+      ),
+    );
+  }
+
+  Widget _hour(String text) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
+      child: TextField(
+        enableInteractiveSelection: false,
+        controller: _inputFieldTimeController,
+        decoration: InputDecoration(
+            // border: OutlineInputBorder(
+            //   borderRadius: BorderRadius.circular(20.0)
+            // ),
+            hintText: text,
+            labelText: text,
+            //    suffixIcon: Icon(Icons.perm_contact_calendar),
+            icon: FaIcon(FontAwesomeIcons.clock, color: AppTheme.themeDefault)),
+        onTap: () {
+          FocusScope.of(context).requestFocus(new FocusNode());
+          _selectTime(context);
+        },
+      ),
+    );
+  }
+
   Widget _button(String text, double fontSize, double edgeInsets) {
     return GFButton(
       padding: EdgeInsets.symmetric(horizontal: edgeInsets),
@@ -291,8 +389,6 @@ class _NewLoadPageState extends State<NewLoadPage> {
     if (!formKey.currentState.validate()) return;
     formKey.currentState.save();
 
-    print('myControllerSOY EL VALOR DE ' + controllerDetalle.text);
-
     setState(() => _save = true);
     loadingEntity();
     executeCUD(entityService, entity);
@@ -301,15 +397,15 @@ class _NewLoadPageState extends State<NewLoadPage> {
 
   void loadingEntity() {
     entity.idNoticiaEvento = 0;
-    entity.idOrganizacion = 2;
-    entity.idPersonal = 3;
+    entity.idOrganizacion = int.parse(prefs.idInstitution);
+    entity.idPersonal = int.parse(prefs.idPersonal);
     entity.titulo = controllerNoticia.text;
     entity.objetivo = controllerDetalle.text;
     entity.dirigidoA = controllerDirigidoA.text;
     entity.ubicacionUrl = controllerUbicacion.text;
     entity.usuarioAuditoria = prefs.email;
-    entity.fecha = '10/08/2020';
-    entity.hora = '23:12';
+    entity.fecha = _inputFieldDateController.text;
+    entity.hora = _inputFieldTimeController.text;
     entity.foto = IMAGE_LOGO;
     entity.fechaAuditoria = '2020-08-10 08:25';
   }
