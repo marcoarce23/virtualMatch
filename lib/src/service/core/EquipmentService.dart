@@ -11,8 +11,7 @@ class EquipmentService with ChangeNotifier {
   final _apiAdd = new ApiAdd();
   final _apiDelete = new ApiDelete();
   final _apiUpdate = new ApiUpdate();
-final _apiGet = new ApiGet();
-
+  final _apiGet = new ApiGet();
 
   Future<Map<String, dynamic>> repository(IEntityMap entity) async {
     var result;
@@ -65,12 +64,11 @@ final _apiGet = new ApiGet();
     return result;
   }
 
-    Future<List<IEntityJson>> getTodosJugadores(IEntityJson entityJson, int value) async {
+  Future<List<IEntityJson>> getTodosJugadores(
+      IEntityJson entityJson, int value) async {
     var _result = await _apiGet.getTodosJugadores(entityJson, value);
     isLoading = false;
-    notifyListeners();    
+    notifyListeners();
     return _result;
   }
-
-
 }

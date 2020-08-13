@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:virtual_match/src/api/core/tourment/ApiGet.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/api/core/tourment/ApiAdd.dart';
 import 'package:virtual_match/src/api/core/tourment/ApiUpdate.dart';
@@ -10,6 +11,7 @@ class TourmentService with ChangeNotifier {
   final _apiAdd = new ApiAdd();
   final _apiDelete = new ApiDelete();
   final _apiUpdate = new ApiUpdate();
+   final _apiGet = new ApiGet();
 
   Future<Map<String, dynamic>> repository(IEntityMap entity) async {
     var result;
@@ -61,4 +63,13 @@ class TourmentService with ChangeNotifier {
     notifyListeners();
     return result;
   }
+
+  Future<List<IEntityJson>> getTablaPosiciones(
+      IEntityJson entityJson, int value) async {
+    var _result = await _apiGet.getTablaPosiciones(entityJson, value);
+    isLoading = false;
+    notifyListeners();
+    return _result;
+  }
+
 }

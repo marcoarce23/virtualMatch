@@ -7,8 +7,5 @@ Map<String, List<String>> api = {
   'getId': [API + '/api/Clasificador', ''],
   'update': [API + '/api/Clasificador', ''],
   'getPartidosPorTorneo': [API + '/api/Torneo/getPartidosPorTorneo', ''],
-  
+  'getTablaPosiciones': [API + '/api/Torneo/getTablaPosicionesTorneo', ''],
 };
-
-
-
