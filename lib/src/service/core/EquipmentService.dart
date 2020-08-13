@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:virtual_match/src/api/core/equipment/ApiGet.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/api/core/equipment/ApiAdd.dart';
 import 'package:virtual_match/src/api/core/equipment/ApiUpdate.dart';
@@ -10,6 +11,8 @@ class EquipmentService with ChangeNotifier {
   final _apiAdd = new ApiAdd();
   final _apiDelete = new ApiDelete();
   final _apiUpdate = new ApiUpdate();
+final _apiGet = new ApiGet();
+
 
   Future<Map<String, dynamic>> repository(IEntityMap entity) async {
     var result;
@@ -61,4 +64,13 @@ class EquipmentService with ChangeNotifier {
     notifyListeners();
     return result;
   }
+
+    Future<List<IEntityJson>> getTodosJugadores(IEntityJson entityJson, int value) async {
+    var _result = await _apiGet.getTodosJugadores(entityJson, value);
+    isLoading = false;
+    notifyListeners();    
+    return _result;
+  }
+
+
 }

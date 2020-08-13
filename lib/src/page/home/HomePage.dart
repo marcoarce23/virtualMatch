@@ -7,8 +7,10 @@ import 'package:image_picker/image_picker.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 
 import 'package:virtual_match/src/model/Preference.dart';
+import 'package:virtual_match/src/page/core/equipment/EquipmentPlayersTournament.dart';
 import 'package:virtual_match/src/page/core/foldable/FoldablePage.dart';
 import 'package:virtual_match/src/page/core/player/PlayerLoadPage.dart';
+import 'package:virtual_match/src/page/core/tourment/TournamentPlayerScored.dart';
 import 'package:virtual_match/src/page/event/EventLoadPage.dart';
 import 'package:virtual_match/src/page/faq/FaqPage.dart';
 import 'package:virtual_match/src/page/general/ViewPage.dart';
@@ -230,6 +232,8 @@ class _HomePageState extends State<HomePage> {
                 ),
                 //  _crearExpedido(),
                 showPictureOval(photo, IMAGE_DEFAULT, 130.0),
+                //TournamentPlayerScored(idTorneo: 2,),
+                EquipmentPlayersTournament(idTorneo: 2,),
                 //    _botonesRedondeados(),
 
                 // Text(

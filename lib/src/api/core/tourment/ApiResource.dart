@@ -6,6 +6,8 @@ Map<String, List<String>> api = {
   'delete': [API + '/api/Clasificador', ''],
   'getId': [API + '/api/Clasificador', ''],
   'update': [API + '/api/Clasificador', ''],
+  'getPartidosPorTorneo': [API + '/api/Torneo/getPartidosPorTorneo', ''],
+  
 };
 
 
