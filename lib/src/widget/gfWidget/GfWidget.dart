@@ -9,6 +9,19 @@ import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 
 final prefs = new Preferense();
 
+GFListTile gfListTileKey(Key key, Widget title, Widget subTitle, Widget description,
+    FaIcon icon, Widget avatar, EdgeInsets padding, EdgeInsets margin) {
+  return GFListTile(
+      key: key,
+      avatar: avatar,
+      title: title,
+      subTitle: subTitle,
+      description: description,
+      padding: padding,
+      margin: margin,
+      icon: icon);
+}
+
 GFListTile gfListTile(Widget title, Widget subTitle, Widget description,
     FaIcon icon, Widget avatar, EdgeInsets padding, EdgeInsets margin) {
   return GFListTile(

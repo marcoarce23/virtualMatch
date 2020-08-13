@@ -10,6 +10,7 @@ import 'package:virtual_match/src/model/entity/EntityMap/EquipoModel.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
+import 'package:virtual_match/src/page/core/equipment/EquipmentListPage.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/core/EquipmentService.dart';
@@ -32,9 +33,7 @@ class EquipmentAllPage extends StatefulWidget {
 class _EquipmentAllPageState extends State<EquipmentAllPage> {
   int page = 0;
   final prefs = new Preferense();
-  final List<Widget> optionPage = [
-    EquipmentLoadPage(),
-  ];
+  final List<Widget> optionPage = [EquipmentLoadPage(), EquipmentListPage()];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -67,17 +66,17 @@ class _EquipmentAllPageState extends State<EquipmentAllPage> {
                   FontAwesomeIcons.newspaper,
                   size: 25,
                 ),
-                title: Text('Noticias')),
+                title: Text('Equipo')),
             BottomNavigationBarItem(
                 icon: FaIcon(
                   FontAwesomeIcons.paperPlane,
                   size: 25,
                 ),
-                title: Text('Listado Noticias')),
+                title: Text('Listado equipos')),
           ],
           currentIndex: page,
-          unselectedItemColor: Colors.purple,
-          selectedItemColor: AppTheme.themeWhite,
+          unselectedItemColor: AppTheme.themeWhite,
+          selectedItemColor: Colors.purple,
           onTap: _onItemTapped,
         ),
         body: optionPage[page],
