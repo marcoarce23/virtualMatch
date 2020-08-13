@@ -6,7 +6,7 @@ import 'package:virtual_match/src/api/people/ApiUpdate.dart';
 import 'package:virtual_match/src/api/people/ApiDelete.dart';
 
 class PeopleService with ChangeNotifier {
- bool isLoading = true;
+  bool isLoading = true;
 
   final _apiAdd = new ApiAdd();
   final _apiDelete = new ApiDelete();

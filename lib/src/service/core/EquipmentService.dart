@@ -6,7 +6,7 @@ import 'package:virtual_match/src/api/core/equipment/ApiUpdate.dart';
 import 'package:virtual_match/src/api/core/equipment/ApiDelete.dart';
 
 class EquipmentService with ChangeNotifier {
- bool isLoading = true;
+  bool isLoading = true;
 
   final _apiAdd = new ApiAdd();
   final _apiDelete = new ApiDelete();
@@ -38,9 +38,6 @@ class EquipmentService with ChangeNotifier {
     var result;
     isLoading = true;
     result = await _apiDelete.delete(id, usuario);
-  Future<List<IEntityJson>> getTodosJugadores(
-      IEntityJson entityJson, int value) async {
-    var _result = await _apiGet.getTodosJugadores(entityJson, value);
     isLoading = false;
     notifyListeners();
     return result;
@@ -62,6 +59,4 @@ class EquipmentService with ChangeNotifier {
     notifyListeners();
     return _result;
   }
-
-
 }
