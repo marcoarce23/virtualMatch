@@ -13,6 +13,7 @@ import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
+import 'package:virtual_match/src/page/new/NewListPage.dart';
 import 'package:virtual_match/src/service/NewService.dart';
 
 import 'package:virtual_match/src/style/Style.dart';
@@ -35,7 +36,7 @@ class _NewAllPagePageState extends State<NewAllPage> {
   int page = 0;
   final prefs = new Preferense();
   final List<Widget> optionPage = [
-    NewLoadPage(),
+    NewLoadPage(),NewListPage()
   ];
 
   void _onItemTapped(int index) {

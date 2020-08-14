@@ -27,7 +27,7 @@ class _EquipmentListPageState extends State<EquipmentListPage> {
   //DEFINICION DE BLOC Y MODEL
   EquipoModel entity = new EquipoModel();
   model.EquipoModel entityModel = new model.EquipoModel();
-EquipmentService entityService;
+  EquipmentService entityService;
   EquipmentService entityGet = EquipmentService();
 
   // DEFINICIOND E VARIABLES

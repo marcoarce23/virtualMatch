@@ -1,15 +1,36 @@
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 
 class MultimediaModel implements IEntityJson {
-  int idClasificador;
-  String nombre;
-  int estado;
+ int idMultimedia;
+  int idOrganizacion;
+  int idaCategoria;
+  String titulo;
+  String resumen;
+  String enlace;
+  String fechainicio;
+  String fechafin;
+  String foto;
 
-  MultimediaModel({this.idClasificador, this.nombre, this.estado});
+  MultimediaModel(
+      {this.idMultimedia,
+      this.idOrganizacion,
+      this.titulo,
+      this.resumen,
+      this.idaCategoria,
+      this.enlace,
+      this.fechainicio,
+      this.fechafin,
+      this.foto});
 
   fromJson(Map<String, dynamic> json) => new MultimediaModel(
-        idClasificador: json["idClasificador"],
-        nombre: json["nombre"],
-        estado: json["estado"],
+        idMultimedia: json["idMultimedia"],
+        idOrganizacion: json["idOrganizacion"],
+        titulo: json["titulo"],
+        resumen: json["resumen"],
+        idaCategoria: json["idaCategoria"],
+        enlace: json["enlace"],
+        fechainicio: json["fechainicio"],
+        fechafin: json["fechafin"],
+        foto: json["foto"],
       );
 }

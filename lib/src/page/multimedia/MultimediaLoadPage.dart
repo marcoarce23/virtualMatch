@@ -14,6 +14,7 @@ import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
+import 'package:virtual_match/src/page/multimedia/MultimediaListPage.dart';
 import 'package:virtual_match/src/service/ClasificadorService.dart';
 import 'package:virtual_match/src/service/MultimediaService.dart';
 import 'package:virtual_match/src/style/Style.dart';
@@ -36,9 +37,7 @@ class MultimediaAllPage extends StatefulWidget {
 class _MultimediaAllPageState extends State<MultimediaAllPage> {
   int page = 0;
   final prefs = new Preferense();
-  final List<Widget> optionPage = [
-    MultimediaLoadPage(),
-  ];
+  final List<Widget> optionPage = [MultimediaLoadPage(), MultimediaListPage()];
 
   void _onItemTapped(int index) {
     setState(() {
