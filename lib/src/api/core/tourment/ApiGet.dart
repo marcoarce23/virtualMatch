@@ -16,6 +16,9 @@ class ApiGet {
     return getListIEntityJson(response, entity, decodeData, list);
   }
 
+
+
+
   Future<List<IEntityJson>> getId(IEntityJson entity, int value) async {
     final List<IEntityJson> list = new List();
     Map<String, dynamic> decodeData;

@@ -1,6 +1,7 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:getwidget/getwidget.dart';
 import 'package:intl/intl.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/ListadoTorneoModel.dart';
@@ -12,6 +13,9 @@ import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
+
+import 'PositionTable.dart';
+import 'TournamentPlayerScored.dart';
 
 class TourmentPage extends StatefulWidget {
   final int idTorneo;
@@ -29,6 +33,15 @@ class _TourmentPageState extends State<TourmentPage> {
   ListaTorneoModel entity = new ListaTorneoModel();
   TourmentService entityService;
   TourmentService entityGet = TourmentService();
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +68,7 @@ class _TourmentPageState extends State<TourmentPage> {
                 ),
               ],
             )),
-        body: SingleChildScrollView(child: bodyContainer(context)),
+        body: bodyContainer(context),
         drawer: DrawerMenu(),
         bottomNavigationBar: convexAppBar(),
       ),
@@ -64,12 +77,90 @@ class _TourmentPageState extends State<TourmentPage> {
 
   Widget bodyContainer(BuildContext context) {
     return Column(
+        children: <Widget>[
+    futureBuilderTorneo(context),
+    GFTabs(
+      initialIndex: 0,
+      length: 3,
+      tabs: <Widget>[
+        Tab(
+          icon: Icon(Icons.perm_identity),
+          child: Text(
+            "Equipos",
+          ),
+        ),
+        Tab(
+          icon: Icon(Icons.score),
+          child: Text(
+            "Fixture",
+          ),
+        ),
+        Tab(
+          icon: Icon(Icons.table_chart),
+          child: Text(
+            "T. posiciones",
+          ),
+        ),
+      ],
+      tabBarView: GFTabBarView(
+        children: <Widget>[
+          SingleChildScrollView(
+                      child: Column(
+              children: <Widget>[
+                divider(),
+                Text('Listado de Equipos',
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+                EquipmentPlayersTournament(
+                    idTorneo: widget.idTorneo,
+                  ),
+                copyRigth(),
+              ],
+            ),
+          ),
+          SingleChildScrollView(
+                      child: Column(
+              children: <Widget>[
+                divider(),
+                Text('Fixture',
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+                TournamentPlayerScored(
+                    idTorneo: widget.idTorneo,
+                  ),
+                copyRigth(),
+              ],
+            ),
+          ),
+        SingleChildScrollView(
+                      child: Column(
+              children: <Widget>[
+                divider(),
+                Text('Fixture',
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+                PositionTable(
+                    idTorneo: widget.idTorneo,
+                  ),
+                copyRigth(),
+              ],
+            ),
+          ),
+        ],
+      ),
+    ),
+        ],
+      );
+
+    /*
+    return Column(ºººººº
       children: <Widget>[
           
         futureBuilderTorneo(context),       
         copyRigth(),
       ],
-    ); //futureBuilder(context);
+    ); 
+    */
   }
 
   Widget futureBuilderTorneo(BuildContext context) {
@@ -83,21 +174,18 @@ class _TourmentPageState extends State<TourmentPage> {
             default:
               ListaTorneoModel entity = snapshot.data[0];
               return Center(
-                child: Column(                  
+                child: Column(
                   children: <Widget>[
                     avatarCircle(entity.foto, 55.0),
                     Text(entity.nombreTorneo,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
-                  Text(entity.detalle),
-                  Text(
-                  'Del ${new DateFormat.yMMMMd('es_BO').format(entity.fechaInicio)} al ${new DateFormat.yMMMMd('es_BO').format(entity.fechaFin)}',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10)),
-                     Text('Estado'),
-                     divider(),
-                     Text('Listado de Equipos',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
-                     EquipmentPlayersTournament(idTorneo:entity.idTorneo ,),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20)),
+                    Text(entity.detalle),
+                    Text(
+                        'Del ${new DateFormat.yMMMMd('es_BO').format(entity.fechaInicio)} al ${new DateFormat.yMMMMd('es_BO').format(entity.fechaFin)}',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 10)),
+                    Text('Estado'),
                   ],
                 ),
               );

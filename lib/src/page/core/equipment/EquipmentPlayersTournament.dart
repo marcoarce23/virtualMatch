@@ -58,16 +58,14 @@ class _EquipmentPlayersTournamentState
   }
 
   Widget showPlayers(ListadoJugadoresModel entity) {
-    return SingleChildScrollView(
-          child: gfListTile(
-          Text(entity.nombreEquipo),
-          _showPlayerDetail(entity),
-          _showAvatarDetail(entity),
-          null,
-          avatarCircle((entity.fotoEquipo ?? IMAGE_LOGO), 35),
-          EdgeInsets.all(5.0),
-          EdgeInsets.all(3.0)),
-    );
+    return gfListTile(
+    Text(entity.nombreEquipo),
+    _showPlayerDetail(entity),
+    _showAvatarDetail(entity),
+    null,
+    avatarCircle((entity.fotoEquipo ?? IMAGE_LOGO), 35),
+    EdgeInsets.all(5.0),
+    EdgeInsets.all(3.0));
 
     //Text(entity.nombreEquipo);
   }
