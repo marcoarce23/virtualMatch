@@ -1,9 +1,11 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/NoticiaEventoModel.dart';
@@ -14,6 +16,7 @@ import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/page/new/NewListPage.dart';
+import 'package:virtual_match/src/service/ImageService.dart';
 import 'package:virtual_match/src/service/NewService.dart';
 
 import 'package:virtual_match/src/style/Style.dart';
@@ -35,9 +38,7 @@ class NewAllPage extends StatefulWidget {
 class _NewAllPagePageState extends State<NewAllPage> {
   int page = 0;
   final prefs = new Preferense();
-  final List<Widget> optionPage = [
-    NewLoadPage(),NewListPage()
-  ];
+  final List<Widget> optionPage = [NewLoadPage(), NewListPage()];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -78,8 +79,8 @@ class _NewAllPagePageState extends State<NewAllPage> {
                 title: Text('Listado Noticias')),
           ],
           currentIndex: page,
-          unselectedItemColor: Colors.purple,
-          selectedItemColor: AppTheme.themeWhite,
+          unselectedItemColor: AppTheme.themeWhite,
+          selectedItemColor: AppTheme.themePurple,
           onTap: _onItemTapped,
         ),
         body: optionPage[page],
@@ -103,9 +104,11 @@ class _NewLoadPageState extends State<NewLoadPage> {
   final controllerDetalle = TextEditingController();
   final controllerDirigidoA = TextEditingController();
   final controllerUbicacion = TextEditingController();
+
 //DEFINICION DE BLOC Y MODEL
   NewService entityService;
   NoticiaEventoModel entity = new NoticiaEventoModel();
+  ImageService entityImage = new ImageService();
   final prefs = new Preferense();
 
   //DEFINICION DE VARIABLES
@@ -115,13 +118,14 @@ class _NewLoadPageState extends State<NewLoadPage> {
 
   bool _save = false;
   File photo;
-  String _fecha = '';
-  TimeOfDay _time;
+  String _fecha = DateTime.now().toString().substring(0, 10);
+  TimeOfDay _time = TimeOfDay.now();
+  int _group = 1;
+  int _selectedRadio = 1;
+  String image = IMAGE_DEFAULT;
 
   @override
   void initState() {
-    _time = TimeOfDay.now();
-    _fecha = DateTime.now().toString().substring(0, 10);
     super.initState();
   }
 
@@ -145,11 +149,11 @@ class _NewLoadPageState extends State<NewLoadPage> {
       body: Stack(
         children: <Widget>[
           background(context, 'IMAGE_LOGO'),
-          showPictureOval(photo, IMAGE_DEFAULT, 130.0),
+          showPictureOval(photo, IMAGE_LOGO, 130.0),
           _form(context),
         ],
       ),
-      floatingActionButton: floatButton(AppTheme.themeDefault, context,
+      floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }
@@ -162,7 +166,22 @@ class _NewLoadPageState extends State<NewLoadPage> {
         key: formKey,
         child: Column(
           children: <Widget>[
-            sizedBox(0.0, 130.0),
+            sizedBox(0.0, 15.0),
+            Container(
+              width: size.width * 0.94,
+              margin: EdgeInsets.symmetric(vertical: 0.0),
+              decoration: containerImage(),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  text('CARGA LAS NOTICIAS Y EVENTOS', AppTheme.themeDefault, 1,
+                      15.0),
+                  _crearIconAppImagenes(),
+                  _crearIconAppCamara(),
+                ],
+              ),
+            ),
+            sizedBox(0.0, 10.0),
             Container(
               width: size.width * 0.94,
               margin: EdgeInsets.symmetric(vertical: 0.0),
@@ -176,11 +195,63 @@ class _NewLoadPageState extends State<NewLoadPage> {
     );
   }
 
+  _crearIconAppImagenes() {
+    return IconButton(
+      icon: Icon(
+        Icons.photo_size_select_actual,
+        color: AppTheme.themePurple,
+      ),
+      onPressed: _seleccionarFoto,
+    );
+  }
+
+  _crearIconAppCamara() {
+    return IconButton(
+      icon: Icon(
+        Icons.camera_alt,
+        color: AppTheme.themePurple,
+      ),
+      onPressed: _tomarFoto,
+    );
+  }
+
   Widget _fields(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         sizedBox(0.0, 7.0),
+        showPictureOval(photo, image, 70.0),
+        divider(),
+
+        Row(
+          children: <Widget>[
+            SizedBox(width: 1),
+          //  FaIcon(FontAwesomeIcons.newspaper, color: AppTheme.themeDefault),
+            sizedBox(15.0, 0.0),
+            Text('Noticia'),
+            Radio(
+              value: 0,
+              groupValue: _group,
+              onChanged: (T) {
+                _selectedRadio = T;
+                setState(() {
+                  _group = T;
+                });
+              },
+            ),
+            Text('Evento'),
+            Radio(
+              value: 1,
+              groupValue: _group,
+              onChanged: (T) {
+                _selectedRadio = T;
+                setState(() {
+                  _group = T;
+                });
+              },
+            ),
+          ],
+        ),
 
         _text(
             controllerNoticia,
@@ -422,6 +493,27 @@ class _NewLoadPageState extends State<NewLoadPage> {
       });
     } catch (error) {
       showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
+    }
+  }
+
+  _seleccionarFoto() async {
+    _procesarImagen(ImageSource.gallery);
+  }
+
+  _tomarFoto() async {
+    _procesarImagen(ImageSource.camera);
+  }
+
+  _procesarImagen(ImageSource origen) async {
+    final photo = await ImagePicker().getImage(source: origen);
+    if (photo != null) {
+      image = await entityImage.uploadImage(photo.path);
+      print('imagennnnn $image');
+      setState(() {
+        entity.foto = image;
+
+        //print('cargadod e iagen ${entity.foto}');
+      });
     }
   }
 }

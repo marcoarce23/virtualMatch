@@ -66,20 +66,20 @@ class _NotificationAllPageState extends State<NotificationAllPage> {
           items: [
             BottomNavigationBarItem(
                 icon: FaIcon(
-                  FontAwesomeIcons.newspaper,
+                  FontAwesomeIcons.bell,
                   size: 25,
                 ),
                 title: Text('Notificaciones')),
             BottomNavigationBarItem(
                 icon: FaIcon(
-                  FontAwesomeIcons.paperPlane,
+                  FontAwesomeIcons.listAlt,
                   size: 25,
                 ),
                 title: Text('Listado Notificación')),
           ],
           currentIndex: page,
-          unselectedItemColor: Colors.purple,
-          selectedItemColor: AppTheme.themeWhite,
+          unselectedItemColor: AppTheme.themeWhite,
+          selectedItemColor: AppTheme.themePurple,
           onTap: _onItemTapped,
         ),
         body: optionPage[page],
@@ -140,8 +140,9 @@ class _NotificationLoadPageState extends State<NotificationLoadPage> {
       body: Stack(
         children: <Widget>[
           background(context, 'IMAGE_LOGO'),
-          showPictureOval(photo, IMAGE_DEFAULT, 130.0),
+          // showPictureOval(photo, IMAGE_DEFAULT, 130.0),
           //   crearFondo(context, IMAGE_LOGO),
+
           _form(context),
         ],
       ),
@@ -158,7 +159,15 @@ class _NotificationLoadPageState extends State<NotificationLoadPage> {
         key: formKey,
         child: Column(
           children: <Widget>[
-            sizedBox(0.0, 130.0),
+            sizedBox(0.0, 7.0),
+            showInformation(
+                context,
+                'GESTIONA LAS NOTIFICACIONES',
+                'En la pantalla podrás crear y modficar las notificaciones.\nLos campos con (*) son obligatorios.',
+                'Visita Sorojchi eclub en facebook',
+                'INGRESASTE A SORIJCHI ECLUB',
+                'https://www.facebook.com/SorojchieClub/'),
+            sizedBox(0.0, 5.0),
             Container(
               width: size.width * 0.94,
               margin: EdgeInsets.symmetric(vertical: 0.0),
@@ -176,8 +185,6 @@ class _NotificationLoadPageState extends State<NotificationLoadPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        sizedBox(0.0, 7.0),
-
         _text(
             controllerTitulo,
             entity.titulo,
@@ -186,7 +193,7 @@ class _NotificationLoadPageState extends State<NotificationLoadPage> {
             3,
             'Ingrese la notificación',
             true,
-            FaIcon(FontAwesomeIcons.newspaper, color: AppTheme.themeGrey),
+            FaIcon(FontAwesomeIcons.newspaper, color: AppTheme.themeDefault),
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             Colors.red),
@@ -199,7 +206,7 @@ class _NotificationLoadPageState extends State<NotificationLoadPage> {
             4,
             'Ingrese Detalle de la notificación',
             true,
-            FaIcon(FontAwesomeIcons.wpforms, color: Colors.black26),
+            FaIcon(FontAwesomeIcons.wpforms, color: AppTheme.themeDefault),
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             Colors.red),

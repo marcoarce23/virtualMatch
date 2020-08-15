@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:ui';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -23,6 +24,7 @@ import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
+import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 import 'package:virtual_match/src/widget/image/ImageWidget.dart';
 
 class HomePage extends StatefulWidget {
@@ -35,12 +37,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final prefs = new Preferense();
-  //final generic = new Generic();
   int _selectedIndex = 0;
   int valorExpedido = 60;
   File photo;
   File _imageFile;
-
   final GlobalKey<FabCircularMenuState> fabKey = GlobalKey();
 
   @override
@@ -64,23 +64,34 @@ class _HomePageState extends State<HomePage> {
       top: true,
       child: Scaffold(
         appBar: AppBar(
-            backgroundColor: AppTheme.themeBlackBlack,
+            backgroundColor: AppTheme.themeDefault,
             // toolbarOpacity: 1.0,
             iconTheme: IconThemeData(color: AppTheme.themeWhite, size: 15),
-            elevation: 5,
+            elevation: 7,
             title: Row(
               children: <Widget>[
-                Text(
-                  "Virtual Match ",
+                // Auto(
+                //   "Virtual Match - Sorojchi eclub ",
+                //   style: kTitleAppBar,
+                //   textAlign: TextAlign.center,
+                // ),
+
+                AutoSizeText(
+                  'Virtual Match - Sorojchi eclub ',
                   style: kTitleAppBar,
-                  textAlign: TextAlign.center,
+                  maxLines: 2,
+                  minFontSize: 15.0,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.left,
                 ),
-                sizedBox(125.0, 0.0),
-                FaIcon(
-                  FontAwesomeIcons.playstation,
-                  color: AppTheme.themeWhite,
-                  size: 25,
-                ),
+
+                sizedBox(5.0, 0.0),
+                // FaIcon(
+                //   FontAwesomeIcons.playstation,
+                //   color: AppTheme.themeWhite,
+                //   size: 25,
+                // ),
+                avatarCircle(IMAGE_SOROJCHI, 25),
               ],
             )),
         body: metodoHome(),
@@ -102,11 +113,11 @@ class _HomePageState extends State<HomePage> {
             // fabCloseColor: Colors.white
             // These properties take precedence over fabColor
             fabColor: AppTheme.themeWhite,
-            fabOpenIcon: Icon(Icons.menu, color: AppTheme.themeBlackGrey),
-            fabCloseIcon: Icon(Icons.close, color: AppTheme.themeBlackGrey),
+            fabOpenIcon: Icon(Icons.menu, color: AppTheme.themeDefault),
+            fabCloseIcon: Icon(Icons.close, color: AppTheme.themeDefault),
             fabMargin: const EdgeInsets.all(16.0),
             animationDuration: const Duration(milliseconds: 800),
-            animationCurve: Curves.easeInOutCirc,
+            animationCurve: Curves.easeInCubic,
             onDisplayChange: (isOpen) {
               _showSnackBar(context,
                   "Menu Virtual Match ${isOpen ? "abierto" : "cerrado"}");
@@ -118,7 +129,18 @@ class _HomePageState extends State<HomePage> {
                 },
                 shape: CircleBorder(),
                 padding: const EdgeInsets.all(24.0),
-                child: FaIcon(FontAwesomeIcons.shoppingCart,
+                child: FaIcon(FontAwesomeIcons.playstation,
+                    color: AppTheme.themeDefault, size: 25.0),
+              ),
+              RawMaterialButton(
+                onPressed: () async {
+                  _imageFile =
+                      await ImagePicker.pickImage(source: ImageSource.gallery);
+                  setState(() {});
+                },
+                shape: CircleBorder(),
+                padding: const EdgeInsets.all(24.0),
+                child: FaIcon(FontAwesomeIcons.futbol,
                     color: AppTheme.themeDefault, size: 25.0),
               ),
               RawMaterialButton(
@@ -132,24 +154,24 @@ class _HomePageState extends State<HomePage> {
                 child: FaIcon(FontAwesomeIcons.images,
                     color: AppTheme.themeDefault, size: 25.0),
               ),
-              RawMaterialButton(
-                onPressed: () async {
-                  _imageFile =
-                      await ImagePicker.pickImage(source: ImageSource.gallery);
-                  setState(() {});
+
+               RawMaterialButton(
+                onPressed: () {
+                  navegation(context, FaqPage());
                 },
                 shape: CircleBorder(),
                 padding: const EdgeInsets.all(24.0),
-                child: FaIcon(FontAwesomeIcons.images,
+                child: FaIcon(FontAwesomeIcons.youtube,
                     color: AppTheme.themeDefault, size: 25.0),
               ),
+
               RawMaterialButton(
                 onPressed: () {
-                  navegation(context, PlayerLoadPage());
+                  navegation(context, FaqListPage());
                 },
                 shape: CircleBorder(),
                 padding: const EdgeInsets.all(24.0),
-                child: FaIcon(FontAwesomeIcons.users,
+                child: FaIcon(FontAwesomeIcons.questionCircle,
                     color: AppTheme.themeDefault, size: 25.0),
               ),
               RawMaterialButton(
@@ -159,7 +181,7 @@ class _HomePageState extends State<HomePage> {
                 },
                 shape: CircleBorder(),
                 padding: const EdgeInsets.all(24.0),
-                child: FaIcon(FontAwesomeIcons.timesCircle,
+                child: FaIcon(FontAwesomeIcons.home,
                     color: AppTheme.themeDefault, size: 25.0),
               )
             ],
@@ -233,9 +255,15 @@ class _HomePageState extends State<HomePage> {
                 ),
                 //  _crearExpedido(),
                 showPictureOval(photo, IMAGE_DEFAULT, 130.0),
-                //TournamentPlayerScored(idTorneo: 2,),
-                //EquipmentPlayersTournament(idTorneo: 2,),
-                PositionTable(idTorneo: 2,),
+                TournamentPlayerScored(
+                  idTorneo: 2,
+                ),
+                EquipmentPlayersTournament(
+                  idTorneo: 2,
+                ),
+                PositionTable(
+                  idTorneo: 2,
+                ),
                 //    _botonesRedondeados(),
 
                 // Text(
@@ -319,120 +347,5 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _botonesRedondeados() {
-    return Wrap(children: <Widget>[
-      _crearBotonRedondeado(
-          Colors.purpleAccent,
-          FaIcon(FontAwesomeIcons.fileImage, color: Colors.white, size: 35.0),
-          'Catálogos',
-          '2',
-          16.0,
-          ClientListPage(),
-          0,
-          ""),
-      _crearBotonRedondeado(
-          Colors.blue,
-          FaIcon(FontAwesomeIcons.home, color: Colors.white, size: 35.0),
-          'Productos',
-          '1',
-          14.0,
-          ClientListPage(),
-          0,
-          ""),
-      _crearBotonRedondeado(
-          Colors.pinkAccent,
-          FaIcon(FontAwesomeIcons.image, color: Colors.white, size: 35.0),
-          'Album de Servicios',
-          '3',
-          14.0,
-          ClientListPage(),
-          0,
-          ""),
-      _crearBotonRedondeado(
-          Colors.deepPurple,
-          FaIcon(FontAwesomeIcons.userTie, color: Colors.white, size: 40.0),
-          'Clientes',
-          '5',
-          15.0,
-          ClientListPage(),
-          0,
-          ""),
-      _crearBotonRedondeado(
-          Colors.deepPurple,
-          FaIcon(FontAwesomeIcons.store, color: Colors.white, size: 40.0),
-          '360°',
-          '6',
-          15.0,
-          ImapePanoramaPage(),
-          0,
-          ""),
-      _crearBotonRedondeado(
-          Colors.green,
-          FaIcon(FontAwesomeIcons.gratipay, color: Colors.white, size: 35.0),
-          'Mis Favoritos',
-          '6',
-          16.0,
-          FoldablePage(),
-          0,
-          ""),
-    ]);
-  }
-
-  Widget _crearBotonRedondeado(Color color, FaIcon icono, String texto,
-      String valor, double size, Widget widget, int acceso, String link) {
-    return InkWell(
-      onTap: () {
-        if (acceso == 1) {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      ViewPage(title: 'TEST DE PRUEBA', url: link)));
-        } else {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => widget),
-          );
-        }
-      },
-      child: ClipRect(
-        child: BackdropFilter(
-          filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
-          child: Container(
-            height: 87.0,
-            width: 160,
-            margin: EdgeInsets.all(9.0),
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomRight,
-              stops: [0.1, 0.4, 0.7, 0.9],
-              colors: [
-                AppTheme.themeBlackGrey,
-                AppTheme.themeBlackGrey,
-                AppTheme.themeBlackGrey,
-                AppTheme.themeBlackGrey,
-              ],
-            )),
-            //  borderRadius: BorderRadius.circular(20.0)),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                SizedBox(height: 5.0),
-                CircleAvatar(
-                  backgroundColor: color,
-                  radius: 30.0,
-                  child: icono,
-                  //Icon(icono, color: Colors.white, size: 42.0),
-                ),
-                Text(texto,
-                    style: TextStyle(
-                        color: AppTheme.themeDefault, fontSize: size)),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+ 
 }

@@ -10,7 +10,6 @@ import 'package:virtual_match/src/service/NewService.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
-import 'package:virtual_match/src/service/NotificactionService.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/NoticiaEventoModel.dart'
     as model;
@@ -53,14 +52,21 @@ class _NewListPageState extends State<NewListPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               backgroundBasic(context),
+              sizedBox(0.0, 8.0),
               Container(
                 width: size.width * 0.95,
                 margin: EdgeInsets.symmetric(vertical: 0.0),
                 child: Column(
                   children: <Widget>[
-                    _header(),
+                    showInformation(
+                        context,
+                        'GESTIONA LAS NOTICIAS Y EVENTOS',
+                        'En esta pantalla puedes modificar y eliminar las notificaciones que haz creado anteriormente.',
+                        'Visita Sorojchi eclub en facebook',
+                        'INGRESASTE A SORIJCHI ECLUB',
+                        'https://www.facebook.com/SorojchieClub/'),
+                    sizedBox(0.0, 5.0),
                     divider(),
-                    sizedBox(0.0, 7.0),
                   ],
                 ),
               ),
@@ -106,40 +112,50 @@ class _NewListPageState extends State<NewListPage> {
   }
 
   Widget _showListTile(NoticiaEventoModel entity) {
-    return Container(
-      child: gfListTileKey(
-          Key(entity.idNoticiaEvento.toString()),
-          Text(entity.titulo),
-          Text(entity.objetivo),
-          _showAction(entity, entity.idNoticiaEvento.toString()),
-          null,
-          avatarCircle((entity.foto ?? IMAGE_LOGO), 35),
-          EdgeInsets.all(5.0),
-          EdgeInsets.all(3.0)),
+    final size = MediaQuery.of(context).size;
+    return Column(
+      children: <Widget>[
+        sizedBox(0, 7.0),
+        Container(
+          width: size.width * 0.95,
+          margin: EdgeInsets.symmetric(vertical: 0.0),
+          decoration: boxDecoration(),
+          child: Column(
+            children: <Widget>[
+              gfListTileKey(
+                  Key(entity.idNoticiaEvento.toString()),
+                  Text('Titulo: ${entity.titulo}'),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text('Detalle: ${entity.objetivo}'),
+                      Text('Dirigo a: ${entity.dirigidoa}'),
+                      Text('Lugar/Virtual: ${entity.dirigidoa}'),
+                      Text('Fecha y Hora: ${entity.fecha} ${entity.hora}'),
+                    ],
+                  ),
+                  _showAction(entity, entity.idNoticiaEvento.toString()),
+                  null,
+                  avatarCircle((entity.foto ?? IMAGE_LOGO), 35),
+                  EdgeInsets.all(5.0),
+                  EdgeInsets.all(3.0)),
+            ],
+          ),
+        ),
+      ],
     );
-    //Text(entity.nombreEquipo);
   }
 
   Widget _showAction(NoticiaEventoModel entity, String keyId) {
     return Row(
       children: <Widget>[
-        Text('Operacionesss: $keyId'),
+        Text('Operaciones: $keyId'),
         sizedBox(10, 0),
         _update(),
         sizedBox(10, 0),
         _delete(keyId),
       ],
     );
-  }
-
-  Widget _header() {
-    return gfListTileText(
-        'NOTIFICACIÓN: Virtual Match',
-        'Porque formas parte de la familia, te tenemos informado.',
-        FaIcon(FontAwesomeIcons.infoCircle),
-        avatarSquare(IMAGE_DEFAULT, 35.0),
-        EdgeInsets.all(5.0),
-        EdgeInsets.all(3.0));
   }
 
   _update() {
@@ -149,8 +165,8 @@ class _NewListPageState extends State<NewListPage> {
     return InkWell(
       child: FaIcon(
         FontAwesomeIcons.edit,
-        color: AppTheme.themeDefault,
-        size: 20,
+        color: AppTheme.themePurple,
+        size: 23,
       ),
       onTap: () {
         setState(() {});
@@ -163,8 +179,8 @@ class _NewListPageState extends State<NewListPage> {
       key: Key(keyId),
       child: FaIcon(
         FontAwesomeIcons.trashAlt,
-        color: AppTheme.themeDefault,
-        size: 20,
+        color: AppTheme.themePurple,
+        size: 23,
       ),
       onTap: () {
         setState(() {

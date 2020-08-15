@@ -7,7 +7,7 @@ import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 AppBar appBar(String title) {
   return AppBar(
     backgroundColor: AppTheme.themeDefault,
-    toolbarOpacity: 0.7,
+    //toolbarOpacity: 0.7,
     iconTheme: IconThemeData(color: AppTheme.themeWhite, size: 12),
     elevation: 2.0,
     title: Text(title, style: kTitleAppBar),

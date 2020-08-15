@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/EquipoModel.dart';
@@ -13,6 +14,7 @@ import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/page/core/equipment/EquipmentListPage.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
+import 'package:virtual_match/src/service/ImageService.dart';
 import 'package:virtual_match/src/service/core/EquipmentService.dart';
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
@@ -20,6 +22,7 @@ import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/model/util/Validator.dart' as validator;
+import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 import 'package:virtual_match/src/widget/image/ImageWidget.dart';
 
 class EquipmentAllPage extends StatefulWidget {
@@ -63,16 +66,16 @@ class _EquipmentAllPageState extends State<EquipmentAllPage> {
           items: [
             BottomNavigationBarItem(
                 icon: FaIcon(
-                  FontAwesomeIcons.newspaper,
+                  FontAwesomeIcons.futbol,
                   size: 25,
                 ),
-                title: Text('Equipo')),
+                title: Text('Tu equipo')),
             BottomNavigationBarItem(
                 icon: FaIcon(
-                  FontAwesomeIcons.paperPlane,
+                  FontAwesomeIcons.gamepad,
                   size: 25,
                 ),
-                title: Text('Listado equipos')),
+                title: Text('Tus equipos')),
           ],
           currentIndex: page,
           unselectedItemColor: AppTheme.themeWhite,
@@ -103,11 +106,14 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
 //DEFINICION DE BLOC Y MODEL
   EquipmentService entityService;
   EquipoModel entity = new EquipoModel();
+  ImageService entityImage = new ImageService();
   final prefs = new Preferense();
 
   //DEFINICION DE VARIABLES
   bool _save = false;
   File photo;
+  int valueImage = 0;
+  String image = IMAGE_DEFAULT;
 
   @override
   void initState() {
@@ -133,7 +139,7 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
       body: Stack(
         children: <Widget>[
           background(context, 'IMAGE_LOGO'),
-          showPictureOval(photo, IMAGE_DEFAULT, 130.0),
+          showPictureOval(photo, IMAGE_LOGO, 130.0),
           _form(context),
         ],
       ),
@@ -150,7 +156,22 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
         key: formKey,
         child: Column(
           children: <Widget>[
-            sizedBox(0.0, 130.0),
+            sizedBox(0.0, 15.0),
+            Container(
+              width: size.width * 0.94,
+              margin: EdgeInsets.symmetric(vertical: 0.0),
+              decoration: containerImage(),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  text('CARGA AVATAR DE TU EQUIPO', AppTheme.themeDefault, 1,
+                      15.0),
+                  _crearIconAppImagenes(),
+                  _crearIconAppCamara(),
+                ],
+              ),
+            ),
+            sizedBox(0.0, 10.0),
             Container(
               width: size.width * 0.94,
               margin: EdgeInsets.symmetric(vertical: 0.0),
@@ -164,32 +185,54 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
     );
   }
 
+  _crearIconAppImagenes() {
+    return IconButton(
+      icon: Icon(
+        Icons.photo_size_select_actual,
+        color: AppTheme.themePurple,
+      ),
+      onPressed: _seleccionarFoto,
+    );
+  }
+
+  _crearIconAppCamara() {
+    return IconButton(
+      icon: Icon(
+        Icons.camera_alt,
+        color: AppTheme.themePurple,
+      ),
+      onPressed: _tomarFoto,
+    );
+  }
+
   Widget _fields(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         sizedBox(0.0, 7.0),
+        showPictureOval(photo, image, 70.0),
+        divider(),
         _text(
             controllerNoticia,
             entity.nombre,
-            'NOMBRE DEL EQUIPO'.toUpperCase(),
+            'Nombre de tu equipo',
             100,
             2,
             'Ingrese el nombre del equipo',
             true,
-            FaIcon(FontAwesomeIcons.newspaper, color: AppTheme.themeGrey),
+            FaIcon(FontAwesomeIcons.newspaper, color: AppTheme.themeDefault),
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             Colors.red),
         _text(
             controllerDetalle,
             entity.detalle,
-            'DETALLE DEL EQUIPO',
+            'Escribe sobre tu equipo',
             140,
             2,
             'Ingrese Detalle del equipo',
             true,
-            FaIcon(FontAwesomeIcons.wpforms, color: Colors.black26),
+            FaIcon(FontAwesomeIcons.wpforms, color: AppTheme.themeDefault),
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             Colors.red),
@@ -201,6 +244,28 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
         _button('Guardar', 18.0, 20.0),
       ],
     );
+  }
+
+  Widget _showInformation() {
+    final size = MediaQuery.of(context).size;
+    return Container(
+      width: size.width * 0.95,
+      margin: EdgeInsets.symmetric(vertical: 0.0),
+      decoration: boxDecoration(),
+      child: Column(
+        children: <Widget>[
+          gfListTile(
+              Text(prefs.nameUser),
+              Text(prefs.email),
+              null,
+              null,
+              avatarCircle((entity.foto ?? IMAGE_LOGO), 35),
+              EdgeInsets.all(5.0),
+              EdgeInsets.all(3.0)),
+        ],
+      ),
+    );
+    //Text(entity.nombreEquipo);
   }
 
   Widget _text(
@@ -292,6 +357,26 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
       });
     } catch (error) {
       showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
+    }
+  }
+
+  _seleccionarFoto() async {
+    _procesarImagen(ImageSource.gallery);
+  }
+
+  _tomarFoto() async {
+    _procesarImagen(ImageSource.camera);
+  }
+
+  _procesarImagen(ImageSource origen) async {
+    final photo = await ImagePicker().getImage(source: origen);
+    if (photo != null) {
+      image = await entityImage.uploadImage(photo.path);
+      print('imagennnnn $image');
+      setState(() {
+        entity.foto = image;
+        //print('cargadod e iagen ${entity.foto}');
+      });
     }
   }
 }

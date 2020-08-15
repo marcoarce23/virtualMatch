@@ -8,7 +8,6 @@ import 'package:virtual_match/src/style/Style.dart';
 
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 
 class IntroPage extends StatefulWidget {
   static final String routeName = 'IntroPage';

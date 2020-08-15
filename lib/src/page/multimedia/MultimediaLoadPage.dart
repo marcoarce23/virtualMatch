@@ -1,9 +1,12 @@
 import 'dart:io';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/ClasificadorModel.dart';
@@ -16,6 +19,7 @@ import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/page/multimedia/MultimediaListPage.dart';
 import 'package:virtual_match/src/service/ClasificadorService.dart';
+import 'package:virtual_match/src/service/ImageService.dart';
 import 'package:virtual_match/src/service/MultimediaService.dart';
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
@@ -59,7 +63,7 @@ class _MultimediaAllPageState extends State<MultimediaAllPage> {
         ChangeNotifierProvider(builder: (_) => new MultimediaService()),
       ],
       child: Scaffold(
-        appBar: appBar('MULTIMEDIA'),
+        appBar: appBar('GALERÍA MULTIMEDIA'),
         drawer: DrawerMenu(),
         bottomNavigationBar: BottomNavigationBar(
           elevation: 21.0,
@@ -67,20 +71,20 @@ class _MultimediaAllPageState extends State<MultimediaAllPage> {
           items: [
             BottomNavigationBarItem(
                 icon: FaIcon(
-                  FontAwesomeIcons.newspaper,
+                  FontAwesomeIcons.images,
                   size: 25,
                 ),
                 title: Text('Multimedia')),
             BottomNavigationBarItem(
                 icon: FaIcon(
-                  FontAwesomeIcons.paperPlane,
+                  FontAwesomeIcons.youtube,
                   size: 25,
                 ),
-                title: Text('Listado Multimedia')),
+                title: Text('Galería Multimedia')),
           ],
           currentIndex: page,
-          unselectedItemColor: Colors.purple,
-          selectedItemColor: AppTheme.themeWhite,
+          unselectedItemColor: AppTheme.themeWhite,
+          selectedItemColor: AppTheme.themePurple,
           onTap: _onItemTapped,
         ),
         body: optionPage[page],
@@ -113,6 +117,7 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
   MultimediaService entityService;
   MultimediaModel entity = new MultimediaModel();
   ClasificadorService entityGet = ClasificadorService();
+  ImageService entityImage = new ImageService();
   final prefs = new Preferense();
 
   //DEFINICION DE VARIABLES
@@ -120,6 +125,11 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
   File photo;
   String _fecha = '';
   int typeMaterial = 14;
+
+  int valueImage = 0;
+  String image = IMAGE_DEFAULT;
+
+  String _pdfPath = '';
 
   @override
   void initState() {
@@ -146,7 +156,7 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
       body: Stack(
         children: <Widget>[
           background(context, 'IMAGE_LOGO'),
-          showPictureOval(photo, IMAGE_DEFAULT, 130.0),
+          showPictureOval(photo, IMAGE_LOGO, 130.0),
           _form(context),
         ],
       ),
@@ -163,7 +173,22 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
         key: formKey,
         child: Column(
           children: <Widget>[
-            sizedBox(0.0, 130.0),
+            sizedBox(0.0, 15.0),
+            Container(
+              width: size.width * 0.94,
+              margin: EdgeInsets.symmetric(vertical: 0.0),
+              decoration: containerImage(),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  text('CARGA TU AVATAR EN LA APP.  ', AppTheme.themeDefault, 1,
+                      15.0),
+                  _crearIconAppImagenes(),
+                  _crearIconAppCamara(),
+                ],
+              ),
+            ),
+            sizedBox(0.0, 10.0),
             Container(
               width: size.width * 0.94,
               margin: EdgeInsets.symmetric(vertical: 0.0),
@@ -177,21 +202,44 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
     );
   }
 
+  _crearIconAppImagenes() {
+    return IconButton(
+      icon: Icon(
+        Icons.photo_size_select_actual,
+        color: AppTheme.themePurple,
+      ),
+      onPressed: _seleccionarFoto,
+    );
+  }
+
+  _crearIconAppCamara() {
+    return IconButton(
+      icon: Icon(
+        Icons.camera_alt,
+        color: AppTheme.themePurple,
+      ),
+      onPressed: _tomarFoto,
+    );
+  }
+
   Widget _fields(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         sizedBox(0.0, 7.0),
+        showPictureOval(photo, image, 70.0),
+        divider(),
+
         _combox('Seleccionar multimedia:'.toUpperCase()),
         _text(
             controllerNoticia,
             entity.titulo,
-            'NOTICIA'.toUpperCase(),
+            'Noticia o evento',
             100,
             2,
-            'Ingrese la noticia',
+            'Ingrese la noticia o evento',
             true,
-            FaIcon(FontAwesomeIcons.newspaper, color: AppTheme.themeGrey),
+            FaIcon(FontAwesomeIcons.newspaper, color: AppTheme.themeDefault),
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             Colors.red),
@@ -199,29 +247,29 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
         _text(
             controllerDetalle,
             entity.resumen,
-            'Detalle de la noticia',
+            'Detalle de la noticia o evento',
             140,
             2,
-            'Ingrese Detalle de la noticia',
+            'Ingrese Detalle de la noticia o evento',
             true,
-            FaIcon(FontAwesomeIcons.wpforms, color: Colors.black26),
+            FaIcon(FontAwesomeIcons.wpforms, color: AppTheme.themeDefault),
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             Colors.red),
         _text(
             controllerUbicacion,
             entity.enlace,
-            'PARTICIPANTES'.toUpperCase(),
+            'Participantes',
             140,
             2,
             'Ingrese quienes participan',
             true,
-            FaIcon(FontAwesomeIcons.userFriends, color: AppTheme.themeGrey),
+            FaIcon(FontAwesomeIcons.userFriends, color: AppTheme.themeDefault),
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             Colors.red),
-        _initDate('FECHA DE INICIO'),
-        _endDate('FECHA DE FIN'),
+        _initDate('Fecha de inicio del torneo'),
+        _endDate('Fecha de conclusión del torneo'),
         //  _comboBox('Tipo.', myController.text),
         Text(
           '(*) Campos obligatorios. ',
@@ -453,6 +501,92 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
       });
     } catch (error) {
       showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
+    }
+  }
+
+  _seleccionarFoto() async {
+    _procesarImagen(ImageSource.gallery);
+  }
+
+  _tomarFoto() async {
+    _procesarImagen(ImageSource.camera);
+  }
+
+  _procesarImagen(ImageSource origen) async {
+    final photo = await ImagePicker().getImage(source: origen);
+    if (photo != null) {
+      image = await entityImage.uploadImage(photo.path);
+      print('imagennnnn $image');
+      setState(() {
+        entity.foto = image;
+
+        //print('cargadod e iagen ${entity.foto}');
+      });
+    }
+  }
+
+  _procesarFile(String file) async {
+    valueImage = 1;
+
+    if (photo != null) {
+      image = await entityImage.uploadImage(file);
+      setState(() {
+        entity.foto = image;
+        //print('cargadod e iagen ${entity.foto}');
+      });
+    }
+  }
+
+  _procesarVideo2(String file) async {
+    valueImage = 2;
+
+    image = await entityImage.uploadVideo(file);
+    setState(() {
+      entity.foto = image;
+      //print('cargadod e iagen ${entity.foto}');
+    });
+  }
+
+  void _pickPDF() async {
+    try {
+      var _extension = 'PDF';
+      _pdfPath = await FilePicker.getFilePath(
+          type: FileType.custom,
+          allowedExtensions: (_extension?.isNotEmpty ?? false)
+              ? _extension?.replaceAll(' ', '')?.split(',')
+              : null);
+
+      setState(() {});
+      if (_pdfPath == '') {
+        return;
+      }
+      valueImage = 1;
+      _procesarFile(_pdfPath);
+    } on PlatformException catch (exception) {
+      showSnackbar('Se produjo un error. $exception', scaffoldKey);
+    }
+  }
+
+  void _pickVideo() async {
+    try {
+      var _extension = 'MP4';
+      _pdfPath = await FilePicker.getFilePath(
+          type: FileType.custom,
+          allowedExtensions: (_extension?.isNotEmpty ?? false)
+              ? _extension?.replaceAll(' ', '')?.split(',')
+              : null);
+
+      setState(() {});
+      if (_pdfPath == '') {
+        return;
+      }
+      //print("File path11: " + _pdfPath);
+      _procesarVideo2(_pdfPath);
+      // setState(() {
+      //   _isLoading = true;
+      // });
+    } on PlatformException catch (exception) {
+      showSnackbar('Se produjo un error. $exception', scaffoldKey);
     }
   }
 }

@@ -7,7 +7,7 @@ import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/service/MultimediaService.dart';
-import 'package:virtual_match/src/service/NewService.dart';
+import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
@@ -16,7 +16,7 @@ import 'package:virtual_match/src/model/entity/EntityMap/MultimediaModel.dart'
     as model;
 
 class MultimediaListPage extends StatefulWidget {
-  static final String routeName = 'notificationList';
+  static final String routeName = 'multimediaList';
   MultimediaListPage({Key key}) : super(key: key);
 
   @override
@@ -53,14 +53,21 @@ class _MultimediaListPageState extends State<MultimediaListPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               backgroundBasic(context),
+              sizedBox(0.0, 8.0),
               Container(
                 width: size.width * 0.95,
                 margin: EdgeInsets.symmetric(vertical: 0.0),
                 child: Column(
                   children: <Widget>[
-                    _header(),
+                    showInformation(
+                        context,
+                        'GESTIONA GALERIA MULTIMEDIA',
+                        'En esta pantalla puedes modificar y eliminar las galerias multimedia que haz creado anteriormente.',
+                        'Visita Sorojchi eclub en facebook',
+                        'INGRESASTE A SORIJCHI ECLUB',
+                        'https://www.facebook.com/SorojchieClub/'),
+                    sizedBox(0.0, 5.0),
                     divider(),
-                    sizedBox(0.0, 7.0),
                   ],
                 ),
               ),
@@ -106,40 +113,52 @@ class _MultimediaListPageState extends State<MultimediaListPage> {
   }
 
   Widget _showListTile(MultimediaModel entity) {
-    return Container(
-      child: gfListTileKey(
-          Key(entity.idMultimedia.toString()),
-          Text(entity.titulo),
-          Text(entity.resumen),
-          _showAction(entity, entity.idMultimedia.toString()),
-          null,
-          avatarCircle((entity.foto ?? IMAGE_LOGO), 35),
-          EdgeInsets.all(5.0),
-          EdgeInsets.all(3.0)),
+    final size = MediaQuery.of(context).size;
+    return Column(
+      children: <Widget>[
+        sizedBox(0, 7.0),
+        Container(
+          width: size.width * 0.95,
+          margin: EdgeInsets.symmetric(vertical: 0.0),
+          decoration: boxDecoration(),
+          child: Column(
+            children: <Widget>[
+              gfListTileKey(
+                  Key(entity.idMultimedia.toString()),
+                  Text('Titulo: ${entity.titulo}'),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text('Detalle: ${entity.resumen}',),
+                      Text('Enlace: ${entity.enlace}'),
+                      Text('Noticia/Evento: ${entity.idaCategoria}'),
+                      Text('Fecha Inicio: ${entity.fechainicio}'),
+                      Text('Fecha Fin     :  ${entity.fechafin}'),
+                    ],
+                  ),
+                  _showAction(entity, entity.idMultimedia.toString()),
+                  null,
+                  avatarCircle((entity.foto ?? IMAGE_LOGO), 35),
+                  EdgeInsets.all(5.0),
+                  EdgeInsets.all(3.0)),
+            ],
+          ),
+        ),
+      ],
     );
-    //Text(entity.nombreEquipo);
   }
 
   Widget _showAction(MultimediaModel entity, String keyId) {
+    sizedBox(0, 10.0);
     return Row(
       children: <Widget>[
-        Text('Operacionesss: $keyId'),
+        Text('Operaciones: $keyId'),
         sizedBox(10, 0),
         _update(),
         sizedBox(10, 0),
         _delete(keyId),
       ],
     );
-  }
-
-  Widget _header() {
-    return gfListTileText(
-        'NOTIFICACIÓN: Virtual Match',
-        'Porque formas parte de la familia, te tenemos informado.',
-        FaIcon(FontAwesomeIcons.infoCircle),
-        avatarSquare(IMAGE_DEFAULT, 35.0),
-        EdgeInsets.all(5.0),
-        EdgeInsets.all(3.0));
   }
 
   _update() {
@@ -149,8 +168,8 @@ class _MultimediaListPageState extends State<MultimediaListPage> {
     return InkWell(
       child: FaIcon(
         FontAwesomeIcons.edit,
-        color: AppTheme.themeDefault,
-        size: 20,
+        color: AppTheme.themePurple,
+        size: 23,
       ),
       onTap: () {
         setState(() {});
@@ -163,8 +182,8 @@ class _MultimediaListPageState extends State<MultimediaListPage> {
       key: Key(keyId),
       child: FaIcon(
         FontAwesomeIcons.trashAlt,
-        color: AppTheme.themeDefault,
-        size: 20,
+        color: AppTheme.themePurple,
+        size: 23,
       ),
       onTap: () {
         setState(() {
@@ -191,7 +210,7 @@ class _MultimediaListPageState extends State<MultimediaListPage> {
   }
 
   void executeUpdate(
-      NewService entityService, model.MultimediaModel entity) async {
+      MultimediaService entityService, model.MultimediaModel entity) async {
     try {
       await entityService.repository(entity).then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
