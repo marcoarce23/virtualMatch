@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/TablaPosicionesModel.dart';
-import 'package:virtual_match/src/model/util/Resource.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 import 'package:virtual_match/src/service/core/TournamentService.dart';
 

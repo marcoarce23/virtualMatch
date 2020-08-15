@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:virtual_match/src/model/util/Const.dart';
+import 'package:virtual_match/src/page/general/ViewPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
-import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
+import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
+import 'package:virtual_match/src/widget/general/CallWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
+import 'package:virtual_match/src/widget/general/SenWidget.dart';
 
 class OrganizationPage extends StatefulWidget {
   OrganizationPage({Key key}) : super(key: key);
@@ -20,35 +24,27 @@ class _OrganizationPageState extends State<OrganizationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          toolbarOpacity: 0.7,
-          iconTheme: IconThemeData(color: AppTheme.themeDefault, size: 12),
-          elevation: 0,
-          title: Text("CONOCE SOBRE virtual_match", style: kTitleAppBar),
-          // actions: <Widget>[
-          //   IconButton(
-          //     icon: Icon(Icons.search),
-          //     onPressed: () {
-          //       // showSearch(context: context, delegate: DataSearchVoluntary());
-          //     },
-          //   )
-          // ],
-        ),
+        appBar: appBar('CONOCE LA COMUNIDAD'),
         drawer: DrawerMenu(),
-        floatingActionButton: floatButton(AppTheme.themeOrange, context,
-            FaIcon(FontAwesomeIcons.home), HomePage()),
+        floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
+            FaIcon(FontAwesomeIcons.playstation), HomePage()),
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
               _crearImagen(context),
               _crearTitulo(),
-              _crearAcciones(),
+              _crearAcciones(context),
               divider(),
               _crearTexto(),
+              sizedBox(0, 10),
               _crearTexto1(),
+              sizedBox(0, 10),
+              _crearTexto0(),
+              sizedBox(0, 10),
               _crearTexto2(),
+              sizedBox(0, 10),
               _crearTexto3(),
+              sizedBox(0, 10),
               _crearTexto4(),
               copyRigth()
             ],
@@ -62,10 +58,8 @@ class _OrganizationPageState extends State<OrganizationPage> {
       child: GestureDetector(
         onTap: () => Navigator.pushNamed(context, 'scroll'),
         child: Image(
-          image: NetworkImage(
-              'https://res.cloudinary.com/propia/image/upload/v1594933808/lvoonq7qcl9jmojlws70.jpg'),
-          //   'https://res.cloudinary.com/propia/image/upload/v1594750950/gzikny5up1aqzm2vfdna.jpg'),
-          height: 230.0,
+          image: NetworkImage(IMAGE_ORGANIZATION),
+          height: 180.0,
           fit: BoxFit.fill,
         ),
       ),
@@ -82,11 +76,12 @@ class _OrganizationPageState extends State<OrganizationPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text('virtual_match, lo último en moda para tí',
+                  Text(
+                      'Comunidad FIFA Bolivia - Virtual Match. @ComunidadFIFABoliviaInicio',
                       style: estiloTitulo),
                   // Text('Terrasur, haciendo tus sueños realidad',
                   //     style: estiloTitulo),
-                  SizedBox(height: 7.0),
+                  sizedBox(0, 7.0),
                   //Text('Fecha: XXXXX', style: estiloSubTitulo ),
                 ],
               ),
@@ -97,36 +92,98 @@ class _OrganizationPageState extends State<OrganizationPage> {
     );
   }
 
-  Widget _crearAcciones() {
+  Row _crearAcciones(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget>[
-        FaIcon(FontAwesomeIcons.phoneSquareAlt, color: Colors.grey, size: 30.0),
-        FaIcon(FontAwesomeIcons.whatsappSquare, color: Colors.grey, size: 30.0),
-        FaIcon(FontAwesomeIcons.instagramSquare,
-            color: Colors.grey, size: 30.0),
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        SizedBox(
+          width: 40,
+          height: 40,
+          child: RaisedButton(
+            color: Colors.blueAccent,
+            padding: EdgeInsets.all(0),
+            shape: CircleBorder(),
+            onPressed: () => navegation(
+                context,
+                ViewPage(
+                    title: 'FACEBOOK VIRTUAL MATCH'.toString(), url: facebook)),
+            child: Icon(
+              FontAwesomeIcons.facebookF,
+              color: Colors.white,
+              size: 20,
+            ),
+          ),
+        ),
+        sizedBox(10, 0),
+        SizedBox(
+          width: 40,
+          height: 40,
+          child: RaisedButton(
+            color: Colors.red,
+            padding: EdgeInsets.all(0),
+            shape: CircleBorder(),
+            onPressed: () => navegation(
+                context,
+                ViewPage(
+                    title: 'FACEBOOK VIRTUAL MATCH'.toString(),
+                    url: instagram)),
+            child: Icon(
+              FontAwesomeIcons.instagram,
+              color: Colors.white,
+              size: 20,
+            ),
+          ),
+        ),
+        sizedBox(10, 0),
+        SizedBox(
+          width: 40,
+          height: 40,
+          child: RaisedButton(
+            color: Colors.green,
+            padding: EdgeInsets.all(0),
+            shape: CircleBorder(),
+            onPressed: () {
+              callWhatsAppText(whatsApp,
+                  '*Comunidad Virtual Match:* \n Mensaje. Me gustaría ponerme en contacto. Gracias. \nEnviado desde la aplicación \n*Virtual Match Digital*.');
+            },
+            child: Icon(
+              FontAwesomeIcons.whatsapp,
+              color: Colors.white,
+              size: 20,
+            ),
+          ),
+        ),
+        sizedBox(10, 0),
+        SizedBox(
+          width: 40,
+          height: 40,
+          child: RaisedButton(
+            color: Colors.grey,
+            padding: EdgeInsets.all(0),
+            shape: CircleBorder(),
+            onPressed: () {
+              sendEmailAdvanced(
+                  email,
+                  "Comunidad Virtual Match. Deseo comunicarme con usted.",
+                  "A la Comunidad Virtual Match:\n Deseo más información sobre la Comunidad y de como formar parte de FIFA BOLIVIA.\n Saludos cordiales. Gracias");
+            },
+            child: Icon(
+              FontAwesomeIcons.solidEnvelope,
+              color: Colors.white,
+              size: 20,
+            ),
+          ),
+        ),
       ],
     );
   }
 
-  // Widget _accion(FontAwesomeIcons icon, String texto ) {
-
-  //   return Column(
-  //     children: <Widget>[
-  //       FaIcon( icon, color: Colors.black54, size: 40.0 ),
-  //       SizedBox( height: 5.0 ),
-  //       Text( texto, style: TextStyle( fontSize: 15.0, color: Colors.black87), )
-  //     ],
-  //   );
-
-  // }
-
   Widget _crearTexto() {
     return SafeArea(
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 30.0),
+        padding: EdgeInsets.symmetric(horizontal: 20.0),
         child: Text(
-          'virtual_match  es una empresa de bienes raíces con mas de 20 años en el mercado nacional y lideres en venta de terrenos urbanizados. Terrasur ofrece lotes de terreno en la ciudad de La Paz (Achumani, Mallasa, Lipari, Río Abajo, El palomar y otros  ), El Alto (Viacha, Ventilla y Mazo Cruz) y Santa Cruz (Urubó). Ofrece crédito directo desde los 5, 10 y hasta 15 años plazo a sola firma.',
+          'FIFA BOLIVIA o Virtual Match es una empresa boliviana donde se organiza torneos de fútbol virtual (FIFA) ON-LINE y PRESENCIALES para la plataforma Play station 4 y XBOX One. Ademas, se garantiza mucha habilidad, estrategia y abundantes premios para los primeros lugares. ',
           textAlign: TextAlign.justify,
         ),
       ),
@@ -136,10 +193,38 @@ class _OrganizationPageState extends State<OrganizationPage> {
   Widget _crearTexto1() {
     return SafeArea(
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 30.0),
+        padding: EdgeInsets.symmetric(horizontal: 20.0),
         child: Text(
-          'Con una gran visión de negocio y notable claridad en sus inversiones, la empresa inmobiliaria hace del desarrollo de urbanizaciones su principal actividad desde sus inicios, convirtiendo grandes extensiones de terreno en lo que hoy son importantes áreas urbanas destinadas a la vivienda y múltiples actividades comerciales, con el consiguiente desarrollo del sector.',
+          'Organizamos torneos desde los ya existentes y mas populares en el mundo real como los totalmente originales creados por esta Comunidad. Ademas se organizaran torneos de:',
           textAlign: TextAlign.justify,
+        ),
+      ),
+    );
+  }
+
+  Widget _crearTexto0() {
+    return SafeArea(
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 20.0),
+        child: Column(
+          children: <Widget>[
+            Text(
+              '1 Vs 1',
+              textAlign: TextAlign.justify,
+            ),
+            Text(
+              '2 Vs 2',
+              textAlign: TextAlign.justify,
+            ),
+            Text(
+              'Torneos presenciales ',
+              textAlign: TextAlign.justify,
+            ),
+            Text(
+              'Clubes Pro',
+              textAlign: TextAlign.justify,
+            ),
+          ],
         ),
       ),
     );
@@ -148,9 +233,9 @@ class _OrganizationPageState extends State<OrganizationPage> {
   Widget _crearTexto2() {
     return SafeArea(
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 30.0),
+        padding: EdgeInsets.symmetric(horizontal: 20.0),
         child: Text(
-          'En poco tiempo, Terrasur se especializó en la compra de terrenos, adecuación y proyección del sector, diseño de planimetrías, aprobación de urbanizaciones, comercialización y financiamiento propio para toda su oferta, al mismo tiempo ha generado una importante cantidad fuentes de trabajo de manera directa e indirecta.',
+          'Por otro lado, buscamos llevar a otro nivel los E-Sports en Bolivia, haciendo lo posible de llamar la atención de los clubes bolivianos en el país y formar jugadores profesionales de fifa para que algún día Bolivia sea representado profesionalmente.',
           textAlign: TextAlign.justify,
         ),
       ),
@@ -160,9 +245,9 @@ class _OrganizationPageState extends State<OrganizationPage> {
   Widget _crearTexto3() {
     return SafeArea(
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 30.0),
+        padding: EdgeInsets.symmetric(horizontal: 20.0),
         child: Text(
-          'Impulsa la compra de un terreno propio, otorgando financiamiento directo sin garantías hipotecarias, a sola firma, con cuota inicial mínima de hasta Sus 100 y el interés más bajos del mercado. ',
+          'Así mismo, se pretende que exista una diversidad de culturas de todo el país, donde se comparta con otras personas de diferentes ciudades o departamentos de Bolivia.',
           textAlign: TextAlign.justify,
         ),
       ),
@@ -172,9 +257,9 @@ class _OrganizationPageState extends State<OrganizationPage> {
   Widget _crearTexto4() {
     return SafeArea(
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 30.0),
+        padding: EdgeInsets.symmetric(horizontal: 20.0),
         child: Text(
-          'Cuenta con dos sucursales, una ubicada en la ciudad de La Paz en la calle Belisario Salinas Nº 525, zona Sopocachi, teléfonos: 2423034 - 2423090 int. 116 y otra en la ciudad de El Alto en la Av. Alfonso Ugarte Nº 274 entre las calles Chacón y Sgto. Carrasco, zona Ballivián, teléfono: 2843310.',
+          'La idea es que se disfrute y se aproveche al máximo tus habilidades en el juego FIFA. Ya que de por si es un excelente juego y que mejor aprovecharlo al máximo compitiendo contra otros rivales y representando a tu país en eventos Internacionales.',
           textAlign: TextAlign.justify,
         ),
       ),

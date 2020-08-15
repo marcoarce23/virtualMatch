@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
+import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/image/imageOvalWidget.dart';
 import 'package:virtual_match/src/widget/util/Util.dart';
 
@@ -52,6 +53,45 @@ Widget showPictureOval(File file, String image, double heigth) {
           children: <Widget>[
             Align(
               child: RadialProgress(
+                progressColor: Colors.purple,
+                progressBackgroundColor: AppTheme.themeDefault,
+                width: 4,
+                goalCompleted: 0.85,
+                child: Container(
+                    child: ImageOvalNetwork(
+                        imageNetworkUrl: image, sizeImage: Size.fromWidth(90))),
+              ),
+            ),
+          ],
+        ),
+      )
+    ],
+  );
+}
+
+
+Widget showPictureOvalTop(File file, String image, double heigth, double top) {
+  final circulo = Container(
+    width: 60.0,
+    height: 60.0,
+    decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(100.0),
+        color: Color.fromRGBO(22, 23, 22, 0.4)),
+  );
+
+  return Stack(
+    children: <Widget>[
+      // Positioned(top: 90.0, left: 30.0, child: circulo),
+      // Positioned(top: 20.0, right: 30.0, child: circulo),
+      // Positioned(bottom: -50.0, right: -10.0, child: circulo),
+      // Positioned(bottom: 120.0, right: 20.0, child: circulo),
+      // Positioned(bottom: -50.0, left: -20.0, child: circulo),
+      Container(
+        padding: EdgeInsets.only(top: top),
+        child: Column(
+          children: <Widget>[
+            Align(
+              child: RadialProgress(
                 progressColor: Colors.pinkAccent,
                 progressBackgroundColor: Colors.white,
                 width: 4,
@@ -67,3 +107,4 @@ Widget showPictureOval(File file, String image, double heigth) {
     ],
   );
 }
+

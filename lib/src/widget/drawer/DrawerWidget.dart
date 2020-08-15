@@ -5,7 +5,7 @@ import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/page/core/equipment/EquipmentLoadPage.dart';
 import 'package:virtual_match/src/page/core/player/PlayerLoadPage.dart';
 import 'package:virtual_match/src/page/core/tourment/TourmentLoadPage.dart';
-import 'package:virtual_match/src/page/event/EventLoadPage.dart';
+import 'package:virtual_match/src/page/general/ViewPage.dart';
 import 'package:virtual_match/src/page/login/LogOnPage.dart';
 import 'package:virtual_match/src/page/login/LoginPage.dart';
 import 'package:virtual_match/src/page/multimedia/MultimediaLoadPage.dart';
@@ -76,7 +76,7 @@ class DrawerMenu extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: ImageOvalNetwork(
-                        imageNetworkUrl: IMAGE_LOGO,
+                        imageNetworkUrl: IMAGE_SOROJCHI,
                         sizeImage: Size.fromWidth(70)),
                   )),
               Flexible(
@@ -84,7 +84,7 @@ class DrawerMenu extends StatelessWidget {
                   children: <Widget>[
                     Expanded(
                       child: Text(
-                       prefs.nameUser,
+                        prefs.nameUser,
                         style: TextStyle(
                             color: AppTheme.themeWhite, fontSize: 18.0),
                         softWrap: true,
@@ -92,7 +92,7 @@ class DrawerMenu extends StatelessWidget {
                       ),
                     ),
                     AutoSizeText(
-                     prefs.email,
+                      prefs.email,
                       style:
                           TextStyle(color: AppTheme.themeWhite, fontSize: 16.0),
                       maxLines: 2,
@@ -106,8 +106,14 @@ class DrawerMenu extends StatelessWidget {
         CustomListTile(Icons.notification_important, '   Notificaciones',
             () => navegation(context, NotificationPage())),
 
-        CustomListTile(Icons.beenhere, '   SorojCHiBolviia',
-            () => navegation(context, NotificationLoadPage())),
+        CustomListTile(
+            Icons.insert_comment,
+            '   Visita Sorojchi eclub',
+            () => navegation(
+                context,
+                ViewPage(
+                    title: 'Visita Sorojchi eclub'.toString(),
+                    url: 'https://www.facebook.com/SorojchieClub/'))),
 
         CustomListTile(Icons.bubble_chart, '   Jugador Virtual Match',
             () => navegation(context, PlayerAllPage())),
@@ -132,11 +138,11 @@ class DrawerMenu extends StatelessWidget {
             Icons.share,
             '    Comparte la aplicación',
             () => sharedText(
-                'Comparte la App - Terrasur',
-                '🔺*virtual_match*🔺 \n Un juego de torneos Virtual .\n💬Atención *EL PRIMER JUEGO DE TORNEOS DE BOLIVIA* . \n 📲 Puede descargar la app desde: https://play.google.com/store/apps/details?id=bo.virtual_matchBolivia',
+                'BIENVENIDO A LA COMUNIDAD',
+                '*Virtual Match - Sorojchi eclub.*\n *Una aplicación de la Comunidad FIFA Bolivia.*\n💬 Con  *Virtual Match - Sorojchi eclub podrás.* \n 🔺 Leer Noticias de la Comunidad. \n 🔺 Enterarte de los eventos. \n 🔺Crear tu jugador y equipos. \n🔺Participar en los torneos. \n 🔺 Conocer campeones de torneos e influencers. 🔺 Mucho mas... \n📲 *Descargar la App en el siguiente enlace:* https://play.google.com/store/apps/details?id=bo.virtual_matchBolivia',
                 'text/html')),
-        CustomListTile(Icons.settings, '    Configuración',
-            () => navegation(context, LoginPage())),
+        // CustomListTile(Icons.settings, '    Configuración',
+        //     () => navegation(context, LoginPage())),
         // CustomListTile(Icons.add_to_home_screen, '   Acerca de la aplicación',
         //     () => navegation(context, IntroPage())),
         CustomListTile(Icons.exit_to_app, '    Cerrar Sesión',

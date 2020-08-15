@@ -3,12 +3,18 @@ const String IMAGE_LOGO =
 // 'https://res.cloudinary.com/propia/image/upload/v1594739598/v93fwhgfuyndbofhotbv.jpg';
 const String IMAGE_DEFAULT =
     'https://res.cloudinary.com/propia/image/upload/v1590111330/bqlz5vkioq29stz2t7yq.png';
+
+const String IMAGE_SOROJCHI =
+    'https://res.cloudinary.com/propia/image/upload/v1597467122/uuaijxqicu6bvidqjtoh.jpg';
+
+const String IMAGE_ORGANIZATION =
+    'https://res.cloudinary.com/propia/image/upload/v1597475148/h2ffkdpsw94pwxz0c77i.jpg';
 //  'https://res.cloudinary.com/propia/image/upload/v1594739598/v93fwhgfuyndbofhotbv.jpg';
 //https://www.facebook.com/virtual_match.Bo/
 const String facebook = 'https://www.facebook.com/ComunidadFIFABolivia/';
 const String instagram = 'https://www.instagram.com/virtual_match_oficial/';
-const int whatsApp = 67012432;
-const String email = 'virtual_match@gmail.com';
+const int whatsApp = 71298852;
+const String email = 'comunidadfifabolivia@gmail.com';
 const String titleRRSS = 'Facebook - Virtual Match';
 const String urlFCM = 'https://fcm.googleapis.com/fcm/send';
 const String keyFCM =

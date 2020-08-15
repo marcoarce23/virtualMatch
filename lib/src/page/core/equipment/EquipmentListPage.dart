@@ -58,9 +58,15 @@ EquipmentService entityService;
                 margin: EdgeInsets.symmetric(vertical: 0.0),
                 child: Column(
                   children: <Widget>[
-                    _header(),
+                    sizedBox(0.0, 8),
+                    showInformation(
+                        context,
+                        'ADMINISTRA TUS EQUIPOS',
+                        'En esta pantalla puedes modificar y eliminar (mientras no se inscribiste con el equipo) tus equipos que hayas creado anteriormente.',
+                        'INGRESA A VIRTUAL MATCH',
+                        'Enlace directo a Virtual Match',
+                        'https://www.facebook.com/ComunidadFIFABolivia/'),
                     divider(),
-                    sizedBox(0.0, 7.0),
                   ],
                 ),
               ),
@@ -106,16 +112,29 @@ EquipmentService entityService;
   }
 
   Widget _showListTile(EquipoModel entity) {
-    return Container(
-      child: gfListTileKey(
-          Key(entity.toString()),
-          Text(entity.nombre),
-          Text(entity.detalle),
-          _showAction(entity, entity.idEquipo.toString()),
-          null,
-          avatarCircle((entity.foto ?? IMAGE_LOGO), 35),
-          EdgeInsets.all(5.0),
-          EdgeInsets.all(3.0)),
+    final size = MediaQuery.of(context).size;
+    return Column(
+      children: <Widget>[
+        sizedBox(0, 7.0),
+        Container(
+          width: size.width * 0.95,
+          margin: EdgeInsets.symmetric(vertical: 0.0),
+          decoration: boxDecoration(),
+          child: Column(
+            children: <Widget>[
+              gfListTileKey(
+                  Key(entity.idEquipo.toString()),
+                  Text('Equipo: ${entity.nombre}'),
+                  Text('Detalle: ${entity.detalle}'),
+                  _showAction(entity, entity.idEquipo.toString()),
+                  null,
+                  avatarCircle((entity.foto ?? IMAGE_LOGO), 35),
+                  EdgeInsets.all(5.0),
+                  EdgeInsets.all(3.0)),
+            ],
+          ),
+        ),
+      ],
     );
     //Text(entity.nombreEquipo);
   }
@@ -123,7 +142,7 @@ EquipmentService entityService;
   Widget _showAction(EquipoModel entity, String keyId) {
     return Row(
       children: <Widget>[
-        Text('Operacionesss: $keyId'),
+        Text('Operaciones: $keyId'),
         sizedBox(10, 0),
         _update(),
         sizedBox(10, 0),
@@ -132,16 +151,7 @@ EquipmentService entityService;
     );
   }
 
-  Widget _header() {
-    return gfListTileText(
-        'NOTIFICACIÓN: Virtual Match',
-        'Porque formas parte de la familia, te tenemos informado.',
-        FaIcon(FontAwesomeIcons.infoCircle),
-        avatarSquare(IMAGE_DEFAULT, 35.0),
-        EdgeInsets.all(5.0),
-        EdgeInsets.all(3.0));
-  }
-
+ 
   _update() {
     entityModel.states = StateEntity.Update;
     entityModel.usuarioAuditoria = prefs.email;
@@ -149,8 +159,8 @@ EquipmentService entityService;
     return InkWell(
       child: FaIcon(
         FontAwesomeIcons.edit,
-        color: AppTheme.themeDefault,
-        size: 20,
+        color: AppTheme.themePurple,
+        size: 23,
       ),
       onTap: () {
         setState(() {});
@@ -163,8 +173,8 @@ EquipmentService entityService;
       key: Key(keyId),
       child: FaIcon(
         FontAwesomeIcons.trashAlt,
-        color: AppTheme.themeDefault,
-        size: 20,
+        color: AppTheme.themePurple,
+        size: 23,
       ),
       onTap: () {
         setState(() {

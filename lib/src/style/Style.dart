@@ -58,9 +58,9 @@ final kSigssTitleStyle = TextStyle(
 );
 
 final kCamposTitleStyle = TextStyle(
-  color: Colors.red,
+  color: AppTheme.themePurple,
   fontFamily: FONT_FAMILY_CM_SANS_SERIF,
-  fontSize: 13.0,
+  fontSize: 15.0,
   height: 1.5,
 );
 
@@ -69,6 +69,8 @@ final kSubtitleStyle = TextStyle(
   fontSize: 15.0,
   height: 1.2,
 );
+
+
 
 final kCopyRigthStyle = TextStyle(
   color: Colors.black,

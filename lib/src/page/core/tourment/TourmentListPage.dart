@@ -2,32 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:virtual_match/src/model/Preference.dart';
-import 'package:virtual_match/src/model/entity/EntityFromJson/NoticiaEventoModel.dart';
+import 'package:virtual_match/src/model/entity/EntityFromJson/TorneoModel.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
-import 'package:virtual_match/src/service/NewService.dart';
+import 'package:virtual_match/src/service/core/TournamentService.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
-import 'package:virtual_match/src/model/entity/EntityMap/NoticiaEventoModel.dart'
+import 'package:virtual_match/src/model/entity/EntityMap/TorneoModelo.dart'
     as model;
 
-class NewListPage extends StatefulWidget {
-  static final String routeName = 'notificationList';
-  NewListPage({Key key}) : super(key: key);
+class TourmentListPage extends StatefulWidget {
+  static final String routeName = 'tourmentList';
+  TourmentListPage({Key key}) : super(key: key);
 
   @override
-  _NewListPageState createState() => _NewListPageState();
+  _TourmentListPageState createState() => _TourmentListPageState();
 }
 
-class _NewListPageState extends State<NewListPage> {
+class _TourmentListPageState extends State<TourmentListPage> {
   //DEFINICION DE BLOC Y MODEL
-  NoticiaEventoModel entity = new NoticiaEventoModel();
-  model.NoticiaEventoModel entityModel = new model.NoticiaEventoModel();
-  NewService entityService;
-  NewService entityGet = NewService();
+  TorneoModel entity = new TorneoModel();
+  model.TorneoModel entityModel = new model.TorneoModel();
+  TourmentService entityService;
+  TourmentService entityGet = TourmentService();
 
   // DEFINICIOND E VARIABLES
   final prefs = new Preferense();
@@ -35,14 +35,14 @@ class _NewListPageState extends State<NewListPage> {
 
   @override
   void initState() {
-    prefs.lastPage = NewListPage.routeName;
+    prefs.lastPage = TourmentListPage.routeName;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    entityService = Provider.of<NewService>(context);
+    entityService = Provider.of<TourmentService>(context);
 
     return Scaffold(
       key: scaffoldKey,
@@ -52,21 +52,14 @@ class _NewListPageState extends State<NewListPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               backgroundBasic(context),
-              sizedBox(0.0, 8.0),
               Container(
                 width: size.width * 0.95,
                 margin: EdgeInsets.symmetric(vertical: 0.0),
                 child: Column(
                   children: <Widget>[
-                    showInformation(
-                        context,
-                        'GESTIONA LAS NOTICIAS Y EVENTOS',
-                        'En esta pantalla puedes modificar y eliminar las notificaciones que haz creado anteriormente.',
-                        'Visita Sorojchi eclub en facebook',
-                        'INGRESASTE A SORIJCHI ECLUB',
-                        'https://www.facebook.com/SorojchieClub/'),
-                    sizedBox(0.0, 5.0),
+                    _header(),
                     divider(),
+                    sizedBox(0.0, 7.0),
                   ],
                 ),
               ),
@@ -83,7 +76,7 @@ class _NewListPageState extends State<NewListPage> {
 
   Widget futureBuilder(BuildContext context) {
     return FutureBuilder(
-        future: entityGet.get(new NoticiaEventoModel()),
+        future: entityGet.get(new TorneoModel()),
         builder: (context, AsyncSnapshot snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
@@ -103,7 +96,7 @@ class _NewListPageState extends State<NewListPage> {
         physics: ClampingScrollPhysics(),
         itemCount: snapshot.data.length,
         itemBuilder: (context, index) {
-          NoticiaEventoModel entity = snapshot.data[index];
+          TorneoModel entity = snapshot.data[index];
 
           return _showListTile(entity);
         },
@@ -111,51 +104,41 @@ class _NewListPageState extends State<NewListPage> {
     );
   }
 
-  Widget _showListTile(NoticiaEventoModel entity) {
-    final size = MediaQuery.of(context).size;
-    return Column(
-      children: <Widget>[
-        sizedBox(0, 7.0),
-        Container(
-          width: size.width * 0.95,
-          margin: EdgeInsets.symmetric(vertical: 0.0),
-          decoration: boxDecoration(),
-          child: Column(
-            children: <Widget>[
-              gfListTileKey(
-                  Key(entity.idNoticiaEvento.toString()),
-                  Text('Titulo: ${entity.titulo}'),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text('Detalle: ${entity.objetivo}'),
-                      Text('Dirigo a: ${entity.dirigidoa}'),
-                      Text('Lugar/Virtual: ${entity.dirigidoa}'),
-                      Text('Fecha y Hora: ${entity.fecha} ${entity.hora}'),
-                    ],
-                  ),
-                  _showAction(entity, entity.idNoticiaEvento.toString()),
-                  null,
-                  avatarCircle((entity.foto ?? IMAGE_LOGO), 35),
-                  EdgeInsets.all(5.0),
-                  EdgeInsets.all(3.0)),
-            ],
-          ),
-        ),
-      ],
+  Widget _showListTile(TorneoModel entity) {
+    return Container(
+      child: gfListTileKey(
+          Key(entity.idTorneo.toString()),
+          Text(entity.nombre),
+          Text(entity.detalle),
+          _showAction(entity, entity.idTorneo.toString()),
+          null,
+          avatarCircle((entity.foto ?? IMAGE_LOGO), 35),
+          EdgeInsets.all(5.0),
+          EdgeInsets.all(3.0)),
     );
+    //Text(entity.nombreEquipo);
   }
 
-  Widget _showAction(NoticiaEventoModel entity, String keyId) {
+  Widget _showAction(TorneoModel entity, String keyId) {
     return Row(
       children: <Widget>[
-        Text('Operaciones: $keyId'),
+        Text('Operacionesss: $keyId'),
         sizedBox(10, 0),
         _update(),
         sizedBox(10, 0),
         _delete(keyId),
       ],
     );
+  }
+
+  Widget _header() {
+    return gfListTileText(
+        'NOTIFICACIÓN: Virtual Match',
+        'Porque formas parte de la familia, te tenemos informado.',
+        FaIcon(FontAwesomeIcons.infoCircle),
+        avatarSquare(IMAGE_DEFAULT, 35.0),
+        EdgeInsets.all(5.0),
+        EdgeInsets.all(3.0));
   }
 
   _update() {
@@ -165,8 +148,8 @@ class _NewListPageState extends State<NewListPage> {
     return InkWell(
       child: FaIcon(
         FontAwesomeIcons.edit,
-        color: AppTheme.themePurple,
-        size: 23,
+        color: AppTheme.themeDefault,
+        size: 20,
       ),
       onTap: () {
         setState(() {});
@@ -179,14 +162,14 @@ class _NewListPageState extends State<NewListPage> {
       key: Key(keyId),
       child: FaIcon(
         FontAwesomeIcons.trashAlt,
-        color: AppTheme.themePurple,
-        size: 23,
+        color: AppTheme.themeDefault,
+        size: 20,
       ),
       onTap: () {
         setState(() {
-          entityModel.idNoticiaEvento = int.parse(keyId);
-          print('eliminar ${entityModel.idNoticiaEvento}');
-          executeDelete(entityModel.idNoticiaEvento.toString(), prefs.email);
+          entityModel.idTorneo = int.parse(keyId);
+          print('eliminar ${entityModel.idTorneo}');
+          executeDelete(entityModel.idTorneo.toString(), prefs.email);
         });
       },
     );
@@ -207,7 +190,7 @@ class _NewListPageState extends State<NewListPage> {
   }
 
   void executeUpdate(
-      NewService entityService, model.NoticiaEventoModel entity) async {
+      TourmentService entityService, model.TorneoModel entity) async {
     try {
       await entityService.repository(entity).then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');

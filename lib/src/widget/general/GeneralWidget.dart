@@ -2,10 +2,51 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
+import 'package:virtual_match/src/page/general/ViewPage.dart';
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/general/OpenWebWidget.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
+
+Widget showInformation(BuildContext context, String title, String subTitle,
+    String subSubTitle, String titlePage, String url) {
+  final size = MediaQuery.of(context).size;
+  return Container(
+    width: size.width * 0.95,
+    margin: EdgeInsets.symmetric(vertical: 0.0),
+    decoration: boxDecoration(),
+    child: Column(
+      children: <Widget>[
+        gfListTile(
+            Text(title),
+            Text(subTitle),
+            Row(
+              children: <Widget>[
+                Text(
+                  subSubTitle,
+                  style: TextStyle(
+                      color: AppTheme.themePurple,
+                      textBaseline: TextBaseline.ideographic,
+                      //   decoration: TextDecoration.underline,
+                      fontSize: 15.0),
+                ),
+                InkWell(
+                  child: avatarCircle(IMAGE_SOROJCHI, 20),
+                  onTap: () =>
+                      navegation(context, ViewPage(title: titlePage, url: url)),
+                ),
+              ],
+            ),
+            null,
+            avatarCircle(IMAGE_LOGO, 35),
+            EdgeInsets.all(5.0),
+            EdgeInsets.all(3.0)),
+      ],
+    ),
+  );
+  //Text(entity.nombreEquipo);
+}
 
 Widget copyRigth() {
   return Column(
@@ -19,8 +60,8 @@ Widget copyRigth() {
           Text(VIRTUAL_MATCH, style: kCopyRigthStyle),
           FaIcon(
             //  FontAwesomeIcons.earlybirds,
-            FontAwesomeIcons.playstation,
-            color: AppTheme.themeDefault,
+            FontAwesomeIcons.futbol,
+            color: AppTheme.themePurple,
             size: 18,
           ),
         ],
@@ -142,10 +183,12 @@ Widget background(BuildContext context, String imagen) {
       end: Alignment.bottomRight,
       stops: [0.1, 0.4, 0.7, 0.9],
       colors: [
-        Color.fromRGBO(113, 113, 113, 1.0),
-        Color.fromRGBO(93, 93, 93, 3.0),
-        Color.fromRGBO(48, 50, 48, 1.0),
-        Color.fromRGBO(22, 23, 22, 1.0),
+        // Color.fromRGBO(113, 113, 113, 1.0),
+        // Color.fromRGBO(93, 93, 93, 3.0),
+        // Color.fromRGBO(48, 50, 48, 1.0),
+        // Color.fromRGBO(22, 23, 22, 1.0),
+        AppTheme.themeDefault, AppTheme.themeDefault, AppTheme.themeDefault,
+        AppTheme.themeDefault,
       ],
     )),
   );
@@ -168,12 +211,12 @@ BoxDecoration containerFileds() {
 
 BoxDecoration containerImage() {
   return BoxDecoration(
-      color: Colors.white70,
+      color: AppTheme.themeWhite,
       borderRadius: BorderRadius.circular(8.0),
       boxShadow: <BoxShadow>[
         BoxShadow(
-            color: Colors.black26,
-            blurRadius: 7.0,
+            color: AppTheme.themePurple,
+            blurRadius: 11.0,
             offset: Offset(2.0, 3.0),
             spreadRadius: 4.0)
       ]);
@@ -211,7 +254,7 @@ boxDecoration() {
 
 boxDecorationMenu() {
   return BoxDecoration(
-    color: AppTheme.themeBlackBlack,
+    color: AppTheme.themeDefault,
   );
   //     gradient: LinearGradient(
   //   begin: Alignment.topCenter,
@@ -267,11 +310,7 @@ Widget floatButton(
     Color color, BuildContext context, FaIcon icon, Widget page) {
   return FloatingActionButton(
     onPressed: () {
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => page,
-          ));
+      navegation(context, page);
     },
     elevation: 2.0,
     child: icon,
@@ -279,9 +318,21 @@ Widget floatButton(
   );
 }
 
+Widget floatButtonImage(
+    Color color, BuildContext context, FaIcon icon, Widget page) {
+  return FloatingActionButton(
+    onPressed: () {
+      navegation(context, page);
+    },
+    elevation: 2.0,
+    child: avatarCircle(IMAGE_SOROJCHI, 35.0),
+    backgroundColor: color,
+  );
+}
+
 showSnackbar(String message, GlobalKey<ScaffoldState> scaffoldKey) {
   final snackbar = SnackBar(
-    backgroundColor:  Colors.pinkAccent,
+    backgroundColor: Colors.pinkAccent,
     content: Text(message),
     duration: Duration(milliseconds: 1500),
   );

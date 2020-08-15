@@ -24,7 +24,6 @@ import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/model/util/Validator.dart' as validator;
-import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 import 'package:virtual_match/src/widget/image/ImageWidget.dart';
 
 class PlayerAllPage extends StatefulWidget {
@@ -70,20 +69,20 @@ class _PlayerAllPagePageState extends State<PlayerAllPage> {
           items: [
             BottomNavigationBarItem(
                 icon: FaIcon(
-                  FontAwesomeIcons.newspaper,
+                  FontAwesomeIcons.gamepad,
                   size: 25,
                 ),
-                title: Text('Eventos')),
+                title: Text('Jugador VM')),
             BottomNavigationBarItem(
                 icon: FaIcon(
-                  FontAwesomeIcons.paperPlane,
+                  FontAwesomeIcons.futbol,
                   size: 25,
                 ),
-                title: Text('Listado Eventos')),
+                title: Text('Tus equipos')),
           ],
           currentIndex: page,
-          unselectedItemColor: Colors.purple,
-          selectedItemColor: AppTheme.themeWhite,
+          unselectedItemColor: AppTheme.themeWhite,
+          selectedItemColor: AppTheme.themePurple,
           onTap: _onItemTapped,
         ),
         body: optionPage[page],
@@ -115,8 +114,6 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
   int valueImage = 0;
   File photo;
   String image = IMAGE_DEFAULT;
-
-  String _pdfPath = '';
   String _opcionDepartamento = '7';
 
   @override
@@ -145,8 +142,8 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
           _form(context),
         ],
       ),
-      floatingActionButton: floatButton(AppTheme.themeGrey, context,
-          FaIcon(FontAwesomeIcons.home), HomePage()),
+       floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
+          FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }
 
@@ -166,8 +163,8 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
-                  text('CARGAR AVATAR VIRTUAL MATCH', AppTheme.themeBlackGrey,
-                      1, 15.0),
+                  text('CARGA TU AVATAR EN LA APP.  ', AppTheme.themeDefault, 1,
+                      15.0),
                   _crearIconAppImagenes(),
                   _crearIconAppCamara(),
                 ],
@@ -191,7 +188,7 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
     return IconButton(
       icon: Icon(
         Icons.photo_size_select_actual,
-        color: AppTheme.themeGrey,
+        color: AppTheme.themePurple,
       ),
       onPressed: _seleccionarFoto,
     );
@@ -201,7 +198,7 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
     return IconButton(
       icon: Icon(
         Icons.camera_alt,
-        color: AppTheme.themeGrey,
+        color: AppTheme.themePurple,
       ),
       onPressed: _tomarFoto,
     );
@@ -225,7 +222,7 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
             40,
             'Ingrese nombres del jugador',
             true,
-            FaIcon(FontAwesomeIcons.userCircle, color: Colors.black26),
+            FaIcon(FontAwesomeIcons.userCircle, color: AppTheme.themeDefault),
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             Colors.red),
@@ -237,7 +234,7 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
             40,
             'Ingrese apellidos del cliente',
             true,
-            FaIcon(FontAwesomeIcons.userAlt, color: Colors.black26),
+            FaIcon(FontAwesomeIcons.userAlt, color: AppTheme.themeDefault),
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             Colors.red),
@@ -248,7 +245,7 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
             40,
             'Ingrese Codigo PSDN/Registro',
             true,
-            FaIcon(FontAwesomeIcons.userAlt, color: Colors.black26),
+            FaIcon(FontAwesomeIcons.solidAddressCard, color: AppTheme.themeDefault),
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             Colors.red),
@@ -259,7 +256,7 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
             40,
             'Ingrese Telefono WhatsApp',
             true,
-            FaIcon(FontAwesomeIcons.chrome, color: Colors.black26),
+            FaIcon(FontAwesomeIcons.whatsapp, color: AppTheme.themeDefault),
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             Colors.red),
@@ -271,7 +268,7 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
             40,
             'Ingrese sobre ti...',
             true,
-            FaIcon(FontAwesomeIcons.chrome, color: Colors.black26),
+            FaIcon(FontAwesomeIcons.mailBulk, color: AppTheme.themeDefault),
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             Colors.red),
@@ -283,7 +280,7 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
             40,
             'Ingrese el telefono de contacto',
             true,
-            FaIcon(FontAwesomeIcons.phoneAlt, color: Colors.black26),
+            FaIcon(FontAwesomeIcons.facebook, color: AppTheme.themeDefault),
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             Colors.red),
@@ -297,7 +294,7 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
         ),
 
         _button('Guardar', 18.0, 20.0),
-       // gfCard(),
+        // gfCard(),
       ],
     );
   }
@@ -338,18 +335,6 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
             validator.validateTextfieldEmpty(value, isValidate),
         onSaved: (value) => controller.text = value,
       ),
-    );
-  }
-
-  Widget _posibleVenta(String text) {
-    return SwitchListTile(
-      value: true,
-      title: Text(text),
-      subtitle: Text('Seleccionar si es posible venta.'),
-      activeColor: AppTheme.themeDefault,
-      onChanged: (value) => setState(() {
-        //esRecuperado = value;
-      }),
     );
   }
 
@@ -402,7 +387,7 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
       text: text,
       textStyle: TextStyle(fontSize: fontSize),
       textColor: AppTheme.themeWhite,
-      color: AppTheme.themeGrey,
+      color: AppTheme.themeDefault,
       icon: FaIcon(FontAwesomeIcons.checkCircle, color: AppTheme.themeWhite),
       shape: GFButtonShape.pills,
       onPressed: (_save) ? null : _submit,
@@ -459,91 +444,22 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
   }
 
   _seleccionarFoto() async {
-    valueImage = 0;
-
     _procesarImagen(ImageSource.gallery);
   }
 
   _tomarFoto() async {
-    valueImage = 0;
     _procesarImagen(ImageSource.camera);
   }
 
   _procesarImagen(ImageSource origen) async {
-    photo = await ImagePicker.pickImage(source: origen);
-
+    final photo = await ImagePicker().getImage(source: origen);
     if (photo != null) {
-      image = await entityImage.uploadImageFile(photo);
+      image = await entityImage.uploadImage(photo.path);
       setState(() {
         entity.foto = image;
 
         //print('cargadod e iagen ${entity.foto}');
       });
-    }
-  }
-
-  _procesarFile(String file) async {
-    valueImage = 1;
-
-    if (photo != null) {
-      image = await entityImage.uploadImage(file);
-      setState(() {
-        entity.foto = image;
-        //print('cargadod e iagen ${entity.foto}');
-      });
-    }
-  }
-
-  _procesarVideo2(String file) async {
-    valueImage = 2;
-
-    image = await entityImage.uploadVideo(file);
-    setState(() {
-      entity.foto = image;
-      //print('cargadod e iagen ${entity.foto}');
-    });
-  }
-
-  void _pickPDF() async {
-    try {
-      var _extension = 'PDF';
-      _pdfPath = await FilePicker.getFilePath(
-          type: FileType.custom,
-          allowedExtensions: (_extension?.isNotEmpty ?? false)
-              ? _extension?.replaceAll(' ', '')?.split(',')
-              : null);
-
-      setState(() {});
-      if (_pdfPath == '') {
-        return;
-      }
-      valueImage = 1;
-      _procesarFile(_pdfPath);
-    } on PlatformException catch (exception) {
-      showSnackbar('Se produjo un error. $exception', scaffoldKey);
-    }
-  }
-
-  void _pickVideo() async {
-    try {
-      var _extension = 'MP4';
-      _pdfPath = await FilePicker.getFilePath(
-          type: FileType.custom,
-          allowedExtensions: (_extension?.isNotEmpty ?? false)
-              ? _extension?.replaceAll(' ', '')?.split(',')
-              : null);
-
-      setState(() {});
-      if (_pdfPath == '') {
-        return;
-      }
-      //print("File path11: " + _pdfPath);
-      _procesarVideo2(_pdfPath);
-      // setState(() {
-      //   _isLoading = true;
-      // });
-    } on PlatformException catch (exception) {
-      showSnackbar('Se produjo un error. $exception', scaffoldKey);
     }
   }
 }

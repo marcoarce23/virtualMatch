@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:getwidget/components/image/gf_image_overlay.dart';
-import 'package:provider/provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
+import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
+import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/NotificactionService.dart';
@@ -39,6 +39,8 @@ class _NotificationPageState extends State<NotificationPage> {
     final size = MediaQuery.of(context).size;
     // entityService = Provider.of<NotificationService>(context);
     return Scaffold(
+      appBar: appBar('COMUNIDAD 24/7.'),
+      drawer: DrawerMenu(),
       body: SafeArea(
         child: Container(
           child: Column(
@@ -51,22 +53,14 @@ class _NotificationPageState extends State<NotificationPage> {
                 // decoration: boxDecoration(),
                 child: Column(
                   children: <Widget>[
-                    gfListTileText(
-                        'NOTIFICACIÓN: Virtual Match',
-                        'Porque formas parte de la familia, te tenemos informado.',
-                        FaIcon(FontAwesomeIcons.infoCircle),
-                        avatarSquare(IMAGE_DEFAULT, 35.0),
-                        EdgeInsets.all(5.0),
-                        EdgeInsets.all(3.0)),
-
-// GFImageOverlay(
-//  // height: 100,
-//   //width: 200,
-//   borderRadius: BorderRadius.circular(2.0),
-//   boxFit: BoxFit.contain,
-
-//   image: NetworkImage(IMAGE_DEFAULT)
-// ),
+                    sizedBox(0, 10),
+                    showInformation(
+                        context,
+                        'TE MANTENEMOS INFORMADO?',
+                        'Las noticias y eventos más importantes y de primera mano. Comunidad FIFA BOLIVIA 24/7.',
+                        'Visita Sorojchi eclub en facebook',
+                        'INGRESASTE A SORIJCHI ECLUB',
+                        'https://www.facebook.com/SorojchieClub/'),
                   ],
                 ),
               ),
@@ -120,7 +114,7 @@ class _NotificationPageState extends State<NotificationPage> {
                     gfListTileText(
                         entity.titulo.toUpperCase(),
                         entity.titulo,
-                        FaIcon(FontAwesomeIcons.playstation),
+                        FaIcon(FontAwesomeIcons.futbol),
                         avatarCircle(IMAGE_LOGO, 35.0),
                         EdgeInsets.all(5.0),
                         EdgeInsets.all(3.0)),
@@ -128,6 +122,7 @@ class _NotificationPageState extends State<NotificationPage> {
                     //   leading: avatarCircle(IMAGE_LOGO, 35.0),
                     //   title: listItem(context, entity),
                     // ),
+                   
                   ],
                 ),
               ),

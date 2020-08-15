@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:virtual_match/src/api/core/formatEquipment/ApiGet.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
-import 'package:virtual_match/src/api/core/equipment/ApiGet.dart';
+import 'package:virtual_match/src/api/core/formatEquipment/ApiAdd.dart';
+import 'package:virtual_match/src/api/core/formatEquipment/ApiUpdate.dart';
+import 'package:virtual_match/src/api/core/formatEquipment/ApiDelete.dart';
 
-import 'package:virtual_match/src/api/core/equipment/ApiAdd.dart';
-import 'package:virtual_match/src/api/core/equipment/ApiUpdate.dart';
-import 'package:virtual_match/src/api/core/equipment/ApiDelete.dart';
-
-class EquipmentService with ChangeNotifier {
+class MiniTourmentService with ChangeNotifier {
   bool isLoading = true;
 
   final _apiAdd = new ApiAdd();
@@ -49,12 +48,11 @@ class EquipmentService with ChangeNotifier {
 
     isLoading = false;
     notifyListeners();
-    notifyListeners();
     return _result;
   }
 
-  Future<List<IEntityJson>> getTodosJugadores(IEntityJson entityJson, int value) async {
-    var _result = await _apiGet.getTodosJugadores(entityJson, value);
+  Future<List<IEntityJson>> getId(IEntityJson entityJson, int value) async {
+    var _result = await _apiGet.getId(entityJson, value);
 
     isLoading = false;
     notifyListeners();
