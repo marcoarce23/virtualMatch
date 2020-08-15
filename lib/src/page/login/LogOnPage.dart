@@ -1,8 +1,10 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:provider/provider.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:virtual_match/src/page/general/ViewPage.dart';
 import 'package:virtual_match/src/page/intro/IntroPage.dart';
 import 'package:virtual_match/src/page/login/LoginClipperPage.dart';
@@ -62,18 +64,21 @@ class _LogOnPageState extends State<LogOnPage> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(
-            "Bienvenido a Virtual Match",
-            style: Theme.of(context)
-                .textTheme
-                .headline5
-                .copyWith(fontWeight: FontWeight.w500),
+          Shimmer.fromColors(
+            baseColor: AppTheme.themeDefault,
+            highlightColor: AppTheme.themePurple,
+            child: AutoSizeText(
+              'Bienvenido a Virtual Match',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 25.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
           _gmailButton(),
-          //   _facebookButton(context),
-          //_emailButton(context),
           _button(context, 'Virtual Match', 18.0, 20.0),
-          _twitterEvelopeButtons(context),
+          _crearAcciones(context),
           sizedBox(0.0, 8.0),
           _egree(context),
           copyRigth(),
@@ -114,7 +119,7 @@ class _LogOnPageState extends State<LogOnPage> {
     );
   }
 
-  Row _twitterEvelopeButtons(BuildContext context) {
+  Row _crearAcciones(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -125,9 +130,10 @@ class _LogOnPageState extends State<LogOnPage> {
             color: Colors.blueAccent,
             padding: EdgeInsets.all(0),
             shape: CircleBorder(),
-            onPressed: () {
-              ViewPage(title: titleRRSS, url: facebook);
-            },
+            onPressed: () => navegation(
+                context,
+                ViewPage(
+                    title: 'FACEBOOK VIRTUAL MATCH'.toString(), url: facebook)),
             child: Icon(
               FontAwesomeIcons.facebookF,
               color: Colors.white,
@@ -135,9 +141,7 @@ class _LogOnPageState extends State<LogOnPage> {
             ),
           ),
         ),
-        SizedBox(
-          width: 10,
-        ),
+        sizedBox(10, 0),
         SizedBox(
           width: 40,
           height: 40,
@@ -145,9 +149,11 @@ class _LogOnPageState extends State<LogOnPage> {
             color: Colors.red,
             padding: EdgeInsets.all(0),
             shape: CircleBorder(),
-            onPressed: () {
-              ViewPage(title: 'Instagram - virtual_match', url: instagram);
-            },
+            onPressed: () => navegation(
+                context,
+                ViewPage(
+                    title: 'FACEBOOK VIRTUAL MATCH'.toString(),
+                    url: instagram)),
             child: Icon(
               FontAwesomeIcons.instagram,
               color: Colors.white,
@@ -155,9 +161,7 @@ class _LogOnPageState extends State<LogOnPage> {
             ),
           ),
         ),
-        SizedBox(
-          width: 10,
-        ),
+        sizedBox(10, 0),
         SizedBox(
           width: 40,
           height: 40,
@@ -167,7 +171,7 @@ class _LogOnPageState extends State<LogOnPage> {
             shape: CircleBorder(),
             onPressed: () {
               callWhatsAppText(whatsApp,
-                  '*Amigos virtual_match:* \nSoy un cliente, me gustaría ponerme en contacto con uds. \nEnviado desde la aplicación \n*virtual_match Digital*.');
+                  '*Comunidad Virtual Match:* \n Mensaje. Me gustaría ponerme en contacto. Gracias. \nEnviado desde la aplicación \n*Virtual Match Digital*.');
             },
             child: Icon(
               FontAwesomeIcons.whatsapp,
@@ -176,9 +180,7 @@ class _LogOnPageState extends State<LogOnPage> {
             ),
           ),
         ),
-        SizedBox(
-          width: 10,
-        ),
+        sizedBox(10, 0),
         SizedBox(
           width: 40,
           height: 40,
@@ -189,8 +191,8 @@ class _LogOnPageState extends State<LogOnPage> {
             onPressed: () {
               sendEmailAdvanced(
                   email,
-                  "Impluse - Consulta para la compra de catálogo",
-                  "Amigos de virtual_match: \nDeseo saber sobre las promociones y vanta de catálogos. \nFavor su colaboración. Gracias");
+                  "Comunidad Virtual Match. Deseo comunicarme con usted.",
+                  "A la Comunidad Virtual Match:\n Deseo más información sobre la Comunidad y de como formar parte de FIFA BOLIVIA.\n Saludos cordiales. Gracias");
             },
             child: Icon(
               FontAwesomeIcons.solidEnvelope,
@@ -238,7 +240,12 @@ class _LogOnPageState extends State<LogOnPage> {
       textStyle: TextStyle(fontSize: fontSize),
       textColor: AppTheme.themeWhite,
       color: AppTheme.themeBlackBlack,
-      icon: FaIcon(FontAwesomeIcons.playstation, color: AppTheme.themeWhite),
+      icon: Shimmer.fromColors(
+        baseColor: AppTheme.themePurple,
+        highlightColor: AppTheme.themeWhite,
+        child: FaIcon(FontAwesomeIcons.playstation,
+            color: AppTheme.themeDefault, size: 28.0),
+      ),
       shape: GFButtonShape.pills,
       onPressed: () => navegation(context, IntroPage()),
     );

@@ -160,7 +160,7 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
           _form(context),
         ],
       ),
-      floatingActionButton: floatButton(AppTheme.themeDefault, context,
+      floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }
@@ -181,7 +181,7 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
-                  text('CARGA TU AVATAR EN LA APP.  ', AppTheme.themeDefault, 1,
+                  text('CARGA TU GALERÍA MULTIMEDIA', AppTheme.themeDefault, 1,
                       15.0),
                   _crearIconAppImagenes(),
                   _crearIconAppCamara(),

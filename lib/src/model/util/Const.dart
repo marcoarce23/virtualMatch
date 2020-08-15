@@ -9,8 +9,11 @@ const String IMAGE_SOROJCHI =
 
 const String IMAGE_ORGANIZATION =
     'https://res.cloudinary.com/propia/image/upload/v1597475148/h2ffkdpsw94pwxz0c77i.jpg';
-//  'https://res.cloudinary.com/propia/image/upload/v1594739598/v93fwhgfuyndbofhotbv.jpg';
-//https://www.facebook.com/virtual_match.Bo/
+
+const String IMAGE_SCREEN2 =
+    'https://res.cloudinary.com/propia/image/upload/v1597503119/vfwyzm4eyeyigmbdgh9a.jpg';
+const String IMAGE_SCREEN3 =
+    'https://res.cloudinary.com/propia/image/upload/v1597503332/ensvnujrmripyrfdmm8x.jpg';
 const String facebook = 'https://www.facebook.com/ComunidadFIFABolivia/';
 const String instagram = 'https://www.instagram.com/virtual_match_oficial/';
 const int whatsApp = 71298852;
