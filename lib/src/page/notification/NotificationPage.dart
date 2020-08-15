@@ -43,6 +43,7 @@ class _NotificationPageState extends State<NotificationPage> {
       drawer: DrawerMenu(),
       body: SafeArea(
         child: Container(
+          
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
@@ -72,7 +73,7 @@ class _NotificationPageState extends State<NotificationPage> {
           ),
         ),
       ),
-      floatingActionButton: floatButton(AppTheme.themeDefault, context,
+      floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }
