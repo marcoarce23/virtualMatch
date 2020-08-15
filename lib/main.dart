@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
+import 'package:virtual_match/src/page/core/tourment/ListTournamentPage.dart';
 import 'package:virtual_match/src/page/event/EventLoadPage.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
@@ -100,7 +101,7 @@ class _MyAppState extends State<MyApp> {
             const Locale('es', 'ES'), // Hebrew
           ],
 
-          // initialRoute: prefs.ultimaPagina,
+          /*        
           home: AnimatedSplash(
             imagePath: ASSETS_ICON,
             home: LogOnPage(),
@@ -109,6 +110,8 @@ class _MyAppState extends State<MyApp> {
             type: AnimatedSplashType.BackgroundProcess,
             outputAndHome: option,
           ),
+*/
+          home: ListTournamentPage(),
 
           //new HomePage(), //MapAdressModule(),
 

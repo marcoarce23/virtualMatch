@@ -27,7 +27,7 @@ class _EquipmentListPageState extends State<EquipmentListPage> {
   //DEFINICION DE BLOC Y MODEL
   EquipoModel entity = new EquipoModel();
   model.EquipoModel entityModel = new model.EquipoModel();
-  EquipmentService entityService;
+EquipmentService entityService;
   EquipmentService entityGet = EquipmentService();
 
   // DEFINICIOND E VARIABLES
@@ -77,7 +77,7 @@ class _EquipmentListPageState extends State<EquipmentListPage> {
 
   Widget futureBuilder(BuildContext context) {
     return FutureBuilder(
-        future: entityGet.get(new EquipoModel()),
+        future: entityGet.get (new EquipoModel()),
         builder: (context, AsyncSnapshot snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:

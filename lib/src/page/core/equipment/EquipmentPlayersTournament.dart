@@ -31,7 +31,7 @@ class _EquipmentPlayersTournamentState
 
   Widget futureBuilder(BuildContext context) {
     return FutureBuilder(
-        future: entityGet.getId(new ListadoJugadoresModel(), widget.idTorneo),
+        future: entityGet.getTodosJugadores(new ListadoJugadoresModel(), widget.idTorneo),
         builder: (context, AsyncSnapshot snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
@@ -58,14 +58,16 @@ class _EquipmentPlayersTournamentState
   }
 
   Widget showPlayers(ListadoJugadoresModel entity) {
-    return gfListTile(
-        Text(entity.nombreEquipo),
-        _showPlayerDetail(entity),
-        _showAvatarDetail(entity),
-        null,
-        avatarCircle((entity.fotoEquipo ?? IMAGE_LOGO), 35),
-        EdgeInsets.all(5.0),
-        EdgeInsets.all(3.0));
+    return SingleChildScrollView(
+          child: gfListTile(
+          Text(entity.nombreEquipo),
+          _showPlayerDetail(entity),
+          _showAvatarDetail(entity),
+          null,
+          avatarCircle((entity.fotoEquipo ?? IMAGE_LOGO), 35),
+          EdgeInsets.all(5.0),
+          EdgeInsets.all(3.0)),
+    );
 
     //Text(entity.nombreEquipo);
   }
@@ -74,14 +76,14 @@ class _EquipmentPlayersTournamentState
     return Row(
       children: <Widget>[
         Text(entity.detalleEquipo),
-        sizedBox(5, 0),
+        //sizedBox(5, 0),
         FaIcon(
           FontAwesomeIcons.trophy,
           size: 10,
           color: Colors.green,
         ),
         Text('20 ganados'),
-        sizedBox(5, 0),
+        //sizedBox(5, 0),
         FaIcon(
           FontAwesomeIcons.handPointDown,
           size: 10,

@@ -52,8 +52,8 @@ class EquipmentService with ChangeNotifier {
     return _result;
   }
 
-  Future<List<IEntityJson>> getId(IEntityJson entityJson, int value) async {
-    var _result = await _apiGet.getId(entityJson, value);
+  Future<List<IEntityJson>> getTodosJugadores(IEntityJson entityJson, int value) async {
+    var _result = await _apiGet.getTodosJugadores(entityJson, value);
 
     isLoading = false;
     notifyListeners();
