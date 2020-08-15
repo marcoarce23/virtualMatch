@@ -4,7 +4,6 @@ import 'package:virtual_match/src/model/entity/EntityFromJson/ListadoJugadoresMo
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/service/core/EquipmentService.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
-
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 
 class EquipmentPlayersTournament extends StatefulWidget {
@@ -31,7 +30,8 @@ class _EquipmentPlayersTournamentState
 
   Widget futureBuilder(BuildContext context) {
     return FutureBuilder(
-        future: entityGet.getTodosJugadores(new ListadoJugadoresModel(), widget.idTorneo),
+        future: entityGet.getTodosJugadores(
+            new ListadoJugadoresModel(), widget.idTorneo),
         builder: (context, AsyncSnapshot snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
@@ -45,49 +45,71 @@ class _EquipmentPlayersTournamentState
 
   Widget listView(BuildContext context, AsyncSnapshot snapshot) {
     final size = MediaQuery.of(context).size;
-    return ListView.builder(
-      shrinkWrap: true,
-      scrollDirection: Axis.vertical,
-      physics: ClampingScrollPhysics(),
-      itemCount: snapshot.data.length,
-      itemBuilder: (context, index) {
-        ListadoJugadoresModel entity = snapshot.data[index];
-        return showPlayers(entity);
-      },
+    return Container(
+      width: size.width * 0.95,
+      child: ListView.builder(
+        shrinkWrap: true,
+        scrollDirection: Axis.vertical,
+        physics: ClampingScrollPhysics(),
+        itemCount: snapshot.data.length,
+        itemBuilder: (context, index) {
+          ListadoJugadoresModel entity = snapshot.data[index];
+          return showPlayers(entity);
+        },
+      ),
     );
   }
 
   Widget showPlayers(ListadoJugadoresModel entity) {
-    return gfListTile(
-    Text(entity.nombreEquipo),
-    _showPlayerDetail(entity),
-    _showAvatarDetail(entity),
-    null,
-    avatarCircle((entity.fotoEquipo ?? IMAGE_LOGO), 35),
-    EdgeInsets.all(5.0),
-    EdgeInsets.all(3.0));
-
+    final size = MediaQuery.of(context).size;
+    sizedBox(0, 7);
+    return Container(
+      width: size.width * 0.95,
+      margin: EdgeInsets.symmetric(vertical: 3.0),
+      decoration: boxDecoration(),
+      child: Column(
+        children: <Widget>[
+          sizedBox(0, 7),
+          gfListTile(
+              Text(entity.nombreEquipo),
+              _showPlayerDetail(entity),
+              _showAvatarDetail(entity),
+              null,
+              avatarCircle((entity.fotoEquipo ?? IMAGE_LOGO), 35),
+              EdgeInsets.all(5.0),
+              EdgeInsets.all(3.0)),
+          sizedBox(0, 7),
+        ],
+      ),
+    );
     //Text(entity.nombreEquipo);
   }
 
   Widget _showPlayerDetail(ListadoJugadoresModel entity) {
-    return Row(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(entity.detalleEquipo),
         //sizedBox(5, 0),
-        FaIcon(
-          FontAwesomeIcons.trophy,
-          size: 10,
-          color: Colors.green,
+
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            FaIcon(
+              FontAwesomeIcons.trophy,
+              size: 10,
+              color: Colors.green,
+            ),
+            Text('20 ganados'),
+            FaIcon(
+              FontAwesomeIcons.handPointDown,
+              size: 10,
+              color: Colors.red,
+            ),
+            Text('10 Perdidos'),
+          ],
         ),
-        Text('20 ganados'),
         //sizedBox(5, 0),
-        FaIcon(
-          FontAwesomeIcons.handPointDown,
-          size: 10,
-          color: Colors.red,
-        ),
-        Text('10 Perdidos'),
       ],
     );
   }

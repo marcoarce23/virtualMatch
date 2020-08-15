@@ -1,15 +1,13 @@
-import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:intl/intl.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/ListadoTorneoModel.dart';
 import 'package:virtual_match/src/page/core/equipment/EquipmentPlayersTournament.dart';
-import 'package:virtual_match/src/page/event/EventLoadPage.dart';
 import 'package:virtual_match/src/service/core/TournamentService.dart';
-import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
+import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
+import 'package:virtual_match/src/widget/bottonNavigationBar/BottonNavigatorWidget.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
@@ -48,122 +46,101 @@ class _TourmentPageState extends State<TourmentPage> {
     return SafeArea(
       child: Scaffold(
         key: scaffoldKey,
-        appBar: AppBar(
-            backgroundColor: AppTheme.themeBlackBlack,
-            // toolbarOpacity: 1.0,
-            iconTheme: IconThemeData(color: AppTheme.themeWhite, size: 15),
-            elevation: 5,
-            title: Row(
-              children: <Widget>[
-                Text(
-                  "Virtual Match ",
-                  style: kTitleAppBar,
-                  textAlign: TextAlign.center,
-                ),
-                sizedBox(125.0, 0.0),
-                FaIcon(
-                  FontAwesomeIcons.playstation,
-                  color: AppTheme.themeWhite,
-                  size: 25,
-                ),
-              ],
-            )),
+        appBar: appBar('TORNEOS FIFA BOLIVIA'),
         body: bodyContainer(context),
         drawer: DrawerMenu(),
-        bottomNavigationBar: convexAppBar(),
+        bottomNavigationBar: new BottonNavigation(),
       ),
     );
   }
 
   Widget bodyContainer(BuildContext context) {
     return Column(
-        children: <Widget>[
-    futureBuilderTorneo(context),
-    GFTabs(
-      initialIndex: 0,
-      length: 3,
-      tabs: <Widget>[
-        Tab(
-          icon: Icon(Icons.perm_identity),
-          child: Text(
-            "Equipos",
-          ),
-        ),
-        Tab(
-          icon: Icon(Icons.score),
-          child: Text(
-            "Fixture",
-          ),
-        ),
-        Tab(
-          icon: Icon(Icons.table_chart),
-          child: Text(
-            "T. posiciones",
-          ),
-        ),
-      ],
-      tabBarView: GFTabBarView(
-        children: <Widget>[
-          SingleChildScrollView(
-                      child: Column(
-              children: <Widget>[
-                divider(),
-                Text('Listado de Equipos',
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
-                EquipmentPlayersTournament(
-                    idTorneo: widget.idTorneo,
-                  ),
-                copyRigth(),
-              ],
-            ),
-          ),
-          SingleChildScrollView(
-                      child: Column(
-              children: <Widget>[
-                divider(),
-                Text('Fixture',
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
-                TournamentPlayerScored(
-                    idTorneo: widget.idTorneo,
-                  ),
-                copyRigth(),
-              ],
-            ),
-          ),
-        SingleChildScrollView(
-                      child: Column(
-              children: <Widget>[
-                divider(),
-                Text('Fixture',
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
-                PositionTable(
-                    idTorneo: widget.idTorneo,
-                  ),
-                copyRigth(),
-              ],
-            ),
-          ),
-        ],
-      ),
-    ),
-        ],
-      );
-
-    /*
-    return Column(ºººººº
       children: <Widget>[
-          
-        futureBuilderTorneo(context),       
-        copyRigth(),
+        sizedBox(0, 6),
+        futureBuilderTorneo(context),
+        sizedBox(0, 8),
+        GFTabs(
+          tabBarColor: AppTheme.themeDefault,
+          indicatorColor: AppTheme.themePurple,
+          indicatorWeight: 4.0,
+          initialIndex: 0,
+          length: 3,
+          tabs: <Widget>[
+            Tab(
+              icon: Icon(Icons.perm_identity),
+              child: Text(
+                "EQUIPOS",
+              ),
+            ),
+            Tab(
+              icon: Icon(Icons.score),
+              child: Text(
+                "Fixture".toUpperCase(),
+              ),
+            ),
+            Tab(
+              icon: Icon(Icons.table_chart),
+              child: Text(
+                "Posiciones".toUpperCase(),
+              ),
+            ),
+          ],
+          tabBarView: GFTabBarView(
+            children: <Widget>[
+              SingleChildScrollView(
+                child: Column(
+                  children: <Widget>[
+                    divider(),
+                    Text('Listado de Equipos'.toUpperCase(),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20)),
+                    sizedBox(0, 6),
+                    EquipmentPlayersTournament(
+                      idTorneo: widget.idTorneo,
+                    ),
+                    copyRigth(),
+                  ],
+                ),
+              ),
+              SingleChildScrollView(
+                child: Column(
+                  children: <Widget>[
+                    divider(),
+                    Text('Fixture de Partidos'.toUpperCase(),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20)),
+                    TournamentPlayerScored(
+                      idTorneo: widget.idTorneo,
+                    ),
+                    copyRigth(),
+                  ],
+                ),
+              ),
+              SingleChildScrollView(
+                child: Column(
+                  children: <Widget>[
+                    divider(),
+                    Text('TABLA DE POSICIONES',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20)),
+                    PositionTable(
+                      idTorneo: widget.idTorneo,
+                    ),
+                    copyRigth(),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
       ],
-    ); 
-    */
+    );
   }
 
   Widget futureBuilderTorneo(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    sizedBox(0, 10);
     return FutureBuilder(
         future: entityGet.getId(new ListaTorneoModel(), widget.idTorneo),
         builder: (context, AsyncSnapshot snapshot) {
@@ -176,47 +153,37 @@ class _TourmentPageState extends State<TourmentPage> {
               return Center(
                 child: Column(
                   children: <Widget>[
-                    avatarCircle(entity.foto, 55.0),
-                    Text(entity.nombreTorneo,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20)),
-                    Text(entity.detalle),
-                    Text(
-                        'Del ${new DateFormat.yMMMMd('es_BO').format(entity.fechaInicio)} al ${new DateFormat.yMMMMd('es_BO').format(entity.fechaFin)}',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 10)),
-                    Text('Estado'),
+                    sizedBox(0, 7),
+                    Container(
+                      width: size.width * 0.95,
+                      margin: EdgeInsets.symmetric(vertical: 0.0),
+                      decoration: boxDecoration(),
+                      child: Column(
+                        children: <Widget>[
+                          gfListTile(
+                            Text('TORNEO: ${entity.nombreTorneo.toUpperCase()}',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 15)),
+                            Text('DETALLE: ${entity.detalle}',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 12)),
+                            Text(
+                                'FECHA: ${new DateFormat.yMMMMd('es_BO').format(entity.fechaInicio)}  AL  ${new DateFormat.yMMMMd('es_BO').format(entity.fechaFin)}',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 12)),
+                            null,
+                            avatarCircle(entity.foto, 45.0),
+                            EdgeInsets.all(3),
+                            EdgeInsets.all(3),
+                          ),
+                        ],
+                      ),
+                    ),
+                    //   Text('Estado'),
                   ],
                 ),
               );
           }
         });
-  }
-
-  Widget convexAppBar() {
-    return ConvexAppBar.badge(
-      {0: '99+', 1: Icons.assistant_photo, 2: Colors.redAccent},
-
-      backgroundColor: AppTheme.themeDefault,
-      style: TabStyle.reactCircle,
-      elevation: 3.0,
-      items: [
-        TabItem(icon: Icons.next_week, title: 'Noticias'),
-        TabItem(icon: Icons.event_available, title: 'Evento'),
-        TabItem(icon: Icons.add, title: 'Torneo', isIconBlend: true),
-        TabItem(icon: Icons.gamepad, title: 'Jugadores'),
-        TabItem(icon: Icons.notifications_active, title: 'Notific'),
-      ],
-      initialActiveIndex: 2, //optional, default as 0
-      onTap: (value) {
-        setState(() {
-          if (value == 0) navegation(context, EventAllPage());
-          if (value == 1) navegation(context, EventAllPage());
-          if (value == 2) navegation(context, EventAllPage());
-          if (value == 3) navegation(context, EventAllPage());
-          if (value == 4) navegation(context, EventAllPage());
-        });
-      },
-    );
   }
 }

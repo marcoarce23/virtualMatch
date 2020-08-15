@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/TablaPosicionesModel.dart';
+import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 import 'package:virtual_match/src/service/core/TournamentService.dart';
 
@@ -49,27 +50,52 @@ class _PositionTableState extends State<PositionTable> {
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              DataTable(    
-                columnSpacing: 10,  
-                horizontalMargin: 10,          
+              DataTable(
+                columnSpacing: 10,
+                horizontalMargin: 10,
                 sortAscending: true,
                 columns: [
                   DataColumn(
                     label: Text(
-                      'Equipos',
+                      'NRO.'.toUpperCase(),
                       style: TextStyle(
-                        color: Colors.green,
+                        color: AppTheme.themePurple,
                         fontSize: 10.0,
                       ),
                     ),
                     numeric: false,
-                    tooltip: "Equipos",
+                    tooltip: "Equipos".toUpperCase(),
                   ),
+
                   DataColumn(
                     label: Text(
-                      'G',
+                      'Equipos'.toUpperCase(),
                       style: TextStyle(
-                        color: Colors.green,
+                        color: AppTheme.themePurple,
+                        fontSize: 10.0,
+                      ),
+                    ),
+                    numeric: false,
+                    tooltip: "Equipos".toUpperCase(),
+                  ),
+
+                    DataColumn(
+                    label: Text(
+                      'PJ',
+                      style: TextStyle(
+                        color: AppTheme.themePurple,
+                        fontSize: 10.0,
+                      ),
+                    ),
+                    numeric: true,
+                    tooltip: "Jugados",
+                  ),
+
+                  DataColumn(
+                    label: Text(
+                      'PG',
+                      style: TextStyle(
+                        color: AppTheme.themePurple,
                         fontSize: 10.0,
                       ),
                     ),
@@ -78,31 +104,31 @@ class _PositionTableState extends State<PositionTable> {
                   ),
                   DataColumn(
                     label: Text(
-                      'E',
+                      'PE',
                       style: TextStyle(
-                        color: Colors.green,
+                        color: AppTheme.themePurple,
                         fontSize: 10.0,
                       ),
                     ),
                     numeric: true,
-                    tooltip: "Empatados",
+                    tooltip: "Empatados".toUpperCase(),
                   ),
                   DataColumn(
                     label: Text(
-                      'P',
+                      'PP',
                       style: TextStyle(
-                        color: Colors.green,
+                        color: AppTheme.themePurple,
                         fontSize: 10.0,
                       ),
                     ),
                     numeric: true,
-                    tooltip: "Perdidos",
+                    tooltip: "Perdidos".toUpperCase(),
                   ),
                   DataColumn(
                     label: Text(
                       'PTS',
                       style: TextStyle(
-                        color: Colors.greenAccent,
+                        color: AppTheme.themePurple,
                         fontSize: 10.0,
                       ),
                     ),
@@ -114,62 +140,101 @@ class _PositionTableState extends State<PositionTable> {
                     .map(
                       (data) => DataRow(
                         cells: [
+                            DataCell(
+                            Container(
+                              width: 15.0,
+                              child: Center(
+                                child: Text(
+                                  data.puntaje.toString(),
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12),
+                                ),
+                              ),
+                            ),
+                          ),
+
                           DataCell(
                             Container(
-                                width: 70.0,
+                              width: 140.0,
                               child: Row(
-                                children: <Widget>[                                  
-                                  avatarCircle(data.imagenEquipo, 10.0),
+                                children: <Widget>[
+                                  avatarCircle(data.imagenEquipo, 13.0),
                                   Text(
                                     data.nombreEquipo,
                                     softWrap: true,
                                     overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(fontWeight: FontWeight.w600,fontSize: 10),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 12),
                                   ),
                                 ],
                               ),
                             ),
                           ),
-                          DataCell(
+
+                            DataCell(
                             Container(
-                              width: 11.0,
+                              width: 15.0,
                               child: Center(
                                 child: Text(
                                   data.puntaje.toString(),
-                                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 10  ),
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12),
+                                ),
+                              ),
+                            ),
+                          ),
+
+                          DataCell(
+                            Container(
+                              width: 15.0,
+                              child: Center(
+                                child: Text(
+                                  data.puntaje.toString(),
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12),
                                 ),
                               ),
                             ),
                           ),
                           DataCell(
                             Container(
-                              width: 11.0,
+                              width: 15.0,
                               child: Center(
                                 child: Text(
                                   data.empate.toString(),
-                                  style: TextStyle(fontWeight: FontWeight.bold,fontSize: 10),
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12),
                                 ),
                               ),
                             ),
                           ),
                           DataCell(
                             Container(
-                              width: 11.0,
+                              width: 15.0,
                               child: Center(
                                 child: Text(
                                   data.perdida.toString(),
-                                  style: TextStyle(fontWeight: FontWeight.bold,fontSize: 10),
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12),
                                 ),
                               ),
                             ),
                           ),
                           DataCell(
                             Container(
-                              width: 11.0,
+                              width: 15.0,
                               child: Center(
                                 child: Text(
                                   data.puntos.toString(),
-                                  style: TextStyle(fontWeight: FontWeight.bold,fontSize: 10),
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12),
                                 ),
                               ),
                             ),

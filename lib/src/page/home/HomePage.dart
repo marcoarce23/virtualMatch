@@ -24,6 +24,7 @@ import 'package:virtual_match/src/page/new/NewLoadPage.dart';
 import 'package:virtual_match/src/page/people/InfluencerListPage.dart';
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
+import 'package:virtual_match/src/widget/bottonNavigationBar/BottonNavigatorWidget.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
@@ -85,7 +86,7 @@ class _HomePageState extends State<HomePage> {
                 avatarCircle(IMAGE_SOROJCHI, 25),
               ],
             )),
-        body: metodoHome(),
+      //  body: metodoHome(),
         drawer: DrawerMenu(),
         floatingActionButton: Builder(
           builder: (context) => FabCircularMenu(
@@ -170,12 +171,12 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ), // drawer(context),
-        bottomNavigationBar: convexAppBar(),
+        bottomNavigationBar: new BottonNavigation(),
       ),
     );
   }
 
-  Widget convexAppBar() {
+  Widget _convexAppBar() {
     return ConvexAppBar.badge(
       {0: '99+', 1: Icons.assistant_photo, 2: Colors.redAccent},
 
@@ -214,56 +215,56 @@ class _HomePageState extends State<HomePage> {
     ));
   }
 
-  Widget metodoHome() {
-    return Stack(
-      children: <Widget>[
-        // fondoApp(),
+  // Widget metodoHome() {
+  //   return Stack(
+  //     children: <Widget>[
+  //       // fondoApp(),
 
-        SingleChildScrollView(
-          child: Center(
-            child: Column(
-              children: <Widget>[
-                Container(
-                  decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomRight,
-                    stops: [0.1, 0.4, 0.7, 0.9],
-                    colors: [
-                      Colors.red,
-                      Colors.red,
-                      Colors.red,
-                      Colors.red,
-                    ],
-                  )),
-                  child: Column(
-                    children: <Widget>[],
-                  ),
-                ),
-                //  _crearExpedido(),
-                //   showPictureOval(photo, IMAGE_DEFAULT, 130.0),
-                TournamentPlayerScored(
-                  idTorneo: 2,
-                ),
-                EquipmentPlayersTournament(
-                  idTorneo: 2,
-                ),
-                PositionTable(
-                  idTorneo: 2,
-                ),
-                //    _botonesRedondeados(),
+  //       SingleChildScrollView(
+  //         child: Center(
+  //           child: Column(
+  //             children: <Widget>[
+  //               Container(
+  //                 decoration: BoxDecoration(
+  //                     gradient: LinearGradient(
+  //                   begin: Alignment.topCenter,
+  //                   end: Alignment.bottomRight,
+  //                   stops: [0.1, 0.4, 0.7, 0.9],
+  //                   colors: [
+  //                     Colors.red,
+  //                     Colors.red,
+  //                     Colors.red,
+  //                     Colors.red,
+  //                   ],
+  //                 )),
+  //                 child: Column(
+  //                   children: <Widget>[],
+  //                 ),
+  //               ),
+  //               //  _crearExpedido(),
+  //               //   showPictureOval(photo, IMAGE_DEFAULT, 130.0),
+  //               TournamentPlayerScored(
+  //                 idTorneo: 2,
+  //               ),
+  //               EquipmentPlayersTournament(
+  //                 idTorneo: 2,
+  //               ),
+  //               PositionTable(
+  //                 idTorneo: 2,
+  //               ),
+  //               //    _botonesRedondeados(),
 
-                // Text(
-                //   'versión 1.0.0',
-                //   textAlign: TextAlign.left,
-                // ),
-              ],
-            ),
-          ),
-        )
-      ],
-    );
-  }
+  //               // Text(
+  //               //   'versión 1.0.0',
+  //               //   textAlign: TextAlign.left,
+  //               // ),
+  //             ],
+  //           ),
+  //         ),
+  //       )
+  //     ],
+  //   );
+  // }
 
   // void _onItemTapped(int index) {
   //   setState(() {

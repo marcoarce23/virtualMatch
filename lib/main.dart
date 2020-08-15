@@ -1,10 +1,10 @@
+import 'package:animated_splash/animated_splash.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
-import 'package:virtual_match/src/page/core/tourment/ListTournamentPage.dart';
 import 'package:virtual_match/src/page/event/EventLoadPage.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
@@ -75,7 +75,7 @@ class _MyAppState extends State<MyApp> {
         return 2;
     };
 
-    Map<int, Widget> option = {1: HomePage(), 2: LogOnPage()};
+    Map<int, Widget> option = {1: LogOnPage(), 2: HomePage()};
 
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
 
@@ -99,8 +99,6 @@ class _MyAppState extends State<MyApp> {
             const Locale('en', 'US'), // English
             const Locale('es', 'ES'), // Hebrew
           ],
-
-          /*        
           home: AnimatedSplash(
             imagePath: ASSETS_ICON,
             home: LogOnPage(),
@@ -109,8 +107,8 @@ class _MyAppState extends State<MyApp> {
             type: AnimatedSplashType.BackgroundProcess,
             outputAndHome: option,
           ),
-*/
-          home: ListTournamentPage(),
+
+          //   home: ListTournamentPage(),
 
           //new HomePage(), //MapAdressModule(),
 
