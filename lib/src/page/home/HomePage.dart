@@ -21,6 +21,8 @@ import 'package:virtual_match/src/page/general/ViewPage.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
 import 'package:virtual_match/src/page/image/ImagePanoramaPage.dart';
 import 'package:virtual_match/src/page/new/NewLoadPage.dart';
+import 'package:virtual_match/src/page/notification/NotificationLoadPage.dart';
+import 'package:virtual_match/src/page/notification/NotificationPage.dart';
 import 'package:virtual_match/src/page/people/InfluencerListPage.dart';
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
@@ -30,6 +32,7 @@ import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 import 'package:virtual_match/src/widget/image/ImageWidget.dart';
 import 'package:virtual_match/src/widget/image/imageOvalWidget.dart';
+import 'package:virtual_match/src/widget/menu/CircularMenu.dart';
 
 class HomePage extends StatefulWidget {
   static final String routeName = 'home';
@@ -86,91 +89,9 @@ class _HomePageState extends State<HomePage> {
                 avatarCircle(IMAGE_SOROJCHI, 25),
               ],
             )),
-      //  body: metodoHome(),
+          body: NotificationPage(),
         drawer: DrawerMenu(),
-        floatingActionButton: Builder(
-          builder: (context) => FabCircularMenu(
-            key: fabKey,
-            // Cannot be `Alignment.center`
-            alignment: Alignment.bottomRight,
-            ringColor: Colors.white.withAlpha(25),
-            ringDiameter: 500.0,
-            ringWidth: 150.0,
-            fabSize: 64.0,
-            fabElevation: 8.0,
-            fabColor: AppTheme.themeWhite,
-            fabOpenIcon: Icon(Icons.menu, color: AppTheme.themeDefault),
-            fabCloseIcon: Icon(Icons.close, color: AppTheme.themeDefault),
-            fabMargin: const EdgeInsets.all(16.0),
-            animationDuration: const Duration(milliseconds: 800),
-            animationCurve: Curves.easeInCubic,
-            onDisplayChange: (isOpen) {
-              _showSnackBar(context,
-                  "Menu Virtual Match ${isOpen ? "abierto" : "cerrado"}");
-            },
-            children: <Widget>[
-              RawMaterialButton(
-                onPressed: () {
-                  _showSnackBar(context, "Selecciono  1");
-                },
-                shape: CircleBorder(),
-                padding: const EdgeInsets.all(24.0),
-                child: FaIcon(FontAwesomeIcons.playstation,
-                    color: AppTheme.themeDefault, size: 25.0),
-              ),
-              RawMaterialButton(
-                onPressed: () async {
-                  _imageFile = (await ImagePicker()
-                      .getImage(source: ImageSource.gallery)) as File;
-                  setState(() {});
-                },
-                shape: CircleBorder(),
-                padding: const EdgeInsets.all(24.0),
-                child: FaIcon(FontAwesomeIcons.futbol,
-                    color: AppTheme.themeDefault, size: 25.0),
-              ),
-              RawMaterialButton(
-                onPressed: () async {
-                  _imageFile = (await ImagePicker()
-                      .getImage(source: ImageSource.gallery)) as File;
-                  setState(() {});
-                },
-                shape: CircleBorder(),
-                padding: const EdgeInsets.all(24.0),
-                child: FaIcon(FontAwesomeIcons.images,
-                    color: AppTheme.themeDefault, size: 25.0),
-              ),
-              RawMaterialButton(
-                onPressed: () {
-                  navegation(context, FaqPage());
-                },
-                shape: CircleBorder(),
-                padding: const EdgeInsets.all(24.0),
-                child: FaIcon(FontAwesomeIcons.youtube,
-                    color: AppTheme.themeDefault, size: 25.0),
-              ),
-              RawMaterialButton(
-                onPressed: () {
-                  navegation(context, FaqListPage());
-                },
-                shape: CircleBorder(),
-                padding: const EdgeInsets.all(24.0),
-                child: FaIcon(FontAwesomeIcons.questionCircle,
-                    color: AppTheme.themeDefault, size: 25.0),
-              ),
-              RawMaterialButton(
-                onPressed: () {
-                  _showSnackBar(context, "Selecciono Cerrar Menu Circular");
-                  fabKey.currentState.close();
-                },
-                shape: CircleBorder(),
-                padding: const EdgeInsets.all(24.0),
-                child: FaIcon(FontAwesomeIcons.home,
-                    color: AppTheme.themeDefault, size: 25.0),
-              )
-            ],
-          ),
-        ), // drawer(context),
+        floatingActionButton: new CircularMenu(),
         bottomNavigationBar: new BottonNavigation(),
       ),
     );
