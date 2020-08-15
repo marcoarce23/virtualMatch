@@ -11,6 +11,7 @@ import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/page/core/equipment/EquipmentPlayersTournament.dart';
 import 'package:virtual_match/src/page/core/foldable/FoldablePage.dart';
 import 'package:virtual_match/src/page/core/player/PlayerLoadPage.dart';
+import 'package:virtual_match/src/page/core/tourment/ListTournamentPage.dart';
 import 'package:virtual_match/src/page/core/tourment/PositionTable.dart';
 import 'package:virtual_match/src/page/core/tourment/TournamentPlayerScored.dart';
 import 'package:virtual_match/src/page/event/EventLoadPage.dart';
@@ -19,6 +20,7 @@ import 'package:virtual_match/src/page/faq/FaqPage.dart';
 import 'package:virtual_match/src/page/general/ViewPage.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
 import 'package:virtual_match/src/page/image/ImagePanoramaPage.dart';
+import 'package:virtual_match/src/page/new/NewLoadPage.dart';
 import 'package:virtual_match/src/page/people/InfluencerListPage.dart';
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
@@ -26,6 +28,7 @@ import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 import 'package:virtual_match/src/widget/image/ImageWidget.dart';
+import 'package:virtual_match/src/widget/image/imageOvalWidget.dart';
 
 class HomePage extends StatefulWidget {
   static final String routeName = 'home';
@@ -70,12 +73,6 @@ class _HomePageState extends State<HomePage> {
             elevation: 7,
             title: Row(
               children: <Widget>[
-                // Auto(
-                //   "Virtual Match - Sorojchi eclub ",
-                //   style: kTitleAppBar,
-                //   textAlign: TextAlign.center,
-                // ),
-
                 AutoSizeText(
                   'Virtual Match - Sorojchi eclub ',
                   style: kTitleAppBar,
@@ -84,13 +81,7 @@ class _HomePageState extends State<HomePage> {
                   overflow: TextOverflow.ellipsis,
                   textAlign: TextAlign.left,
                 ),
-
                 sizedBox(5.0, 0.0),
-                // FaIcon(
-                //   FontAwesomeIcons.playstation,
-                //   color: AppTheme.themeWhite,
-                //   size: 25,
-                // ),
                 avatarCircle(IMAGE_SOROJCHI, 25),
               ],
             )),
@@ -106,12 +97,6 @@ class _HomePageState extends State<HomePage> {
             ringWidth: 150.0,
             fabSize: 64.0,
             fabElevation: 8.0,
-
-            // Also can use specific color based on wether
-            // the menu is open or not:
-            // fabOpenColor: Colors.white
-            // fabCloseColor: Colors.white
-            // These properties take precedence over fabColor
             fabColor: AppTheme.themeWhite,
             fabOpenIcon: Icon(Icons.menu, color: AppTheme.themeDefault),
             fabCloseIcon: Icon(Icons.close, color: AppTheme.themeDefault),
@@ -134,8 +119,8 @@ class _HomePageState extends State<HomePage> {
               ),
               RawMaterialButton(
                 onPressed: () async {
-                  _imageFile =
-                      await ImagePicker.pickImage(source: ImageSource.gallery);
+                  _imageFile = (await ImagePicker()
+                      .getImage(source: ImageSource.gallery)) as File;
                   setState(() {});
                 },
                 shape: CircleBorder(),
@@ -145,8 +130,8 @@ class _HomePageState extends State<HomePage> {
               ),
               RawMaterialButton(
                 onPressed: () async {
-                  _imageFile =
-                      await ImagePicker.pickImage(source: ImageSource.gallery);
+                  _imageFile = (await ImagePicker()
+                      .getImage(source: ImageSource.gallery)) as File;
                   setState(() {});
                 },
                 shape: CircleBorder(),
@@ -154,8 +139,7 @@ class _HomePageState extends State<HomePage> {
                 child: FaIcon(FontAwesomeIcons.images,
                     color: AppTheme.themeDefault, size: 25.0),
               ),
-
-               RawMaterialButton(
+              RawMaterialButton(
                 onPressed: () {
                   navegation(context, FaqPage());
                 },
@@ -164,7 +148,6 @@ class _HomePageState extends State<HomePage> {
                 child: FaIcon(FontAwesomeIcons.youtube,
                     color: AppTheme.themeDefault, size: 25.0),
               ),
-
               RawMaterialButton(
                 onPressed: () {
                   navegation(context, FaqListPage());
@@ -201,17 +184,21 @@ class _HomePageState extends State<HomePage> {
       elevation: 3.0,
       items: [
         TabItem(icon: Icons.next_week, title: 'Noticias'),
-        TabItem(icon: Icons.event_available, title: 'Evento'),
-        TabItem(icon: Icons.add, title: 'Torneo', isIconBlend: true),
-        TabItem(icon: Icons.gamepad, title: 'Jugadores'),
+        TabItem(icon: Icons.event_available, title: 'Eventos'),
+        TabItem(
+            icon: ImageOvalNetwork(
+                imageNetworkUrl: IMAGE_LOGO, sizeImage: Size.fromWidth(50)),
+            title: 'Torneos',
+            isIconBlend: false),
+        TabItem(icon: Icons.notifications_active, title: 'Jugadores'),
         TabItem(icon: Icons.notifications_active, title: 'Notific'),
       ],
       initialActiveIndex: 2, //optional, default as 0
       onTap: (value) {
         setState(() {
-          if (value == 0) navegation(context, EventAllPage());
+          if (value == 0) navegation(context, NewLoadPage());
           if (value == 1) navegation(context, EventAllPage());
-          if (value == 2) navegation(context, EventAllPage());
+          if (value == 2) navegation(context, ListTournamentPage());
           if (value == 3) navegation(context, EventAllPage());
           if (value == 4) navegation(context, FaqListPage());
         });
@@ -223,7 +210,7 @@ class _HomePageState extends State<HomePage> {
     Scaffold.of(context).showSnackBar(SnackBar(
       content: Text(message),
       duration: const Duration(milliseconds: 1000),
-      backgroundColor: Colors.pinkAccent,
+      backgroundColor: AppTheme.themePurple,
     ));
   }
 
@@ -254,7 +241,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 //  _crearExpedido(),
-                showPictureOval(photo, IMAGE_DEFAULT, 130.0),
+                //   showPictureOval(photo, IMAGE_DEFAULT, 130.0),
                 TournamentPlayerScored(
                   idTorneo: 2,
                 ),
@@ -278,74 +265,72 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
+  // void _onItemTapped(int index) {
+  //   setState(() {
+  //     _selectedIndex = index;
 
-      if (_selectedIndex == 0) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => FaqPage()),
-        );
-      }
+  //     if (_selectedIndex == 0) {
+  //       Navigator.push(
+  //         context,
+  //         MaterialPageRoute(builder: (context) => FaqPage()),
+  //       );
+  //     }
 
-      if (_selectedIndex == 1) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => ClientListPage()),
-        );
-      }
-      if (_selectedIndex == 2) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => HomePage()),
-        );
-      }
-    });
-  }
+  //     if (_selectedIndex == 1) {
+  //       Navigator.push(
+  //         context,
+  //         MaterialPageRoute(builder: (context) => ClientListPage()),
+  //       );
+  //     }
+  //     if (_selectedIndex == 2) {
+  //       Navigator.push(
+  //         context,
+  //         MaterialPageRoute(builder: (context) => HomePage()),
+  //       );
+  //     }
+  //   });
+  // }
 
-  Widget _bottomNavigationBar(BuildContext context) {
-    return BottomNavigationBar(
-      elevation: 3.0,
-      type: BottomNavigationBarType.shifting,
-      showSelectedLabels: true,
-      backgroundColor: AppTheme.themeBlackGrey,
-      items: [
-        BottomNavigationBarItem(
-            icon: Icon(Icons.contact_phone,
-                size: 20.0, color: AppTheme.themeDefault),
-            title: Text('Noticias')),
-        BottomNavigationBarItem(
-            icon: Icon(Icons.event_available,
-                size: 20.0, color: AppTheme.themeDefault),
-            title: Text('Torneo')),
-        BottomNavigationBarItem(
-            icon: Icon(
-              Icons.ondemand_video,
-              size: 20.0,
-              color: AppTheme.themeDefault,
-            ),
-            title: Text('Virtual')),
-        BottomNavigationBarItem(
-            icon: Icon(
-              Icons.ondemand_video,
-              size: 20.0,
-              color: AppTheme.themeDefault,
-            ),
-            title: Text('Registrate')),
-        BottomNavigationBarItem(
-            icon: Icon(
-              Icons.ondemand_video,
-              size: 20.0,
-              color: AppTheme.themeDefault,
-            ),
-            title: Text('Menu')),
-      ],
-      currentIndex: _selectedIndex,
-      selectedItemColor: AppTheme.themeDefault,
-      onTap: _onItemTapped,
-    );
-  }
-
- 
+  // Widget _bottomNavigationBar(BuildContext context) {
+  //   return BottomNavigationBar(
+  //     elevation: 3.0,
+  //     type: BottomNavigationBarType.shifting,
+  //     showSelectedLabels: true,
+  //     backgroundColor: AppTheme.themeBlackGrey,
+  //     items: [
+  //       BottomNavigationBarItem(
+  //           icon: Icon(Icons.contact_phone,
+  //               size: 20.0, color: AppTheme.themeDefault),
+  //           title: Text('Noticias')),
+  //       BottomNavigationBarItem(
+  //           icon: Icon(Icons.event_available,
+  //               size: 20.0, color: AppTheme.themeDefault),
+  //           title: Text('Torneo')),
+  //       BottomNavigationBarItem(
+  //           icon: Icon(
+  //             Icons.ondemand_video,
+  //             size: 20.0,
+  //             color: AppTheme.themeDefault,
+  //           ),
+  //           title: Text('Virtual')),
+  //       BottomNavigationBarItem(
+  //           icon: Icon(
+  //             Icons.ondemand_video,
+  //             size: 20.0,
+  //             color: AppTheme.themeDefault,
+  //           ),
+  //           title: Text('Registrate')),
+  //       BottomNavigationBarItem(
+  //           icon: Icon(
+  //             Icons.ondemand_video,
+  //             size: 20.0,
+  //             color: AppTheme.themeDefault,
+  //           ),
+  //           title: Text('Menu')),
+  //     ],
+  //     currentIndex: _selectedIndex,
+  //     selectedItemColor: AppTheme.themeDefault,
+  //     onTap: _onItemTapped,
+  //   );
+  // }
 }

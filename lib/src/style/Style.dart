@@ -10,41 +10,41 @@ final kTitleAppBar = TextStyle(
 );
 
 var kTitleStyleBlack = TextStyle(
-  color: Colors.black54,
+  color: AppTheme.themeBlackBlack,
   fontFamily: 'CM Sans Serif',
   fontSize: 20.0,
   height: 1.0,
 );
 
 final kSubTitleCardStyle = TextStyle(
-  color: Colors.black87,
+  color: AppTheme.themeBlackBlack,
   fontSize: 15,
   fontWeight: FontWeight.w600,
   height: 1.5,
 );
 
 final kSubSubTitleCardStyle = TextStyle(
-  color: Colors.black87,
-  fontSize: 15,
+  color: AppTheme.themeBlackBlack,
+  fontSize: 14,
   fontWeight: FontWeight.w600,
   height: 1.5,
 );
 
 final kSubtitleStyleBlack = TextStyle(
-  color: Colors.black54,
+  color: AppTheme.themeBlackBlack,
   fontSize: 15.0,
   height: 1.2,
 );
 
 final kSigTitleStyle = TextStyle(
-  color: Colors.black87,
+  color: AppTheme.themeBlackBlack,
   fontFamily: 'CM Sans Serif',
   fontSize: 26.0,
   height: 1.0,
 );
 
 final kSigsTitleStyle = TextStyle(
-  color: Colors.black87,
+  color: AppTheme.themeBlackBlack,
   fontFamily: FONT_FAMILY_CM_SANS_SERIF,
   fontSize: 15.0,
   height: 1.0,
@@ -69,8 +69,6 @@ final kSubtitleStyle = TextStyle(
   fontSize: 15.0,
   height: 1.2,
 );
-
-
 
 final kCopyRigthStyle = TextStyle(
   color: Colors.black,

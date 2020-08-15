@@ -73,7 +73,7 @@ class _NewAllPagePageState extends State<NewAllPage> {
                 title: Text('Noticias')),
             BottomNavigationBarItem(
                 icon: FaIcon(
-                  FontAwesomeIcons.paperPlane,
+                  FontAwesomeIcons.listAlt,
                   size: 25,
                 ),
                 title: Text('Listado Noticias')),
