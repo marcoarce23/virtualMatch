@@ -39,11 +39,10 @@ class _NotificationPageState extends State<NotificationPage> {
     final size = MediaQuery.of(context).size;
     // entityService = Provider.of<NotificationService>(context);
     return Scaffold(
-      appBar: appBar('COMUNIDAD 24/7.'),
+      //    appBar: appBar('COMUNIDAD 24/7.'),
       drawer: DrawerMenu(),
       body: SafeArea(
         child: Container(
-          
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
@@ -123,7 +122,6 @@ class _NotificationPageState extends State<NotificationPage> {
                     //   leading: avatarCircle(IMAGE_LOGO, 35.0),
                     //   title: listItem(context, entity),
                     // ),
-                   
                   ],
                 ),
               ),

@@ -19,6 +19,7 @@ import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/service/core/TournamentService.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 import 'package:virtual_match/src/widget/image/imageOvalWidget.dart';
+import 'package:virtual_match/src/widget/menu/CircularMenu.dart';
 
 import 'TourmentPage.dart';
 
@@ -51,6 +52,7 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
         appBar: appBar('TORNEOS FIFA BOLIVIA'),
         body: bodyContainer(context),
         drawer: DrawerMenu(),
+        floatingActionButton: new CircularMenu(),
         bottomNavigationBar: new BottonNavigation(),
       ),
     );
@@ -194,6 +196,4 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
       ),
     );
   }
-
- 
 }
