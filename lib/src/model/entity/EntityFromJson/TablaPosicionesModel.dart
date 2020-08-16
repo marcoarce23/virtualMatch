@@ -1,6 +1,8 @@
 import '../IEntity.dart';
 
 class TablaPosicionesModel implements IEntityJson {
+  int nro;
+  int jugados;
   int idTorneo;
   int idEquipo;
   String imagenEquipo;
@@ -11,6 +13,8 @@ class TablaPosicionesModel implements IEntityJson {
   int puntos;
 
   TablaPosicionesModel({
+    this.nro,
+    this.jugados,
     this.idTorneo,
     this.idEquipo,
     this.imagenEquipo,
@@ -22,6 +26,8 @@ class TablaPosicionesModel implements IEntityJson {
   });
 
   fromJson(Map<String, dynamic> json) => new TablaPosicionesModel(
+        nro: json["nro"],
+        jugados: json["jugados"],
         idTorneo: json["idTorneo"],
         idEquipo: json["idEquipo"],
         imagenEquipo: json["imagenEquipo"],
