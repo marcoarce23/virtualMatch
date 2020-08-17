@@ -5,6 +5,8 @@ import 'package:virtual_match/src/service/core/PartidosPorTorneoService.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
+import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
+import 'RegisterScoredPage.dart';
 
 class TournamentPlayerScored extends StatefulWidget {
   final int idTorneo;
@@ -20,7 +22,7 @@ class _TournamentPlayerScoredState extends State<TournamentPlayerScored> {
   PartidosPorTorneoModel entity = new PartidosPorTorneoModel();
   PartidosPorTorneoService entityService;
   PartidosPorTorneoService entityGet = PartidosPorTorneoService();
-
+  bool esVisto = false;
   @override
   Widget build(BuildContext context) {
     return futureBuilder(context);
@@ -52,7 +54,16 @@ class _TournamentPlayerScoredState extends State<TournamentPlayerScored> {
         itemCount: snapshot.data.length,
         itemBuilder: (context, index) {
           PartidosPorTorneoModel entity = snapshot.data[index];
-          return showScored(entity);
+          return InkWell(
+              onTap: () {
+                navegation(
+                    context,
+                    RegisterScoredPage(
+                      entity: entity,
+                      idTorneo: widget.idTorneo,
+                    ));
+              },
+              child: showScored(entity));
         },
       ),
     );
