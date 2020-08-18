@@ -25,9 +25,8 @@ class _ImapePanoramaPageState extends State<ImapePanoramaPage> {
 
   @override
   Widget build(BuildContext context) {
-    final primaryColor = Theme.of(context).primaryColor;
-
-    return Scaffold(
+  
+      return Scaffold(
       appBar: AppBar(
         title: Text('PRODUCTOS EN 360°'),
       ),
@@ -78,7 +77,9 @@ class _ImapePanoramaPageState extends State<ImapePanoramaPage> {
             RawMaterialButton(
               onPressed: () async {
                 _imageFile =
-                    await ImagePicker.pickImage(source: ImageSource.gallery);
+              
+                    (await ImagePicker().getImage(source: ImageSource.gallery)) as File;
+                    
                 setState(() {});
               },
               shape: CircleBorder(),

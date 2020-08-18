@@ -144,74 +144,74 @@ class _FoldableState extends State<FoldablePage>
     );
   }
 
-  Widget _loadingProduct() {
-    return Column(
-      children: <Widget>[
-        Expanded(
-          child: Stack(
-            fit: StackFit.expand,
-            children: <Widget>[
-              Container(
-                color: AppTheme.themeOrange,
-                padding: EdgeInsets.all(8.0),
-                child: Image.network(
-                  "https://www.educaciontrespuntocero.com/wp-content/uploads/2018/01/machu-picchu.jpg",
-                  fit: BoxFit.cover,
-                ),
-              ),
-              FoldableItem(
-                lastChild: Container(
-                  color: AppTheme.themeOrange,
-                  child: FlutterLogo(),
-                ),
-                animation: Tween<double>(begin: 90.0, end: 0.0).animate(
-                  CurvedAnimation(
-                    parent: _controller,
-                    curve: Interval(0.6, 1.0),
-                  ),
-                ),
-              )
-            ],
-          ),
-        ),
-        Expanded(
-          child: FoldableItem(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Image.network(
-                "https://www.educaciontrespuntocero.com/wp-content/uploads/2018/01/chichen-itza.jpg",
-                fit: BoxFit.cover,
-              ),
-            ),
-            animation: Tween<double>(begin: 0.0, end: 90).animate(
-              CurvedAnimation(
-                parent: _controller,
-                curve: Interval(0.3, 0.6),
-              ),
-            ),
-          ),
-        ),
-        Expanded(
-          child: FoldableItem(
-            first: true,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Image.network(
-                "https://www.educaciontrespuntocero.com/wp-content/uploads/2018/01/cristo-redentor-1.jpg",
-                fit: BoxFit.cover,
-              ),
-            ),
-            animation: Tween<double>(begin: 0.0, end: 180).animate(
-              CurvedAnimation(
-                parent: _controller,
-                curve: Interval(0.0, 0.3),
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
+  // Widget _loadingProduct() {
+  //   return Column(
+  //     children: <Widget>[
+  //       Expanded(
+  //         child: Stack(
+  //           fit: StackFit.expand,
+  //           children: <Widget>[
+  //             Container(
+  //               color: AppTheme.themeOrange,
+  //               padding: EdgeInsets.all(8.0),
+  //               child: Image.network(
+  //                 "https://www.educaciontrespuntocero.com/wp-content/uploads/2018/01/machu-picchu.jpg",
+  //                 fit: BoxFit.cover,
+  //               ),
+  //             ),
+  //             FoldableItem(
+  //               lastChild: Container(
+  //                 color: AppTheme.themeOrange,
+  //                 child: FlutterLogo(),
+  //               ),
+  //               animation: Tween<double>(begin: 90.0, end: 0.0).animate(
+  //                 CurvedAnimation(
+  //                   parent: _controller,
+  //                   curve: Interval(0.6, 1.0),
+  //                 ),
+  //               ),
+  //             )
+  //           ],
+  //         ),
+  //       ),
+  //       Expanded(
+  //         child: FoldableItem(
+  //           child: Padding(
+  //             padding: const EdgeInsets.all(8.0),
+  //             child: Image.network(
+  //               "https://www.educaciontrespuntocero.com/wp-content/uploads/2018/01/chichen-itza.jpg",
+  //               fit: BoxFit.cover,
+  //             ),
+  //           ),
+  //           animation: Tween<double>(begin: 0.0, end: 90).animate(
+  //             CurvedAnimation(
+  //               parent: _controller,
+  //               curve: Interval(0.3, 0.6),
+  //             ),
+  //           ),
+  //         ),
+  //       ),
+  //       Expanded(
+  //         child: FoldableItem(
+  //           first: true,
+  //           child: Padding(
+  //             padding: const EdgeInsets.all(8.0),
+  //             child: Image.network(
+  //               "https://www.educaciontrespuntocero.com/wp-content/uploads/2018/01/cristo-redentor-1.jpg",
+  //               fit: BoxFit.cover,
+  //             ),
+  //           ),
+  //           animation: Tween<double>(begin: 0.0, end: 180).animate(
+  //             CurvedAnimation(
+  //               parent: _controller,
+  //               curve: Interval(0.0, 0.3),
+  //             ),
+  //           ),
+  //         ),
+  //       ),
+  //     ],
+  //   );
+  // }
 }
 
 class FoldableItem extends AnimatedWidget {

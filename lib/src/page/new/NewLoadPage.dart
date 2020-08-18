@@ -121,6 +121,7 @@ class _NewLoadPageState extends State<NewLoadPage> {
   String _fecha = DateTime.now().toString().substring(0, 10);
   TimeOfDay _time = TimeOfDay.now();
   int _group = 1;
+  // ignore: unused_field
   int _selectedRadio = 1;
   String image = IMAGE_DEFAULT;
 
@@ -154,7 +155,7 @@ class _NewLoadPageState extends State<NewLoadPage> {
         ],
       ),
       floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
-          FaIcon(FontAwesomeIcons.playstation), HomePage()),
+          FaIcon(FontAwesomeIcons.futbol), HomePage()),
     );
   }
 
@@ -226,7 +227,7 @@ class _NewLoadPageState extends State<NewLoadPage> {
         Row(
           children: <Widget>[
             SizedBox(width: 1),
-          //  FaIcon(FontAwesomeIcons.newspaper, color: AppTheme.themeDefault),
+            //  FaIcon(FontAwesomeIcons.newspaper, color: AppTheme.themeDefault),
             sizedBox(15.0, 0.0),
             Text('Noticia'),
             Radio(

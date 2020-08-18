@@ -161,7 +161,7 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
         ],
       ),
       floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
-          FaIcon(FontAwesomeIcons.playstation), HomePage()),
+          FaIcon(FontAwesomeIcons.futbol), HomePage()),
     );
   }
 

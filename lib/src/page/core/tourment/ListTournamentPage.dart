@@ -1,24 +1,15 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/ListadoTorneoModel.dart';
-import 'package:virtual_match/src/model/util/Const.dart';
-import 'package:virtual_match/src/page/event/EventLoadPage.dart';
-import 'package:virtual_match/src/page/faq/FaqListPage.dart';
-import 'package:virtual_match/src/page/new/NewListPage.dart';
 import 'package:virtual_match/src/style/Style.dart';
-import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/bottonNavigationBar/BottonNavigatorWidget.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/service/core/TournamentService.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
-import 'package:virtual_match/src/widget/image/imageOvalWidget.dart';
 import 'package:virtual_match/src/widget/menu/CircularMenu.dart';
 
 import 'TourmentPage.dart';

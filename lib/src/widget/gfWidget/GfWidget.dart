@@ -3,9 +3,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
-import 'package:virtual_match/src/page/intro/IntroPage.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
-import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
+
 
 final prefs = new Preferense();
 

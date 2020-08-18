@@ -17,9 +17,10 @@ class CircularMenu extends StatefulWidget {
 }
 
 class _CircularMenuState extends State<CircularMenu> {
-   File _imageFile;
+  // ignore: unused_field
+  File _imageFile;
   final GlobalKey<FabCircularMenuState> fabKey = GlobalKey();
-  
+
   @override
   Widget build(BuildContext context) {
     return Builder(

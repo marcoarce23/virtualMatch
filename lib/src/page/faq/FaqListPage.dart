@@ -2,8 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:virtual_match/src/model/util/Const.dart';
-import 'package:virtual_match/src/page/general/ViewPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
@@ -32,7 +30,7 @@ class _FaqListPagetate extends State<FaqListPage> {
         ],
       ),
       floatingActionButton: floatButton(AppTheme.themeDefault, context,
-          FaIcon(FontAwesomeIcons.playstation), HomePage()),
+          FaIcon(FontAwesomeIcons.futbol), HomePage()),
     );
   }
 
@@ -67,13 +65,11 @@ class _FaqListPagetate extends State<FaqListPage> {
     return Column(
       children: <Widget>[
         sizedBox(0.0, 0.0),
-        showInformation(
-            context,
-            'TIENES CONSULTAS ?',
-            'Acá te respondemos las preguntas mas comunes sobre la Comunidad Virtual Match y nuestra APP',
-            'Visita Sorojchi eclub en facebook',
-            'INGRESASTE A SORIJCHI ECLUB',
-            'https://www.facebook.com/SorojchieClub/'),
+        showInformationBasic(
+          context,
+          'TIENES CONSULTAS ?',
+          'Acá te respondemos las preguntas mas comunes sobre la Comunidad Virtual Match y nuestra APP',
+        ),
         listAcordion(),
         listAcordion2(),
         listAcordion3(),
@@ -82,47 +78,47 @@ class _FaqListPagetate extends State<FaqListPage> {
     );
   }
 
-  Widget _showInformation(String url) {
-    final size = MediaQuery.of(context).size;
-    return Container(
-      width: size.width * 0.95,
-      margin: EdgeInsets.symmetric(vertical: 0.0),
-      decoration: boxDecoration(),
-      child: Column(
-        children: <Widget>[
-          gfListTile(
-              Text('TIENES CONSULTAS ?'),
-              Text(
-                  'Acá te respondemos las preguntas mas comunes sobre la Comunidad Virtual Match y nuestra APP'),
-              Row(
-                children: <Widget>[
-                  Text(
-                    'Visita Sorojchi eclub en facebook',
-                    style: TextStyle(
-                        color: AppTheme.themePurple,
-                        textBaseline: TextBaseline.ideographic,
-                        //   decoration: TextDecoration.underline,
-                        fontSize: 15.0),
-                  ),
-                  InkWell(
-                    child: avatarCircle(IMAGE_LOGO, 20),
-                    onTap: () => navegation(
-                        context,
-                        ViewPage(
-                            title: 'Visita Sorojchi'.toString(),
-                            url: 'https://www.facebook.com/SorojchieClub/')),
-                  ),
-                ],
-              ),
-              null,
-              avatarCircle(IMAGE_LOGO, 35),
-              EdgeInsets.all(5.0),
-              EdgeInsets.all(3.0)),
-        ],
-      ),
-    );
-    //Text(entity.nombreEquipo);
-  }
+  // Widget _showInformation(String url) {
+  //   final size = MediaQuery.of(context).size;
+  //   return Container(
+  //     width: size.width * 0.95,
+  //     margin: EdgeInsets.symmetric(vertical: 0.0),
+  //     decoration: boxDecoration(),
+  //     child: Column(
+  //       children: <Widget>[
+  //         gfListTile(
+  //             Text('TIENES CONSULTAS ?'),
+  //             Text(
+  //                 'Acá te respondemos las preguntas mas comunes sobre la Comunidad Virtual Match y nuestra APP'),
+  //             Row(
+  //               children: <Widget>[
+  //                 Text(
+  //                   'Visita Sorojchi eclub en facebook',
+  //                   style: TextStyle(
+  //                       color: AppTheme.themePurple,
+  //                       textBaseline: TextBaseline.ideographic,
+  //                       //   decoration: TextDecoration.underline,
+  //                       fontSize: 15.0),
+  //                 ),
+  //                 InkWell(
+  //                   child: avatarCircle(IMAGE_LOGO, 20),
+  //                   onTap: () => navegation(
+  //                       context,
+  //                       ViewPage(
+  //                           title: 'Visita Sorojchi'.toString(),
+  //                           url: 'https://www.facebook.com/SorojchieClub/')),
+  //                 ),
+  //               ],
+  //             ),
+  //             null,
+  //             avatarCircle(IMAGE_LOGO, 35),
+  //             EdgeInsets.all(5.0),
+  //             EdgeInsets.all(3.0)),
+  //       ],
+  //     ),
+  //   );
+  //   //Text(entity.nombreEquipo);
+  // }
 
   Widget listAcordion() {
     return accordion(

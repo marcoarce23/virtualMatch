@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
@@ -8,7 +7,8 @@ import 'package:virtual_match/src/widget/image/imageOvalWidget.dart';
 import 'package:virtual_match/src/widget/util/Util.dart';
 
 Future<File> loadImage(ImageSource image) async {
-  final _foto = await ImagePicker.pickImage(source: image);
+  final _foto = await ImagePicker().getImage(source: image)
+      as File; // ESTO REVISAR SI DA ERROR
 
   print('uploadImage: $_foto');
   return _foto;
@@ -32,7 +32,7 @@ Widget showPictureRectangle(File file, String picture, double heigth) {
 }
 
 Widget showPictureOval(File file, String image, double heigth) {
-  final circulo = Container(
+  Container(
     width: 60.0,
     height: 60.0,
     decoration: BoxDecoration(
@@ -58,8 +58,9 @@ Widget showPictureOval(File file, String image, double heigth) {
                 width: 4,
                 goalCompleted: 0.85,
                 child: Container(
-                    child: ImageOvalNetwork(
-                        imageNetworkUrl: image, sizeImage: Size.fromWidth(90))),
+                  child: ImageOvalNetwork(
+                      imageNetworkUrl: image, sizeImage: Size.fromWidth(90)),
+                ),
               ),
             ),
           ],
@@ -69,9 +70,8 @@ Widget showPictureOval(File file, String image, double heigth) {
   );
 }
 
-
 Widget showPictureOvalTop(File file, String image, double heigth, double top) {
-  final circulo = Container(
+  Container(
     width: 60.0,
     height: 60.0,
     decoration: BoxDecoration(
@@ -92,8 +92,8 @@ Widget showPictureOvalTop(File file, String image, double heigth, double top) {
           children: <Widget>[
             Align(
               child: RadialProgress(
-                progressColor: Colors.pinkAccent,
-                progressBackgroundColor: Colors.white,
+                progressColor: Colors.purple,
+                progressBackgroundColor: AppTheme.themeDefault,
                 width: 4,
                 goalCompleted: 0.85,
                 child: Container(
@@ -107,4 +107,3 @@ Widget showPictureOvalTop(File file, String image, double heigth, double top) {
     ],
   );
 }
-

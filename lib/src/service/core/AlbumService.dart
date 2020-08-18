@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:virtual_match/src/api/core/album/ApiAdd.dart';
 import 'package:virtual_match/src/api/core/album/ApiDelete.dart';
-import 'package:virtual_match/src/api/core/album/ApiGet.dart';
+//import 'package:virtual_match/src/api/core/album/ApiGet.dart';
 import 'package:virtual_match/src/api/core/album/ApiUpdate.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
-
-
 
 class AlbumService with ChangeNotifier {
   bool isLoading = true;
@@ -13,7 +11,7 @@ class AlbumService with ChangeNotifier {
   final _apiAdd = new ApiAdd();
   final _apiDelete = new ApiDelete();
   final _apiUpdate = new ApiUpdate();
-  final _apiGet = new ApiGet();
+  //final _apiGet = new ApiGet();
 
   Future<Map<String, dynamic>> repository(IEntityMap entity) async {
     var result;

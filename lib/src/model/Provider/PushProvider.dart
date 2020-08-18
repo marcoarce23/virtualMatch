@@ -17,15 +17,16 @@ class PushNotificationProvider {
       badge: true,
     ));
     _firebaseMessaging.getToken().then((token) {
-      //print('===== FCM Token =====');
+      print('===== FCM Token =====');
       prefs.token = token;
-      //print('tokennnn: ${prefs.token}');
+      print('tokennnn: ${prefs.token}');
     });
 
+    // ignore: missing_return
     _firebaseMessaging.configure(onMessage: (info) {
-      //print('======= On Message ========');
-      //print(info);
-      //  info.
+      print('======= On Message ========');
+      print(info);
+      // info.
 
       String argumento = 'no-data';
       if (Platform.isAndroid) {
@@ -36,9 +37,10 @@ class PushNotificationProvider {
       }
 
       _mensajesStreamController.sink.add(argumento);
+      // ignore: missing_return
     }, onLaunch: (info) {
-      //print('======= On Launch ========');
-      //print(info);
+      print('======= On Launch ========');
+      print(info);
 
       String argumento = 'no-data';
 
@@ -49,9 +51,10 @@ class PushNotificationProvider {
         argumento = info['ayudaPersona'] ?? 'no-data-ios';
       }
       _mensajesStreamController.sink.add(argumento);
+      // ignore: missing_return
     }, onResume: (info) {
-      //print('======= On Resume ========');
-      //print(info);
+      print('======= On Resume ========');
+      print(info);
       String argumento = 'no-data';
 
       if (Platform.isAndroid) {

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/NoticiaEventoModel.dart';
@@ -8,11 +7,14 @@ import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/service/NewService.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
+import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
+import 'package:virtual_match/src/widget/bottonNavigationBar/BottonNavigatorWidget.dart';
+import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
-import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/NoticiaEventoModel.dart'
     as model;
+import 'package:virtual_match/src/widget/menu/CircularMenu.dart';
 
 class NewListPage extends StatefulWidget {
   static final String routeName = 'notificationList';
@@ -42,12 +44,16 @@ class _NewListPageState extends State<NewListPage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    entityService = Provider.of<NewService>(context);
+    // entityService = Provider.of<NewService>(context);
 
     return Scaffold(
       key: scaffoldKey,
+      appBar: appBar('Virtual Match'.toUpperCase()),
+      drawer: DrawerMenu(),
+      bottomNavigationBar: new BottonNavigation(),
       body: SafeArea(
         child: Container(
+          color: Colors.black54,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
@@ -58,13 +64,11 @@ class _NewListPageState extends State<NewListPage> {
                 margin: EdgeInsets.symmetric(vertical: 0.0),
                 child: Column(
                   children: <Widget>[
-                    showInformation(
-                        context,
-                        'GESTIONA LAS NOTICIAS Y EVENTOS',
-                        'En esta pantalla puedes modificar y eliminar las notificaciones que haz creado anteriormente.',
-                        'Visita Sorojchi eclub en facebook',
-                        'INGRESASTE A SORIJCHI ECLUB',
-                        'https://www.facebook.com/SorojchieClub/'),
+                    showInformationBasic(
+                      context,
+                      'GESTIONA LAS NOTICIAS Y EVENTOS',
+                      'En esta pantalla puedes modificar y eliminar las notificaciones que haz creado anteriormente.',
+                    ),
                     sizedBox(0.0, 5.0),
                     divider(),
                   ],
@@ -76,8 +80,10 @@ class _NewListPageState extends State<NewListPage> {
           ),
         ),
       ),
-      floatingActionButton: floatButton(AppTheme.themeDefault, context,
-          FaIcon(FontAwesomeIcons.playstation), HomePage()),
+      floatingActionButton: new CircularMenu(),
+      
+      // floatButton(AppTheme.themeDefault, context,
+       //   FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }
 

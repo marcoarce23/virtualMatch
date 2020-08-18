@@ -3,8 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:imei_plugin/imei_plugin.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:virtual_match/src/model/Preference.dart';
+import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/page/general/ViewPage.dart';
 import 'package:virtual_match/src/page/intro/IntroPage.dart';
 import 'package:virtual_match/src/page/login/LoginClipperPage.dart';
@@ -23,6 +27,62 @@ class LogOnPage extends StatefulWidget {
 
 class _LogOnPageState extends State<LogOnPage> {
   LoginService loginService;
+  final formKey = GlobalKey<FormState>();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+  final prefs = new Preferense();
+  //LoginSigIn entity = new LoginSigIn();
+  String _platformImei = 'Unknown';
+  String uniqueId = "Unknown";
+  String result2;
+  var result;
+  var result1;
+
+  GoogleSignIn _googleSignIn = GoogleSignIn(
+    scopes: <String>[
+      'email',
+      'profile',
+    ],
+  );
+
+  GoogleSignInAccount currentUser;
+  get respuesta => null;
+
+  @override
+  void initState() {
+    super.initState();
+    // prefs.lastPage = LoginPage.routeName;
+    initPlatformState();
+
+    _googleSignIn.onCurrentUserChanged.listen((GoogleSignInAccount account) {
+      setState(() {
+        currentUser = account;
+      });
+    });
+    _googleSignIn.signInSilently();
+  }
+
+  Future<void> initPlatformState() async {
+    String platformImei = 'Failed to get platform version.';
+    String idunique;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      platformImei =
+          await ImeiPlugin.getImei(shouldShowRequestPermissionRationale: false);
+      idunique = await ImeiPlugin.getId();
+    } catch (exception) {
+      showSnackbar('Se produjo un error. $exception', scaffoldKey);
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) return;
+
+    setState(() {
+      _platformImei = platformImei;
+      uniqueId = idunique;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +91,7 @@ class _LogOnPageState extends State<LogOnPage> {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
+      key: scaffoldKey,
       body: Container(
         child: Stack(
           children: [
@@ -87,10 +148,62 @@ class _LogOnPageState extends State<LogOnPage> {
     );
   }
 
+  Future<void> handleSignIn() async {
+    try {
+      //  await _crearInformacion();
+      await _googleSignIn.signIn().then((value) {
+        _crearInformacion();
+      });
+    } catch (error) {
+      //showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
+
+      print('erro: logeo: ${error.toString()} ');
+    }
+  }
+
+  _crearInformacion() async {
+    await _googleSignIn.signIn().then((value) {
+      prefs.avatarImage = currentUser.photoUrl;
+      prefs.nameUser = currentUser.displayName;
+      prefs.email = currentUser.email;
+
+      print('Se ha  logueado ${currentUser.email}');
+      print('Se ha  displayName ${currentUser.displayName}');
+      print('Se ha  imeie $_platformImei');
+
+      // final dataMap1 = generic.getAll(
+      //     entity, getLogin + '${currentUser.email}', primaryKeyGetLogin);
+
+      // dataMap1.then((value) {
+      //   //print('SE SETEOOOO 1111');
+      //   if (value.length > 0) {
+      //     //print('SE SETEOOOO 222');
+      //     for (int i = 0; i < value.length; i++) {
+      //       entity = value[i];
+      //       //print('SE SETEOOOO 333');
+      //     }
+
+      //       //print('SE SETEOOOO 444 ${entity.idCreacionInstitucion}');
+      //       prefs.imei = _platformImei;
+      //       prefs.nombreUsuario = entity.nombrePersona;
+      //       prefs.correoElectronico = entity.correo;
+      //       prefs.avatarImagen = entity.avatar;
+      //       prefs.nombreInstitucion = entity.nombreInstitucion;
+      //       prefs.idInsitucion = entity.idInstitucion;
+      //       prefs.idPersonal = entity.idPersonal;
+      //       prefs.userId = entity.idUsuario;
+      //       prefs.idCreacionInsitucion = entity.idCreacionInstitucion;
+      //       prefs.nombreCreacionInstitucion = entity.nombreCreacionInstitucion;
+
+      navegation(context, IntroPage());
+    });
+    // });
+  }
+
   Widget _gmailButton() {
     return OutlineButton(
       splashColor: Colors.black,
-      onPressed: () {}, // handleSignIn, // _handleSignIn,
+      onPressed: handleSignIn,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
       highlightElevation: 0,
       borderSide: BorderSide(color: Colors.black),
@@ -250,4 +363,71 @@ class _LogOnPageState extends State<LogOnPage> {
       onPressed: () => navegation(context, IntroPage()),
     );
   }
+
+  // Widget _botonInvitado(String text) {
+  //   return Container(
+  //     padding: EdgeInsets.symmetric(horizontal: 70.0),
+  //     width: MediaQuery.of(context).size.width,
+  //     child: RaisedButton.icon(
+  //       shape:
+  //           RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+  //       color: AppTheme.themeDefault,
+  //       textColor: Colors.white,
+  //       label: Text(
+  //         text,
+  //         style: kSubtitleStyle,
+  //       ),
+  //       icon: FaIcon(FontAwesomeIcons.earlybirds, color: Colors.white),
+  //       onPressed: () {
+  //         // prefs.imei = entity.imei;
+  //         // prefs.nombreUsuario = 'Invitado';
+  //         // prefs.correoElectronico = 'Invitado';
+  //         // prefs.nombreInstitucion = 'Invitado';
+  //         // prefs.idInsitucion = '0';
+  //         // prefs.idPersonal = '-2';
+  //         // prefs.userId = '0';
+
+  //         // Navigator.push(
+  //         //     context,
+  //         //     PageTransition(
+  //         //       curve: Curves.bounceOut,
+  //         //       type: PageTransitionType.rotate,
+  //         //       alignment: Alignment.topCenter,
+  //         //       child: LoginPage(),
+  //         //     ));
+  //       },
+  //     ),
+  //   );
+  // }
+
+// void loadingEntity() {
+//     entity.idMultimedia = 0;
+//     entity.idOrganizacion = int.parse(prefs.idInstitution);
+//     entity.idaCategoria = typeMaterial;
+//     entity.titulo = controllerNoticia.text;
+//     entity.resumen = controllerDetalle.text;
+//     entity.fechaInicio = _inputFieldDateInicioController.text;
+//     entity.fechaFin = _inputFieldDateFinController.text;
+//     entity.usuarioAuditoria = prefs.email;
+//     entity.fechaAuditoria = '2020-08-10 08:25';
+//     entity.foto = IMAGE_LOGO;
+//     entity.enlace = controllerUbicacion.text;
+//   }
+
+//   void executeCUD(
+//       MultimediaService entityService, MultimediaModel entity) async {
+//     try {
+//       await entityService.repository(entity).then((result) {
+//         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
+
+//         if (result["tipo_mensaje"] == '0')
+//           showSnackbar(STATUS_OK, scaffoldKey);
+//         else
+//           showSnackbar(STATUS_ERROR, scaffoldKey);
+//       });
+//     } catch (error) {
+//       showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
+//     }
+//   }
+
 }

@@ -22,7 +22,6 @@ import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/model/util/Validator.dart' as validator;
-import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 import 'package:virtual_match/src/widget/image/ImageWidget.dart';
 
 class EquipmentAllPage extends StatefulWidget {
@@ -244,28 +243,6 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
         _button('Guardar', 18.0, 20.0),
       ],
     );
-  }
-
-  Widget _showInformation() {
-    final size = MediaQuery.of(context).size;
-    return Container(
-      width: size.width * 0.95,
-      margin: EdgeInsets.symmetric(vertical: 0.0),
-      decoration: boxDecoration(),
-      child: Column(
-        children: <Widget>[
-          gfListTile(
-              Text(prefs.nameUser),
-              Text(prefs.email),
-              null,
-              null,
-              avatarCircle((entity.foto ?? IMAGE_LOGO), 35),
-              EdgeInsets.all(5.0),
-              EdgeInsets.all(3.0)),
-        ],
-      ),
-    );
-    //Text(entity.nombreEquipo);
   }
 
   Widget _text(

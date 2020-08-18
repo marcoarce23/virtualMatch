@@ -5,7 +5,10 @@ class IEntityMap {
 
   StateEntity get states => _state;
 
-  void set states(StateEntity statesEntity) => this._state = statesEntity;
+  // ignore: avoid_return_types_on_setters
+  void set states(StateEntity statesEntity) {
+    this._state = statesEntity;
+  }
 
   Map<String, dynamic> toJson() => {};
 

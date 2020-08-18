@@ -58,13 +58,10 @@ class _NotificationListPageState extends State<NotificationListPage> {
                 child: Column(
                   children: <Widget>[
                     sizedBox(0.0, 8),
-                    showInformation(
+                    showInformationBasic(
                         context,
                         'ADMINISTRA LAS NOTIFICACIONES',
-                        'En esta pantalla puedes modificar y eliminar las notificaciones que haz creado anteriormente.',
-                        'INGRESA A VIRTUAL MATCH',
-                        'Enlace directo a Virtual Match',
-                        'https://www.facebook.com/ComunidadFIFABolivia/'),
+                        'En esta pantalla puedes modificar y eliminar las notificaciones que haz creado anteriormente.',),
                     divider(),
                   ],
                 ),

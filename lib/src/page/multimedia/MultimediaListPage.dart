@@ -7,7 +7,6 @@ import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/service/MultimediaService.dart';
-import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
@@ -59,13 +58,10 @@ class _MultimediaListPageState extends State<MultimediaListPage> {
                 margin: EdgeInsets.symmetric(vertical: 0.0),
                 child: Column(
                   children: <Widget>[
-                    showInformation(
+                    showInformationBasic(
                         context,
                         'GESTIONA GALERIA MULTIMEDIA',
-                        'En esta pantalla puedes modificar y eliminar las galerias multimedia que haz creado anteriormente.',
-                        'Visita Sorojchi eclub en facebook',
-                        'INGRESASTE A SORIJCHI ECLUB',
-                        'https://www.facebook.com/SorojchieClub/'),
+                        'En esta pantalla puedes modificar y eliminar las galerias multimedia que haz creado anteriormente.',),
                     sizedBox(0.0, 5.0),
                     divider(),
                   ],

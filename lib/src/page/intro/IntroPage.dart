@@ -9,7 +9,6 @@ import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/style/Style.dart';
 
 import 'package:virtual_match/src/theme/Theme.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 
 class IntroPage extends StatefulWidget {
@@ -68,14 +67,10 @@ class _IntroPageState extends State<IntroPage> {
                 Container(
                   alignment: Alignment.centerRight,
                   child: FlatButton(
-                    onPressed: () => Navigator.push(
-                        context,
-                        PageTransition(
-                          curve: Curves.bounceOut,
-                          type: PageTransitionType.rotate,
-                          alignment: Alignment.topCenter,
-                          child: HomePage(),
-                        )),
+                    onPressed: () => navegation(
+                      context,
+                      HomePage(),
+                    ),
                     child: Text(
                       'Iniciar',
                       style: TextStyle(
@@ -99,328 +94,322 @@ class _IntroPageState extends State<IntroPage> {
                     children: <Widget>[
                       Padding(
                         padding: const EdgeInsets.all(10.0),
-                        child: Flexible(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Center(
-                                child: Image(
-                                  image: NetworkImage(IMAGE_ORGANIZATION),
-                                  height: 180.0,
-                                  fit: BoxFit.fill,
-                                ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Center(
+                              child: Image(
+                                image: NetworkImage(IMAGE_ORGANIZATION),
+                                height: 180.0,
+                                fit: BoxFit.fill,
                               ),
+                            ),
 
-                              Shimmer.fromColors(
-                                baseColor: AppTheme.themeDefault,
-                                highlightColor: AppTheme.themePurple,
-                                child: AutoSizeText(
-                                  'Virtual Match es la más grande Comunidad de FIFA.',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 18.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                            Shimmer.fromColors(
+                              baseColor: AppTheme.themeDefault,
+                              highlightColor: AppTheme.themePurple,
+                              child: AutoSizeText(
+                                'Virtual Match es la más grande Comunidad de FIFA.',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
+                            ),
 
-                              sizedBox(0, 15.0),
-                              //    Expanded(
-                              Column(
-                                children: <Widget>[
-                                  Row(
-                                    children: <Widget>[
-                                      sizedBox(0, 11.0),
-                                      Shimmer.fromColors(
-                                        baseColor: AppTheme.themeDefault,
-                                        highlightColor: AppTheme.themePurple,
-                                        child: FaIcon(
-                                            FontAwesomeIcons.playstation,
-                                            color: AppTheme.themeDefault,
-                                            size: 35.0),
-                                      ),
-                                      sizedBox(0, 11.0),
-                                      Expanded(
-                                        child: AutoSizeText(
-                                          'Una alternativa para recibir asistencia telefónica, on-line o audiovisual gratuita y virtual.',
-                                          style: kSubtitleStyleBlack,
-                                          softWrap: true,
-                                          overflow: TextOverflow.clip,
-                                          textAlign: TextAlign.justify,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  sizedBox(0, 10.0),
-                                  Row(
-                                    children: <Widget>[
-                                      sizedBox(0, 11.0),
-                                      Shimmer.fromColors(
-                                        baseColor: AppTheme.themeDefault,
-                                        highlightColor: AppTheme.themePurple,
-                                        child: FaIcon(
-                                            FontAwesomeIcons.playstation,
-                                            color: AppTheme.themeDefault,
-                                            size: 35.0),
-                                      ),
-                                      sizedBox(0, 11.0),
-                                      Expanded(
-                                        child: AutoSizeText(
-                                          'Una alternativa para recibir asistencia telefónica, on-line o audiovisual gratuita y virtual.',
-                                          style: kSubtitleStyleBlack,
-                                          softWrap: true,
-                                          overflow: TextOverflow.clip,
-                                          textAlign: TextAlign.justify,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  sizedBox(0, 11.0),
-                                  Row(
-                                    children: <Widget>[
-                                      sizedBox(0, 11.0),
-                                      Shimmer.fromColors(
-                                        baseColor: AppTheme.themeDefault,
-                                        highlightColor: AppTheme.themePurple,
-                                        child: FaIcon(
-                                            FontAwesomeIcons.playstation,
-                                            color: AppTheme.themeDefault,
-                                            size: 35.0),
-                                      ),
-                                      sizedBox(0, 10.0),
-                                      Expanded(
-                                        child: AutoSizeText(
-                                          'Es un lugar donde podras encontrar material multimedia y eventos del voluntariado para tu aprendizaje.',
-                                          style: kSubtitleStyleBlack,
-                                          softWrap: true,
-                                          overflow: TextOverflow.clip,
-                                          textAlign: TextAlign.justify,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              //  ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Flexible(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Center(
-                                child: Image(
-                                  image: NetworkImage(IMAGE_SCREEN2),
-                                  height: 180.0,
-                                  fit: BoxFit.fill,
-                                ),
-                              ),
-                              sizedBox(0, 10.0),
-                              Shimmer.fromColors(
-                                baseColor: AppTheme.themeDefault,
-                                highlightColor: AppTheme.themePurple,
-                                child: AutoSizeText(
-                                  'Vrtual Match es la más grande Comunidad de FIFA.',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 18.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-
-                              sizedBox(0, 10.0),
-
-                              Column(
-                                children: <Widget>[
-                                  Row(
-                                    children: <Widget>[
-                                      sizedBox(0, 10.0),
-                                      Shimmer.fromColors(
-                                        baseColor: AppTheme.themeDefault,
-                                        highlightColor: AppTheme.themePurple,
-                                        child: FaIcon(
-                                            FontAwesomeIcons.playstation,
-                                            color: AppTheme.themeDefault,
-                                            size: 35.0),
-                                      ),
-                                      sizedBox(0, 10.0),
-                                      Expanded(
-                                        child: AutoSizeText(
-                                          'Grupo de personas que de forma voluntaria y dedicación brindan apoyo a las personas que estan buscando ayuda gratuita y virtual.',
-                                          style: kSubtitleStyleBlack,
-                                          softWrap: true,
-                                          overflow: TextOverflow.clip,
-                                          textAlign: TextAlign.justify,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  sizedBox(0, 10.0),
-                                  Row(
-                                    children: <Widget>[
-                                      sizedBox(10.0, 0),
-                                      Shimmer.fromColors(
-                                        baseColor: AppTheme.themeDefault,
-                                        highlightColor: AppTheme.themePurple,
-                                        child: FaIcon(
-                                            FontAwesomeIcons.playstation,
-                                            color: AppTheme.themeDefault,
-                                            size: 35.0),
-                                      ),
-                                      sizedBox(0, 10.0),
-                                      Expanded(
-                                        child: AutoSizeText(
-                                          'Grupo111 de personas que te brindan apoyo gratuito y virtual e interesad@s en brindarte material de apoyo y eventos para tu aprendizaje.',
-                                          style: kSubtitleStyleBlack,
-                                          softWrap: true,
-                                          overflow: TextOverflow.clip,
-                                          textAlign: TextAlign.justify,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  sizedBox(0, 11.0),
-                                  Row(
-                                    children: <Widget>[
-                                      sizedBox(0, 10.0),
-                                      Shimmer.fromColors(
-                                        baseColor: AppTheme.themeDefault,
-                                        highlightColor: AppTheme.themePurple,
-                                        child: FaIcon(
-                                            FontAwesomeIcons.playstation,
-                                            color: AppTheme.themeDefault,
-                                            size: 35.0),
-                                      ),
-                                      sizedBox(0, 10.0),
-                                      Expanded(
-                                        child: AutoSizeText(
-                                          'Grupo de ciudadanos bolivianos que convecidos con nuestro trabajo podemos hacer a diferencia en tu vida.',
-                                          style: kSubtitleStyleBlack,
-                                          softWrap: true,
-                                          overflow: TextOverflow.clip,
-                                          textAlign: TextAlign.justify,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              // ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Flexible(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Center(
-                                child: Image(
-                                  image: NetworkImage(IMAGE_SCREEN3),
-                                  height: 180.0,
-                                  fit: BoxFit.fill,
-                                ),
-                              ),
-                              sizedBox(0, 5.0),
-                              Shimmer.fromColors(
-                                baseColor: AppTheme.themeDefault,
-                                highlightColor: AppTheme.themePurple,
-                                child: AutoSizeText(
-                                  'Vrtual Match es la más grande Comunidad de FIFA.',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 18.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                              sizedBox(0, 12.0),
-                              Expanded(
-                                child: Column(
+                            sizedBox(0, 15.0),
+                            //    Expanded(
+                            Column(
+                              children: <Widget>[
+                                Row(
                                   children: <Widget>[
-                                    Row(
-                                      children: <Widget>[
-                                        sizedBox(0, 10.0),
-                                        Shimmer.fromColors(
-                                          baseColor: AppTheme.themeDefault,
-                                          highlightColor: AppTheme.themePurple,
-                                          child: FaIcon(
-                                              FontAwesomeIcons.playstation,
-                                              color: AppTheme.themeDefault,
-                                              size: 35.0),
-                                        ),
-                                        sizedBox(10.0, 0),
-                                        Expanded(
-                                          child: AutoSizeText(
-                                            'Hacer buen uso de la aplicación, en tu tiempo y cuando lo necesites.',
-                                            style: kSubtitleStyleBlack,
-                                            softWrap: true,
-                                            overflow: TextOverflow.clip,
-                                            textAlign: TextAlign.justify,
-                                          ),
-                                        ),
-                                      ],
+                                    sizedBox(0, 11.0),
+                                    Shimmer.fromColors(
+                                      baseColor: AppTheme.themeDefault,
+                                      highlightColor: AppTheme.themePurple,
+                                      child: FaIcon(
+                                          FontAwesomeIcons.playstation,
+                                          color: AppTheme.themeDefault,
+                                          size: 35.0),
                                     ),
-                                    sizedBox(0, 12.0),
-                                    Row(
-                                      children: <Widget>[
-                                        sizedBox(0, 10.0),
-                                        Shimmer.fromColors(
-                                          baseColor: AppTheme.themeDefault,
-                                          highlightColor: AppTheme.themePurple,
-                                          child: FaIcon(
-                                              FontAwesomeIcons.playstation,
-                                              color: AppTheme.themeDefault,
-                                              size: 35.0),
-                                        ),
-                                        sizedBox(0, 10.0),
-                                        Expanded(
-                                          child: AutoSizeText(
-                                            'Brindar información real y veridica a las personas con las que te comuniques a través de la APP SomosUnoBolivia.',
-                                            style: kSubtitleStyleBlack,
-                                            softWrap: true,
-                                            overflow: TextOverflow.clip,
-                                            textAlign: TextAlign.justify,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    sizedBox(0, 12.0),
-                                    Row(
-                                      children: <Widget>[
-                                        sizedBox(0, 10.0),
-                                        Shimmer.fromColors(
-                                          baseColor: AppTheme.themeDefault,
-                                          highlightColor: AppTheme.themePurple,
-                                          child: FaIcon(
-                                              FontAwesomeIcons.playstation,
-                                              color: AppTheme.themeDefault,
-                                              size: 35.0),
-                                        ),
-                                        sizedBox(0, 10.0),
-                                        Expanded(
-                                          child: AutoSizeText(
-                                            'Comparte la aplicación con tus amig@s, familiares y personas para que podamos llegar a más familias bolvianas.',
-                                            style: kSubtitleStyleBlack,
-                                            softWrap: true,
-                                            overflow: TextOverflow.clip,
-                                            textAlign: TextAlign.justify,
-                                          ),
-                                        ),
-                                      ],
+                                    sizedBox(0, 11.0),
+                                    Expanded(
+                                      child: AutoSizeText(
+                                        'Una alternativa para recibir asistencia telefónica, on-line o audiovisual gratuita y virtual.',
+                                        style: kSubtitleStyleBlack,
+                                        softWrap: true,
+                                        overflow: TextOverflow.clip,
+                                        textAlign: TextAlign.justify,
+                                      ),
                                     ),
                                   ],
                                 ),
+                                sizedBox(0, 10.0),
+                                Row(
+                                  children: <Widget>[
+                                    sizedBox(0, 11.0),
+                                    Shimmer.fromColors(
+                                      baseColor: AppTheme.themeDefault,
+                                      highlightColor: AppTheme.themePurple,
+                                      child: FaIcon(
+                                          FontAwesomeIcons.playstation,
+                                          color: AppTheme.themeDefault,
+                                          size: 35.0),
+                                    ),
+                                    sizedBox(0, 11.0),
+                                    Expanded(
+                                      child: AutoSizeText(
+                                        'Una alternativa para recibir asistencia telefónica, on-line o audiovisual gratuita y virtual.',
+                                        style: kSubtitleStyleBlack,
+                                        softWrap: true,
+                                        overflow: TextOverflow.clip,
+                                        textAlign: TextAlign.justify,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                sizedBox(0, 11.0),
+                                Row(
+                                  children: <Widget>[
+                                    sizedBox(0, 11.0),
+                                    Shimmer.fromColors(
+                                      baseColor: AppTheme.themeDefault,
+                                      highlightColor: AppTheme.themePurple,
+                                      child: FaIcon(
+                                          FontAwesomeIcons.playstation,
+                                          color: AppTheme.themeDefault,
+                                          size: 35.0),
+                                    ),
+                                    sizedBox(0, 10.0),
+                                    Expanded(
+                                      child: AutoSizeText(
+                                        'Es un lugar donde podras encontrar material multimedia y eventos del voluntariado para tu aprendizaje.',
+                                        style: kSubtitleStyleBlack,
+                                        softWrap: true,
+                                        overflow: TextOverflow.clip,
+                                        textAlign: TextAlign.justify,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            //  ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Center(
+                              child: Image(
+                                image: NetworkImage(IMAGE_SCREEN2),
+                                height: 180.0,
+                                fit: BoxFit.fill,
                               ),
-                            ],
-                          ),
+                            ),
+                            sizedBox(0, 10.0),
+                            Shimmer.fromColors(
+                              baseColor: AppTheme.themeDefault,
+                              highlightColor: AppTheme.themePurple,
+                              child: AutoSizeText(
+                                'Vrtual Match es la más grande Comunidad de FIFA.',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+
+                            sizedBox(0, 10.0),
+
+                            Column(
+                              children: <Widget>[
+                                Row(
+                                  children: <Widget>[
+                                    sizedBox(0, 10.0),
+                                    Shimmer.fromColors(
+                                      baseColor: AppTheme.themeDefault,
+                                      highlightColor: AppTheme.themePurple,
+                                      child: FaIcon(
+                                          FontAwesomeIcons.playstation,
+                                          color: AppTheme.themeDefault,
+                                          size: 35.0),
+                                    ),
+                                    sizedBox(0, 10.0),
+                                    Expanded(
+                                      child: AutoSizeText(
+                                        'Grupo de personas que de forma voluntaria y dedicación brindan apoyo a las personas que estan buscando ayuda gratuita y virtual.',
+                                        style: kSubtitleStyleBlack,
+                                        softWrap: true,
+                                        overflow: TextOverflow.clip,
+                                        textAlign: TextAlign.justify,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                sizedBox(0, 10.0),
+                                Row(
+                                  children: <Widget>[
+                                    sizedBox(10.0, 0),
+                                    Shimmer.fromColors(
+                                      baseColor: AppTheme.themeDefault,
+                                      highlightColor: AppTheme.themePurple,
+                                      child: FaIcon(
+                                          FontAwesomeIcons.playstation,
+                                          color: AppTheme.themeDefault,
+                                          size: 35.0),
+                                    ),
+                                    sizedBox(0, 10.0),
+                                    Expanded(
+                                      child: AutoSizeText(
+                                        'Grupo111 de personas que te brindan apoyo gratuito y virtual e interesad@s en brindarte material de apoyo y eventos para tu aprendizaje.',
+                                        style: kSubtitleStyleBlack,
+                                        softWrap: true,
+                                        overflow: TextOverflow.clip,
+                                        textAlign: TextAlign.justify,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                sizedBox(0, 11.0),
+                                Row(
+                                  children: <Widget>[
+                                    sizedBox(0, 10.0),
+                                    Shimmer.fromColors(
+                                      baseColor: AppTheme.themeDefault,
+                                      highlightColor: AppTheme.themePurple,
+                                      child: FaIcon(
+                                          FontAwesomeIcons.playstation,
+                                          color: AppTheme.themeDefault,
+                                          size: 35.0),
+                                    ),
+                                    sizedBox(0, 10.0),
+                                    Expanded(
+                                      child: AutoSizeText(
+                                        'Grupo de ciudadanos bolivianos que convecidos con nuestro trabajo podemos hacer a diferencia en tu vida.',
+                                        style: kSubtitleStyleBlack,
+                                        softWrap: true,
+                                        overflow: TextOverflow.clip,
+                                        textAlign: TextAlign.justify,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            // ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Center(
+                              child: Image(
+                                image: NetworkImage(IMAGE_SCREEN3),
+                                height: 180.0,
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                            sizedBox(0, 5.0),
+                            Shimmer.fromColors(
+                              baseColor: AppTheme.themeDefault,
+                              highlightColor: AppTheme.themePurple,
+                              child: AutoSizeText(
+                                'Vrtual Match es la más grande Comunidad de FIFA.',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            sizedBox(0, 12.0),
+                            Expanded(
+                              child: Column(
+                                children: <Widget>[
+                                  Row(
+                                    children: <Widget>[
+                                      sizedBox(0, 10.0),
+                                      Shimmer.fromColors(
+                                        baseColor: AppTheme.themeDefault,
+                                        highlightColor: AppTheme.themePurple,
+                                        child: FaIcon(
+                                            FontAwesomeIcons.playstation,
+                                            color: AppTheme.themeDefault,
+                                            size: 35.0),
+                                      ),
+                                      sizedBox(10.0, 0),
+                                      Expanded(
+                                        child: AutoSizeText(
+                                          'Hacer buen uso de la aplicación, en tu tiempo y cuando lo necesites.',
+                                          style: kSubtitleStyleBlack,
+                                          softWrap: true,
+                                          overflow: TextOverflow.clip,
+                                          textAlign: TextAlign.justify,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  sizedBox(0, 12.0),
+                                  Row(
+                                    children: <Widget>[
+                                      sizedBox(0, 10.0),
+                                      Shimmer.fromColors(
+                                        baseColor: AppTheme.themeDefault,
+                                        highlightColor: AppTheme.themePurple,
+                                        child: FaIcon(
+                                            FontAwesomeIcons.playstation,
+                                            color: AppTheme.themeDefault,
+                                            size: 35.0),
+                                      ),
+                                      sizedBox(0, 10.0),
+                                      Expanded(
+                                        child: AutoSizeText(
+                                          'Brindar información real y veridica a las personas con las que te comuniques a través de la APP SomosUnoBolivia.',
+                                          style: kSubtitleStyleBlack,
+                                          softWrap: true,
+                                          overflow: TextOverflow.clip,
+                                          textAlign: TextAlign.justify,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  sizedBox(0, 12.0),
+                                  Row(
+                                    children: <Widget>[
+                                      sizedBox(0, 10.0),
+                                      Shimmer.fromColors(
+                                        baseColor: AppTheme.themeDefault,
+                                        highlightColor: AppTheme.themePurple,
+                                        child: FaIcon(
+                                            FontAwesomeIcons.playstation,
+                                            color: AppTheme.themeDefault,
+                                            size: 35.0),
+                                      ),
+                                      sizedBox(0, 10.0),
+                                      Expanded(
+                                        child: AutoSizeText(
+                                          'Comparte la aplicación con tus amig@s, familiares y personas para que podamos llegar a más familias bolvianas.',
+                                          style: kSubtitleStyleBlack,
+                                          softWrap: true,
+                                          overflow: TextOverflow.clip,
+                                          textAlign: TextAlign.justify,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ],
@@ -475,14 +464,10 @@ class _IntroPageState extends State<IntroPage> {
               width: double.infinity,
               color: Colors.white54,
               child: GestureDetector(
-                onTap: () => Navigator.push(
-                    context,
-                    PageTransition(
-                      curve: Curves.bounceOut,
-                      type: PageTransitionType.rotate,
-                      alignment: Alignment.topCenter,
-                      child: HomePage(),
-                    )),
+                onTap: () => navegation(
+                  context,
+                  HomePage(),
+                ),
                 child: Center(
                   child: Padding(
                     padding: EdgeInsets.only(bottom: 30.0),
@@ -497,7 +482,7 @@ class _IntroPageState extends State<IntroPage> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(width: 10.0),
+                        sizedBox(10.0, 0),
                         FaIcon(
                           FontAwesomeIcons.futbol,
                           color: AppTheme.themePurple,

@@ -9,6 +9,29 @@ import 'package:virtual_match/src/widget/general/OpenWebWidget.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 
+Widget showInformationBasic(
+    BuildContext context, String title, String subTitle) {
+  final size = MediaQuery.of(context).size;
+  return Container(
+    width: size.width * 0.95,
+    margin: EdgeInsets.symmetric(vertical: 0.0),
+    decoration: boxDecoration(),
+    child: Column(
+      children: <Widget>[
+        gfListTile(
+            Text(title, style: kSigsTitleStyle),
+            Text(subTitle, style: kSigssTitleStyle),
+            null,
+            null,
+            avatarCircle(IMAGE_LOGO, 35),
+            EdgeInsets.all(5.0),
+            EdgeInsets.all(3.0)),
+      ],
+    ),
+  );
+  //Text(entity.nombreEquipo);
+}
+
 Widget showInformation(BuildContext context, String title, String subTitle,
     String subSubTitle, String titlePage, String url) {
   final size = MediaQuery.of(context).size;
@@ -52,7 +75,7 @@ Widget copyRigth() {
   return Column(
     mainAxisAlignment: MainAxisAlignment.start,
     children: <Widget>[
-      SizedBox(height: 5.0),
+      sizedBox(0, 5.0),
       divider(),
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -61,7 +84,7 @@ Widget copyRigth() {
           FaIcon(
             //  FontAwesomeIcons.earlybirds,
             FontAwesomeIcons.futbol,
-            color: AppTheme.themePurple,
+            color: AppTheme.themeWhite,
             size: 18,
           ),
         ],

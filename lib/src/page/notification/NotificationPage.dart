@@ -3,7 +3,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
-import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
@@ -54,13 +53,10 @@ class _NotificationPageState extends State<NotificationPage> {
                 child: Column(
                   children: <Widget>[
                     sizedBox(0, 10),
-                    showInformation(
+                    showInformationBasic(
                         context,
                         'TE MANTENEMOS INFORMADO?',
-                        'Las noticias y eventos más importantes y de primera mano. Comunidad FIFA BOLIVIA 24/7.',
-                        'Visita Sorojchi eclub en facebook',
-                        'INGRESASTE A SORIJCHI ECLUB',
-                        'https://www.facebook.com/SorojchieClub/'),
+                        'Las noticias y eventos más importantes y de primera mano. Comunidad FIFA BOLIVIA 24/7.',),
                   ],
                 ),
               ),

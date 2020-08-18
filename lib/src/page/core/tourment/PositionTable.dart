@@ -39,7 +39,6 @@ class _PositionTableState extends State<PositionTable> {
   }
 
   Widget listView(BuildContext context, AsyncSnapshot snapshot) {
-    final size = MediaQuery.of(context).size;
     List entities = snapshot.data;
     return showTablePositions(entities);
   }

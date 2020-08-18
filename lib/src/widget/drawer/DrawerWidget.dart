@@ -1,14 +1,13 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/page/core/equipment/EquipmentLoadPage.dart';
 import 'package:virtual_match/src/page/core/player/PlayerLoadPage.dart';
 import 'package:virtual_match/src/page/core/tourment/TourmentLoadPage.dart';
 import 'package:virtual_match/src/page/general/ViewPage.dart';
 import 'package:virtual_match/src/page/intro/IntroPage.dart';
-import 'package:virtual_match/src/page/login/LogOnPage.dart';
+import 'package:virtual_match/src/page/login/LogOutPage.dart';
 import 'package:virtual_match/src/page/multimedia/MultimediaLoadPage.dart';
 import 'package:virtual_match/src/page/new/NewLoadPage.dart';
 import 'package:virtual_match/src/page/notification/NotificationLoadPage.dart';
@@ -17,7 +16,6 @@ import 'package:virtual_match/src/page/organization/OrganizationPage.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/widget/general/SharedWidget.dart';
-import 'package:virtual_match/src/widget/image/ImageWidget.dart';
 import 'package:virtual_match/src/widget/image/imageOvalWidget.dart';
 
 class CustomListTile extends StatelessWidget {
@@ -79,7 +77,7 @@ class DrawerMenu extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: ImageOvalNetwork(
-                        imageNetworkUrl: IMAGE_SOROJCHI,
+                        imageNetworkUrl: prefs.avatarImage,//IMAGE_LOGO,
                         sizeImage: Size.fromWidth(70)),
 
                     //  child: showPictureOval(null, IMAGE_SOROJCHI, 70.0),
@@ -198,7 +196,7 @@ class DrawerMenu extends StatelessWidget {
               size: 25,
             ),
             '    Cerrar Sesión',
-            () => navegation(context, LogOnPage())),
+            () => navegation(context, LogOutPage())),
       ],
     ));
   }

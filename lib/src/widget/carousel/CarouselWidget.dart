@@ -14,8 +14,8 @@ class CarouselSimple extends StatefulWidget {
   @override
   _CarouselSimpleState createState() => _CarouselSimpleState();
 
-  CarouselSimple(@required List<CarouselSimpleModel> list,
-      @required Color colorBackGround, @required Color colorText) {
+  CarouselSimple(List<CarouselSimpleModel> list,
+     Color colorBackGround, @required Color colorText) {
     this.listCarousel = list;
     this.colorBackGround = colorBackGround;
     this.colorText = colorText;

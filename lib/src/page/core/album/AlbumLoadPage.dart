@@ -364,35 +364,7 @@ class _AlbumLoadPagePageState extends State<AlbumLoadPage> {
     );
   }
 
-  Widget _comboBox(String label, String values) {
-    return Center(child: FutureBuilder(
-        // future: generic.getAll(new GetClasificador(),
-        //     urlGetClasificador + '53', primaryKeyGetClasifidor),
-        builder: (context, AsyncSnapshot snapshot) {
-      if (snapshot.hasData) {
-        return Row(
-          children: <Widget>[
-            SizedBox(width: 35.0),
-            Text(label),
-            SizedBox(width: 15.0),
-            DropdownButton(
-              icon: FaIcon(FontAwesomeIcons.sort, color: AppTheme.themeDefault),
-              value: values,
-              items: getDropDown(snapshot),
-              onChanged: (value) {
-                setState(() {
-                  values = value;
-                });
-              },
-            ),
-          ],
-        );
-      } else {
-        return GFLoader(type: GFLoaderType.circle, size: 35.0);
-      }
-    }));
-  }
-
+ 
   List<DropdownMenuItem<String>> getDropDown(AsyncSnapshot snapshot) {
     List<DropdownMenuItem<String>> lista = new List();
 
@@ -475,7 +447,7 @@ class _AlbumLoadPagePageState extends State<AlbumLoadPage> {
   }
 
   _procesarImagen(ImageSource origen) async {
-    photo = await ImagePicker.pickImage(source: origen);
+    photo = (await ImagePicker().getImage(source: origen)) as File;
 
     if (photo != null) {
       image = await entityImage.uploadImageFile(photo);

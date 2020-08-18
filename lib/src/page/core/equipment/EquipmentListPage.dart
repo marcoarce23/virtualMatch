@@ -59,13 +59,10 @@ EquipmentService entityService;
                 child: Column(
                   children: <Widget>[
                     sizedBox(0.0, 8),
-                    showInformation(
+                    showInformationBasic(
                         context,
                         'ADMINISTRA TUS EQUIPOS',
-                        'En esta pantalla puedes modificar y eliminar (mientras no se inscribiste con el equipo) tus equipos que hayas creado anteriormente.',
-                        'INGRESA A VIRTUAL MATCH',
-                        'Enlace directo a Virtual Match',
-                        'https://www.facebook.com/ComunidadFIFABolivia/'),
+                        'En esta pantalla puedes modificar y eliminar (mientras no se inscribiste con el equipo) tus equipos que hayas creado anteriormente.',),
                     divider(),
                   ],
                 ),
@@ -77,7 +74,7 @@ EquipmentService entityService;
         ),
       ),
       floatingActionButton: floatButton(AppTheme.themeDefault, context,
-          FaIcon(FontAwesomeIcons.playstation), HomePage()),
+          FaIcon(FontAwesomeIcons.futbol), HomePage()),
     );
   }
 

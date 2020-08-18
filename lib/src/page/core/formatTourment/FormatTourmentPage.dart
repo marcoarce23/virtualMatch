@@ -4,38 +4,36 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-import 'package:virtual_match/src/model/entity/EntityMap/NoticiaEventoModel.dart';
 import 'package:virtual_match/src/model/Preference.dart';
+import 'package:virtual_match/src/model/entity/EntityMap/NotificacionModel.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
-import 'package:virtual_match/src/service/ImageService.dart';
-import 'package:virtual_match/src/service/OrganizationService.dart';
+import 'package:virtual_match/src/service/NotificactionService.dart';
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/model/util/Validator.dart' as validator;
-import 'package:virtual_match/src/widget/image/ImageWidget.dart';
 
-class OrganizationAllPage extends StatefulWidget {
-  static final String routeName = 'event';
-  const OrganizationAllPage({Key key}) : super(key: key);
+class TourmentAllPage extends StatefulWidget {
+  static final String routeName = 'tourment';
+  const TourmentAllPage({Key key}) : super(key: key);
 
   @override
-  _OrganizationAllPageState createState() => _OrganizationAllPageState();
+  _TourmentAllPageState createState() => _TourmentAllPageState();
 }
 
-class _OrganizationAllPageState extends State<OrganizationAllPage> {
+class _TourmentAllPageState extends State<TourmentAllPage> {
   int page = 0;
   final prefs = new Preferense();
   final List<Widget> optionPage = [
-    OrganizationLoadPage(),
+    FormatTourmentPage(),
+    FormatTourmentPage()
   ];
 
   void _onItemTapped(int index) {
@@ -46,7 +44,7 @@ class _OrganizationAllPageState extends State<OrganizationAllPage> {
 
   @override
   void initState() {
-    prefs.lastPage = OrganizationAllPage.routeName;
+    prefs.lastPage = TourmentAllPage.routeName;
     page = 0;
     super.initState();
   }
@@ -55,10 +53,10 @@ class _OrganizationAllPageState extends State<OrganizationAllPage> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(builder: (_) => new OrganizationService()),
+        ChangeNotifierProvider(builder: (_) => new NotificationService()),
       ],
       child: Scaffold(
-        appBar: appBar('CREA NUEVO EVENTO'),
+        appBar: appBar('TORNEOS'),
         drawer: DrawerMenu(),
         bottomNavigationBar: BottomNavigationBar(
           elevation: 21.0,
@@ -66,20 +64,20 @@ class _OrganizationAllPageState extends State<OrganizationAllPage> {
           items: [
             BottomNavigationBarItem(
                 icon: FaIcon(
-                  FontAwesomeIcons.newspaper,
+                  FontAwesomeIcons.bell,
                   size: 25,
                 ),
-                title: Text('Eventos')),
+                title: Text('Formato')),
             BottomNavigationBarItem(
                 icon: FaIcon(
-                  FontAwesomeIcons.paperPlane,
+                  FontAwesomeIcons.listAlt,
                   size: 25,
                 ),
-                title: Text('Listado Eventos')),
+                title: Text('Eliminatorias')),
           ],
           currentIndex: page,
-          unselectedItemColor: Colors.purple,
-          selectedItemColor: AppTheme.themeWhite,
+          unselectedItemColor: AppTheme.themeWhite,
+          selectedItemColor: AppTheme.themePurple,
           onTap: _onItemTapped,
         ),
         body: optionPage[page],
@@ -88,30 +86,28 @@ class _OrganizationAllPageState extends State<OrganizationAllPage> {
   }
 }
 
-class OrganizationLoadPage extends StatefulWidget {
-  static final String routeName = 'eventLoad';
+class FormatTourmentPage extends StatefulWidget {
+  static final String routeName = 'notificationLoad';
 
   @override
-  _OrganizationLoadPageState createState() => _OrganizationLoadPageState();
+  _FormatTourmentPageState createState() => _FormatTourmentPageState();
 }
 
-class _OrganizationLoadPageState extends State<OrganizationLoadPage> {
+class _FormatTourmentPageState extends State<FormatTourmentPage> {
   //DEFINIICON DE VARIABLES GLOBALES
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final controllerNoticia = TextEditingController();
+  final controllerTitulo = TextEditingController();
   final controllerDetalle = TextEditingController();
-  final controllerDirigidoA = TextEditingController();
-  final controllerUbicacion = TextEditingController();
+
 //DEFINICION DE BLOC Y MODEL
-  OrganizationService entityBloc;
-  NoticiaEventoModel entity = new NoticiaEventoModel();
-  ImageService entityImage = new ImageService();
+  NotificacionModel entity = new NotificacionModel();
+  NotificationService entityService;
+  final prefs = new Preferense();
 
   //DEFINICION DE VARIABLES
   bool _save = false;
   File photo;
-  String image = IMAGE_DEFAULT;
 
   @override
   void initState() {
@@ -122,22 +118,33 @@ class _OrganizationLoadPageState extends State<OrganizationLoadPage> {
 
   @override
   Widget build(BuildContext context) {
-    entityBloc = Provider.of<OrganizationService>(context);
-    final NoticiaEventoModel entityModel =
+    entityService = Provider.of<NotificationService>(context);
+    entity.states = StateEntity.Insert;
+
+    final NotificacionModel entityModel =
         ModalRoute.of(context).settings.arguments;
 
-    if (entityModel != null) entity = entityModel;
+    if (entityModel != null) {
+      entity = entityModel;
+      entity.states = StateEntity.Update;
+    }
+
+    // return ChangeNotifierProvider(
+    //   builder: (_) => new NotificationService(),
+    //   child:
 
     return Scaffold(
       key: scaffoldKey,
       body: Stack(
         children: <Widget>[
           background(context, 'IMAGE_LOGO'),
-          showPictureOval(photo, IMAGE_DEFAULT, 130.0),
+          // showPictureOval(photo, IMAGE_DEFAULT, 130.0),
+          //   crearFondo(context, IMAGE_LOGO),
+
           _form(context),
         ],
       ),
-      floatingActionButton: floatButton(AppTheme.themeDefault, context,
+      floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }
@@ -150,22 +157,15 @@ class _OrganizationLoadPageState extends State<OrganizationLoadPage> {
         key: formKey,
         child: Column(
           children: <Widget>[
-            sizedBox(0.0, 130.0),
-            Container(
-              width: size.width * 0.94,
-              margin: EdgeInsets.symmetric(vertical: 0.0),
-              decoration: containerImage(),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  text('CARGAR IMAGEN DEL EVENTO', AppTheme.themeBlackGrey, 1,
-                      15.0),
-                  _crearIconAppImagenes(),
-                  _crearIconAppCamara(),
-                ],
-              ),
-            ),
-            sizedBox(0.0, 10.0),
+            sizedBox(0.0, 7.0),
+            showInformation(
+                context,
+                'GESTIONA LAS NOTIFICACIONES',
+                'En la pantalla podrás crear y modficar las notificaciones.\nLos campos con (*) son obligatorios.',
+                'Visita Sorojchi eclub en facebook',
+                'INGRESASTE A SORIJCHI ECLUB',
+                'https://www.facebook.com/SorojchieClub/'),
+            sizedBox(0.0, 5.0),
             Container(
               width: size.width * 0.94,
               margin: EdgeInsets.symmetric(vertical: 0.0),
@@ -179,78 +179,32 @@ class _OrganizationLoadPageState extends State<OrganizationLoadPage> {
     );
   }
 
-  _crearIconAppImagenes() {
-    return IconButton(
-      icon: Icon(
-        Icons.image,
-        color: AppTheme.themeGrey,
-      ),
-      onPressed: _seleccionarFoto,
-    );
-  }
-
-  _crearIconAppCamara() {
-    return IconButton(
-      icon: Icon(
-        Icons.camera_alt,
-        color: AppTheme.themeGrey,
-      ),
-      onPressed: _tomarFoto,
-    );
-  }
-
   Widget _fields(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        sizedBox(0.0, 7.0),
-
         _text(
-            controllerNoticia,
+            controllerTitulo,
             entity.titulo,
-            'NOTICIA'.toUpperCase(),
+            'NOTIFICACIÓN'.toUpperCase(),
             100,
-            2,
-            'Ingrese la noticia',
+            3,
+            'Ingrese la notificación',
             true,
-            FaIcon(FontAwesomeIcons.newspaper, color: AppTheme.themeGrey),
+            FaIcon(FontAwesomeIcons.newspaper, color: AppTheme.themeDefault),
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             Colors.red),
 
         _text(
             controllerDetalle,
-            entity.objetivo,
-            'Detalle de la noticia',
+            entity.detalle,
+            'DETALLE DE LA NOTIFICACION',
             140,
-            2,
-            'Ingrese Detalle de la noticia',
+            4,
+            'Ingrese Detalle de la notificación',
             true,
-            FaIcon(FontAwesomeIcons.wpforms, color: Colors.black26),
-            AppTheme.themeDefault,
-            AppTheme.themeDefault,
-            Colors.red),
-        _text(
-            controllerDirigidoA,
-            entity.titulo,
-            'PARTICIPANTES'.toUpperCase(),
-            140,
-            2,
-            'Ingrese quienes participan',
-            true,
-            FaIcon(FontAwesomeIcons.userFriends, color: AppTheme.themeGrey),
-            AppTheme.themeDefault,
-            AppTheme.themeDefault,
-            Colors.red),
-        _text(
-            controllerUbicacion,
-            entity.titulo,
-            'UBICACIÓN'.toUpperCase(),
-            160,
-            2,
-            'Ingrese lugar o ruta digital',
-            true,
-            FaIcon(FontAwesomeIcons.mapMarked, color: AppTheme.themeGrey),
+            FaIcon(FontAwesomeIcons.wpforms, color: AppTheme.themeDefault),
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             Colors.red),
@@ -285,9 +239,9 @@ class _OrganizationLoadPageState extends State<OrganizationLoadPage> {
         textCapitalization: TextCapitalization.sentences,
         enableSuggestions: true,
         maxLength: maxLength,
-        maxLines: maxLines,
         autocorrect: true,
         autovalidate: false,
+        maxLines: maxLines,
         cursorColor: AppTheme.themeDefault,
         toolbarOptions:
             ToolbarOptions(copy: true, cut: true, paste: true, selectAll: true),
@@ -321,67 +275,42 @@ class _OrganizationLoadPageState extends State<OrganizationLoadPage> {
   }
 
   _submit() async {
-    //var _result;
-
     if (!formKey.currentState.validate()) return;
     formKey.currentState.save();
 
-    print('myControllerSOY EL VALOR DE ' + controllerDetalle.text);
+    print('myControllerSOY EL VALOR DE ' + controllerTitulo.text);
 
     setState(() => _save = true);
     loadingEntity();
-    executeCUD(entityBloc, entity);
+    executeCUD(entityService, entity);
     setState(() => _save = false);
   }
 
   void loadingEntity() {
-    entity.idNoticiaEvento = 0;
+    entity.idNotificacion = 0;
     entity.idOrganizacion = 1;
-    entity.idPersonal = 1;
-    entity.titulo = controllerNoticia.text;
-    entity.objetivo = controllerDetalle.text;
-    entity.dirigidoA = controllerDirigidoA.text;
-    entity.ubicacionUrl = controllerUbicacion.text;
-    entity.usuarioAuditoria = 'marce';
-    entity.fecha = '02/04/2020';
-    entity.hora = '23:12';
+    entity.titulo = controllerTitulo.text;
+    entity.detalle = controllerDetalle.text;
+    entity.usuarioAuditoria = prefs.email;
     entity.foto = IMAGE_LOGO;
-    entity.fechaAuditoria = '';
-    entity.states = StateEntity.Insert;
+    entity.fechaAuditoria = '2020-08-10 08:25';
+    // entity.states = StateEntity.Insert;
+
+    print('EL ENTITY NOTIFICA: ${entity.detalle}');
   }
 
   void executeCUD(
-      OrganizationService entityService, NoticiaEventoModel entity) async {
+      NotificationService entityService, NotificacionModel entity) async {
     try {
       await entityService.repository(entity).then((result) {
-        if (result["TIPO_RESPUESTA"] == '0')
+        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
+        if (result["tipo_mensaje"] == '0')
           showSnackbar(STATUS_OK, scaffoldKey);
         else
           showSnackbar(STATUS_ERROR, scaffoldKey);
       });
     } catch (error) {
       showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
-    }
-  }
-
-  _seleccionarFoto() async {
-    _procesarImagen(ImageSource.gallery);
-  }
-
-  _tomarFoto() async {
-    _procesarImagen(ImageSource.camera);
-  }
-
-  _procesarImagen(ImageSource origen) async {
-    final photo = await ImagePicker().getImage(source: origen);
-    if (photo != null) {
-      image = await entityImage.uploadImage(photo.path);
-      print('imagennnnn $image');
-      setState(() {
-        entity.foto = image;
-
-        //print('cargadod e iagen ${entity.foto}');
-      });
     }
   }
 }

@@ -20,7 +20,6 @@ import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/model/util/Validator.dart' as validator;
-import 'package:virtual_match/src/widget/image/ImageWidget.dart';
 
 class NotificationAllPage extends StatefulWidget {
   static final String routeName = 'notification';
@@ -160,13 +159,10 @@ class _NotificationLoadPageState extends State<NotificationLoadPage> {
         child: Column(
           children: <Widget>[
             sizedBox(0.0, 7.0),
-            showInformation(
+            showInformationBasic(
                 context,
                 'GESTIONA LAS NOTIFICACIONES',
-                'En la pantalla podrás crear y modficar las notificaciones.\nLos campos con (*) son obligatorios.',
-                'Visita Sorojchi eclub en facebook',
-                'INGRESASTE A SORIJCHI ECLUB',
-                'https://www.facebook.com/SorojchieClub/'),
+                'En la pantalla podrás crear y modficar las notificaciones.\nLos campos con (*) son obligatorios.',),
             sizedBox(0.0, 5.0),
             Container(
               width: size.width * 0.94,
