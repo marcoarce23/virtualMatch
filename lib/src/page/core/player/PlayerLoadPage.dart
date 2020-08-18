@@ -12,6 +12,7 @@ import 'package:virtual_match/src/model/entity/EntityMap/JugadorModel.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
+import 'package:virtual_match/src/page/core/equipment/EquipmentLoadPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/ClasificadorService.dart';
 import 'package:virtual_match/src/service/ImageService.dart';
@@ -22,6 +23,7 @@ import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/model/util/Validator.dart' as validator;
+import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 import 'package:virtual_match/src/widget/image/ImageWidget.dart';
 
 class PlayerAllPage extends StatefulWidget {
@@ -37,6 +39,8 @@ class _PlayerAllPagePageState extends State<PlayerAllPage> {
   final prefs = new Preferense();
   final List<Widget> optionPage = [
     PlayerLoadPage(),
+    PlayerListTeams(),
+    PlayerWithTournement()
   ];
 
   void _onItemTapped(int index) {
@@ -77,6 +81,12 @@ class _PlayerAllPagePageState extends State<PlayerAllPage> {
                   size: 25,
                 ),
                 title: Text('Tus equipos')),
+            BottomNavigationBarItem(
+                icon: FaIcon(
+                  FontAwesomeIcons.playstation,
+                  size: 25,
+                ),
+                title: Text('Torneos')),
           ],
           currentIndex: page,
           unselectedItemColor: AppTheme.themeWhite,
@@ -84,6 +94,185 @@ class _PlayerAllPagePageState extends State<PlayerAllPage> {
           onTap: _onItemTapped,
         ),
         body: optionPage[page],
+      ),
+    );
+  }
+}
+
+class PlayerListTeams extends StatefulWidget {
+  PlayerListTeams({Key key}) : super(key: key);
+
+  @override
+  _PlayerListTeamsState createState() => _PlayerListTeamsState();
+}
+
+class _PlayerListTeamsState extends State<PlayerListTeams> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+          body: Container(
+        child: Column(
+          children: <Widget>[
+            itemPlayer(),
+            divider(),
+            Text("Tus equipos"),
+            divider(),
+            itemTeam()
+          ],
+        ),
+      ),
+              floatingActionButton: floatButton(AppTheme.themeDefault, context,
+          FaIcon(FontAwesomeIcons.plus), EquipmentLoadPage()),
+    );
+  }
+
+  Widget itemPlayer() {
+    return Container(
+      width: MediaQuery.of(context).size.width * 0.95,
+      margin: EdgeInsets.symmetric(vertical: 5.0),
+      decoration: boxDecoration(),
+      child: Column(
+        children: <Widget>[
+          gfListTile(
+              Text("Jugador: Marco Antonio Arce Valdivia"),
+              null,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text("# 150 partidos Jugados"),
+                  Text("# 100 Ganados"),
+                  Text("# 50 Perdidos"),
+                ],
+              ),
+              null,
+              avatarCircle(IMAGE_DEFAULT, 35),
+              EdgeInsets.all(5.0),
+              EdgeInsets.all(3.0)),
+        ],
+      ),
+    );
+  }
+
+  Widget itemTeam() {
+    return Container(
+      width: MediaQuery.of(context).size.width * 0.95,
+      margin: EdgeInsets.symmetric(vertical: 5.0),
+      decoration: boxDecoration(),
+      child: Column(
+        children: <Widget>[
+          gfListTile(
+              Text("Bomberos teams"),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Text("#15 partidos jugados"),
+                  Text("#10 Ganados"),
+                  Text("#5 Perdidos"),
+                ],
+              ),
+              null,
+              null,
+              avatarCircle(IMAGE_DEFAULT, 35),
+              EdgeInsets.all(5.0),
+              EdgeInsets.all(3.0)),
+        ],
+      ),
+    );
+  }
+}
+
+class PlayerWithTournement extends StatefulWidget {
+  PlayerWithTournement({Key key}) : super(key: key);
+
+  @override
+  _PlayerWithTournementState createState() => _PlayerWithTournementState();
+}
+
+class _PlayerWithTournementState extends State<PlayerWithTournement> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+          body: Container(
+        child: Column(
+          children: <Widget>[
+            itemPlayer(),
+            divider(),
+            Text("Torneos disponbles"),
+            divider(),
+            itemTournament(),
+            itemTournament(),
+          ],
+        ),
+      ),
+ 
+    );
+  }
+
+  Widget itemPlayer() {
+    return Container(
+      width: MediaQuery.of(context).size.width * 0.95,
+      margin: EdgeInsets.symmetric(vertical: 5.0),
+      decoration: boxDecoration(),
+      child: Column(
+        children: <Widget>[
+          gfListTile(
+              Text("Jugador: Marco Antonio Arce Valdivia"),
+              null,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text("# 150 partidos Jugados"),
+                  Text("# 100 Ganados"),
+                  Text("# 50 Perdidos"),
+                ],
+              ),
+              null,
+              avatarCircle(IMAGE_DEFAULT, 35),
+              EdgeInsets.all(5.0),
+              EdgeInsets.all(3.0)),
+        ],
+      ),
+    );
+  }
+
+  Widget itemTournament() {
+    return Container(
+      width: MediaQuery.of(context).size.width * 0.95,
+      margin: EdgeInsets.symmetric(vertical: 5.0),
+      decoration: boxDecoration(),
+      child: Column(
+        children: <Widget>[
+          gfListTile(
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text("Torneo Wistupiku"),
+                  Text("126/128"),
+                ],
+              ),
+              Text("Eliminatoria"),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text("Torneo relampago para eliminatoria "),
+                  Text("Del 01/01/2020 al 31/08/2020 "),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      GFButton(
+                        onPressed: () {},
+                        text: "Inscribirse",
+                      ),
+                      Text("2 días para cerrar"),
+                    ],
+                  ),
+                ],
+              ),
+              null,
+              avatarCircle(IMAGE_DEFAULT, 35),
+              EdgeInsets.all(5.0),
+              EdgeInsets.all(3.0)),
+        ],
       ),
     );
   }
@@ -140,7 +329,7 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
           _form(context),
         ],
       ),
-       floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
+      floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }
@@ -243,7 +432,8 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
             40,
             'Ingrese Codigo PSDN/Registro',
             true,
-            FaIcon(FontAwesomeIcons.solidAddressCard, color: AppTheme.themeDefault),
+            FaIcon(FontAwesomeIcons.solidAddressCard,
+                color: AppTheme.themeDefault),
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             Colors.red),
