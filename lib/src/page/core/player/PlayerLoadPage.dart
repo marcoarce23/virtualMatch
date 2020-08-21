@@ -122,11 +122,7 @@ class _PlayerListTeamsState extends State<PlayerListTeams> {
         ),
       ),
       floatingActionButton: floatButton(AppTheme.themeDefault, context,
-<<<<<<< HEAD
           FaIcon(FontAwesomeIcons.plus), EquipmentAllPage()),
-=======
-          FaIcon(FontAwesomeIcons.plus), EquipmentLoadPage()),
->>>>>>> master
     );
   }
 
@@ -276,23 +272,22 @@ class _PlayerWithTournementState extends State<PlayerWithTournement> {
                           width: 20,
                           shape: BoxShape.circle,
                           image: NetworkImage(IMAGE_DEFAULT)),
-                          GFImageOverlay(
+                      GFImageOverlay(
                           height: 20,
                           width: 20,
                           shape: BoxShape.circle,
                           image: NetworkImage(IMAGE_DEFAULT)),
-                          GFImageOverlay(
+                      GFImageOverlay(
                           height: 20,
                           width: 20,
                           shape: BoxShape.circle,
                           image: NetworkImage(IMAGE_DEFAULT)),
-                          GFImageOverlay(
+                      GFImageOverlay(
                           height: 20,
                           width: 20,
                           shape: BoxShape.circle,
                           image: NetworkImage(IMAGE_DEFAULT)),
-                          Text(" + 126 jugadores inscritos")
-
+                      Text(" + 126 jugadores inscritos")
                     ],
                   )
                 ],

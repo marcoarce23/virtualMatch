@@ -14,6 +14,7 @@ import 'package:virtual_match/src/page/core/tourment/TourmentLoadPage.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/NotificactionService.dart';
+import 'package:virtual_match/src/service/core/TournamentService.dart';
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
@@ -54,7 +55,7 @@ class _TourmentAllPageState extends State<TourmentAllPage> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(builder: (_) => new NotificationService()),
+        ChangeNotifierProvider(builder: (_) => new TourmentService()),
       ],
       child: Scaffold(
         appBar: appBar('TORNEOS'),
