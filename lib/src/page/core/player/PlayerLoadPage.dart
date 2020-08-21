@@ -122,7 +122,11 @@ class _PlayerListTeamsState extends State<PlayerListTeams> {
         ),
       ),
       floatingActionButton: floatButton(AppTheme.themeDefault, context,
+<<<<<<< HEAD
           FaIcon(FontAwesomeIcons.plus), EquipmentAllPage()),
+=======
+          FaIcon(FontAwesomeIcons.plus), EquipmentLoadPage()),
+>>>>>>> master
     );
   }
 
@@ -216,7 +220,6 @@ class _PlayerWithTournementState extends State<PlayerWithTournement> {
         children: <Widget>[
           gfListTile(
               Text("Jugador: Marco Antonio Arce Valdivia"),
-              null,
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
@@ -225,6 +228,7 @@ class _PlayerWithTournementState extends State<PlayerWithTournement> {
                   Text("# 50 Perdidos"),
                 ],
               ),
+              Text(""),
               null,
               avatarCircle(IMAGE_DEFAULT, 35),
               EdgeInsets.all(5.0),
@@ -265,6 +269,32 @@ class _PlayerWithTournementState extends State<PlayerWithTournement> {
                       Text("2 días para cerrar"),
                     ],
                   ),
+                  Row(
+                    children: <Widget>[
+                      GFImageOverlay(
+                          height: 20,
+                          width: 20,
+                          shape: BoxShape.circle,
+                          image: NetworkImage(IMAGE_DEFAULT)),
+                          GFImageOverlay(
+                          height: 20,
+                          width: 20,
+                          shape: BoxShape.circle,
+                          image: NetworkImage(IMAGE_DEFAULT)),
+                          GFImageOverlay(
+                          height: 20,
+                          width: 20,
+                          shape: BoxShape.circle,
+                          image: NetworkImage(IMAGE_DEFAULT)),
+                          GFImageOverlay(
+                          height: 20,
+                          width: 20,
+                          shape: BoxShape.circle,
+                          image: NetworkImage(IMAGE_DEFAULT)),
+                          Text(" + 126 jugadores inscritos")
+
+                    ],
+                  )
                 ],
               ),
               null,
