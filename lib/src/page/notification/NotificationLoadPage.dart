@@ -130,18 +130,11 @@ class _NotificationLoadPageState extends State<NotificationLoadPage> {
       entity.states = StateEntity.Update;
     }
 
-    // return ChangeNotifierProvider(
-    //   builder: (_) => new NotificationService(),
-    //   child:
-
     return Scaffold(
       key: scaffoldKey,
       body: Stack(
         children: <Widget>[
           background(context, 'IMAGE_LOGO'),
-          // showPictureOval(photo, IMAGE_DEFAULT, 130.0),
-          //   crearFondo(context, IMAGE_LOGO),
-
           _form(context),
         ],
       ),
@@ -156,22 +149,26 @@ class _NotificationLoadPageState extends State<NotificationLoadPage> {
     return SingleChildScrollView(
       child: Form(
         key: formKey,
-        child: Column(
-          children: <Widget>[
-            sizedBox(0.0, 7.0),
-            showInformationBasic(
-                context,
-                'GESTIONA LAS NOTIFICACIONES',
-                'En la pantalla podrás crear y modficar las notificaciones.\nLos campos con (*) son obligatorios.',),
-            sizedBox(0.0, 5.0),
-            Container(
-              width: size.width * 0.94,
-              margin: EdgeInsets.symmetric(vertical: 0.0),
-              decoration: containerFileds(),
-              child: _fields(context),
-            ),
-            copyRigth(),
-          ],
+        child: Container(
+          color: Colors.black87,
+          child: Column(
+            children: <Widget>[
+              sizedBox(0.0, 7.0),
+              showInformationBasic(
+                  context,
+                  'GESTIONA LAS NOTIFICACIONES',
+                  'En la pantalla podrás crear y modficar las notificaciones.\nLos campos con (*) son obligatorios.',),
+              sizedBox(0.0, 5.0),
+              Container(
+                
+                width: size.width * 0.94,
+                margin: EdgeInsets.symmetric(vertical: 0.0),
+                decoration: containerFileds(),
+                child: _fields(context),
+              ),
+              copyRigth(),
+            ],
+          ),
         ),
       ),
     );

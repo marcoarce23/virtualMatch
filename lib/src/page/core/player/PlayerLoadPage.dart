@@ -74,7 +74,7 @@ class _PlayerAllPagePageState extends State<PlayerAllPage> {
                   FontAwesomeIcons.gamepad,
                   size: 25,
                 ),
-                title: Text('Jugador VM')),
+                title: Text('Jugador')),
             BottomNavigationBarItem(
                 icon: FaIcon(
                   FontAwesomeIcons.futbol,
@@ -86,7 +86,7 @@ class _PlayerAllPagePageState extends State<PlayerAllPage> {
                   FontAwesomeIcons.playstation,
                   size: 25,
                 ),
-                title: Text('Torneos')),
+                title: Text('INscripción')),
           ],
           currentIndex: page,
           unselectedItemColor: AppTheme.themeWhite,
@@ -110,7 +110,7 @@ class _PlayerListTeamsState extends State<PlayerListTeams> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-          body: Container(
+      body: Container(
         child: Column(
           children: <Widget>[
             itemPlayer(),
@@ -121,8 +121,8 @@ class _PlayerListTeamsState extends State<PlayerListTeams> {
           ],
         ),
       ),
-              floatingActionButton: floatButton(AppTheme.themeDefault, context,
-          FaIcon(FontAwesomeIcons.plus), EquipmentLoadPage()),
+      floatingActionButton: floatButton(AppTheme.themeDefault, context,
+          FaIcon(FontAwesomeIcons.plus), EquipmentAllPage()),
     );
   }
 
@@ -192,7 +192,7 @@ class _PlayerWithTournementState extends State<PlayerWithTournement> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-          body: Container(
+      body: Container(
         child: Column(
           children: <Widget>[
             itemPlayer(),
@@ -204,7 +204,6 @@ class _PlayerWithTournementState extends State<PlayerWithTournement> {
           ],
         ),
       ),
- 
     );
   }
 
@@ -405,9 +404,9 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
         _text(
             myController,
             'Marcelo Antonio',
-            'Nombres',
+            '(*) Nombres',
             40,
-            'Ingrese nombres del jugador',
+            '(*) Ingrese nombres del jugador',
             true,
             FaIcon(FontAwesomeIcons.userCircle, color: AppTheme.themeDefault),
             AppTheme.themeDefault,
@@ -417,9 +416,9 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
         _text(
             myController,
             'Arce Valdivia',
-            'Apellidos del jugador',
+            '(*) Apellidos',
             40,
-            'Ingrese apellidos del cliente',
+            '(*) Ingrese apellidos del cliente',
             true,
             FaIcon(FontAwesomeIcons.userAlt, color: AppTheme.themeDefault),
             AppTheme.themeDefault,
@@ -428,9 +427,9 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
         _text(
             myController,
             '',
-            'Codigo PDSN',
-            40,
-            'Ingrese Codigo PSDN/Registro',
+            '(*) ID- PSN/GamerTag',
+            30,
+            '(*) ID- PSN/GamerTag',
             true,
             FaIcon(FontAwesomeIcons.solidAddressCard,
                 color: AppTheme.themeDefault),
@@ -440,9 +439,9 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
         _text(
             myController,
             'marco.arce@gmail.com',
-            'Telefono WhatsApp',
+            '(*) Ingrese WhatsApp',
             40,
-            'Ingrese Telefono WhatsApp',
+            '(*) Ingrese WhatsApp',
             true,
             FaIcon(FontAwesomeIcons.whatsapp, color: AppTheme.themeDefault),
             AppTheme.themeDefault,
@@ -464,9 +463,9 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
         _text(
             myController,
             '72038768',
-            'Ingressa cuenta Faceook',
+            '(*) Ingressa cuenta Facebook/Instagram/Twitter',
             40,
-            'Ingrese el telefono de contacto',
+            '(*) Ingressa cuenta Facebook/Instagram/Twitter',
             true,
             FaIcon(FontAwesomeIcons.facebook, color: AppTheme.themeDefault),
             AppTheme.themeDefault,

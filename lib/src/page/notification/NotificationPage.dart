@@ -42,11 +42,13 @@ class _NotificationPageState extends State<NotificationPage> {
       drawer: DrawerMenu(),
       body: SafeArea(
         child: Container(
+          color: Colors.black87,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               backgroundBasic(context),
               Container(
+             
                 width: size.width * 0.95,
                 margin: EdgeInsets.symmetric(vertical: 0.0),
                 // decoration: boxDecoration(),

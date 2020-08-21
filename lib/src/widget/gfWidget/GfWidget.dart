@@ -12,6 +12,7 @@ GFListTile gfListTileKey(Key key, Widget title, Widget subTitle, Widget descript
     FaIcon icon, Widget avatar, EdgeInsets padding, EdgeInsets margin) {
   return GFListTile(
       key: key,
+      color: AppTheme.themeDefault,
       avatar: avatar,
       title: title,
       subTitle: subTitle,
@@ -24,6 +25,7 @@ GFListTile gfListTileKey(Key key, Widget title, Widget subTitle, Widget descript
 GFListTile gfListTile(Widget title, Widget subTitle, Widget description,
     FaIcon icon, Widget avatar, EdgeInsets padding, EdgeInsets margin) {
   return GFListTile(
+    color: AppTheme.themeDefault,
       avatar: avatar,
       title: title,
       subTitle: subTitle,
@@ -36,6 +38,7 @@ GFListTile gfListTile(Widget title, Widget subTitle, Widget description,
 GFListTile gfListTileText(String title, String subTitle, FaIcon icon,
     Widget avatar, EdgeInsets padding, EdgeInsets margin) {
   return GFListTile(
+    color: AppTheme.themeDefault,
     avatar: avatar,
     titleText: title,
     subtitleText: subTitle,

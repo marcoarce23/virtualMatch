@@ -53,7 +53,7 @@ class _NewListPageState extends State<NewListPage> {
       bottomNavigationBar: new BottonNavigation(),
       body: SafeArea(
         child: Container(
-          color: Colors.black54,
+          color: Colors.black87,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
@@ -134,10 +134,10 @@ class _NewListPageState extends State<NewListPage> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text('Detalle: ${entity.objetivo}'),
-                      Text('Dirigo a: ${entity.dirigidoa}'),
-                      Text('Lugar/Virtual: ${entity.dirigidoa}'),
-                      Text('Fecha y Hora: ${entity.fecha} ${entity.hora}'),
+                      Text('Detalle: ${entity.objetivo}', style: TextStyle(color: Colors.white),),
+                      Text('Dirigo a: ${entity.dirigidoa}' , style: TextStyle(color: Colors.white),),
+                      Text('Lugar/Virtual: ${entity.dirigidoa}',style: TextStyle(color: Colors.white),),
+                      Text('Fecha y Hora: ${entity.fecha} ${entity.hora}', style: TextStyle(color: Colors.white),),
                     ],
                   ),
                   _showAction(entity, entity.idNoticiaEvento.toString()),
@@ -155,7 +155,7 @@ class _NewListPageState extends State<NewListPage> {
   Widget _showAction(NoticiaEventoModel entity, String keyId) {
     return Row(
       children: <Widget>[
-        Text('Operaciones: $keyId'),
+        Text('Operaciones: $keyId', style: TextStyle(color: Colors.white),),
         sizedBox(10, 0),
         _update(),
         sizedBox(10, 0),

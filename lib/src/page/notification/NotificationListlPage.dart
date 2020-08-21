@@ -48,7 +48,8 @@ class _NotificationListPageState extends State<NotificationListPage> {
       key: scaffoldKey,
       body: SafeArea(
         child: Container(
-          child: Column(
+          color:   Colors.black87,
+          child:    Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               backgroundBasic(context),
@@ -59,9 +60,10 @@ class _NotificationListPageState extends State<NotificationListPage> {
                   children: <Widget>[
                     sizedBox(0.0, 8),
                     showInformationBasic(
-                        context,
-                        'ADMINISTRA LAS NOTIFICACIONES',
-                        'En esta pantalla puedes modificar y eliminar las notificaciones que haz creado anteriormente.',),
+                      context,
+                      'ADMINISTRA LAS NOTIFICACIONES',
+                      'En esta pantalla puedes modificar y eliminar las notificaciones que haz creado anteriormente.',
+                    ),
                     divider(),
                   ],
                 ),
@@ -120,8 +122,14 @@ class _NotificationListPageState extends State<NotificationListPage> {
             children: <Widget>[
               gfListTileKey(
                   Key(entity.idNotificacion.toString()),
-                  Text('Título: ${entity.titulo}'),
-                  Text('Detalle: ${entity.detalle}'),
+                  Text(
+                    'TÍTULO : ${entity.titulo}',
+                    style: TextStyle(
+                      color: AppTheme.themeWhite,
+                    ),
+                  ),
+                  Text('DETALLE: ${entity.detalle}',
+                      style: TextStyle(color: AppTheme.themeWhite)),
                   _showAction(entity, entity.idNotificacion.toString()),
                   null,
                   avatarCircle((entity.foto ?? IMAGE_LOGO), 35),
@@ -138,7 +146,8 @@ class _NotificationListPageState extends State<NotificationListPage> {
   Widget _showAction(NotificacionModel entity, String keyId) {
     return Row(
       children: <Widget>[
-        Text('Operaciones: $keyId'),
+        Text('OPERACIONES: $keyId',
+            style: TextStyle(color: AppTheme.themeWhite)),
         sizedBox(10, 0),
         _update(),
         sizedBox(10, 0),
@@ -158,7 +167,10 @@ class _NotificationListPageState extends State<NotificationListPage> {
         size: 23,
       ),
       onTap: () {
-        setState(() {});
+        setState(() {
+
+
+        });
       },
     );
   }

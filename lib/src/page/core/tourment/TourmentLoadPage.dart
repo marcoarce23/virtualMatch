@@ -233,10 +233,10 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
         _text(
             controllerHastag,
             entity.hastag,
-            'HASTAG'.toUpperCase(),
+            '#Hastag'.toUpperCase(),
             100,
             2,
-            'Ingrese Hastag',
+            'Ingrese #Hastag',
             true,
             FaIcon(FontAwesomeIcons.userFriends, color: AppTheme.themeGrey),
             AppTheme.themeDefault,
@@ -246,7 +246,7 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
         _text(
             controllerGift,
             entity.premios,
-            'PREMIOS'.toUpperCase(),
+            'Premios'.toUpperCase(),
             160,
             2,
             'Ingrese el tipo de premios',
@@ -259,7 +259,7 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
         _text(
             controllerOrganization,
             entity.organizador,
-            'ORGANIZADORES'.toUpperCase(),
+            'Colaboradores'.toUpperCase(),
             160,
             2,
             'Ingrese los organizadores',
@@ -270,8 +270,8 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
             Colors.red),
         _dateInit('Fecha de inicio'),
         _hourInit('Hora de inicio'),
-        _dateEnd('Fecha Fin'),
-        _hourEnd('Hora de conclusión'),
+        //  _dateEnd('Fecha Fin'),
+        //   _hourEnd('Hora de conclusión'),
         //  _comboBox('Tipo.', myController.text),
         Text(
           '(*) Campos obligatorios. ',
@@ -279,7 +279,7 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
           textAlign: TextAlign.left,
         ),
 
-        _button('Guardar', 18.0, 20.0),
+        _button('Siguiente', 18.0, 20.0),
       ],
     );
   }
@@ -550,7 +550,7 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
       textStyle: TextStyle(fontSize: fontSize),
       textColor: AppTheme.themeWhite,
       color: AppTheme.themeDefault,
-      icon: FaIcon(FontAwesomeIcons.checkCircle, color: AppTheme.themeWhite),
+      icon: FaIcon(FontAwesomeIcons.arrowRight, color: AppTheme.themeWhite),
       shape: GFButtonShape.pills,
       onPressed: (_save) ? null : _submit,
     );
@@ -591,7 +591,8 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
     entity.foto = IMAGE_LOGO;
     entity.fechaInicio =
         _inputFieldDateController.text + ' ' + TimeOfDay.now().toString();
-    entity.fechaFin = _inputFieldDateEndController.text+ ' ' + TimeOfDay.now().toString();
+    entity.fechaFin =
+        _inputFieldDateEndController.text + ' ' + TimeOfDay.now().toString();
     entity.horaInicio = _inputFieldTimeController.text;
     entity.horaFin = _inputFieldTimeEndController.text;
     entity.idaAsignacion = -1;

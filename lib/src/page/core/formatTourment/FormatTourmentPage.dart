@@ -10,6 +10,7 @@ import 'package:virtual_match/src/model/entity/EntityMap/NotificacionModel.dart'
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
+import 'package:virtual_match/src/page/core/tourment/TourmentLoadPage.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/NotificactionService.dart';
@@ -32,7 +33,7 @@ class _TourmentAllPageState extends State<TourmentAllPage> {
   int page = 0;
   final prefs = new Preferense();
   final List<Widget> optionPage = [
-    FormatTourmentPage(),
+    TourmentLoadPage(),
     FormatTourmentPage()
   ];
 

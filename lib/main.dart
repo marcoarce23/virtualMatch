@@ -42,11 +42,10 @@ class _MyAppState extends State<MyApp> {
     super.initState();
 
     final pushProvider = new PushNotificationProvider();
-     pushProvider.initNotifications();
-     pushProvider.mensajes.listen((data) {
-     print('Argumento del Push: $data');
-    
-     
+    pushProvider.initNotifications();
+    pushProvider.mensajes.listen((data) {
+      print('Argumento del Push: $data');
+
       if (data == 'ayudaPersona')
         navigatorKey.currentState
             .pushNamed('CiudadanoEmergencia', arguments: data);
@@ -65,7 +64,7 @@ class _MyAppState extends State<MyApp> {
       else if (data == 'multimedia')
         navigatorKey.currentState
             .pushNamed('CiudadanoMultimedia', arguments: data);
-     });
+    });
   }
 
   @override
@@ -113,7 +112,7 @@ class _MyAppState extends State<MyApp> {
             outputAndHome: option,
           ),
           */
-          home: ListTournamentPage(),
+          home: LogOnPage(),
 
           //new HomePage(), //MapAdressModule(),
 

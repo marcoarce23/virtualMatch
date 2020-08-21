@@ -169,6 +169,7 @@ class _NewLoadPageState extends State<NewLoadPage> {
           children: <Widget>[
             sizedBox(0.0, 15.0),
             Container(
+              color: Colors.black87,
               width: size.width * 0.94,
               margin: EdgeInsets.symmetric(vertical: 0.0),
               decoration: containerImage(),

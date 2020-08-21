@@ -2,10 +2,8 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:virtual_match/src/model/Preference.dart';
-import 'package:virtual_match/src/page/core/equipment/EquipmentLoadPage.dart';
+import 'package:virtual_match/src/page/core/formatTourment/FormatTourmentPage.dart';
 import 'package:virtual_match/src/page/core/player/PlayerLoadPage.dart';
-import 'package:virtual_match/src/page/core/tourment/TourmentLoadPage.dart';
-import 'package:virtual_match/src/page/general/ViewPage.dart';
 import 'package:virtual_match/src/page/intro/IntroPage.dart';
 import 'package:virtual_match/src/page/login/LogOutPage.dart';
 import 'package:virtual_match/src/page/multimedia/MultimediaLoadPage.dart';
@@ -13,6 +11,7 @@ import 'package:virtual_match/src/page/new/NewLoadPage.dart';
 import 'package:virtual_match/src/page/notification/NotificationLoadPage.dart';
 import 'package:virtual_match/src/page/notification/NotificationPage.dart';
 import 'package:virtual_match/src/page/organization/OrganizationPage.dart';
+import 'package:virtual_match/src/page/organization/SorojchiPage.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/widget/general/SharedWidget.dart';
@@ -77,7 +76,7 @@ class DrawerMenu extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: ImageOvalNetwork(
-                        imageNetworkUrl: prefs.avatarImage,//IMAGE_LOGO,
+                        imageNetworkUrl: prefs.avatarImage, //IMAGE_LOGO,
                         sizeImage: Size.fromWidth(70)),
 
                     //  child: showPictureOval(null, IMAGE_SOROJCHI, 70.0),
@@ -113,37 +112,42 @@ class DrawerMenu extends StatelessWidget {
             ),
             '   Notificaciones',
             () => navegation(context, NotificationPage())),
-        CustomListTile(
-            FaIcon(
-              FontAwesomeIcons.facebook,
-              size: 25,
-            ),
-            '   Visita Sorojchi eclub',
-            () => navegation(
-                context,
-                ViewPage(
-                    title: 'Visita Sorojchi eclub'.toString(),
-                    url: 'https://www.facebook.com/SorojchieClub/'))),
-        CustomListTile(
-            FaIcon(
-              FontAwesomeIcons.userFriends,
-              size: 25,
-            ),
-            '   Jugador Virtual Match',
-            () => navegation(context, PlayerAllPage())),
-        CustomListTile(
-            FaIcon(
-              FontAwesomeIcons.gamepad,
-              size: 25,
-            ),
-            '    Crea tu equipo',
-            () => navegation(context, EquipmentAllPage())),
+
         CustomListTile(
             FaIcon(
               FontAwesomeIcons.playstation,
               size: 25,
             ),
-            '   Crea tu torneo',
+            '   Sorojchi eclub',
+            () => navegation(context, SorojchiPage())),
+
+        CustomListTile(
+            FaIcon(
+              FontAwesomeIcons.userFriends,
+              size: 25,
+            ),
+            '   Jugadores de la comunidad',
+            () => navegation(context, PlayerAllPage())),
+        // CustomListTile(
+        //     FaIcon(
+        //       FontAwesomeIcons.gamepad,
+        //       size: 25,
+        //     ),
+        //     '    Crea tu equipo',
+        //     () => navegation(context, EquipmentAllPage())),
+        CustomListTile(
+            FaIcon(
+              FontAwesomeIcons.playstation,
+              size: 25,
+            ),
+            '   Crea MiniTorneo',
+            () => navegation(context, TourmentAllPage())),
+        CustomListTile(
+            FaIcon(
+              FontAwesomeIcons.playstation,
+              size: 25,
+            ),
+            '   Crea Torneo VM',
             () => navegation(context, TourmentAllPage())),
         CustomListTile(
             FaIcon(
@@ -181,7 +185,7 @@ class DrawerMenu extends StatelessWidget {
             '    Comparte la aplicación',
             () => sharedText(
                 'BIENVENIDO A LA COMUNIDAD',
-                '*Virtual Match - Sorojchi eclub.*\n *Una aplicación de la Comunidad FIFA Bolivia.*\n💬 Con  *Virtual Match - Sorojchi eclub podrás.* \n 🔺 Leer Noticias de la Comunidad. \n 🔺 Enterarte de los eventos. \n 🔺Crear tu jugador y equipos. \n🔺Participar en los torneos. \n 🔺 Conocer campeones de torneos e influencers. 🔺 Mucho mas... \n📲 *Descargar la App en el siguiente enlace:* https://play.google.com/store/apps/details?id=bo.virtual_matchBolivia',
+                '*Virtual Match.*\n *Una aplicación de la Comunidad FIFA Bolivia.*\n💬 Con  *Virtual Match podrás.* \n 🔺 Leer Noticias de la Comunidad. \n 🔺 Enterarte de los eventos. \n 🔺Crear tu jugador y equipos. \n🔺Participar en los torneos. \n 🔺 Conocer campeones de torneos e influencers. \n🔺 Mucho mas... \n📲 *Descargar la App en el siguiente enlace:* https://play.google.com/store/apps/details?id=bo.virtual_matchBolivia',
                 'text/html')),
         CustomListTile(
             FaIcon(

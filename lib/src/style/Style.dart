@@ -44,14 +44,14 @@ final kSigTitleStyle = TextStyle(
 );
 
 final kSigsTitleStyle = TextStyle(
-  color: AppTheme.themeBlackBlack,
+  color: AppTheme.themeWhite,
   fontFamily: FONT_FAMILY_CM_SANS_SERIF,
   fontSize: 15.0,
   height: 1.0,
 );
 
 final kSigssTitleStyle = TextStyle(
-  color: Colors.black54,
+  color: AppTheme.themeWhite,
   fontFamily: FONT_FAMILY_CM_SANS_SERIF,
   fontSize: 14.0,
   height: 1.0,

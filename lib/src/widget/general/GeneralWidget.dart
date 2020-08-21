@@ -96,7 +96,7 @@ Widget copyRigth() {
 Divider divider() {
   return Divider(
     thickness: 2.0,
-    color: AppTheme.themeDefault,
+    color: AppTheme.themeWhite,
     endIndent: 20.0,
     indent: 20.0,
   );
@@ -348,7 +348,7 @@ Widget floatButtonImage(
       navegation(context, page);
     },
     elevation: 2.0,
-    child: avatarCircle(IMAGE_SOROJCHI, 35.0),
+    child: avatarCircle(IMAGE_LOGO, 34.0),
     backgroundColor: color,
   );
 }

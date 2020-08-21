@@ -43,11 +43,11 @@ class _BottonNavigationState extends State<BottonNavigation> {
         TabItem(
             icon: ImageOvalNetwork(
                 imageNetworkUrl: IMAGE_LOGO, sizeImage: Size.fromWidth(50)),
-            title: 'Jugadores'),
+            title: '1 Vs.1'),
         TabItem(
             icon: ImageOvalNetwork(
                 imageNetworkUrl: IMAGE_LOGO, sizeImage: Size.fromWidth(50)),
-            title: 'Ranking'),
+            title: 'Clubes Pro'),
       ],
       initialActiveIndex: 2, //optional, default as 0
       onTap: (value) {
