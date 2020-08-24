@@ -5,8 +5,6 @@ class TorneoModel implements IEntityMap {
   StateEntity states;
   int idTorneo;
   int idOrganizacion;
-  int idaTipoTorneo;
-  int idaInscripcion;
   String nombre;
   String detalle;
   String hastag;
@@ -14,13 +12,7 @@ class TorneoModel implements IEntityMap {
   String organizador;
   String foto;
   String fechaInicio;
-  String fechaFin;
-  String horaInicio;
-  String horaFin;
-  int idaAsignacion;
-  int cantidadJugadores;
-  int horasFase;
-  int idaTipoModalidad;
+  String horaInicio; 
   String usuarioAuditoria;
   String fechaAuditoria;
 
@@ -29,7 +21,6 @@ class TorneoModel implements IEntityMap {
       this.idTorneo = 0,
       this.idOrganizacion,
       idaTipoTorneo,
-      this.idaInscripcion,
       this.nombre,
       this.detalle,
       this.hastag,
@@ -37,21 +28,13 @@ class TorneoModel implements IEntityMap {
       this.organizador,
       this.foto,
       this.fechaInicio,
-      this.fechaFin,
       this.horaInicio,
-      this.horaFin,
-      this.idaAsignacion,
-      this.cantidadJugadores,
-      this.horasFase,
-      this.idaTipoModalidad,
       this.usuarioAuditoria,
       this.fechaAuditoria});
 
   Map<String, dynamic> toJson() => {
         "idTorneo": idTorneo,
-        "idOrganizacion": idOrganizacion,
-        "idaTipoTorneo": idaTipoTorneo,
-        "idaInscripcion": idaInscripcion,
+        "idOrganizacion":  idOrganizacion,
         "nombre": nombre,
         "detalle": detalle,
         "hastag": hastag,
@@ -59,14 +42,8 @@ class TorneoModel implements IEntityMap {
         "organizador": organizador,
         "foto": foto,
         "fechaInicio": fechaInicio,
-        "fechaFin": fechaFin,
-        "horaInicio": horaInicio,
-        "horaFin": horaFin,
-        "idaAsignacion": idaAsignacion,
-        "cantidadJugadores": cantidadJugadores,
-        "horasFase": horasFase,
-        "idaTipoModalidad": idaTipoModalidad,
-        "usuarioAuditoria": usuarioAuditoria,
+          "horaInicio": horaInicio,
+         "usuarioAuditoria": usuarioAuditoria,
         "fechaAuditoria": fechaAuditoria
       };
 }

@@ -1,5 +1,6 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:virtual_match/src/example/VideoApp.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/page/core/tourment/ListTournamentPage.dart';
 import 'package:virtual_match/src/page/faq/FaqListPage.dart';
@@ -20,7 +21,7 @@ class _BottonNavigationState extends State<BottonNavigation> {
   @override
   Widget build(BuildContext context) {
     return ConvexAppBar.badge(
-      {3: '200+', 1:'10+', 2: '3+'},
+      {3: '200+', 1: '10+', 2: '3+'},
 
       backgroundColor: AppTheme.themeDefault,
       badgeColor: AppTheme.themePurple,
@@ -53,7 +54,7 @@ class _BottonNavigationState extends State<BottonNavigation> {
       onTap: (value) {
         setState(() {
           if (value == 0) navegation(context, NewListPage());
-          if (value == 1) navegation(context, NewLoadPage());
+          if (value == 1) navegation(context, VideoApp());
           if (value == 2) navegation(context, ListTournamentPage());
           if (value == 3) navegation(context, NewLoadPage());
           if (value == 4) navegation(context, FaqListPage());

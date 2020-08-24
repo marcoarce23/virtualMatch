@@ -11,7 +11,6 @@ import 'package:virtual_match/src/model/entity/EntityMap/TorneoModelo.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
-import 'package:virtual_match/src/page/core/tourment/FormatLoadPage.dart';
 import 'package:virtual_match/src/page/core/tourment/TourmentListPage.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
@@ -24,77 +23,14 @@ import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/model/util/Validator.dart' as validator;
 import 'package:virtual_match/src/widget/image/ImageWidget.dart';
 
-class TourmentAllPage extends StatefulWidget {
-  static final String routeName = 'tourment';
-  const TourmentAllPage({Key key}) : super(key: key);
+class FormatLoadPage extends StatefulWidget {
+  static final String routeName = 'formatLoad';
 
   @override
-  _TourmentAllPageState createState() => _TourmentAllPageState();
+  _FormatLoadPageState createState() => _FormatLoadPageState();
 }
 
-class _TourmentAllPageState extends State<TourmentAllPage> {
-  int page = 0;
-  final prefs = new Preferense();
-  final List<Widget> optionPage = [TourmentLoadPage(), FormatLoadPage()];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      page = index;
-    });
-  }
-
-  @override
-  void initState() {
-    prefs.lastPage = TourmentAllPage.routeName;
-    page = 0;
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(builder: (_) => new TourmentService()),
-      ],
-      child: Scaffold(
-        appBar: appBar('CREACIÓN DEL TORNEO'),
-        drawer: DrawerMenu(),
-        bottomNavigationBar: BottomNavigationBar(
-          elevation: 21.0,
-          backgroundColor: AppTheme.themeDefault,
-          items: [
-            BottomNavigationBarItem(
-                icon: FaIcon(
-                  FontAwesomeIcons.newspaper,
-                  size: 25,
-                ),
-                title: Text('Noticias')),
-            BottomNavigationBarItem(
-                icon: FaIcon(
-                  FontAwesomeIcons.paperPlane,
-                  size: 25,
-                ),
-                title: Text('Listado Noticias')),
-          ],
-          currentIndex: page,
-          unselectedItemColor: Colors.purple,
-          selectedItemColor: AppTheme.themeWhite,
-          onTap: _onItemTapped,
-        ),
-        body: optionPage[page],
-      ),
-    );
-  }
-}
-
-class TourmentLoadPage extends StatefulWidget {
-  static final String routeName = 'tourmnetLoad';
-
-  @override
-  _TourmentLoadPageState createState() => _TourmentLoadPageState();
-}
-
-class _TourmentLoadPageState extends State<TourmentLoadPage> {
+class _FormatLoadPageState extends State<FormatLoadPage> {
   //DEFINIICON DE VARIABLES GLOBALES
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -108,6 +44,10 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
 
   TextEditingController _inputFieldDateController = new TextEditingController();
   TextEditingController _inputFieldTimeController = new TextEditingController();
+  TextEditingController _inputFieldDateEndController =
+      new TextEditingController();
+  TextEditingController _inputFieldTimeEndController =
+      new TextEditingController();
 
 //DEFINICION DE BLOC Y MODEL
   TourmentService entityService;
@@ -125,7 +65,20 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
   String typeCount = '2';
   TimeOfDay _time = TimeOfDay.now();
   String _fecha = DateTime.now().toString().substring(0, 10);
-  
+  TimeOfDay _timeEnd = TimeOfDay.now();
+  String _fechaEnd = DateTime.now().toString().substring(0, 10);
+  List<String> _cantidad = [
+    '2',
+    '4',
+    '8',
+    '16',
+    '32',
+    '64',
+    '128',
+    '256',
+    '512'
+  ];
+
   @override
   void initState() {
     super.initState();
@@ -186,6 +139,9 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         sizedBox(0.0, 7.0),
+
+        _inscription('Torneo Grautuito'),
+        _combo(),
         _text(
             controllerName,
             entity.nombre,
@@ -194,10 +150,11 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
             2,
             'Ingrese nombre al torneo',
             true,
-            FaIcon(FontAwesomeIcons.newspaper, color: AppTheme.themeDefault),
+            FaIcon(FontAwesomeIcons.newspaper, color: AppTheme.themeGrey),
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             Colors.red),
+
         _text(
             controllerDetail,
             entity.detalle,
@@ -206,7 +163,7 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
             2,
             'Ingrese Detalle del torneo',
             true,
-            FaIcon(FontAwesomeIcons.wpforms, color: AppTheme.themeDefault),
+            FaIcon(FontAwesomeIcons.wpforms, color: Colors.black26),
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             Colors.red),
@@ -218,10 +175,11 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
             2,
             'Ingrese #Hastag',
             true,
-            FaIcon(FontAwesomeIcons.userFriends, color: AppTheme.themeDefault),
+            FaIcon(FontAwesomeIcons.userFriends, color: AppTheme.themeGrey),
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             Colors.red),
+
         _text(
             controllerGift,
             entity.premios,
@@ -230,10 +188,11 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
             2,
             'Ingrese el tipo de premios',
             true,
-            FaIcon(FontAwesomeIcons.mapMarked, color: AppTheme.themeDefault),
+            FaIcon(FontAwesomeIcons.mapMarked, color: AppTheme.themeGrey),
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             Colors.red),
+
         _text(
             controllerOrganization,
             entity.organizador,
@@ -242,19 +201,67 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
             2,
             'Ingrese los organizadores',
             true,
-            FaIcon(FontAwesomeIcons.mapMarked, color: AppTheme.themeDefault),
+            FaIcon(FontAwesomeIcons.mapMarked, color: AppTheme.themeGrey),
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             Colors.red),
         _dateInit('Fecha de inicio'),
         _hourInit('Hora de inicio'),
+        //  _dateEnd('Fecha Fin'),
+        //   _hourEnd('Hora de conclusión'),
+        //  _comboBox('Tipo.', myController.text),
         Text(
           '(*) Campos obligatorios. ',
           style: kCamposTitleStyle,
           textAlign: TextAlign.left,
         ),
+
         _button('Siguiente', 18.0, 20.0),
       ],
+    );
+  }
+
+  Widget _combo() {
+    return Row(
+      children: <Widget>[
+        SizedBox(width: 35.0),
+        Text('Cantidad:'),
+        SizedBox(width: 15.0),
+        DropdownButton(
+          value: typeCount,
+          icon: FaIcon(FontAwesomeIcons.sort, color: AppTheme.themeDefault),
+          items: _count(),
+          onChanged: (opt) {
+            setState(() {
+              typeCount = opt;
+            });
+          },
+        ),
+      ],
+    );
+  }
+
+  List<DropdownMenuItem<String>> _count() {
+    List<DropdownMenuItem<String>> lista = new List();
+
+    _cantidad.forEach((cantidad) {
+      lista.add(DropdownMenuItem(
+        child: Text(cantidad),
+        value: cantidad,
+      ));
+    });
+    return lista;
+  }
+
+  Widget _inscription(String text) {
+    return SwitchListTile(
+      value: isFree,
+      title: Text(text),
+      // subtitle: Text('Habilitar opción si será voluntario.'),
+      activeColor: AppTheme.themeDefault,
+      onChanged: (value) => setState(() {
+        isFree = value;
+      }),
     );
   }
 
@@ -386,6 +393,93 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
     );
   }
 
+  _selectDateEnd(BuildContext context) async {
+    DateTime picked = await showDatePicker(
+        context: context,
+        initialDate: new DateTime.now(),
+        firstDate: new DateTime(2020, 4),
+        lastDate: new DateTime(2025, 12),
+        locale: Locale('es', 'ES'));
+
+    if (picked != null) {
+      setState(() {
+        _fechaEnd = DateFormat("dd/MM/yyyy").format(picked);
+        _inputFieldDateEndController.text = _fechaEnd;
+        //print(_inputFieldDateController.text);
+      });
+    }
+  }
+
+  _selectTimeEnd(BuildContext context) async {
+    TimeOfDay picked = await showTimePicker(
+      context: context,
+      initialTime: _timeEnd,
+
+      builder: (BuildContext context, Widget child) {
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
+          child: child,
+        );
+      },
+      //    locale: Locale('es', 'ES')
+    );
+
+    if (picked != null) {
+      setState(() {
+        _timeEnd = picked;
+        _inputFieldTimeEndController.text = _timeEnd.hour.toString() +
+            ':' +
+            _timeEnd.minute
+                .toString(); //TimeOfDay(hour: _time.hour, minute: _time.minute).toString();
+      });
+    }
+  }
+
+  Widget _dateEnd(String text) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
+      child: TextField(
+        enableInteractiveSelection: false,
+        controller: _inputFieldDateEndController,
+        decoration: InputDecoration(
+            // border: OutlineInputBorder(
+            //   borderRadius: BorderRadius.circular(20.0)
+            // ),
+            hintText: text,
+            labelText: text,
+            //    suffixIcon: Icon(Icons.perm_contact_calendar),
+            icon: FaIcon(FontAwesomeIcons.calendarAlt,
+                color: AppTheme.themeDefault)),
+        onTap: () {
+          FocusScope.of(context).requestFocus(new FocusNode());
+          _selectDateEnd(context);
+        },
+      ),
+    );
+  }
+
+  Widget _hourEnd(String text) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
+      child: TextField(
+        enableInteractiveSelection: false,
+        controller: _inputFieldTimeEndController,
+        decoration: InputDecoration(
+            // border: OutlineInputBorder(
+            //   borderRadius: BorderRadius.circular(20.0)
+            // ),
+            hintText: text,
+            labelText: text,
+            //    suffixIcon: Icon(Icons.perm_contact_calendar),
+            icon: FaIcon(FontAwesomeIcons.clock, color: AppTheme.themeDefault)),
+        onTap: () {
+          FocusScope.of(context).requestFocus(new FocusNode());
+          _selectTimeEnd(context);
+        },
+      ),
+    );
+  }
+
   Widget _button(String text, double fontSize, double edgeInsets) {
     return GFButton(
       padding: EdgeInsets.symmetric(horizontal: edgeInsets),
@@ -400,6 +494,8 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
   }
 
   _submit() async {
+    //var _result;
+
     if (!formKey.currentState.validate()) return;
     formKey.currentState.save();
 
@@ -413,6 +509,10 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
 
   void loadingEntity() {
     entity.idTorneo = 0;
+    entity.idOrganizacion = 133;
+    entity.usuarioAuditoria = prefs.email;
+    entity.fechaAuditoria = '2020-08-10 08:25';
+    entity.idTorneo = 0;
     entity.idOrganizacion = int.parse(prefs.idInstitution);
     entity.nombre = controllerName.text;
     entity.detalle = controllerDetail.text;
@@ -420,9 +520,8 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
     entity.premios = controllerGift.text;
     entity.organizador = controllerOrganization.text;
     entity.foto = IMAGE_LOGO;
-    entity.fechaInicio =
-        _inputFieldDateController.text + ' ' + TimeOfDay.now().toString();
-    entity.horaInicio = _inputFieldTimeController.text;
+    entity.fechaInicio = _inputFieldDateController.text + ' ' + TimeOfDay.now().toString();
+    entity.horaInicio  = _inputFieldTimeController.text;
     entity.usuarioAuditoria = prefs.email;
   }
 
@@ -430,10 +529,9 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
     try {
       await entityService.repository(entity).then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
-        if (result["tipo_mensaje"] == '0') {
+        if (result["tipo_mensaje"] == '0')
           showSnackbar(STATUS_OK, scaffoldKey);
-          navegation(context, FormatLoadPage());
-        } else
+        else
           showSnackbar(STATUS_ERROR, scaffoldKey);
       });
     } catch (error) {
