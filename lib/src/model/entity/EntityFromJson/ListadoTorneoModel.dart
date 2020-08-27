@@ -16,9 +16,7 @@ class ListaTorneoModel implements IEntityJson {
   String organizador;
   String foto;
   DateTime fechaInicio;
-  DateTime fechaFin;
   String horaInicio;
-  String horaFin;
   String tipoAsignacion;
   String tipoModalidad;
 
@@ -38,9 +36,7 @@ class ListaTorneoModel implements IEntityJson {
     this.organizador,
     this.foto,
     this.fechaInicio,
-    this.fechaFin,
     this.horaInicio,
-    this.horaFin,
     this.tipoAsignacion,
     this.tipoModalidad,
   });
@@ -61,9 +57,7 @@ class ListaTorneoModel implements IEntityJson {
         organizador: json["organizador"],
         foto: json["foto"],
         fechaInicio: DateTime.parse(json["fechaInicio"]),
-        fechaFin: DateTime.parse(json["fechaFin"]),
         horaInicio: json["horaInicio"],
-        horaFin: json["horaFin"],
         tipoAsignacion: json["tipoAsignacion"],
         tipoModalidad: json["tipoModalidad"],
       );

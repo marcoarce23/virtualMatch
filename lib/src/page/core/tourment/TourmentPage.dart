@@ -63,7 +63,7 @@ class _TourmentPageState extends State<TourmentPage> {
         GFTabs(
           tabBarColor: AppTheme.themeDefault,
           indicatorColor: AppTheme.themePurple,
-          indicatorWeight: 4.0,
+          //indicatorWeight: 4.0,
           initialIndex: 0,
           length: 3,
           tabs: <Widget>[
@@ -99,7 +99,7 @@ class _TourmentPageState extends State<TourmentPage> {
                     EquipmentPlayersTournament(
                       idTorneo: widget.idTorneo,
                     ),
-                    copyRigth(),
+                    //copyRigth(),
                   ],
                 ),
               ),
@@ -113,7 +113,7 @@ class _TourmentPageState extends State<TourmentPage> {
                     TournamentPlayerScored(
                       idTorneo: widget.idTorneo,
                     ),
-                    copyRigth(),
+                    //copyRigth(),
                   ],
                 ),
               ),
@@ -127,7 +127,7 @@ class _TourmentPageState extends State<TourmentPage> {
                     PositionTable(
                       idTorneo: widget.idTorneo,
                     ),
-                    copyRigth(),
+                    //copyRigth(),
                   ],
                 ),
               ),
@@ -168,7 +168,7 @@ class _TourmentPageState extends State<TourmentPage> {
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 12)),
                             Text(
-                                'FECHA: ${new DateFormat.yMMMMd('es_BO').format(entity.fechaInicio)}  AL  ${new DateFormat.yMMMMd('es_BO').format(entity.fechaFin)}',
+                                'FECHA: ${new DateFormat.yMMMMd('es_BO').format(entity.fechaInicio)} ',
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 12)),
                             null,

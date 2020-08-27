@@ -169,7 +169,7 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
                         ],
                       ),
                       AutoSizeText(
-                        'Del ${new DateFormat.yMMMMd('es_BO').format(entity.fechaInicio)} al ${new DateFormat.yMMMMd('es_BO').format(entity.fechaFin)}',
+                        'Del ${new DateFormat.yMMMMd('es_BO').format(entity.fechaInicio)}',
                         style: kSubSubTitleCardStyle,
                         softWrap: true,
                         overflow: TextOverflow.clip,
