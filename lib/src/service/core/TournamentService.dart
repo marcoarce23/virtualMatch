@@ -11,7 +11,7 @@ class TourmentService with ChangeNotifier {
   final _apiAdd = new ApiAdd();
   final _apiDelete = new ApiDelete();
   final _apiUpdate = new ApiUpdate();
-   final _apiGet = new ApiGet();
+  final _apiGet = new ApiGet();
 
   Future<Map<String, dynamic>> repository(IEntityMap entity) async {
     var result;
@@ -67,13 +67,10 @@ class TourmentService with ChangeNotifier {
     return _result;
   }
 
-  Future<List<IEntityJson>> getTodosLosTorneos(
-      IEntityJson entityJson) async {
+  Future<List<IEntityJson>> getTodosLosTorneos(IEntityJson entityJson) async {
     var _result = await _apiGet.getTodosLosTorneos(entityJson);
     isLoading = false;
     notifyListeners();
     return _result;
   }
-
-
 }

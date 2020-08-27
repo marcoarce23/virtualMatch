@@ -54,7 +54,7 @@ class _BottonNavigationState extends State<BottonNavigation> {
       onTap: (value) {
         setState(() {
           if (value == 0) navegation(context, NewListPage());
-          if (value == 1) navegation(context, VideoApp());
+          if (value == 1) navegation(context, NewListPage());
           if (value == 2) navegation(context, ListTournamentPage());
           if (value == 3) navegation(context, NewLoadPage());
           if (value == 4) navegation(context, FaqListPage());

@@ -4,7 +4,7 @@ import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/api/core/tourment/ApiResource.dart';
 
 class ApiGet {
-   Future<List<IEntityJson>> get(IEntityJson entity) async {
+  Future<List<IEntityJson>> get(IEntityJson entity) async {
     final List<IEntityJson> list = new List();
     Map<String, dynamic> decodeData;
 
@@ -15,9 +15,6 @@ class ApiGet {
 
     return getListIEntityJson(response, entity, decodeData, list);
   }
-
-
-
 
   Future<List<IEntityJson>> getId(IEntityJson entity, int value) async {
     final List<IEntityJson> list = new List();
@@ -59,19 +56,15 @@ class ApiGet {
     return getListIEntityJson(response, entity, decodeData, list);
   }
 
- Future<List<IEntityJson>> getTodosLosTorneos(
-      IEntityJson entity) async {
+  Future<List<IEntityJson>> getTodosLosTorneos(IEntityJson entity) async {
     final List<IEntityJson> list = new List();
     Map<String, dynamic> decodeData;
 
-    final _apiRest =
-        api['getTodosLosTorneos'][0].toString();
+    final _apiRest = api['getTodosLosTorneos'][0].toString();
     final response = await http.get(_apiRest);
 
     print(_apiRest);
 
     return getListIEntityJson(response, entity, decodeData, list);
   }
-
-
 }

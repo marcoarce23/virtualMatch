@@ -10,6 +10,8 @@ import 'package:virtual_match/src/model/entity/EntityMap/NotificacionModel.dart'
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
+import 'package:virtual_match/src/page/core/tourment/FormatLoadPage.dart';
+import 'package:virtual_match/src/page/core/tourment/TourmentListPage.dart';
 import 'package:virtual_match/src/page/core/tourment/TourmentLoadPage.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
@@ -35,7 +37,8 @@ class _TourmentAllPageState extends State<TourmentAllPage> {
   final prefs = new Preferense();
   final List<Widget> optionPage = [
     TourmentLoadPage(),
-    FormatTourmentPage()
+    FormatLoadPage(),
+    TourmentListPage()
   ];
 
   void _onItemTapped(int index) {
@@ -72,10 +75,16 @@ class _TourmentAllPageState extends State<TourmentAllPage> {
                 title: Text('Formato')),
             BottomNavigationBarItem(
                 icon: FaIcon(
+                  FontAwesomeIcons.futbol,
+                  size: 25,
+                ),
+                title: Text('Torneos')),
+            BottomNavigationBarItem(
+                icon: FaIcon(
                   FontAwesomeIcons.listAlt,
                   size: 25,
                 ),
-                title: Text('Eliminatorias')),
+                title: Text('Listado Torneos')),
           ],
           currentIndex: page,
           unselectedItemColor: AppTheme.themeWhite,
@@ -104,7 +113,7 @@ class _FormatTourmentPageState extends State<FormatTourmentPage> {
 
 //DEFINICION DE BLOC Y MODEL
   NotificacionModel entity = new NotificacionModel();
-  NotificationService entityService;
+  TourmentService entityService;
   final prefs = new Preferense();
 
   //DEFINICION DE VARIABLES
@@ -120,7 +129,7 @@ class _FormatTourmentPageState extends State<FormatTourmentPage> {
 
   @override
   Widget build(BuildContext context) {
-    entityService = Provider.of<NotificationService>(context);
+    entityService = Provider.of<TourmentService>(context);
     entity.states = StateEntity.Insert;
 
     final NotificacionModel entityModel =
@@ -284,7 +293,7 @@ class _FormatTourmentPageState extends State<FormatTourmentPage> {
 
     setState(() => _save = true);
     loadingEntity();
-    executeCUD(entityService, entity);
+    // executeCUD(entityService, entity);
     setState(() => _save = false);
   }
 

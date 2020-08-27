@@ -48,6 +48,7 @@ class _TourmentListPageState extends State<TourmentListPage> {
       key: scaffoldKey,
       body: SafeArea(
         child: Container(
+          color: Colors.black87,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
@@ -57,19 +58,33 @@ class _TourmentListPageState extends State<TourmentListPage> {
                 margin: EdgeInsets.symmetric(vertical: 0.0),
                 child: Column(
                   children: <Widget>[
-                    _header(),
+                    Container(
+                      width: size.width * 0.95,
+                      margin: EdgeInsets.symmetric(vertical: 0.0),
+                      // decoration: boxDecoration(),
+                      child: Column(
+                        children: <Widget>[
+                          sizedBox(0, 10),
+                          showInformationBasic(
+                            context,
+                            'TORNEOS CREADOS',
+                            'Listado de los torneos disponibles para administralos Virtual Match',
+                          ),
+                        ],
+                      ),
+                    ),
                     divider(),
                     sizedBox(0.0, 7.0),
                   ],
                 ),
               ),
-              futureBuilder(context),
+              //       futureBuilder(context),
               copyRigth(),
             ],
           ),
         ),
       ),
-      floatingActionButton: floatButton(AppTheme.themeDefault, context,
+      floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }
@@ -133,10 +148,10 @@ class _TourmentListPageState extends State<TourmentListPage> {
 
   Widget _header() {
     return gfListTileText(
-        'NOTIFICACIÓN: Virtual Match',
-        'Porque formas parte de la familia, te tenemos informado.',
+        'TORNEOS: Virtual Match',
+        'Detalle de los torneos creando.',
         FaIcon(FontAwesomeIcons.infoCircle),
-        avatarSquare(IMAGE_DEFAULT, 35.0),
+        avatarSquare(IMAGE_LOGO, 35.0),
         EdgeInsets.all(5.0),
         EdgeInsets.all(3.0));
   }

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:virtual_match/src/example/VideoApp.dart';
 import 'package:virtual_match/src/page/faq/FaqListPage.dart';
 import 'package:virtual_match/src/page/faq/FaqPage.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
@@ -28,11 +29,11 @@ class _CircularMenuState extends State<CircularMenu> {
         key: fabKey,
         // Cannot be `Alignment.center`
         alignment: Alignment.bottomRight,
-        ringColor: Colors.white.withAlpha(25),
-        ringDiameter: 500.0,
-        ringWidth: 150.0,
+        ringColor: Colors.white.withAlpha(75),
+        ringDiameter: 480.0,
+        ringWidth: 60.0,
         fabSize: 64.0,
-        fabElevation: 8.0,
+        fabElevation: 15.0,
         fabColor: AppTheme.themeWhite,
         fabOpenIcon: Icon(Icons.menu, color: AppTheme.themeDefault),
         fabCloseIcon: Icon(Icons.close, color: AppTheme.themeDefault),
@@ -51,7 +52,7 @@ class _CircularMenuState extends State<CircularMenu> {
             shape: CircleBorder(),
             padding: const EdgeInsets.all(24.0),
             child: FaIcon(FontAwesomeIcons.playstation,
-                color: AppTheme.themeDefault, size: 25.0),
+                color: AppTheme.themeWhite, size: 25.0),
           ),
           RawMaterialButton(
             onPressed: () async {
@@ -62,7 +63,7 @@ class _CircularMenuState extends State<CircularMenu> {
             shape: CircleBorder(),
             padding: const EdgeInsets.all(24.0),
             child: FaIcon(FontAwesomeIcons.futbol,
-                color: AppTheme.themeDefault, size: 25.0),
+                color: AppTheme.themeWhite, size: 25.0),
           ),
           RawMaterialButton(
             onPressed: () async {
@@ -73,16 +74,16 @@ class _CircularMenuState extends State<CircularMenu> {
             shape: CircleBorder(),
             padding: const EdgeInsets.all(24.0),
             child: FaIcon(FontAwesomeIcons.images,
-                color: AppTheme.themeDefault, size: 25.0),
+                color: AppTheme.themeWhite, size: 25.0),
           ),
           RawMaterialButton(
             onPressed: () {
-              navegation(context, FaqPage());
+              navegation(context, VideoApp());
             },
             shape: CircleBorder(),
             padding: const EdgeInsets.all(24.0),
             child: FaIcon(FontAwesomeIcons.youtube,
-                color: AppTheme.themeDefault, size: 25.0),
+                color: AppTheme.themeWhite, size: 25.0),
           ),
           RawMaterialButton(
             onPressed: () {
@@ -91,7 +92,7 @@ class _CircularMenuState extends State<CircularMenu> {
             shape: CircleBorder(),
             padding: const EdgeInsets.all(24.0),
             child: FaIcon(FontAwesomeIcons.questionCircle,
-                color: AppTheme.themeDefault, size: 25.0),
+                color: AppTheme.themeWhite, size: 25.0),
           ),
           RawMaterialButton(
             onPressed: () {
@@ -101,7 +102,7 @@ class _CircularMenuState extends State<CircularMenu> {
             shape: CircleBorder(),
             padding: const EdgeInsets.all(24.0),
             child: FaIcon(FontAwesomeIcons.home,
-                color: AppTheme.themeDefault, size: 25.0),
+                color: AppTheme.themeWhite, size: 25.0),
           )
         ],
       ),

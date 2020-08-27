@@ -35,7 +35,11 @@ class TourmentAllPage extends StatefulWidget {
 class _TourmentAllPageState extends State<TourmentAllPage> {
   int page = 0;
   final prefs = new Preferense();
-  final List<Widget> optionPage = [TourmentLoadPage(), FormatLoadPage()];
+  final List<Widget> optionPage = [
+    TourmentLoadPage(),
+    FormatLoadPage(),
+    TourmentListPage()
+  ];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -125,7 +129,7 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
   String typeCount = '2';
   TimeOfDay _time = TimeOfDay.now();
   String _fecha = DateTime.now().toString().substring(0, 10);
-  
+
   @override
   void initState() {
     super.initState();
@@ -189,12 +193,12 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
         _text(
             controllerName,
             entity.nombre,
-            'NOMBRE DEL TORNEO'.toUpperCase(),
+            'Nombre del torneo',
             100,
             2,
             'Ingrese nombre al torneo',
             true,
-            FaIcon(FontAwesomeIcons.newspaper, color: AppTheme.themeDefault),
+            FaIcon(FontAwesomeIcons.futbol, color: AppTheme.themeDefault),
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             Colors.red),
@@ -213,36 +217,36 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
         _text(
             controllerHastag,
             entity.hastag,
-            '#Hastag'.toUpperCase(),
+            '#Hastag Virtual Match',
             100,
             2,
             'Ingrese #Hastag',
             true,
-            FaIcon(FontAwesomeIcons.userFriends, color: AppTheme.themeDefault),
+            FaIcon(FontAwesomeIcons.hashtag, color: AppTheme.themeDefault),
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             Colors.red),
         _text(
             controllerGift,
             entity.premios,
-            'Premios'.toUpperCase(),
+            'Premios',
             160,
             2,
             'Ingrese el tipo de premios',
             true,
-            FaIcon(FontAwesomeIcons.mapMarked, color: AppTheme.themeDefault),
+            FaIcon(FontAwesomeIcons.playstation, color: AppTheme.themeDefault),
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             Colors.red),
         _text(
             controllerOrganization,
             entity.organizador,
-            'Colaboradores'.toUpperCase(),
+            'Colaboradores',
             160,
             2,
-            'Ingrese los organizadores',
+            'Ingrese los Colaboradores',
             true,
-            FaIcon(FontAwesomeIcons.mapMarked, color: AppTheme.themeDefault),
+            FaIcon(FontAwesomeIcons.user, color: AppTheme.themeDefault),
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             Colors.red),
@@ -400,8 +404,8 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
   }
 
   _submit() async {
-    if (!formKey.currentState.validate()) return;
-    formKey.currentState.save();
+    //if (!formKey.currentState.validate()) return;
+    //formKey.currentState.save();
 
     print('myControllerSOY EL VALOR DE ' + controllerDetail.text);
 
@@ -427,17 +431,18 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
   }
 
   void executeCUD(TourmentService entityService, TorneoModel entity) async {
-    try {
-      await entityService.repository(entity).then((result) {
-        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
-        if (result["tipo_mensaje"] == '0') {
-          showSnackbar(STATUS_OK, scaffoldKey);
-          navegation(context, FormatLoadPage());
-        } else
-          showSnackbar(STATUS_ERROR, scaffoldKey);
-      });
-    } catch (error) {
-      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
-    }
+    // try {
+    //   await entityService.repository(entity).then((result) {
+    //     print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
+    //     if (result["tipo_mensaje"] == '0') {
+    //       showSnackbar(STATUS_OK, scaffoldKey);
+    //       navegation(context, FormatLoadPage());
+    //     } else
+    //       showSnackbar(STATUS_ERROR, scaffoldKey);
+    //   });
+    // } catch (error) {
+    //   showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
+    // }
+    navegation(context, FormatLoadPage());
   }
 }

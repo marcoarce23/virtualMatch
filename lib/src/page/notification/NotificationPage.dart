@@ -48,7 +48,6 @@ class _NotificationPageState extends State<NotificationPage> {
             children: <Widget>[
               backgroundBasic(context),
               Container(
-             
                 width: size.width * 0.95,
                 margin: EdgeInsets.symmetric(vertical: 0.0),
                 // decoration: boxDecoration(),
@@ -56,9 +55,10 @@ class _NotificationPageState extends State<NotificationPage> {
                   children: <Widget>[
                     sizedBox(0, 10),
                     showInformationBasic(
-                        context,
-                        'TE MANTENEMOS INFORMADO?',
-                        'Las noticias y eventos más importantes y de primera mano. Comunidad FIFA BOLIVIA 24/7.',),
+                      context,
+                      'TE MANTENEMOS INFORMADO?',
+                      'Las noticias y eventos más importantes y de primera mano. Comunidad FIFA BOLIVIA 24/7.',
+                    ),
                   ],
                 ),
               ),
@@ -109,17 +109,21 @@ class _NotificationPageState extends State<NotificationPage> {
                 decoration: boxDecoration(),
                 child: Column(
                   children: <Widget>[
-                    gfListTileText(
-                        entity.titulo.toUpperCase(),
-                        entity.titulo,
-                        FaIcon(FontAwesomeIcons.futbol),
-                        avatarCircle(IMAGE_LOGO, 35.0),
+                    gfListTileKey(
+                        Key(entity.idNotificacion.toString()),
+                        Text(
+                          'TÍTULO : ${entity.titulo}',
+                          style: TextStyle(
+                            color: AppTheme.themeWhite,
+                          ),
+                        ),
+                        Text('DETALLE: ${entity.detalle}',
+                            style: TextStyle(color: AppTheme.themeWhite)),
+                        null,
+                        null,
+                        avatarCircle((entity.foto ?? IMAGE_LOGO), 35),
                         EdgeInsets.all(5.0),
                         EdgeInsets.all(3.0)),
-                    // ListTile(
-                    //   leading: avatarCircle(IMAGE_LOGO, 35.0),
-                    //   title: listItem(context, entity),
-                    // ),
                   ],
                 ),
               ),

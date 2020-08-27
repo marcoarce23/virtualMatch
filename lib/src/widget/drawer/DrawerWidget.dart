@@ -147,7 +147,7 @@ class DrawerMenu extends StatelessWidget {
               FontAwesomeIcons.playstation,
               size: 25,
             ),
-            '   Crea Torneo VM',
+            '   Crea Torneo VM.',
             () => navegation(context, TourmentAllPage())),
         CustomListTile(
             FaIcon(
