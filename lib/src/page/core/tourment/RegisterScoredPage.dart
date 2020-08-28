@@ -6,13 +6,13 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/ListadoTorneoModel.dart';
-import 'package:virtual_match/src/model/entity/EntityFromJson/NotificacionModel.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/PartidosPorTorneoModel.dart';
-import 'package:virtual_match/src/model/entity/EntityFromJson/ResultadoModel.dart';
+import 'package:virtual_match/src/model/entity/EntityMap/ResultadoModel.dart';
+import 'package:virtual_match/src/model/entity/IEntity.dart';
+
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/service/ImageService.dart';
-import 'package:virtual_match/src/service/NotificactionService.dart';
 import 'package:virtual_match/src/service/ResultadoService.dart';
 import 'package:virtual_match/src/service/core/TournamentService.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
@@ -46,7 +46,7 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
   TourmentService entityGet = TourmentService();
 
   ResultadoModel entityResultado = new ResultadoModel();
-  ResultadoService entityResultadoService;
+  ResultadoService entityResultadoService = new ResultadoService();
 
   @override
   void initState() {
@@ -89,6 +89,14 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
     return GFButton(
       size: GFSize.SMALL,
       onPressed: () {
+        entityResultado.states = StateEntity.Update;
+        entityResultado.fechaAuditoria = DateTime.now().toString();
+        entityResultado.idEliminatoria = entity.idEliminatoria;
+        entityResultado.idEquipo1 = entity.iIdJugador;
+        entityResultado.idEquipo2 = entity.dIdJugador;
+        entityResultado.idResultado = entity.idResultado;
+        entityResultado.idTorneo = entity.idTorneo;
+
         _submit();
       },
       text: "Registrar",
@@ -102,15 +110,15 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
 
   void executeCUD(ResultadoService entityService, ResultadoModel entity) async {
     try {
-      /* await entityService.repository(entity).then((result) {
+      await entityService.repository(entity).then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0')
           showSnackbar(STATUS_OK, scaffoldKey);
         else
           showSnackbar(STATUS_ERROR, scaffoldKey);
-          
-      });*/
+      });
     } catch (error) {
+      print('EL RESULTTTTT: ${error.toString()} ');
       showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
     }
   }
@@ -196,7 +204,7 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
                               TextStyle(fontSize: 14, color: Colors.black),
                         ),
                         onChanged: (value) {
-                          print(value);
+                          entityResultado.gol1 = int.parse(value);
                         },
                       )
                     ],
@@ -229,7 +237,7 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
                               TextStyle(fontSize: 14, color: Colors.black),
                         ),
                         onChanged: (value) {
-                          print(value);
+                          entityResultado.gol2 = int.parse(value);
                         },
                       )
                     ],
@@ -252,19 +260,6 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
               _seleccionarFoto();
             },
             child: showPictureOval(photo, image, 70.0)),
-/*
-        GFButton(
-          size: GFSize.SMALL,
-          onPressed: () {
-            
-          },
-          text: "Suba su foto",
-          blockButton: true,
-        ),
-        Row(
-          children: <Widget>[],
-        ),
-        */
       ],
     );
   }
@@ -278,9 +273,7 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
     if (photo != null) {
       image = await entityImage.uploadImage(photo.path);
       setState(() {
-        //entity.foto = image;
-
-        //print('cargadod e iagen ${entity.foto}');
+        entityResultado.foto = image;
       });
     }
   }
