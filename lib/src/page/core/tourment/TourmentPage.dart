@@ -49,7 +49,7 @@ class _TourmentPageState extends State<TourmentPage> {
         appBar: appBar('TORNEOS FIFA BOLIVIA'),
         body: bodyContainer(context),
         drawer: DrawerMenu(),
-        bottomNavigationBar: new BottonNavigation(),
+        // bottomNavigationBar: new BottonNavigation(),
       ),
     );
   }
