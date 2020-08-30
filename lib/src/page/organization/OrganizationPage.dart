@@ -39,8 +39,6 @@ class _OrganizationPageState extends State<OrganizationPage> {
               sizedBox(0, 10),
               _crearTexto1(),
               sizedBox(0, 10),
-              _crearTexto0(),
-              sizedBox(0, 10),
               _crearTexto2(),
               sizedBox(0, 10),
               _crearTexto3(),
@@ -76,8 +74,7 @@ class _OrganizationPageState extends State<OrganizationPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
-                      'Comunidad FIFA Bolivia - Virtual Match. @ComunidadFIFABoliviaInicio',
+                  Text('Acerca de COMUNIDAD FIFA BOLIVIA. ¿Quiénes somos?',
                       style: estiloTitulo),
                   // Text('Terrasur, haciendo tus sueños realidad',
                   //     style: estiloTitulo),
@@ -183,7 +180,7 @@ class _OrganizationPageState extends State<OrganizationPage> {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20.0),
         child: Text(
-          'FIFA BOLIVIA o Virtual Match es una empresa boliviana donde se organiza torneos de fútbol virtual (FIFA) ON-LINE y PRESENCIALES para la plataforma Play station 4 y XBOX One. Ademas, se garantiza mucha habilidad, estrategia y abundantes premios para los primeros lugares. ',
+          'Virtual Match en una comunidad de FIFA en Bolivia que nació en febrero del 2016, constituido como empresa unipersonal legalmente registrada en Bolivia el 1 de agosto de 2017,  representada legalmente por su propietario Edison Paredes. Desde su inicio, apuesta por asentar unas bases sólidas y de referencia dentro del mundo del fútbol virtual en los deportes electrónicos. Teniendo como pilares la Identidad,  determinación, identidad, determinación, pasión y trabajo en equipo que hacen parte de nuestro ADN.',
           textAlign: TextAlign.justify,
         ),
       ),
@@ -195,36 +192,8 @@ class _OrganizationPageState extends State<OrganizationPage> {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20.0),
         child: Text(
-          'Organizamos torneos desde los ya existentes y mas populares en el mundo real como los totalmente originales creados por esta Comunidad. Ademas se organizaran torneos de:',
+          'Desde nuestro inicio solo tenemos un objetivo: Profesionalizar el fútbol virtual en Bolivia y al mismo tiempo formar jugadores profesionales de fifa para que en un futuro cercano Bolivia sea representado profesionalmente a nivel internacional.',
           textAlign: TextAlign.justify,
-        ),
-      ),
-    );
-  }
-
-  Widget _crearTexto0() {
-    return SafeArea(
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20.0),
-        child: Column(
-          children: <Widget>[
-            Text(
-              '1 Vs 1',
-              textAlign: TextAlign.justify,
-            ),
-            Text(
-              '2 Vs 2',
-              textAlign: TextAlign.justify,
-            ),
-            Text(
-              'Torneos presenciales ',
-              textAlign: TextAlign.justify,
-            ),
-            Text(
-              'Clubes Pro',
-              textAlign: TextAlign.justify,
-            ),
-          ],
         ),
       ),
     );
@@ -247,7 +216,7 @@ class _OrganizationPageState extends State<OrganizationPage> {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20.0),
         child: Text(
-          'Así mismo, se pretende que exista una diversidad de culturas de todo el país, donde se comparta con otras personas de diferentes ciudades o departamentos de Bolivia.',
+          'Así mismo, se pretende llegar a ser una de las empresas de eSports de referencia en el panorama de los deportes electrónicos. Para ello, contamos con un equipo de profesionales multidisciplinares que nos acompañan en el desarrollo de la marca.',
           textAlign: TextAlign.justify,
         ),
       ),
@@ -259,7 +228,7 @@ class _OrganizationPageState extends State<OrganizationPage> {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20.0),
         child: Text(
-          'La idea es que se disfrute y se aproveche al máximo tus habilidades en el juego FIFA. Ya que de por si es un excelente juego y que mejor aprovecharlo al máximo compitiendo contra otros rivales y representando a tu país en eventos Internacionales.',
+          'Además se pretende que en la comunidad fifera exista una diversidad de culturas y una integración de todo el país, donde se comparta con otras personas de diferentes ciudades o departamentos de Bolivia. La idea es que nuestros miembros disfruten y aprovechen al máximo tus habilidades en el juego FIFA. Ya que es un juego que promueve la competitividad e incentiva a la mejora constante de habilidades del jugador, donde se desarrollan mejor  compitiendo contra otros rivales y dando la posibilidad de representar al país en eventos Internacionales.',
           textAlign: TextAlign.justify,
         ),
       ),

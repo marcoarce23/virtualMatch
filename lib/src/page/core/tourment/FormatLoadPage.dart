@@ -139,6 +139,7 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
       children: <Widget>[
         sizedBox(0.0, 7.0),
         _inscription('Torneo de Pago'),
+        Text('Ingrese el monto en Bs.'),
         _selection('Selección Manual'),
         _comboJugador(),
         _comboCompeticion(_opcionTipoCompeticion),
@@ -385,7 +386,6 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
     entity.idTorneo = 0;
     entity.idOrganizacion = 133;
     entity.usuarioAuditoria = prefs.email;
-    entity.fechaAuditoria = '2020-08-10 08:25';
     entity.idTorneo = 0;
     entity.idOrganizacion = int.parse(prefs.idInstitution);
     entity.nombre = controllerName.text;

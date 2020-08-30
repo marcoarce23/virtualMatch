@@ -8,7 +8,6 @@ import 'package:imei_plugin/imei_plugin.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:virtual_match/src/model/Preference.dart';
-import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/page/general/ViewPage.dart';
 import 'package:virtual_match/src/page/intro/IntroPage.dart';
 import 'package:virtual_match/src/page/login/LoginClipperPage.dart';

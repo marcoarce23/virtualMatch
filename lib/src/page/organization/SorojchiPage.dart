@@ -18,12 +18,16 @@ class SorojchiPage extends StatefulWidget {
 }
 
 class _SorojchiPageState extends State<SorojchiPage> {
-  final estiloTitulo = TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold);
-  final estiloSubTitulo = TextStyle(fontSize: 18.0, color: Colors.grey);
+  final estiloTitulo = TextStyle(
+      fontSize: 18.0,
+      fontWeight: FontWeight.bold, color: Colors.black
+    );
+  final estiloSubTitulo = TextStyle(fontSize: 18.0, color: AppTheme.themeDefault);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        //  backgroundColor: Colors.black87,
         appBar: appBar('SOROJCHI ECLUB'),
         drawer: DrawerMenu(),
         floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
@@ -31,22 +35,20 @@ class _SorojchiPageState extends State<SorojchiPage> {
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
+              backgroundBasic(context),
               _crearImagen(context),
               _crearTitulo(),
               _crearAcciones(context),
-              divider(),
+              dividerBlack(),
               _crearTexto(),
               sizedBox(0, 10),
               _crearTexto1(),
-              sizedBox(0, 10),
-              _crearTexto0(),
               sizedBox(0, 10),
               _crearTexto2(),
               sizedBox(0, 10),
               _crearTexto3(),
               sizedBox(0, 10),
-              _crearTexto4(),
-              copyRigth()
+              copyRigthBlack()
             ],
           ),
         ));
@@ -76,7 +78,7 @@ class _SorojchiPageState extends State<SorojchiPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text('Comunidad Sorojchi eclub - @ComunidadFIFABoliviaInicio',
+                  Text('Acerca de Sorojchi eClub'.toUpperCase(),
                       style: estiloTitulo),
                   sizedBox(0, 7.0),
                 ],
@@ -179,7 +181,7 @@ class _SorojchiPageState extends State<SorojchiPage> {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20.0),
         child: Text(
-          'FIFA BOLIVIA o Virtual Match es una empresa boliviana donde se organiza torneos de fútbol virtual (FIFA) ON-LINE y PRESENCIALES para la plataforma Play station 4 y XBOX One. Ademas, se garantiza mucha habilidad, estrategia y abundantes premios para los primeros lugares. ',
+          'Sorojchi eClub es un nuevo club de deportes electrónicos fundado el 2 de julio de 2019 por Edison Paredes (Presidente de Comunidad FIFA Bolivia) que tiene por objetivo reunir a los jugadores más talentosos para participar en competiciones oficiales de EA Sports FIFA.',
           textAlign: TextAlign.justify,
         ),
       ),
@@ -191,36 +193,8 @@ class _SorojchiPageState extends State<SorojchiPage> {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20.0),
         child: Text(
-          'Organizamos torneos desde los ya existentes y mas populares en el mundo real como los totalmente originales creados por esta Comunidad. Ademas se organizaran torneos de:',
+          'En la actualidad el club está formado por los bolivianos Julio Calderón,  Mauricio Angulo y Jorge Trigo. Julio es el máximo campeón de torneos FIFA de todo el país, actualmente es poseedor de los campeonatos nacionales de FIFA 18 – FIFA 19 Y FIFA20 sin duda el jugador con más campeonatos nacionales en su haber. También es el jugador de fútbol virtual más seguido del país por jóvenes promesas fiferas que quieren llegar a ser como él y lo toman como ejemplo.',
           textAlign: TextAlign.justify,
-        ),
-      ),
-    );
-  }
-
-  Widget _crearTexto0() {
-    return SafeArea(
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20.0),
-        child: Column(
-          children: <Widget>[
-            Text(
-              '1 Vs 1',
-              textAlign: TextAlign.justify,
-            ),
-            Text(
-              '2 Vs 2',
-              textAlign: TextAlign.justify,
-            ),
-            Text(
-              'Torneos presenciales ',
-              textAlign: TextAlign.justify,
-            ),
-            Text(
-              'Clubes Pro',
-              textAlign: TextAlign.justify,
-            ),
-          ],
         ),
       ),
     );
@@ -231,7 +205,7 @@ class _SorojchiPageState extends State<SorojchiPage> {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20.0),
         child: Text(
-          'Por otro lado, buscamos llevar a otro nivel los E-Sports en Bolivia, haciendo lo posible de llamar la atención de los clubes bolivianos en el país y formar jugadores profesionales de fifa para que algún día Bolivia sea representado profesionalmente.',
+          'Mauricio Angulo es el vigente campeón (en la modalidad de equipos libres) de los últimos torneos más importantes del panorama nacional pertenecientes a las competiciones de EA Sports Fifa20 y organizada por FIFA BOLIVIA. ',
           textAlign: TextAlign.justify,
         ),
       ),
@@ -243,19 +217,7 @@ class _SorojchiPageState extends State<SorojchiPage> {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20.0),
         child: Text(
-          'Así mismo, se pretende que exista una diversidad de culturas de todo el país, donde se comparta con otras personas de diferentes ciudades o departamentos de Bolivia.',
-          textAlign: TextAlign.justify,
-        ),
-      ),
-    );
-  }
-
-  Widget _crearTexto4() {
-    return SafeArea(
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20.0),
-        child: Text(
-          'La idea es que se disfrute y se aproveche al máximo tus habilidades en el juego FIFA. Ya que de por si es un excelente juego y que mejor aprovecharlo al máximo compitiendo contra otros rivales y representando a tu país en eventos Internacionales.',
+          'FRASES PARA DESTACAR\n\n  •	El club que busca, impulsa y promueve a nuevo talentos bolivianos del futbol virtual. \n  •	Sorojchi eClub es el club de futbol virtual que mejor representa a los miles de fans que aman los esports con corazón amateur y a los que sueñan con algún día formar parte del mundo profesional.',
           textAlign: TextAlign.justify,
         ),
       ),

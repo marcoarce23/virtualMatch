@@ -81,9 +81,9 @@ class _NewListPageState extends State<NewListPage> {
         ),
       ),
       floatingActionButton: new CircularMenu(),
-      
+
       // floatButton(AppTheme.themeDefault, context,
-       //   FaIcon(FontAwesomeIcons.playstation), HomePage()),
+      //   FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }
 
@@ -134,10 +134,22 @@ class _NewListPageState extends State<NewListPage> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text('Detalle: ${entity.objetivo}', style: TextStyle(color: Colors.white),),
-                      Text('Dirigo a: ${entity.dirigidoa}' , style: TextStyle(color: Colors.white),),
-                      Text('Lugar/Virtual: ${entity.dirigidoa}',style: TextStyle(color: Colors.white),),
-                      Text('Fecha y Hora: ${entity.fecha} ${entity.hora}', style: TextStyle(color: Colors.white),),
+                      Text(
+                        'Detalle: ${entity.objetivo}',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      Text(
+                        'Dirigo a: ${entity.dirigidoa}',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      Text(
+                        'Lugar/Virtual: ${entity.dirigidoa}',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      Text(
+                        'Fecha y Hora: ${entity.fecha} ${entity.hora}',
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ],
                   ),
                   _showAction(entity, entity.idNoticiaEvento.toString()),
@@ -155,12 +167,33 @@ class _NewListPageState extends State<NewListPage> {
   Widget _showAction(NoticiaEventoModel entity, String keyId) {
     return Row(
       children: <Widget>[
-        Text('Operaciones: $keyId', style: TextStyle(color: Colors.white),),
+        Text(
+          '$keyId',
+          style: TextStyle(color: Colors.white),
+        ),
         sizedBox(10, 0),
         _update(),
         sizedBox(10, 0),
         _delete(keyId),
+        sizedBox(10, 0),
+        _like(),
       ],
+    );
+  }
+
+  _like() {
+    entityModel.states = StateEntity.Update;
+    entityModel.usuarioAuditoria = prefs.email;
+
+    return InkWell(
+      child: FaIcon(
+        FontAwesomeIcons.handPointUp,
+        color: AppTheme.themePurple,
+        size: 23,
+      ),
+      onTap: () {
+        setState(() {});
+      },
     );
   }
 
@@ -170,7 +203,7 @@ class _NewListPageState extends State<NewListPage> {
 
     return InkWell(
       child: FaIcon(
-        FontAwesomeIcons.edit,
+        FontAwesomeIcons.commentDots,
         color: AppTheme.themePurple,
         size: 23,
       ),
@@ -184,7 +217,7 @@ class _NewListPageState extends State<NewListPage> {
     return InkWell(
       key: Key(keyId),
       child: FaIcon(
-        FontAwesomeIcons.trashAlt,
+        FontAwesomeIcons.smile,
         color: AppTheme.themePurple,
         size: 23,
       ),

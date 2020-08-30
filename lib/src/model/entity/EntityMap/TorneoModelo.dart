@@ -12,9 +12,8 @@ class TorneoModel implements IEntityMap {
   String organizador;
   String foto;
   String fechaInicio;
-  String horaInicio; 
+  String horaInicio;
   String usuarioAuditoria;
-  String fechaAuditoria;
 
   TorneoModel(
       {this.states = StateEntity.None,
@@ -29,12 +28,11 @@ class TorneoModel implements IEntityMap {
       this.foto,
       this.fechaInicio,
       this.horaInicio,
-      this.usuarioAuditoria,
-      this.fechaAuditoria});
+      this.usuarioAuditoria});
 
   Map<String, dynamic> toJson() => {
         "idTorneo": idTorneo,
-        "idOrganizacion":  idOrganizacion,
+        "idOrganizacion": idOrganizacion,
         "nombre": nombre,
         "detalle": detalle,
         "hastag": hastag,
@@ -42,8 +40,7 @@ class TorneoModel implements IEntityMap {
         "organizador": organizador,
         "foto": foto,
         "fechaInicio": fechaInicio,
-          "horaInicio": horaInicio,
-         "usuarioAuditoria": usuarioAuditoria,
-        "fechaAuditoria": fechaAuditoria
+        "horaInicio": horaInicio,
+        "usuarioAuditoria": usuarioAuditoria,
       };
 }

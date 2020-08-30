@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/ListadoTorneoModel.dart';
 import 'package:virtual_match/src/style/Style.dart';
+import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/bottonNavigationBar/BottonNavigatorWidget.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
@@ -83,13 +84,12 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
                   // ),
 
                   sizedBox(0, 8.0),
-                  showInformation(
+                 
+                       showInformationBasic(
                       context,
-                      'LISTADO DE TORNEOS - FIFA BOLIVIA?',
+                       'LISTADO DE TORNEOS - FIFA BOLIVIA',
                       'Conoce los resultados.',
-                      'Visita Sorojchi eclub en facebook',
-                      'INGRESASTE A SORIJCHI ECLUB',
-                      'https://www.facebook.com/SorojchieClub/'),
+                    ),
                   sizedBox(0, 5.0),
                   divider(),
                   listView(context, snapshot),
@@ -135,7 +135,7 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
                     children: <Widget>[
                       Text(entity.nombreTorneo,
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 15)),
+                              fontWeight: FontWeight.bold, fontSize: 15, color: AppTheme.themeWhite)),
                       Text('Inscritos: 100/${entity.cantidadJugadores}'),
                     ],
                   ),
@@ -143,7 +143,7 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
                     children: <Widget>[
                       Text('Detalle:',
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 13)),
+                              fontWeight: FontWeight.bold, fontSize: 13, color: AppTheme.themeWhite)),
                       sizedBox(5, 0),
                       Text(entity.detalle),
                     ],
@@ -159,7 +159,7 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
                               Text('Premios:',
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 13)),
+                                      fontSize: 13, color: AppTheme.themeWhite)),
                               sizedBox(5, 0),
                               Text(entity.premios,
                                   style: TextStyle(fontSize: 13)),

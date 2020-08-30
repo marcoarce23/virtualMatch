@@ -93,10 +93,41 @@ Widget copyRigth() {
   );
 }
 
+Widget copyRigthBlack() {
+  return Column(
+    mainAxisAlignment: MainAxisAlignment.start,
+    children: <Widget>[
+      sizedBox(0, 5.0),
+      dividerBlack(),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text(VIRTUAL_MATCH, style: TextStyle(color: AppTheme.themeDefault)),
+          FaIcon(
+            //  FontAwesomeIcons.earlybirds,
+            FontAwesomeIcons.futbol,
+            color: AppTheme.themeDefault,
+            size: 18,
+          ),
+        ],
+      ),
+    ],
+  );
+}
+
 Divider divider() {
   return Divider(
     thickness: 2.0,
     color: AppTheme.themeWhite,
+    endIndent: 20.0,
+    indent: 20.0,
+  );
+}
+
+Divider dividerBlack() {
+  return Divider(
+    thickness: 2.0,
+    color: AppTheme.themeDefault,
     endIndent: 20.0,
     indent: 20.0,
   );

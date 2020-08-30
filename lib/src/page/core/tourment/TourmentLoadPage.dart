@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:virtual_match/src/model/Preference.dart';
@@ -15,6 +16,7 @@ import 'package:virtual_match/src/page/core/tourment/FormatLoadPage.dart';
 import 'package:virtual_match/src/page/core/tourment/TourmentListPage.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
+import 'package:virtual_match/src/service/ImageService.dart';
 import 'package:virtual_match/src/service/core/TournamentService.dart';
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
@@ -116,6 +118,7 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
 //DEFINICION DE BLOC Y MODEL
   TourmentService entityService;
   TorneoModel entity = new TorneoModel();
+  ImageService entityImage = new ImageService();
   final prefs = new Preferense();
 
   //DEFINICION DE VARIABLES
@@ -129,6 +132,7 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
   String typeCount = '2';
   TimeOfDay _time = TimeOfDay.now();
   String _fecha = DateTime.now().toString().substring(0, 10);
+  String image = IMAGE_DEFAULT;
 
   @override
   void initState() {
@@ -154,11 +158,11 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
       body: Stack(
         children: <Widget>[
           background(context, 'IMAGE_LOGO'),
-          showPictureOval(photo, IMAGE_DEFAULT, 130.0),
+          showPictureOval(photo, image, 130.0),
           _form(context),
         ],
       ),
-      floatingActionButton: floatButton(AppTheme.themeDefault, context,
+      floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }
@@ -171,7 +175,23 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
         key: formKey,
         child: Column(
           children: <Widget>[
-            sizedBox(0.0, 130.0),
+            sizedBox(0.0, 125.0),
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 0.0),
+              decoration: containerImage(),
+              //  color: Colors.black87,
+              width: size.width * 0.94,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  text('CARGA IMAGEN DEL TORNEO ', AppTheme.themeDefault, 1,
+                      15.0),
+                  _crearIconAppImagenes(),
+                  _crearIconAppCamara(),
+                ],
+              ),
+            ),
+            sizedBox(0.0, 8.0),
             Container(
               width: size.width * 0.94,
               margin: EdgeInsets.symmetric(vertical: 0.0),
@@ -185,6 +205,26 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
     );
   }
 
+  _crearIconAppImagenes() {
+    return IconButton(
+      icon: Icon(
+        Icons.photo_size_select_actual,
+        color: AppTheme.themePurple,
+      ),
+      onPressed: _seleccionarFoto,
+    );
+  }
+
+  _crearIconAppCamara() {
+    return IconButton(
+      icon: Icon(
+        Icons.camera_alt,
+        color: AppTheme.themePurple,
+      ),
+      onPressed: _tomarFoto,
+    );
+  }
+
   Widget _fields(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -195,7 +235,7 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
             entity.nombre,
             'Nombre del torneo',
             100,
-            2,
+            1,
             'Ingrese nombre al torneo',
             true,
             FaIcon(FontAwesomeIcons.futbol, color: AppTheme.themeDefault),
@@ -219,7 +259,7 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
             entity.hastag,
             '#Hastag Virtual Match',
             100,
-            2,
+            1,
             'Ingrese #Hastag',
             true,
             FaIcon(FontAwesomeIcons.hashtag, color: AppTheme.themeDefault),
@@ -229,24 +269,24 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
         _text(
             controllerGift,
             entity.premios,
-            'Premios',
-            160,
-            2,
-            'Ingrese el tipo de premios',
+            'Premios en Bs.',
+            5,
+            1,
+            'Ingrese el monto el premio en Bs.',
             true,
-            FaIcon(FontAwesomeIcons.playstation, color: AppTheme.themeDefault),
+            FaIcon(FontAwesomeIcons.moneyCheck, color: AppTheme.themeDefault),
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             Colors.red),
         _text(
             controllerOrganization,
             entity.organizador,
-            'Colaboradores',
-            160,
-            2,
-            'Ingrese los Colaboradores',
+            'Inscripción en Bs.',
+            5,
+            1,
+            'Ingrese el monto de la Inscripción',
             true,
-            FaIcon(FontAwesomeIcons.user, color: AppTheme.themeDefault),
+            FaIcon(FontAwesomeIcons.moneyBillAlt, color: AppTheme.themeDefault),
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             Colors.red),
@@ -257,7 +297,7 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
           style: kCamposTitleStyle,
           textAlign: TextAlign.left,
         ),
-        _button('Siguiente', 18.0, 20.0),
+        _button('Crear', 18.0, 20.0),
       ],
     );
   }
@@ -397,7 +437,7 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
       textStyle: TextStyle(fontSize: fontSize),
       textColor: AppTheme.themeWhite,
       color: AppTheme.themeDefault,
-      icon: FaIcon(FontAwesomeIcons.arrowRight, color: AppTheme.themeWhite),
+      icon: FaIcon(FontAwesomeIcons.checkCircle, color: AppTheme.themeWhite),
       shape: GFButtonShape.pills,
       onPressed: (_save) ? null : _submit,
     );
@@ -423,26 +463,46 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
     entity.hastag = controllerHastag.text;
     entity.premios = controllerGift.text;
     entity.organizador = controllerOrganization.text;
-    entity.foto = IMAGE_LOGO;
-    entity.fechaInicio =
-        _inputFieldDateController.text + ' ' + TimeOfDay.now().toString();
+    //  entity.foto = IMAGE_LOGO;
+    entity.fechaInicio = _inputFieldDateController.text + ' ' + '12:00';
     entity.horaInicio = _inputFieldTimeController.text;
     entity.usuarioAuditoria = prefs.email;
   }
 
   void executeCUD(TourmentService entityService, TorneoModel entity) async {
-    // try {
-    //   await entityService.repository(entity).then((result) {
-    //     print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
-    //     if (result["tipo_mensaje"] == '0') {
-    //       showSnackbar(STATUS_OK, scaffoldKey);
-    //       navegation(context, FormatLoadPage());
-    //     } else
-    //       showSnackbar(STATUS_ERROR, scaffoldKey);
-    //   });
-    // } catch (error) {
-    //   showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
-    // }
-    navegation(context, FormatLoadPage());
+    try {
+      await entityService.repository(entity).then((result) {
+        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
+        if (result["tipo_mensaje"] == '0') {
+          showSnackbar(STATUS_OK, scaffoldKey);
+          navegation(context, FormatLoadPage());
+        } else
+          showSnackbar(STATUS_ERROR, scaffoldKey);
+      });
+    } catch (error) {
+      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
+    }
+    //  navegation(context, FormatLoadPage());
+  }
+
+  _seleccionarFoto() async {
+    _procesarImagen(ImageSource.gallery);
+  }
+
+  _tomarFoto() async {
+    _procesarImagen(ImageSource.camera);
+  }
+
+  _procesarImagen(ImageSource origen) async {
+    final photo = await ImagePicker().getImage(source: origen);
+    if (photo != null) {
+      image = await entityImage.uploadImage(photo.path);
+      print('imagennnnn $image');
+      setState(() {
+        entity.foto = image;
+
+        print('cargadod e iagen ${entity.foto}');
+      });
+    }
   }
 }

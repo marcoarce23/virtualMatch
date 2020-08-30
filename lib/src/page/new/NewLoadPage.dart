@@ -150,7 +150,7 @@ class _NewLoadPageState extends State<NewLoadPage> {
       body: Stack(
         children: <Widget>[
           background(context, 'IMAGE_LOGO'),
-          showPictureOval(photo, IMAGE_LOGO, 130.0),
+          showPictureOval(photo, image, 130.0),
           _form(context),
         ],
       ),
@@ -480,7 +480,7 @@ class _NewLoadPageState extends State<NewLoadPage> {
     entity.usuarioAuditoria = prefs.email;
     entity.fecha = _inputFieldDateController.text;
     entity.hora = _inputFieldTimeController.text;
-    entity.foto = IMAGE_LOGO;
+    // entity.foto = IMAGE_LOGO;
     entity.fechaAuditoria = '2020-08-10 08:25';
   }
 

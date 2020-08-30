@@ -36,7 +36,7 @@ class _FaqPageState extends State<FaqPage> {
           _form(context),
         ],
       ),
-      floatingActionButton: floatButton(AppTheme.themeGrey, context,
+      floatingActionButton: floatButtonImage(AppTheme.themeGrey, context,
           FaIcon(FontAwesomeIcons.home), HomePage()),
     );
   }
@@ -83,40 +83,39 @@ class _FaqPageState extends State<FaqPage> {
         listAcordion(),
         listAcordion2(),
         listAcordion3(),
-        listAcordion4(),
       ],
     );
   }
 
   Widget listAcordion() {
     return accordion(
-        '¿Cómo puedo contactarlos?',
-        'Contamos con distintos canales de atención, cualquier duda o consulta que tengas siéntete libre de preguntar mediante: \nNuestras redes sociales: Facebook Instagram \nCorreo electrónico info@virtual_match.bo \nNúmero de WhatsApp +591 61677470',
+        ' ¿Cómo puede contactarse con nosotros?',
+        'Contamos con distintos canales de contacto, cualquier duda o consulta nos puedes contactar mediante:\n\n \n - Facebook, Instagram, Twitter, o WhatsApp \n\n\n - Email: comunidadfifabolivia@gmail.com \n Teléfono: +59171298852',
         AppTheme.themeGrey,
         AppTheme.themeOrange);
   }
 
   Widget listAcordion2() {
     return accordion(
-        '¿Cuál es el horario de atención?',
-        'Puedes contactarnos en cualquier momento, para recibir respuestas más inmediatas nuestro horario es el siguiente: 9:00 AM a 8 :00 PM de lunes a viernes.',
+        ' ¿Este es un sitio seguro?',
+        'Ten la confianza de que tu información está siendo gestionada de la manera correcta y que este sitio web tiene los certificados de seguridad SSL correspondientes. (Poner link xxx).',
         AppTheme.themeGrey,
         AppTheme.themeOrange);
   }
 
   Widget listAcordion3() {
     return accordion(
-        '¿Este es un sitio seguro?',
-        'Ten la confianza de que tu información está siendo gestionada de la manera correcta y que este sitio web tiene los certificados de seguridad SSL correspondientes.',
+        '¿Cómo puedo registrarme a un nuevo campeonato?',
+        'Las competiciones son lanzadas periódicamente, con un lapso de  10 a 15 días por torneo y por modalidad y son anunciadas por las redes sociales de la comunidad.',
         AppTheme.themeGrey,
         AppTheme.themeOrange);
   }
 
-  Widget listAcordion4() {
-    return accordion(
-        '¿Cómo realizan el servicio de despacho?',
-        'Los despachos los realizamos habiendo confirmado la información de los pedidos y realizado el empaque y procediendo de despacho hasta las 9:00 AM en días hábiles. Para que tu producto este seguro tenemos tres métodos de entrega:\nEntrega gratuita a domicilio para las principales ciudades del país.\nEntrega mediante oficinas FedEx de todo el país (si vive en una provincia o bien lo desee así).\nEntrega mediante las tiendas virtual_match.',
-        AppTheme.themeGrey,
-        AppTheme.themeOrange);
-  }
+  // Widget listAcordion4() {
+  //   return accordion(
+  //       '¿Cómo realizan el servicio de despacho?',
+  //       'Los despachos los realizamos habiendo confirmado la información de los pedidos y realizado el empaque y procediendo de despacho hasta las 9:00 AM en días hábiles. Para que tu producto este seguro tenemos tres métodos de entrega:\nEntrega gratuita a domicilio para las principales ciudades del país.\nEntrega mediante oficinas FedEx de todo el país (si vive en una provincia o bien lo desee así).\nEntrega mediante las tiendas virtual_match.',
+  //       AppTheme.themeGrey,
+  //       AppTheme.themeOrange);
+  // }
 }

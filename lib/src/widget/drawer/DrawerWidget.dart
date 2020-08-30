@@ -4,6 +4,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/page/core/formatTourment/FormatTourmentPage.dart';
 import 'package:virtual_match/src/page/core/player/PlayerLoadPage.dart';
+import 'package:virtual_match/src/page/faq/FaqListPage.dart';
+import 'package:virtual_match/src/page/faq/FaqPage.dart';
 import 'package:virtual_match/src/page/intro/IntroPage.dart';
 import 'package:virtual_match/src/page/login/LogOutPage.dart';
 import 'package:virtual_match/src/page/multimedia/MultimediaLoadPage.dart';
@@ -32,7 +34,7 @@ class CustomListTile extends StatelessWidget {
         decoration: BoxDecoration(
             border: Border(bottom: BorderSide(color: Colors.grey))),
         child: InkWell(
-          splashColor: Colors.orange,
+          splashColor: AppTheme.themePurple,
           onTap: onTap,
           child: Container(
             height: 50,
@@ -107,20 +109,11 @@ class DrawerMenu extends StatelessWidget {
         ),
         CustomListTile(
             FaIcon(
-              FontAwesomeIcons.bell,
-              size: 25,
-            ),
-            '   Notificaciones',
-            () => navegation(context, NotificationPage())),
-
-        CustomListTile(
-            FaIcon(
               FontAwesomeIcons.playstation,
               size: 25,
             ),
-            '   Sorojchi eclub',
+            '   SOROJCHI eclub',
             () => navegation(context, SorojchiPage())),
-
         CustomListTile(
             FaIcon(
               FontAwesomeIcons.userFriends,
@@ -128,13 +121,13 @@ class DrawerMenu extends StatelessWidget {
             ),
             '   Jugadores de la comunidad',
             () => navegation(context, PlayerAllPage())),
-        // CustomListTile(
-        //     FaIcon(
-        //       FontAwesomeIcons.gamepad,
-        //       size: 25,
-        //     ),
-        //     '    Crea tu equipo',
-        //     () => navegation(context, EquipmentAllPage())),
+        CustomListTile(
+            FaIcon(
+              FontAwesomeIcons.gamepad,
+              size: 25,
+            ),
+            '    Clubes Pro (Crea tu equipo)',
+            () => navegation(context, TourmentAllPage())),
         CustomListTile(
             FaIcon(
               FontAwesomeIcons.playstation,
@@ -147,7 +140,7 @@ class DrawerMenu extends StatelessWidget {
               FontAwesomeIcons.playstation,
               size: 25,
             ),
-            '   Crea Torneo VM.',
+            '   Crea Torneo ',
             () => navegation(context, TourmentAllPage())),
         CustomListTile(
             FaIcon(
@@ -182,11 +175,18 @@ class DrawerMenu extends StatelessWidget {
               FontAwesomeIcons.shareAlt,
               size: 25,
             ),
-            '    Comparte la aplicación',
+            '    Apoya a la comunidad',
             () => sharedText(
                 'BIENVENIDO A LA COMUNIDAD',
                 '*Virtual Match.*\n *Una aplicación de la Comunidad FIFA Bolivia.*\n💬 Con  *Virtual Match podrás.* \n 🔺 Leer Noticias de la Comunidad. \n 🔺 Enterarte de los eventos. \n 🔺Crear tu jugador y equipos. \n🔺Participar en los torneos. \n 🔺 Conocer campeones de torneos e influencers. \n🔺 Mucho mas... \n📲 *Descargar la App en el siguiente enlace:* https://play.google.com/store/apps/details?id=bo.virtual_matchBolivia',
                 'text/html')),
+        CustomListTile(
+            FaIcon(
+              FontAwesomeIcons.questionCircle,
+              size: 25,
+            ),
+            '    ¿ Alguna duda? Preguntas',
+            () => navegation(context, FaqListPage())),
         CustomListTile(
             FaIcon(
               FontAwesomeIcons.questionCircle,

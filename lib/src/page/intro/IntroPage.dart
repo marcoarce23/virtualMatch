@@ -109,7 +109,7 @@ class _IntroPageState extends State<IntroPage> {
                               baseColor: AppTheme.themeDefault,
                               highlightColor: AppTheme.themePurple,
                               child: AutoSizeText(
-                                'Virtual Match es la más grande Comunidad de FIFA.',
+                                'Somos la comunidad más grande de fútbol virtual de Bolivia',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontSize: 18.0,
@@ -136,7 +136,7 @@ class _IntroPageState extends State<IntroPage> {
                                     sizedBox(0, 11.0),
                                     Expanded(
                                       child: AutoSizeText(
-                                        'Una alternativa para recibir asistencia telefónica, on-line o audiovisual gratuita y virtual.',
+                                        'Organizamos e impulsamos  los torneos más competitivos de fútbol virtual del país.',
                                         style: kSubtitleStyleBlack,
                                         softWrap: true,
                                         overflow: TextOverflow.clip,
@@ -160,7 +160,7 @@ class _IntroPageState extends State<IntroPage> {
                                     sizedBox(0, 11.0),
                                     Expanded(
                                       child: AutoSizeText(
-                                        'Una alternativa para recibir asistencia telefónica, on-line o audiovisual gratuita y virtual.',
+                                        'Te mantenemos informado de todos los campeonatos de la comunidad (Fixture, resultados, tablas, estadísticas y ranking).',
                                         style: kSubtitleStyleBlack,
                                         softWrap: true,
                                         overflow: TextOverflow.clip,
@@ -184,7 +184,7 @@ class _IntroPageState extends State<IntroPage> {
                                     sizedBox(0, 10.0),
                                     Expanded(
                                       child: AutoSizeText(
-                                        'Es un lugar donde podras encontrar material multimedia y eventos del voluntariado para tu aprendizaje.',
+                                        'Impulsamos la competitividad y el entretenimiento, por eso, te  brindamos la posibilidad de crear tus propios torneos de una manera sencilla, para realizar campeonatos personalizados con  tus amigos y/o familiares.',
                                         style: kSubtitleStyleBlack,
                                         softWrap: true,
                                         overflow: TextOverflow.clip,
@@ -216,7 +216,7 @@ class _IntroPageState extends State<IntroPage> {
                               baseColor: AppTheme.themeDefault,
                               highlightColor: AppTheme.themePurple,
                               child: AutoSizeText(
-                                'Vrtual Match es la más grande Comunidad de FIFA.',
+                                'Qué ofrecemos',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontSize: 18.0,
@@ -240,10 +240,10 @@ class _IntroPageState extends State<IntroPage> {
                                           color: AppTheme.themeDefault,
                                           size: 35.0),
                                     ),
-                                    sizedBox(0, 10.0),
+                                    sizedBox(10, 10.0),
                                     Expanded(
                                       child: AutoSizeText(
-                                        'Grupo de personas que de forma voluntaria y dedicación brindan apoyo a las personas que estan buscando ayuda gratuita y virtual.',
+                                        'Reunimos a la mayor cantidad de FIFEROS de Bolivia, consolidando la comunidad de FIFA más grande y con mejores jugadores del país. ',
                                         style: kSubtitleStyleBlack,
                                         softWrap: true,
                                         overflow: TextOverflow.clip,
@@ -267,7 +267,7 @@ class _IntroPageState extends State<IntroPage> {
                                     sizedBox(0, 10.0),
                                     Expanded(
                                       child: AutoSizeText(
-                                        'Grupo111 de personas que te brindan apoyo gratuito y virtual e interesad@s en brindarte material de apoyo y eventos para tu aprendizaje.',
+                                        'Te damos la oportunidad de medir tus habilidades contra los mejores FIFEROS de Bolivia, los mismos que han representado al país en torneos internacionales oficiales.',
                                         style: kSubtitleStyleBlack,
                                         softWrap: true,
                                         overflow: TextOverflow.clip,
@@ -288,10 +288,10 @@ class _IntroPageState extends State<IntroPage> {
                                           color: AppTheme.themeDefault,
                                           size: 35.0),
                                     ),
-                                    sizedBox(0, 10.0),
+                                    sizedBox(10, 10.0),
                                     Expanded(
                                       child: AutoSizeText(
-                                        'Grupo de ciudadanos bolivianos que convecidos con nuestro trabajo podemos hacer a diferencia en tu vida.',
+                                        'Te ofrecemos la posibilidad de ganar grandes premios por divertirte y hacer lo que más te gusta.',
                                         style: kSubtitleStyleBlack,
                                         softWrap: true,
                                         overflow: TextOverflow.clip,
@@ -323,7 +323,7 @@ class _IntroPageState extends State<IntroPage> {
                               baseColor: AppTheme.themeDefault,
                               highlightColor: AppTheme.themePurple,
                               child: AutoSizeText(
-                                'Vrtual Match es la más grande Comunidad de FIFA.',
+                                'Qué buscamos en la COMUNIDAD.',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontSize: 18.0,
@@ -349,7 +349,7 @@ class _IntroPageState extends State<IntroPage> {
                                       sizedBox(10.0, 0),
                                       Expanded(
                                         child: AutoSizeText(
-                                          'Hacer buen uso de la aplicación, en tu tiempo y cuando lo necesites.',
+                                          'El club que busca, impulsa y promueve a nuevo talentos bolivianos del futbol virtual.',
                                           style: kSubtitleStyleBlack,
                                           softWrap: true,
                                           overflow: TextOverflow.clip,
@@ -373,7 +373,7 @@ class _IntroPageState extends State<IntroPage> {
                                       sizedBox(0, 10.0),
                                       Expanded(
                                         child: AutoSizeText(
-                                          'Brindar información real y veridica a las personas con las que te comuniques a través de la APP SomosUnoBolivia.',
+                                          'Sorojchi eClub es el club de futbol virtual que mejor representa a los miles de fans que aman los esports con corazón amateur y a los que sueñan con algún día formar parte del mundo profesional.',
                                           style: kSubtitleStyleBlack,
                                           softWrap: true,
                                           overflow: TextOverflow.clip,
@@ -397,7 +397,7 @@ class _IntroPageState extends State<IntroPage> {
                                       sizedBox(0, 10.0),
                                       Expanded(
                                         child: AutoSizeText(
-                                          'Comparte la aplicación con tus amig@s, familiares y personas para que podamos llegar a más familias bolvianas.',
+                                          'Creamos puentes de integración a través de la diversión y el entretenimiento sano.',
                                           style: kSubtitleStyleBlack,
                                           softWrap: true,
                                           overflow: TextOverflow.clip,

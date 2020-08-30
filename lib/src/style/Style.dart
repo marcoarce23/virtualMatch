@@ -24,7 +24,7 @@ final kSubTitleCardStyle = TextStyle(
 );
 
 final kSubSubTitleCardStyle = TextStyle(
-  color: AppTheme.themeBlackBlack,
+  color: AppTheme.themeWhite,
   fontSize: 14,
   fontWeight: FontWeight.w600,
   height: 1.5,
