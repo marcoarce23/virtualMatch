@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/PartidosPorTorneoModel.dart';
 import 'package:virtual_match/src/service/core/PartidosPorTorneoService.dart';
@@ -85,6 +86,7 @@ class _TournamentPlayerScoredState extends State<TournamentPlayerScored> {
                 children: <Widget>[
                   avatarCircle(entity.iFoto, 35.0),
                   Text(entity.iJugador),
+                  _showAction(entity),
                 ],
               ),
               Column(
@@ -123,13 +125,14 @@ class _TournamentPlayerScoredState extends State<TournamentPlayerScored> {
                   ),
                   Text(new DateFormat.yMMMMd('es_BO')
                       .format(entity.fechaPartido)),
-                  Text(entity.nombreTorneo.toString()),
+                  //  Text(entity.nombreTorneo.toString()),
                 ],
               ),
               Column(
                 children: <Widget>[
                   avatarCircle(entity.dFoto, 35.0),
                   Text(entity.iJugador),
+                  _showAction(entity),
                 ],
               ),
               sizedBox(0, 6),
@@ -137,6 +140,42 @@ class _TournamentPlayerScoredState extends State<TournamentPlayerScored> {
           ),
         ],
       ),
+    );
+  }
+
+  Widget _showAction(PartidosPorTorneoModel entity) {
+    return Row(
+      children: <Widget>[
+        _phone(),
+        sizedBox(15, 0),
+        _whatApp(),
+      ],
+    );
+  }
+
+  _phone() {
+    return InkWell(
+      child: FaIcon(
+        FontAwesomeIcons.phone,
+        color: AppTheme.themeDefault,
+        size: 25,
+      ),
+      onTap: () {
+        setState(() {});
+      },
+    );
+  }
+
+  _whatApp() {
+    return InkWell(
+      child: FaIcon(
+        FontAwesomeIcons.whatsapp,
+        color: AppTheme.themeDefault,
+        size: 25,
+      ),
+      onTap: () {
+        setState(() {});
+      },
     );
   }
 }

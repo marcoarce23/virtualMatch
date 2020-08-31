@@ -4,7 +4,9 @@ import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/api/core/tourment/ApiAdd.dart';
 import 'package:virtual_match/src/api/core/tourment/ApiUpdate.dart';
 import 'package:virtual_match/src/api/core/tourment/ApiDelete.dart';
-
+import 'package:virtual_match/src/api/core/format/ApiAdd.dart' as format;
+import 'package:virtual_match/src/api/core/format/ApiUpdate.dart' as format1;
+import 'package:virtual_match/src/api/core/format/ApiDelete.dart' as format2;
 class TourmentService with ChangeNotifier {
   bool isLoading = true;
 
@@ -12,6 +14,10 @@ class TourmentService with ChangeNotifier {
   final _apiDelete = new ApiDelete();
   final _apiUpdate = new ApiUpdate();
   final _apiGet = new ApiGet();
+
+ final _apiAddDetail = new format.ApiAdd();
+  final _apiUpdateDetail = new format1.ApiUpdate();
+  final _apiGetDetail = new format2.ApiDelete();
 
   Future<Map<String, dynamic>> repository(IEntityMap entity) async {
     var result;
@@ -24,6 +30,28 @@ class TourmentService with ChangeNotifier {
         break;
       case StateEntity.Update:
         result = await _apiUpdate.update(entity);
+        break;
+      default:
+    }
+
+    print('DEL VALOR DE EVENT BLOC: $result');
+    isLoading = false;
+    notifyListeners();
+    return result;
+  }
+
+
+  Future<Map<String, dynamic>> repositoryDetail(IEntityMap entity) async {
+    var result;
+    print('STATE ENTIRY: ${entity.states}');
+
+    isLoading = true;
+    switch (entity.states) {
+      case StateEntity.Insert:
+        result = await _apiAddDetail.add(entity);
+        break;
+      case StateEntity.Update:
+        result = await _apiUpdateDetail.update(entity);
         break;
       default:
     }

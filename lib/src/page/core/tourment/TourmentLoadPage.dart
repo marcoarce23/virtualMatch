@@ -6,6 +6,7 @@ import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/TorneoModelo.dart';
@@ -39,7 +40,7 @@ class _TourmentAllPageState extends State<TourmentAllPage> {
   final prefs = new Preferense();
   final List<Widget> optionPage = [
     TourmentLoadPage(),
-    FormatLoadPage(),
+    FormatLoadPage(idTorneo: '0'),
     TourmentListPage()
   ];
 
@@ -198,7 +199,7 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
               decoration: containerFileds(),
               child: _fields(context),
             ),
-            copyRigth(),
+            copyRigthBlack(),
           ],
         ),
       ),
@@ -297,7 +298,7 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
           style: kCamposTitleStyle,
           textAlign: TextAlign.left,
         ),
-        _button('Crear', 18.0, 20.0),
+        _button('Guardar', 18.0, 20.0),
       ],
     );
   }
@@ -353,7 +354,7 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
 
     if (picked != null) {
       setState(() {
-        _fecha = DateFormat("dd/MM/yyyy").format(picked);
+        _fecha = DateFormat("yyyy-MM-dd").format(picked);
         _inputFieldDateController.text = _fecha;
         //print(_inputFieldDateController.text);
       });
@@ -444,8 +445,8 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
   }
 
   _submit() async {
-    //if (!formKey.currentState.validate()) return;
-    //formKey.currentState.save();
+    if (!formKey.currentState.validate()) return;
+    formKey.currentState.save();
 
     print('myControllerSOY EL VALOR DE ' + controllerDetail.text);
 
@@ -475,7 +476,14 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0') {
           showSnackbar(STATUS_OK, scaffoldKey);
-          navegation(context, FormatLoadPage());
+
+          Navigator.push(
+              context,
+              PageTransition(
+                  curve: Curves.bounceOut,
+                  type: PageTransitionType.rotate,
+                  alignment: Alignment.topCenter,
+                  child: FormatLoadPage(idTorneo: '8')));
         } else
           showSnackbar(STATUS_ERROR, scaffoldKey);
       });

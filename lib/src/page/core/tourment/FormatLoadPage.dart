@@ -6,6 +6,9 @@ import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/components/loader/gf_loader.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:getwidget/types/gf_loader_type.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
+import 'package:page_transition/page_transition.dart';
 
 import 'package:provider/provider.dart';
 import 'package:virtual_match/src/model/Preference.dart';
@@ -17,21 +20,29 @@ import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/ClasificadorService.dart';
+import 'package:virtual_match/src/service/ImageService.dart';
+import 'package:virtual_match/src/service/core/FormatService.dart';
 import 'package:virtual_match/src/service/core/TournamentService.dart';
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/model/util/Validator.dart' as validator;
 import 'package:virtual_match/src/widget/image/ImageWidget.dart';
+import 'package:virtual_match/src/model/entity/EntityMap/FormatoModel.dart';
 
 class FormatLoadPage extends StatefulWidget {
   static final String routeName = 'formatLoad';
+
+  final String idTorneo;
+
+  const FormatLoadPage({Key key, @required this.idTorneo}) : super(key: key);
 
   @override
   _FormatLoadPageState createState() => _FormatLoadPageState();
 }
 
 class _FormatLoadPageState extends State<FormatLoadPage> {
+ 
   //DEFINIICON DE VARIABLES GLOBALES
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -48,20 +59,26 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
 
 //DEFINICION DE BLOC Y MODEL
   TourmentService entityService;
-  TorneoModel entity = new TorneoModel();
+  FormatoModel entity = new FormatoModel();
+  ImageService entityImage = new ImageService();
   ClasificadorService entityGet = ClasificadorService();
+
   final prefs = new Preferense();
 
   //DEFINICION DE VARIABLES
-  bool _save = true;
-  bool isFree = true;
-  bool isManual = true;
+  bool _save = false;
+  bool isFree = false;
+  bool isManual = false;
   File photo;
   int typeTourment = 14;
   int typeInscription = 14;
   int typeMaterial = 14;
   int typeAsigment = 14;
   String typeCount = '2';
+  TimeOfDay _time = TimeOfDay.now();
+  String _fecha = DateTime.now().toString().substring(0, 10);
+  String image = IMAGE_DEFAULT;
+
   String _opcionTipoCompeticion = '27';
   String _opcionTipoTorneo = '23';
   String _opcionTipoModalidad = '43';
@@ -90,7 +107,7 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
     entity.states = StateEntity.Insert;
     entityService = Provider.of<TourmentService>(context);
 
-    final TorneoModel entityModel = ModalRoute.of(context).settings.arguments;
+    final FormatoModel entityModel = ModalRoute.of(context).settings.arguments;
 
     if (entityModel != null) {
       entity = entityModel;
@@ -102,7 +119,7 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
       body: Stack(
         children: <Widget>[
           background(context, 'IMAGE_LOGO'),
-          showPictureOval(photo, IMAGE_DEFAULT, 130.0),
+          showPictureOval(photo, image, 130.0),
           _form(context),
         ],
       ),
@@ -119,14 +136,24 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
         key: formKey,
         child: Column(
           children: <Widget>[
-            sizedBox(0.0, 130.0),
+            sizedBox(0.0, 125.0),
+            Container(
+              margin: EdgeInsets.symmetric(vertical: 0.0),
+              decoration: containerImage(),
+              //  color: Colors.black87,
+              width: size.width * 0.94,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+              ),
+            ),
+            sizedBox(0.0, 8.0),
             Container(
               width: size.width * 0.94,
               margin: EdgeInsets.symmetric(vertical: 0.0),
               decoration: containerFileds(),
               child: _fields(context),
             ),
-            copyRigth(),
+            copyRigthBlack(),
           ],
         ),
       ),
@@ -138,22 +165,108 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         sizedBox(0.0, 7.0),
-        _inscription('Torneo de Pago'),
-        Text('Ingrese el monto en Bs.'),
-        _selection('Selección Manual'),
+        _comboTorneoCreado(_opcionTipoCompeticion),
         _comboJugador(),
         _comboCompeticion(_opcionTipoCompeticion),
         _comboTorneo(_opcionTipoTorneo),
         _comboModalidad(_opcionTipoModalidad),
+        _porEquipo('Por equipo?'),
+        _inscription('Torneo de Pago'),
+        _selection('Selección Manual'),
         Text(
           '(*) Campos obligatorios. ',
           style: kCamposTitleStyle,
           textAlign: TextAlign.left,
         ),
-        _button('Crear torneo', 18.0, 30.0),
+        _button('Guardar', 18.0, 20.0),
       ],
     );
   }
+
+  Widget _text(
+      TextEditingController controller,
+      String initialValue,
+      String labelText,
+      int maxLength,
+      int maxLines,
+      String hintText,
+      bool isValidate,
+      FaIcon icon,
+      Color hoverColor,
+      Color fillColor,
+      Color focusColor) {
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 15.0),
+      child: TextFormField(
+        initialValue: initialValue,
+        textCapitalization: TextCapitalization.sentences,
+        enableSuggestions: true,
+        maxLength: maxLength,
+        maxLines: maxLines,
+        autocorrect: true,
+        autovalidate: false,
+        cursorColor: AppTheme.themeDefault,
+        toolbarOptions:
+            ToolbarOptions(copy: true, cut: true, paste: true, selectAll: true),
+        keyboardType: TextInputType.text,
+        // controller: controller,
+        decoration: inputDecoration(
+            hintText, labelText, icon, hoverColor, fillColor, focusColor),
+        onChanged: (value) {
+          setState(() {
+            controller.text = value;
+          });
+        },
+        validator: (value) =>
+            validator.validateTextfieldEmpty(value, isValidate),
+        onSaved: (value) => controller.text = value,
+      ),
+    );
+  }
+
+  _selectDate(BuildContext context) async {
+    DateTime picked = await showDatePicker(
+        context: context,
+        initialDate: new DateTime.now(),
+        firstDate: new DateTime(2020, 4),
+        lastDate: new DateTime(2025, 12),
+        locale: Locale('es', 'ES'));
+
+    if (picked != null) {
+      setState(() {
+        _fecha = DateFormat("yyyy-MM-dd").format(picked);
+        _inputFieldDateController.text = _fecha;
+        //print(_inputFieldDateController.text);
+      });
+    }
+  }
+
+  _selectTime(BuildContext context) async {
+    TimeOfDay picked = await showTimePicker(
+      context: context,
+      initialTime: _time,
+
+      builder: (BuildContext context, Widget child) {
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
+          child: child,
+        );
+      },
+      //    locale: Locale('es', 'ES')
+    );
+
+    if (picked != null) {
+      setState(() {
+        _time = picked;
+        _inputFieldTimeController.text = _time.hour.toString() +
+            ':' +
+            _time.minute
+                .toString(); //TimeOfDay(hour: _time.hour, minute: _time.minute).toString();
+      });
+    }
+  }
+
+ 
 
   Widget _comboJugador() {
     return Row(
@@ -173,6 +286,36 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
         ),
       ],
     );
+  }
+
+  Widget _comboTorneoCreado(String _opcionTipoCompeticion) {
+    return Center(
+        child: FutureBuilder(
+            future: entityGet.get(new ClasificadorModel(), 26),
+            builder: (context, AsyncSnapshot snapshot) {
+              if (snapshot.hasData) {
+                return Row(
+                  children: <Widget>[
+                    SizedBox(width: 35.0),
+                    Text('Selecciones el torneo:'),
+                    SizedBox(width: 15.0),
+                    DropdownButton(
+                      icon: FaIcon(FontAwesomeIcons.sort,
+                          color: AppTheme.themePurple),
+                      value: _opcionTipoCompeticion,
+                      items: getDropDown(snapshot),
+                      onChanged: (value) {
+                        setState(() {
+                          _opcionTipoCompeticion = value;
+                        });
+                      },
+                    ),
+                  ],
+                );
+              } else {
+                return GFLoader(type: GFLoaderType.circle, size: 35.0);
+              }
+            }));
   }
 
   Widget _comboCompeticion(String _opcionTipoCompeticion) {
@@ -290,11 +433,24 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
     return lista;
   }
 
+  Widget _porEquipo(String text) {
+    return SwitchListTile(
+      value: isFree,
+      title: Text(text),
+      subtitle: Text(
+          'Habilitar opción si será equipo, caso contrario sera individual'),
+      activeColor: AppTheme.themePurple,
+      onChanged: (value) => setState(() {
+        isFree = value;
+      }),
+    );
+  }
+
   Widget _inscription(String text) {
     return SwitchListTile(
       value: isFree,
       title: Text(text),
-      // subtitle: Text('Habilitar opción si será voluntario.'),
+      subtitle: Text('Habilitar opción si será de pago.'),
       activeColor: AppTheme.themePurple,
       onChanged: (value) => setState(() {
         isFree = value;
@@ -306,52 +462,11 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
     return SwitchListTile(
       value: isManual,
       title: Text(text),
-      // subtitle: Text('Habilitar opción si será voluntario.'),
+      subtitle: Text('Habilitar opción si será manual.'),
       activeColor: AppTheme.themePurple,
       onChanged: (value) => setState(() {
         isManual = value;
       }),
-    );
-  }
-
-  Widget _text(
-      TextEditingController controller,
-      String initialValue,
-      String labelText,
-      int maxLength,
-      int maxLines,
-      String hintText,
-      bool isValidate,
-      FaIcon icon,
-      Color hoverColor,
-      Color fillColor,
-      Color focusColor) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 15.0),
-      child: TextFormField(
-        initialValue: initialValue,
-        textCapitalization: TextCapitalization.sentences,
-        enableSuggestions: true,
-        maxLength: maxLength,
-        maxLines: maxLines,
-        autocorrect: true,
-        autovalidate: false,
-        cursorColor: AppTheme.themeDefault,
-        toolbarOptions:
-            ToolbarOptions(copy: true, cut: true, paste: true, selectAll: true),
-        keyboardType: TextInputType.text,
-        // controller: controller,
-        decoration: inputDecoration(
-            hintText, labelText, icon, hoverColor, fillColor, focusColor),
-        onChanged: (value) {
-          setState(() {
-            controller.text = value;
-          });
-        },
-        validator: (value) =>
-            validator.validateTextfieldEmpty(value, isValidate),
-        onSaved: (value) => controller.text = value,
-      ),
     );
   }
 
@@ -361,16 +476,14 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
       text: text,
       textStyle: TextStyle(fontSize: fontSize),
       textColor: AppTheme.themeWhite,
-      color: Colors.black,
-      icon: FaIcon(FontAwesomeIcons.playstation, color: AppTheme.themeWhite),
+      color: AppTheme.themeDefault,
+      icon: FaIcon(FontAwesomeIcons.checkCircle, color: AppTheme.themeWhite),
       shape: GFButtonShape.pills,
       onPressed: (_save) ? null : _submit,
     );
   }
 
   _submit() async {
-    //var _result;
-
     if (!formKey.currentState.validate()) return;
     formKey.currentState.save();
 
@@ -383,34 +496,40 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
   }
 
   void loadingEntity() {
-    entity.idTorneo = 0;
-    entity.idOrganizacion = 133;
-    entity.usuarioAuditoria = prefs.email;
-    entity.idTorneo = 0;
-    entity.idOrganizacion = int.parse(prefs.idInstitution);
-    entity.nombre = controllerName.text;
-    entity.detalle = controllerDetail.text;
-    entity.hastag = controllerHastag.text;
-    entity.premios = controllerGift.text;
-    entity.organizador = controllerOrganization.text;
-    entity.foto = IMAGE_LOGO;
-    entity.fechaInicio =
-        _inputFieldDateController.text + ' ' + TimeOfDay.now().toString();
-    entity.horaInicio = _inputFieldTimeController.text;
-    entity.usuarioAuditoria = prefs.email;
+
+//
+entity.idTorneo = 8;
+entity.idTipoCompeticion = 8;
+entity.idaTipoTorneo = 8;
+entity.idaInscripcion= 8;
+entity.idaAsignacion = 8;
+entity.cantidadJugadores= 8;
+entity.idaTipoModalidad = 8;
+ entity.usuarioAuditoria = prefs.email;
   }
 
-  void executeCUD(TourmentService entityService, TorneoModel entity) async {
+  void executeCUD(TourmentService entityService, FormatoModel entity) async {
     try {
-      await entityService.repository(entity).then((result) {
+      await entityService.repositoryDetail(entity).then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
-        if (result["tipo_mensaje"] == '0')
+        if (result["tipo_mensaje"] == '0') {
           showSnackbar(STATUS_OK, scaffoldKey);
-        else
+
+          // Navigator.push(
+          //     context,
+          //     PageTransition(
+          //         curve: Curves.bounceOut,
+          //         type: PageTransitionType.rotate,
+          //         alignment: Alignment.topCenter,
+          //         child: FormatLoadPage(idTorneo: '8')));
+        } else
           showSnackbar(STATUS_ERROR, scaffoldKey);
       });
     } catch (error) {
       showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
     }
+    //  navegation(context, FormatLoadPage());
   }
+
+ 
 }

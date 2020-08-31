@@ -13,9 +13,11 @@ class FormatoModel implements IEntityMap {
   int idaTipoModalidad;
   String usuarioAuditoria;
 
+
+
   FormatoModel(
       {this.states = StateEntity.None,
-      this.idFormato = 0,
+   //   this.idFormato = 0,
       this.idTorneo,
       this.idTipoCompeticion,
       this.idaTipoTorneo,
@@ -26,14 +28,15 @@ class FormatoModel implements IEntityMap {
       this.usuarioAuditoria});
 
   Map<String, dynamic> toJson() => {
-        "idFormato": idFormato,
-        "idTorneo": idTorneo,
-        "idTipoCompeticion": idTipoCompeticion,
-        "idaTipoTorneo": idaTipoTorneo,
-        "idaInscripcion": idaInscripcion,
-        "idaAsignacion": idaAsignacion,
-        "cantidadJugadores": cantidadJugadores,
-        "idaTipoModalidad": idaTipoModalidad,
-        "usuarioAuditoria": usuarioAuditoria,
+ //       "IdFormato": idFormato,
+        "IdTorneo": idTorneo,
+        "IdTipoCompeticion": idTipoCompeticion,
+        "IdTipoTorneo": idaTipoTorneo,
+        "IdInscripcion": idaInscripcion,
+        "IdAsignacion": idaAsignacion,
+        "CantidadJugadores": cantidadJugadores,
+        "IdTipoModalidad": idaTipoModalidad,
+        "UsuarioAuditoria": usuarioAuditoria,
       };
 }
+

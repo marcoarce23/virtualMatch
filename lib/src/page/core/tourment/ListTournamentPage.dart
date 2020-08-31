@@ -1,8 +1,10 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:virtual_match/src/model/Preference.dart';
-import 'package:virtual_match/src/model/entity/EntityFromJson/ListadoTorneoModel.dart';
+import 'package:virtual_match/src/service/NotificactionService.dart';
+
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
@@ -12,8 +14,10 @@ import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/service/core/TournamentService.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 import 'package:virtual_match/src/widget/menu/CircularMenu.dart';
-
 import 'TourmentPage.dart';
+
+import 'package:virtual_match/src/model/entity/EntityFromJson/ListadoTorneoModel.dart';
+//import 'package:virtual_match/src/model/entity/EntityMap/ListadoTorneoModel.dart'  as model;
 
 class ListTournamentPage extends StatefulWidget {
   ListTournamentPage({Key key}) : super(key: key);
@@ -31,6 +35,8 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
   TourmentService entityService;
   TourmentService entityGet = TourmentService();
 
+// model.NotificacionModel entityModel = new model.NotificacionModel();
+
   @override
   void initState() {
     super.initState();
@@ -38,6 +44,9 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    // entityService = Provider.of<TourmentService>(context);
+
     return SafeArea(
       child: Scaffold(
         key: scaffoldKey,
@@ -84,12 +93,12 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
                   // ),
 
                   sizedBox(0, 8.0),
-                 
-                       showInformationBasic(
-                      context,
-                       'LISTADO DE TORNEOS - FIFA BOLIVIA',
-                      'Conoce los resultados.',
-                    ),
+
+                  showInformationBasic(
+                    context,
+                    'LISTADO DE TORNEOS - FIFA BOLIVIA',
+                    'Conoce los resultados.',
+                  ),
                   sizedBox(0, 5.0),
                   divider(),
                   listView(context, snapshot),
@@ -133,17 +142,22 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Text(entity.nombreTorneo,
+                      //    Image(),
+                      Text('TORNEO: ${entity.nombreTorneo}',
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 15, color: AppTheme.themeWhite)),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                              color: AppTheme.themeWhite)),
                       Text('Inscritos: 100/${entity.cantidadJugadores}'),
                     ],
                   ),
                   Row(
                     children: <Widget>[
-                      Text('Detalle:',
+                      Text('DETALLE:',
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 13, color: AppTheme.themeWhite)),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 13,
+                              color: AppTheme.themeWhite)),
                       sizedBox(5, 0),
                       Text(entity.detalle),
                     ],
@@ -159,7 +173,8 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
                               Text('Premios:',
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 13, color: AppTheme.themeWhite)),
+                                      fontSize: 13,
+                                      color: AppTheme.themeWhite)),
                               sizedBox(5, 0),
                               Text(entity.premios,
                                   style: TextStyle(fontSize: 13)),
@@ -175,6 +190,7 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
                         overflow: TextOverflow.clip,
                         textAlign: TextAlign.justify,
                       ),
+                      _showAction(entity.idTorneo.toString()),
                     ],
                   ),
                   null, //FaIcon(FontAwesomeIcons.infoCircle),
@@ -185,6 +201,73 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _showAction(String keyId) {
+    return Row(
+      children: <Widget>[
+        Text('OPERACIONES: $keyId',
+            style: TextStyle(color: AppTheme.themeWhite)),
+        sizedBox(5, 0),
+        _subcription(keyId),
+        sizedBox(5, 0),
+        _delete(keyId),
+        sizedBox(5, 0),
+        _detail(keyId),
+      ],
+    );
+  }
+
+  _subcription(String keyId) {
+    //  entityModel.states = StateEntity.Update;
+    // entityModel.usuarioAuditoria = prefs.email;
+
+    return InkWell(
+      child: FaIcon(
+        FontAwesomeIcons.handsHelping,
+        color: AppTheme.themePurple,
+        size: 23,
+      ),
+      onTap: () {
+        setState(() {});
+      },
+    );
+  }
+
+  _delete(String keyId) {
+    return InkWell(
+      key: Key(keyId),
+      child: FaIcon(
+        FontAwesomeIcons.subscript,
+        color: AppTheme.themePurple,
+        size: 23,
+      ),
+      onTap: () {
+        setState(() {
+          // entityModel.idNotificacion = int.parse(keyId);
+          // print('eliminar ${entityModel.idNotificacion}');
+          // executeDelete(entityModel.idNotificacion.toString(), prefs.email);
+        });
+      },
+    );
+  }
+
+  _detail(String keyId) {
+    return InkWell(
+      //
+      child: FaIcon(
+        FontAwesomeIcons.shower,
+        color: AppTheme.themePurple,
+        size: 23,
+      ),
+      onTap: () {
+        setState(() {
+          // entityModel.idNotificacion = int.parse(keyId);
+          // print('eliminar ${entityModel.idNotificacion}');
+          // executeDelete(entityModel.idNotificacion.toString(), prefs.email);
+        });
+      },
     );
   }
 }
