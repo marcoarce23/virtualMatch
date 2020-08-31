@@ -19,6 +19,7 @@ import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/ImageService.dart';
 import 'package:virtual_match/src/service/core/TournamentService.dart';
+import 'package:virtual_match/src/service/crudService.dart';
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
@@ -61,7 +62,7 @@ class _TourmentAllPageState extends State<TourmentAllPage> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(builder: (_) => new TourmentService()),
+        ChangeNotifierProvider(builder: (_) => new CrudService()),
       ],
       child: Scaffold(
         appBar: appBar('CREACIÓN DEL TORNEO'),
@@ -117,7 +118,7 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
   TextEditingController _inputFieldTimeController = new TextEditingController();
 
 //DEFINICION DE BLOC Y MODEL
-  TourmentService entityService;
+  CrudService entityService;
   TorneoModel entity = new TorneoModel();
   ImageService entityImage = new ImageService();
   final prefs = new Preferense();
@@ -145,7 +146,7 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
   @override
   Widget build(BuildContext context) {
     entity.states = StateEntity.Insert;
-    entityService = Provider.of<TourmentService>(context);
+    entityService = Provider.of<CrudService>(context);
 
     final TorneoModel entityModel = ModalRoute.of(context).settings.arguments;
 
@@ -470,10 +471,13 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
     entity.usuarioAuditoria = prefs.email;
   }
 
-  void executeCUD(TourmentService entityService, TorneoModel entity) async {
-    try {
-      await entityService.repository(entity).then((result) {
+  void executeCUD(CrudService entityService, TorneoModel entity) async {
+    
+      await entityService
+          .repository(entity, API + '/api/Torneo')
+          .then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
+
         if (result["tipo_mensaje"] == '0') {
           showSnackbar(STATUS_OK, scaffoldKey);
 
@@ -487,10 +491,8 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
         } else
           showSnackbar(STATUS_ERROR, scaffoldKey);
       });
-    } catch (error) {
-      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
-    }
-    //  navegation(context, FormatLoadPage());
+   
+ 
   }
 
   _seleccionarFoto() async {

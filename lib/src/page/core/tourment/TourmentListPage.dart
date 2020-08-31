@@ -7,6 +7,7 @@ import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/service/core/TournamentService.dart';
+import 'package:virtual_match/src/service/crudService.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
@@ -26,8 +27,8 @@ class _TourmentListPageState extends State<TourmentListPage> {
   //DEFINICION DE BLOC Y MODEL
   TorneoModel entity = new TorneoModel();
   model.TorneoModel entityModel = new model.TorneoModel();
-  TourmentService entityService;
-  TourmentService entityGet = TourmentService();
+  CrudService entityService;
+  CrudService entityGet = CrudService();
 
   // DEFINICIOND E VARIABLES
   final prefs = new Preferense();
@@ -42,7 +43,7 @@ class _TourmentListPageState extends State<TourmentListPage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    entityService = Provider.of<TourmentService>(context);
+    entityService = Provider.of<CrudService>(context);
 
     return Scaffold(
       key: scaffoldKey,
@@ -91,7 +92,7 @@ class _TourmentListPageState extends State<TourmentListPage> {
 
   Widget futureBuilder(BuildContext context) {
     return FutureBuilder(
-        future: entityGet.get(new TorneoModel()),
+        future: entityGet.get(new TorneoModel(), ''),
         builder: (context, AsyncSnapshot snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
@@ -192,7 +193,7 @@ class _TourmentListPageState extends State<TourmentListPage> {
 
   void executeDelete(String id, String usuario) async {
     try {
-      await entityService.delete(id, usuario).then((result) {
+      await entityService.delete(id, usuario, '').then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0')
           showSnackbar(STATUS_OK, scaffoldKey);

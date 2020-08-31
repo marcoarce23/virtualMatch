@@ -3,11 +3,12 @@ import 'package:virtual_match/src/api/DataMap.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:virtual_match/src/model/util/StatusCode.dart';
 
-class MultimediaService with ChangeNotifier {
+class CrudService with ChangeNotifier {
   bool isLoading = true;
 
-  Future<Map<String, dynamic>> repository(IEntityMap entity, String url) async {
+  Future<Map<dynamic>> repository(IEntityMap entity, String url) async {
     var result;
     print('STATE ENTIRY: ${entity.states}');
 
@@ -25,6 +26,8 @@ class MultimediaService with ChangeNotifier {
     print('DEL VALOR DE EVENT BLOC: $result');
     isLoading = false;
     notifyListeners();
+
+    print('RRRRR: $result');
     return result;
   }
 
@@ -83,7 +86,15 @@ class MultimediaService with ChangeNotifier {
     print('urlDDDDDDD: $apiRest');
     final response = await http.post(apiRest,
         headers: {"Content-Type": "application/json"}, body: _body);
-    return dataMap(response);
+
+    Map<dynamic> dataMap;
+
+    if (response.statusCode == STATUSCODE200)
+      dataMap = json.decode(response.body);
+    else
+      dataMap.addAll(throw Exception(STATUSCODE400));
+
+    return dataMap;
   }
 
   _update(IEntityMap entity, String url) async {
@@ -94,6 +105,13 @@ class MultimediaService with ChangeNotifier {
     print('urlDDDDDDD: $apiRest');
     final response = await http.put(apiRest,
         headers: {"Content-Type": "application/json"}, body: _body);
-    return dataMap(response);
+
+    Map<String, dynamic> dataMap;
+
+    if (response.statusCode == STATUSCODE200)
+      dataMap = json.decode(response.body);
+    else
+      dataMap.addAll(throw Exception(STATUSCODE400));
+    return dataMap;
   }
 }
