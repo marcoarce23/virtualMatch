@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:virtual_match/src/model/Preference.dart';
+import 'package:virtual_match/src/model/entity/EntityFromJson/ListadoTorneoModel.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/TorneoModel.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
@@ -25,7 +26,7 @@ class TourmentListPage extends StatefulWidget {
 
 class _TourmentListPageState extends State<TourmentListPage> {
   //DEFINICION DE BLOC Y MODEL
-  TorneoModel entity = new TorneoModel();
+  ListaTorneoModel entity = new ListaTorneoModel();
   model.TorneoModel entityModel = new model.TorneoModel();
   CrudService entityService;
   CrudService entityGet = CrudService();
@@ -92,7 +93,8 @@ class _TourmentListPageState extends State<TourmentListPage> {
 
   Widget futureBuilder(BuildContext context) {
     return FutureBuilder(
-        future: entityGet.get(new TorneoModel(), ''),
+        future: entityGet.get(
+            new ListaTorneoModel(), API + '/api/Torneo/getTodosLosTorneos'),
         builder: (context, AsyncSnapshot snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
@@ -112,21 +114,20 @@ class _TourmentListPageState extends State<TourmentListPage> {
         physics: ClampingScrollPhysics(),
         itemCount: snapshot.data.length,
         itemBuilder: (context, index) {
-          TorneoModel entity = snapshot.data[index];
-
+          ListaTorneoModel entity = snapshot.data[index];
           return _showListTile(entity);
         },
       ),
     );
   }
 
-  Widget _showListTile(TorneoModel entity) {
+  Widget _showListTile(ListaTorneoModel entity) {
     return Container(
       child: gfListTileKey(
           Key(entity.idTorneo.toString()),
-          Text(entity.nombre),
+          Text(entity.nombreTorneo),
           Text(entity.detalle),
-          _showAction(entity, entity.idTorneo.toString()),
+          _showAction(entity, entity.idTipoTorneo.toString()),
           null,
           avatarCircle((entity.foto ?? IMAGE_LOGO), 35),
           EdgeInsets.all(5.0),
@@ -135,7 +136,7 @@ class _TourmentListPageState extends State<TourmentListPage> {
     //Text(entity.nombreEquipo);
   }
 
-  Widget _showAction(TorneoModel entity, String keyId) {
+  Widget _showAction(ListaTorneoModel entity, String keyId) {
     return Row(
       children: <Widget>[
         Text('Operacionesss: $keyId'),
@@ -145,16 +146,6 @@ class _TourmentListPageState extends State<TourmentListPage> {
         _delete(keyId),
       ],
     );
-  }
-
-  Widget _header() {
-    return gfListTileText(
-        'TORNEOS: Virtual Match',
-        'Detalle de los torneos creando.',
-        FaIcon(FontAwesomeIcons.infoCircle),
-        avatarSquare(IMAGE_LOGO, 35.0),
-        EdgeInsets.all(5.0),
-        EdgeInsets.all(3.0));
   }
 
   _update() {
