@@ -8,7 +8,7 @@ import 'package:virtual_match/src/model/util/StatusCode.dart';
 class CrudService with ChangeNotifier {
   bool isLoading = true;
 
-  Future<Map<dynamic>> repository(IEntityMap entity, String url) async {
+  Future<dynamic> repository(IEntityMap entity, String url) async {
     var result;
     print('STATE ENTIRY: ${entity.states}');
 
@@ -87,7 +87,7 @@ class CrudService with ChangeNotifier {
     final response = await http.post(apiRest,
         headers: {"Content-Type": "application/json"}, body: _body);
 
-    Map<dynamic> dataMap;
+    var dataMap;
 
     if (response.statusCode == STATUSCODE200)
       dataMap = json.decode(response.body);
@@ -106,7 +106,7 @@ class CrudService with ChangeNotifier {
     final response = await http.put(apiRest,
         headers: {"Content-Type": "application/json"}, body: _body);
 
-    Map<String, dynamic> dataMap;
+    var dataMap;
 
     if (response.statusCode == STATUSCODE200)
       dataMap = json.decode(response.body);

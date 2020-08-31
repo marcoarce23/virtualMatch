@@ -23,6 +23,7 @@ import 'package:virtual_match/src/service/ClasificadorService.dart';
 import 'package:virtual_match/src/service/ImageService.dart';
 import 'package:virtual_match/src/service/core/FormatService.dart';
 import 'package:virtual_match/src/service/core/TournamentService.dart';
+import 'package:virtual_match/src/service/crudService.dart';
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
@@ -32,33 +33,35 @@ import 'package:virtual_match/src/model/entity/EntityMap/FormatoModel.dart';
 
 class FormatLoadPage extends StatefulWidget {
   static final String routeName = 'formatLoad';
+  String idTorneo;
 
-  final String idTorneo;
+  String nombreTorneo;
 
-  const FormatLoadPage({Key key, @required this.idTorneo}) : super(key: key);
+  FormatLoadPage(
+      {Key key, @required this.idTorneo, @required this.nombreTorneo})
+      : super(key: key);
 
   @override
   _FormatLoadPageState createState() => _FormatLoadPageState();
 }
 
 class _FormatLoadPageState extends State<FormatLoadPage> {
- 
   //DEFINIICON DE VARIABLES GLOBALES
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final controllerName = TextEditingController();
-  final controllerDetail = TextEditingController();
-  final controllerHastag = TextEditingController();
-  final controllerGift = TextEditingController();
-  final controllerOrganization = TextEditingController();
-  final controllerCount = TextEditingController();
-  final controllerFaseTime = TextEditingController();
+  // final controllerName = TextEditingController();
+  // final controllerDetail = TextEditingController();
+  // final controllerHastag = TextEditingController();
+  // final controllerGift = TextEditingController();
+  // final controllerOrganization = TextEditingController();
+  // final controllerCount = TextEditingController();
+  // final controllerFaseTime = TextEditingController();
 
   TextEditingController _inputFieldDateController = new TextEditingController();
   TextEditingController _inputFieldTimeController = new TextEditingController();
 
 //DEFINICION DE BLOC Y MODEL
-  TourmentService entityService;
+  CrudService entityService;
   FormatoModel entity = new FormatoModel();
   ImageService entityImage = new ImageService();
   ClasificadorService entityGet = ClasificadorService();
@@ -105,7 +108,7 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
   @override
   Widget build(BuildContext context) {
     entity.states = StateEntity.Insert;
-    entityService = Provider.of<TourmentService>(context);
+    //entityService = <CrudService>(context);
 
     final FormatoModel entityModel = ModalRoute.of(context).settings.arguments;
 
@@ -265,8 +268,6 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
       });
     }
   }
-
- 
 
   Widget _comboJugador() {
     return Row(
@@ -487,7 +488,7 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
     if (!formKey.currentState.validate()) return;
     formKey.currentState.save();
 
-    print('myControllerSOY EL VALOR DE ' + controllerDetail.text);
+    //print('myControllerSOY EL VALOR DE ' + controllerDetail.text);
 
     setState(() => _save = true);
     loadingEntity();
@@ -496,21 +497,20 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
   }
 
   void loadingEntity() {
-
 //
-entity.idTorneo = 8;
-entity.idTipoCompeticion = 8;
-entity.idaTipoTorneo = 8;
-entity.idaInscripcion= 8;
-entity.idaAsignacion = 8;
-entity.cantidadJugadores= 8;
-entity.idaTipoModalidad = 8;
- entity.usuarioAuditoria = prefs.email;
+    entity.idTorneo = 8;
+    entity.idTipoCompeticion = 8;
+    entity.idaTipoTorneo = 8;
+    entity.idaInscripcion = 8;
+    entity.idaAsignacion = 8;
+    entity.cantidadJugadores = 8;
+    entity.idaTipoModalidad = 8;
+    entity.usuarioAuditoria = prefs.email;
   }
 
-  void executeCUD(TourmentService entityService, FormatoModel entity) async {
+  void executeCUD(CrudService entityService, FormatoModel entity) async {
     try {
-      await entityService.repositoryDetail(entity).then((result) {
+      await entityService.repository(entity, '').then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0') {
           showSnackbar(STATUS_OK, scaffoldKey);
@@ -530,6 +530,4 @@ entity.idaTipoModalidad = 8;
     }
     //  navegation(context, FormatLoadPage());
   }
-
- 
 }

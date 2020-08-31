@@ -38,7 +38,7 @@ class _TourmentAllPageState extends State<TourmentAllPage> {
   final prefs = new Preferense();
   final List<Widget> optionPage = [
     TourmentLoadPage(),
-    FormatLoadPage(idTorneo:'3'),
+    FormatLoadPage(),
     TourmentListPage()
   ];
 

@@ -41,7 +41,7 @@ class _TourmentAllPageState extends State<TourmentAllPage> {
   final prefs = new Preferense();
   final List<Widget> optionPage = [
     TourmentLoadPage(),
-    FormatLoadPage(idTorneo: '0'),
+    FormatLoadPage(idTorneo: '', nombreTorneo: ''),
     TourmentListPage()
   ];
 
@@ -472,7 +472,7 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
   }
 
   void executeCUD(CrudService entityService, TorneoModel entity) async {
-    
+    try {
       await entityService
           .repository(entity, API + '/api/Torneo')
           .then((result) {
@@ -487,12 +487,14 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
                   curve: Curves.bounceOut,
                   type: PageTransitionType.rotate,
                   alignment: Alignment.topCenter,
-                  child: FormatLoadPage(idTorneo: '8')));
+                  child: FormatLoadPage(idTorneo: '', nombreTorneo: '')));
         } else
           showSnackbar(STATUS_ERROR, scaffoldKey);
       });
-   
- 
+    } catch (error) {
+      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
+    }
+    //  navegation(context, FormatLoadPage());
   }
 
   _seleccionarFoto() async {
