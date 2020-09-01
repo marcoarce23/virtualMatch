@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/ListadoTorneoModel.dart';
-import 'package:virtual_match/src/model/entity/EntityFromJson/TorneoModel.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
@@ -80,7 +79,7 @@ class _TourmentListPageState extends State<TourmentListPage> {
                   ],
                 ),
               ),
-              //       futureBuilder(context),
+              futureBuilder(context),
               copyRigth(),
             ],
           ),
@@ -92,6 +91,7 @@ class _TourmentListPageState extends State<TourmentListPage> {
   }
 
   Widget futureBuilder(BuildContext context) {
+    print('entro acaaaaa???');
     return FutureBuilder(
         future: entityGet.get(
             new ListaTorneoModel(), API + '/api/Torneo/getTodosLosTorneos'),
@@ -125,9 +125,26 @@ class _TourmentListPageState extends State<TourmentListPage> {
     return Container(
       child: gfListTileKey(
           Key(entity.idTorneo.toString()),
-          Text(entity.nombreTorneo),
-          Text(entity.detalle),
-          _showAction(entity, entity.idTipoTorneo.toString()),
+          Text('NOMBRE: ${entity.nombreTorneo}',
+              style: TextStyle(color: AppTheme.themeWhite)),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('DETALLE: ${entity.detalle}',
+                  style: TextStyle(color: AppTheme.themeWhite)),
+              Text('TORNEO:  ${entity.tipoTorneo}',
+                  style: TextStyle(color: AppTheme.themeWhite),
+                  textAlign: TextAlign.justify),
+              Text('ELIMINATORIA: ${entity.tipoModalidad}',
+                  style: TextStyle(color: AppTheme.themeWhite)),
+              Text('MODALIDAD: ${entity.idTipoModalidad}',
+                  style: TextStyle(color: AppTheme.themeWhite)),
+              Text('JUGADORES:  ${entity.cantidadJugadores}',
+                  style: TextStyle(color: AppTheme.themeWhite)),
+            ],
+          ),
+          _showAction(entity, entity.idTorneo.toString()),
           null,
           avatarCircle((entity.foto ?? IMAGE_LOGO), 35),
           EdgeInsets.all(5.0),
@@ -139,11 +156,16 @@ class _TourmentListPageState extends State<TourmentListPage> {
   Widget _showAction(ListaTorneoModel entity, String keyId) {
     return Row(
       children: <Widget>[
-        Text('Operacionesss: $keyId'),
+        Text('OPERACIONES: $keyId',
+            style: TextStyle(color: AppTheme.themeWhite)),
         sizedBox(10, 0),
         _update(),
         sizedBox(10, 0),
         _delete(keyId),
+        sizedBox(10, 0),
+        _complete(keyId),
+        sizedBox(10, 0),
+        _start(keyId,"0"),
       ],
     );
   }
@@ -155,7 +177,7 @@ class _TourmentListPageState extends State<TourmentListPage> {
     return InkWell(
       child: FaIcon(
         FontAwesomeIcons.edit,
-        color: AppTheme.themeDefault,
+        color: AppTheme.themePurple,
         size: 20,
       ),
       onTap: () {
@@ -166,17 +188,56 @@ class _TourmentListPageState extends State<TourmentListPage> {
 
   _delete(String keyId) {
     return InkWell(
-      key: Key(keyId),
       child: FaIcon(
         FontAwesomeIcons.trashAlt,
-        color: AppTheme.themeDefault,
+        color: AppTheme.themePurple,
         size: 20,
       ),
       onTap: () {
         setState(() {
-          entityModel.idTorneo = int.parse(keyId);
-          print('eliminar ${entityModel.idTorneo}');
-          executeDelete(entityModel.idTorneo.toString(), prefs.email);
+          //    entityModel.idTorneo = int.parse(keyId);
+          //     print('eliminar ${entityModel.idTorneo}');
+          //      executeDelete(entityModel.idTorneo.toString(), prefs.email);
+        });
+      },
+    );
+  }
+
+  _complete(String keyId) {
+    return InkWell(
+      //  key: Key(keyId),
+      child: FaIcon(
+        FontAwesomeIcons.users,
+        color: AppTheme.themePurple,
+        size: 20,
+      ),
+      onTap: () {
+        setState(() {
+          //    entityModel.idTorneo = int.parse(keyId);
+          //     print('eliminar ${entityModel.idTorneo}');
+          //      executeDelete(entityModel.idTorneo.toString(), prefs.email);
+        });
+      },
+    );
+  }
+
+  _start(String keyId, String modalidad) {
+    return InkWell(
+      key: Key(keyId),
+      child: FaIcon(
+        FontAwesomeIcons.futbol,
+        color: AppTheme.themePurple,
+        size: 20,
+      ),
+      onTap: () {
+        setState(() {
+          if (modalidad == '0')
+            _executeGenerator('/api/Torneo/execGenerarPlayOff/2/usuario/'+prefs.email);
+          else
+            _executeGenerator('/api/Torneo/execGenerarLiga/usuario/'+prefs.email);
+          //    entityModel.idTorneo = int.parse(keyId);
+          //     print('eliminar ${entityModel.idTorneo}');
+          //      executeDelete(entityModel.idTorneo.toString(), prefs.email);
         });
       },
     );
@@ -200,6 +261,21 @@ class _TourmentListPageState extends State<TourmentListPage> {
       TourmentService entityService, model.TorneoModel entity) async {
     try {
       await entityService.repository(entity).then((result) {
+        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
+        if (result["tipo_mensaje"] == '0')
+          showSnackbar(STATUS_OK, scaffoldKey);
+        else
+          showSnackbar(STATUS_ERROR, scaffoldKey);
+      });
+    } catch (error) {
+      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
+    }
+  }
+
+  void _executeGenerator(String url) async {
+    print('ENTROSSSSWWW $url');
+    try {
+      await entityService.execute(API + url).then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0')
           showSnackbar(STATUS_OK, scaffoldKey);

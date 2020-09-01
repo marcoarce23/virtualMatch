@@ -47,10 +47,21 @@ class CrudService with ChangeNotifier {
     return dataMap(response);
   }
 
+  Future<Map<String, dynamic>> execute(String url) async {
+    final apiRest = url; // eventResourceAdd['add'][0].toString()   ;
+    print('urlvvvvvv: $apiRest');
+    final response =
+        await http.post(apiRest);
+
+    isLoading = false;
+    notifyListeners();
+    return dataMap(response);
+  }
+
   Future<List<IEntityJson>> get(IEntityJson entityJson, String url) async {
     final List<IEntityJson> list = new List();
     Map<String, dynamic> decodeData;
-
+    print('URLLLL URLLL: $url');
     final _apiRest = url;
     final response = await http.get(_apiRest);
     print(_apiRest);

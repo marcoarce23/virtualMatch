@@ -13,6 +13,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/ClasificadorModel.dart';
+import 'package:virtual_match/src/model/entity/EntityFromJson/ListadoTorneoModel.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/TorneoModelo.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
@@ -33,13 +34,10 @@ import 'package:virtual_match/src/model/entity/EntityMap/FormatoModel.dart';
 
 class FormatLoadPage extends StatefulWidget {
   static final String routeName = 'formatLoad';
-  String idTorneo;
 
-  String nombreTorneo;
-
-  FormatLoadPage(
-      {Key key, @required this.idTorneo, @required this.nombreTorneo})
-      : super(key: key);
+  FormatLoadPage({
+    Key key,
+  }) : super(key: key);
 
   @override
   _FormatLoadPageState createState() => _FormatLoadPageState();
@@ -49,13 +47,6 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
   //DEFINIICON DE VARIABLES GLOBALES
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  // final controllerName = TextEditingController();
-  // final controllerDetail = TextEditingController();
-  // final controllerHastag = TextEditingController();
-  // final controllerGift = TextEditingController();
-  // final controllerOrganization = TextEditingController();
-  // final controllerCount = TextEditingController();
-  // final controllerFaseTime = TextEditingController();
 
   TextEditingController _inputFieldDateController = new TextEditingController();
   TextEditingController _inputFieldTimeController = new TextEditingController();
@@ -65,6 +56,7 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
   FormatoModel entity = new FormatoModel();
   ImageService entityImage = new ImageService();
   ClasificadorService entityGet = ClasificadorService();
+  TourmentService entityGet1 = TourmentService();
 
   final prefs = new Preferense();
 
@@ -72,19 +64,14 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
   bool _save = false;
   bool isFree = false;
   bool isManual = false;
+  bool isIndividual = false;
   File photo;
-  int typeTourment = 14;
-  int typeInscription = 14;
-  int typeMaterial = 14;
-  int typeAsigment = 14;
   String typeCount = '2';
-  TimeOfDay _time = TimeOfDay.now();
-  String _fecha = DateTime.now().toString().substring(0, 10);
   String image = IMAGE_DEFAULT;
-
   String _opcionTipoCompeticion = '27';
   String _opcionTipoTorneo = '23';
   String _opcionTipoModalidad = '43';
+  String _opcionCodTorneo = '1';
 
   List<String> _cantidad = [
     '2',
@@ -108,21 +95,14 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
   @override
   Widget build(BuildContext context) {
     entity.states = StateEntity.Insert;
-    //entityService = <CrudService>(context);
-
-    final FormatoModel entityModel = ModalRoute.of(context).settings.arguments;
-
-    if (entityModel != null) {
-      entity = entityModel;
-      entity.states = StateEntity.Update;
-    }
+    entityService = Provider.of<CrudService>(context);
 
     return Scaffold(
       key: scaffoldKey,
       body: Stack(
         children: <Widget>[
           background(context, 'IMAGE_LOGO'),
-          showPictureOval(photo, image, 130.0),
+          //  showPictureOval(photo, image, 130.0),
           _form(context),
         ],
       ),
@@ -139,7 +119,7 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
         key: formKey,
         child: Column(
           children: <Widget>[
-            sizedBox(0.0, 125.0),
+            sizedBox(0.0, 15.0),
             Container(
               margin: EdgeInsets.symmetric(vertical: 0.0),
               decoration: containerImage(),
@@ -168,6 +148,7 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         sizedBox(0.0, 7.0),
+        //     _comboCodTroneo(_opcionCodTorneo),
         _comboTorneoCreado(_opcionTipoCompeticion),
         _comboJugador(),
         _comboCompeticion(_opcionTipoCompeticion),
@@ -227,46 +208,34 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
     );
   }
 
-  _selectDate(BuildContext context) async {
-    DateTime picked = await showDatePicker(
-        context: context,
-        initialDate: new DateTime.now(),
-        firstDate: new DateTime(2020, 4),
-        lastDate: new DateTime(2025, 12),
-        locale: Locale('es', 'ES'));
-
-    if (picked != null) {
-      setState(() {
-        _fecha = DateFormat("yyyy-MM-dd").format(picked);
-        _inputFieldDateController.text = _fecha;
-        //print(_inputFieldDateController.text);
-      });
-    }
-  }
-
-  _selectTime(BuildContext context) async {
-    TimeOfDay picked = await showTimePicker(
-      context: context,
-      initialTime: _time,
-
-      builder: (BuildContext context, Widget child) {
-        return MediaQuery(
-          data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
-          child: child,
-        );
-      },
-      //    locale: Locale('es', 'ES')
-    );
-
-    if (picked != null) {
-      setState(() {
-        _time = picked;
-        _inputFieldTimeController.text = _time.hour.toString() +
-            ':' +
-            _time.minute
-                .toString(); //TimeOfDay(hour: _time.hour, minute: _time.minute).toString();
-      });
-    }
+  Widget _comboCodTroneo(String _opcionCodTorneo) {
+    return Center(
+        child: FutureBuilder(
+            future: entityGet1.getTodosLosTorneos(new ListaTorneoModel()),
+            builder: (context, AsyncSnapshot snapshot) {
+              if (snapshot.hasData) {
+                return Row(
+                  children: <Widget>[
+                    SizedBox(width: 35.0),
+                    Text('Selecciones el torneo:'),
+                    SizedBox(width: 15.0),
+                    DropdownButton(
+                      icon: FaIcon(FontAwesomeIcons.sort,
+                          color: AppTheme.themePurple),
+                      value: _opcionTipoCompeticion,
+                      items: getDropDown(snapshot),
+                      onChanged: (value) {
+                        setState(() {
+                          _opcionCodTorneo = value;
+                        });
+                      },
+                    ),
+                  ],
+                );
+              } else {
+                return GFLoader(type: GFLoaderType.circle, size: 35.0);
+              }
+            }));
   }
 
   Widget _comboJugador() {
@@ -449,12 +418,12 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
 
   Widget _inscription(String text) {
     return SwitchListTile(
-      value: isFree,
+      value: isIndividual,
       title: Text(text),
       subtitle: Text('Habilitar opción si será de pago.'),
       activeColor: AppTheme.themePurple,
       onChanged: (value) => setState(() {
-        isFree = value;
+        isIndividual = value;
       }),
     );
   }
@@ -497,20 +466,20 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
   }
 
   void loadingEntity() {
-//
-    entity.idTorneo = 8;
-    entity.idTipoCompeticion = 8;
-    entity.idaTipoTorneo = 8;
-    entity.idaInscripcion = 8;
-    entity.idaAsignacion = 8;
-    entity.cantidadJugadores = 8;
-    entity.idaTipoModalidad = 8;
+    entity.idTorneo = 43;
+    entity.idTipoCompeticion = int.parse(_opcionTipoCompeticion);
+    entity.idaTipoTorneo = int.parse(_opcionTipoTorneo);
+    entity.idaInscripcion = 1;
+    entity.idaAsignacion = 1;
+    entity.cantidadJugadores = int.parse(typeCount);
+    entity.idaTipoModalidad = int.parse(_opcionTipoModalidad);
     entity.usuarioAuditoria = prefs.email;
-  }
+
+   }
 
   void executeCUD(CrudService entityService, FormatoModel entity) async {
     try {
-      await entityService.repository(entity, '').then((result) {
+      await entityService.repository(entity, API+'/api/Formato').then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0') {
           showSnackbar(STATUS_OK, scaffoldKey);
