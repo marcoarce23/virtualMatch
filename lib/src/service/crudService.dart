@@ -95,7 +95,6 @@ class CrudService with ChangeNotifier {
       dataMap.addAll(throw Exception(STATUSCODE400));
 
     return dataMap;
-    */
   }
 
   _update(IEntityMap entity, String url) async {

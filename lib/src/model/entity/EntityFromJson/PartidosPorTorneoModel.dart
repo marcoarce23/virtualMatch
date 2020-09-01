@@ -14,9 +14,16 @@ class PartidosPorTorneoModel implements IEntityJson {
   int idEliminatoria;
   int idResultado;
   int idTorneo;
-
   int dIdJugador;
   int iIdJugador;
+  String iCorreo;
+  String iFacebook;
+  String iTwitter;
+  String dCorreo;
+  String dFacebook;
+  String dTwitter;
+  String iTelefono;
+  String dTelefono;
 
   PartidosPorTorneoModel({
     this.iGoles,
@@ -34,6 +41,14 @@ class PartidosPorTorneoModel implements IEntityJson {
     this.idTorneo,
     this.dIdJugador,
     this.iIdJugador,
+    this.iCorreo,
+    this.iFacebook,
+    this.iTwitter,
+    this.dCorreo,
+    this.dFacebook,
+    this.dTwitter,
+    this.iTelefono,
+    this.dTelefono,
   });
 
   fromJson(Map<String, dynamic> json) => new PartidosPorTorneoModel(
@@ -52,5 +67,13 @@ class PartidosPorTorneoModel implements IEntityJson {
         fechaTorneo: DateTime.parse(json["fechaTorneo"]),
         nombreTorneo: json["nombreTorneo"],
         fechaPartido: DateTime.parse(json["fechaPartido"]),
+        iCorreo: json["iCorreo"],
+        iFacebook: json["iFacebook"],
+        iTwitter: json["iTwitter"],
+        dCorreo: json["dCorreo"],
+        dFacebook: json["dFacebook"],
+        dTwitter: json["dTwitter"],
+        iTelefono: json["iTelefono"],
+        dTelefono: json["dTelefono"],
       );
 }
