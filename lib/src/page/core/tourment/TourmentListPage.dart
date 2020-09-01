@@ -234,7 +234,7 @@ class _TourmentListPageState extends State<TourmentListPage> {
           if (modalidad == '0')
             _executeGenerator('/api/Torneo/execGenerarPlayOff/2/usuario/'+prefs.email);
           else
-            _executeGenerator('/api/Torneo/execGenerarLiga/2/usuario/'+prefs.email);
+            _executeGenerator('/api/Torneo/execGenerarLiga/usuario/'+prefs.email);
           //    entityModel.idTorneo = int.parse(keyId);
           //     print('eliminar ${entityModel.idTorneo}');
           //      executeDelete(entityModel.idTorneo.toString(), prefs.email);

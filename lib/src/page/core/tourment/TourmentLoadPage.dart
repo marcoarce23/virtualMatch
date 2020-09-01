@@ -41,7 +41,7 @@ class _TourmentAllPageState extends State<TourmentAllPage> {
   final prefs = new Preferense();
   final List<Widget> optionPage = [
     TourmentLoadPage(),
-    FormatLoadPage(idTorneo: '', nombreTorneo: ''),
+    FormatLoadPage(),
     TourmentListPage()
   ];
 
@@ -481,13 +481,10 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
         if (result["tipo_mensaje"] == '0') {
           showSnackbar(STATUS_OK, scaffoldKey);
 
-          Navigator.push(
-              context,
-              PageTransition(
-                  curve: Curves.bounceOut,
-                  type: PageTransitionType.rotate,
-                  alignment: Alignment.topCenter,
-                  child: FormatLoadPage(idTorneo: '', nombreTorneo: '')));
+          // navigation(
+          //   context, TourmentListPage()
+          // );
+          
         } else
           showSnackbar(STATUS_ERROR, scaffoldKey);
       });
