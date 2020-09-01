@@ -108,14 +108,7 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
   @override
   Widget build(BuildContext context) {
     entity.states = StateEntity.Insert;
-    //entityService = <CrudService>(context);
-
-    final FormatoModel entityModel = ModalRoute.of(context).settings.arguments;
-
-    if (entityModel != null) {
-      entity = entityModel;
-      entity.states = StateEntity.Update;
-    }
+    entityService = Provider.of<CrudService>(context);
 
     return Scaffold(
       key: scaffoldKey,

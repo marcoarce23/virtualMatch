@@ -73,13 +73,13 @@ class _TourmentAllPageState extends State<TourmentAllPage> {
                   FontAwesomeIcons.bell,
                   size: 25,
                 ),
-                title: Text('Formato')),
+                title: Text('Torneo')),
             BottomNavigationBarItem(
                 icon: FaIcon(
                   FontAwesomeIcons.futbol,
                   size: 25,
                 ),
-                title: Text('Torneos')),
+                title: Text('Formato')),
             BottomNavigationBarItem(
                 icon: FaIcon(
                   FontAwesomeIcons.listAlt,

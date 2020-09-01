@@ -2,8 +2,13 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:virtual_match/src/model/Preference.dart';
+import 'package:virtual_match/src/model/entity/EntityMap/TorneoModelo.dart';
+import 'package:virtual_match/src/model/util/Const.dart';
+import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/service/NotificactionService.dart';
+import 'package:virtual_match/src/service/crudService.dart';
 
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
@@ -31,8 +36,8 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
   final prefs = new Preferense();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
+  CrudService entityService = new CrudService();
   ListaTorneoModel entity = new ListaTorneoModel();
-  TourmentService entityService;
   TourmentService entityGet = TourmentService();
 
 // model.NotificacionModel entityModel = new model.NotificacionModel();
@@ -45,12 +50,15 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    // entityService = Provider.of<TourmentService>(context);
+    //entityService = Provider.of<CrudService>(context);
 
-    return SafeArea(
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(builder: (_) => new CrudService()),
+      ],
       child: Scaffold(
         key: scaffoldKey,
-        appBar: appBar('TORNEOS FIFA BOLIVIA'),
+        appBar: appBar('TORNEOS VIRTUAL MATCH'),
         body: bodyContainer(context),
         drawer: DrawerMenu(),
         floatingActionButton: new CircularMenu(),
@@ -205,16 +213,18 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
   }
 
   Widget _showAction(String keyId) {
-    return Row(
-      children: <Widget>[
-        Text('OPERACIONES: $keyId',
-            style: TextStyle(color: AppTheme.themeWhite)),
-        sizedBox(5, 0),
-        _subcription(keyId),
-        sizedBox(5, 0),
-        _delete(keyId),
+    return Column(
+      children: [
         sizedBox(5, 0),
         _detail(keyId),
+        sizedBox(0, 6),
+        Row(
+          children: <Widget>[
+            _subcription(keyId),
+            sizedBox(5, 0),
+            _delete(keyId),
+          ],
+        ),
       ],
     );
   }
@@ -223,51 +233,109 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
     //  entityModel.states = StateEntity.Update;
     // entityModel.usuarioAuditoria = prefs.email;
 
-    return InkWell(
-      child: FaIcon(
-        FontAwesomeIcons.handsHelping,
-        color: AppTheme.themePurple,
-        size: 23,
-      ),
-      onTap: () {
-        setState(() {});
-      },
+    return Row(
+      children: [
+        Text('Inscribirse: ', style: TextStyle(color: AppTheme.themeWhite)),
+        InkWell(
+          child: FaIcon(
+            FontAwesomeIcons.handPointUp,
+            color: AppTheme.themePurple,
+            semanticLabel: 'Inscribirse',
+            size: 27,
+          ),
+          onTap: () {
+            setState(() {
+              _executeInscription('1', '4');
+            });
+          },
+        ),
+      ],
     );
   }
 
   _delete(String keyId) {
-    return InkWell(
-      key: Key(keyId),
-      child: FaIcon(
-        FontAwesomeIcons.subscript,
-        color: AppTheme.themePurple,
-        size: 23,
-      ),
-      onTap: () {
-        setState(() {
-          // entityModel.idNotificacion = int.parse(keyId);
-          // print('eliminar ${entityModel.idNotificacion}');
-          // executeDelete(entityModel.idNotificacion.toString(), prefs.email);
-        });
-      },
+    return Row(
+      children: [
+        Text('Salirse: ', style: TextStyle(color: AppTheme.themeWhite)),
+        InkWell(
+          key: Key(keyId),
+          child: FaIcon(
+            FontAwesomeIcons.handPointDown,
+            color: AppTheme.themePurple,
+            size: 27,
+          ),
+          onTap: () {
+            setState(() {
+              // entityModel.idNotificacion = int.parse(keyId);
+              // print('eliminar ${entityModel.idNotificacion}');
+              _executeUnsuscription('1', '3');
+            });
+          },
+        ),
+      ],
     );
   }
 
   _detail(String keyId) {
-    return InkWell(
-      //
-      child: FaIcon(
-        FontAwesomeIcons.shower,
-        color: AppTheme.themePurple,
-        size: 23,
-      ),
-      onTap: () {
-        setState(() {
-          // entityModel.idNotificacion = int.parse(keyId);
-          // print('eliminar ${entityModel.idNotificacion}');
-          // executeDelete(entityModel.idNotificacion.toString(), prefs.email);
-        });
-      },
+    return Row(
+      children: [
+        Text('VER DETALLE DEL TORNEO : ',
+            style: TextStyle(color: AppTheme.themeWhite)),
+        InkWell(
+          //
+          child: FaIcon(
+            FontAwesomeIcons.commentDots,
+            color: AppTheme.themePurple,
+            size: 27,
+          ),
+          onTap: () {
+            setState(() {
+              _executeUnsuscription('1', '3');
+            });
+          },
+        ),
+      ],
     );
+  }
+
+  void _executeInscription(String idTorneo, String idJugador) async {
+    print('ENTROSSSS $idTorneo y $idJugador');
+    try {
+      await entityService
+          .execute(API +
+              '/api/Torneo/Inscribir/Torneo/' +
+              idTorneo +
+              '/Jugador/' +
+              idJugador)
+          .then((result) {
+        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
+        if (result["tipo_mensaje"] == '0')
+          showSnackbar(STATUS_OK, scaffoldKey);
+        else
+          showSnackbar(STATUS_ERROR, scaffoldKey);
+      });
+    } catch (error) {
+      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
+    }
+  }
+
+  void _executeUnsuscription(String idTorneo, String idJugador) async {
+    try {
+      await entityService
+          .execute(API +
+              '/api/Torneo/Desinscribir/Torneo/' +
+              idTorneo +
+              '/Jugador/' +
+              idJugador)
+          .then((result) {
+        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
+        if (result["tipo_mensaje"] == '0')
+          showSnackbar(STATUS_OK, scaffoldKey);
+        else
+          showSnackbar(STATUS_ERROR, scaffoldKey);
+      });
+    } catch (error) {
+      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
+    }
   }
 }
