@@ -71,11 +71,11 @@ class _EquipmentPlayersTournamentState
         children: <Widget>[
           sizedBox(0, 7),
           gfListTile(
-              Text(entity.nombreEquipo),
+              Text(entity.nombreJugador),
               _showPlayerDetail(entity),
               _showAvatarDetail(entity),
               null,
-              avatarCircle((entity.fotoEquipo ?? IMAGE_LOGO), 35),
+              avatarCircle((entity.fotoJugador ?? IMAGE_LOGO), 35),
               EdgeInsets.all(5.0),
               EdgeInsets.all(3.0)),
           sizedBox(0, 7),
@@ -89,7 +89,6 @@ class _EquipmentPlayersTournamentState
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Text(entity.detalleEquipo),
         //sizedBox(5, 0),
 
         Row(

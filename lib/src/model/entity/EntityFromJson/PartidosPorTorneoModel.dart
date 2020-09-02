@@ -14,8 +14,6 @@ class PartidosPorTorneoModel implements IEntityJson {
   int idEliminatoria;
   int idResultado;
   int idTorneo;
-  int dIdJugador;
-  int iIdJugador;
   String iCorreo;
   String iFacebook;
   String iTwitter;
@@ -39,8 +37,6 @@ class PartidosPorTorneoModel implements IEntityJson {
     this.idEliminatoria,
     this.idResultado,
     this.idTorneo,
-    this.dIdJugador,
-    this.iIdJugador,
     this.iCorreo,
     this.iFacebook,
     this.iTwitter,
@@ -62,8 +58,6 @@ class PartidosPorTorneoModel implements IEntityJson {
         idEliminatoria: json["iD_ELIMINATORIA"],
         idResultado: json["iD_RESULTADO"],
         idTorneo: json["iD_TORNEO"],
-        dIdJugador: json["dIdJugador"],
-        iIdJugador: json["iIdJugador"],
         fechaTorneo: DateTime.parse(json["fechaTorneo"]),
         nombreTorneo: json["nombreTorneo"],
         fechaPartido: DateTime.parse(json["fechaPartido"]),

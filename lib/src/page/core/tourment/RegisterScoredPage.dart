@@ -92,8 +92,6 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
         entityResultado.states = StateEntity.Update;
         entityResultado.fechaAuditoria = DateTime.now().toString();
         entityResultado.idEliminatoria = entity.idEliminatoria;
-        entityResultado.idEquipo1 = entity.iIdJugador;
-        entityResultado.idEquipo2 = entity.dIdJugador;
         entityResultado.idResultado = entity.idResultado;
         entityResultado.idTorneo = entity.idTorneo;
 
