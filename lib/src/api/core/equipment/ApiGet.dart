@@ -4,7 +4,7 @@ import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/api/core/equipment/ApiResource.dart';
 
 class ApiGet {
-   Future<List<IEntityJson>> get(IEntityJson entity) async {
+  Future<List<IEntityJson>> get(IEntityJson entity) async {
     final List<IEntityJson> list = new List();
     Map<String, dynamic> decodeData;
 
@@ -28,17 +28,17 @@ class ApiGet {
     return getListIEntityJson(response, entity, decodeData, list);
   }
 
- Future<List<IEntityJson>> getTodosJugadores(IEntityJson entity, int value) async {
+  Future<List<IEntityJson>> getTodosJugadores(
+      IEntityJson entity, int value) async {
     final List<IEntityJson> list = new List();
     Map<String, dynamic> decodeData;
 
-    final _apiRest = api['getListaJugadores'][0].toString();// + '/' + value.toString();
+    final _apiRest =
+        api['getListaJugadores'][0].toString(); // + '/' + value.toString();
     final response = await http.get(_apiRest);
 
     print(_apiRest);
 
     return getListIEntityJson(response, entity, decodeData, list);
   }
-
-
 }

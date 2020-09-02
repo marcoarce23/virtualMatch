@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/PartidosPorTorneoModel.dart';
 import 'package:virtual_match/src/service/core/PartidosPorTorneoService.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
+import 'package:virtual_match/src/widget/general/CallWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 import 'RegisterScoredPage.dart';
@@ -54,16 +55,7 @@ class _TournamentPlayerScoredState extends State<TournamentPlayerScored> {
         itemCount: snapshot.data.length,
         itemBuilder: (context, index) {
           PartidosPorTorneoModel entity = snapshot.data[index];
-          return InkWell(
-              onTap: () {
-                navegation(
-                    context,
-                    RegisterScoredPage(
-                      entity: entity,
-                      idTorneo: widget.idTorneo,
-                    ));
-              },
-              child: showScored(entity));
+          return showScored(entity);
         },
       ),
     );
@@ -86,7 +78,8 @@ class _TournamentPlayerScoredState extends State<TournamentPlayerScored> {
                 children: <Widget>[
                   avatarCircle(entity.iFoto, 35.0),
                   Text(entity.iJugador),
-                  _showAction(entity),
+                  sizedBox(0, 8),
+                  _showActionIzq(entity),
                 ],
               ),
               Column(
@@ -131,8 +124,9 @@ class _TournamentPlayerScoredState extends State<TournamentPlayerScored> {
               Column(
                 children: <Widget>[
                   avatarCircle(entity.dFoto, 35.0),
-                  Text(entity.iJugador),
-                  _showAction(entity),
+                  Text(entity.dJugador),
+                  sizedBox(0, 8),
+                  _showActionDer(entity),
                 ],
               ),
               sizedBox(0, 6),
@@ -143,38 +137,84 @@ class _TournamentPlayerScoredState extends State<TournamentPlayerScored> {
     );
   }
 
-  Widget _showAction(PartidosPorTorneoModel entity) {
+  Widget _showActionIzq(PartidosPorTorneoModel entity) {
     return Row(
       children: <Widget>[
-        _phone(),
+        _phoneIzq(entity.iTelefono),
         sizedBox(15, 0),
-        _whatApp(),
+        _whatAppIzq(entity.iTelefono),
       ],
     );
   }
 
-  _phone() {
+  Widget _showActionDer(PartidosPorTorneoModel entity) {
+    return Row(
+      children: <Widget>[
+        _phoneDer(entity.dTelefono),
+        sizedBox(15, 0),
+        _whatAppDer(entity.dTelefono),
+      ],
+    );
+  }
+
+  _phoneDer(String telefono) {
     return InkWell(
       child: FaIcon(
         FontAwesomeIcons.phone,
         color: AppTheme.themeDefault,
-        size: 25,
+        size: 20,
       ),
       onTap: () {
-        setState(() {});
+        setState(() {
+          callNumber(int.parse(telefono));
+        });
       },
     );
   }
 
-  _whatApp() {
+  _phoneIzq(String telefono) {
+    return InkWell(
+      child: FaIcon(
+        FontAwesomeIcons.phone,
+        color: AppTheme.themeDefault,
+        size: 20,
+      ),
+      onTap: () {
+        setState(() {
+          callNumber(int.parse(telefono));
+        });
+      },
+    );
+  }
+
+  _whatAppDer(String telefono) {
     return InkWell(
       child: FaIcon(
         FontAwesomeIcons.whatsapp,
         color: AppTheme.themeDefault,
-        size: 25,
+        size: 20,
       ),
       onTap: () {
-        setState(() {});
+        setState(() {
+          callWhatsAppText(int.parse(telefono),
+              "*virtualMatch:* Hola, estas listo para jugar?");
+        });
+      },
+    );
+  }
+
+  _whatAppIzq(String telefono) {
+    return InkWell(
+      child: FaIcon(
+        FontAwesomeIcons.whatsapp,
+        color: AppTheme.themeDefault,
+        size: 20,
+      ),
+      onTap: () {
+        setState(() {
+          callWhatsAppText(int.parse(telefono),
+              "*virtualMatch:* Hola, estas listo para jugar?");
+        });
       },
     );
   }

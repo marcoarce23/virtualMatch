@@ -65,7 +65,6 @@ class _PositionTableState extends State<PositionTable> {
                     numeric: false,
                     tooltip: "Equipos".toUpperCase(),
                   ),
-
                   DataColumn(
                     label: Text(
                       'Equipos'.toUpperCase(),
@@ -77,8 +76,7 @@ class _PositionTableState extends State<PositionTable> {
                     numeric: false,
                     tooltip: "Equipos".toUpperCase(),
                   ),
-
-                    DataColumn(
+                  DataColumn(
                     label: Text(
                       'PJ',
                       style: TextStyle(
@@ -89,7 +87,6 @@ class _PositionTableState extends State<PositionTable> {
                     numeric: true,
                     tooltip: "Jugados",
                   ),
-
                   DataColumn(
                     label: Text(
                       'PG',
@@ -139,7 +136,7 @@ class _PositionTableState extends State<PositionTable> {
                     .map(
                       (data) => DataRow(
                         cells: [
-                            DataCell(
+                          DataCell(
                             Container(
                               width: 15.0,
                               child: Center(
@@ -152,7 +149,6 @@ class _PositionTableState extends State<PositionTable> {
                               ),
                             ),
                           ),
-
                           DataCell(
                             Container(
                               width: 140.0,
@@ -167,12 +163,12 @@ class _PositionTableState extends State<PositionTable> {
                                         fontWeight: FontWeight.w600,
                                         fontSize: 12),
                                   ),
+                                  Text(data.nombreEquipo),
                                 ],
                               ),
                             ),
                           ),
-
-                            DataCell(
+                          DataCell(
                             Container(
                               width: 15.0,
                               child: Center(
@@ -185,7 +181,6 @@ class _PositionTableState extends State<PositionTable> {
                               ),
                             ),
                           ),
-
                           DataCell(
                             Container(
                               width: 15.0,

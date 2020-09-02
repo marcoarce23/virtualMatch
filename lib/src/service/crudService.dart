@@ -89,7 +89,7 @@ class CrudService with ChangeNotifier {
     return getListIEntityJson(response, entityJson, decodeData, list);
   }
 
-  _insert(IEntityMap entity, String url) async {
+  Future<Map<String, dynamic>> _insert(IEntityMap entity, String url) async {
     String _body = json.encode(entity.toJson());
     print('body: $_body');
     final apiRest = url; // eventResourceAdd['add'][0].toString()   ;

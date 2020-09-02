@@ -6,13 +6,14 @@ import 'package:virtual_match/src/model/util/StatusCode.dart';
 
 Map dataMap(http.Response response) {
   Map dataMap;
-
+  print('Response status: ${response.statusCode}');
+  print('Response body: ${response.body}');
   if (response.statusCode == STATUSCODE200)
     dataMap = json.decode(response.body);
   else
-    dataMap.addAll(throw Exception(STATUSCODE400));
+    throw Exception(
+        'Error occured while Communication with Server with StatusCode : ${response.statusCode}');
 
-  print('DATA MAP: $dataMap');
   return dataMap;
 }
 
@@ -31,6 +32,6 @@ List<IEntityJson> getListIEntityJson(http.Response response, IEntityJson entity,
   } else {
     Exception('Error: Status 400');
   }
-  print('OOOOOOO: $list');
+
   return list;
 }
