@@ -3,8 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:virtual_match/src/api/core/tourment/ApiGet.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 
-
-class PartidosPorTorneoService with ChangeNotifier  {
+class PartidosPorTorneoService with ChangeNotifier {
   bool isLoading = true;
 
   final _apiGet = new ApiGet();
@@ -34,15 +33,11 @@ class PartidosPorTorneoService with ChangeNotifier  {
   }
   */
 
-  
-Future<List<IEntityJson>> getPartidosTorneoX(IEntityJson entityJson, int value) async {
+  Future<List<IEntityJson>> getPartidosTorneoX(
+      IEntityJson entityJson, int value) async {
     var _result = await _apiGet.getPartidosTorneo(entityJson, value);
     isLoading = false;
-    notifyListeners();    
+    notifyListeners();
     return _result;
   }
-
-
-
- 
 }
