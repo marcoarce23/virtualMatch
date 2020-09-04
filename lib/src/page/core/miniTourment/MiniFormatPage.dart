@@ -23,6 +23,7 @@ import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/model/util/Validator.dart' as validator;
 import 'package:virtual_match/src/model/entity/EntityMap/FormatoModel.dart';
+import 'package:virtual_match/src/widget/image/ImageWidget.dart';
 
 class MiniFormatLoadPage extends StatefulWidget {
   static final String routeName = 'formatLoad';
@@ -39,9 +40,6 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
   //DEFINIICON DE VARIABLES GLOBALES
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
-
-  TextEditingController _inputFieldDateController = new TextEditingController();
-  TextEditingController _inputFieldTimeController = new TextEditingController();
 
 //DEFINICION DE BLOC Y MODEL
   CrudService entityService;
@@ -137,16 +135,18 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        sizedBox(0.0, 7.0),
+      //  sizedBox(0.0, 7.0),
+      showPictureOval(photo, image, 125.0),
+          dividerBlack(),
         _comboCodTroneo(_opcionCodTorneo),
         _comboTorneoCreado(_opcionTipoCompeticion),
         _comboJugador(),
         _comboCompeticion(_opcionTipoCompeticion),
         _comboTorneo(_opcionTipoTorneo),
         _comboModalidad(_opcionTipoModalidad),
-        _porEquipo('Por equipo?'),
-        _inscription('Torneo de Pago'),
-        _selection('Selección Manual'),
+      //  _porEquipo('Por equipo?'),
+      //  _inscription('Torneo de Pago'),
+     //   _selection('Selección Manual'),
         Text(
           '(*) Campos obligatorios. ',
           style: kCamposTitleStyle,

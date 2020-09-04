@@ -39,7 +39,7 @@ class _MiniTourmentAllPageState extends State<MiniTourmentAllPage> {
   int page = 0;
   final prefs = new Preferense();
   final List<Widget> optionPage = [
-    TourmentLoadPage(),
+    MiniTourmentLoadPage(),
     MiniFormatLoadPage(),
     MiniTourmentListPage()
   ];
