@@ -1,8 +1,12 @@
 const String IMAGE_LOGO =
-    'https://res.cloudinary.com/propia/image/upload/v1589642715/gb13qky0nobqqg6z2h4e.jpg';
+    'https://res.cloudinary.com/propia/image/upload/v1599165364/jb3izteupo8zjtg1lhim.png';
+
+const String IMAGE_LOGOB =
+    'https://res.cloudinary.com/propia/image/upload/v1599167231/bptu2ayo1lomgnteqelm.png';
+
 // 'https://res.cloudinary.com/propia/image/upload/v1594739598/v93fwhgfuyndbofhotbv.jpg';
 const String IMAGE_DEFAULT =
-    'https://res.cloudinary.com/propia/image/upload/v1590111330/bqlz5vkioq29stz2t7yq.png';
+    'https://res.cloudinary.com/propia/image/upload/v1599164970/kotogomfvjj3vtga86fo.png';
 
 const String IMAGE_SOROJCHI =
     'https://res.cloudinary.com/propia/image/upload/v1597467122/uuaijxqicu6bvidqjtoh.jpg';

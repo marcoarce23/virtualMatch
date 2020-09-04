@@ -34,7 +34,7 @@ class _OrganizationPageState extends State<OrganizationPage> {
               _crearImagen(context),
               _crearTitulo(),
               _crearAcciones(context),
-              divider(),
+              dividerBlack(),
               _crearTexto(),
               sizedBox(0, 10),
               _crearTexto1(),
@@ -44,7 +44,7 @@ class _OrganizationPageState extends State<OrganizationPage> {
               _crearTexto3(),
               sizedBox(0, 10),
               _crearTexto4(),
-              copyRigth()
+              copyRigthBlack()
             ],
           ),
         ));

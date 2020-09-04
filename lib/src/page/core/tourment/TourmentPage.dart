@@ -31,8 +31,12 @@ class _TourmentPageState extends State<TourmentPage> {
   ListaTorneoModel entity = new ListaTorneoModel();
   TourmentService entityService;
   TourmentService entityGet = TourmentService();
+
+  TabController tabController;
+  
   @override
   void initState() {
+     // tabController = TabController(length: 3, vsync: this);
     super.initState();
   }
 
@@ -60,14 +64,13 @@ class _TourmentPageState extends State<TourmentPage> {
         sizedBox(0, 6),
         futureBuilderTorneo(context),
         sizedBox(0, 8),
-        GFTabs(
-          tabBarColor: AppTheme.themeDefault,
-          indicatorColor: AppTheme.themePurple,
-          //indicatorWeight: 4.0,
-          initialIndex: 0,
-          length: 3,
-          tabs: <Widget>[
-            Tab(
+
+       GFSegmentTabs(
+
+
+  length: 3,
+  tabs: <Widget>[
+     Tab(
               icon: Icon(Icons.perm_identity),
               child: Text(
                 "EQUIPOS",
@@ -85,55 +88,83 @@ class _TourmentPageState extends State<TourmentPage> {
                 "Posiciones".toUpperCase(),
               ),
             ),
-          ],
-          tabBarView: GFTabBarView(
-            children: <Widget>[
-              SingleChildScrollView(
-                child: Column(
-                  children: <Widget>[
-                    divider(),
-                    Text('Listado de Equipos'.toUpperCase(),
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20)),
-                    sizedBox(0, 6),
-                    EquipmentPlayersTournament(
-                      idTorneo: widget.idTorneo,
-                    ),
-                    //copyRigth(),
-                  ],
-                ),
-              ),
-              SingleChildScrollView(
-                child: Column(
-                  children: <Widget>[
-                    divider(),
-                    Text('Fixture de Partidos'.toUpperCase(),
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20)),
-                    TournamentPlayerScored(
-                      idTorneo: widget.idTorneo,
-                    ),
-                    //copyRigth(),
-                  ],
-                ),
-              ),
-              SingleChildScrollView(
-                child: Column(
-                  children: <Widget>[
-                    divider(),
-                    Text('TABLA DE POSICIONES',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20)),
-                    PositionTable(
-                      idTorneo: widget.idTorneo,
-                    ),
-                    //copyRigth(),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
+   ],
+),
+
+        // GFTabs(
+        //   tabBarColor: AppTheme.themeDefault,
+        //   indicatorColor: AppTheme.themePurple,
+        //   //indicatorWeight: 4.0,
+        //   initialIndex: 0,
+        //   length: 3,
+        //   tabs: <Widget>[
+        //     Tab(
+        //       icon: Icon(Icons.perm_identity),
+        //       child: Text(
+        //         "EQUIPOS",
+        //       ),
+        //     ),
+        //     Tab(
+        //       icon: Icon(Icons.score),
+        //       child: Text(
+        //         "Fixture".toUpperCase(),
+        //       ),
+        //     ),
+        //     Tab(
+        //       icon: Icon(Icons.table_chart),
+        //       child: Text(
+        //         "Posiciones".toUpperCase(),
+        //       ),
+        //     ),
+        //   ],
+        //   tabBarView: GFTabBarView(
+        //     children: <Widget>[
+        //       SingleChildScrollView(
+        //         child: Column(
+        //           children: <Widget>[
+        //             divider(),
+        //             Text('Listado de Equipos'.toUpperCase(),
+        //                 style: TextStyle(
+        //                     fontWeight: FontWeight.bold, fontSize: 20)),
+        //             sizedBox(0, 6),
+        //             EquipmentPlayersTournament(
+        //               idTorneo: widget.idTorneo,
+        //             ),
+        //             //copyRigth(),
+        //           ],
+        //         ),
+        //       ),
+        //       SingleChildScrollView(
+        //         child: Column(
+        //           children: <Widget>[
+        //             divider(),
+        //             Text('Fixture de Partidos'.toUpperCase(),
+        //                 style: TextStyle(
+        //                     fontWeight: FontWeight.bold, fontSize: 20)),
+        //             TournamentPlayerScored(
+        //               idTorneo: widget.idTorneo,
+        //             ),
+        //             //copyRigth(),
+        //           ],
+        //         ),
+        //       ),
+        //       SingleChildScrollView(
+        //         child: Column(
+        //           children: <Widget>[
+        //             divider(),
+        //             Text('TABLA DE POSICIONES',
+        //                 style: TextStyle(
+        //                     fontWeight: FontWeight.bold, fontSize: 20)),
+        //             PositionTable(
+        //               idTorneo: widget.idTorneo,
+        //             ),
+        //             //copyRigth(),
+        //           ],
+        //         ),
+        //       ),
+        //     ],
+        //   ),
+        // ),
       ],
     );
   }

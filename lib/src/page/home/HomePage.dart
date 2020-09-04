@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
       bottom: true,
       top: true,
       child: Scaffold(
-        appBar: appBar('Virtual Match - Sorojchi eclub'),
+        appBar: appBar('Virtual Match'),
         body: NotificationPage(),
         drawer: DrawerMenu(),
         floatingActionButton: new CircularMenu(),

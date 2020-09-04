@@ -23,7 +23,7 @@ Widget showInformationBasic(
             Text(subTitle, style: kSigssTitleStyle),
             null,
             null,
-            avatarCircle(IMAGE_LOGO, 35),
+            avatarCircle(IMAGE_LOGOB, 35),
             EdgeInsets.all(5.0),
             EdgeInsets.all(3.0)),
       ],
@@ -379,7 +379,7 @@ Widget floatButtonImage(
       navegation(context, page);
     },
     elevation: 2.0,
-    child: avatarCircle(IMAGE_LOGO, 34.0),
+    child: avatarCircle(IMAGE_LOGOB, 34.0),
     backgroundColor: color,
   );
 }

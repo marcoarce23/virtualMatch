@@ -29,7 +29,7 @@ class _FaqListPagetate extends State<FaqListPage> {
           _form(context),
         ],
       ),
-      floatingActionButton: floatButton(AppTheme.themeDefault, context,
+      floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
           FaIcon(FontAwesomeIcons.futbol), HomePage()),
     );
   }
@@ -37,26 +37,29 @@ class _FaqListPagetate extends State<FaqListPage> {
   Widget _form(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    return SingleChildScrollView(
-      child: Column(
-        children: <Widget>[
-          sizedBox(0.0, 15.0),
-          Container(
-            width: size.width * 0.96,
-            margin: EdgeInsets.symmetric(vertical: 0.0),
-            decoration: containerImage(),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[],
+    return Container(
+      color: Colors.black87,
+      child: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            sizedBox(0.0, 15.0),
+            Container(
+              width: size.width * 0.96,
+              margin: EdgeInsets.symmetric(vertical: 0.0),
+              decoration: containerImage(),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[],
+              ),
             ),
-          ),
-          Container(
-            width: size.width * 0.96,
-            margin: EdgeInsets.symmetric(vertical: 0.0),
-            child: _fields(context),
-          ),
-          copyRigth(),
-        ],
+            Container(
+              width: size.width * 0.96,
+              margin: EdgeInsets.symmetric(vertical: 0.0),
+              child: _fields(context),
+            ),
+            copyRigth(),
+          ],
+        ),
       ),
     );
   }

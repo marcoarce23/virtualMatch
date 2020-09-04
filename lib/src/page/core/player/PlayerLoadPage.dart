@@ -12,11 +12,11 @@ import 'package:virtual_match/src/model/entity/EntityMap/JugadorModel.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
-import 'package:virtual_match/src/page/core/equipment/EquipmentLoadPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/ClasificadorService.dart';
 import 'package:virtual_match/src/service/ImageService.dart';
 import 'package:virtual_match/src/service/core/PlayerService.dart';
+import 'package:virtual_match/src/service/crudService.dart';
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
@@ -39,7 +39,7 @@ class _PlayerAllPagePageState extends State<PlayerAllPage> {
   final prefs = new Preferense();
   final List<Widget> optionPage = [
     PlayerLoadPage(),
-    PlayerListTeams(),
+    PlayerWithTournement(),
     PlayerWithTournement()
   ];
 
@@ -60,7 +60,7 @@ class _PlayerAllPagePageState extends State<PlayerAllPage> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(builder: (_) => new PlayerService()),
+        ChangeNotifierProvider(builder: (_) => new CrudService()),
       ],
       child: Scaffold(
         appBar: appBar('JUGADOR VIRTUAL MATCH'),
@@ -86,7 +86,7 @@ class _PlayerAllPagePageState extends State<PlayerAllPage> {
                   FontAwesomeIcons.playstation,
                   size: 25,
                 ),
-                title: Text('INscripción')),
+                title: Text('Tus Equipos')),
           ],
           currentIndex: page,
           unselectedItemColor: AppTheme.themeWhite,
@@ -99,87 +99,87 @@ class _PlayerAllPagePageState extends State<PlayerAllPage> {
   }
 }
 
-class PlayerListTeams extends StatefulWidget {
-  PlayerListTeams({Key key}) : super(key: key);
+// class PlayerListTeams extends StatefulWidget {
+//   PlayerListTeams({Key key}) : super(key: key);
 
-  @override
-  _PlayerListTeamsState createState() => _PlayerListTeamsState();
-}
+//   @override
+//   _PlayerListTeamsState createState() => _PlayerListTeamsState();
+// }
 
-class _PlayerListTeamsState extends State<PlayerListTeams> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        child: Column(
-          children: <Widget>[
-            itemPlayer(),
-            divider(),
-            Text("Tus equipos"),
-            divider(),
-            itemTeam()
-          ],
-        ),
-      ),
-      floatingActionButton: floatButton(AppTheme.themeDefault, context,
-          FaIcon(FontAwesomeIcons.plus), EquipmentAllPage()),
-    );
-  }
+// class _PlayerListTeamsState extends State<PlayerListTeams> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body: Container(
+//         child: Column(
+//           children: <Widget>[
+//             itemPlayer(),
+//             divider(),
+//             Text("Tus equipos"),
+//             divider(),
+//             itemTeam()
+//           ],
+//         ),
+//       ),
+//       floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
+//           FaIcon(FontAwesomeIcons.plus), EquipmentAllPage()),
+//     );
+//   }
 
-  Widget itemPlayer() {
-    return Container(
-      width: MediaQuery.of(context).size.width * 0.95,
-      margin: EdgeInsets.symmetric(vertical: 5.0),
-      decoration: boxDecoration(),
-      child: Column(
-        children: <Widget>[
-          gfListTile(
-              Text("Jugador: Marco Antonio Arce Valdivia"),
-              null,
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text("# 150 partidos Jugados"),
-                  Text("# 100 Ganados"),
-                  Text("# 50 Perdidos"),
-                ],
-              ),
-              null,
-              avatarCircle(IMAGE_DEFAULT, 35),
-              EdgeInsets.all(5.0),
-              EdgeInsets.all(3.0)),
-        ],
-      ),
-    );
-  }
+//   Widget itemPlayer() {
+//     return Container(
+//       width: MediaQuery.of(context).size.width * 0.95,
+//       margin: EdgeInsets.symmetric(vertical: 5.0),
+//       decoration: boxDecoration(),
+//       child: Column(
+//         children: <Widget>[
+//           gfListTile(
+//               Text("Jugador: Marco Antonio Arce Valdivia"),
+//               null,
+//               Column(
+//                 crossAxisAlignment: CrossAxisAlignment.start,
+//                 children: <Widget>[
+//                   Text("# 150 partidos Jugados"),
+//                   Text("# 100 Ganados"),
+//                   Text("# 50 Perdidos"),
+//                 ],
+//               ),
+//               null,
+//               avatarCircle(IMAGE_DEFAULT, 35),
+//               EdgeInsets.all(5.0),
+//               EdgeInsets.all(3.0)),
+//         ],
+//       ),
+//     );
+//   }
 
-  Widget itemTeam() {
-    return Container(
-      width: MediaQuery.of(context).size.width * 0.95,
-      margin: EdgeInsets.symmetric(vertical: 5.0),
-      decoration: boxDecoration(),
-      child: Column(
-        children: <Widget>[
-          gfListTile(
-              Text("Bomberos teams"),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  Text("#15 partidos jugados"),
-                  Text("#10 Ganados"),
-                  Text("#5 Perdidos"),
-                ],
-              ),
-              null,
-              null,
-              avatarCircle(IMAGE_DEFAULT, 35),
-              EdgeInsets.all(5.0),
-              EdgeInsets.all(3.0)),
-        ],
-      ),
-    );
-  }
-}
+//   Widget itemTeam() {
+//     return Container(
+//       width: MediaQuery.of(context).size.width * 0.95,
+//       margin: EdgeInsets.symmetric(vertical: 5.0),
+//       decoration: boxDecoration(),
+//       child: Column(
+//         children: <Widget>[
+//           gfListTile(
+//               Text("Bomberos teams"),
+//               Row(
+//                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                 children: <Widget>[
+//                   Text("#15 partidos jugados"),
+//                   Text("#10 Ganados"),
+//                   Text("#5 Perdidos"),
+//                 ],
+//               ),
+//               null,
+//               null,
+//               avatarCircle(IMAGE_DEFAULT, 35),
+//               EdgeInsets.all(5.0),
+//               EdgeInsets.all(3.0)),
+//         ],
+//       ),
+//     );
+//   }
+// }
 
 class PlayerWithTournement extends StatefulWidget {
   PlayerWithTournement({Key key}) : super(key: key);
@@ -189,8 +189,39 @@ class PlayerWithTournement extends StatefulWidget {
 }
 
 class _PlayerWithTournementState extends State<PlayerWithTournement> {
+  final formKey = GlobalKey<FormState>();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  final controllerIpsdb = TextEditingController();
+  final controllerName = TextEditingController();
+  final controllerSecondName = TextEditingController();
+  final controllerPhone = TextEditingController();
+  final controllerInformation = TextEditingController();
+  final controllerFacebook = TextEditingController();
+  final controllerTwitter = TextEditingController();
+
+//DEFINICION DE BLOC Y MODEL
+  CrudService entityService;
+  JugadorModel entity = new JugadorModel();
+  ImageService entityImage = new ImageService();
+  final prefs = new Preferense();
+
+  //DEFINICION DE VARIABLES
+  bool _save = false;
+  File photo;
+  String image = IMAGE_DEFAULT;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    entity.states = StateEntity.Insert;
+    entity.foto = image;
+    entityService = Provider.of<CrudService>(context);
+
     return Scaffold(
       body: Container(
         child: Column(
@@ -312,9 +343,17 @@ class PlayerLoadPage extends StatefulWidget {
 class _PlayerLoadPageState extends State<PlayerLoadPage> {
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final myController = TextEditingController();
 
-  PlayerService entityService;
+  final controllerIpsdb = TextEditingController();
+  final controllerName = TextEditingController();
+  final controllerSecondName = TextEditingController();
+  final controllerPhone = TextEditingController();
+  final controllerInformation = TextEditingController();
+  final controllerFacebook = TextEditingController();
+  final controllerTwitter = TextEditingController();
+  final controllerIpsdn = TextEditingController();
+
+  CrudService entityService;
   ImageService entityImage = new ImageService();
   JugadorModel entity = new JugadorModel();
   ClasificadorService entityGet = ClasificadorService();
@@ -335,7 +374,8 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
   @override
   Widget build(BuildContext context) {
     entity.states = StateEntity.Insert;
-    entityService = Provider.of<PlayerService>(context);
+    entity.foto = image;
+    entityService = Provider.of<CrudService>(context);
 
     final JugadorModel entityModel = ModalRoute.of(context).settings.arguments;
 
@@ -359,36 +399,37 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
   }
 
   Widget _form(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+      final size = MediaQuery.of(context).size;
 
     return SingleChildScrollView(
       child: Form(
         key: formKey,
         child: Column(
           children: <Widget>[
-            sizedBox(0.0, 15.0),
+            sizedBox(0.0, 5.0),
             Container(
-              width: size.width * 0.94,
               margin: EdgeInsets.symmetric(vertical: 0.0),
               decoration: containerImage(),
+              //  color: Colors.black87,
+              width: size.width * 0.94,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
-                  text('CARGA TU AVATAR EN LA APP.  ', AppTheme.themeDefault, 1,
+                  text('CARGA IMAGEN DEL TORNEO ', AppTheme.themeDefault, 1,
                       15.0),
                   _crearIconAppImagenes(),
                   _crearIconAppCamara(),
                 ],
               ),
             ),
-            sizedBox(0.0, 10.0),
+            sizedBox(0.0, 8.0),
             Container(
               width: size.width * 0.94,
               margin: EdgeInsets.symmetric(vertical: 0.0),
               decoration: containerFileds(),
               child: _fields(context),
             ),
-            copyRigth(),
+            copyRigthBlack(),
           ],
         ),
       ),
@@ -420,17 +461,14 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         sizedBox(0.0, 7.0),
-        showPictureOval(photo, image, 70.0),
-        divider(),
-
-        //     _tipo('Departamento : ', getTipo()),
+        showPictureOval(photo, entity.foto, 70.0),
+        dividerBlack(),
         _comboBox('Departamento', _opcionDepartamento),
-
         _text(
-            myController,
-            'Marcelo Antonio',
+            controllerName,
+            entity.nombre,
             '(*) Nombres',
-            40,
+            30,
             '(*) Ingrese nombres del jugador',
             true,
             FaIcon(FontAwesomeIcons.userCircle, color: AppTheme.themeDefault),
@@ -439,10 +477,10 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
             Colors.red),
 
         _text(
-            myController,
-            'Arce Valdivia',
+            controllerSecondName,
+            entity.apellido,
             '(*) Apellidos',
-            40,
+            30,
             '(*) Ingrese apellidos del cliente',
             true,
             FaIcon(FontAwesomeIcons.userAlt, color: AppTheme.themeDefault),
@@ -450,10 +488,10 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
             AppTheme.themeDefault,
             Colors.red),
         _text(
-            myController,
-            '',
+            controllerIpsdn,
+            entity.idPsdn,
             '(*) ID- PSN/GamerTag',
-            30,
+            15,
             '(*) ID- PSN/GamerTag',
             true,
             FaIcon(FontAwesomeIcons.solidAddressCard,
@@ -462,10 +500,10 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
             AppTheme.themeDefault,
             Colors.red),
         _text(
-            myController,
-            'marco.arce@gmail.com',
+            controllerPhone,
+            entity.telefono,
             '(*) Ingrese WhatsApp',
-            40,
+            10,
             '(*) Ingrese WhatsApp',
             true,
             FaIcon(FontAwesomeIcons.whatsapp, color: AppTheme.themeDefault),
@@ -474,10 +512,10 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
             Colors.red),
 
         _text(
-            myController,
-            'marco.arce@gmail.com',
+            controllerInformation,
+            entity.informacionComplementaria,
             'Acerca de ti..',
-            40,
+            140,
             'Ingrese sobre ti...',
             true,
             FaIcon(FontAwesomeIcons.mailBulk, color: AppTheme.themeDefault),
@@ -486,10 +524,10 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
             Colors.red),
 
         _text(
-            myController,
-            '72038768',
-            '(*) Ingressa cuenta Facebook/Instagram/Twitter',
-            40,
+            controllerFacebook,
+            entity.facebook,
+            '(*) Cuenta Facebook/Instagram/Twitter',
+            50,
             '(*) Ingressa cuenta Facebook/Instagram/Twitter',
             true,
             FaIcon(FontAwesomeIcons.facebook, color: AppTheme.themeDefault),
@@ -612,7 +650,7 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
     if (!formKey.currentState.validate()) return;
     formKey.currentState.save();
 
-    print('myControllerSOY EL VALOR DE ' + myController.text);
+    print('myControllerSOY EL VALOR DE ' + controllerName.text);
 
     setState(() => _save = true);
     loadingEntity();
@@ -622,27 +660,27 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
 
   void loadingEntity() {
     entity.idJugador = 0;
-    entity.idOrganizacion = prefs.idInstitution;
+    entity.idOrganizacion = 2;
     entity.idaDepartamento = int.parse(_opcionDepartamento);
-    entity.idLogin = prefs.userId;
-    entity.idPsdn = '2468';
-    entity.nombre = 'maro antonio';
-    entity.apellido = 'arce';
+    entity.idLogin = 1;
+    entity.idPsdn = controllerIpsdn.text;
+    entity.nombre = controllerName.text;
+    entity.apellido = controllerSecondName.text;
     entity.correo = prefs.email;
-    entity.telefono = '72038768';
+    entity.telefono = controllerPhone.text;
     entity.idaSexo = 0;
-    entity.informacionComplementaria = 'me gusta jugar';
-    entity.facebook = '@facebookmarce';
-    entity.twitter = '@marce3452';
-    entity.foto = IMAGE_LOGO;
+    entity.informacionComplementaria = controllerInformation.text;
+    entity.facebook = controllerFacebook.text;
+    entity.twitter = '@sinTwitter';
     entity.usuarioAuditoria = prefs.email;
-    entity.fechaAuditoria = '2020-08-10 08:25';
   }
 
   void executeCUD(
-      PlayerService entityService, JugadorModel entity, var _result) async {
+      CrudService entityService, JugadorModel entity, var _result) async {
     try {
-      await entityService.repository(entity).then((result) {
+      await entityService
+          .repository(entity, API + '/api/Jugador')
+          .then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
 
         if (result["tipo_mensaje"] == '0')

@@ -18,7 +18,7 @@ class JugadorModel implements IEntityMap {
   String twitter;
   String foto;
   String usuarioAuditoria;
-  String fechaAuditoria;
+ 
 
   JugadorModel(
   {   this.states = StateEntity.None,
@@ -36,8 +36,7 @@ class JugadorModel implements IEntityMap {
       this.facebook,
       this.twitter,
       this.foto,
-      this.usuarioAuditoria,
-      this.fechaAuditoria});
+      this.usuarioAuditoria});
 
   Map<String, dynamic> toJson() => {
         "idJugador": idJugador,
@@ -54,7 +53,6 @@ class JugadorModel implements IEntityMap {
         "facebook": facebook,
         "twitter": twitter,
         "foto": foto,
-        "usuarioAuditoria": usuarioAuditoria,
-        "fechaAuditoria": fechaAuditoria,
+        "usuarioAuditoria": usuarioAuditoria
       };
 }

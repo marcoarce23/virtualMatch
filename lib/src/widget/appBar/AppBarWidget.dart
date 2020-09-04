@@ -12,12 +12,12 @@ AppBar appBar(String title) {
     elevation: 2.0,
     title: Text(title, style: kTitleAppBar),
     actions: <Widget>[
-      avatarCircle(IMAGE_LOGO, 35.0),
-    //  FaIcon(
-    //     FontAwesomeIcons.edit,
-    //     color: AppTheme.themePurple,
-    //     size: 23,
-    //   ),
+      avatarCircle(IMAGE_DEFAULT, 35.0),
+      //  FaIcon(
+      //     FontAwesomeIcons.edit,
+      //     color: AppTheme.themePurple,
+      //     size: 23,
+      //   ),
     ],
   );
 }

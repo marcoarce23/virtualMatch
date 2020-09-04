@@ -101,4 +101,11 @@ class TourmentService with ChangeNotifier {
     notifyListeners();
     return _result;
   }
+
+  Future<List<IEntityJson>> getTodosLosTorneosPersona(IEntityJson entityJson) async {
+    var _result = await _apiGet.getTodosLosTorneos(entityJson);
+    isLoading = false;
+    notifyListeners();
+    return _result;
+  }
 }

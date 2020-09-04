@@ -56,7 +56,7 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
   FormatoModel entity = new FormatoModel();
   ImageService entityImage = new ImageService();
   ClasificadorService entityGet = ClasificadorService();
-  TourmentService entityGet1 = TourmentService();
+  CrudService entityGet1 = CrudService();
 
   final prefs = new Preferense();
 
@@ -71,7 +71,7 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
   String _opcionTipoCompeticion = '27';
   String _opcionTipoTorneo = '23';
   String _opcionTipoModalidad = '43';
-  String _opcionCodTorneo = '1';
+  String _opcionCodTorneo = '44';
 
   List<String> _cantidad = [
     '2',
@@ -148,7 +148,7 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         sizedBox(0.0, 7.0),
-        //     _comboCodTroneo(_opcionCodTorneo),
+        _comboCodTroneo(_opcionCodTorneo),
         _comboTorneoCreado(_opcionTipoCompeticion),
         _comboJugador(),
         _comboCompeticion(_opcionTipoCompeticion),
@@ -211,7 +211,11 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
   Widget _comboCodTroneo(String _opcionCodTorneo) {
     return Center(
         child: FutureBuilder(
-            future: entityGet1.getTodosLosTorneos(new ListaTorneoModel()),
+            future: entityGet1.get(
+                new ListaTorneoModel(),
+                API +
+                    '/api/Torneo/getTorneosUsuario/' +
+                    'marcoarce23@gmail.com'),
             builder: (context, AsyncSnapshot snapshot) {
               if (snapshot.hasData) {
                 return Row(
@@ -222,8 +226,8 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
                     DropdownButton(
                       icon: FaIcon(FontAwesomeIcons.sort,
                           color: AppTheme.themePurple),
-                      value: _opcionTipoCompeticion,
-                      items: getDropDown(snapshot),
+                      value: '44',
+                      items: getDropDownTorneo(snapshot),
                       onChanged: (value) {
                         setState(() {
                           _opcionCodTorneo = value;
@@ -378,6 +382,19 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
             }));
   }
 
+  List<DropdownMenuItem<String>> getDropDownTorneo(AsyncSnapshot snapshot) {
+    List<DropdownMenuItem<String>> lista = new List();
+
+    for (var i = 0; i < snapshot.data.length; i++) {
+      ListaTorneoModel item = snapshot.data[i];
+      lista.add(DropdownMenuItem(
+        child: Text(item.nombreTorneo),
+        value: item.idTorneo.toString(),
+      ));
+    }
+    return lista;
+  }
+
   List<DropdownMenuItem<String>> getDropDown(AsyncSnapshot snapshot) {
     List<DropdownMenuItem<String>> lista = new List();
 
@@ -474,12 +491,13 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
     entity.cantidadJugadores = int.parse(typeCount);
     entity.idaTipoModalidad = int.parse(_opcionTipoModalidad);
     entity.usuarioAuditoria = prefs.email;
-
-   }
+  }
 
   void executeCUD(CrudService entityService, FormatoModel entity) async {
     try {
-      await entityService.repository(entity, API+'/api/Formato').then((result) {
+      await entityService
+          .repository(entity, API + '/api/Formato')
+          .then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0') {
           showSnackbar(STATUS_OK, scaffoldKey);
