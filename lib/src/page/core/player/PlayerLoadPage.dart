@@ -15,7 +15,6 @@ import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/ClasificadorService.dart';
 import 'package:virtual_match/src/service/ImageService.dart';
-import 'package:virtual_match/src/service/core/PlayerService.dart';
 import 'package:virtual_match/src/service/crudService.dart';
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
@@ -220,19 +219,24 @@ class _PlayerWithTournementState extends State<PlayerWithTournement> {
   Widget build(BuildContext context) {
     entity.states = StateEntity.Insert;
     entity.foto = image;
-    entityService = Provider.of<CrudService>(context);
+    // entityService = Provider.of<CrudService>(context);
 
-    return Scaffold(
-      body: Container(
-        child: Column(
-          children: <Widget>[
-            itemPlayer(),
-            divider(),
-            Text("Torneos disponbles"),
-            divider(),
-            itemTournament(),
-            itemTournament(),
-          ],
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(builder: (_) => new CrudService()),
+      ],
+      child: Scaffold(
+        body: Container(
+          child: Column(
+            children: <Widget>[
+              itemPlayer(),
+              divider(),
+              Text("Torneos disponbles"),
+              divider(),
+              itemTournament(),
+              itemTournament(),
+            ],
+          ),
         ),
       ),
     );
@@ -375,7 +379,7 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
   Widget build(BuildContext context) {
     entity.states = StateEntity.Insert;
     entity.foto = image;
-    entityService = Provider.of<CrudService>(context);
+    // entityService = Provider.of<CrudService>(context);
 
     final JugadorModel entityModel = ModalRoute.of(context).settings.arguments;
 
@@ -384,22 +388,29 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
       entity.states = StateEntity.Update;
     }
 
-    return Scaffold(
-      key: scaffoldKey,
-      body: Stack(
-        children: <Widget>[
-          background(context, ''),
-          // crearFondo(context, imagen),
-          _form(context),
-        ],
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(builder: (_) => new CrudService()),
+      ],
+      child: Scaffold(
+        key: scaffoldKey,
+        appBar: appBar('Jugador Virtual Match'),
+        drawer: DrawerMenu(),
+        body: Stack(
+          children: <Widget>[
+            background(context, ''),
+            // crearFondo(context, imagen),
+            _form(context),
+          ],
+        ),
+        floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
+            FaIcon(FontAwesomeIcons.playstation), HomePage()),
       ),
-      floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
-          FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }
 
   Widget _form(BuildContext context) {
-      final size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
 
     return SingleChildScrollView(
       child: Form(

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:virtual_match/src/example/VideoApp.dart';
+import 'package:virtual_match/src/page/core/player/PlayerLoadPage.dart';
 import 'package:virtual_match/src/page/faq/FaqListPage.dart';
 import 'package:virtual_match/src/page/faq/FaqPage.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
@@ -41,39 +42,18 @@ class _CircularMenuState extends State<CircularMenu> {
         fabMargin: const EdgeInsets.all(16.0),
         animationDuration: const Duration(milliseconds: 800),
         animationCurve: Curves.easeInCubic,
+
         onDisplayChange: (isOpen) {
           _showSnackBar(
               context, "Menú Virtual Match ${isOpen ? "abierto" : "cerrado"}");
         },
+
         children: <Widget>[
-          RawMaterialButton(
-            onPressed: () {
-              _showSnackBar(context, "Selecciono  1");
-            },
-            shape: CircleBorder(),
-            padding: const EdgeInsets.all(24.0),
-            child: FaIcon(FontAwesomeIcons.playstation,
-                color: AppTheme.themePurple, size: 25.0),
-          ),
-          RawMaterialButton(
-            onPressed: () =>
-               sharedText(
-                    'BIENVENIDO A LA COMUNIDAD',
-                    '*Virtual Match.*\n *Una aplicación de la Comunidad FIFA Bolivia.*\n💬 Con  *Virtual Match podrás.* \n 🔺 Leer Noticias de la Comunidad. \n 🔺 Enterarte de los eventos. \n 🔺Crear tu jugador y equipos. \n🔺Participar en los torneos. \n 🔺 Conocer campeones de torneos e influencers. \n🔺 Mucho mas... \n📲 *Descargar la App en el siguiente enlace:* https://play.google.com/store/apps/details?id=bo.virtual_matchBolivia',
-                    'text/html'),
-         
-            shape: CircleBorder(),
-            padding: const EdgeInsets.all(24.0),
-            child: FaIcon(FontAwesomeIcons.shareAlt,
-                color: AppTheme.themePurple, size: 25.0),
-          ),
           RawMaterialButton(
             onPressed: () async {
               _imageFile = (await ImagePicker()
                   .getImage(source: ImageSource.gallery)) as File;
-              setState(() {
-              
-              });
+              setState(() {});
             },
             shape: CircleBorder(),
             padding: const EdgeInsets.all(24.0),
@@ -81,33 +61,56 @@ class _CircularMenuState extends State<CircularMenu> {
                 color: AppTheme.themePurple, size: 25.0),
           ),
           RawMaterialButton(
+            elevation: 4,
             onPressed: () {
-              navegation(context, VideoApp());
+              setState(() {
+                print('Se presionooo');
+                navegation(context, VideoApp());
+              });
             },
             shape: CircleBorder(),
             padding: const EdgeInsets.all(24.0),
             child: FaIcon(FontAwesomeIcons.youtube,
                 color: AppTheme.themePurple, size: 25.0),
           ),
-          RawMaterialButton(
-            onPressed: () {
-              navegation(context, FaqListPage());
-            },
-            shape: CircleBorder(),
-            padding: const EdgeInsets.all(24.0),
-            child: FaIcon(FontAwesomeIcons.questionCircle,
-                color: AppTheme.themePurple, size: 25.0),
-          ),
-          RawMaterialButton(
-            onPressed: () {
-              _showSnackBar(context, "Cerrar Menu Circular");
-              fabKey.currentState.close();
-            },
-            shape: CircleBorder(),
-            padding: const EdgeInsets.all(24.0),
-            child: FaIcon(FontAwesomeIcons.home,
-                color: AppTheme.themePurple, size: 25.0),
-          )
+          // RawMaterialButton(
+          //   onPressed: () {
+          //     navegation(context, FaqListPage());
+          //   },
+          //   shape: CircleBorder(),
+          //   padding: const EdgeInsets.all(24.0),
+          //   child: FaIcon(FontAwesomeIcons.questionCircle,
+          //       color: AppTheme.themePurple, size: 25.0),
+          // ),
+          // RawMaterialButton(
+          //   onPressed: () => sharedText(
+          //       'BIENVENIDO A LA COMUNIDAD',
+          //       '*Virtual Match.*\n *Una aplicación de la Comunidad FIFA Bolivia.*\n💬 Con  *Virtual Match podrás.* \n 🔺 Leer Noticias de la Comunidad. \n 🔺 Enterarte de los eventos. \n 🔺Crear tu jugador y equipos. \n🔺Participar en los torneos. \n 🔺 Conocer campeones de torneos e influencers. \n🔺 Mucho mas... \n📲 *Descargar la App en el siguiente enlace:* https://play.google.com/store/apps/details?id=bo.virtual_matchBolivia',
+          //       'text/html'),
+          //   shape: CircleBorder(),
+          //   padding: const EdgeInsets.all(24.0),
+          //   child: FaIcon(FontAwesomeIcons.shareAlt,
+          //       color: AppTheme.themePurple, size: 25.0),
+          // ),
+          // RawMaterialButton(
+          //   onPressed: () {
+          //     navegation(context, FaqListPage());
+          //   },
+          //   shape: CircleBorder(),
+          //   padding: const EdgeInsets.all(24.0),
+          //   child: FaIcon(FontAwesomeIcons.questionCircle,
+          //       color: AppTheme.themePurple, size: 25.0),
+          // ),
+          // RawMaterialButton(
+          //   onPressed: () {
+          //     _showSnackBar(context, "Cerrar Menu Circular");
+          //     fabKey.currentState.close();
+          //   },
+          //   shape: CircleBorder(),
+          //   padding: const EdgeInsets.all(24.0),
+          //   child: FaIcon(FontAwesomeIcons.home,
+          //       color: AppTheme.themePurple, size: 25.0),
+          // )
         ],
       ),
     );

@@ -169,7 +169,7 @@ class _NewLoadPageState extends State<NewLoadPage> {
           children: <Widget>[
             sizedBox(0.0, 15.0),
             Container(
-            //  color: Colors.black87,
+              //  color: Colors.black87,
               width: size.width * 0.94,
               margin: EdgeInsets.symmetric(vertical: 0.0),
               decoration: containerImage(),
@@ -190,7 +190,7 @@ class _NewLoadPageState extends State<NewLoadPage> {
               decoration: containerFileds(),
               child: _fields(context),
             ),
-            copyRigth(),
+            copyRigthBlack(),
           ],
         ),
       ),
@@ -223,7 +223,7 @@ class _NewLoadPageState extends State<NewLoadPage> {
       children: <Widget>[
         sizedBox(0.0, 7.0),
         showPictureOval(photo, image, 70.0),
-        divider(),
+        dividerBlack(),
 
         Row(
           children: <Widget>[
@@ -274,7 +274,7 @@ class _NewLoadPageState extends State<NewLoadPage> {
             'Detalle de la noticia',
             140,
             2,
-            'Ingrese Detalle de la noticia/evento'.toUpperCase(),
+            'Ingrese Detalle de la noticia/evento',
             true,
             FaIcon(FontAwesomeIcons.wpforms, color: AppTheme.themeDefault),
             AppTheme.themeDefault,
@@ -283,7 +283,7 @@ class _NewLoadPageState extends State<NewLoadPage> {
         _text(
             controllerDirigidoA,
             entity.titulo,
-            'DIRIGIDO A:'.toUpperCase(),
+            'Dirigido a:',
             140,
             2,
             'Ingrese quienes participan',
@@ -295,7 +295,7 @@ class _NewLoadPageState extends State<NewLoadPage> {
         _text(
             controllerUbicacion,
             entity.titulo,
-            'UBICACIÓN/PUBLICACION'.toUpperCase(),
+            'Ubicación/Publicación digital del evento',
             160,
             2,
             'Ingrese lugar o ruta digital',
@@ -304,8 +304,8 @@ class _NewLoadPageState extends State<NewLoadPage> {
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             Colors.red),
-        _date('FECHA NOTICIA/EVENTO'),
-        _hour('HORA NOTICIA/EVENTO'),
+        _date('Fecha noticia/evento'),
+        _hour('Hora noticia/evento'),
         //  _comboBox('Tipo.', myController.text),
         Text(
           '(*) Campos obligatorios. ',

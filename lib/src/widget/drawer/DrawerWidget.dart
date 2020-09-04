@@ -2,16 +2,16 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:virtual_match/src/model/Preference.dart';
+import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/page/core/formatTourment/FormatTourmentPage.dart';
+import 'package:virtual_match/src/page/core/miniTourment/MiniTourmentLoadPage.dart';
 import 'package:virtual_match/src/page/core/player/PlayerLoadPage.dart';
 import 'package:virtual_match/src/page/faq/FaqListPage.dart';
-import 'package:virtual_match/src/page/faq/FaqPage.dart';
 import 'package:virtual_match/src/page/intro/IntroPage.dart';
 import 'package:virtual_match/src/page/login/LogOutPage.dart';
 import 'package:virtual_match/src/page/multimedia/MultimediaLoadPage.dart';
 import 'package:virtual_match/src/page/new/NewLoadPage.dart';
 import 'package:virtual_match/src/page/notification/NotificationLoadPage.dart';
-import 'package:virtual_match/src/page/notification/NotificationPage.dart';
 import 'package:virtual_match/src/page/organization/OrganizationPage.dart';
 import 'package:virtual_match/src/page/organization/SorojchiPage.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
@@ -20,7 +20,7 @@ import 'package:virtual_match/src/widget/general/SharedWidget.dart';
 import 'package:virtual_match/src/widget/image/imageOvalWidget.dart';
 
 class CustomListTile extends StatelessWidget {
-  final FaIcon icon;
+  final Widget icon;
   final String text;
   final Function onTap;
 
@@ -42,7 +42,7 @@ class CustomListTile extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Row(children: <Widget>[
-                  icon,
+            icon,
                   Text(
                     text,
                     style: TextStyle(fontSize: 16.0),
@@ -108,19 +108,24 @@ class DrawerMenu extends StatelessWidget {
           )),
         ),
         CustomListTile(
-            FaIcon(
-              FontAwesomeIcons.playstation,
-              size: 25,
-            ),
+              ImageOvalNetwork(
+                      imageNetworkUrl: IMAGE_SOROJCHI,
+                      sizeImage: Size.fromWidth(35)),
             '   SOROJCHI eclub',
             () => navegation(context, SorojchiPage())),
+        CustomListTile(
+                 ImageOvalNetwork(
+                      imageNetworkUrl: IMAGE_SOROJCHI,
+                      sizeImage: Size.fromWidth(35)),
+            '   Sobre Auspiciador',
+            () => navegation(context, PlayerLoadPage())),
         CustomListTile(
             FaIcon(
               FontAwesomeIcons.userFriends,
               size: 25,
             ),
             '   Jugadores de la comunidad',
-            () => navegation(context, PlayerAllPage())),
+            () => navegation(context, PlayerLoadPage())),
         CustomListTile(
             FaIcon(
               FontAwesomeIcons.gamepad,
@@ -129,17 +134,15 @@ class DrawerMenu extends StatelessWidget {
             '    Clubes Pro (Crea tu equipo)',
             () => navegation(context, TourmentAllPage())),
         CustomListTile(
-            FaIcon(
-              FontAwesomeIcons.playstation,
-              size: 25,
-            ),
+            ImageOvalNetwork(
+                      imageNetworkUrl: IMAGE_DEFAULT,
+                      sizeImage: Size.fromWidth(35)),
             '   Crea MiniTorneo',
-            () => navegation(context, TourmentAllPage())),
+            () => navegation(context, MiniTourmentAllPage())),
         CustomListTile(
-            FaIcon(
-              FontAwesomeIcons.playstation,
-              size: 25,
-            ),
+            ImageOvalNetwork(
+                      imageNetworkUrl: IMAGE_DEFAULT,
+                      sizeImage: Size.fromWidth(35)),
             '   Crea Torneo ',
             () => navegation(context, TourmentAllPage())),
         CustomListTile(
@@ -164,10 +167,9 @@ class DrawerMenu extends StatelessWidget {
             '   Cargar Multimedia',
             () => navegation(context, MultimediaAllPage())),
         CustomListTile(
-            FaIcon(
-              FontAwesomeIcons.futbol,
-              size: 25,
-            ),
+             ImageOvalNetwork(
+                      imageNetworkUrl: IMAGE_LOGO,
+                      sizeImage: Size.fromWidth(35)),
             '    Sobre Virtual Match',
             () => navegation(context, OrganizationPage())),
         CustomListTile(

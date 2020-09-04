@@ -48,6 +48,7 @@ class _MultimediaListPageState extends State<MultimediaListPage> {
       key: scaffoldKey,
       body: SafeArea(
         child: Container(
+          color: Colors.black87,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
@@ -73,7 +74,7 @@ class _MultimediaListPageState extends State<MultimediaListPage> {
           ),
         ),
       ),
-      floatingActionButton: floatButton(AppTheme.themeDefault, context,
+      floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }

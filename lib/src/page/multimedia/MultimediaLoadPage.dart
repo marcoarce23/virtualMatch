@@ -128,6 +128,10 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
 
   int valueImage = 0;
   String image = IMAGE_DEFAULT;
+  String imagenPDF =
+      'https://res.cloudinary.com/propia/image/upload/v1590680683/mbzeu6fr44aizrr9dl0f.jpg';
+  String imagenVideo =
+      'https://res.cloudinary.com/propia/image/upload/v1590680880/lmbkvadzzymfcfwqosj9.webp';
 
   String _pdfPath = '';
 
@@ -140,6 +144,10 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
 
   @override
   Widget build(BuildContext context) {
+    if (valueImage == 0) image = image;
+    if (valueImage == 1) image = imagenPDF;
+    if (valueImage == 2) image = imagenVideo;
+
     entity.states = StateEntity.Insert;
     entityService = Provider.of<MultimediaService>(context);
 
@@ -156,7 +164,7 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
       body: Stack(
         children: <Widget>[
           background(context, 'IMAGE_LOGO'),
-          showPictureOval(photo, IMAGE_LOGO, 130.0),
+          showPictureOval(photo, image, 130.0),
           _form(context),
         ],
       ),
@@ -171,32 +179,36 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
     return SingleChildScrollView(
       child: Form(
         key: formKey,
-        child: Column(
-          children: <Widget>[
-            sizedBox(0.0, 15.0),
-            Container(
-              width: size.width * 0.94,
-              margin: EdgeInsets.symmetric(vertical: 0.0),
-              decoration: containerImage(),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  text('CARGA TU GALERÍA MULTIMEDIA', AppTheme.themeDefault, 1,
-                      15.0),
-                  _crearIconAppImagenes(),
-                  _crearIconAppCamara(),
-                ],
+        child: Container(
+          color: Colors.black54,
+          child: Column(
+            children: <Widget>[
+              sizedBox(0.0, 8.0),
+              Container(
+                width: size.width * 0.94,
+                margin: EdgeInsets.symmetric(vertical: 0.0),
+                decoration: containerImage(),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    text('CARGAR MULTIMEDIA', AppTheme.themeDefault, 1, 13.5),
+                    _crearIconAppImagenes(),
+                    _crearIconAppCamara(),
+                    _crearIconAppVideo(),
+                    _crearIconAppPDF()
+                  ],
+                ),
               ),
-            ),
-            sizedBox(0.0, 10.0),
-            Container(
-              width: size.width * 0.94,
-              margin: EdgeInsets.symmetric(vertical: 0.0),
-              decoration: containerFileds(),
-              child: _fields(context),
-            ),
-            copyRigth(),
-          ],
+              sizedBox(0.0, 8.0),
+              Container(
+                width: size.width * 0.94,
+                margin: EdgeInsets.symmetric(vertical: 0.0),
+                decoration: containerFileds(),
+                child: _fields(context),
+              ),
+              divider(),
+            ],
+          ),
         ),
       ),
     );
@@ -222,22 +234,42 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
     );
   }
 
+  _crearIconAppVideo() {
+    return IconButton(
+      icon: FaIcon(
+        FontAwesomeIcons.youtube,
+        color: AppTheme.themePurple,
+      ),
+      onPressed: _pickVideo,
+    );
+  }
+
+  _crearIconAppPDF() {
+    return IconButton(
+      icon: FaIcon(
+        FontAwesomeIcons.solidFilePdf,
+        color: AppTheme.themePurple,
+      ),
+      onPressed: _pickPDF,
+    );
+  }
+
   Widget _fields(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         sizedBox(0.0, 7.0),
         showPictureOval(photo, image, 70.0),
-        divider(),
+        dividerBlack(),
 
         _combox('Seleccionar multimedia:'.toUpperCase()),
         _text(
             controllerNoticia,
             entity.titulo,
-            'Noticia o evento',
+            'Nombre material multimedia',
             100,
             2,
-            'Ingrese la noticia o evento',
+            'Ingrese el nombre del matarial multimedia',
             true,
             FaIcon(FontAwesomeIcons.newspaper, color: AppTheme.themeDefault),
             AppTheme.themeDefault,
@@ -247,10 +279,10 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
         _text(
             controllerDetalle,
             entity.resumen,
-            'Detalle de la noticia o evento',
+            'Detalle del material multimedia',
             140,
             2,
-            'Ingrese Detalle de la noticia o evento',
+            'Ingrese detalle del material multimedia',
             true,
             FaIcon(FontAwesomeIcons.wpforms, color: AppTheme.themeDefault),
             AppTheme.themeDefault,
@@ -259,10 +291,10 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
         _text(
             controllerUbicacion,
             entity.enlace,
-            'Participantes',
+            'Enlace digital del torneo',
             140,
             2,
-            'Ingrese quienes participan',
+            'Ingrese enlace del torneo (facebook, youtube)',
             true,
             FaIcon(FontAwesomeIcons.userFriends, color: AppTheme.themeDefault),
             AppTheme.themeDefault,
@@ -476,7 +508,7 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
 
   void loadingEntity() {
     entity.idMultimedia = 0;
-    entity.idOrganizacion = int.parse(prefs.idInstitution);
+    entity.idOrganizacion = int.parse(prefs.idOrganization);
     entity.idaCategoria = typeMaterial;
     entity.titulo = controllerNoticia.text;
     entity.resumen = controllerDetalle.text;
@@ -484,7 +516,6 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
     entity.fechaFin = _inputFieldDateFinController.text;
     entity.usuarioAuditoria = prefs.email;
     entity.fechaAuditoria = '2020-08-10 08:25';
-    entity.foto = IMAGE_LOGO;
     entity.enlace = controllerUbicacion.text;
   }
 

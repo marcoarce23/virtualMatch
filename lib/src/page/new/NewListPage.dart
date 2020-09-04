@@ -7,7 +7,6 @@ import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/service/NewService.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
-import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/bottonNavigationBar/BottonNavigatorWidget.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
@@ -48,7 +47,6 @@ class _NewListPageState extends State<NewListPage> {
 
     return Scaffold(
       key: scaffoldKey,
-      appBar: appBar('Virtual Match'.toUpperCase()),
       drawer: DrawerMenu(),
       bottomNavigationBar: new BottonNavigation(),
       body: SafeArea(

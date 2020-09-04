@@ -24,18 +24,18 @@ import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/model/util/Validator.dart' as validator;
 import 'package:virtual_match/src/model/entity/EntityMap/FormatoModel.dart';
 
-class FormatLoadPage extends StatefulWidget {
+class MiniFormatLoadPage extends StatefulWidget {
   static final String routeName = 'formatLoad';
 
-  FormatLoadPage({
+  MiniFormatLoadPage({
     Key key,
   }) : super(key: key);
 
   @override
-  _FormatLoadPageState createState() => _FormatLoadPageState();
+  _MiniFormatLoadPageState createState() => _MiniFormatLoadPageState();
 }
 
-class _FormatLoadPageState extends State<FormatLoadPage> {
+class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
   //DEFINIICON DE VARIABLES GLOBALES
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -67,14 +67,12 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
 
   List<String> _cantidad = [
     '2',
+    '3',
     '4',
-    '8',
-    '16',
-    '32',
-    '64',
-    '128',
-    '256',
-    '512'
+    '5',
+    '6',
+    '7',
+    '8'
   ];
 
   @override
