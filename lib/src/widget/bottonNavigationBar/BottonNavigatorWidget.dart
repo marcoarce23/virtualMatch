@@ -2,6 +2,7 @@ import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:virtual_match/src/example/VideoApp.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
+import 'package:virtual_match/src/page/core/player/PlayerLoadPage.dart';
 import 'package:virtual_match/src/page/core/player/PlayerWinnePage.dart';
 import 'package:virtual_match/src/page/core/tourment/ListTournamentPage.dart';
 import 'package:virtual_match/src/page/faq/FaqListPage.dart';
@@ -45,11 +46,11 @@ class _BottonNavigationState extends State<BottonNavigation> {
         TabItem(
             icon: ImageOvalNetwork(
                 imageNetworkUrl: IMAGE_LOGO, sizeImage: Size.fromWidth(50)),
-            title: '1 Vs.1'),
+            title: 'Jugador'),
         TabItem(
             icon: ImageOvalNetwork(
                 imageNetworkUrl: IMAGE_LOGO, sizeImage: Size.fromWidth(50)),
-            title: 'Clubes Pro'),
+            title: '1 Vs.1'),
       ],
       initialActiveIndex: 2, //optional, default as 0
       onTap: (value) {
@@ -57,8 +58,8 @@ class _BottonNavigationState extends State<BottonNavigation> {
           if (value == 0) navegation(context, NewListPage());
           if (value == 1) navegation(context, PlayerWinnerPage());
           if (value == 2) navegation(context, ListTournamentPage());
-          if (value == 3) navegation(context, NewLoadPage());
-          if (value == 4) navegation(context, FaqListPage());
+          if (value == 3) navegation(context, PlayerLoadPage());
+          if (value == 4) navegation(context, PlayerLoadPage());
         });
       },
     );

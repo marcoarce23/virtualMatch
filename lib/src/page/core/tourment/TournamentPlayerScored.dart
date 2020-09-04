@@ -7,7 +7,6 @@ import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/general/CallWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
-import 'RegisterScoredPage.dart';
 
 class TournamentPlayerScored extends StatefulWidget {
   final int idTorneo;

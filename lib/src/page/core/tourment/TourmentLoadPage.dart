@@ -160,7 +160,7 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
       body: Stack(
         children: <Widget>[
           background(context, 'IMAGE_LOGO'),
-          showPictureOval(photo, image, 130.0),
+        
           _form(context),
         ],
       ),
@@ -177,7 +177,7 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
         key: formKey,
         child: Column(
           children: <Widget>[
-            sizedBox(0.0, 125.0),
+            sizedBox(0.0, 8.0),
             Container(
               margin: EdgeInsets.symmetric(vertical: 0.0),
               decoration: containerImage(),
@@ -231,7 +231,8 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        sizedBox(0.0, 7.0),
+          showPictureOval(photo, image, 125.0),
+          dividerBlack(),
         _text(
             controllerName,
             entity.nombre,
