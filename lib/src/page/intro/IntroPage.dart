@@ -10,6 +10,7 @@ import 'package:virtual_match/src/style/Style.dart';
 
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
+import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 
 class IntroPage extends StatefulWidget {
   static final String routeName = 'IntroPage';
@@ -125,14 +126,12 @@ class _IntroPageState extends State<IntroPage> {
                                 Row(
                                   children: <Widget>[
                                     sizedBox(0, 11.0),
-                                    Shimmer.fromColors(
-                                      baseColor: AppTheme.themeDefault,
-                                      highlightColor: AppTheme.themePurple,
-                                      child: FaIcon(
-                                          FontAwesomeIcons.playstation,
-                                          color: AppTheme.themeDefault,
-                                          size: 35.0),
-                                    ),
+                                    // Shimmer.fromColors(
+                                    //   baseColor: AppTheme.themeDefault,
+                                    //   highlightColor: AppTheme.themePurple,
+                                    //   child:
+                                    avatarCircle(IMAGE_LOGOB, 25.0),
+                                    //  ),
                                     sizedBox(0, 11.0),
                                     Expanded(
                                       child: AutoSizeText(
@@ -148,16 +147,17 @@ class _IntroPageState extends State<IntroPage> {
                                 sizedBox(0, 10.0),
                                 Row(
                                   children: <Widget>[
-                                    sizedBox(0, 11.0),
-                                    Shimmer.fromColors(
-                                      baseColor: AppTheme.themeDefault,
-                                      highlightColor: AppTheme.themePurple,
-                                      child: FaIcon(
-                                          FontAwesomeIcons.playstation,
-                                          color: AppTheme.themeDefault,
-                                          size: 35.0),
-                                    ),
-                                    sizedBox(0, 11.0),
+                                    sizedBox(0, 15.0),
+                                    // Shimmer.fromColors(
+                                    //   baseColor: AppTheme.themeDefault,
+                                    //   highlightColor: AppTheme.themePurple,
+                                    //   child: FaIcon(
+                                    //       FontAwesomeIcons.playstation,
+                                    //       color: AppTheme.themeDefault,
+                                    //       size: 35.0),
+                                    // ),
+                                     avatarCircle(IMAGE_DEFAULT, 25.0),
+                                    sizedBox(0, 15.0),
                                     Expanded(
                                       child: AutoSizeText(
                                         'Te mantenemos informado de todos los campeonatos de la comunidad (Fixture, resultados, tablas, estadísticas y ranking).',
@@ -173,14 +173,15 @@ class _IntroPageState extends State<IntroPage> {
                                 Row(
                                   children: <Widget>[
                                     sizedBox(0, 11.0),
-                                    Shimmer.fromColors(
-                                      baseColor: AppTheme.themeDefault,
-                                      highlightColor: AppTheme.themePurple,
-                                      child: FaIcon(
-                                          FontAwesomeIcons.playstation,
-                                          color: AppTheme.themeDefault,
-                                          size: 35.0),
-                                    ),
+                                    // Shimmer.fromColors(
+                                    //   baseColor: AppTheme.themeDefault,
+                                    //   highlightColor: AppTheme.themePurple,
+                                    //   child: FaIcon(
+                                    //       FontAwesomeIcons.playstation,
+                                    //       color: AppTheme.themeDefault,
+                                    //       size: 35.0),
+                                    // ),
+                                     avatarCircle(IMAGE_LOGOB, 25.0),
                                     sizedBox(0, 10.0),
                                     Expanded(
                                       child: AutoSizeText(
@@ -219,7 +220,7 @@ class _IntroPageState extends State<IntroPage> {
                                 'Qué ofrecemos',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  fontSize: 18.0,
+                                  fontSize: 24.0,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -232,14 +233,15 @@ class _IntroPageState extends State<IntroPage> {
                                 Row(
                                   children: <Widget>[
                                     sizedBox(0, 10.0),
-                                    Shimmer.fromColors(
-                                      baseColor: AppTheme.themeDefault,
-                                      highlightColor: AppTheme.themePurple,
-                                      child: FaIcon(
-                                          FontAwesomeIcons.playstation,
-                                          color: AppTheme.themeDefault,
-                                          size: 35.0),
-                                    ),
+                                    // Shimmer.fromColors(
+                                    //   baseColor: AppTheme.themeDefault,
+                                    //   highlightColor: AppTheme.themePurple,
+                                    //   child: FaIcon(
+                                    //       FontAwesomeIcons.playstation,
+                                    //       color: AppTheme.themeDefault,
+                                    //       size: 35.0),
+                                    // ),
+                                     avatarCircle(IMAGE_DEFAULT, 25.0),
                                     sizedBox(10, 10.0),
                                     Expanded(
                                       child: AutoSizeText(
@@ -255,15 +257,16 @@ class _IntroPageState extends State<IntroPage> {
                                 sizedBox(0, 10.0),
                                 Row(
                                   children: <Widget>[
-                                    sizedBox(10.0, 0),
-                                    Shimmer.fromColors(
-                                      baseColor: AppTheme.themeDefault,
-                                      highlightColor: AppTheme.themePurple,
-                                      child: FaIcon(
-                                          FontAwesomeIcons.playstation,
-                                          color: AppTheme.themeDefault,
-                                          size: 35.0),
-                                    ),
+                                    sizedBox(0, 10),
+                                    // Shimmer.fromColors(
+                                    //   baseColor: AppTheme.themeDefault,
+                                    //   highlightColor: AppTheme.themePurple,
+                                    //   child: FaIcon(
+                                    //       FontAwesomeIcons.playstation,
+                                    //       color: AppTheme.themeDefault,
+                                    //       size: 35.0),
+                                    // ),
+                                     avatarCircle(IMAGE_LOGOB, 25.0),
                                     sizedBox(0, 10.0),
                                     Expanded(
                                       child: AutoSizeText(
@@ -280,14 +283,15 @@ class _IntroPageState extends State<IntroPage> {
                                 Row(
                                   children: <Widget>[
                                     sizedBox(0, 10.0),
-                                    Shimmer.fromColors(
-                                      baseColor: AppTheme.themeDefault,
-                                      highlightColor: AppTheme.themePurple,
-                                      child: FaIcon(
-                                          FontAwesomeIcons.playstation,
-                                          color: AppTheme.themeDefault,
-                                          size: 35.0),
-                                    ),
+                                    // Shimmer.fromColors(
+                                    //   baseColor: AppTheme.themeDefault,
+                                    //   highlightColor: AppTheme.themePurple,
+                                    //   child: FaIcon(
+                                    //       FontAwesomeIcons.playstation,
+                                    //       color: AppTheme.themeDefault,
+                                    //       size: 35.0),
+                                    // ),
+                                     avatarCircle(IMAGE_DEFAULT, 25.0),
                                     sizedBox(10, 10.0),
                                     Expanded(
                                       child: AutoSizeText(
@@ -323,10 +327,10 @@ class _IntroPageState extends State<IntroPage> {
                               baseColor: AppTheme.themeDefault,
                               highlightColor: AppTheme.themePurple,
                               child: AutoSizeText(
-                                'Qué buscamos en la COMUNIDAD.',
+                                'Qué buscamos en la Comunidad.',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  fontSize: 18.0,
+                                  fontSize: 22.0,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -338,14 +342,15 @@ class _IntroPageState extends State<IntroPage> {
                                   Row(
                                     children: <Widget>[
                                       sizedBox(0, 10.0),
-                                      Shimmer.fromColors(
-                                        baseColor: AppTheme.themeDefault,
-                                        highlightColor: AppTheme.themePurple,
-                                        child: FaIcon(
-                                            FontAwesomeIcons.playstation,
-                                            color: AppTheme.themeDefault,
-                                            size: 35.0),
-                                      ),
+                                      // Shimmer.fromColors(
+                                      //   baseColor: AppTheme.themeDefault,
+                                      //   highlightColor: AppTheme.themePurple,
+                                      //   child: FaIcon(
+                                      //       FontAwesomeIcons.playstation,
+                                      //       color: AppTheme.themeDefault,
+                                      //       size: 35.0),
+                                      // ),
+                                       avatarCircle(IMAGE_LOGOB, 25.0),
                                       sizedBox(10.0, 0),
                                       Expanded(
                                         child: AutoSizeText(
@@ -362,14 +367,15 @@ class _IntroPageState extends State<IntroPage> {
                                   Row(
                                     children: <Widget>[
                                       sizedBox(0, 10.0),
-                                      Shimmer.fromColors(
-                                        baseColor: AppTheme.themeDefault,
-                                        highlightColor: AppTheme.themePurple,
-                                        child: FaIcon(
-                                            FontAwesomeIcons.playstation,
-                                            color: AppTheme.themeDefault,
-                                            size: 35.0),
-                                      ),
+                                      // Shimmer.fromColors(
+                                      //   baseColor: AppTheme.themeDefault,
+                                      //   highlightColor: AppTheme.themePurple,
+                                      //   child: FaIcon(
+                                      //       FontAwesomeIcons.playstation,
+                                      //       color: AppTheme.themeDefault,
+                                      //       size: 35.0),
+                                      // ),
+                                       avatarCircle(IMAGE_DEFAULT, 25.0),
                                       sizedBox(0, 10.0),
                                       Expanded(
                                         child: AutoSizeText(
@@ -386,14 +392,15 @@ class _IntroPageState extends State<IntroPage> {
                                   Row(
                                     children: <Widget>[
                                       sizedBox(0, 10.0),
-                                      Shimmer.fromColors(
-                                        baseColor: AppTheme.themeDefault,
-                                        highlightColor: AppTheme.themePurple,
-                                        child: FaIcon(
-                                            FontAwesomeIcons.playstation,
-                                            color: AppTheme.themeDefault,
-                                            size: 35.0),
-                                      ),
+                                      // Shimmer.fromColors(
+                                      //   baseColor: AppTheme.themeDefault,
+                                      //   highlightColor: AppTheme.themePurple,
+                                      //   child: FaIcon(
+                                      //       FontAwesomeIcons.playstation,
+                                      //       color: AppTheme.themeDefault,
+                                      //       size: 35.0),
+                                      // ),
+                                       avatarCircle(IMAGE_LOGOB, 25.0),
                                       sizedBox(0, 10.0),
                                       Expanded(
                                         child: AutoSizeText(

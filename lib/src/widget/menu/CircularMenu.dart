@@ -9,6 +9,7 @@ import 'package:virtual_match/src/page/faq/FaqPage.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
+import 'package:virtual_match/src/widget/general/SharedWidget.dart';
 
 class CircularMenu extends StatefulWidget {
   CircularMenu({Key key}) : super(key: key);
@@ -42,7 +43,7 @@ class _CircularMenuState extends State<CircularMenu> {
         animationCurve: Curves.easeInCubic,
         onDisplayChange: (isOpen) {
           _showSnackBar(
-              context, "Menu Virtual Match ${isOpen ? "abierto" : "cerrado"}");
+              context, "Menú Virtual Match ${isOpen ? "abierto" : "cerrado"}");
         },
         children: <Widget>[
           RawMaterialButton(
@@ -52,29 +53,32 @@ class _CircularMenuState extends State<CircularMenu> {
             shape: CircleBorder(),
             padding: const EdgeInsets.all(24.0),
             child: FaIcon(FontAwesomeIcons.playstation,
-                color: AppTheme.themeWhite, size: 25.0),
+                color: AppTheme.themePurple, size: 25.0),
           ),
           RawMaterialButton(
-            onPressed: () async {
-              _imageFile = (await ImagePicker()
-                  .getImage(source: ImageSource.gallery)) as File;
-              setState(() {});
-            },
+            onPressed: () =>
+               sharedText(
+                    'BIENVENIDO A LA COMUNIDAD',
+                    '*Virtual Match.*\n *Una aplicación de la Comunidad FIFA Bolivia.*\n💬 Con  *Virtual Match podrás.* \n 🔺 Leer Noticias de la Comunidad. \n 🔺 Enterarte de los eventos. \n 🔺Crear tu jugador y equipos. \n🔺Participar en los torneos. \n 🔺 Conocer campeones de torneos e influencers. \n🔺 Mucho mas... \n📲 *Descargar la App en el siguiente enlace:* https://play.google.com/store/apps/details?id=bo.virtual_matchBolivia',
+                    'text/html'),
+         
             shape: CircleBorder(),
             padding: const EdgeInsets.all(24.0),
-            child: FaIcon(FontAwesomeIcons.futbol,
-                color: AppTheme.themeWhite, size: 25.0),
+            child: FaIcon(FontAwesomeIcons.shareAlt,
+                color: AppTheme.themePurple, size: 25.0),
           ),
           RawMaterialButton(
             onPressed: () async {
               _imageFile = (await ImagePicker()
                   .getImage(source: ImageSource.gallery)) as File;
-              setState(() {});
+              setState(() {
+              
+              });
             },
             shape: CircleBorder(),
             padding: const EdgeInsets.all(24.0),
             child: FaIcon(FontAwesomeIcons.images,
-                color: AppTheme.themeWhite, size: 25.0),
+                color: AppTheme.themePurple, size: 25.0),
           ),
           RawMaterialButton(
             onPressed: () {
@@ -83,7 +87,7 @@ class _CircularMenuState extends State<CircularMenu> {
             shape: CircleBorder(),
             padding: const EdgeInsets.all(24.0),
             child: FaIcon(FontAwesomeIcons.youtube,
-                color: AppTheme.themeWhite, size: 25.0),
+                color: AppTheme.themePurple, size: 25.0),
           ),
           RawMaterialButton(
             onPressed: () {
@@ -92,17 +96,17 @@ class _CircularMenuState extends State<CircularMenu> {
             shape: CircleBorder(),
             padding: const EdgeInsets.all(24.0),
             child: FaIcon(FontAwesomeIcons.questionCircle,
-                color: AppTheme.themeWhite, size: 25.0),
+                color: AppTheme.themePurple, size: 25.0),
           ),
           RawMaterialButton(
             onPressed: () {
-              _showSnackBar(context, "Selecciono Cerrar Menu Circular");
+              _showSnackBar(context, "Cerrar Menu Circular");
               fabKey.currentState.close();
             },
             shape: CircleBorder(),
             padding: const EdgeInsets.all(24.0),
             child: FaIcon(FontAwesomeIcons.home,
-                color: AppTheme.themeWhite, size: 25.0),
+                color: AppTheme.themePurple, size: 25.0),
           )
         ],
       ),

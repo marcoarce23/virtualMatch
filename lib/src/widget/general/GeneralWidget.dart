@@ -253,13 +253,13 @@ BoxDecoration containerFileds() {
   return BoxDecoration(
       color: Colors.white,
       // gradient: boxDecorationList(),
-      borderRadius: BorderRadius.circular(20.0),
+      borderRadius: BorderRadius.circular(10.0),
       boxShadow: <BoxShadow>[
         BoxShadow(
-            color: Colors.black26,
+            color: AppTheme.themePurple,
             blurRadius: 7.0,
-            offset: Offset(2.0, 3.0),
-            spreadRadius: 4.0)
+            offset: Offset(1.0, 1.0),
+            spreadRadius: 1.0)
       ]);
 }
 
@@ -270,15 +270,15 @@ BoxDecoration containerImage() {
       boxShadow: <BoxShadow>[
         BoxShadow(
             color: AppTheme.themePurple,
-            blurRadius: 11.0,
-            offset: Offset(2.0, 3.0),
-            spreadRadius: 4.0)
+            blurRadius: 15.0,
+            offset: Offset(2.0, 1.0),
+            spreadRadius: 2.0)
       ]);
 }
 
 boxDecoration() {
   return BoxDecoration(
-      borderRadius: BorderRadius.circular(8.0),
+      borderRadius: BorderRadius.circular(5.0),
       boxShadow: <BoxShadow>[
         BoxShadow(
             color: Colors.black,

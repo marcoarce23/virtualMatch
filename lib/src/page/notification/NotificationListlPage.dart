@@ -48,8 +48,8 @@ class _NotificationListPageState extends State<NotificationListPage> {
       key: scaffoldKey,
       body: SafeArea(
         child: Container(
-          color:   Colors.black87,
-          child:    Column(
+          color: Colors.black87,
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               backgroundBasic(context),
@@ -74,7 +74,7 @@ class _NotificationListPageState extends State<NotificationListPage> {
           ),
         ),
       ),
-      floatingActionButton: floatButton(AppTheme.themeDefault, context,
+      floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }
@@ -132,7 +132,7 @@ class _NotificationListPageState extends State<NotificationListPage> {
                       style: TextStyle(color: AppTheme.themeWhite)),
                   _showAction(entity, entity.idNotificacion.toString()),
                   null,
-                  avatarCircle((entity.foto ?? IMAGE_LOGO), 35),
+                  null, //avatarCircle((entity.foto ?? IMAGE_LOGO), 35),
                   EdgeInsets.all(5.0),
                   EdgeInsets.all(3.0)),
             ],
@@ -146,6 +146,7 @@ class _NotificationListPageState extends State<NotificationListPage> {
   Widget _showAction(NotificacionModel entity, String keyId) {
     return Row(
       children: <Widget>[
+        sizedBox(0, 15),
         Text('OPERACIONES: $keyId',
             style: TextStyle(color: AppTheme.themeWhite)),
         sizedBox(10, 0),
@@ -167,10 +168,7 @@ class _NotificationListPageState extends State<NotificationListPage> {
         size: 23,
       ),
       onTap: () {
-        setState(() {
-
-
-        });
+        setState(() {});
       },
     );
   }
