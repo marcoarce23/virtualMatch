@@ -124,4 +124,28 @@ class Preferense {
   set avatarImage(String value) {
     _prefs.setString('avatarImage', value);
   }
+
+  get idJugador {
+    return _prefs.getString('idJugador') ?? 1;
+  }
+
+  set idJugador(String value) {
+    _prefs.setString('idJugador', value);
+  }
+
+  get idPlayer {
+    return _prefs.getString('idPlayer') ?? '1';
+  }
+
+  set idPlayer(String value) {
+    _prefs.setString('idPlayer', value);
+  }
+
+  get idOrganization {
+    return _prefs.getString('idOrganization') ?? '2';
+  }
+
+  set idOrganization(String value) {
+    _prefs.setString('idOrganization', value);
+  }
 }

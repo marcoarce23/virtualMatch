@@ -134,7 +134,7 @@ class _NotificationLoadPageState extends State<NotificationLoadPage> {
       key: scaffoldKey,
       body: Stack(
         children: <Widget>[
-          background(context, 'IMAGE_LOGO'),
+          // background(context, 'IMAGE_LOGO'),
           _form(context),
         ],
       ),
@@ -153,14 +153,14 @@ class _NotificationLoadPageState extends State<NotificationLoadPage> {
           color: Colors.black87,
           child: Column(
             children: <Widget>[
-              sizedBox(0.0, 7.0),
+              sizedBox(0.0, 5.0),
               showInformationBasic(
-                  context,
-                  'GESTIONA LAS NOTIFICACIONES',
-                  'En la pantalla podrás crear y modficar las notificaciones.\nLos campos con (*) son obligatorios.',),
+                context,
+                'GESTIONA LAS NOTIFICACIONES',
+                'En la pantalla podrás crear y modficar las notificaciones.\nLos campos con (*) son obligatorios.',
+              ),
               sizedBox(0.0, 5.0),
               Container(
-                
                 width: size.width * 0.94,
                 margin: EdgeInsets.symmetric(vertical: 0.0),
                 decoration: containerFileds(),
@@ -181,7 +181,7 @@ class _NotificationLoadPageState extends State<NotificationLoadPage> {
         _text(
             controllerTitulo,
             entity.titulo,
-            'NOTIFICACIÓN'.toUpperCase(),
+            '(*) Notificación',
             100,
             3,
             'Ingrese la notificación',
@@ -194,7 +194,7 @@ class _NotificationLoadPageState extends State<NotificationLoadPage> {
         _text(
             controllerDetalle,
             entity.detalle,
-            'DETALLE DE LA NOTIFICACION',
+            '(*) Detalle de la notificación',
             140,
             4,
             'Ingrese Detalle de la notificación',
@@ -273,8 +273,6 @@ class _NotificationLoadPageState extends State<NotificationLoadPage> {
     if (!formKey.currentState.validate()) return;
     formKey.currentState.save();
 
-    print('myControllerSOY EL VALOR DE ' + controllerTitulo.text);
-
     setState(() => _save = true);
     loadingEntity();
     executeCUD(entityService, entity);
@@ -289,9 +287,7 @@ class _NotificationLoadPageState extends State<NotificationLoadPage> {
     entity.usuarioAuditoria = prefs.email;
     entity.foto = IMAGE_LOGO;
     entity.fechaAuditoria = '2020-08-10 08:25';
-    // entity.states = StateEntity.Insert;
 
-    print('EL ENTITY NOTIFICA: ${entity.detalle}');
   }
 
   void executeCUD(

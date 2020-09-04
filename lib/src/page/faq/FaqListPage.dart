@@ -42,7 +42,7 @@ class _FaqListPagetate extends State<FaqListPage> {
       child: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            sizedBox(0.0, 15.0),
+            sizedBox(0.0, 10.0),
             Container(
               width: size.width * 0.96,
               margin: EdgeInsets.symmetric(vertical: 0.0),
@@ -81,48 +81,7 @@ class _FaqListPagetate extends State<FaqListPage> {
     );
   }
 
-  // Widget _showInformation(String url) {
-  //   final size = MediaQuery.of(context).size;
-  //   return Container(
-  //     width: size.width * 0.95,
-  //     margin: EdgeInsets.symmetric(vertical: 0.0),
-  //     decoration: boxDecoration(),
-  //     child: Column(
-  //       children: <Widget>[
-  //         gfListTile(
-  //             Text('TIENES CONSULTAS ?'),
-  //             Text(
-  //                 'Acá te respondemos las preguntas mas comunes sobre la Comunidad Virtual Match y nuestra APP'),
-  //             Row(
-  //               children: <Widget>[
-  //                 Text(
-  //                   'Visita Sorojchi eclub en facebook',
-  //                   style: TextStyle(
-  //                       color: AppTheme.themePurple,
-  //                       textBaseline: TextBaseline.ideographic,
-  //                       //   decoration: TextDecoration.underline,
-  //                       fontSize: 15.0),
-  //                 ),
-  //                 InkWell(
-  //                   child: avatarCircle(IMAGE_LOGO, 20),
-  //                   onTap: () => navegation(
-  //                       context,
-  //                       ViewPage(
-  //                           title: 'Visita Sorojchi'.toString(),
-  //                           url: 'https://www.facebook.com/SorojchieClub/')),
-  //                 ),
-  //               ],
-  //             ),
-  //             null,
-  //             avatarCircle(IMAGE_LOGO, 35),
-  //             EdgeInsets.all(5.0),
-  //             EdgeInsets.all(3.0)),
-  //       ],
-  //     ),
-  //   );
-  //   //Text(entity.nombreEquipo);
-  // }
-
+  
   Widget listAcordion() {
     return accordion(
         '¿Cómo puedo contactarlos?',
