@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:intl/intl.dart';
+import 'package:tabbar/tabbar.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/ListadoTorneoModel.dart';
 import 'package:virtual_match/src/page/core/equipment/EquipmentPlayersTournament.dart';
@@ -29,6 +30,7 @@ class TourmentPage extends StatefulWidget {
 class _TourmentPageState extends State<TourmentPage> {
   final prefs = new Preferense();
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  bool _isExpanded = true;
 
   ListaTorneoModel entity = new ListaTorneoModel();
   TourmentService entityService;
@@ -70,6 +72,7 @@ class _TourmentPageState extends State<TourmentPage> {
         //    sizedBox(0, 6),
         futureBuilderTorneo(context),
         GFTabs(
+          height: MediaQuery.of(context).size.height,
           tabBarColor: AppTheme.themeDefault,
           indicatorColor: AppTheme.themePurple,
           height: MediaQuery.of(context).size.height * 0.73,
@@ -113,37 +116,34 @@ class _TourmentPageState extends State<TourmentPage> {
                   ],
                 ),
               ),
-              SingleChildScrollView(
-                child: Column(
-                  children: <Widget>[
-                    divider(),
-                    Text('Fixture de Partidos'.toUpperCase(),
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20)),
-                    TournamentPlayerScored(
-                      idTorneo: widget.idTorneo,
-                    ),
-                    //copyRigth(),
-                  ],
-                ),
+              Column(
+                children: <Widget>[
+                  divider(),
+                  Text('Fixture de Partidos'.toUpperCase(),
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+                  TournamentPlayerScored(
+                    idTorneo: widget.idTorneo,
+                  ),
+                  //copyRigth(),
+                ],
               ),
-              SingleChildScrollView(
-                child: Column(
-                  children: <Widget>[
-                    divider(),
-                    Text('TABLA DE POSICIONES',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 20)),
-                    PositionTable(
-                      idTorneo: widget.idTorneo,
-                    ),
-                    //copyRigth(),
-                  ],
-                ),
+              Column(
+                children: <Widget>[
+                  divider(),
+                  Text('TABLA DE POSICIONES',
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
+                  PositionTable(
+                    idTorneo: widget.idTorneo,
+                  ),
+                  //copyRigth(),
+                ],
               ),
             ],
           ),
         ),
+        */
       ],
     );
   }

@@ -5,11 +5,17 @@ import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 
-
 final prefs = new Preferense();
 
-GFListTile gfListTileKey(Key key, Widget title, Widget subTitle, Widget description,
-    FaIcon icon, Widget avatar, EdgeInsets padding, EdgeInsets margin) {
+GFListTile gfListTileKey(
+    Key key,
+    Widget title,
+    Widget subTitle,
+    Widget description,
+    FaIcon icon,
+    Widget avatar,
+    EdgeInsets padding,
+    EdgeInsets margin) {
   return GFListTile(
       key: key,
       color: AppTheme.themeDefault,
@@ -25,7 +31,7 @@ GFListTile gfListTileKey(Key key, Widget title, Widget subTitle, Widget descript
 GFListTile gfListTile(Widget title, Widget subTitle, Widget description,
     FaIcon icon, Widget avatar, EdgeInsets padding, EdgeInsets margin) {
   return GFListTile(
-    color: AppTheme.themeDefault,
+      color: AppTheme.themeDefault,
       avatar: avatar,
       title: title,
       subTitle: subTitle,

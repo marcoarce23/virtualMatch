@@ -59,7 +59,7 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
       child: Scaffold(
         key: scaffoldKey,
         appBar: appBar('TORNEOS VIRTUAL MATCH'),
-        body: bodyContainer(context),
+        body: SingleChildScrollView(child: bodyContainer(context)),
         drawer: DrawerMenu(),
         floatingActionButton: new CircularMenu(),
         bottomNavigationBar: new BottonNavigation(),

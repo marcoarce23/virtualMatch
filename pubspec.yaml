@@ -80,6 +80,7 @@ dependencies:
   get: ^3.4.4
   convex_bottom_bar: ^2.4.1
   flt_video_player: ^0.0.4
+  tabbar: ^0.1.1
 
 dev_dependencies:
   flutter_test:
