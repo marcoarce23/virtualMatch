@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:intl/intl.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/ListadoTorneoModel.dart';
 import 'package:virtual_match/src/page/core/equipment/EquipmentPlayersTournament.dart';
+import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/core/TournamentService.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
@@ -33,10 +35,10 @@ class _TourmentPageState extends State<TourmentPage> {
   TourmentService entityGet = TourmentService();
 
   TabController tabController;
-  
+
   @override
   void initState() {
-     // tabController = TabController(length: 3, vsync: this);
+    // tabController = TabController(length: 3, vsync: this);
     super.initState();
   }
 
@@ -47,12 +49,16 @@ class _TourmentPageState extends State<TourmentPage> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     return SafeArea(
       child: Scaffold(
         key: scaffoldKey,
-        appBar: appBar('TORNEOS FIFA BOLIVIA'),
+        appBar: appBar('TORNEOS'),
         body: bodyContainer(context),
         drawer: DrawerMenu(),
+         floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
+            FaIcon(FontAwesomeIcons.playstation), HomePage()),
         // bottomNavigationBar: new BottonNavigation(),
       ),
     );
@@ -61,16 +67,17 @@ class _TourmentPageState extends State<TourmentPage> {
   Widget bodyContainer(BuildContext context) {
     return Column(
       children: <Widget>[
-        sizedBox(0, 6),
+        //    sizedBox(0, 6),
         futureBuilderTorneo(context),
-        sizedBox(0, 8),
-
-       GFSegmentTabs(
-
-
-  length: 3,
-  tabs: <Widget>[
-     Tab(
+        GFTabs(
+          tabBarColor: AppTheme.themeDefault,
+          indicatorColor: AppTheme.themePurple,
+          height: MediaQuery.of(context).size.height * 0.73,
+          indicatorWeight: 6.0,
+          initialIndex: 0,
+          length: 3,
+          tabs: <Widget>[
+            Tab(
               icon: Icon(Icons.perm_identity),
               child: Text(
                 "EQUIPOS",
@@ -88,90 +95,62 @@ class _TourmentPageState extends State<TourmentPage> {
                 "Posiciones".toUpperCase(),
               ),
             ),
-   ],
-),
-
-        // GFTabs(
-        //   tabBarColor: AppTheme.themeDefault,
-        //   indicatorColor: AppTheme.themePurple,
-        //   //indicatorWeight: 4.0,
-        //   initialIndex: 0,
-        //   length: 3,
-        //   tabs: <Widget>[
-        //     Tab(
-        //       icon: Icon(Icons.perm_identity),
-        //       child: Text(
-        //         "EQUIPOS",
-        //       ),
-        //     ),
-        //     Tab(
-        //       icon: Icon(Icons.score),
-        //       child: Text(
-        //         "Fixture".toUpperCase(),
-        //       ),
-        //     ),
-        //     Tab(
-        //       icon: Icon(Icons.table_chart),
-        //       child: Text(
-        //         "Posiciones".toUpperCase(),
-        //       ),
-        //     ),
-        //   ],
-        //   tabBarView: GFTabBarView(
-        //     children: <Widget>[
-        //       SingleChildScrollView(
-        //         child: Column(
-        //           children: <Widget>[
-        //             divider(),
-        //             Text('Listado de Equipos'.toUpperCase(),
-        //                 style: TextStyle(
-        //                     fontWeight: FontWeight.bold, fontSize: 20)),
-        //             sizedBox(0, 6),
-        //             EquipmentPlayersTournament(
-        //               idTorneo: widget.idTorneo,
-        //             ),
-        //             //copyRigth(),
-        //           ],
-        //         ),
-        //       ),
-        //       SingleChildScrollView(
-        //         child: Column(
-        //           children: <Widget>[
-        //             divider(),
-        //             Text('Fixture de Partidos'.toUpperCase(),
-        //                 style: TextStyle(
-        //                     fontWeight: FontWeight.bold, fontSize: 20)),
-        //             TournamentPlayerScored(
-        //               idTorneo: widget.idTorneo,
-        //             ),
-        //             //copyRigth(),
-        //           ],
-        //         ),
-        //       ),
-        //       SingleChildScrollView(
-        //         child: Column(
-        //           children: <Widget>[
-        //             divider(),
-        //             Text('TABLA DE POSICIONES',
-        //                 style: TextStyle(
-        //                     fontWeight: FontWeight.bold, fontSize: 20)),
-        //             PositionTable(
-        //               idTorneo: widget.idTorneo,
-        //             ),
-        //             //copyRigth(),
-        //           ],
-        //         ),
-        //       ),
-        //     ],
-        //   ),
-        // ),
+          ],
+          tabBarView: GFTabBarView(
+            children: <Widget>[
+              SingleChildScrollView(
+                child: Column(
+                  children: <Widget>[
+                //    divider(),
+                    Text('Listado de Equipos'.toUpperCase(),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 16)),
+                    sizedBox(0, 6),
+                    EquipmentPlayersTournament(
+                      idTorneo: widget.idTorneo,
+                    ),
+                    //copyRigth(),
+                  ],
+                ),
+              ),
+              SingleChildScrollView(
+                child: Column(
+                  children: <Widget>[
+                    divider(),
+                    Text('Fixture de Partidos'.toUpperCase(),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20)),
+                    TournamentPlayerScored(
+                      idTorneo: widget.idTorneo,
+                    ),
+                    //copyRigth(),
+                  ],
+                ),
+              ),
+              SingleChildScrollView(
+                child: Column(
+                  children: <Widget>[
+                    divider(),
+                    Text('TABLA DE POSICIONES',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 20)),
+                    PositionTable(
+                      idTorneo: widget.idTorneo,
+                    ),
+                    //copyRigth(),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
       ],
     );
   }
 
   Widget futureBuilderTorneo(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    sizedBox(0, 10);
+    // sizedBox(0, 10);
     return FutureBuilder(
         future: entityGet.getId(new ListaTorneoModel(), widget.idTorneo),
         builder: (context, AsyncSnapshot snapshot) {
@@ -193,15 +172,12 @@ class _TourmentPageState extends State<TourmentPage> {
                         children: <Widget>[
                           gfListTile(
                             Text('TORNEO: ${entity.nombreTorneo.toUpperCase()}',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 15)),
+                                style: TextStyle(color: AppTheme.themeWhite)),
                             Text('DETALLE: ${entity.detalle}',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 12)),
+                                style: TextStyle(color: AppTheme.themeWhite)),
                             Text(
                                 'FECHA: ${new DateFormat.yMMMMd('es_BO').format(entity.fechaInicio)} ',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 12)),
+                                style: TextStyle(color: AppTheme.themeWhite)),
                             null,
                             avatarCircle(entity.foto, 45.0),
                             EdgeInsets.all(3),

@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/ListadoJugadoresModel.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/service/core/EquipmentService.dart';
+import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 
@@ -46,7 +47,7 @@ class _EquipmentPlayersTournamentState
   Widget listView(BuildContext context, AsyncSnapshot snapshot) {
     final size = MediaQuery.of(context).size;
     return Container(
-      width: size.width * 0.95,
+      width: size.width * 0.97,
       child: ListView.builder(
         shrinkWrap: true,
         scrollDirection: Axis.vertical,
@@ -62,23 +63,23 @@ class _EquipmentPlayersTournamentState
 
   Widget showPlayers(ListadoJugadoresModel entity) {
     final size = MediaQuery.of(context).size;
-    sizedBox(0, 7);
+    // sizedBox(0, 7);
     return Container(
-      width: size.width * 0.95,
-      margin: EdgeInsets.symmetric(vertical: 3.0),
+      width: size.width * 0.97,
+      //   margin: EdgeInsets.all(3.0),
       decoration: boxDecoration(),
       child: Column(
         children: <Widget>[
-          sizedBox(0, 7),
+          //  sizedBox(0, 7),
           gfListTile(
               Text(entity.nombreJugador),
               _showPlayerDetail(entity),
               _showAvatarDetail(entity),
               null,
-              avatarCircle((entity.fotoJugador ?? IMAGE_LOGO), 35),
-              EdgeInsets.all(5.0),
+              avatarCircle((entity.fotoJugador ?? IMAGE_DEFAULT), 35),
+              EdgeInsets.all(3.0),
               EdgeInsets.all(3.0)),
-          sizedBox(0, 7),
+          //sizedBox(0, 7),
         ],
       ),
     );
@@ -99,13 +100,13 @@ class _EquipmentPlayersTournamentState
               size: 10,
               color: Colors.green,
             ),
-            Text('20 ganados'),
+            Text('20 ganados', style: TextStyle(color: AppTheme.themeWhite)),
             FaIcon(
               FontAwesomeIcons.handPointDown,
               size: 10,
               color: Colors.red,
             ),
-            Text('10 Perdidos'),
+            Text('10 Perdidos', style: TextStyle(color: AppTheme.themeWhite)),
           ],
         ),
         //sizedBox(5, 0),
@@ -117,8 +118,10 @@ class _EquipmentPlayersTournamentState
     return Row(
       children: <Widget>[
         avatarCircle(
-            (entity.fotoJugador == null ? IMAGE_LOGO : entity.fotoJugador), 15),
-        Text(entity.nombreJugador + ' ' + entity.apellidoJugador),
+            (entity.fotoJugador == null ? IMAGE_LOGOB : entity.fotoJugador),
+            13),
+        Text(entity.nombreJugador + ' ' + entity.apellidoJugador,
+            style: TextStyle(color: AppTheme.themeWhite)),
       ],
     );
   }
