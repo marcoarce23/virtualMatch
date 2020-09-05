@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:virtual_match/src/model/Preference.dart';
+import 'package:virtual_match/src/model/entity/EntityFromJson/ClasificadorModel.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/ListadoTorneoModel.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
+import 'package:virtual_match/src/service/ClasificadorService.dart';
 import 'package:virtual_match/src/service/core/TournamentService.dart';
 import 'package:virtual_match/src/service/crudService.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
@@ -28,7 +30,7 @@ class _TourmentListPageState extends State<TourmentListPage> {
   ListaTorneoModel entity = new ListaTorneoModel();
   model.TorneoModel entityModel = new model.TorneoModel();
   CrudService entityService;
-  CrudService entityGet = CrudService();
+  CrudService entityGet = new CrudService();
 
   // DEFINICIOND E VARIABLES
   final prefs = new Preferense();
@@ -93,6 +95,7 @@ class _TourmentListPageState extends State<TourmentListPage> {
   Widget futureBuilder(BuildContext context) {
     print('entro acaaaaa???');
     return FutureBuilder(
+        //  future: entityGettt.get(new ClasificadorModel(), 26),
         future: entityGet.get(
             new ListaTorneoModel(), API + '/api/Torneo/getTodosLosTorneos'),
         builder: (context, AsyncSnapshot snapshot) {
@@ -101,6 +104,7 @@ class _TourmentListPageState extends State<TourmentListPage> {
               return loading();
               break;
             default:
+              print(snapshot.data);
               return listView(context, snapshot);
           }
         });
@@ -114,14 +118,15 @@ class _TourmentListPageState extends State<TourmentListPage> {
         physics: ClampingScrollPhysics(),
         itemCount: snapshot.data.length,
         itemBuilder: (context, index) {
-          ListaTorneoModel entity = snapshot.data[index];
-          return _showListTile(entity);
+          ListaTorneoModel entity1 = snapshot.data[index];
+          return _showListTile(entity1);
         },
       ),
     );
   }
 
   Widget _showListTile(ListaTorneoModel entity) {
+    print(entity.idTorneo);
     return Container(
       child: gfListTileKey(
           Key(entity.idTorneo.toString()),
@@ -131,9 +136,9 @@ class _TourmentListPageState extends State<TourmentListPage> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('DETALLE: ${entity.detalle}',
+              Text('DETALLE: ${entity.nombreTorneo}',
                   style: TextStyle(color: AppTheme.themeWhite)),
-              Text('TORNEO:  ${entity.tipoTorneo}',
+              Text('TORNEO:  ${entity.idTorneo}',
                   style: TextStyle(color: AppTheme.themeWhite),
                   textAlign: TextAlign.justify),
               Text('ELIMINATORIA: ${entity.tipoModalidad}',
@@ -165,7 +170,7 @@ class _TourmentListPageState extends State<TourmentListPage> {
         sizedBox(10, 0),
         _complete(keyId),
         sizedBox(10, 0),
-        _start(keyId,"0"),
+        _start(keyId, entity.idTipoModalidad.toString()),
       ],
     );
   }
@@ -232,9 +237,11 @@ class _TourmentListPageState extends State<TourmentListPage> {
       onTap: () {
         setState(() {
           if (modalidad == '0')
-            _executeGenerator('/api/Torneo/execGenerarPlayOff/2/usuario/'+prefs.email);
+            _executeGenerator(
+                '/api/Torneo/execGenerarPlayOff/'+keyId+'/usuario/' + prefs.email);
           else
-            _executeGenerator('/api/Torneo/execGenerarLiga/usuario/'+prefs.email);
+            _executeGenerator(
+                '/api/Torneo/execGenerarLiga/usuario/'+keyId+'/usuario/' + prefs.email);
           //    entityModel.idTorneo = int.parse(keyId);
           //     print('eliminar ${entityModel.idTorneo}');
           //      executeDelete(entityModel.idTorneo.toString(), prefs.email);
@@ -263,9 +270,9 @@ class _TourmentListPageState extends State<TourmentListPage> {
       await entityService.repository(entity).then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0')
-          showSnackbar(STATUS_OK, scaffoldKey);
+          showSnackbar(result["mensaje"], scaffoldKey);
         else
-          showSnackbar(STATUS_ERROR, scaffoldKey);
+          showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
       showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
@@ -278,12 +285,12 @@ class _TourmentListPageState extends State<TourmentListPage> {
       await entityService.execute(API + url).then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0')
-          showSnackbar(STATUS_OK, scaffoldKey);
+          showSnackbar(result["mensaje"], scaffoldKey);
         else
-          showSnackbar(STATUS_ERROR, scaffoldKey);
+          showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
-      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
+      showSnackbar('No puede generar porque aun no se completo la cantidad de jugadores inscritos !!', scaffoldKey);
     }
   }
 } // FIN DE LA CLASE

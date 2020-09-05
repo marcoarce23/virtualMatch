@@ -357,7 +357,7 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
   final controllerTwitter = TextEditingController();
   final controllerIpsdn = TextEditingController();
 
-  CrudService entityService;
+  CrudService entityService = new CrudService();
   ImageService entityImage = new ImageService();
   JugadorModel entity = new JugadorModel();
   ClasificadorService entityGet = ClasificadorService();
@@ -528,7 +528,7 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
             'Acerca de ti..',
             140,
             'Ingrese sobre ti...',
-            true,
+            false,
             FaIcon(FontAwesomeIcons.mailBulk, color: AppTheme.themeDefault),
             AppTheme.themeDefault,
             AppTheme.themeDefault,
@@ -694,9 +694,10 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
           .then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
 
-        if (result["tipo_mensaje"] == '0')
+        if (result["tipo_mensaje"] == '0') {
+          prefs.idPlayer = result["data"];
           showSnackbar('Registro con éxito.', scaffoldKey);
-        else
+        } else
           showSnackbar('Se produjo un error. Vuelva a intentarlo', scaffoldKey);
       });
     } catch (error) {

@@ -50,8 +50,7 @@ class CrudService with ChangeNotifier {
   Future<Map<String, dynamic>> execute(String url) async {
     final apiRest = url; // eventResourceAdd['add'][0].toString()   ;
     print('urlvvvvvv: $apiRest');
-    final response =
-        await http.post(apiRest);
+    final response = await http.post(apiRest);
 
     isLoading = false;
     notifyListeners();
@@ -69,7 +68,7 @@ class CrudService with ChangeNotifier {
     isLoading = false;
     notifyListeners();
     // return _result;
-       print(getListIEntityJson(response, entityJson, decodeData, list));
+    print(getListIEntityJson(response, entityJson, decodeData, list));
     return getListIEntityJson(response, entityJson, decodeData, list);
   }
 

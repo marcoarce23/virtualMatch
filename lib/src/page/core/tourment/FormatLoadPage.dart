@@ -40,11 +40,7 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
-  TextEditingController _inputFieldDateController = new TextEditingController();
-  TextEditingController _inputFieldTimeController = new TextEditingController();
-
 //DEFINICION DE BLOC Y MODEL
-  CrudService entityService;
   FormatoModel entity = new FormatoModel();
   ImageService entityImage = new ImageService();
   ClasificadorService entityGet = ClasificadorService();
@@ -63,7 +59,7 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
   String _opcionTipoCompeticion = '27';
   String _opcionTipoTorneo = '23';
   String _opcionTipoModalidad = '43';
-  String _opcionCodTorneo = '44';
+  String _opcionCodTorneo = '48';
 
   List<String> _cantidad = [
     '2',
@@ -87,7 +83,7 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
   @override
   Widget build(BuildContext context) {
     entity.states = StateEntity.Insert;
-    entityService = Provider.of<CrudService>(context);
+    // entityService = Provider.of<CrudService>(context);
 
     return Scaffold(
       key: scaffoldKey,
@@ -140,7 +136,7 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         sizedBox(0.0, 7.0),
-        _comboCodTroneo(_opcionCodTorneo),
+        //       _comboCodTroneo(_opcionCodTorneo),
         _comboTorneoCreado(_opcionTipoCompeticion),
         _comboJugador(),
         _comboCompeticion(_opcionTipoCompeticion),
@@ -201,12 +197,12 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
   }
 
   Widget _comboCodTroneo(String _opcionCodTorneo) {
+    print('AAAA $_opcionCodTorneo');
+    print(API + '/api/Torneo/getTorneosUsuario/' + prefs.email);
     return Center(
         child: FutureBuilder(
-            future: entityGet1.get(
-                new ListaTorneoModel(),
-                API +
-                    '/api/Torneo/getTorneosUsuario/' + prefs.email),
+            future: entityGet1.get(new ListaTorneoModel(),
+                API + '/api/Torneo/getTorneosUsuario/' + prefs.email),
             builder: (context, AsyncSnapshot snapshot) {
               if (snapshot.hasData) {
                 return Row(
@@ -217,10 +213,11 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
                     DropdownButton(
                       icon: FaIcon(FontAwesomeIcons.sort,
                           color: AppTheme.themePurple),
-                      value: '44',
+                      value: _opcionCodTorneo,
                       items: getDropDownTorneo(snapshot),
                       onChanged: (value) {
                         setState(() {
+                          print(_opcionCodTorneo);
                           _opcionCodTorneo = value;
                         });
                       },
@@ -376,10 +373,12 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
   List<DropdownMenuItem<String>> getDropDownTorneo(AsyncSnapshot snapshot) {
     List<DropdownMenuItem<String>> lista = new List();
 
+    print('tammmm: ${snapshot.data.length}');
+
     for (var i = 0; i < snapshot.data.length; i++) {
       ListaTorneoModel item = snapshot.data[i];
       lista.add(DropdownMenuItem(
-        child: Text(item.nombreTorneo),
+        child: Text(item.idTorneo.toString()),
         value: item.idTorneo.toString(),
       ));
     }
@@ -469,12 +468,12 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
 
     setState(() => _save = true);
     loadingEntity();
-    executeCUD(entityService, entity);
+    executeCUD(entityGet1, entity);
     setState(() => _save = false);
   }
 
   void loadingEntity() {
-    entity.idTorneo = 43;
+    entity.idTorneo = 48;
     entity.idTipoCompeticion = int.parse(_opcionTipoCompeticion);
     entity.idaTipoTorneo = int.parse(_opcionTipoTorneo);
     entity.idaInscripcion = 1;

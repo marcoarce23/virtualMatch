@@ -388,7 +388,7 @@ showSnackbar(String message, GlobalKey<ScaffoldState> scaffoldKey) {
   final snackbar = SnackBar(
     backgroundColor: Colors.pinkAccent,
     content: Text(message),
-    duration: Duration(milliseconds: 1500),
+    duration: Duration(milliseconds: 4000),
   );
 
   scaffoldKey.currentState.showSnackBar(snackbar);
