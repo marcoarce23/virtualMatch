@@ -154,7 +154,11 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
                               fontWeight: FontWeight.bold,
                               fontSize: 15,
                               color: AppTheme.themeWhite)),
-                      Text('Inscritos: 100/${entity.cantidadJugadores}'),
+                      Text('Inscritos: 100/${entity.cantidadJugadores}',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                              color: AppTheme.themeWhite)),
                     ],
                   ),
                   Row(
@@ -243,7 +247,7 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
           ),
           onTap: () {
             setState(() {
-              _executeInscription('1', '4');
+              _executeInscription(keyId, '170');
             });
           },
         ),
@@ -266,7 +270,7 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
             setState(() {
               // entityModel.idNotificacion = int.parse(keyId);
               // print('eliminar ${entityModel.idNotificacion}');
-              _executeUnsuscription('1', '3');
+              _executeUnsuscription(keyId, prefs.idPlayer);
             });
           },
         ),
@@ -307,13 +311,14 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
               idJugador)
           .then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
+
         if (result["tipo_mensaje"] == '0')
-          showSnackbar(STATUS_OK, scaffoldKey);
-        else
-          showSnackbar(STATUS_ERROR, scaffoldKey);
+          showSnackbar(result["mensaje"], scaffoldKey);
+        if (result["tipo_mensaje"] == '2')
+          showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
-      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
+      showSnackbar( 'El usuario ya fue registrado', scaffoldKey);
     }
   }
 
@@ -328,12 +333,12 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
           .then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0')
-          showSnackbar(STATUS_OK, scaffoldKey);
-        else
-          showSnackbar(STATUS_ERROR, scaffoldKey);
+          showSnackbar(result["mensaje"], scaffoldKey);
+        if (result["tipo_mensaje"] == '2')
+          showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
-      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
+      showSnackbar('El usuario ya salio del torneo', scaffoldKey);
     }
   }
 }
