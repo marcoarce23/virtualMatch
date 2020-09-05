@@ -53,10 +53,10 @@ class _TourmentPageState extends State<TourmentPage> {
     return SafeArea(
       child: Scaffold(
         key: scaffoldKey,
-        appBar: appBar('TORNEOS'),
+        appBar: appBar('TORNEOS VIRTUAL MATCH'),
         body: bodyContainer(context),
         drawer: DrawerMenu(),
-         floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
+        floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
             FaIcon(FontAwesomeIcons.playstation), HomePage()),
         // bottomNavigationBar: new BottonNavigation(),
       ),
@@ -100,7 +100,7 @@ class _TourmentPageState extends State<TourmentPage> {
               SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
-                //    divider(),
+                    //    divider(),
                     Text('Listado de Equipos'.toUpperCase(),
                         style: TextStyle(
                             fontWeight: FontWeight.bold, fontSize: 16)),

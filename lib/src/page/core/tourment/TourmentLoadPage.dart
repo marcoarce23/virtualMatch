@@ -6,7 +6,6 @@ import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/TorneoModelo.dart';
@@ -19,7 +18,6 @@ import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/ImageService.dart';
 import 'package:virtual_match/src/service/core/TournamentService.dart';
-import 'package:virtual_match/src/service/crudService.dart';
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
@@ -62,7 +60,7 @@ class _TourmentAllPageState extends State<TourmentAllPage> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(builder: (_) => new CrudService()),
+        ChangeNotifierProvider(builder: (_) => new TourmentService()),
       ],
       child: Scaffold(
         appBar: appBar('CREACIÓN DEL TORNEO'),
@@ -118,7 +116,7 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
   TextEditingController _inputFieldTimeController = new TextEditingController();
 
 //DEFINICION DE BLOC Y MODEL
-  CrudService entityService;
+  TourmentService entityService;
   TorneoModel entity = new TorneoModel();
   ImageService entityImage = new ImageService();
   final prefs = new Preferense();
@@ -146,7 +144,7 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
   @override
   Widget build(BuildContext context) {
     entity.states = StateEntity.Insert;
-    entityService = Provider.of<CrudService>(context);
+    entityService = Provider.of<TourmentService>(context);
 
     final TorneoModel entityModel = ModalRoute.of(context).settings.arguments;
 
@@ -160,7 +158,6 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
       body: Stack(
         children: <Widget>[
           background(context, 'IMAGE_LOGO'),
-        
           _form(context),
         ],
       ),
@@ -231,12 +228,12 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-          showPictureOval(photo, image, 125.0),
-          dividerBlack(),
+        showPictureOval(photo, image, 125.0),
+        dividerBlack(),
         _text(
             controllerName,
             entity.nombre,
-            'Nombre del torneo',
+            '(*) Nombre del torneo',
             100,
             1,
             'Ingrese nombre al torneo',
@@ -248,7 +245,7 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
         _text(
             controllerDetail,
             entity.detalle,
-            'Detalle del torneo',
+            '(*) Detalle del torneo',
             250,
             2,
             'Ingrese Detalle del torneo',
@@ -260,7 +257,7 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
         _text(
             controllerHastag,
             entity.hastag,
-            '#Hastag Virtual Match',
+            '(*) #Hastag Virtual Match',
             100,
             1,
             'Ingrese #Hastag',
@@ -272,7 +269,7 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
         _text(
             controllerGift,
             entity.premios,
-            'Premios en Bs.',
+            '(*) Premios en Bs.',
             5,
             1,
             'Ingrese el monto el premio en Bs.',
@@ -284,7 +281,7 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
         _text(
             controllerOrganization,
             entity.organizador,
-            'Inscripción en Bs.',
+            '(*) Inscripción en Bs.',
             5,
             1,
             'Ingrese el monto de la Inscripción',
@@ -293,8 +290,8 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             Colors.red),
-        _dateInit('Fecha de inicio'),
-        _hourInit('Hora de inicio'),
+        _dateInit('(*) Fecha de inicio'),
+        _hourInit('(*) Hora de inicio'),
         Text(
           '(*) Campos obligatorios. ',
           style: kCamposTitleStyle,
@@ -472,11 +469,9 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
     entity.usuarioAuditoria = prefs.email;
   }
 
-  void executeCUD(CrudService entityService, TorneoModel entity) async {
+  void executeCUD(TourmentService entityService, TorneoModel entity) async {
     try {
-      await entityService
-          .repository(entity, API + '/api/Torneo')
-          .then((result) {
+      await entityService.repository(entity).then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
 
         if (result["tipo_mensaje"] == '0') {
@@ -485,7 +480,7 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
           // navigation(
           //   context, TourmentListPage()
           // );
-          
+
         } else
           showSnackbar(STATUS_ERROR, scaffoldKey);
       });

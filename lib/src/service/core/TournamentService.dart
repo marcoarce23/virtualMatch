@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:virtual_match/src/api/DataMap.dart';
 import 'package:virtual_match/src/api/core/tourment/ApiGet.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/api/core/tourment/ApiAdd.dart';
@@ -7,6 +8,9 @@ import 'package:virtual_match/src/api/core/tourment/ApiDelete.dart';
 import 'package:virtual_match/src/api/core/format/ApiAdd.dart' as format;
 import 'package:virtual_match/src/api/core/format/ApiUpdate.dart' as format1;
 import 'package:virtual_match/src/api/core/format/ApiDelete.dart' as format2;
+import 'package:http/http.dart' as http;
+
+
 class TourmentService with ChangeNotifier {
   bool isLoading = true;
 
@@ -108,4 +112,15 @@ class TourmentService with ChangeNotifier {
     notifyListeners();
     return _result;
   }
+
+    Future<Map<String, dynamic>> execute(String url) async {
+    final apiRest = url; // eventResourceAdd['add'][0].toString()   ;
+    print('urlvvvvvv: $apiRest');
+    final response = await http.post(apiRest);
+
+    isLoading = false;
+    notifyListeners();
+    return dataMap(response);
+  }
+  
 }

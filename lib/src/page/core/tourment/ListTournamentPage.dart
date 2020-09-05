@@ -5,7 +5,6 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
-import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/service/crudService.dart';
 
 import 'package:virtual_match/src/style/Style.dart';

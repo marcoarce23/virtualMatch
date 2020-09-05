@@ -59,7 +59,7 @@ class _TourmentAllPageState extends State<TourmentAllPage> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(builder: (_) => new CrudService()),
+        ChangeNotifierProvider(builder: (_) => new TourmentService()),
       ],
       child: Scaffold(
         appBar: appBar('TORNEOS'),

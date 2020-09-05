@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/components/loader/gf_loader.dart';
@@ -17,7 +18,7 @@ import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/ClasificadorService.dart';
 import 'package:virtual_match/src/service/ImageService.dart';
-import 'package:virtual_match/src/service/crudService.dart';
+import 'package:virtual_match/src/service/core/TournamentService.dart';
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
@@ -39,12 +40,12 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
   //DEFINIICON DE VARIABLES GLOBALES
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
-
+  final controllerCantidad = TextEditingController();
 //DEFINICION DE BLOC Y MODEL
   FormatoModel entity = new FormatoModel();
   ImageService entityImage = new ImageService();
   ClasificadorService entityGet = ClasificadorService();
-  CrudService entityGet1 = CrudService();
+  TourmentService entityGet1 = TourmentService();
 
   final prefs = new Preferense();
 
@@ -135,10 +136,29 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        sizedBox(0.0, 7.0),
-        //       _comboCodTroneo(_opcionCodTorneo),
+        sizedBox(0.0, 8.0),
+        Row(
+          children: [
+            sizedBox(13.0, 0.0),
+            Text('Selecciones el torneo'),
+          ],
+        ),
+        _comboCodTroneo(_opcionCodTorneo),
         _comboTorneoCreado(_opcionTipoCompeticion),
-        _comboJugador(),
+        //_comboJugador(),
+        _text(
+            controllerCantidad,
+            '0',
+            '(*) Ingrese cantidad de jugadores',
+            3,
+            1,
+            'Ingrese la cantidad de jugadores',
+            true,
+           null,// FaIcon(FontAwesomeIcons.futbol, color: AppTheme.themeDefault),
+            AppTheme.themeDefault,
+            AppTheme.themeDefault,
+            AppTheme.themePurple),
+
         _comboCompeticion(_opcionTipoCompeticion),
         _comboTorneo(_opcionTipoTorneo),
         _comboModalidad(_opcionTipoModalidad),
@@ -170,6 +190,7 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 15.0),
       child: TextFormField(
+        keyboardType: TextInputType.number,
         initialValue: initialValue,
         textCapitalization: TextCapitalization.sentences,
         enableSuggestions: true,
@@ -180,7 +201,6 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
         cursorColor: AppTheme.themeDefault,
         toolbarOptions:
             ToolbarOptions(copy: true, cut: true, paste: true, selectAll: true),
-        keyboardType: TextInputType.text,
         // controller: controller,
         decoration: inputDecoration(
             hintText, labelText, icon, hoverColor, fillColor, focusColor),
@@ -197,19 +217,15 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
   }
 
   Widget _comboCodTroneo(String _opcionCodTorneo) {
-    print('AAAA $_opcionCodTorneo');
-    print(API + '/api/Torneo/getTorneosUsuario/' + prefs.email);
     return Center(
         child: FutureBuilder(
-            future: entityGet1.get(new ListaTorneoModel(),
-                API + '/api/Torneo/getTorneosUsuario/' + prefs.email),
+            future: entityGet1.get(new ListaTorneoModel()),
             builder: (context, AsyncSnapshot snapshot) {
               if (snapshot.hasData) {
                 return Row(
                   children: <Widget>[
-                    SizedBox(width: 35.0),
-                    Text('Selecciones el torneo:'),
-                    SizedBox(width: 15.0),
+                    // Text('Selecciones el torneo:'),
+                    sizedBox(10.0, 0),
                     DropdownButton(
                       icon: FaIcon(FontAwesomeIcons.sort,
                           color: AppTheme.themePurple),
@@ -217,7 +233,6 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
                       items: getDropDownTorneo(snapshot),
                       onChanged: (value) {
                         setState(() {
-                          print(_opcionCodTorneo);
                           _opcionCodTorneo = value;
                         });
                       },
@@ -233,9 +248,9 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
   Widget _comboJugador() {
     return Row(
       children: <Widget>[
-        SizedBox(width: 35.0),
+        sizedBox(10.0, 0),
         Text('Cantidad Jugadores:'),
-        SizedBox(width: 15.0),
+        sizedBox(15.0, 0),
         DropdownButton(
           value: typeCount,
           icon: FaIcon(FontAwesomeIcons.sort, color: AppTheme.themePurple),
@@ -258,9 +273,9 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
               if (snapshot.hasData) {
                 return Row(
                   children: <Widget>[
-                    SizedBox(width: 35.0),
+                    sizedBox(15.0, 0),
                     Text('Selecciones el torneo:'),
-                    SizedBox(width: 15.0),
+                    sizedBox(15.0, 0),
                     DropdownButton(
                       icon: FaIcon(FontAwesomeIcons.sort,
                           color: AppTheme.themePurple),
@@ -288,9 +303,9 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
               if (snapshot.hasData) {
                 return Row(
                   children: <Widget>[
-                    SizedBox(width: 35.0),
+                    sizedBox(15.0, 0),
                     Text('Tipo Competición:'),
-                    SizedBox(width: 15.0),
+                    sizedBox(15.0, 0),
                     DropdownButton(
                       icon: FaIcon(FontAwesomeIcons.sort,
                           color: AppTheme.themePurple),
@@ -318,9 +333,9 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
               if (snapshot.hasData) {
                 return Row(
                   children: <Widget>[
-                    SizedBox(width: 35.0),
+                    sizedBox(15.0, 0),
                     Text('Tipo Torneo:'),
-                    SizedBox(width: 15.0),
+                    sizedBox(15.0, 0),
                     DropdownButton(
                       icon: FaIcon(FontAwesomeIcons.sort,
                           color: AppTheme.themePurple),
@@ -348,9 +363,9 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
               if (snapshot.hasData) {
                 return Row(
                   children: <Widget>[
-                    SizedBox(width: 35.0),
+                    sizedBox(15.0, 0),
                     Text('Tipo Moldalidad'),
-                    SizedBox(width: 15.0),
+                    sizedBox(15.0, 0),
                     DropdownButton(
                       icon: FaIcon(FontAwesomeIcons.sort,
                           color: AppTheme.themePurple),
@@ -373,12 +388,10 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
   List<DropdownMenuItem<String>> getDropDownTorneo(AsyncSnapshot snapshot) {
     List<DropdownMenuItem<String>> lista = new List();
 
-    print('tammmm: ${snapshot.data.length}');
-
     for (var i = 0; i < snapshot.data.length; i++) {
       ListaTorneoModel item = snapshot.data[i];
       lista.add(DropdownMenuItem(
-        child: Text(item.idTorneo.toString()),
+        child: Text(item.nombreTorneo),
         value: item.idTorneo.toString(),
       ));
     }
@@ -483,11 +496,9 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
     entity.usuarioAuditoria = prefs.email;
   }
 
-  void executeCUD(CrudService entityService, FormatoModel entity) async {
+  void executeCUD(TourmentService entityService, FormatoModel entity) async {
     try {
-      await entityService
-          .repository(entity, API + '/api/Formato')
-          .then((result) {
+      await entityService.repository(entity).then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0') {
           showSnackbar(STATUS_OK, scaffoldKey);
