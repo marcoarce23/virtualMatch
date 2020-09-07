@@ -23,13 +23,19 @@ class ResultadoService with ChangeNotifier {
       case StateEntity.Insert:
         result = await _apiAdd.add(entity);
         break;
-      case StateEntity.Update:
-        result = await _apiUpdate.update(entity);
-        break;
       default:
     }
 
     print('DEL VALOR DE EVENT BLOC: $result');
+    isLoading = false;
+    notifyListeners();
+    return result;
+  }
+
+  Future<Map<String, dynamic>> update(IEntityMap entity, int id) async {
+    var result;
+    isLoading = true;
+    result = await _apiUpdate.update(entity, id);
     isLoading = false;
     notifyListeners();
     return result;

@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/TablaPosicionesModel.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
@@ -30,7 +31,7 @@ class _PositionTableState extends State<PositionTable> {
         builder: (context, AsyncSnapshot snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
-              return Text('ss');
+              return loading();
               break;
             default:
               return listView(context, snapshot);
@@ -141,7 +142,7 @@ class _PositionTableState extends State<PositionTable> {
                               width: 15.0,
                               child: Center(
                                 child: Text(
-                                  data.puntaje.toString(),
+                                  data.nro.toString(),
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 12),
@@ -155,15 +156,16 @@ class _PositionTableState extends State<PositionTable> {
                               child: Row(
                                 children: <Widget>[
                                   avatarCircle(data.imagenEquipo, 13.0),
-                                  Text(
-                                    data.nombreEquipo,
-                                    softWrap: true,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 12),
+                                  Expanded(
+                                    child: AutoSizeText(
+                                      data.nombreEquipo,
+                                      overflow: TextOverflow.ellipsis,
+                                      softWrap: true,
+                                      maxLines: 3,
+                                    ),
                                   ),
-                                  Text(data.nombreEquipo),
+
+                                  //Text(data.nombreEquipo),
                                 ],
                               ),
                             ),

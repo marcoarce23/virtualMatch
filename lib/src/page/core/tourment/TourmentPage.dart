@@ -56,9 +56,9 @@ class _TourmentPageState extends State<TourmentPage> {
       child: Scaffold(
         key: scaffoldKey,
         appBar: appBar('TORNEOS'),
-        body: bodyContainer(context),
+        body: SingleChildScrollView(child: bodyContainer(context)),
         drawer: DrawerMenu(),
-         floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
+        floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
             FaIcon(FontAwesomeIcons.playstation), HomePage()),
         // bottomNavigationBar: new BottonNavigation(),
       ),
@@ -68,81 +68,87 @@ class _TourmentPageState extends State<TourmentPage> {
   Widget bodyContainer(BuildContext context) {
     return Column(
       children: <Widget>[
-        //    sizedBox(0, 6),
+        sizedBox(0, 10),
         futureBuilderTorneo(context),
-        GFTabs(
-          height: MediaQuery.of(context).size.height,
-          tabBarColor: AppTheme.themeDefault,
-          indicatorColor: AppTheme.themePurple,
-          height: MediaQuery.of(context).size.height * 0.73,
-          indicatorWeight: 6.0,
-          initialIndex: 0,
-          length: 3,
-          tabs: <Widget>[
-            Tab(
-              icon: Icon(Icons.perm_identity),
-              child: Text(
-                "EQUIPOS",
-              ),
-            ),
-            Tab(
-              icon: Icon(Icons.score),
-              child: Text(
-                "Fixture".toUpperCase(),
-              ),
-            ),
-            Tab(
-              icon: Icon(Icons.table_chart),
-              child: Text(
-                "Posiciones".toUpperCase(),
-              ),
-            ),
-          ],
-          tabBarView: GFTabBarView(
-            children: <Widget>[
-              SingleChildScrollView(
-                child: Column(
-                  children: <Widget>[
-                //    divider(),
-                    Text('Listado de Equipos'.toUpperCase(),
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 16)),
-                    sizedBox(0, 6),
-                    EquipmentPlayersTournament(
-                      idTorneo: widget.idTorneo,
-                    ),
-                    //copyRigth(),
-                  ],
+        sizedBox(0, 10),
+        Container(
+          width: MediaQuery.of(context).size.width * 0.95,
+          child: GFTabs(
+            tabBarColor: AppTheme.themeDefault,
+            indicatorColor: AppTheme.themePurple,
+            height: MediaQuery.of(context).size.height * 0.73,
+            indicatorWeight: 6.0,
+            initialIndex: 0,
+            length: 3,
+            tabs: <Widget>[
+              Tab(
+                icon: Icon(Icons.perm_identity),
+                child: Text(
+                  "EQUIPOS",
                 ),
               ),
-              Column(
-                children: <Widget>[
-                  divider(),
-                  Text('Fixture de Partidos'.toUpperCase(),
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
-                  TournamentPlayerScored(
-                    idTorneo: widget.idTorneo,
-                  ),
-                  //copyRigth(),
-                ],
+              Tab(
+                icon: Icon(Icons.score),
+                child: Text(
+                  "Fixture".toUpperCase(),
+                ),
               ),
-              Column(
-                children: <Widget>[
-                  divider(),
-                  Text('TABLA DE POSICIONES',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
-                  PositionTable(
-                    idTorneo: widget.idTorneo,
-                  ),
-                  //copyRigth(),
-                ],
+              Tab(
+                icon: Icon(Icons.table_chart),
+                child: Text(
+                  "Posiciones".toUpperCase(),
+                ),
               ),
             ],
+            tabBarView: GFTabBarView(
+              children: <Widget>[
+                SingleChildScrollView(
+                  child: Column(
+                    children: <Widget>[
+                      //    divider(),
+                      Text('Listado de Equipos'.toUpperCase(),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 16)),
+                      sizedBox(0, 6),
+                      EquipmentPlayersTournament(
+                        idTorneo: widget.idTorneo,
+                      ),
+                      //copyRigth(),
+                    ],
+                  ),
+                ),
+                SingleChildScrollView(
+                  child: Column(
+                    children: <Widget>[
+                      divider(),
+                      Text('Fixture de Partidos'.toUpperCase(),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 20)),
+                      TournamentPlayerScored(
+                        idTorneo: widget.idTorneo,
+                      ),
+                      //copyRigth(),
+                    ],
+                  ),
+                ),
+                SingleChildScrollView(
+                  child: Column(
+                    children: <Widget>[
+                      divider(),
+                      Text('TABLA DE POSICIONES',
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 20)),
+                      PositionTable(
+                        idTorneo: widget.idTorneo,
+                      ),
+                      //copyRigth(),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
-        */
       ],
     );
   }
@@ -178,7 +184,7 @@ class _TourmentPageState extends State<TourmentPage> {
                                 'FECHA: ${new DateFormat.yMMMMd('es_BO').format(entity.fechaInicio)} ',
                                 style: TextStyle(color: AppTheme.themeWhite)),
                             null,
-                            avatarCircle(entity.foto, 45.0),
+                            null, //avatarCircle(entity.foto, 45.0),
                             EdgeInsets.all(3),
                             EdgeInsets.all(3),
                           ),

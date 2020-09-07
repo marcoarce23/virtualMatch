@@ -4,7 +4,9 @@ import 'package:virtual_match/src/model/entity/EntityFromJson/ListadoJugadoresMo
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/service/core/EquipmentService.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
+import 'package:virtual_match/src/widget/general/CallWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
+import 'package:virtual_match/src/widget/general/SenWidget.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 
 class EquipmentPlayersTournament extends StatefulWidget {
@@ -55,7 +57,10 @@ class _EquipmentPlayersTournamentState
         itemCount: snapshot.data.length,
         itemBuilder: (context, index) {
           ListadoJugadoresModel entity = snapshot.data[index];
-          return showPlayers(entity);
+          return Padding(
+            padding: const EdgeInsets.all(3.0),
+            child: showPlayers(entity),
+          );
         },
       ),
     );
@@ -72,14 +77,38 @@ class _EquipmentPlayersTournamentState
         children: <Widget>[
           //  sizedBox(0, 7),
           gfListTile(
-              Text(entity.nombreJugador),
-              _showPlayerDetail(entity),
-              _showAvatarDetail(entity),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  _showAvatarDetail(entity),
+                  InkWell(
+                    onTap: () {
+                      callNumber(int.parse(entity.telefono));
+                    },
+                    child: FaIcon(FontAwesomeIcons.phone, color: Colors.white),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      sendSMS(int.parse(entity.telefono));
+                    },
+                    child: FaIcon(FontAwesomeIcons.sms, color: Colors.white),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      callWhatsApp1(int.parse(entity.telefono));
+                    },
+                    child:
+                        FaIcon(FontAwesomeIcons.whatsapp, color: Colors.white),
+                  ),
+                ],
+              ),
               null,
-              avatarCircle((entity.fotoJugador ?? IMAGE_DEFAULT), 35),
-              EdgeInsets.all(3.0),
+              null, //_showPlayerDetail(entity),
+              null,
+              null, //avatarCircle((entity.fotoJugador ?? IMAGE_DEFAULT), 35),
+              null,
               EdgeInsets.all(3.0)),
-          //sizedBox(0, 7),
+          sizedBox(0, 7),
         ],
       ),
     );
@@ -119,7 +148,8 @@ class _EquipmentPlayersTournamentState
       children: <Widget>[
         avatarCircle(
             (entity.fotoJugador == null ? IMAGE_LOGOB : entity.fotoJugador),
-            13),
+            24),
+        sizedBox(10, 0),
         Text(entity.nombreJugador + ' ' + entity.apellidoJugador,
             style: TextStyle(color: AppTheme.themeWhite)),
       ],

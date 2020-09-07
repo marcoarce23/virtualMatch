@@ -22,6 +22,9 @@ import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 import 'package:virtual_match/src/widget/image/ImageWidget.dart';
 
+import 'ListTournamentPage.dart';
+import 'TourmentPage.dart';
+
 // ignore: must_be_immutable
 class RegisterScoredPage extends StatefulWidget {
   final int idTorneo;
@@ -62,7 +65,7 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        //key: scaffoldKey,
+        key: scaffoldKey,
         appBar: appBar('TORNEOS FIFA BOLIVIA'),
         body: SingleChildScrollView(child: bodyContainer(context)),
         drawer: DrawerMenu(),
@@ -72,16 +75,20 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
   }
 
   Widget bodyContainer(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        sizedBox(0, 6),
-        futureBuilderTorneo(context),
-        sizedBox(0, 8),
-        registerScored(widget.entity, widget.idTorneo),
-        registerPhoto(widget.entity, widget.idTorneo),
-        sizedBox(0, 20),
-        botonRegistrarScored(widget.entity, widget.idTorneo)
-      ],
+    return Padding(
+      padding: const EdgeInsets.all(15.0),
+      child: Column(
+        children: <Widget>[
+          sizedBox(0, 6),
+          //futureBuilderTorneo(context),
+          sizedBox(0, 8),
+          registerScored(widget.entity, widget.idTorneo),
+          registerPhoto(widget.entity, widget.idTorneo),
+          Text("Subir la foto aqui"),
+          sizedBox(0, 20),
+          botonRegistrarScored(widget.entity, widget.idTorneo)
+        ],
+      ),
     );
   }
 
@@ -90,12 +97,11 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
       size: GFSize.SMALL,
       onPressed: () {
         entityResultado.states = StateEntity.Update;
-        entityResultado.fechaAuditoria = DateTime.now().toString();
-        entityResultado.idEliminatoria = entity.idEliminatoria;
         entityResultado.idResultado = entity.idResultado;
-        entityResultado.idTorneo = entity.idTorneo;
-
-        _submit();
+        if (entityResultado.gol1 == entityResultado.gol2) {
+          showSnackbar("No pueden empatar!", scaffoldKey);
+        } else
+          _submit();
       },
       text: "Registrar",
       //blockButton: true,
@@ -108,11 +114,12 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
 
   void executeCUD(ResultadoService entityService, ResultadoModel entity) async {
     try {
-      await entityService.repository(entity).then((result) {
+      await entityService.update(entity, entity.idResultado).then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
-        if (result["tipo_mensaje"] == '0')
+        if (result["tipo_mensaje"] == '0') {
           showSnackbar(STATUS_OK, scaffoldKey);
-        else
+          navegation(context, TourmentPage(idTorneo: widget.idTorneo));
+        } else
           showSnackbar(STATUS_ERROR, scaffoldKey);
       });
     } catch (error) {
@@ -190,16 +197,17 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
                       avatarCircle(entity.iFoto, 35.0),
                       Text(entity.iJugador),
                       TextFormField(
+                        textAlign: TextAlign.center,
                         keyboardType: TextInputType.phone,
                         textCapitalization: TextCapitalization.sentences,
                         maxLength: 2,
-                        style: TextStyle(color: Colors.black, fontSize: 13),
+                        style: TextStyle(color: Colors.black, fontSize: 20),
                         decoration: InputDecoration(
                           labelStyle:
-                              TextStyle(fontSize: 14, color: Colors.black),
+                              TextStyle(fontSize: 20, color: Colors.black),
                           hintText: 'Goles',
                           hintStyle:
-                              TextStyle(fontSize: 14, color: Colors.black),
+                              TextStyle(fontSize: 20, color: Colors.black),
                         ),
                         onChanged: (value) {
                           entityResultado.gol1 = int.parse(value);
@@ -223,16 +231,17 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
                       avatarCircle(entity.dFoto, 35.0),
                       Text(entity.dJugador),
                       TextFormField(
+                        textAlign: TextAlign.center,
                         keyboardType: TextInputType.phone,
                         textCapitalization: TextCapitalization.sentences,
                         maxLength: 2,
-                        style: TextStyle(color: Colors.black, fontSize: 13),
+                        style: TextStyle(color: Colors.black, fontSize: 20),
                         decoration: InputDecoration(
                           labelStyle:
-                              TextStyle(fontSize: 14, color: Colors.black),
+                              TextStyle(fontSize: 20, color: Colors.black),
                           hintText: 'Goles',
                           hintStyle:
-                              TextStyle(fontSize: 14, color: Colors.black),
+                              TextStyle(fontSize: 20, color: Colors.black),
                         ),
                         onChanged: (value) {
                           entityResultado.gol2 = int.parse(value);
@@ -250,14 +259,33 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
     );
   }
 
+  Widget subirFoto(File file, String picture, double heigth) {
+    if (picture != null) {
+      return InkWell(
+        onTap: () => _seleccionarFoto(),
+        child: FadeInImage(
+          image: NetworkImage(picture),
+          placeholder: AssetImage('assets/jar-loading.gif'),
+          height: heigth,
+          fit: BoxFit.contain,
+        ),
+      );
+    } else {
+      return InkWell(
+        onTap: () => _seleccionarFoto(),
+        child: Image(
+          image: AssetImage(file?.path ?? IMAGE_LOGO),
+          height: heigth,
+          fit: BoxFit.cover,
+        ),
+      );
+    }
+  }
+
   Widget registerPhoto(PartidosPorTorneoModel entity, int idTorneo) {
     return Column(
       children: <Widget>[
-        InkWell(
-            onTap: () {
-              _seleccionarFoto();
-            },
-            child: showPictureOval(photo, image, 70.0)),
+        subirFoto(photo, image, 90.0),
       ],
     );
   }

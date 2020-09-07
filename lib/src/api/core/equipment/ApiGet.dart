@@ -34,7 +34,7 @@ class ApiGet {
     Map<String, dynamic> decodeData;
 
     final _apiRest =
-        api['getListaJugadores'][0].toString(); // + '/' + value.toString();
+        api['getListaJugadores'][0].toString() + '/' + value.toString();
     final response = await http.get(_apiRest);
 
     print(_apiRest);
