@@ -14,6 +14,7 @@ import 'package:virtual_match/src/model/entity/EntityFromJson/ListadoTorneoModel
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
+import 'package:virtual_match/src/page/core/tourment/TourmentListPage.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/ClasificadorService.dart';
@@ -154,7 +155,7 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
             1,
             'Ingrese la cantidad de jugadores',
             true,
-           null,// FaIcon(FontAwesomeIcons.futbol, color: AppTheme.themeDefault),
+            null, // FaIcon(FontAwesomeIcons.futbol, color: AppTheme.themeDefault),
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             AppTheme.themePurple),
@@ -486,7 +487,7 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
   }
 
   void loadingEntity() {
-    entity.idTorneo = 48;
+    entity.idTorneo = int.parse(_opcionCodTorneo);
     entity.idTipoCompeticion = int.parse(_opcionTipoCompeticion);
     entity.idaTipoTorneo = int.parse(_opcionTipoTorneo);
     entity.idaInscripcion = 1;
@@ -498,18 +499,12 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
 
   void executeCUD(TourmentService entityService, FormatoModel entity) async {
     try {
-      await entityService.repository(entity).then((result) {
+      await entityService.repositoryDetail(entity).then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0') {
           showSnackbar(STATUS_OK, scaffoldKey);
 
-          // Navigator.push(
-          //     context,
-          //     PageTransition(
-          //         curve: Curves.bounceOut,
-          //         type: PageTransitionType.rotate,
-          //         alignment: Alignment.topCenter,
-          //         child: FormatLoadPage(idTorneo: '8')));
+         // navigation(context, TourmentListPage());
         } else
           showSnackbar(STATUS_ERROR, scaffoldKey);
       });

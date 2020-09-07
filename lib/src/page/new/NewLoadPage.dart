@@ -54,37 +54,36 @@ class _NewAllPagePageState extends State<NewAllPage> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(builder: (_) => new NewService()),
-      ],
-      child: Scaffold(
-        appBar: appBar('CREA NOTICIA-EVENTO'),
-        drawer: DrawerMenu(),
-        bottomNavigationBar: BottomNavigationBar(
-          elevation: 21.0,
-          backgroundColor: AppTheme.themeDefault,
-          items: [
-            BottomNavigationBarItem(
-                icon: FaIcon(
-                  FontAwesomeIcons.newspaper,
-                  size: 25,
-                ),
-                title: Text('Noticias')),
-            BottomNavigationBarItem(
-                icon: FaIcon(
-                  FontAwesomeIcons.listAlt,
-                  size: 25,
-                ),
-                title: Text('Listado Noticias')),
-          ],
-          currentIndex: page,
-          unselectedItemColor: AppTheme.themeWhite,
-          selectedItemColor: AppTheme.themePurple,
-          onTap: _onItemTapped,
-        ),
-        body: optionPage[page],
+    // return MultiProvider(
+    //   providers: [
+    //     ChangeNotifierProvider(builder: (_) => new NewService()),
+    //   ],
+    //   child:
+    return Scaffold(
+      bottomNavigationBar: BottomNavigationBar(
+        elevation: 21.0,
+        backgroundColor: AppTheme.themeDefault,
+        items: [
+          BottomNavigationBarItem(
+              icon: FaIcon(
+                FontAwesomeIcons.newspaper,
+                size: 25,
+              ),
+              title: Text('Noticias')),
+          BottomNavigationBarItem(
+              icon: FaIcon(
+                FontAwesomeIcons.listAlt,
+                size: 25,
+              ),
+              title: Text('Listado Noticias')),
+        ],
+        currentIndex: page,
+        unselectedItemColor: AppTheme.themeWhite,
+        selectedItemColor: AppTheme.themePurple,
+        onTap: _onItemTapped,
       ),
+      body: optionPage[page],
+      //  ),
     );
   }
 }
@@ -106,7 +105,7 @@ class _NewLoadPageState extends State<NewLoadPage> {
   final controllerUbicacion = TextEditingController();
 
 //DEFINICION DE BLOC Y MODEL
-  NewService entityService;
+  NewService entityService = new NewService();
   NoticiaEventoModel entity = new NoticiaEventoModel();
   ImageService entityImage = new ImageService();
   final prefs = new Preferense();
@@ -135,7 +134,8 @@ class _NewLoadPageState extends State<NewLoadPage> {
   @override
   Widget build(BuildContext context) {
     entity.states = StateEntity.Insert;
-    entityService = Provider.of<NewService>(context);
+    entity.foto = image;
+    //   entityService = Provider.of<NewService>(context);
 
     final NoticiaEventoModel entityModel =
         ModalRoute.of(context).settings.arguments;
@@ -147,10 +147,12 @@ class _NewLoadPageState extends State<NewLoadPage> {
 
     return Scaffold(
       key: scaffoldKey,
+      appBar: appBar('CREA NOTICIAS-EVENTOS'),
+      drawer: DrawerMenu(),
       body: Stack(
         children: <Widget>[
-          background(context, 'IMAGE_LOGO'),
-          showPictureOval(photo, image, 130.0),
+          background(context, entity.foto),
+          showPictureOval(photo, entity.foto, 130.0),
           _form(context),
         ],
       ),
@@ -258,7 +260,7 @@ class _NewLoadPageState extends State<NewLoadPage> {
         _text(
             controllerNoticia,
             entity.titulo,
-            'NOTICIA/EVENTO'.toUpperCase(),
+            '(*) Registre la noticia/evento',
             100,
             2,
             'Ingrese la noticia',
@@ -271,7 +273,7 @@ class _NewLoadPageState extends State<NewLoadPage> {
         _text(
             controllerDetalle,
             entity.objetivo,
-            'Detalle de la noticia',
+            '(*)  Detalle de la noticia',
             140,
             2,
             'Ingrese Detalle de la noticia/evento',
@@ -283,7 +285,7 @@ class _NewLoadPageState extends State<NewLoadPage> {
         _text(
             controllerDirigidoA,
             entity.titulo,
-            'Dirigido a:',
+            '(*) Dirigido a:',
             140,
             2,
             'Ingrese quienes participan',
@@ -295,7 +297,7 @@ class _NewLoadPageState extends State<NewLoadPage> {
         _text(
             controllerUbicacion,
             entity.titulo,
-            'Ubicación/Publicación digital del evento',
+            '(*) Ubicación/Publicación digital del evento',
             160,
             2,
             'Ingrese lugar o ruta digital',
@@ -304,8 +306,8 @@ class _NewLoadPageState extends State<NewLoadPage> {
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             Colors.red),
-        _date('Fecha noticia/evento'),
-        _hour('Hora noticia/evento'),
+        _date('(*) Fecha noticia/evento'),
+        _hour('(*) Hora noticia/evento'),
         //  _comboBox('Tipo.', myController.text),
         Text(
           '(*) Campos obligatorios. ',
@@ -480,6 +482,7 @@ class _NewLoadPageState extends State<NewLoadPage> {
     entity.usuarioAuditoria = prefs.email;
     entity.fecha = _inputFieldDateController.text;
     entity.hora = _inputFieldTimeController.text;
+    entity.tipo = _selectedRadio;
     // entity.foto = IMAGE_LOGO;
     entity.fechaAuditoria = '2020-08-10 08:25';
   }

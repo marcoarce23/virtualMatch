@@ -80,13 +80,10 @@ Widget copyRigth() {
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Text(VIRTUAL_MATCH, style: kCopyRigthStyle),
-          FaIcon(
-            //  FontAwesomeIcons.earlybirds,
-            FontAwesomeIcons.futbol,
-            color: AppTheme.themeWhite,
-            size: 18,
-          ),
+          Text(VIRTUAL_MATCH,
+              style: TextStyle(
+                  color: AppTheme.themeWhite)), //style: kCopyRigthStyle),
+          avatarCircle(IMAGE_DEFAULT, 15),
         ],
       ),
     ],
@@ -103,12 +100,7 @@ Widget copyRigthBlack() {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(VIRTUAL_MATCH, style: TextStyle(color: AppTheme.themeDefault)),
-          FaIcon(
-            //  FontAwesomeIcons.earlybirds,
-            FontAwesomeIcons.futbol,
-            color: AppTheme.themeDefault,
-            size: 18,
-          ),
+          avatarCircle(IMAGE_DEFAULT, 15),
         ],
       ),
     ],

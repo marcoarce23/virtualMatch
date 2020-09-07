@@ -11,6 +11,7 @@ import 'package:virtual_match/src/page/faq/FaqPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/page/login/LogOnPage.dart';
 import 'package:virtual_match/src/page/new/NewLoadPage.dart';
+import 'package:virtual_match/src/page/notification/NotificationLoadPage.dart';
 import 'package:virtual_match/src/service/LogInService.dart';
 
 void main() async {
@@ -120,6 +121,10 @@ class _MyAppState extends State<MyApp> {
             'login': (BuildContext context) => new LogOnPage(),
             'new': (BuildContext context) => new NewAllPage(),
             'faq': (BuildContext context) => new FaqPage(),
+            'notificationAll': (BuildContext context) =>
+                new NotificationAllPage(),
+            'notificationLoad': (BuildContext context) =>
+                new NotificationLoadPage(),
           }),
     );
   }

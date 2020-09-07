@@ -7,6 +7,8 @@ import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:provider/provider.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/NotificacionModel.dart';
+import 'package:virtual_match/src/model/entity/EntityFromJson/NotificacionModel.dart'
+    as gets;
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
@@ -20,9 +22,10 @@ import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/model/util/Validator.dart' as validator;
+import 'package:virtual_match/src/widget/image/ImageWidget.dart';
 
 class NotificationAllPage extends StatefulWidget {
-  static final String routeName = 'notification';
+  static final String routeName = 'notificationAll';
   const NotificationAllPage({Key key}) : super(key: key);
 
   @override
@@ -52,37 +55,36 @@ class _NotificationAllPageState extends State<NotificationAllPage> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(builder: (_) => new NotificationService()),
-      ],
-      child: Scaffold(
-        appBar: appBar('NOTIFICACIONES'),
-        drawer: DrawerMenu(),
-        bottomNavigationBar: BottomNavigationBar(
-          elevation: 21.0,
-          backgroundColor: AppTheme.themeDefault,
-          items: [
-            BottomNavigationBarItem(
-                icon: FaIcon(
-                  FontAwesomeIcons.bell,
-                  size: 25,
-                ),
-                title: Text('Notificaciones')),
-            BottomNavigationBarItem(
-                icon: FaIcon(
-                  FontAwesomeIcons.listAlt,
-                  size: 25,
-                ),
-                title: Text('Listado Notificación')),
-          ],
-          currentIndex: page,
-          unselectedItemColor: AppTheme.themeWhite,
-          selectedItemColor: AppTheme.themePurple,
-          onTap: _onItemTapped,
-        ),
-        body: optionPage[page],
+    // return MultiProvider(
+    //   providers: [
+    //     ChangeNotifierProvider(builder: (_) => new NotificationService()),
+    //   ],
+    //   child:
+    return Scaffold(
+      bottomNavigationBar: BottomNavigationBar(
+        elevation: 21.0,
+        backgroundColor: AppTheme.themeDefault,
+        items: [
+          BottomNavigationBarItem(
+              icon: FaIcon(
+                FontAwesomeIcons.bell,
+                size: 25,
+              ),
+              title: Text('Notificaciones')),
+          BottomNavigationBarItem(
+              icon: FaIcon(
+                FontAwesomeIcons.listAlt,
+                size: 25,
+              ),
+              title: Text('Listado Notificación')),
+        ],
+        currentIndex: page,
+        unselectedItemColor: AppTheme.themeWhite,
+        selectedItemColor: AppTheme.themePurple,
+        onTap: _onItemTapped,
       ),
+      body: optionPage[page],
+      //),
     );
   }
 }
@@ -103,7 +105,8 @@ class _NotificationLoadPageState extends State<NotificationLoadPage> {
 
 //DEFINICION DE BLOC Y MODEL
   NotificacionModel entity = new NotificacionModel();
-  NotificationService entityService;
+  gets.NotificacionModel entityGet = new gets.NotificacionModel();
+  NotificationService entityService = new NotificationService();
   final prefs = new Preferense();
 
   //DEFINICION DE VARIABLES
@@ -119,27 +122,33 @@ class _NotificationLoadPageState extends State<NotificationLoadPage> {
 
   @override
   Widget build(BuildContext context) {
-    entityService = Provider.of<NotificationService>(context);
+    //   entityService = Provider.of<NotificationService>(context);
     entity.states = StateEntity.Insert;
 
-    final NotificacionModel entityModel =
+    final gets.NotificacionModel entityModelGet =
         ModalRoute.of(context).settings.arguments;
 
-    if (entityModel != null) {
-      entity = entityModel;
+    if (entityModelGet != null) {
+      entity.detalle = entityModelGet.detalle;
+      entity.titulo = entityModelGet.titulo;
+      entity.idNotificacion = entityModelGet.idNotificacion;
       entity.states = StateEntity.Update;
+      print(entityModelGet.detalle);
     }
 
     return Scaffold(
       key: scaffoldKey,
+      appBar: appBar('NOTIFICACIONES'),
+      drawer: DrawerMenu(),
       body: Stack(
         children: <Widget>[
-          // background(context, 'IMAGE_LOGO'),
+          background(context, 'IMAGE_LOGO'),
+          //  showPictureOval(photo, image, 130.0),
           _form(context),
         ],
       ),
       floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
-          FaIcon(FontAwesomeIcons.playstation), HomePage()),
+          FaIcon(FontAwesomeIcons.futbol), HomePage()),
     );
   }
 
@@ -150,10 +159,12 @@ class _NotificationLoadPageState extends State<NotificationLoadPage> {
       child: Form(
         key: formKey,
         child: Container(
-          color: Colors.black87,
+          //  color: Colors.black87,
+       
           child: Column(
             children: <Widget>[
-              sizedBox(0.0, 5.0),
+         //      
+              sizedBox(0.0, 8.0),
               showInformationBasic(
                 context,
                 'GESTIONA LAS NOTIFICACIONES',
@@ -166,7 +177,7 @@ class _NotificationLoadPageState extends State<NotificationLoadPage> {
                 decoration: containerFileds(),
                 child: _fields(context),
               ),
-              copyRigth(),
+              copyRigthBlack(),
             ],
           ),
         ),
@@ -178,6 +189,8 @@ class _NotificationLoadPageState extends State<NotificationLoadPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
+        showPictureOval(photo, IMAGE_DEFAULT, 0.0),
+        dividerBlack(),
         _text(
             controllerTitulo,
             entity.titulo,
@@ -280,14 +293,14 @@ class _NotificationLoadPageState extends State<NotificationLoadPage> {
   }
 
   void loadingEntity() {
-    entity.idNotificacion = 0;
+    entity.idNotificacion =
+        (entity.states == StateEntity.Insert) ? 0 : entity.idNotificacion;
     entity.idOrganizacion = 1;
     entity.titulo = controllerTitulo.text;
     entity.detalle = controllerDetalle.text;
     entity.usuarioAuditoria = prefs.email;
     entity.foto = IMAGE_LOGO;
     entity.fechaAuditoria = '2020-08-10 08:25';
-
   }
 
   void executeCUD(

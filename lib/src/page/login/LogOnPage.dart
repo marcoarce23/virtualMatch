@@ -18,6 +18,7 @@ import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/widget/general/SenWidget.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
+import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 
 class LogOnPage extends StatefulWidget {
   @override
@@ -352,12 +353,12 @@ class _LogOnPageState extends State<LogOnPage> {
       textStyle: TextStyle(fontSize: fontSize),
       textColor: AppTheme.themeWhite,
       color: AppTheme.themeBlackBlack,
-      icon: Shimmer.fromColors(
-        baseColor: AppTheme.themePurple,
-        highlightColor: AppTheme.themeWhite,
-        child: FaIcon(FontAwesomeIcons.playstation,
-            color: AppTheme.themeDefault, size: 28.0),
-      ),
+      icon: avatarCircle(IMAGE_DEFAULT, 20),
+      // Shimmer.fromColors(
+      //   baseColor: AppTheme.themePurple,
+      //   highlightColor: AppTheme.themeWhite,
+      //   child: avatarCircle(IMAGE_LOGOB, 35),
+      // ),
       shape: GFButtonShape.pills,
       onPressed: () => navegation(context, IntroPage()),
     );

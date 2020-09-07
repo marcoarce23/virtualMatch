@@ -11,6 +11,7 @@ class NoticiaEventoModel implements IEntityJson {
   String fecha;
   String hora;
   String foto;
+  int tipo;
 
   NoticiaEventoModel(
       {this.idNoticiaEvento,
@@ -22,7 +23,8 @@ class NoticiaEventoModel implements IEntityJson {
       this.ubicacionUrl,
       this.fecha,
       this.hora,
-      this.foto});
+      this.foto,
+      this.tipo});
 
   fromJson(Map<String, dynamic> json) => new NoticiaEventoModel(
         idNoticiaEvento: json["idNoticiaEvento"],
@@ -35,5 +37,6 @@ class NoticiaEventoModel implements IEntityJson {
         fecha: json["fecha"],
         hora: json["hora"],
         foto: json["foto"],
+        tipo: json["tipo"],
       );
 }
