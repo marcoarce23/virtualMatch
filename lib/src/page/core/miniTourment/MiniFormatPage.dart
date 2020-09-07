@@ -17,7 +17,7 @@ import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/ClasificadorService.dart';
 import 'package:virtual_match/src/service/ImageService.dart';
-import 'package:virtual_match/src/service/crudService.dart';
+import 'package:virtual_match/src/service/core/TournamentService.dart';
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
@@ -42,11 +42,11 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
 //DEFINICION DE BLOC Y MODEL
-  CrudService entityService;
+  TourmentService entityService;
   FormatoModel entity = new FormatoModel();
   ImageService entityImage = new ImageService();
   ClasificadorService entityGet = ClasificadorService();
-  CrudService entityGet1 = CrudService();
+  TourmentService entityGet1 = TourmentService();
 
   final prefs = new Preferense();
 
@@ -61,17 +61,9 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
   String _opcionTipoCompeticion = '27';
   String _opcionTipoTorneo = '23';
   String _opcionTipoModalidad = '43';
-  String _opcionCodTorneo = '44';
+  String _opcionCodTorneo = '48';
 
-  List<String> _cantidad = [
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8'
-  ];
+  List<String> _cantidad = ['2', '3', '4', '5', '6', '7', '8'];
 
   @override
   void initState() {
@@ -83,7 +75,7 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
   @override
   Widget build(BuildContext context) {
     entity.states = StateEntity.Insert;
-    entityService = Provider.of<CrudService>(context);
+    entityService = Provider.of<TourmentService>(context);
 
     return Scaffold(
       key: scaffoldKey,
@@ -135,18 +127,24 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-      //  sizedBox(0.0, 7.0),
-      showPictureOval(photo, image, 125.0),
-          dividerBlack(),
+        //  sizedBox(0.0, 7.0),
+        showPictureOval(photo, image, 125.0),
+        dividerBlack(),
+           Row(
+          children: [
+            sizedBox(30.0, 0.0),
+            Text('Selecciona tu torneo creado'),
+          ],
+        ),
         _comboCodTroneo(_opcionCodTorneo),
         _comboTorneoCreado(_opcionTipoCompeticion),
         _comboJugador(),
         _comboCompeticion(_opcionTipoCompeticion),
         _comboTorneo(_opcionTipoTorneo),
         _comboModalidad(_opcionTipoModalidad),
-      //  _porEquipo('Por equipo?'),
-      //  _inscription('Torneo de Pago'),
-     //   _selection('Selección Manual'),
+        //  _porEquipo('Por equipo?'),
+        //  _inscription('Torneo de Pago'),
+        //   _selection('Selección Manual'),
         Text(
           '(*) Campos obligatorios. ',
           style: kCamposTitleStyle,
@@ -201,21 +199,18 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
   Widget _comboCodTroneo(String _opcionCodTorneo) {
     return Center(
         child: FutureBuilder(
-            future: entityGet1.get(
-                new ListaTorneoModel(),
-                API +
-                    '/api/Torneo/getTorneosUsuario/' + prefs.email),
+            future: entityGet1.get(new ListaTorneoModel()),
             builder: (context, AsyncSnapshot snapshot) {
               if (snapshot.hasData) {
                 return Row(
                   children: <Widget>[
-                    SizedBox(width: 35.0),
-                    Text('Selecciones el torneo:'),
-                    SizedBox(width: 15.0),
+                    SizedBox(width: 30.0),
+                  //  Text('Selecciones el torneo:'),
+             
                     DropdownButton(
                       icon: FaIcon(FontAwesomeIcons.sort,
                           color: AppTheme.themePurple),
-                      value: '44',
+                      value: _opcionCodTorneo,
                       items: getDropDownTorneo(snapshot),
                       onChanged: (value) {
                         setState(() {
@@ -260,7 +255,7 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
                 return Row(
                   children: <Widget>[
                     SizedBox(width: 35.0),
-                    Text('Selecciones el torneo:'),
+                    Text('Tipo de torneo:'),
                     SizedBox(width: 15.0),
                     DropdownButton(
                       icon: FaIcon(FontAwesomeIcons.sort,
@@ -482,11 +477,9 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
     entity.usuarioAuditoria = prefs.email;
   }
 
-  void executeCUD(CrudService entityService, FormatoModel entity) async {
+  void executeCUD(TourmentService entityService, FormatoModel entity) async {
     try {
-      await entityService
-          .repository(entity, API + '/api/Formato')
-          .then((result) {
+      await entityService.repository(entity).then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0') {
           showSnackbar(STATUS_OK, scaffoldKey);

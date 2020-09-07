@@ -14,11 +14,10 @@ import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/page/core/miniTourment/MiniFormatPage.dart';
 import 'package:virtual_match/src/page/core/miniTourment/MiniTourmentListPage.dart';
-import 'package:virtual_match/src/page/core/tourment/TourmentLoadPage.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/ImageService.dart';
-import 'package:virtual_match/src/service/crudService.dart';
+import 'package:virtual_match/src/service/core/TournamentService.dart';
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
@@ -52,7 +51,7 @@ class _MiniTourmentAllPageState extends State<MiniTourmentAllPage> {
 
   @override
   void initState() {
-    prefs.lastPage = TourmentAllPage.routeName;
+    prefs.lastPage = MiniTourmentAllPage.routeName;
     page = 0;
     super.initState();
   }
@@ -61,7 +60,7 @@ class _MiniTourmentAllPageState extends State<MiniTourmentAllPage> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(builder: (_) => new CrudService()),
+        ChangeNotifierProvider(builder: (_) => new TourmentService()),
       ],
       child: Scaffold(
         appBar: appBar('MINI TORNEOS'),
@@ -123,7 +122,7 @@ class _MiniTourmentLoadPageState extends State<MiniTourmentLoadPage> {
   TextEditingController _inputFieldTimeController = new TextEditingController();
 
 //DEFINICION DE BLOC Y MODEL
-  CrudService entityService;
+  TourmentService entityService;
   MiniTorneoModel entity = new MiniTorneoModel();
   ImageService entityImage = new ImageService();
   final prefs = new Preferense();
@@ -151,9 +150,10 @@ class _MiniTourmentLoadPageState extends State<MiniTourmentLoadPage> {
   @override
   Widget build(BuildContext context) {
     entity.states = StateEntity.Insert;
-    entityService = Provider.of<CrudService>(context);
+    entityService = Provider.of<TourmentService>(context);
 
-    final MiniTorneoModel entityModel = ModalRoute.of(context).settings.arguments;
+    final MiniTorneoModel entityModel =
+        ModalRoute.of(context).settings.arguments;
 
     if (entityModel != null) {
       entity = entityModel;
@@ -165,7 +165,6 @@ class _MiniTourmentLoadPageState extends State<MiniTourmentLoadPage> {
       body: Stack(
         children: <Widget>[
           background(context, 'IMAGE_LOGO'),
-        
           _form(context),
         ],
       ),
@@ -236,12 +235,12 @@ class _MiniTourmentLoadPageState extends State<MiniTourmentLoadPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-          showPictureOval(photo, image, 125.0),
-          dividerBlack(),
+        showPictureOval(photo, image, 125.0),
+        dividerBlack(),
         _text(
             controllerName,
             entity.nombre,
-            'Nombre del torneo',
+            '(*) Nombre del torneo',
             100,
             1,
             'Ingrese nombre al torneo',
@@ -253,7 +252,7 @@ class _MiniTourmentLoadPageState extends State<MiniTourmentLoadPage> {
         _text(
             controllerDetail,
             entity.detalle,
-            'Detalle del torneo',
+            '(*) Detalle del torneo',
             250,
             2,
             'Ingrese Detalle del torneo',
@@ -298,8 +297,8 @@ class _MiniTourmentLoadPageState extends State<MiniTourmentLoadPage> {
         //     AppTheme.themeDefault,
         //     AppTheme.themeDefault,
         //     Colors.red),
-        _dateInit('Fecha de inicio'),
-        _hourInit('Hora de inicio'),
+        _dateInit('(*) Fecha de inicio'),
+        _hourInit('(*) Hora de inicio'),
         Text(
           '(*) Campos obligatorios. ',
           style: kCamposTitleStyle,
@@ -477,11 +476,9 @@ class _MiniTourmentLoadPageState extends State<MiniTourmentLoadPage> {
     entity.usuarioAuditoria = prefs.email;
   }
 
-  void executeCUD(CrudService entityService, MiniTorneoModel entity) async {
+  void executeCUD(TourmentService entityService, MiniTorneoModel entity) async {
     try {
-      await entityService
-          .repository(entity, API + '/api/Torneo')
-          .then((result) {
+      await entityService.repository(entity).then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
 
         if (result["tipo_mensaje"] == '0') {
@@ -490,7 +487,7 @@ class _MiniTourmentLoadPageState extends State<MiniTourmentLoadPage> {
           // navigation(
           //   context, TourmentListPage()
           // );
-          
+
         } else
           showSnackbar(STATUS_ERROR, scaffoldKey);
       });
