@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/ListadoJugadoresModel.dart';
@@ -80,25 +81,35 @@ class _EquipmentPlayersTournamentState
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  _showAvatarDetail(entity),
-                  InkWell(
-                    onTap: () {
-                      callNumber(int.parse(entity.telefono));
-                    },
-                    child: FaIcon(FontAwesomeIcons.phone, color: Colors.white),
+                  Flexible(flex: 7, child: _showAvatarDetail(entity)),
+                  Flexible(
+                    flex: 1,
+                    child: InkWell(
+                      onTap: () {
+                        callNumber(int.parse(entity.telefono));
+                      },
+                      child:
+                          FaIcon(FontAwesomeIcons.phone, color: Colors.white),
+                    ),
                   ),
-                  InkWell(
-                    onTap: () {
-                      sendSMS(int.parse(entity.telefono));
-                    },
-                    child: FaIcon(FontAwesomeIcons.sms, color: Colors.white),
+                  Flexible(
+                    flex: 1,
+                    child: InkWell(
+                      onTap: () {
+                        sendSMS(int.parse(entity.telefono));
+                      },
+                      child: FaIcon(FontAwesomeIcons.sms, color: Colors.white),
+                    ),
                   ),
-                  InkWell(
-                    onTap: () {
-                      callWhatsApp1(int.parse(entity.telefono));
-                    },
-                    child:
-                        FaIcon(FontAwesomeIcons.whatsapp, color: Colors.white),
+                  Flexible(
+                    flex: 1,
+                    child: InkWell(
+                      onTap: () {
+                        callWhatsApp1(int.parse(entity.telefono));
+                      },
+                      child: FaIcon(FontAwesomeIcons.whatsapp,
+                          color: Colors.white),
+                    ),
                   ),
                 ],
               ),
@@ -150,8 +161,15 @@ class _EquipmentPlayersTournamentState
             (entity.fotoJugador == null ? IMAGE_LOGOB : entity.fotoJugador),
             24),
         sizedBox(10, 0),
-        Text(entity.nombreJugador + ' ' + entity.apellidoJugador,
-            style: TextStyle(color: AppTheme.themeWhite)),
+        Expanded(
+          child: AutoSizeText(
+            entity.nombreJugador + ' ' + entity.apellidoJugador,
+            style: TextStyle(color: Colors.white),
+            overflow: TextOverflow.ellipsis,
+            softWrap: true,
+            maxLines: 3,
+          ),
+        ),
       ],
     );
   }
