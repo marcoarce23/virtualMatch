@@ -15,7 +15,8 @@ class NoticiaEventoModel implements IEntityMap {
   String foto;
   String usuarioAuditoria;
   String fechaAuditoria;
-
+  int tipo;
+  
   NoticiaEventoModel(
   {
       this.states = StateEntity.None,
@@ -30,7 +31,8 @@ class NoticiaEventoModel implements IEntityMap {
       this.hora,
       this.foto,
       this.usuarioAuditoria,
-      this.fechaAuditoria
+      this.fechaAuditoria,
+      this.tipo
       }
       );
 
@@ -47,5 +49,6 @@ class NoticiaEventoModel implements IEntityMap {
         "foto": foto,
         "usuarioAuditoria": usuarioAuditoria,
         "fechaAuditoria": fechaAuditoria,
+        "tipo": tipo
       };
 }

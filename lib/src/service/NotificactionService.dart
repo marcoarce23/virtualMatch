@@ -5,7 +5,8 @@ import 'package:virtual_match/src/api/notification/ApiAdd.dart';
 import 'package:virtual_match/src/api/notification/ApiUpdate.dart';
 import 'package:virtual_match/src/api/notification/ApiDelete.dart';
 
-class NotificationService with ChangeNotifier {
+class NotificationService {
+  //with ChangeNotifier {
   bool isLoading = true;
 
   final _apiAdd = new ApiAdd();
@@ -30,7 +31,7 @@ class NotificationService with ChangeNotifier {
 
     print('DEL VALOR DE EVENT BLOC: $result');
     isLoading = false;
-    notifyListeners();
+    // notifyListeners();
     return result;
   }
 
@@ -39,7 +40,7 @@ class NotificationService with ChangeNotifier {
     isLoading = true;
     result = await _apiDelete.delete(id, usuario);
     isLoading = false;
-    notifyListeners();
+    //notifyListeners();
     return result;
   }
 
@@ -47,7 +48,7 @@ class NotificationService with ChangeNotifier {
     var _result = await _apiGet.get(entityJson);
 
     isLoading = false;
-    notifyListeners();
+    // notifyListeners();
     return _result;
   }
 
@@ -55,7 +56,7 @@ class NotificationService with ChangeNotifier {
     var _result = await _apiGet.getId(entityJson, value);
 
     isLoading = false;
-    notifyListeners();
+    //  notifyListeners();
     return _result;
   }
 }

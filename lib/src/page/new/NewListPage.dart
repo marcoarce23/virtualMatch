@@ -5,8 +5,10 @@ import 'package:virtual_match/src/model/entity/EntityFromJson/NoticiaEventoModel
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
+import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/NewService.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
+import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/bottonNavigationBar/BottonNavigatorWidget.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
@@ -47,11 +49,11 @@ class _NewListPageState extends State<NewListPage> {
 
     return Scaffold(
       key: scaffoldKey,
+      appBar: appBar('CREA NOTICIAS-EVENTOS'),
       drawer: DrawerMenu(),
-      bottomNavigationBar: new BottonNavigation(),
       body: SafeArea(
         child: Container(
-          color: Colors.black87,
+        //  color: Colors.black87,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
@@ -68,17 +70,18 @@ class _NewListPageState extends State<NewListPage> {
                       'En esta pantalla puedes modificar y eliminar las notificaciones que haz creado anteriormente.',
                     ),
                     sizedBox(0.0, 5.0),
-                    divider(),
+                    dividerBlack(),
                   ],
                 ),
               ),
               futureBuilder(context),
-              copyRigth(),
+              copyRigthBlack(),
             ],
           ),
         ),
       ),
-      floatingActionButton: new CircularMenu(),
+      floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
+          FaIcon(FontAwesomeIcons.futbol), HomePage()),
 
       // floatButton(AppTheme.themeDefault, context,
       //   FaIcon(FontAwesomeIcons.playstation), HomePage()),
@@ -150,7 +153,8 @@ class _NewListPageState extends State<NewListPage> {
                       ),
                     ],
                   ),
-                  _showAction(entity, entity.idNoticiaEvento.toString()),
+                  _showAction(
+                      entity, entity.idNoticiaEvento.toString(), context),
                   null,
                   avatarCircle((entity.foto ?? IMAGE_LOGO), 35),
                   EdgeInsets.all(5.0),
@@ -162,52 +166,33 @@ class _NewListPageState extends State<NewListPage> {
     );
   }
 
-  Widget _showAction(NoticiaEventoModel entity, String keyId) {
+  Widget _showAction(
+      NoticiaEventoModel entity, String keyId, BuildContext context) {
     return Row(
       children: <Widget>[
-        Text(
-          '$keyId',
-          style: TextStyle(color: Colors.white),
-        ),
+        sizedBox(0, 15),
+        Text('OPERACIONES: ', style: TextStyle(color: AppTheme.themeWhite)),
         sizedBox(10, 0),
-        _update(),
+        _update(context, entity),
         sizedBox(10, 0),
         _delete(keyId),
-        sizedBox(10, 0),
-        _like(),
       ],
     );
   }
 
-  _like() {
-    entityModel.states = StateEntity.Update;
-    entityModel.usuarioAuditoria = prefs.email;
-
+  _update(BuildContext context, NoticiaEventoModel entity) {
     return InkWell(
       child: FaIcon(
-        FontAwesomeIcons.handPointUp,
+        FontAwesomeIcons.edit,
         color: AppTheme.themePurple,
-        size: 23,
+        size: 26,
       ),
       onTap: () {
-        setState(() {});
+        setState(() {
+          Navigator.pushNamed(context, 'notificationLoad', arguments: entity);
+        });
       },
-    );
-  }
-
-  _update() {
-    entityModel.states = StateEntity.Update;
-    entityModel.usuarioAuditoria = prefs.email;
-
-    return InkWell(
-      child: FaIcon(
-        FontAwesomeIcons.commentDots,
-        color: AppTheme.themePurple,
-        size: 23,
-      ),
-      onTap: () {
-        setState(() {});
-      },
+      //  ),
     );
   }
 
@@ -215,14 +200,13 @@ class _NewListPageState extends State<NewListPage> {
     return InkWell(
       key: Key(keyId),
       child: FaIcon(
-        FontAwesomeIcons.smile,
+        FontAwesomeIcons.trashAlt,
         color: AppTheme.themePurple,
-        size: 23,
+        size: 26,
       ),
       onTap: () {
         setState(() {
           entityModel.idNoticiaEvento = int.parse(keyId);
-          print('eliminar ${entityModel.idNoticiaEvento}');
           executeDelete(entityModel.idNoticiaEvento.toString(), prefs.email);
         });
       },
@@ -232,21 +216,6 @@ class _NewListPageState extends State<NewListPage> {
   void executeDelete(String id, String usuario) async {
     try {
       await entityService.delete(id, usuario).then((result) {
-        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
-        if (result["tipo_mensaje"] == '0')
-          showSnackbar(STATUS_OK, scaffoldKey);
-        else
-          showSnackbar(STATUS_ERROR, scaffoldKey);
-      });
-    } catch (error) {
-      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
-    }
-  }
-
-  void executeUpdate(
-      NewService entityService, model.NoticiaEventoModel entity) async {
-    try {
-      await entityService.repository(entity).then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0')
           showSnackbar(STATUS_OK, scaffoldKey);

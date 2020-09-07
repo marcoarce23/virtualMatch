@@ -4,7 +4,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
+import 'package:virtual_match/src/page/notification/NotificationLoadPage.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
+import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
+import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/NotificactionService.dart';
@@ -41,13 +44,15 @@ class _NotificationListPageState extends State<NotificationListPage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    entityService = Provider.of<NotificationService>(context);
+    //  entityService = Provider.of<NotificationService>(context);
 
     return Scaffold(
       key: scaffoldKey,
+        appBar: appBar('NOTIFICACIONES'),
+      drawer: DrawerMenu(),
       body: SafeArea(
         child: Container(
-          color: Colors.black87,
+        //  color: Colors.black87,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
@@ -63,12 +68,13 @@ class _NotificationListPageState extends State<NotificationListPage> {
                       'ADMINISTRA LAS NOTIFICACIONES',
                       'En esta pantalla puedes modificar y eliminar las notificaciones que haz creado anteriormente.',
                     ),
-                    divider(),
+                 sizedBox(0.0, 3),
+                    dividerBlack(),
                   ],
                 ),
               ),
               futureBuilder(context),
-              copyRigth(),
+              copyRigthBlack(),
             ],
           ),
         ),
@@ -102,13 +108,13 @@ class _NotificationListPageState extends State<NotificationListPage> {
         itemBuilder: (context, index) {
           NotificacionModel entity = snapshot.data[index];
 
-          return _showListTile(entity);
+          return _showListTile(entity, context);
         },
       ),
     );
   }
 
-  Widget _showListTile(NotificacionModel entity) {
+  Widget _showListTile(NotificacionModel entity, BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Column(
       children: <Widget>[
@@ -129,7 +135,8 @@ class _NotificationListPageState extends State<NotificationListPage> {
                   ),
                   Text('DETALLE: ${entity.detalle}',
                       style: TextStyle(color: AppTheme.themeWhite)),
-                  _showAction(entity, entity.idNotificacion.toString()),
+                  _showAction(
+                      entity, entity.idNotificacion.toString(), context),
                   null,
                   null, //avatarCircle((entity.foto ?? IMAGE_LOGO), 35),
                   EdgeInsets.all(5.0),
@@ -142,33 +149,34 @@ class _NotificationListPageState extends State<NotificationListPage> {
     //Text(entity.nombreEquipo);
   }
 
-  Widget _showAction(NotificacionModel entity, String keyId) {
+  Widget _showAction(
+      NotificacionModel entity, String keyId, BuildContext context) {
     return Row(
       children: <Widget>[
         sizedBox(0, 15),
-        Text('OPERACIONES: $keyId',
+        Text('OPERACIONES: ',
             style: TextStyle(color: AppTheme.themeWhite)),
         sizedBox(10, 0),
-        _update(),
+        _update(context, entity),
         sizedBox(10, 0),
         _delete(keyId),
       ],
     );
   }
 
-  _update() {
-    entityModel.states = StateEntity.Update;
-    entityModel.usuarioAuditoria = prefs.email;
-
+  _update(BuildContext context, NotificacionModel entity) {
     return InkWell(
       child: FaIcon(
         FontAwesomeIcons.edit,
         color: AppTheme.themePurple,
-        size: 23,
+        size: 26,
       ),
       onTap: () {
-        setState(() {});
+        setState(() {
+          Navigator.pushNamed(context, 'notificationLoad', arguments: entity);
+        });
       },
+      //  ),
     );
   }
 
@@ -178,12 +186,11 @@ class _NotificationListPageState extends State<NotificationListPage> {
       child: FaIcon(
         FontAwesomeIcons.trashAlt,
         color: AppTheme.themePurple,
-        size: 23,
+        size: 26,
       ),
       onTap: () {
         setState(() {
           entityModel.idNotificacion = int.parse(keyId);
-          print('eliminar ${entityModel.idNotificacion}');
           executeDelete(entityModel.idNotificacion.toString(), prefs.email);
         });
       },
@@ -204,18 +211,4 @@ class _NotificationListPageState extends State<NotificationListPage> {
     }
   }
 
-  void executeUpdate(
-      NotificationService entityService, model.NotificacionModel entity) async {
-    try {
-      await entityService.repository(entity).then((result) {
-        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
-        if (result["tipo_mensaje"] == '0')
-          showSnackbar(STATUS_OK, scaffoldKey);
-        else
-          showSnackbar(STATUS_ERROR, scaffoldKey);
-      });
-    } catch (error) {
-      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
-    }
-  }
 } // FIN DE LA CLASE
