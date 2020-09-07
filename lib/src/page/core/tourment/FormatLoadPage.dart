@@ -22,6 +22,8 @@ import 'package:virtual_match/src/service/ImageService.dart';
 import 'package:virtual_match/src/service/core/TournamentService.dart';
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
+import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
+import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/model/util/Validator.dart' as validator;
 import 'package:virtual_match/src/model/entity/EntityMap/FormatoModel.dart';
@@ -60,8 +62,8 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
   String image = IMAGE_DEFAULT;
   String _opcionTipoCompeticion = '27';
   String _opcionTipoTorneo = '23';
-  String _opcionTipoModalidad = '43';
-  String _opcionCodTorneo = '48';
+  String _opcionTipoModalidad = '44';
+  String _opcionCodTorneo = '0';
 
   List<String> _cantidad = [
     '2',
@@ -89,6 +91,8 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
 
     return Scaffold(
       key: scaffoldKey,
+       appBar: appBar('CREACIÓN DEL TORNEO'),
+        drawer: DrawerMenu(),
       body: Stack(
         children: <Widget>[
           background(context, 'IMAGE_LOGO'),
@@ -138,14 +142,9 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         sizedBox(0.0, 8.0),
-        Row(
-          children: [
-            sizedBox(13.0, 0.0),
-            Text('Selecciones el torneo'),
-          ],
-        ),
+
         _comboCodTroneo(_opcionCodTorneo),
-        _comboTorneoCreado(_opcionTipoCompeticion),
+        //  _comboTorneoCreado(_opcionTipoCompeticion),
         //_comboJugador(),
         _text(
             controllerCantidad,
@@ -217,10 +216,10 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
     );
   }
 
-  Widget _comboCodTroneo(String _opcionCodTorneo) {
+  Widget _comboCodTroneo(String _opcionCodTorneosss) {
     return Center(
         child: FutureBuilder(
-            future: entityGet1.get(new ListaTorneoModel()),
+            future: entityGet1.get1(new ListaTorneoModel()),
             builder: (context, AsyncSnapshot snapshot) {
               if (snapshot.hasData) {
                 return Row(
@@ -266,7 +265,7 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
     );
   }
 
-  Widget _comboTorneoCreado(String _opcionTipoCompeticion) {
+  Widget _comboTorneoCreado(String _opcionTipoCompeticionss) {
     return Center(
         child: FutureBuilder(
             future: entityGet.get(new ClasificadorModel(), 26),
@@ -285,6 +284,7 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
                       onChanged: (value) {
                         setState(() {
                           _opcionTipoCompeticion = value;
+                          print('ddddd: $_opcionTipoCompeticion');
                         });
                       },
                     ),
@@ -296,7 +296,7 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
             }));
   }
 
-  Widget _comboCompeticion(String _opcionTipoCompeticion) {
+  Widget _comboCompeticion(String _opcionTipoCompeticionss) {
     return Center(
         child: FutureBuilder(
             future: entityGet.get(new ClasificadorModel(), 26),
@@ -326,7 +326,7 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
             }));
   }
 
-  Widget _comboTorneo(String _opcionTipoTorneo) {
+  Widget _comboTorneo(String _opcionTipoTorneosss) {
     return Center(
         child: FutureBuilder(
             future: entityGet.get(new ClasificadorModel(), 22),
@@ -356,7 +356,7 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
             }));
   }
 
-  Widget _comboModalidad(String _opcionTipoModalidad) {
+  Widget _comboModalidad(String _opcionTipoModalidadss) {
     return Center(
         child: FutureBuilder(
             future: entityGet.get(new ClasificadorModel(), 42),
@@ -504,7 +504,7 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
         if (result["tipo_mensaje"] == '0') {
           showSnackbar(STATUS_OK, scaffoldKey);
 
-         // navigation(context, TourmentListPage());
+           navegation(context, TourmentListPage());
         } else
           showSnackbar(STATUS_ERROR, scaffoldKey);
       });

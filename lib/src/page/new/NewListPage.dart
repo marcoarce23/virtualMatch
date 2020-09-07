@@ -53,7 +53,7 @@ class _NewListPageState extends State<NewListPage> {
       drawer: DrawerMenu(),
       body: SafeArea(
         child: Container(
-        //  color: Colors.black87,
+          //  color: Colors.black87,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[

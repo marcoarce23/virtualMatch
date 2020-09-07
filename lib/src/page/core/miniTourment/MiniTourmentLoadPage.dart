@@ -58,43 +58,45 @@ class _MiniTourmentAllPageState extends State<MiniTourmentAllPage> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(builder: (_) => new TourmentService()),
-      ],
-      child: Scaffold(
-        appBar: appBar('MINI TORNEOS'),
-        drawer: DrawerMenu(),
-        bottomNavigationBar: BottomNavigationBar(
-          elevation: 21.0,
-          backgroundColor: AppTheme.themeDefault,
-          items: [
-            BottomNavigationBarItem(
-                icon: FaIcon(
-                  FontAwesomeIcons.bell,
-                  size: 25,
-                ),
-                title: Text('Torneo')),
-            BottomNavigationBarItem(
-                icon: FaIcon(
-                  FontAwesomeIcons.futbol,
-                  size: 25,
-                ),
-                title: Text('Formato')),
-            BottomNavigationBarItem(
-                icon: FaIcon(
-                  FontAwesomeIcons.listAlt,
-                  size: 25,
-                ),
-                title: Text('Lista tus Torneos')),
-          ],
-          currentIndex: page,
-          unselectedItemColor: AppTheme.themeWhite,
-          selectedItemColor: AppTheme.themePurple,
-          onTap: _onItemTapped,
-        ),
-        body: optionPage[page],
+    return
+        //  MultiProvider(
+        //   providers: [
+        //     ChangeNotifierProvider(builder: (_) => new TourmentService()),
+        //   ],
+        //   child:
+        Scaffold(
+      appBar: appBar('MINI TORNEOS'),
+      drawer: DrawerMenu(),
+      bottomNavigationBar: BottomNavigationBar(
+        elevation: 21.0,
+        backgroundColor: AppTheme.themeDefault,
+        items: [
+          BottomNavigationBarItem(
+              icon: FaIcon(
+                FontAwesomeIcons.bell,
+                size: 25,
+              ),
+              title: Text('Torneo')),
+          BottomNavigationBarItem(
+              icon: FaIcon(
+                FontAwesomeIcons.futbol,
+                size: 25,
+              ),
+              title: Text('Formato')),
+          BottomNavigationBarItem(
+              icon: FaIcon(
+                FontAwesomeIcons.listAlt,
+                size: 25,
+              ),
+              title: Text('Lista tus Torneos')),
+        ],
+        currentIndex: page,
+        unselectedItemColor: AppTheme.themeWhite,
+        selectedItemColor: AppTheme.themePurple,
+        onTap: _onItemTapped,
       ),
+      body: optionPage[page],
+      //   ),
     );
   }
 }

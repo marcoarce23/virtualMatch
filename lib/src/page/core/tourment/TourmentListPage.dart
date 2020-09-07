@@ -8,6 +8,8 @@ import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/service/core/TournamentService.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
+import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
+import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
@@ -36,13 +38,15 @@ class _TourmentListPageState extends State<TourmentListPage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    entityService = Provider.of<TourmentService>(context);
+    //  entityService = Provider.of<TourmentService>(context);
 
     return Scaffold(
       key: scaffoldKey,
+      appBar: appBar('CREACIÓN DEL TORNEO'),
+      drawer: DrawerMenu(),
       body: SafeArea(
         child: Container(
-          color: Colors.black87,
+         // color: Colors.black87,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
@@ -58,12 +62,12 @@ class _TourmentListPageState extends State<TourmentListPage> {
                       'INICIA EL TORNEO VIRTUAL MATCH',
                       'En esta pantalla puedes iniciar el torneo y agregar personas que faltantes.',
                     ),
-                    divider(),
+                    dividerBlack(),
                   ],
                 ),
               ),
               futureBuilder(context),
-              copyRigth(),
+              copyRigthBlack(),
             ],
           ),
         ),
@@ -153,12 +157,11 @@ class _TourmentListPageState extends State<TourmentListPage> {
         sizedBox(0, 10),
         Row(
           children: [
-            Text('$keyId',
-                style: TextStyle(color: AppTheme.themeWhite)),
+            Text('$keyId', style: TextStyle(color: AppTheme.themeWhite)),
             sizedBox(10, 0),
             _complete(keyId),
             sizedBox(10, 0),
-            _start(keyId, entity.idTipoModalidad.toString()),
+            _start(keyId, entity.tipoCompeticion.toString()),
           ],
         ),
       ],
@@ -201,9 +204,8 @@ class _TourmentListPageState extends State<TourmentListPage> {
   _complete(String keyId) {
     return Row(
       children: [
-         Text('Agregar:',
-                style: TextStyle(color: AppTheme.themeWhite)),
-            sizedBox(10, 0),
+        Text('Agregar:', style: TextStyle(color: AppTheme.themeWhite)),
+        sizedBox(10, 0),
         InkWell(
           //  key: Key(keyId),
           child: FaIcon(
@@ -226,9 +228,8 @@ class _TourmentListPageState extends State<TourmentListPage> {
   _start(String keyId, String modalidad) {
     return Row(
       children: [
-         Text('Empezar Torneo:',
-                style: TextStyle(color: AppTheme.themeWhite)),
-            sizedBox(10, 0),
+        Text('Empezar Torneo:', style: TextStyle(color: AppTheme.themeWhite)),
+        sizedBox(10, 0),
         InkWell(
           key: Key(keyId),
           child: FaIcon(
@@ -298,7 +299,9 @@ class _TourmentListPageState extends State<TourmentListPage> {
           showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
-      showSnackbar('No puede generar porque aun no se completo la cantidad de jugadores inscritos !!', scaffoldKey);
+      showSnackbar(
+          'No puede generar porque aun no se completo la cantidad de jugadores inscritos !!',
+          scaffoldKey);
     }
   }
 } // FIN DE LA CLASE

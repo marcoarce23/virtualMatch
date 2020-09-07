@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
+import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/crudService.dart';
 
 import 'package:virtual_match/src/style/Style.dart';
@@ -58,7 +59,8 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
         appBar: appBar('TORNEOS VIRTUAL MATCH'),
         body: SingleChildScrollView(child: bodyContainer(context)),
         drawer: DrawerMenu(),
-        floatingActionButton: new CircularMenu(),
+        // floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
+        //   FaIcon(FontAwesomeIcons.futbol), HomePage()),
         bottomNavigationBar: new BottonNavigation(),
       ),
     );
@@ -105,9 +107,9 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
                     'Conoce los resultados.',
                   ),
                   sizedBox(0, 5.0),
-                  divider(),
+                  dividerBlack(),
                   listView(context, snapshot),
-                  copyRigth(),
+                  copyRigthBlack(),
                 ],
               );
           }
@@ -142,10 +144,11 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
           decoration: boxDecoration(),
           child: Column(
             children: <Widget>[
-              //  ,
+              
               gfListTile(
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       //    Image(),
                       Text('TORNEO: ${entity.nombreTorneo}',
@@ -153,7 +156,7 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
                               fontWeight: FontWeight.bold,
                               fontSize: 15,
                               color: AppTheme.themeWhite)),
-                      Text('Inscritos: 100/${entity.cantidadJugadores}',
+                      Text('INSCRITOS: 100/${entity.cantidadJugadores}',
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 15,
@@ -179,7 +182,7 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
                         children: <Widget>[
                           Row(
                             children: <Widget>[
-                              Text('Premios:',
+                              Text('PREMIOS:',
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 13,
@@ -204,8 +207,9 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
                   ),
                   null, //FaIcon(FontAwesomeIcons.infoCircle),
                   avatarCircle(entity.foto, 25.0),
-                  EdgeInsets.all(10.0),
-                  EdgeInsets.all(10.0)),
+                  EdgeInsets.all(4.0),
+                  EdgeInsets.all(4.0)),
+                  
             ],
           ),
         ),

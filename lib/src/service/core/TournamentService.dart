@@ -11,7 +11,7 @@ import 'package:virtual_match/src/api/core/format/ApiDelete.dart' as format2;
 import 'package:http/http.dart' as http;
 
 
-class TourmentService with ChangeNotifier {
+class TourmentService{//} with ChangeNotifier {
   bool isLoading = true;
 
   final _apiAdd = new ApiAdd();
@@ -40,7 +40,7 @@ class TourmentService with ChangeNotifier {
 
     print('DEL VALOR DE EVENT BLOC: $result');
     isLoading = false;
-    notifyListeners();
+  //  notifyListeners();
     return result;
   }
 
@@ -62,7 +62,7 @@ class TourmentService with ChangeNotifier {
 
     print('DEL VALOR DE EVENT BLOC: $result');
     isLoading = false;
-    notifyListeners();
+   // notifyListeners();
     return result;
   }
 
@@ -71,7 +71,7 @@ class TourmentService with ChangeNotifier {
     isLoading = true;
     result = await _apiDelete.delete(id, usuario);
     isLoading = false;
-    notifyListeners();
+  //  notifyListeners();
     return result;
   }
 
@@ -79,7 +79,15 @@ class TourmentService with ChangeNotifier {
     var _result = await _apiGet.get(entityJson);
 
     isLoading = false;
-    notifyListeners();
+ //   notifyListeners();
+    return _result;
+  }
+
+Future<List<IEntityJson>> get1(IEntityJson entityJson) async {
+    var _result = await _apiGet.get1(entityJson);
+
+    isLoading = false;
+ //   notifyListeners();
     return _result;
   }
 
@@ -87,7 +95,7 @@ class TourmentService with ChangeNotifier {
     var _result = await _apiGet.getId(entityJson, value);
 
     isLoading = false;
-    notifyListeners();
+ //   notifyListeners();
     return _result;
   }
 
@@ -95,21 +103,21 @@ class TourmentService with ChangeNotifier {
       IEntityJson entityJson, int value) async {
     var _result = await _apiGet.getTablaPosiciones(entityJson, value);
     isLoading = false;
-    notifyListeners();
+  //  notifyListeners();
     return _result;
   }
 
   Future<List<IEntityJson>> getTodosLosTorneos(IEntityJson entityJson) async {
     var _result = await _apiGet.getTodosLosTorneos(entityJson);
     isLoading = false;
-    notifyListeners();
+    //notifyListeners();
     return _result;
   }
 
   Future<List<IEntityJson>> getTodosLosTorneosPersona(IEntityJson entityJson) async {
     var _result = await _apiGet.getTodosLosTorneos(entityJson);
     isLoading = false;
-    notifyListeners();
+  //  notifyListeners();
     return _result;
   }
 
@@ -119,7 +127,7 @@ class TourmentService with ChangeNotifier {
     final response = await http.post(apiRest);
 
     isLoading = false;
-    notifyListeners();
+  //  notifyListeners();
     return dataMap(response);
   }
   

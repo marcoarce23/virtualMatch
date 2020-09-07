@@ -57,13 +57,15 @@ class _TourmentAllPageState extends State<TourmentAllPage> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(builder: (_) => new TourmentService()),
-      ],
-      child: Scaffold(
-        appBar: appBar('TORNEOS'),
-        drawer: DrawerMenu(),
+    return
+    //  MultiProvider(
+    //   providers: [
+    //     ChangeNotifierProvider(builder: (_) => new TourmentService()),
+    //   ],
+    //   child: 
+      Scaffold(
+        // appBar: appBar('TORNEOS'),
+        // drawer: DrawerMenu(),
         bottomNavigationBar: BottomNavigationBar(
           elevation: 21.0,
           backgroundColor: AppTheme.themeDefault,
@@ -93,7 +95,7 @@ class _TourmentAllPageState extends State<TourmentAllPage> {
           onTap: _onItemTapped,
         ),
         body: optionPage[page],
-      ),
+     // ),
     );
   }
 }

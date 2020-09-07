@@ -75,6 +75,8 @@ class _EquipmentPlayersTournamentState
       //   margin: EdgeInsets.all(3.0),
       decoration: boxDecoration(),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           //  sizedBox(0, 7),
           gfListTile(
@@ -88,8 +90,8 @@ class _EquipmentPlayersTournamentState
                       onTap: () {
                         callNumber(int.parse(entity.telefono));
                       },
-                      child:
-                          FaIcon(FontAwesomeIcons.phone, color: Colors.white),
+                      child: FaIcon(FontAwesomeIcons.phone,
+                          color: AppTheme.themePurple, size:27),
                     ),
                   ),
                   Flexible(
@@ -98,7 +100,8 @@ class _EquipmentPlayersTournamentState
                       onTap: () {
                         sendSMS(int.parse(entity.telefono));
                       },
-                      child: FaIcon(FontAwesomeIcons.sms, color: Colors.white),
+                      child: FaIcon(FontAwesomeIcons.sms,
+                          color: AppTheme.themePurple, size:27),
                     ),
                   ),
                   Flexible(
@@ -108,7 +111,7 @@ class _EquipmentPlayersTournamentState
                         callWhatsApp1(int.parse(entity.telefono));
                       },
                       child: FaIcon(FontAwesomeIcons.whatsapp,
-                          color: Colors.white),
+                          color: Colors.white, size:27),
                     ),
                   ),
                 ],
@@ -119,7 +122,7 @@ class _EquipmentPlayersTournamentState
               null, //avatarCircle((entity.fotoJugador ?? IMAGE_DEFAULT), 35),
               null,
               EdgeInsets.all(3.0)),
-          sizedBox(0, 7),
+          // sizedBox(0, 7),
         ],
       ),
     );
@@ -129,6 +132,7 @@ class _EquipmentPlayersTournamentState
   Widget _showPlayerDetail(ListadoJugadoresModel entity) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         //sizedBox(5, 0),
 
@@ -146,7 +150,7 @@ class _EquipmentPlayersTournamentState
               size: 10,
               color: Colors.red,
             ),
-            Text('10 Perdidos', style: TextStyle(color: AppTheme.themeWhite)),
+            Text('10 Perdidos', style: TextStyle(color: AppTheme.themePurple)),
           ],
         ),
         //sizedBox(5, 0),
@@ -162,12 +166,42 @@ class _EquipmentPlayersTournamentState
             24),
         sizedBox(10, 0),
         Expanded(
-          child: AutoSizeText(
-            entity.nombreJugador + ' ' + entity.apellidoJugador,
-            style: TextStyle(color: Colors.white),
-            overflow: TextOverflow.ellipsis,
-            softWrap: true,
-            maxLines: 3,
+          child: Column(
+            //    mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              AutoSizeText(
+                entity.nombreJugador,
+                style: TextStyle(color: Colors.white),
+                overflow: TextOverflow.ellipsis,
+                softWrap: true,
+                maxLines: 1,
+                textAlign: TextAlign.left,
+              ),
+              AutoSizeText(
+                entity.apellidoJugador,
+                style: TextStyle(color: Colors.white),
+                overflow: TextOverflow.ellipsis,
+                softWrap: true,
+                maxLines: 1,
+                textAlign: TextAlign.left,
+              ),
+              AutoSizeText(
+                'DPTO: ${entity.departamento}',
+                style: TextStyle(color: Colors.white),
+                overflow: TextOverflow.ellipsis,
+                softWrap: true,
+                maxLines: 2,
+                textAlign: TextAlign.left,
+              ),
+              AutoSizeText(
+                'IPSDN: ${entity.idJugador.toString()}',
+                style: TextStyle(color: Colors.white),
+                overflow: TextOverflow.ellipsis,
+                softWrap: true,
+                maxLines: 1,
+                textAlign: TextAlign.left,
+              ),
+            ],
           ),
         ),
       ],

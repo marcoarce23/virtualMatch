@@ -19,6 +19,7 @@ class ListaTorneoModel implements IEntityJson {
   String horaInicio;
   String tipoAsignacion;
   String tipoModalidad;
+  String tipoCompeticion;
 
   ListaTorneoModel({
     this.idTorneo,
@@ -39,6 +40,7 @@ class ListaTorneoModel implements IEntityJson {
     this.horaInicio,
     this.tipoAsignacion,
     this.tipoModalidad,
+    this.tipoCompeticion
   });
 
   fromJson(Map<String, dynamic> json) => new ListaTorneoModel(
@@ -60,5 +62,6 @@ class ListaTorneoModel implements IEntityJson {
         horaInicio: json["horaInicio"],
         tipoAsignacion: json["tipoAsignacion"],
         tipoModalidad: json["tipoModalidad"],
+        tipoCompeticion: json["tipoCompeticion"] 
       );
 }

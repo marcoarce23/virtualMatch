@@ -1,7 +1,9 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:intl/intl.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:tabbar/tabbar.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/ListadoTorneoModel.dart';
@@ -106,10 +108,21 @@ class _TourmentPageState extends State<TourmentPage> {
                   child: Column(
                     children: <Widget>[
                       //    divider(),
-                      Text('Listado de Equipos'.toUpperCase(),
+
+                      Shimmer.fromColors(
+                        baseColor: AppTheme.themeDefault,
+                        highlightColor: AppTheme.themePurple,
+                        child: AutoSizeText(
+                          'Listado de Equipos'.toUpperCase(),
+                          textAlign: TextAlign.center,
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 16)),
-                      sizedBox(0, 6),
+                            fontSize: 19.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+
+                      sizedBox(0, 0),
                       EquipmentPlayersTournament(
                         idTorneo: widget.idTorneo,
                       ),
@@ -121,9 +134,20 @@ class _TourmentPageState extends State<TourmentPage> {
                   child: Column(
                     children: <Widget>[
                       divider(),
-                      Text('Fixture de Partidos'.toUpperCase(),
+
+                      Shimmer.fromColors(
+                        baseColor: AppTheme.themeDefault,
+                        highlightColor: AppTheme.themePurple,
+                        child: AutoSizeText(
+                          'Fixture de Partidos'.toUpperCase(),
+                          textAlign: TextAlign.center,
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20)),
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+
                       TournamentPlayerScored(
                         idTorneo: widget.idTorneo,
                       ),
@@ -135,9 +159,18 @@ class _TourmentPageState extends State<TourmentPage> {
                   child: Column(
                     children: <Widget>[
                       divider(),
-                      Text('TABLA DE POSICIONES',
+                      Shimmer.fromColors(
+                        baseColor: AppTheme.themeDefault,
+                        highlightColor: AppTheme.themePurple,
+                        child: AutoSizeText(
+                          'TABLA DE POSICIONES',
+                          textAlign: TextAlign.center,
                           style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 20)),
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
                       PositionTable(
                         idTorneo: widget.idTorneo,
                       ),

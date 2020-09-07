@@ -58,13 +58,14 @@ class _TourmentAllPageState extends State<TourmentAllPage> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(builder: (_) => new TourmentService()),
-      ],
-      child: Scaffold(
-        appBar: appBar('CREACIÓN DEL TORNEO'),
-        drawer: DrawerMenu(),
+    return
+    //  MultiProvider(
+    //   providers: [
+    //     ChangeNotifierProvider(builder: (_) => new TourmentService()),
+    //   ],
+    //   child: 
+      Scaffold(
+       
         bottomNavigationBar: BottomNavigationBar(
           elevation: 21.0,
           backgroundColor: AppTheme.themeDefault,
@@ -88,7 +89,7 @@ class _TourmentAllPageState extends State<TourmentAllPage> {
           onTap: _onItemTapped,
         ),
         body: optionPage[page],
-      ),
+    //  ),
     );
   }
 }
@@ -116,7 +117,7 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
   TextEditingController _inputFieldTimeController = new TextEditingController();
 
 //DEFINICION DE BLOC Y MODEL
-  TourmentService entityService;
+  TourmentService entityService = new TourmentService();
   TorneoModel entity = new TorneoModel();
   ImageService entityImage = new ImageService();
   final prefs = new Preferense();
@@ -144,7 +145,7 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
   @override
   Widget build(BuildContext context) {
     entity.states = StateEntity.Insert;
-    entityService = Provider.of<TourmentService>(context);
+   // entityService = Provider.of<TourmentService>(context);
 
     final TorneoModel entityModel = ModalRoute.of(context).settings.arguments;
 
@@ -155,6 +156,8 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
 
     return Scaffold(
       key: scaffoldKey,
+       appBar: appBar('CREACIÓN DEL TORNEO'),
+        drawer: DrawerMenu(),
       body: Stack(
         children: <Widget>[
           background(context, 'IMAGE_LOGO'),
