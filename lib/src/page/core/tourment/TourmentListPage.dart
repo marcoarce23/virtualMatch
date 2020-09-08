@@ -28,7 +28,7 @@ class _TourmentListPageState extends State<TourmentListPage> {
   //DEFINICION DE BLOC Y MODEL
   ListaTorneoModel entity = new ListaTorneoModel();
   model.TorneoModel entityModel = new model.TorneoModel();
-  TourmentService entityService;
+  TourmentService entityService = new TourmentService();
   TourmentService entityGet = new TourmentService();
 
   // DEFINICIOND E VARIABLES
@@ -249,16 +249,17 @@ class _TourmentListPageState extends State<TourmentListPage> {
           ),
           onTap: () {
             setState(() {
+              print('XXXXXX: $tipoCompetencia');
               if (tipoCompetencia == '27')
                 _executeGenerator('/api/Torneo/execGenerarPlayOff/' +
                     keyId +
                     '/usuario/' +
-                    prefs.nameUser);
+                    prefs.email);
               else
                 _executeGenerator('/api/Torneo/execGenerarLiga/' +
                     keyId +
                     '/usuario/' +
-                    prefs.nameUser);
+                    prefs.email);
               //    entityModel.idTorneo = int.parse(keyId);
               //     print('eliminar ${entityModel.idTorneo}');
               //      executeDelete(entityModel.idTorneo.toString(), prefs.email);
@@ -298,20 +299,20 @@ class _TourmentListPageState extends State<TourmentListPage> {
     }
   }
 
-  void _executeGenerator(String url) async {
+  _executeGenerator(String url) async {
     print('ENTROSSSSWWW $url');
+
     try {
       await entityService.execute(API + url).then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
+
         if (result["tipo_mensaje"] == '0')
           showSnackbar(result["mensaje"], scaffoldKey);
-        else
+        if (result["tipo_mensaje"] == '3')
           showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
-      showSnackbar(
-          'No puede generar porque aun no se completo la cantidad de jugadores inscritos !!',
-          scaffoldKey);
+      showSnackbar('El torneo ya se ha iniciado.!!! ', scaffoldKey);
     }
   }
 } // FIN DE LA CLASE

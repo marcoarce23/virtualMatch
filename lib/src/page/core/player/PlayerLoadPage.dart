@@ -671,7 +671,7 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
 
   void loadingEntity() {
     entity.idJugador = 0;
-    entity.idOrganizacion = 2;
+    entity.idOrganizacion = int.parse(prefs.idOrganization);
     entity.idaDepartamento = int.parse(_opcionDepartamento);
     entity.idLogin = 1;
     entity.idPsdn = controllerIpsdn.text;
@@ -682,7 +682,7 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
     entity.idaSexo = 0;
     entity.informacionComplementaria = controllerInformation.text;
     entity.facebook = controllerFacebook.text;
-    entity.twitter = '@sinTwitter';
+    entity.twitter = 'sinTwitter';
     entity.usuarioAuditoria = prefs.email;
   }
 
@@ -695,10 +695,11 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
 
         if (result["tipo_mensaje"] == '0') {
-          prefs.idPlayer = result["data"];
-          showSnackbar('Registro con éxito.', scaffoldKey);
+          prefs.idPlayer = result["data"].toString();
+          print('EL ID USUARIO ESSS: ${prefs.idPlayer}');
+          showSnackbar(result["mensaje"].toString(), scaffoldKey);
         } else
-          showSnackbar('Se produjo un error. Vuelva a intentarlo', scaffoldKey);
+          showSnackbar(result["mensaje"].toString(), scaffoldKey);
       });
     } catch (error) {
       showSnackbar('Se produjo un error.${error.toString()} ', scaffoldKey);

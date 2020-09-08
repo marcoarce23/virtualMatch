@@ -300,7 +300,7 @@ boxDecoration() {
 
 boxDecorationMenu(BuildContext context, String imagen) {
   return BoxDecoration(
-    image: DecorationImage(image: ImageProvider<String>imagen) ,
+    // image: DecorationImage(image: ImageProvider<String>imagen) ,
     color: AppTheme.themeDefault,
   );
   //     gradient: LinearGradient(
