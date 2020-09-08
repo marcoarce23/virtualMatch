@@ -113,6 +113,14 @@ class TourmentService {
     return _result;
   }
 
+  Future<List<IEntityJson>> getTodosLosTorneosIniciados(
+      IEntityJson entityJson) async {
+    var _result = await _apiGet.getTodosLosTorneosIniciados(entityJson);
+    isLoading = false;
+    //notifyListeners();
+    return _result;
+  }
+
   Future<List<IEntityJson>> getTodosLosTorneosPersona(
       IEntityJson entityJson) async {
     var _result = await _apiGet.getTodosLosTorneos(entityJson);

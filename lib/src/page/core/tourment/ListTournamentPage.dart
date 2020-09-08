@@ -48,7 +48,6 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
- 
 
     return
         // return MultiProvider(
@@ -140,7 +139,13 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
     return Container(
       child: InkWell(
         onTap: () {
-          navegation(context, TourmentPage(idTorneo: entity.idTorneo));
+          if (entity.cantidadInscritos == entity.cantidadJugadores) {
+            navegation(context, TourmentPage(idTorneo: entity.idTorneo));
+          } else {
+            showSnackbar(
+                'Aun no se completo la cantidad de inscritos al torneo  ',
+                scaffoldKey);
+          }
         },
         child: Container(
           margin: EdgeInsets.symmetric(vertical: 0.0),
@@ -163,7 +168,8 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
                               fontWeight: FontWeight.bold,
                               fontSize: 15,
                               color: AppTheme.themeWhite)),
-                      Text('INSCRITOS: 100/${entity.cantidadJugadores}',
+                      Text(
+                          'INSCRITOS:  ${entity.cantidadInscritos}/${entity.cantidadJugadores}',
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 15,
@@ -312,21 +318,21 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
     print('ENTROSSSS $idTorneo y $idJugador');
     String respuesta;
     String mensaje;
-     try {
-    await entityService
-        .execute(API +
-            '/api/Torneo/Inscribir/Torneo/' +
-            idTorneo +
-            '/Jugador/' +
-            idJugador)
-        .then((result) {
-      respuesta = result["tipo_mensaje"].toString();
-      mensaje = result["mensaje"].toString();
-      print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
+    try {
+      await entityService
+          .execute(API +
+              '/api/Torneo/Inscribir/Torneo/' +
+              idTorneo +
+              '/Jugador/' +
+              idJugador)
+          .then((result) {
+        respuesta = result["tipo_mensaje"].toString();
+        mensaje = result["mensaje"].toString();
+        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
 
-      if (respuesta == '0') showSnackbar(mensaje, scaffoldKey);
-      if (respuesta == '2') showSnackbar(mensaje, scaffoldKey);
-    });
+        if (respuesta == '0') showSnackbar(mensaje, scaffoldKey);
+        if (respuesta == '2') showSnackbar(mensaje, scaffoldKey);
+      });
     } catch (error) {
       showSnackbar('Usuario registrado !!!', scaffoldKey);
     }
@@ -335,19 +341,19 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
   void _executeUnsuscription(String idTorneo, String idJugador) async {
     print('ENTROSSSS $idTorneo y $idJugador');
     try {
-    await entityService
-        .execute(API +
-            '/api/Torneo/Desinscribir/Torneo/' +
-            idTorneo +
-            '/Jugador/' +
-            idJugador)
-        .then((result) {
-      print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
-      if (result["tipo_mensaje"] == '0')
-        showSnackbar(result["mensaje"], scaffoldKey);
-      if (result["tipo_mensaje"] == '2')
-        showSnackbar(result["mensaje"], scaffoldKey);
-    });
+      await entityService
+          .execute(API +
+              '/api/Torneo/Desinscribir/Torneo/' +
+              idTorneo +
+              '/Jugador/' +
+              idJugador)
+          .then((result) {
+        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
+        if (result["tipo_mensaje"] == '0')
+          showSnackbar(result["mensaje"], scaffoldKey);
+        if (result["tipo_mensaje"] == '2')
+          showSnackbar(result["mensaje"], scaffoldKey);
+      });
     } catch (error) {
       showSnackbar('El usuario ya salio del torneo!!', scaffoldKey);
     }

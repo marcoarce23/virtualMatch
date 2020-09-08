@@ -21,6 +21,7 @@ class ListaTorneoModel implements IEntityJson {
   String tipoAsignacion;
   String tipoModalidad;
   String tipoCompeticion;
+  int cantidadInscritos;
 
   ListaTorneoModel(
       {this.idTorneo,
@@ -38,6 +39,7 @@ class ListaTorneoModel implements IEntityJson {
       this.premios,
       this.organizador,
       this.foto,
+      this.cantidadInscritos,
       this.fechaInicio,
       this.horaInicio,
       this.tipoAsignacion,
@@ -59,6 +61,7 @@ class ListaTorneoModel implements IEntityJson {
       hashTag: json["hashTag"],
       premios: json["premios"],
       organizador: json["organizador"],
+      cantidadInscritos: json["cantidadInscritos"],
       foto: json["foto"],
       fechaInicio: DateTime.parse(json["fechaInicio"]),
       horaInicio: json["horaInicio"],

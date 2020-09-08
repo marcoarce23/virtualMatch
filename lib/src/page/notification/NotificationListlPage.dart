@@ -158,8 +158,8 @@ class _NotificationListPageState extends State<NotificationListPage> {
         sizedBox(10, 0),
         _update(context, entity),
         sizedBox(10, 0),
-        _delete(keyId, context),
-        sizedBox(10, 0),
+        _delete(keyId),
+         sizedBox(10, 0),
         _notification(keyId),
       ],
     );
@@ -214,8 +214,7 @@ class _NotificationListPageState extends State<NotificationListPage> {
       },
     );
   }
-
-  void executeDelete(String id, String usuario, BuildContext context)  {
+  void executeDelete(String id, String usuario) async {
     try {
       entityService.delete(id, usuario).then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
