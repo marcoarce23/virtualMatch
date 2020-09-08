@@ -218,9 +218,10 @@ class _NewListPageState extends State<NewListPage> {
     try {
       await entityService.delete(id, usuario).then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
-        if (result["tipo_mensaje"] == '0')
+
+        if (result["tipo_mensaje"] == '0') {
           showSnackbar(STATUS_OK, scaffoldKey);
-        else
+        } else
           showSnackbar(STATUS_ERROR, scaffoldKey);
       });
     } catch (error) {

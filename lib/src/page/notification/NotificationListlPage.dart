@@ -28,7 +28,7 @@ class _NotificationListPageState extends State<NotificationListPage> {
   //DEFINICION DE BLOC Y MODEL
   NotificacionModel entity = new NotificacionModel();
   model.NotificacionModel entityModel = new model.NotificacionModel();
-  NotificationService entityService;
+  NotificationService entityService =  NotificationService();
   NotificationService entityGet = NotificationService();
 
   // DEFINICIOND E VARIABLES
@@ -160,6 +160,8 @@ class _NotificationListPageState extends State<NotificationListPage> {
         _update(context, entity),
         sizedBox(10, 0),
         _delete(keyId),
+         sizedBox(10, 0),
+        _notification(keyId),
       ],
     );
   }
@@ -197,6 +199,21 @@ class _NotificationListPageState extends State<NotificationListPage> {
     );
   }
 
+_notification(String keyId) {
+    return InkWell(
+        child: FaIcon(
+        FontAwesomeIcons.bell,
+        color: AppTheme.themePurple,
+        size: 26,
+      ),
+      onTap: () {
+        setState(() {
+          entityModel.idNotificacion = int.parse(keyId);
+          executeDelete(entityModel.idNotificacion.toString(), prefs.email);
+        });
+      },
+    );
+  }
   void executeDelete(String id, String usuario) async {
     try {
       await entityService.delete(id, usuario).then((result) {

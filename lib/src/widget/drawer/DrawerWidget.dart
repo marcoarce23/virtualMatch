@@ -34,7 +34,7 @@ class CustomListTile extends StatelessWidget {
         decoration: BoxDecoration(
             border: Border(bottom: BorderSide(color: Colors.grey))),
         child: InkWell(
-          splashColor: AppTheme.themePurple,
+          splashColor: AppTheme.themeWhite,
           onTap: onTap,
           child: Container(
             height: 50,
@@ -42,7 +42,7 @@ class CustomListTile extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Row(children: <Widget>[
-            icon,
+                  icon,
                   Text(
                     text,
                     style: TextStyle(fontSize: 16.0),
@@ -72,7 +72,7 @@ class DrawerMenu extends StatelessWidget {
               child: Column(
             children: <Widget>[
               Material(
-                  color: Colors.purple,
+                  color: AppTheme.themeWhite,
                   borderRadius: BorderRadius.all(Radius.circular(60.0)),
                   elevation: 10.0,
                   child: Padding(
@@ -108,15 +108,13 @@ class DrawerMenu extends StatelessWidget {
           )),
         ),
         CustomListTile(
-              ImageOvalNetwork(
-                      imageNetworkUrl: IMAGE_SOROJCHI,
-                      sizeImage: Size.fromWidth(35)),
+            ImageOvalNetwork(
+                imageNetworkUrl: IMAGE_SOROJCHI, sizeImage: Size.fromWidth(35)),
             '   SOROJCHI eclub',
             () => navegation(context, SorojchiPage())),
         CustomListTile(
-                 ImageOvalNetwork(
-                      imageNetworkUrl: IMAGE_SOROJCHI,
-                      sizeImage: Size.fromWidth(35)),
+            ImageOvalNetwork(
+                imageNetworkUrl: IMAGE_SOROJCHI, sizeImage: Size.fromWidth(35)),
             '   Sobre Auspiciador',
             () => navegation(context, PlayerLoadPage())),
         CustomListTile(
@@ -135,14 +133,12 @@ class DrawerMenu extends StatelessWidget {
             () => navegation(context, TourmentAllPage())),
         CustomListTile(
             ImageOvalNetwork(
-                      imageNetworkUrl: IMAGE_DEFAULT,
-                      sizeImage: Size.fromWidth(35)),
+                imageNetworkUrl: IMAGE_DEFAULT, sizeImage: Size.fromWidth(35)),
             '   Crea MiniTorneo',
             () => navegation(context, MiniTourmentAllPage())),
         CustomListTile(
             ImageOvalNetwork(
-                      imageNetworkUrl: IMAGE_DEFAULT,
-                      sizeImage: Size.fromWidth(35)),
+                imageNetworkUrl: IMAGE_DEFAULT, sizeImage: Size.fromWidth(35)),
             '   Crea Torneo ',
             () => navegation(context, TourmentAllPage())),
         CustomListTile(
@@ -167,9 +163,8 @@ class DrawerMenu extends StatelessWidget {
             '   Cargar Multimedia',
             () => navegation(context, MultimediaAllPage())),
         CustomListTile(
-             ImageOvalNetwork(
-                      imageNetworkUrl: IMAGE_LOGO,
-                      sizeImage: Size.fromWidth(35)),
+            ImageOvalNetwork(
+                imageNetworkUrl: IMAGE_LOGO, sizeImage: Size.fromWidth(35)),
             '    Sobre Virtual Match',
             () => navegation(context, OrganizationPage())),
         CustomListTile(
