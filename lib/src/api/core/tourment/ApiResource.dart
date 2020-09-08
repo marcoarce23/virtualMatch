@@ -10,4 +10,8 @@ Map<String, List<String>> api = {
   'getPartidosPorTorneo': [API + '/api/Torneo/getPartidosPorTorneo', ''],
   'getTablaPosiciones': [API + '/api/Torneo/getTablaPosicionesTorneo', ''],
   'getTodosLosTorneos': [API + '/api/Torneo/getTodosLosTorneos', ''],
+  'getTodosLosTorneosIniciados': [
+    API + '/api/Torneo/getTodosLosTorneosIniciados',
+    ''
+  ],
 };
