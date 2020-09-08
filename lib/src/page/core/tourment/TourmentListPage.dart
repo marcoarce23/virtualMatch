@@ -299,16 +299,18 @@ class _TourmentListPageState extends State<TourmentListPage> {
     }
   }
 
-  _executeGenerator(String url) async {
+  _executeGenerator(String url) {
     print('ENTROSSSSWWW $url');
 
     try {
-      await entityService.execute(API + url).then((result) {
+      entityService.execute(API + url).then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
 
         if (result["tipo_mensaje"] == '0')
           showSnackbar(result["mensaje"], scaffoldKey);
         if (result["tipo_mensaje"] == '3')
+          showSnackbar(result["mensaje"], scaffoldKey);
+        if (result["tipo_mensaje"] == '2')
           showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {

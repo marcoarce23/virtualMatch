@@ -28,7 +28,7 @@ class _NotificationListPageState extends State<NotificationListPage> {
   //DEFINICION DE BLOC Y MODEL
   NotificacionModel entity = new NotificacionModel();
   model.NotificacionModel entityModel = new model.NotificacionModel();
-  NotificationService entityService =  NotificationService();
+  NotificationService entityService = NotificationService();
   NotificationService entityGet = NotificationService();
 
   // DEFINICIOND E VARIABLES
@@ -48,11 +48,11 @@ class _NotificationListPageState extends State<NotificationListPage> {
 
     return Scaffold(
       key: scaffoldKey,
-        appBar: appBar('NOTIFICACIONES'),
+      appBar: appBar('NOTIFICACIONES'),
       drawer: DrawerMenu(),
       body: SafeArea(
         child: Container(
-        //  color: Colors.black87,
+          //  color: Colors.black87,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
@@ -68,7 +68,7 @@ class _NotificationListPageState extends State<NotificationListPage> {
                       'ADMINISTRA LAS NOTIFICACIONES',
                       'En esta pantalla puedes modificar y eliminar las notificaciones que haz creado anteriormente.',
                     ),
-                 sizedBox(0.0, 3),
+                    sizedBox(0.0, 3),
                     dividerBlack(),
                   ],
                 ),
@@ -154,13 +154,12 @@ class _NotificationListPageState extends State<NotificationListPage> {
     return Row(
       children: <Widget>[
         sizedBox(0, 15),
-        Text('OPERACIONES: ',
-            style: TextStyle(color: AppTheme.themeWhite)),
+        Text('OPERACIONES: ', style: TextStyle(color: AppTheme.themeWhite)),
         sizedBox(10, 0),
         _update(context, entity),
         sizedBox(10, 0),
-        _delete(keyId),
-         sizedBox(10, 0),
+        _delete(keyId, context),
+        sizedBox(10, 0),
         _notification(keyId),
       ],
     );
@@ -182,7 +181,7 @@ class _NotificationListPageState extends State<NotificationListPage> {
     );
   }
 
-  _delete(String keyId) {
+  _delete(String keyId, BuildContext context) {
     return InkWell(
       key: Key(keyId),
       child: FaIcon(
@@ -193,39 +192,41 @@ class _NotificationListPageState extends State<NotificationListPage> {
       onTap: () {
         setState(() {
           entityModel.idNotificacion = int.parse(keyId);
-          executeDelete(entityModel.idNotificacion.toString(), prefs.email);
+          executeDelete(
+              entityModel.idNotificacion.toString(), prefs.email, context);
         });
       },
     );
   }
 
-_notification(String keyId) {
+  _notification(String keyId) {
     return InkWell(
-        child: FaIcon(
+      child: FaIcon(
         FontAwesomeIcons.bell,
         color: AppTheme.themePurple,
         size: 26,
       ),
       onTap: () {
         setState(() {
-          entityModel.idNotificacion = int.parse(keyId);
-          executeDelete(entityModel.idNotificacion.toString(), prefs.email);
+          //    entityModel.idNotificacion = int.parse(keyId);
+          //   executeDelete(entityModel.idNotificacion.toString(), prefs.email);
         });
       },
     );
   }
-  void executeDelete(String id, String usuario) async {
+
+  void executeDelete(String id, String usuario, BuildContext context)  {
     try {
-      await entityService.delete(id, usuario).then((result) {
+      entityService.delete(id, usuario).then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
-        if (result["tipo_mensaje"] == '0')
+        if (result["tipo_mensaje"] == '0') {
           showSnackbar(STATUS_OK, scaffoldKey);
-        else
+       //   futureBuilder(context);
+        } else
           showSnackbar(STATUS_ERROR, scaffoldKey);
       });
     } catch (error) {
       showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
     }
   }
-
 } // FIN DE LA CLASE

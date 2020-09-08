@@ -214,9 +214,9 @@ class _NewListPageState extends State<NewListPage> {
     );
   }
 
-  void executeDelete(String id, String usuario) async {
+  void executeDelete(String id, String usuario) {
     try {
-      await entityService.delete(id, usuario).then((result) {
+      entityService.delete(id, usuario).then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
 
         if (result["tipo_mensaje"] == '0') {

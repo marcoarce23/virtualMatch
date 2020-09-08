@@ -65,7 +65,7 @@ class _NotificationPageState extends State<NotificationPage> {
               divider(),
               sizedBox(0.0, 7.0),
               futureBuilder(context),
-              copyRigth(),
+              //    copyRigth(),
             ],
           ),
         ),
