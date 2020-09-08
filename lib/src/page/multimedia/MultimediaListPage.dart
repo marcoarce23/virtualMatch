@@ -26,7 +26,7 @@ class _MultimediaListPageState extends State<MultimediaListPage> {
   //DEFINICION DE BLOC Y MODEL
   MultimediaModel entity = new MultimediaModel();
   model.MultimediaModel entityModel = new model.MultimediaModel();
-  MultimediaService entityService;
+  MultimediaService entityService =  new MultimediaService();
   MultimediaService entityGet = MultimediaService();
 
   // DEFINICIOND E VARIABLES
@@ -42,7 +42,7 @@ class _MultimediaListPageState extends State<MultimediaListPage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    entityService = Provider.of<MultimediaService>(context);
+   // entityService = Provider.of<MultimediaService>(context);
 
     return Scaffold(
       key: scaffoldKey,
@@ -126,11 +126,11 @@ class _MultimediaListPageState extends State<MultimediaListPage> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text('Detalle: ${entity.resumen}',),
-                      Text('Enlace: ${entity.enlace}'),
-                      Text('Noticia/Evento: ${entity.idaCategoria}'),
-                      Text('Fecha Inicio: ${entity.fechainicio}'),
-                      Text('Fecha Fin     :  ${entity.fechafin}'),
+                      Text('DETALLE: ${entity.resumen}', style: TextStyle(color: AppTheme.themeWhite)),
+                      Text('ENLACE: ${entity.enlace}', style: TextStyle(color: AppTheme.themeWhite)),
+                      Text('NOTICIA/EVENTO: ${entity.idaCategoria}', style: TextStyle(color: AppTheme.themeWhite)),
+                      Text('FECHA INICIO: ${entity.fechainicio}', style: TextStyle(color: AppTheme.themeWhite)),
+                      Text('FECHA FIN     :  ${entity.fechafin}', style: TextStyle(color: AppTheme.themeWhite)),
                     ],
                   ),
                   _showAction(entity, entity.idMultimedia.toString()),

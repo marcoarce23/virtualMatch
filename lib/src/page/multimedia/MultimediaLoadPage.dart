@@ -128,6 +128,7 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
 
   int valueImage = 0;
   String image = IMAGE_DEFAULT;
+  //String image = IMAGE_DEFAULT;
   String imagenPDF =
       'https://res.cloudinary.com/propia/image/upload/v1590680683/mbzeu6fr44aizrr9dl0f.jpg';
   String imagenVideo =
@@ -163,7 +164,7 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
       key: scaffoldKey,
       body: Stack(
         children: <Widget>[
-          background(context, 'IMAGE_LOGO'),
+          background(context, image),
           showPictureOval(photo, image, 130.0),
           _form(context),
         ],
@@ -551,7 +552,7 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
       setState(() {
         entity.foto = image;
 
-        //print('cargadod e iagen ${entity.foto}');
+        print('cargadod e iagen ${entity.foto}');
       });
     }
   }
@@ -560,10 +561,10 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
     valueImage = 1;
 
     if (photo != null) {
-      image = await entityImage.uploadImage(file);
+       image = await entityImage.uploadImage(file);
       setState(() {
         entity.foto = image;
-        //print('cargadod e iagen ${entity.foto}');
+        print('cargadod e iagen ${entity.foto}');
       });
     }
   }
@@ -574,7 +575,7 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
     image = await entityImage.uploadVideo(file);
     setState(() {
       entity.foto = image;
-      //print('cargadod e iagen ${entity.foto}');
+      print('cargadod e iagen ${entity.foto}');
     });
   }
 

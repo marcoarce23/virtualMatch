@@ -298,8 +298,9 @@ boxDecoration() {
       ));
 }
 
-boxDecorationMenu() {
+boxDecorationMenu(BuildContext context, String imagen) {
   return BoxDecoration(
+    image: DecorationImage(image: ImageProvider<String>imagen) ,
     color: AppTheme.themeDefault,
   );
   //     gradient: LinearGradient(
@@ -380,7 +381,7 @@ showSnackbar(String message, GlobalKey<ScaffoldState> scaffoldKey) {
   final snackbar = SnackBar(
     backgroundColor: Colors.pinkAccent,
     content: Text(message),
-    duration: Duration(milliseconds: 4000),
+    duration: Duration(milliseconds: 2500),
   );
 
   scaffoldKey.currentState.showSnackBar(snackbar);

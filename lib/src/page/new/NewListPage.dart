@@ -29,7 +29,7 @@ class _NewListPageState extends State<NewListPage> {
   //DEFINICION DE BLOC Y MODEL
   NoticiaEventoModel entity = new NoticiaEventoModel();
   model.NoticiaEventoModel entityModel = new model.NoticiaEventoModel();
-  NewService entityService;
+  NewService entityService = new NewService();
   NewService entityGet = NewService();
 
   // DEFINICIOND E VARIABLES
@@ -137,19 +137,19 @@ class _NewListPageState extends State<NewListPage> {
                     children: <Widget>[
                       Text(
                         'Detalle: ${entity.objetivo}',
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(color: AppTheme.themeWhite),
                       ),
                       Text(
                         'Dirigo a: ${entity.dirigidoa}',
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(color: AppTheme.themeWhite),
                       ),
                       Text(
                         'Lugar/Virtual: ${entity.dirigidoa}',
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(color: AppTheme.themeWhite),
                       ),
                       Text(
                         'Fecha y Hora: ${entity.fecha} ${entity.hora}',
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(color: AppTheme.themeWhite),
                       ),
                     ],
                   ),
@@ -171,7 +171,8 @@ class _NewListPageState extends State<NewListPage> {
     return Row(
       children: <Widget>[
         sizedBox(0, 15),
-        Text('OPERACIONES: ', style: TextStyle(color: AppTheme.themeWhite)),
+        Text('OPERACIONES: $keyId',
+            style: TextStyle(color: AppTheme.themeWhite)),
         sizedBox(10, 0),
         _update(context, entity),
         sizedBox(10, 0),
@@ -207,7 +208,7 @@ class _NewListPageState extends State<NewListPage> {
       onTap: () {
         setState(() {
           entityModel.idNoticiaEvento = int.parse(keyId);
-          executeDelete(entityModel.idNoticiaEvento.toString(), prefs.email);
+          executeDelete(keyId, prefs.email);
         });
       },
     );
