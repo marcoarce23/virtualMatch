@@ -7,6 +7,7 @@ class ListaTorneoModel implements IEntityJson {
   int idAsignacion;
   int cantidadJugadores;
   int idTipoModalidad;
+  int idTipoCompeticion;
   String tipoTorneo;
   String tipoInscripcion;
   String nombreTorneo;
@@ -21,47 +22,47 @@ class ListaTorneoModel implements IEntityJson {
   String tipoModalidad;
   String tipoCompeticion;
 
-  ListaTorneoModel({
-    this.idTorneo,
-    this.idTipoTorneo,
-    this.idTipoInscripcion,
-    this.idAsignacion,
-    this.cantidadJugadores,
-    this.idTipoModalidad,
-    this.tipoTorneo,
-    this.tipoInscripcion,
-    this.nombreTorneo,
-    this.detalle,
-    this.hashTag,
-    this.premios,
-    this.organizador,
-    this.foto,
-    this.fechaInicio,
-    this.horaInicio,
-    this.tipoAsignacion,
-    this.tipoModalidad,
-    this.tipoCompeticion
-  });
+  ListaTorneoModel(
+      {this.idTorneo,
+      this.idTipoCompeticion,
+      this.idTipoTorneo,
+      this.idTipoInscripcion,
+      this.idAsignacion,
+      this.cantidadJugadores,
+      this.idTipoModalidad,
+      this.tipoTorneo,
+      this.tipoInscripcion,
+      this.nombreTorneo,
+      this.detalle,
+      this.hashTag,
+      this.premios,
+      this.organizador,
+      this.foto,
+      this.fechaInicio,
+      this.horaInicio,
+      this.tipoAsignacion,
+      this.tipoModalidad,
+      this.tipoCompeticion});
 
   fromJson(Map<String, dynamic> json) => new ListaTorneoModel(
-        idTorneo: json["idTorneo"],
-        idTipoTorneo: json["idTipoTorneo"],
-        idTipoInscripcion: json["idTipoInscripcion"],
-        idAsignacion: json["idAsignacion"],
-        cantidadJugadores: json["cantidadJugadores"],
-        idTipoModalidad: json["idTipoModalidad"],
-        tipoTorneo: json["tipoTorneo"],
-        tipoInscripcion: json["tipoInscripcion"],
-        nombreTorneo: json["nombreTorneo"],
-        detalle: json["detalle"],
-        hashTag: json["hashTag"],
-        premios: json["premios"],
-        organizador: json["organizador"],
-        foto: json["foto"],
-        fechaInicio: DateTime.parse(json["fechaInicio"]),
-        horaInicio: json["horaInicio"],
-        tipoAsignacion: json["tipoAsignacion"],
-        tipoModalidad: json["tipoModalidad"],
-        tipoCompeticion: json["tipoCompeticion"] 
-      );
+      idTorneo: json["idTorneo"],
+      idTipoTorneo: json["idTipoTorneo"],
+      idTipoInscripcion: json["idTipoInscripcion"],
+      idAsignacion: json["idAsignacion"],
+      cantidadJugadores: json["cantidadJugadores"],
+      idTipoModalidad: json["idTipoModalidad"],
+      tipoTorneo: json["tipoTorneo"],
+      tipoInscripcion: json["tipoInscripcion"],
+      nombreTorneo: json["nombreTorneo"],
+      detalle: json["detalle"],
+      idTipoCompeticion: json["idTipoCompeticion"],
+      hashTag: json["hashTag"],
+      premios: json["premios"],
+      organizador: json["organizador"],
+      foto: json["foto"],
+      fechaInicio: DateTime.parse(json["fechaInicio"]),
+      horaInicio: json["horaInicio"],
+      tipoAsignacion: json["tipoAsignacion"],
+      tipoModalidad: json["tipoModalidad"],
+      tipoCompeticion: json["tipoCompeticion"]);
 }

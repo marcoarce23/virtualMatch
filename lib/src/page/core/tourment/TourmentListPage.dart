@@ -46,7 +46,7 @@ class _TourmentListPageState extends State<TourmentListPage> {
       drawer: DrawerMenu(),
       body: SafeArea(
         child: Container(
-         // color: Colors.black87,
+          // color: Colors.black87,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
@@ -120,11 +120,21 @@ class _TourmentListPageState extends State<TourmentListPage> {
             children: <Widget>[
               gfListTileKey(
                   Key(entity.idTorneo.toString()),
-                  Text(
-                    'TÍTULO : ${entity.nombreTorneo}',
-                    style: TextStyle(
-                      color: AppTheme.themeWhite,
-                    ),
+                  Column(
+                    children: [
+                      Text(
+                        'TÍTULO : ${entity.nombreTorneo}',
+                        style: TextStyle(
+                          color: AppTheme.themeWhite,
+                        ),
+                      ),
+                      Text(
+                        'TIPO: ${entity.tipoCompeticion}',
+                        style: TextStyle(
+                          color: AppTheme.themeWhite,
+                        ),
+                      ),
+                    ],
                   ),
                   Text('DETALLE: ${entity.detalle}',
                       style: TextStyle(color: AppTheme.themeWhite)),
@@ -161,7 +171,7 @@ class _TourmentListPageState extends State<TourmentListPage> {
             sizedBox(10, 0),
             _complete(keyId),
             sizedBox(10, 0),
-            _start(keyId, entity.tipoCompeticion.toString()),
+            _start(keyId, entity.idTipoCompeticion.toString()),
           ],
         ),
       ],
@@ -225,7 +235,7 @@ class _TourmentListPageState extends State<TourmentListPage> {
     );
   }
 
-  _start(String keyId, String modalidad) {
+  _start(String keyId, String tipoCompetencia) {
     return Row(
       children: [
         Text('Empezar Torneo:', style: TextStyle(color: AppTheme.themeWhite)),
@@ -239,16 +249,16 @@ class _TourmentListPageState extends State<TourmentListPage> {
           ),
           onTap: () {
             setState(() {
-              if (modalidad == '0')
+              if (tipoCompetencia == '27')
                 _executeGenerator('/api/Torneo/execGenerarPlayOff/' +
                     keyId +
                     '/usuario/' +
-                    prefs.email);
+                    prefs.nameUser);
               else
-                _executeGenerator('/api/Torneo/execGenerarLiga/usuario/' +
+                _executeGenerator('/api/Torneo/execGenerarLiga/' +
                     keyId +
                     '/usuario/' +
-                    prefs.email);
+                    prefs.nameUser);
               //    entityModel.idTorneo = int.parse(keyId);
               //     print('eliminar ${entityModel.idTorneo}');
               //      executeDelete(entityModel.idTorneo.toString(), prefs.email);

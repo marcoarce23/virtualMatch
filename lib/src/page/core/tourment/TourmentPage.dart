@@ -123,9 +123,11 @@ class _TourmentPageState extends State<TourmentPage> {
                       ),
 
                       sizedBox(0, 0),
+
                       EquipmentPlayersTournament(
                         idTorneo: widget.idTorneo,
                       ),
+
                       //copyRigth(),
                     ],
                   ),
@@ -151,6 +153,7 @@ class _TourmentPageState extends State<TourmentPage> {
                       TournamentPlayerScored(
                         idTorneo: widget.idTorneo,
                       ),
+
                       //copyRigth(),
                     ],
                   ),
@@ -171,9 +174,11 @@ class _TourmentPageState extends State<TourmentPage> {
                           ),
                         ),
                       ),
+
                       PositionTable(
                         idTorneo: widget.idTorneo,
                       ),
+
                       //copyRigth(),
                     ],
                   ),
@@ -202,6 +207,7 @@ class _TourmentPageState extends State<TourmentPage> {
                 child: Column(
                   children: <Widget>[
                     sizedBox(0, 7),
+
                     Container(
                       width: size.width * 0.95,
                       margin: EdgeInsets.symmetric(vertical: 0.0),
