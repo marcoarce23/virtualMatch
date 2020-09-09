@@ -128,8 +128,10 @@ class _LogOnPageState extends State<LogOnPage> {
           Shimmer.fromColors(
             baseColor: AppTheme.themeDefault,
             highlightColor: AppTheme.themePurple,
+            
             child: AutoSizeText(
               'Bienvenido a Virtual Match',
+              maxLines:1,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 25.0,
@@ -142,7 +144,7 @@ class _LogOnPageState extends State<LogOnPage> {
           _crearAcciones(context),
           sizedBox(0.0, 8.0),
           _egree(context),
-          copyRigth(),
+          copyRigthBlack(),
         ],
       ),
     );
