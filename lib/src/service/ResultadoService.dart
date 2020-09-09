@@ -41,6 +41,15 @@ class ResultadoService with ChangeNotifier {
     return result;
   }
 
+  Future<Map<String, dynamic>> updateLiga(IEntityMap entity) async {
+    var result;
+    isLoading = true;
+    result = await _apiUpdate.updateLiga(entity);
+    isLoading = false;
+    notifyListeners();
+    return result;
+  }
+
   Future<Map<String, dynamic>> delete(String id, String usuario) async {
     var result;
     isLoading = true;

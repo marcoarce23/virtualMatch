@@ -158,8 +158,8 @@ class _NotificationListPageState extends State<NotificationListPage> {
         sizedBox(10, 0),
         _update(context, entity),
         sizedBox(10, 0),
-        _delete(keyId),
-         sizedBox(10, 0),
+        _delete(keyId, context),
+        sizedBox(10, 0),
         _notification(keyId),
       ],
     );
@@ -193,7 +193,9 @@ class _NotificationListPageState extends State<NotificationListPage> {
         setState(() {
           entityModel.idNotificacion = int.parse(keyId);
           executeDelete(
-              entityModel.idNotificacion.toString(), prefs.email, context);
+            entityModel.idNotificacion.toString(),
+            prefs.email,
+          );
         });
       },
     );
@@ -214,13 +216,14 @@ class _NotificationListPageState extends State<NotificationListPage> {
       },
     );
   }
+
   void executeDelete(String id, String usuario) async {
     try {
       entityService.delete(id, usuario).then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0') {
           showSnackbar(STATUS_OK, scaffoldKey);
-       //   futureBuilder(context);
+          //   futureBuilder(context);
         } else
           showSnackbar(STATUS_ERROR, scaffoldKey);
       });

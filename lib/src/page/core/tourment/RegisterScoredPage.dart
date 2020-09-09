@@ -96,12 +96,23 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
     return GFButton(
       size: GFSize.SMALL,
       onPressed: () {
-        entityResultado.states = StateEntity.Update;
-        entityResultado.idResultado = entity.idResultado;
-        if (entityResultado.gol1 == entityResultado.gol2) {
-          showSnackbar("No pueden empatar!", scaffoldKey);
-        } else
-          _submit();
+        if (entity.idEliminatoria == 0) {
+          //  es para ligaº
+          entityResultado.states = StateEntity.Update;
+          entityResultado.idResultado = entity.idResultado;
+          if (entityResultado.gol1 == entityResultado.gol2) {
+            showSnackbar("No pueden empatar!", scaffoldKey);
+          } else
+            _submitLiga();
+        } else {
+          // es para eliminatoria
+          entityResultado.states = StateEntity.Update;
+          entityResultado.idResultado = entity.idResultado;
+          if (entityResultado.gol1 == entityResultado.gol2) {
+            showSnackbar("No pueden empatar!", scaffoldKey);
+          } else
+            _submit();
+        }
       },
       text: "Registrar",
       //blockButton: true,
@@ -112,9 +123,30 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
     executeCUD(entityResultadoService, entityResultado);
   }
 
+  _submitLiga() async {
+    executeCUDLiga(entityResultadoService, entityResultado);
+  }
+
   void executeCUD(ResultadoService entityService, ResultadoModel entity) async {
     try {
       await entityService.update(entity, entity.idResultado).then((result) {
+        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
+        if (result["tipo_mensaje"] == '0') {
+          showSnackbar(STATUS_OK, scaffoldKey);
+          navegation(context, TourmentPage(idTorneo: widget.idTorneo));
+        } else
+          showSnackbar(STATUS_ERROR, scaffoldKey);
+      });
+    } catch (error) {
+      print('EL RESULTTTTT: ${error.toString()} ');
+      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
+    }
+  }
+
+  void executeCUDLiga(
+      ResultadoService entityService, ResultadoModel entity) async {
+    try {
+      await entityService.updateLiga(entity).then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0') {
           showSnackbar(STATUS_OK, scaffoldKey);

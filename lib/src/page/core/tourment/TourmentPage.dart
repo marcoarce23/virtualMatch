@@ -107,8 +107,7 @@ class _TourmentPageState extends State<TourmentPage> {
                 SingleChildScrollView(
                   child: Column(
                     children: <Widget>[
-                      //    divider(),
-
+                      divider(),
                       Shimmer.fromColors(
                         baseColor: AppTheme.themeDefault,
                         highlightColor: AppTheme.themePurple,
@@ -121,13 +120,10 @@ class _TourmentPageState extends State<TourmentPage> {
                           ),
                         ),
                       ),
-
                       sizedBox(0, 0),
-
                       EquipmentPlayersTournament(
                         idTorneo: widget.idTorneo,
                       ),
-
                       //copyRigth(),
                     ],
                   ),
@@ -136,7 +132,6 @@ class _TourmentPageState extends State<TourmentPage> {
                   child: Column(
                     children: <Widget>[
                       divider(),
-
                       Shimmer.fromColors(
                         baseColor: AppTheme.themeDefault,
                         highlightColor: AppTheme.themePurple,
@@ -149,11 +144,9 @@ class _TourmentPageState extends State<TourmentPage> {
                           ),
                         ),
                       ),
-
                       TournamentPlayerScored(
                         idTorneo: widget.idTorneo,
                       ),
-
                       //copyRigth(),
                     ],
                   ),
@@ -174,11 +167,9 @@ class _TourmentPageState extends State<TourmentPage> {
                           ),
                         ),
                       ),
-
                       PositionTable(
                         idTorneo: widget.idTorneo,
                       ),
-
                       //copyRigth(),
                     ],
                   ),
