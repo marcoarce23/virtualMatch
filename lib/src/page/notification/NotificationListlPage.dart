@@ -158,11 +158,7 @@ class _NotificationListPageState extends State<NotificationListPage> {
         sizedBox(10, 0),
         _update(context, entity),
         sizedBox(10, 0),
-<<<<<<< Updated upstream
-        _delete(keyId, context),
-=======
         _delete(keyId),
->>>>>>> Stashed changes
         sizedBox(10, 0),
         _notification(keyId),
       ],
@@ -196,14 +192,10 @@ class _NotificationListPageState extends State<NotificationListPage> {
       onTap: () {
         setState(() {
           entityModel.idNotificacion = int.parse(keyId);
-<<<<<<< Updated upstream
           executeDelete(
             entityModel.idNotificacion.toString(),
             prefs.email,
           );
-=======
-          executeDelete(entityModel.idNotificacion.toString(), prefs.email);
->>>>>>> Stashed changes
         });
       },
     );
