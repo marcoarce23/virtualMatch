@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
@@ -15,6 +16,7 @@ import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/service/ImageService.dart';
 import 'package:virtual_match/src/service/ResultadoService.dart';
 import 'package:virtual_match/src/service/core/TournamentService.dart';
+import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/bottonNavigationBar/BottonNavigatorWidget.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
@@ -66,7 +68,7 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
     return SafeArea(
       child: Scaffold(
         key: scaffoldKey,
-        appBar: appBar('TORNEOS FIFA BOLIVIA'),
+        appBar: appBar('TORNEOS VIRTUAL MATCH'),
         body: SingleChildScrollView(child: bodyContainer(context)),
         drawer: DrawerMenu(),
         bottomNavigationBar: new BottonNavigation(),
@@ -75,26 +77,55 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
   }
 
   Widget bodyContainer(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     return Padding(
-      padding: const EdgeInsets.all(15.0),
+      padding: const EdgeInsets.all(10.0),
       child: Column(
         children: <Widget>[
-          sizedBox(0, 6),
-          //futureBuilderTorneo(context),
+          showInformationBasic(
+            context,
+            'REGISTRA EL RESULTADO DEL GANADOR ',
+            'Cargar la imagen del resultado final del encuentro.',
+          ),
           sizedBox(0, 8),
-          registerScored(widget.entity, widget.idTorneo),
-          registerPhoto(widget.entity, widget.idTorneo),
-          Text("Subir la foto aqui"),
-          sizedBox(0, 20),
-          botonRegistrarScored(widget.entity, widget.idTorneo)
+          Container(
+            width: size.width * 0.94,
+            margin: EdgeInsets.symmetric(vertical: 0.0),
+            decoration: containerFileds(),
+            child: _fields(context),
+          ),
+          copyRigthBlack(),
+          //futureBuilderTorneo(context),
         ],
       ),
     );
   }
 
+  Widget _fields(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        sizedBox(0, 8),
+        registerPhoto(widget.entity, widget.idTorneo),
+        Text("Click en la imagen para subir la foto del resultado"),
+        dividerBlack(),
+        registerScored(widget.entity, widget.idTorneo),
+        sizedBox(0, 10),
+        botonRegistrarScored(widget.entity, widget.idTorneo),
+      ],
+    );
+  }
+
   Widget botonRegistrarScored(PartidosPorTorneoModel entity, int idTorneo) {
     return GFButton(
-      size: GFSize.SMALL,
+      padding: EdgeInsets.symmetric(horizontal: 30),
+      text: "Registrar",
+      textStyle: TextStyle(fontSize: 18),
+      textColor: AppTheme.themeWhite,
+      color: AppTheme.themeDefault,
+      icon: FaIcon(FontAwesomeIcons.checkCircle, color: AppTheme.themeWhite),
+      shape: GFButtonShape.pills,
       onPressed: () {
         if (entity.idEliminatoria == 0) {
           //  es para ligaº
@@ -114,7 +145,7 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
             _submit();
         }
       },
-      text: "Registrar",
+
       //blockButton: true,
     );
   }
@@ -233,13 +264,13 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
                         keyboardType: TextInputType.phone,
                         textCapitalization: TextCapitalization.sentences,
                         maxLength: 2,
-                        style: TextStyle(color: Colors.black, fontSize: 20),
+                        style: TextStyle(color: Colors.black, fontSize: 30),
                         decoration: InputDecoration(
                           labelStyle:
-                              TextStyle(fontSize: 20, color: Colors.black),
-                          hintText: 'Goles',
+                              TextStyle(fontSize: 30, color: Colors.black),
+                          hintText: '0',
                           hintStyle:
-                              TextStyle(fontSize: 20, color: Colors.black),
+                              TextStyle(fontSize: 30, color: Colors.black),
                         ),
                         onChanged: (value) {
                           entityResultado.gol1 = int.parse(value);
@@ -267,13 +298,13 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
                         keyboardType: TextInputType.phone,
                         textCapitalization: TextCapitalization.sentences,
                         maxLength: 2,
-                        style: TextStyle(color: Colors.black, fontSize: 20),
+                        style: TextStyle(color: Colors.black, fontSize: 30),
                         decoration: InputDecoration(
                           labelStyle:
-                              TextStyle(fontSize: 20, color: Colors.black),
-                          hintText: 'Goles',
+                              TextStyle(fontSize: 30, color: Colors.black),
+                          hintText: '0',
                           hintStyle:
-                              TextStyle(fontSize: 20, color: Colors.black),
+                              TextStyle(fontSize: 30, color: Colors.black),
                         ),
                         onChanged: (value) {
                           entityResultado.gol2 = int.parse(value);

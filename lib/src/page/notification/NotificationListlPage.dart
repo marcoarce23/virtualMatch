@@ -158,7 +158,7 @@ class _NotificationListPageState extends State<NotificationListPage> {
         sizedBox(10, 0),
         _update(context, entity),
         sizedBox(10, 0),
-        _delete(keyId, context),
+        _delete(keyId),
         sizedBox(10, 0),
         _notification(keyId),
       ],
@@ -181,7 +181,7 @@ class _NotificationListPageState extends State<NotificationListPage> {
     );
   }
 
-  _delete(String keyId, BuildContext context) {
+  _delete(String keyId) {
     return InkWell(
       key: Key(keyId),
       child: FaIcon(

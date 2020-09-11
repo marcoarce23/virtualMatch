@@ -32,10 +32,10 @@ class _CircularMenuState extends State<CircularMenu> {
         // Cannot be `Alignment.center`
         alignment: Alignment.bottomRight,
         ringColor: Colors.white.withAlpha(75),
-        ringDiameter: 480.0,
-        ringWidth: 60.0,
-        fabSize: 64.0,
-        fabElevation: 15.0,
+        ringDiameter: 500.0,
+        ringWidth: 120.0,
+        fabSize: 50.0,
+        fabElevation: 35.0,
         fabColor: AppTheme.themeWhite,
         fabOpenIcon: Icon(Icons.menu, color: AppTheme.themeDefault),
         fabCloseIcon: Icon(Icons.close, color: AppTheme.themeDefault),
@@ -49,17 +49,22 @@ class _CircularMenuState extends State<CircularMenu> {
         },
 
         children: <Widget>[
-          RawMaterialButton(
-            onPressed: () async {
-              _imageFile = (await ImagePicker()
-                  .getImage(source: ImageSource.gallery)) as File;
-              setState(() {});
-            },
-            shape: CircleBorder(),
-            padding: const EdgeInsets.all(24.0),
-            child: FaIcon(FontAwesomeIcons.images,
-                color: AppTheme.themePurple, size: 25.0),
-          ),
+// IconButton(icon: Icon(Icons.access_time), iconSize: 27,  onPressed: ()=>navegation(context, FaqListPage())),
+// IconButton(icon: Icon(Icons.access_time), onPressed: ()=>navegation(context, FaqListPage())),
+// IconButton(icon: Icon(Icons.access_time), onPressed: ()=>navegation(context, FaqListPage())),
+// IconButton(icon: Icon(Icons.access_time), onPressed: ()=>navegation(context, FaqListPage())),
+// IconButton(icon: Icon(Icons.access_time), onPressed: ()=>navegation(context, FaqListPage())),
+
+//             onPressed: () async {
+//               _imageFile = (await ImagePicker()
+//                   .getImage(source: ImageSource.gallery)) as File;
+//               setState(() {});
+//             },
+//             shape: CircleBorder(),
+//             padding: const EdgeInsets.all(24.0),
+//             child: FaIcon(FontAwesomeIcons.images,
+//                 color: AppTheme.themePurple, size: 25.0),
+//           ),
           RawMaterialButton(
             elevation: 4,
             onPressed: () {
@@ -73,44 +78,44 @@ class _CircularMenuState extends State<CircularMenu> {
             child: FaIcon(FontAwesomeIcons.youtube,
                 color: AppTheme.themePurple, size: 25.0),
           ),
-          // RawMaterialButton(
-          //   onPressed: () {
-          //     navegation(context, FaqListPage());
-          //   },
-          //   shape: CircleBorder(),
-          //   padding: const EdgeInsets.all(24.0),
-          //   child: FaIcon(FontAwesomeIcons.questionCircle,
-          //       color: AppTheme.themePurple, size: 25.0),
-          // ),
-          // RawMaterialButton(
-          //   onPressed: () => sharedText(
-          //       'BIENVENIDO A LA COMUNIDAD',
-          //       '*Virtual Match.*\n *Una aplicación de la Comunidad FIFA Bolivia.*\n💬 Con  *Virtual Match podrás.* \n 🔺 Leer Noticias de la Comunidad. \n 🔺 Enterarte de los eventos. \n 🔺Crear tu jugador y equipos. \n🔺Participar en los torneos. \n 🔺 Conocer campeones de torneos e influencers. \n🔺 Mucho mas... \n📲 *Descargar la App en el siguiente enlace:* https://play.google.com/store/apps/details?id=bo.virtual_matchBolivia',
-          //       'text/html'),
-          //   shape: CircleBorder(),
-          //   padding: const EdgeInsets.all(24.0),
-          //   child: FaIcon(FontAwesomeIcons.shareAlt,
-          //       color: AppTheme.themePurple, size: 25.0),
-          // ),
-          // RawMaterialButton(
-          //   onPressed: () {
-          //     navegation(context, FaqListPage());
-          //   },
-          //   shape: CircleBorder(),
-          //   padding: const EdgeInsets.all(24.0),
-          //   child: FaIcon(FontAwesomeIcons.questionCircle,
-          //       color: AppTheme.themePurple, size: 25.0),
-          // ),
-          // RawMaterialButton(
-          //   onPressed: () {
-          //     _showSnackBar(context, "Cerrar Menu Circular");
-          //     fabKey.currentState.close();
-          //   },
-          //   shape: CircleBorder(),
-          //   padding: const EdgeInsets.all(24.0),
-          //   child: FaIcon(FontAwesomeIcons.home,
-          //       color: AppTheme.themePurple, size: 25.0),
-          // )
+          RawMaterialButton(
+            onPressed: () {
+              navegation(context, FaqListPage());
+            },
+            shape: CircleBorder(),
+            padding: const EdgeInsets.all(24.0),
+            child: FaIcon(FontAwesomeIcons.questionCircle,
+                color: AppTheme.themePurple, size: 25.0),
+          ),
+          RawMaterialButton(
+            onPressed: () => sharedText(
+                'BIENVENIDO A LA COMUNIDAD',
+                '*Virtual Match.*\n *Una aplicación de la Comunidad FIFA Bolivia.*\n💬 Con  *Virtual Match podrás.* \n 🔺 Leer Noticias de la Comunidad. \n 🔺 Enterarte de los eventos. \n 🔺Crear tu jugador y equipos. \n🔺Participar en los torneos. \n 🔺 Conocer campeones de torneos e influencers. \n🔺 Mucho mas... \n📲 *Descargar la App en el siguiente enlace:* https://play.google.com/store/apps/details?id=bo.virtual_matchBolivia',
+                'text/html'),
+            shape: CircleBorder(),
+            padding: const EdgeInsets.all(24.0),
+            child: FaIcon(FontAwesomeIcons.shareAlt,
+                color: AppTheme.themePurple, size: 25.0),
+          ),
+          RawMaterialButton(
+            onPressed: () {
+              navegation(context, FaqListPage());
+            },
+            shape: CircleBorder(),
+            padding: const EdgeInsets.all(24.0),
+            child: FaIcon(FontAwesomeIcons.questionCircle,
+                color: AppTheme.themePurple, size: 25.0),
+          ),
+          RawMaterialButton(
+            onPressed: () {
+              _showSnackBar(context, "Cerrar Menu Circular");
+              fabKey.currentState.close();
+            },
+            shape: CircleBorder(),
+            padding: const EdgeInsets.all(24.0),
+            child: FaIcon(FontAwesomeIcons.home,
+                color: AppTheme.themePurple, size: 25.0),
+          )
         ],
       ),
     );
