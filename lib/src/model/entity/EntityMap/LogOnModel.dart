@@ -3,37 +3,26 @@ import 'package:virtual_match/src/model/entity/IEntity.dart';
 class LoginModel implements IEntityMap {
   @override
   StateEntity states;
-  int idLogin;
-  String contrasenia;
-  int estado;
-  DateTime fechaRegistro;
-  String tipoIngreso;
+  String foto;
+  String nombre;
   String correo;
-  String avatar;
-  String persona;
-  String usuario;
+  String imei;
+  String token;
 
-  LoginModel(
+
+    LoginModel(
       {this.states = StateEntity.None,
-      this.idLogin,
-      this.contrasenia,
-      this.estado,
-      this.fechaRegistro,
-      this.tipoIngreso,
+      this.foto,
+      this.nombre,
       this.correo,
-      this.avatar,
-      this.persona,
-      this.usuario});
+      this.imei,
+      this.token});
 
   Map<String, dynamic> toJson() => {
-        "ID_LOGIN": idLogin,
-        "CONTRASENIA": contrasenia,
-        "ESTADO": estado,
-        "FECHA_REGISTRO": fechaRegistro,
-        "TIPO_INGRESO": tipoIngreso,
-        "CORREO": correo,
-        "AVATAR": avatar,
-        "PERSONA": persona,
-        "USUARIO": usuario,
+        "foto": foto,
+        "nombre": nombre,
+        "correo": correo,
+        "imei": imei,
+        "token": token,
       };
 }

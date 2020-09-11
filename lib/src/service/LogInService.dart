@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:virtual_match/src/api/logIn/ApiGet.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
-import 'package:virtual_match/src/api/notification/ApiAdd.dart';
-import 'package:virtual_match/src/api/notification/ApiUpdate.dart';
-import 'package:virtual_match/src/api/notification/ApiDelete.dart';
+import 'package:virtual_match/src/api/logIn/ApiAdd.dart';
+import 'package:virtual_match/src/api/logIn/ApiUpdate.dart';
+import 'package:virtual_match/src/api/logIn/ApiDelete.dart';
 
 class LoginService with ChangeNotifier {
   bool isLoading = true;

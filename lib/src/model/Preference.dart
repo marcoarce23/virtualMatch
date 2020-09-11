@@ -60,6 +60,14 @@ class Preferense {
     _prefs.setString('nameInstitution', value);
   }
 
+  get idLogin {
+    return _prefs.getString('idLogin') ?? '0';
+  }
+
+  set idLogin(String value) {
+    _prefs.setString('idLogin', value);
+  }
+
   get token {
     return _prefs.getString('token') ?? '-1';
   }

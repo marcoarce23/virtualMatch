@@ -8,7 +8,13 @@ import 'package:imei_plugin/imei_plugin.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:virtual_match/src/model/Preference.dart';
+import 'package:virtual_match/src/model/entity/EntityFromJson/LogOnModel.dart';
+import 'package:virtual_match/src/model/entity/EntityMap/LogOnModel.dart'
+    as model;
+import 'package:virtual_match/src/model/entity/IEntity.dart';
+import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/page/general/ViewPage.dart';
+import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/page/intro/IntroPage.dart';
 import 'package:virtual_match/src/page/login/LoginClipperPage.dart';
 import 'package:virtual_match/src/service/LogInService.dart';
@@ -26,7 +32,12 @@ class LogOnPage extends StatefulWidget {
 }
 
 class _LogOnPageState extends State<LogOnPage> {
-  LoginService loginService;
+  LoginService loginService1;
+
+  LoginService loginService = new LoginService();
+  LoginModel loginModel = new LoginModel();
+  model.LoginModel entity = new model.LoginModel();
+
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final prefs = new Preferense();
@@ -86,7 +97,7 @@ class _LogOnPageState extends State<LogOnPage> {
 
   @override
   Widget build(BuildContext context) {
-    loginService = Provider.of<LoginService>(context);
+    loginService1 = Provider.of<LoginService>(context);
 
     Size size = MediaQuery.of(context).size;
 
@@ -128,10 +139,9 @@ class _LogOnPageState extends State<LogOnPage> {
           Shimmer.fromColors(
             baseColor: AppTheme.themeDefault,
             highlightColor: AppTheme.themePurple,
-            
             child: AutoSizeText(
               'Bienvenido a Virtual Match',
-              maxLines:1,
+              maxLines: 1,
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 25.0,
@@ -152,54 +162,54 @@ class _LogOnPageState extends State<LogOnPage> {
 
   Future<void> handleSignIn() async {
     try {
-      //  await _crearInformacion();
       await _googleSignIn.signIn().then((value) {
         _crearInformacion();
       });
     } catch (error) {
-      //showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
-
-      print('erro: logeo: ${error.toString()} ');
+      // scaffoldKey.currentState
+      //     .showSnackBar('Se produjo un error: ${error.toString()}');
     }
   }
 
-  _crearInformacion() async {
-    await _googleSignIn.signIn().then((value) {
-      prefs.avatarImage = currentUser.photoUrl;
+  _crearInformacion() {
+    _googleSignIn.signIn().then((value) {
       prefs.nameUser = currentUser.displayName;
       prefs.email = currentUser.email;
+      prefs.avatarImage = currentUser.photoUrl;
+      prefs.userId = currentUser.displayName;
 
-      print('Se ha  logueado ${currentUser.email}');
-      print('Se ha  displayName ${currentUser.displayName}');
-      print('Se ha  imeie $_platformImei');
+      print('DDDD. ${prefs.email}');
+      //   final dataMap1 = loginService.get(entity);
 
-      // final dataMap1 = generic.getAll(
-      //     entity, getLogin + '${currentUser.email}', primaryKeyGetLogin);
+      //   dataMap1.then((value) {
+      //     print('SE SETEOOOO 1111');
+      // if (value.length > 0) {
+      //   //print('SE SETEOOOO 222');
+      //   for (int i = 0; i < value.length; i++) {
+      //     entity = value[i];
+      //     //print('SE SETEOOOO 333');
+      //   }
 
-      // dataMap1.then((value) {
-      //   //print('SE SETEOOOO 1111');
-      //   if (value.length > 0) {
-      //     //print('SE SETEOOOO 222');
-      //     for (int i = 0; i < value.length; i++) {
-      //       entity = value[i];
-      //       //print('SE SETEOOOO 333');
+      //print('SE SETEOOOO 444 ${entity.idCreacionInstitucion}');
+      // prefs.imei = _platformImei;
+      // prefs.nombreUsuario = entity.nombrePersona;
+      // prefs.correoElectronico = entity.correo;
+      // prefs.avatarImagen = entity.avatar;
+      // prefs.nombreInstitucion = entity.nombreInstitucion;
+      // prefs.idInsitucion = entity.idInstitucion;
+      // prefs.idPersonal = entity.idPersonal;
+      // prefs.userId = entity.idUsuario;
+      // prefs.idCreacionInsitucion = entity.idCreacionInstitucion;
+      // prefs.nombreCreacionInstitucion = entity.nombreCreacionInstitucion;
+
+      //       navegation(context, HomePage());
+      //     } else {
+      //       _crearNuevo();
       //     }
 
-      //       //print('SE SETEOOOO 444 ${entity.idCreacionInstitucion}');
-      //       prefs.imei = _platformImei;
-      //       prefs.nombreUsuario = entity.nombrePersona;
-      //       prefs.correoElectronico = entity.correo;
-      //       prefs.avatarImagen = entity.avatar;
-      //       prefs.nombreInstitucion = entity.nombreInstitucion;
-      //       prefs.idInsitucion = entity.idInstitucion;
-      //       prefs.idPersonal = entity.idPersonal;
-      //       prefs.userId = entity.idUsuario;
-      //       prefs.idCreacionInsitucion = entity.idCreacionInstitucion;
-      //       prefs.nombreCreacionInstitucion = entity.nombreCreacionInstitucion;
-
-      navegation(context, IntroPage());
+      // //  });
+      _submit();
     });
-    // });
   }
 
   Widget _gmailButton() {
@@ -402,34 +412,33 @@ class _LogOnPageState extends State<LogOnPage> {
   //   );
   // }
 
-// void loadingEntity() {
-//     entity.idMultimedia = 0;
-//     entity.idOrganizacion = int.parse(prefs.idInstitution);
-//     entity.idaCategoria = typeMaterial;
-//     entity.titulo = controllerNoticia.text;
-//     entity.resumen = controllerDetalle.text;
-//     entity.fechaInicio = _inputFieldDateInicioController.text;
-//     entity.fechaFin = _inputFieldDateFinController.text;
-//     entity.usuarioAuditoria = prefs.email;
-//     entity.fechaAuditoria = '2020-08-10 08:25';
-//     entity.foto = IMAGE_LOGO;
-//     entity.enlace = controllerUbicacion.text;
-//   }
+  _submit() async {
+    loadingEntity();
+    executeCUD(loginService, entity);
+  }
 
-//   void executeCUD(
-//       MultimediaService entityService, MultimediaModel entity) async {
-//     try {
-//       await entityService.repository(entity).then((result) {
-//         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
+  void loadingEntity() {
+    entity.states = StateEntity.Insert;
+    entity.foto = prefs.avatarImage;
+    entity.nombre = prefs.nameUser;
+    entity.correo = prefs.email;
+    entity.imei = _platformImei;
+    entity.token = prefs.token;
+  }
 
-//         if (result["tipo_mensaje"] == '0')
-//           showSnackbar(STATUS_OK, scaffoldKey);
-//         else
-//           showSnackbar(STATUS_ERROR, scaffoldKey);
-//       });
-//     } catch (error) {
-//       showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
-//     }
-//   }
-
+  void executeCUD(LoginService entityService, model.LoginModel entity) async {
+    try {
+      await entityService.repository(entity).then((result) {
+        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
+        if (result["tipo_mensaje"] == '0') {
+          //  showSnackbar(STATUS_OK, scaffoldKey);
+          prefs.idLogin = result["data"]["idLogin"].toString();
+          navegation(context, HomePage());
+        } else
+          showSnackbar(STATUS_ERROR, scaffoldKey);
+      });
+    } catch (error) {
+      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
+    }
+  }
 }
