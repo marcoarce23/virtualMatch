@@ -16,6 +16,7 @@ import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 
+import 'HistoricTournament.dart';
 import 'PositionTable.dart';
 import 'TournamentPlayerScored.dart';
 
@@ -78,10 +79,10 @@ class _TourmentPageState extends State<TourmentPage> {
           child: GFTabs(
             tabBarColor: AppTheme.themeDefault,
             indicatorColor: AppTheme.themePurple,
-            height: MediaQuery.of(context).size.height * 0.73,
+            height: MediaQuery.of(context).size.height * 0.80,
             indicatorWeight: 6.0,
             initialIndex: 0,
-            length: 3,
+            length: 4,
             tabs: <Widget>[
               Tab(
                 icon: Icon(Icons.perm_identity),
@@ -99,6 +100,12 @@ class _TourmentPageState extends State<TourmentPage> {
                 icon: Icon(Icons.table_chart),
                 child: Text(
                   "Posiciones".toUpperCase(),
+                ),
+              ),
+              Tab(
+                icon: Icon(Icons.history),
+                child: Text(
+                  "Historial".toUpperCase(),
                 ),
               ),
             ],
@@ -168,6 +175,30 @@ class _TourmentPageState extends State<TourmentPage> {
                         ),
                       ),
                       PositionTable(
+                        idTorneo: widget.idTorneo,
+                      ),
+                      //copyRigth(),
+                    ],
+                  ),
+                ),
+                SingleChildScrollView(
+                  child: Column(
+                    children: <Widget>[
+                      divider(),
+                      Shimmer.fromColors(
+                        baseColor: AppTheme.themeDefault,
+                        highlightColor: AppTheme.themePurple,
+                        child: AutoSizeText(
+                          'Historial de partidos'.toUpperCase(),
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 19.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      sizedBox(0, 0),
+                      HistoricTournamentPage(
                         idTorneo: widget.idTorneo,
                       ),
                       //copyRigth(),

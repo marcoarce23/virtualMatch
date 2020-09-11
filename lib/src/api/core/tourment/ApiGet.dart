@@ -92,4 +92,17 @@ class ApiGet {
 
     return getListIEntityJson(response, entity, decodeData, list);
   }
+
+  Future<List<IEntityJson>> getHistoricoTorneo(
+      IEntityJson entity, int idtorneo) async {
+    final List<IEntityJson> list = new List();
+    Map<String, dynamic> decodeData;
+
+    final _apiRest =
+        api['getHistoricoTorneo'][0].toString() + '/' + idtorneo.toString();
+    print(_apiRest);
+    final response = await http.get(_apiRest);
+
+    return getListIEntityJson(response, entity, decodeData, list);
+  }
 }

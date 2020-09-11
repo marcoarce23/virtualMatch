@@ -110,7 +110,7 @@ class _MyAppState extends State<MyApp> {
             duration: 3500,
             type: AnimatedSplashType.BackgroundProcess,
             outputAndHome: option,
-          ),
+          ),  
           */
           home: LogOnPage(),
 
