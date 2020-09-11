@@ -138,4 +138,11 @@ class TourmentService {
     //  notifyListeners();
     return dataMap(response);
   }
+
+  Future<List<IEntityJson>> getHistoricoTorneo(
+      IEntityJson entityJson, int idTorneo) async {
+    var _result = await _apiGet.getHistoricoTorneo(entityJson, idTorneo);
+    isLoading = false;
+    return _result;
+  }
 }
