@@ -16,7 +16,7 @@ class JugadorModel implements IEntityJson {
   String twitter;
   String foto;
 
-  JugadorModel(
+   JugadorModel(
       {this.idJugador,
       this.idOrganizacion,
       this.idaDepartamento,

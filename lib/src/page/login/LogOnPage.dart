@@ -166,8 +166,8 @@ class _LogOnPageState extends State<LogOnPage> {
         _crearInformacion();
       });
     } catch (error) {
-      // scaffoldKey.currentState
-      //     .showSnackBar('Se produjo un error: ${error.toString()}');
+      showSnackbar(
+          result["mensaje"].toString() + error.toString(), scaffoldKey);
     }
   }
 
@@ -179,35 +179,6 @@ class _LogOnPageState extends State<LogOnPage> {
       prefs.userId = currentUser.displayName;
 
       print('DDDD. ${prefs.email}');
-      //   final dataMap1 = loginService.get(entity);
-
-      //   dataMap1.then((value) {
-      //     print('SE SETEOOOO 1111');
-      // if (value.length > 0) {
-      //   //print('SE SETEOOOO 222');
-      //   for (int i = 0; i < value.length; i++) {
-      //     entity = value[i];
-      //     //print('SE SETEOOOO 333');
-      //   }
-
-      //print('SE SETEOOOO 444 ${entity.idCreacionInstitucion}');
-      // prefs.imei = _platformImei;
-      // prefs.nombreUsuario = entity.nombrePersona;
-      // prefs.correoElectronico = entity.correo;
-      // prefs.avatarImagen = entity.avatar;
-      // prefs.nombreInstitucion = entity.nombreInstitucion;
-      // prefs.idInsitucion = entity.idInstitucion;
-      // prefs.idPersonal = entity.idPersonal;
-      // prefs.userId = entity.idUsuario;
-      // prefs.idCreacionInsitucion = entity.idCreacionInstitucion;
-      // prefs.nombreCreacionInstitucion = entity.nombreCreacionInstitucion;
-
-      //       navegation(context, HomePage());
-      //     } else {
-      //       _crearNuevo();
-      //     }
-
-      // //  });
       _submit();
     });
   }
@@ -433,7 +404,12 @@ class _LogOnPageState extends State<LogOnPage> {
         if (result["tipo_mensaje"] == '0') {
           //  showSnackbar(STATUS_OK, scaffoldKey);
           prefs.idLogin = result["data"]["idLogin"].toString();
-          navegation(context, HomePage());
+          prefs.idPlayer = "170"; // result["data"]["idPlayer"].toString();
+
+          if (prefs.idPlayer != '0')
+            navegation(context, HomePage());
+          else
+            navegation(context, IntroPage());
         } else
           showSnackbar(STATUS_ERROR, scaffoldKey);
       });
