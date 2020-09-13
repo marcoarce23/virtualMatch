@@ -9,6 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/ClasificadorModel.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/JugadorModel.dart';
+import 'package:virtual_match/src/model/entity/EntityFromJson/JugadorModel.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
@@ -382,6 +383,7 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
     // entityService = Provider.of<CrudService>(context);
 
     final JugadorModel entityModel = ModalRoute.of(context).settings.arguments;
+    JugadorModelJson entityModelJson = new JugadorModelJson();
 
     if (entityModel != null) {
       entity = entityModel;
@@ -728,8 +730,8 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
 
   _obtenerPlayer() {
     FutureBuilder(
-        future: entityService.get(
-            entityModel, API + '/api/Jugador/' + prefs.idPlayer.toString()),
+        future: entityService.get(new JugadorModelJson(),
+            API + '/api/Jugador/' + prefs.idPlayer.toString()),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:

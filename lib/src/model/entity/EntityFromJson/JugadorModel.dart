@@ -1,6 +1,6 @@
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 
-class JugadorModel implements IEntityJson {
+class JugadorModelJson implements IEntityJson {
   int idJugador;
   int idOrganizacion;
   int idaDepartamento;
@@ -16,7 +16,7 @@ class JugadorModel implements IEntityJson {
   String twitter;
   String foto;
 
-   JugadorModel(
+  JugadorModelJson(
       {this.idJugador,
       this.idOrganizacion,
       this.idaDepartamento,
@@ -32,7 +32,7 @@ class JugadorModel implements IEntityJson {
       this.twitter,
       this.foto});
 
-  fromJson(Map<String, dynamic> json) => new JugadorModel(
+  fromJson(Map<String, dynamic> json) => new JugadorModelJson(
         idJugador: json["idJugador"],
         idOrganizacion: json["idOrganizacion"],
         idaDepartamento: json["idaDepartamento"],
