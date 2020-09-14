@@ -152,7 +152,7 @@ class _MiniTourmentLoadPageState extends State<MiniTourmentLoadPage> {
   @override
   Widget build(BuildContext context) {
     entity.states = StateEntity.Insert;
-    entityService = Provider.of<TourmentService>(context);
+   // entityService = Provider.of<TourmentService>(context);
 
     final MiniTorneoModel entityModel =
         ModalRoute.of(context).settings.arguments;

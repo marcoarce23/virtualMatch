@@ -41,7 +41,7 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    entityService = Provider.of<TourmentService>(context);
+   
 
     return Scaffold(
       key: scaffoldKey,

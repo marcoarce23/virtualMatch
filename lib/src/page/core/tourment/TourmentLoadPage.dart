@@ -59,37 +59,36 @@ class _TourmentAllPageState extends State<TourmentAllPage> {
   @override
   Widget build(BuildContext context) {
     return
-    //  MultiProvider(
-    //   providers: [
-    //     ChangeNotifierProvider(builder: (_) => new TourmentService()),
-    //   ],
-    //   child: 
-      Scaffold(
-       
-        bottomNavigationBar: BottomNavigationBar(
-          elevation: 21.0,
-          backgroundColor: AppTheme.themeDefault,
-          items: [
-            BottomNavigationBarItem(
-                icon: FaIcon(
-                  FontAwesomeIcons.newspaper,
-                  size: 25,
-                ),
-                title: Text('Noticias')),
-            BottomNavigationBarItem(
-                icon: FaIcon(
-                  FontAwesomeIcons.paperPlane,
-                  size: 25,
-                ),
-                title: Text('Listado Noticias')),
-          ],
-          currentIndex: page,
-          unselectedItemColor: Colors.purple,
-          selectedItemColor: AppTheme.themeWhite,
-          onTap: _onItemTapped,
-        ),
-        body: optionPage[page],
-    //  ),
+        //  MultiProvider(
+        //   providers: [
+        //     ChangeNotifierProvider(builder: (_) => new TourmentService()),
+        //   ],
+        //   child:
+        Scaffold(
+      bottomNavigationBar: BottomNavigationBar(
+        elevation: 21.0,
+        backgroundColor: AppTheme.themeDefault,
+        items: [
+          BottomNavigationBarItem(
+              icon: FaIcon(
+                FontAwesomeIcons.newspaper,
+                size: 25,
+              ),
+              title: Text('Noticias')),
+          BottomNavigationBarItem(
+              icon: FaIcon(
+                FontAwesomeIcons.paperPlane,
+                size: 25,
+              ),
+              title: Text('Listado Noticias')),
+        ],
+        currentIndex: page,
+        unselectedItemColor: Colors.purple,
+        selectedItemColor: AppTheme.themeWhite,
+        onTap: _onItemTapped,
+      ),
+      body: optionPage[page],
+      //  ),
     );
   }
 }
@@ -145,7 +144,7 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
   @override
   Widget build(BuildContext context) {
     entity.states = StateEntity.Insert;
-   // entityService = Provider.of<TourmentService>(context);
+    // entityService = Provider.of<TourmentService>(context);
 
     final TorneoModel entityModel = ModalRoute.of(context).settings.arguments;
 
@@ -156,8 +155,8 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
 
     return Scaffold(
       key: scaffoldKey,
-       appBar: appBar('CREACIÓN DEL TORNEO'),
-        drawer: DrawerMenu(),
+      appBar: appBar('CREACIÓN DEL TORNEO'),
+      drawer: DrawerMenu(),
       body: Stack(
         children: <Widget>[
           background(context, 'IMAGE_LOGO'),
@@ -470,6 +469,7 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
     entity.fechaInicio = _inputFieldDateController.text + ' ' + '12:00';
     entity.horaInicio = _inputFieldTimeController.text;
     entity.usuarioAuditoria = prefs.email;
+    entity.idJugador = 1;
   }
 
   void executeCUD(TourmentService entityService, TorneoModel entity) async {

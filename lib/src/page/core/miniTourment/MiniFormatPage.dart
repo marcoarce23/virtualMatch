@@ -75,7 +75,6 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
   @override
   Widget build(BuildContext context) {
     entity.states = StateEntity.Insert;
-    entityService = Provider.of<TourmentService>(context);
 
     return Scaffold(
       key: scaffoldKey,
@@ -130,7 +129,7 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
         //  sizedBox(0.0, 7.0),
         showPictureOval(photo, image, 125.0),
         dividerBlack(),
-           Row(
+        Row(
           children: [
             sizedBox(30.0, 0.0),
             Text('Selecciona tu torneo creado'),
@@ -205,8 +204,8 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
                 return Row(
                   children: <Widget>[
                     SizedBox(width: 30.0),
-                  //  Text('Selecciones el torneo:'),
-             
+                    //  Text('Selecciones el torneo:'),
+
                     DropdownButton(
                       icon: FaIcon(FontAwesomeIcons.sort,
                           color: AppTheme.themePurple),

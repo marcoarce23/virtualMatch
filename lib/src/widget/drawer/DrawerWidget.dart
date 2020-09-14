@@ -178,9 +178,11 @@ class DrawerMenu extends StatelessWidget {
                 '*Virtual Match.*\n *Una aplicación de la Comunidad FIFA Bolivia.*\n💬 Con  *Virtual Match podrás.* \n 🔺 Leer Noticias de la Comunidad. \n 🔺 Enterarte de los eventos. \n 🔺Crear tu jugador y equipos. \n🔺Participar en los torneos. \n 🔺 Conocer campeones de torneos e influencers. \n🔺 Mucho mas... \n📲 *Descargar la App en el siguiente enlace:* https://play.google.com/store/apps/details?id=bo.virtual_matchBolivia',
                 'text/html')),
         CustomListTile(
-            FaIcon(
-              FontAwesomeIcons.questionCircle,
-              size: 25,
+            Image.asset(
+              'assets/pregunta1.png',
+              scale: 0.4,
+              width: 20,
+              height: 20,
             ),
             '    ¿ Alguna duda? Preguntas',
             () => navegation(context, FaqListPage())),

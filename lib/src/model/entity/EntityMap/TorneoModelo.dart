@@ -14,6 +14,7 @@ class TorneoModel implements IEntityMap {
   String fechaInicio;
   String horaInicio;
   String usuarioAuditoria;
+  int idJugador;
 
   TorneoModel(
       {this.states = StateEntity.None,
@@ -28,7 +29,8 @@ class TorneoModel implements IEntityMap {
       this.foto,
       this.fechaInicio,
       this.horaInicio,
-      this.usuarioAuditoria});
+      this.usuarioAuditoria,
+      this.idJugador});
 
   Map<String, dynamic> toJson() => {
         "idTorneo": idTorneo,
@@ -42,10 +44,9 @@ class TorneoModel implements IEntityMap {
         "fechaInicio": fechaInicio,
         "horaInicio": horaInicio,
         "usuarioAuditoria": usuarioAuditoria,
+        "idJugador": idJugador
       };
 }
-
-
 
 class MiniTorneoModel implements IEntityMap {
   @override
@@ -61,6 +62,7 @@ class MiniTorneoModel implements IEntityMap {
   String fechaInicio;
   String horaInicio;
   String usuarioAuditoria;
+  int idJugador;
 
   MiniTorneoModel(
       {this.states = StateEntity.None,
@@ -75,7 +77,8 @@ class MiniTorneoModel implements IEntityMap {
       this.foto,
       this.fechaInicio,
       this.horaInicio,
-      this.usuarioAuditoria});
+      this.usuarioAuditoria,
+      this.idJugador});
 
   Map<String, dynamic> toJson() => {
         "idTorneo": idTorneo,
@@ -89,5 +92,6 @@ class MiniTorneoModel implements IEntityMap {
         "fechaInicio": fechaInicio,
         "horaInicio": horaInicio,
         "usuarioAuditoria": usuarioAuditoria,
+        "idJugador": idJugador,
       };
 }
