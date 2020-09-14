@@ -19,6 +19,48 @@ class BottonNavigation extends StatefulWidget {
 class _BottonNavigationState extends State<BottonNavigation> {
   @override
   Widget build(BuildContext context) {
+    return BottomAppBar(
+      child: Row(
+        children: [
+          IconButton(
+              icon: Image.asset(
+                'assets/image/mensajeria.png',
+                //scale: 0.4,
+                width: 30,
+                height: 30,
+              ),
+              onPressed: () {
+                navegation(context, NewListPage());
+              }),
+          //Text('Noticias'),
+          IconButton(
+              icon: Image.asset(
+                'assets/image/trofeo.png',
+                //scale: 0.4,
+                width: 30,
+                height: 30,
+              ),
+              onPressed: () {
+                navegation(context, PlayerWinnerPage());
+              }),
+          //Text('Ganadores'),
+          IconButton(
+              icon: Image.asset(
+                'assets/image/jugador2.png',
+                //scale: 0.4,
+                width: 30,
+                height: 30,
+              ),
+              onPressed: () {
+                navegation(context, ListTournamentPage());
+              }),
+          Spacer()
+          //Text('Torneos'),
+        ],
+      ),
+    );
+  }
+  /*Widget build(BuildContext context) {
     return ConvexAppBar.badge(
       {3: '', 1: '', 2: ''},
 
@@ -77,4 +119,6 @@ class _BottonNavigationState extends State<BottonNavigation> {
       },
     );
   }
+
+  */
 }
