@@ -1,6 +1,6 @@
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 
-class JugadorModel implements IEntityMap {
+class JugadorModel implements IEntityMap, IEntityJson {
   @override
   StateEntity states;
   int idJugador;
@@ -18,10 +18,9 @@ class JugadorModel implements IEntityMap {
   String twitter;
   String foto;
   String usuarioAuditoria;
- 
 
   JugadorModel(
-  {   this.states = StateEntity.None,
+      {this.states = StateEntity.None,
       this.idJugador = 0,
       this.idOrganizacion,
       this.idaDepartamento,
@@ -55,4 +54,21 @@ class JugadorModel implements IEntityMap {
         "foto": foto,
         "usuarioAuditoria": usuarioAuditoria
       };
+
+  fromJson(Map<String, dynamic> json) => new JugadorModel(
+        idJugador: json["idJugador"],
+        idOrganizacion: json["idOrganizacion"],
+        idaDepartamento: json["idaDepartamento"],
+        idLogin: json["idLogin"],
+        idaSexo: json["idaSexo"],
+        idPsdn: json["idPsdn"],
+        nombre: json["nombre"],
+        apellido: json["apellido"],
+        correo: json["correo"],
+        telefono: json["telefono"],
+        informacionComplementaria: json["informacionComplementaria"],
+        facebook: json["facebook"],
+        twitter: json["twitter"],
+        foto: json["foto"],
+      );
 }

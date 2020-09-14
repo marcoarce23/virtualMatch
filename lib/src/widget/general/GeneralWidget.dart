@@ -386,3 +386,11 @@ showSnackbar(String message, GlobalKey<ScaffoldState> scaffoldKey) {
 
   scaffoldKey.currentState.showSnackBar(snackbar);
 }
+
+showSnackbarWithOutKey(String message, BuildContext context) {
+  return Scaffold.of(context).showSnackBar(SnackBar(
+    backgroundColor: Colors.pinkAccent,
+    content: Text(message),
+    duration: Duration(milliseconds: 2500),
+  ));
+}
