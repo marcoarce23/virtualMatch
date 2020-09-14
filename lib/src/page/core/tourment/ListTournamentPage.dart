@@ -60,12 +60,12 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
 
         Scaffold(
       key: scaffoldKey,
-    //  appBar: appBar('TORNEOS VIRTUAL MATCH'),
+      //  appBar: appBar('TORNEOS VIRTUAL MATCH'),
       body: SingleChildScrollView(child: bodyContainer(context)),
       drawer: DrawerMenu(),
       // floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
       //   FaIcon(FontAwesomeIcons.futbol), HomePage()),
-    //  bottomNavigationBar: new BottonNavigation(),
+      //  bottomNavigationBar: new BottonNavigation(),
       //   ),
     );
   }
@@ -113,7 +113,7 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
                   sizedBox(0, 5.0),
                   dividerBlack(),
                   listView(context, snapshot),
-            //     copyRigthBlack(),
+                  //     copyRigthBlack(),
                 ],
               );
           }
@@ -232,6 +232,7 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
                       Positioned(
                           left: MediaQuery.of(context).size.width * 0.72,
                           child: RadialProgress(
+                              progressColor: AppTheme.themePurple,
                               child: avatarCircle(entity.foto, 55.0))),
                     ],
                   ),
