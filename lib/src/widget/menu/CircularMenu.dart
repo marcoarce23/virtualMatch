@@ -2,12 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:virtual_match/src/example/VideoApp.dart';
-import 'package:virtual_match/src/page/core/player/PlayerLoadPage.dart';
-import 'package:virtual_match/src/page/faq/FaqListPage.dart';
-import 'package:virtual_match/src/page/faq/FaqPage.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
+import 'package:virtual_match/src/page/multimedia/MultimediaPage.dart';
+import 'package:virtual_match/src/page/new/NewPage.dart';
+import 'package:virtual_match/src/page/notification/NotificationPage.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/widget/general/SharedWidget.dart';
@@ -32,15 +30,15 @@ class _CircularMenuState extends State<CircularMenu> {
         // Cannot be `Alignment.center`
         alignment: Alignment.bottomRight,
         ringColor: Colors.white.withAlpha(75),
-        ringDiameter: 500.0,
-        ringWidth: 120.0,
-        fabSize: 50.0,
-        fabElevation: 35.0,
-        fabColor: AppTheme.themeWhite,
-        fabOpenIcon: Icon(Icons.menu, color: AppTheme.themeDefault),
-        fabCloseIcon: Icon(Icons.close, color: AppTheme.themeDefault),
-        fabMargin: const EdgeInsets.all(16.0),
-        animationDuration: const Duration(milliseconds: 800),
+        // ringDiameter: 500.0,
+         ringWidth: 120.0,
+         fabSize: 50.0,
+         fabElevation: 35.0,
+         fabColor: AppTheme.themeWhite,
+         fabOpenIcon: Icon(Icons.menu, color: AppTheme.themeDefault),
+         fabCloseIcon: Icon(Icons.close, color: AppTheme.themeDefault),
+        // fabMargin: const EdgeInsets.all(16.0),
+         animationDuration: const Duration(milliseconds: 800),
         animationCurve: Curves.easeInCubic,
 
         onDisplayChange: (isOpen) {
@@ -49,44 +47,6 @@ class _CircularMenuState extends State<CircularMenu> {
         },
 
         children: <Widget>[
-// IconButton(icon: Icon(Icons.access_time), iconSize: 27,  onPressed: ()=>navegation(context, FaqListPage())),
-// IconButton(icon: Icon(Icons.access_time), onPressed: ()=>navegation(context, FaqListPage())),
-// IconButton(icon: Icon(Icons.access_time), onPressed: ()=>navegation(context, FaqListPage())),
-// IconButton(icon: Icon(Icons.access_time), onPressed: ()=>navegation(context, FaqListPage())),
-// IconButton(icon: Icon(Icons.access_time), onPressed: ()=>navegation(context, FaqListPage())),
-
-//             onPressed: () async {
-//               _imageFile = (await ImagePicker()
-//                   .getImage(source: ImageSource.gallery)) as File;
-//               setState(() {});
-//             },
-//             shape: CircleBorder(),
-//             padding: const EdgeInsets.all(24.0),
-//             child: FaIcon(FontAwesomeIcons.images,
-//                 color: AppTheme.themePurple, size: 25.0),
-//           ),
-          RawMaterialButton(
-            elevation: 4,
-            onPressed: () {
-              setState(() {
-                print('Se presionooo');
-                navegation(context, VideoApp());
-              });
-            },
-            shape: CircleBorder(),
-            padding: const EdgeInsets.all(24.0),
-            child: FaIcon(FontAwesomeIcons.youtube,
-                color: AppTheme.themePurple, size: 25.0),
-          ),
-          RawMaterialButton(
-            onPressed: () {
-              navegation(context, FaqListPage());
-            },
-            shape: CircleBorder(),
-            padding: const EdgeInsets.all(24.0),
-            child: FaIcon(FontAwesomeIcons.questionCircle,
-                color: AppTheme.themePurple, size: 25.0),
-          ),
           RawMaterialButton(
             onPressed: () => sharedText(
                 'BIENVENIDO A LA COMUNIDAD',
@@ -95,16 +55,52 @@ class _CircularMenuState extends State<CircularMenu> {
             shape: CircleBorder(),
             padding: const EdgeInsets.all(24.0),
             child: FaIcon(FontAwesomeIcons.shareAlt,
-                color: AppTheme.themePurple, size: 25.0),
+                color: AppTheme.themeWhite, size: 25.0),
           ),
           RawMaterialButton(
             onPressed: () {
-              navegation(context, FaqListPage());
+              navegation(context, NotificationPage());
             },
             shape: CircleBorder(),
             padding: const EdgeInsets.all(24.0),
-            child: FaIcon(FontAwesomeIcons.questionCircle,
-                color: AppTheme.themePurple, size: 25.0),
+
+            child: Image.asset(
+              'assets/image/mensajeria.png',
+              //scale: 0.4,
+              width: 30,
+              height: 30,
+            ),
+
+            // child: FaIcon(FontAwesomeIcons.questionCircle,
+            //     color: AppTheme.themePurple, size: 25.0),
+          ),
+
+          RawMaterialButton(
+            elevation: 4,
+            onPressed: () {
+              navegation(context, MultimediaPage());
+            },
+            shape: CircleBorder(),
+            padding: const EdgeInsets.all(24.0),
+            child: Image.asset(
+              'assets/image/multimedia.png',
+              //scale: 0.4,
+              width: 30,
+              height: 30,
+            ),
+          ),
+          RawMaterialButton(
+            onPressed: () {
+              navegation(context, NewPage());
+            },
+            shape: CircleBorder(),
+            padding: const EdgeInsets.all(24.0),
+            child: Image.asset(
+              'assets/image/imagen.png',
+              //scale: 0.4,
+              width: 30,
+              height: 30,
+            ),
           ),
           RawMaterialButton(
             onPressed: () {
@@ -113,8 +109,12 @@ class _CircularMenuState extends State<CircularMenu> {
             },
             shape: CircleBorder(),
             padding: const EdgeInsets.all(24.0),
-            child: FaIcon(FontAwesomeIcons.home,
-                color: AppTheme.themePurple, size: 25.0),
+            child: Image.asset(
+              'assets/image/cerrar.png',
+              //scale: 0.4,
+              width: 30,
+              height: 30,
+            ),
           )
         ],
       ),

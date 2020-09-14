@@ -55,7 +55,7 @@ class _BottonNavigationState extends State<BottonNavigation> {
               width: 28,
               height: 28,
             ),
-            title: 'Jugador'),
+            title: 'Jugadores'),
         TabItem(
             icon: Image.asset(
               'assets/image/control.png',
@@ -63,7 +63,7 @@ class _BottonNavigationState extends State<BottonNavigation> {
               width: 28,
               height: 28,
             ),
-            title: '1 Vs.1'),
+            title: 'Mi torneo'),
       ],
       initialActiveIndex: 2, //optional, default as 0
       onTap: (value) {

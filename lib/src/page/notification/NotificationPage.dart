@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
+import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
@@ -38,7 +39,7 @@ class _NotificationPageState extends State<NotificationPage> {
     final size = MediaQuery.of(context).size;
     // entityService = Provider.of<NotificationService>(context);
     return Scaffold(
-      //    appBar: appBar('COMUNIDAD 24/7.'),
+      appBar: appBar('COMUNIDAD 24/7.'),
       drawer: DrawerMenu(),
       body: SafeArea(
         child: Container(
@@ -65,7 +66,7 @@ class _NotificationPageState extends State<NotificationPage> {
               divider(),
               sizedBox(0.0, 7.0),
               futureBuilder(context),
-              //    copyRigth(),
+              //   copyRigth(),
             ],
           ),
         ),

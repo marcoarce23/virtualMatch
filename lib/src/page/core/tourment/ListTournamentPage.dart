@@ -58,12 +58,12 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
 
         Scaffold(
       key: scaffoldKey,
-      appBar: appBar('TORNEOS VIRTUAL MATCH'),
+    //  appBar: appBar('TORNEOS VIRTUAL MATCH'),
       body: SingleChildScrollView(child: bodyContainer(context)),
       drawer: DrawerMenu(),
       // floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
       //   FaIcon(FontAwesomeIcons.futbol), HomePage()),
-      bottomNavigationBar: new BottonNavigation(),
+    //  bottomNavigationBar: new BottonNavigation(),
       //   ),
     );
   }
@@ -105,13 +105,13 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
 
                   showInformationBasic(
                     context,
-                    'LISTADO DE TORNEOS - FIFA BOLIVIA',
-                    'Conoce los resultados.',
+                    'TORNEOS - VIRTUAL MATCH',
+                    'Conoce los resultados actuales de los torneos de la comunidad.',
                   ),
                   sizedBox(0, 5.0),
                   dividerBlack(),
                   listView(context, snapshot),
-                  copyRigthBlack(),
+            //     copyRigthBlack(),
                 ],
               );
           }

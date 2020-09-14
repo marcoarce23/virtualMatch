@@ -38,7 +38,7 @@ class _FaqListPagetate extends State<FaqListPage> {
     final size = MediaQuery.of(context).size;
 
     return Container(
-      color: Colors.black87,
+      color: Colors.white,
       child: SingleChildScrollView(
         child: Column(
           children: <Widget>[
@@ -57,7 +57,7 @@ class _FaqListPagetate extends State<FaqListPage> {
               margin: EdgeInsets.symmetric(vertical: 0.0),
               child: _fields(context),
             ),
-            copyRigth(),
+            copyRigthBlack(),
           ],
         ),
       ),

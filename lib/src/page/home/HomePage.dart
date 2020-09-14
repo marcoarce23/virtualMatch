@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:virtual_match/src/model/Preference.dart';
+import 'package:virtual_match/src/page/core/tourment/ListTournamentPage.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
-import 'package:virtual_match/src/page/notification/NotificationPage.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/bottonNavigationBar/BottonNavigatorWidget.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
@@ -42,7 +42,7 @@ class _HomePageState extends State<HomePage> {
       top: true,
       child: Scaffold(
         appBar: appBar('Virtual Match'),
-        body: NotificationPage(),
+        body: ListTournamentPage(),
         drawer: DrawerMenu(),
         floatingActionButton: new CircularMenu(),
         bottomNavigationBar: new BottonNavigation(),

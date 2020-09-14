@@ -490,11 +490,7 @@ class _IntroPageState extends State<IntroPage> {
                           ),
                         ),
                         sizedBox(10.0, 0),
-                        FaIcon(
-                          FontAwesomeIcons.futbol,
-                          color: AppTheme.themePurple,
-                          size: 18,
-                        ),
+                        avatarCircle(IMAGE_LOGOB, 15),
                       ],
                     ),
                   ),

@@ -7,6 +7,7 @@ import 'package:virtual_match/src/page/core/formatTourment/FormatTourmentPage.da
 import 'package:virtual_match/src/page/core/miniTourment/MiniTourmentLoadPage.dart';
 import 'package:virtual_match/src/page/core/player/PlayerLoadPage.dart';
 import 'package:virtual_match/src/page/faq/FaqListPage.dart';
+import 'package:virtual_match/src/page/general/ViewPage.dart';
 import 'package:virtual_match/src/page/intro/IntroPage.dart';
 import 'package:virtual_match/src/page/login/LogOutPage.dart';
 import 'package:virtual_match/src/page/multimedia/MultimediaLoadPage.dart';
@@ -63,6 +64,13 @@ class DrawerMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (prefs.idJugador == '1')
+      return drawerVirtualMatch(context);
+    else
+      return drawerUser(context);
+  }
+
+  Drawer drawerUser(BuildContext context) {
     return Drawer(
         child: ListView(
       children: <Widget>[
@@ -107,6 +115,12 @@ class DrawerMenu extends StatelessWidget {
             ],
           )),
         ),
+        //  CustomListTile(
+        //     ImageOvalNetwork(
+        //         imageNetworkUrl: IMAGE_SOROJCHI, sizeImage: Size.fromWidth(30)),
+        //     '   SOROJCHI eclubss',
+        //     () => navegation(context, ViewPage(title:'mapa catastro', url: 'https://geovisorec.000webhostapp.com/index.html'))),
+
         CustomListTile(
             ImageOvalNetwork(
                 imageNetworkUrl: IMAGE_SOROJCHI, sizeImage: Size.fromWidth(30)),
@@ -118,7 +132,143 @@ class DrawerMenu extends StatelessWidget {
             '   Sobre Auspiciador',
             () => navegation(context, PlayerLoadPage())),
         CustomListTile(
-             Image.asset(
+            Image.asset(
+              'assets/image/jugador2.png',
+              //scale: 0.4,
+              width: 30,
+              height: 30,
+            ),
+            '   Jugadores de la comunidad',
+            () => navegation(context, PlayerLoadPage())),
+        // CustomListTile(
+        //     Image.asset(
+        //       'assets/image/control.png',
+        //       //scale: 0.4,
+        //       width: 30,
+        //       height: 30,
+        //     ),
+        //     '    Clubes Pro (Crea tu equipo)',
+        //     () => navegation(context, TourmentAllPage())),
+        CustomListTile(
+            Image.asset(
+              'assets/image/pelota.png',
+              //scale: 0.4,
+              width: 28,
+              height: 28,
+            ),
+            '   Crea MiniTorneo',
+            () => navegation(context, MiniTourmentAllPage())),
+
+        CustomListTile(
+            ImageOvalNetwork(
+                imageNetworkUrl: IMAGE_LOGO, sizeImage: Size.fromWidth(35)),
+            '    Sobre Virtual Match',
+            () => navegation(context, OrganizationPage())),
+        CustomListTile(
+            FaIcon(
+              FontAwesomeIcons.shareAlt,
+              size: 25,
+            ),
+            '    Apoya a la comunidad',
+            () => sharedText(
+                'BIENVENIDO A LA COMUNIDAD',
+                '*Virtual Match.*\n *Una aplicación de la Comunidad FIFA Bolivia.*\n💬 Con  *Virtual Match podrás.* \n 🔺 Leer Noticias de la Comunidad. \n 🔺 Enterarte de los eventos. \n 🔺Crear tu jugador y equipos. \n🔺Participar en los torneos. \n 🔺 Conocer campeones de torneos e influencers. \n🔺 Mucho mas... \n📲 *Descargar la App en el siguiente enlace:* https://play.google.com/store/apps/details?id=bo.virtual_matchBolivia',
+                'text/html')),
+        CustomListTile(
+            Image.asset(
+              'assets/pregunta1.png',
+              //scale: 0.4,
+              width: 30,
+              height: 30,
+            ),
+            '    ¿ Alguna duda? Preguntas',
+            () => navegation(context, FaqListPage())),
+        CustomListTile(
+            Image.asset(
+              'assets/image/penal.png',
+              //scale: 0.4,
+              width: 30,
+              height: 30,
+            ),
+            '    Acerca de la APP.',
+            () => navegation(context, IntroPage())),
+        CustomListTile(
+            Image.asset(
+              'assets/image/casa.png',
+              //scale: 0.4,
+              width: 30,
+              height: 30,
+            ),
+            '    Cerrar Sesión',
+            () => navegation(context, LogOutPage())),
+      ],
+    ));
+  }
+
+  Drawer drawerVirtualMatch(BuildContext context) {
+    return Drawer(
+        child: ListView(
+      children: <Widget>[
+        DrawerHeader(
+          decoration: boxDecorationMenu(context, IMAGE_DEFAULT),
+          child: Container(
+              child: Column(
+            children: <Widget>[
+              Material(
+                  color: AppTheme.themeWhite,
+                  borderRadius: BorderRadius.all(Radius.circular(60.0)),
+                  elevation: 10.0,
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: ImageOvalNetwork(
+                        imageNetworkUrl: prefs.avatarImage, //IMAGE_LOGO,
+                        sizeImage: Size.fromWidth(70)),
+
+                    //  child: showPictureOval(null, IMAGE_SOROJCHI, 70.0),
+                  )),
+              Flexible(
+                child: Column(
+                  children: <Widget>[
+                    Expanded(
+                      child: Text(
+                        prefs.nameUser,
+                        style: TextStyle(
+                            color: AppTheme.themeWhite, fontSize: 18.0),
+                        softWrap: true,
+                        overflow: TextOverflow.clip,
+                      ),
+                    ),
+                    AutoSizeText(
+                      prefs.email,
+                      style:
+                          TextStyle(color: AppTheme.themeWhite, fontSize: 16.0),
+                      maxLines: 2,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          )),
+        ),
+
+//  CustomListTile(
+//             ImageOvalNetwork(
+//                 imageNetworkUrl: IMAGE_SOROJCHI, sizeImage: Size.fromWidth(30)),
+//             '   SOROJCHI eclubss',
+//             () => navegation(context, ViewPage(title:'mapa catastro', url: 'https://geovisorec.000webhostapp.com/index.html'))),
+
+        CustomListTile(
+            ImageOvalNetwork(
+                imageNetworkUrl: IMAGE_SOROJCHI, sizeImage: Size.fromWidth(30)),
+            '   SOROJCHI eclub',
+            () => navegation(context, SorojchiPage())),
+        CustomListTile(
+            ImageOvalNetwork(
+                imageNetworkUrl: IMAGE_SOROJCHI, sizeImage: Size.fromWidth(30)),
+            '   Sobre Auspiciador',
+            () => navegation(context, PlayerLoadPage())),
+        CustomListTile(
+            Image.asset(
               'assets/image/jugador2.png',
               //scale: 0.4,
               width: 30,
@@ -136,7 +286,7 @@ class DrawerMenu extends StatelessWidget {
             '    Clubes Pro (Crea tu equipo)',
             () => navegation(context, TourmentAllPage())),
         CustomListTile(
-             Image.asset(
+            Image.asset(
               'assets/image/pelota.png',
               //scale: 0.4,
               width: 28,
@@ -192,7 +342,7 @@ class DrawerMenu extends StatelessWidget {
                 '*Virtual Match.*\n *Una aplicación de la Comunidad FIFA Bolivia.*\n💬 Con  *Virtual Match podrás.* \n 🔺 Leer Noticias de la Comunidad. \n 🔺 Enterarte de los eventos. \n 🔺Crear tu jugador y equipos. \n🔺Participar en los torneos. \n 🔺 Conocer campeones de torneos e influencers. \n🔺 Mucho mas... \n📲 *Descargar la App en el siguiente enlace:* https://play.google.com/store/apps/details?id=bo.virtual_matchBolivia',
                 'text/html')),
         CustomListTile(
-             Image.asset(
+            Image.asset(
               'assets/pregunta1.png',
               //scale: 0.4,
               width: 30,

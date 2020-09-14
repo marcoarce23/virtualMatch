@@ -97,31 +97,40 @@ class _LogOutPageState extends State<LogOutPage> {
 
   Widget _buildBody() {
     if (_currentUser != null) {
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[
-          ListTile(
-            leading: avatarCircle(_currentUser.photoUrl, 35),
-            title: Text(
-              'Nombre del usuario :\n${_currentUser.displayName}' ?? '',
+      return Container(
+        color: Colors.black87,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            ListTile(
+              leading: avatarCircle(_currentUser.photoUrl, 45),
+              title: Text(
+                'Nombre del usuario :\n${_currentUser.displayName}' ?? '',
+                style: kSigssTitleStyle,
+              ),
+              subtitle: Text(
+                'Correo logeado :\n${_currentUser.email}' ?? '',
+                style: kSigssTitleStyle,
+              ),
+            ),
+            Text(
+              "Logueo exitoso.!.",
               style: kSigssTitleStyle,
             ),
-            subtitle: Text(
-              'Correo logeado :\n${_currentUser.email}' ?? '',
+            Image.asset(
+              'assets/icono2.png',
+              //scale: 0.4,
+              width: 180,
+              height: 180,
+            ),
+            Text(
+              "Disfruta de Virtual Match!.",
               style: kSigssTitleStyle,
             ),
-          ),
-          Text(
-            "Logueo exitoso.!.",
-            style: kSigssTitleStyle,
-          ),
-          Text(
-            "Estas trabajando con normalidad !.",
-            style: kSigssTitleStyle,
-          ),
-          //  Text(_contactText ?? ''),
-          _gmailButton(),
-        ],
+            //  Text(_contactText ?? ''),
+            _gmailButton(),
+          ],
+        ),
       );
     } else {
       return Column(
@@ -144,9 +153,9 @@ class _LogOutPageState extends State<LogOutPage> {
     return OutlineButton(
       splashColor: Colors.black,
       onPressed: _handleSignOut, // _handleSignIn,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(35)),
       highlightElevation: 0,
-      borderSide: BorderSide(color: Colors.black),
+      borderSide: BorderSide(color: Colors.white),
       child: Padding(
         padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
         child: Row(
@@ -162,7 +171,7 @@ class _LogOutPageState extends State<LogOutPage> {
                 'Cerrar sesión',
                 style: TextStyle(
                   fontSize: 16,
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
               ),
             )
@@ -175,7 +184,7 @@ class _LogOutPageState extends State<LogOutPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: appBar('CERAR SESIÓN ${prefs.nameUser.toString()}'),
+        appBar: appBar('CERRAR SESIÓN'),
         body: ConstrainedBox(
           constraints: const BoxConstraints.expand(),
           child: _buildBody(),
