@@ -25,6 +25,9 @@ class _TournamentPlayerScoredState extends State<TournamentPlayerScored> {
   PartidosPorTorneoService entityService;
   PartidosPorTorneoService entityGet = PartidosPorTorneoService();
   bool esVisto = false;
+
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return futureBuilder(context);
@@ -93,10 +96,16 @@ class _TournamentPlayerScoredState extends State<TournamentPlayerScored> {
                 flex: 3,
                 child: InkWell(
                   onTap: () {
-                    navegation(
-                        context,
-                        RegisterScoredPage(
-                            entity: entity, idTorneo: entity.idTorneo));
+                    if (entity.iidJugador.toString() == prefs.idPlayer ||
+                        entity.didJugador.toString() == prefs.idPlayer) {
+                      navegation(
+                          context,
+                          RegisterScoredPage(
+                              entity: entity, idTorneo: entity.idTorneo));
+                    } else {
+                      showSnackbarWithOutKey(
+                          "No participo de este partido", context);
+                    }
                   },
                   child: Container(
                     child: Column(

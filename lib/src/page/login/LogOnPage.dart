@@ -404,7 +404,7 @@ class _LogOnPageState extends State<LogOnPage> {
         if (result["tipo_mensaje"] == '0') {
           //  showSnackbar(STATUS_OK, scaffoldKey);
           prefs.idLogin = result["data"]["idLogin"].toString();
-          prefs.idPlayer = "170"; // result["data"]["idPlayer"].toString();
+          prefs.idPlayer = result["data"]["idPlayer"].toString();
 
           if (prefs.idPlayer != '0')
             navegation(context, HomePage());
