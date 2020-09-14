@@ -60,12 +60,12 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
 
         Scaffold(
       key: scaffoldKey,
-      //  appBar: appBar('TORNEOS VIRTUAL MATCH'),
+      //appBar: appBar('TORNEOS VIRTUAL MATCH'),
       body: SingleChildScrollView(child: bodyContainer(context)),
-      drawer: DrawerMenu(),
-      // floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
-      //   FaIcon(FontAwesomeIcons.futbol), HomePage()),
-      //  bottomNavigationBar: new BottonNavigation(),
+      //drawer: DrawerMenu(),
+      //floatingActionButton: CircularMenu(),
+      //floatingActionButtonLocation: FloatingActionButtonLocation.miniEndDocked,
+      //bottomNavigationBar: new BottonNavigation(),
       //   ),
     );
   }
@@ -185,13 +185,26 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
                           ),
                           Row(
                             children: <Widget>[
-                              Text('DETALLE:',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 13,
-                                      color: AppTheme.themeWhite)),
+                              Flexible(
+                                flex: 2,
+                                child: Text('DETALLE:',
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 13,
+                                        color: AppTheme.themeWhite)),
+                              ),
                               sizedBox(5, 0),
-                              Text(entity.detalle),
+                              Flexible(
+                                flex: 5,
+                                child: AutoSizeText(
+                                  entity.detalle,
+                                  style: kSubSubTitleCardStyle,
+                                  softWrap: true,
+                                  overflow: TextOverflow.clip,
+                                  textAlign: TextAlign.justify,
+                                ),
+                              ),
+                              Flexible(flex: 3, child: Container())
                             ],
                           ),
                           Column(

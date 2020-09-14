@@ -29,21 +29,21 @@ class _CircularMenuState extends State<CircularMenu> {
         key: fabKey,
         // Cannot be `Alignment.center`
         alignment: Alignment.bottomRight,
-        ringColor: Colors.white.withAlpha(75),
-        // ringDiameter: 500.0,
-         ringWidth: 120.0,
-         fabSize: 50.0,
-         fabElevation: 35.0,
-         fabColor: AppTheme.themeWhite,
-         fabOpenIcon: Icon(Icons.menu, color: AppTheme.themeDefault),
-         fabCloseIcon: Icon(Icons.close, color: AppTheme.themeDefault),
+        ringColor: Colors.purple,
+        ringDiameter: 350.0,
+        ringWidth: 80.0,
+        fabSize: 50.0,
+        fabElevation: 35.0,
+        fabColor: AppTheme.themePurple,
+        fabOpenIcon: Icon(Icons.menu, color: AppTheme.themeDefault),
+        fabCloseIcon: Icon(Icons.close, color: AppTheme.themeDefault),
         // fabMargin: const EdgeInsets.all(16.0),
-         animationDuration: const Duration(milliseconds: 800),
+        animationDuration: const Duration(milliseconds: 800),
         animationCurve: Curves.easeInCubic,
 
         onDisplayChange: (isOpen) {
-          _showSnackBar(
-              context, "Menú Virtual Match ${isOpen ? "abierto" : "cerrado"}");
+          /*_showSnackBar(
+              context, "Menú Virtual Match ${isOpen ? "abierto" : "cerrado"}");*/
         },
 
         children: <Widget>[
@@ -74,7 +74,6 @@ class _CircularMenuState extends State<CircularMenu> {
             // child: FaIcon(FontAwesomeIcons.questionCircle,
             //     color: AppTheme.themePurple, size: 25.0),
           ),
-
           RawMaterialButton(
             elevation: 4,
             onPressed: () {
