@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -17,6 +18,7 @@ import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/service/core/TournamentService.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 import 'package:virtual_match/src/widget/menu/CircularMenu.dart';
+import 'package:virtual_match/src/widget/util/Util.dart';
 import 'TourmentPage.dart';
 
 import 'package:virtual_match/src/model/entity/EntityFromJson/ListadoTorneoModel.dart';
@@ -147,81 +149,95 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
                 scaffoldKey);
           }
         },
-        child: Container(
-          margin: EdgeInsets.symmetric(vertical: 0.0),
-          decoration: boxDecoration(),
-          child: Column(
-            children: <Widget>[
-              gfListTile(
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      //    Image(),
-                      Text('TORNEO: ${entity.nombreTorneo}',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                              color: AppTheme.themeWhite)),
-                      Text('TIPO:  ${entity.tipoCompeticion}',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                              color: AppTheme.themeWhite)),
-                      Text(
-                          'INSCRITOS:  ${entity.cantidadInscritos}/${entity.cantidadJugadores}',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
-                              color: AppTheme.themeWhite)),
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Text('DETALLE:',
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 13,
-                              color: AppTheme.themeWhite)),
-                      sizedBox(5, 0),
-                      Text(entity.detalle),
-                    ],
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
+        child: Align(
+          alignment: Alignment.centerLeft,
+          child: Container(
+            margin: EdgeInsets.symmetric(vertical: 0.0),
+            //decoration: boxDecoration(),
+            child: Column(
+              children: <Widget>[
+                FadeInLeftBig(
+                  duration: Duration(seconds: 1),
+                  child: Stack(
+                    children: [
+                      gfListTile(
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text('TORNEO: ${entity.nombreTorneo}',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15,
+                                      color: AppTheme.themeWhite)),
+                              Text('TIPO:  ${entity.tipoCompeticion}',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15,
+                                      color: AppTheme.themeWhite)),
+                              Text(
+                                  'INSCRITOS:  ${entity.cantidadInscritos}/${entity.cantidadJugadores}',
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15,
+                                      color: AppTheme.themeWhite)),
+                            ],
+                          ),
                           Row(
                             children: <Widget>[
-                              Text('PREMIOS:',
+                              Text('DETALLE:',
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 13,
                                       color: AppTheme.themeWhite)),
                               sizedBox(5, 0),
-                              Text(entity.premios,
-                                  style: TextStyle(fontSize: 13)),
+                              Text(entity.detalle),
                             ],
                           ),
-                        ],
-                      ),
-                      AutoSizeText(
-                        'Del ${new DateFormat.yMMMMd('es_BO').format(entity.fechaInicio)}',
-                        style: kSubSubTitleCardStyle,
-                        softWrap: true,
-                        overflow: TextOverflow.clip,
-                        textAlign: TextAlign.justify,
-                      ),
-                      _showAction(entity.idTorneo.toString()),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Row(
+                                    children: <Widget>[
+                                      Text('PREMIOS:',
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 13,
+                                              color: AppTheme.themeWhite)),
+                                      sizedBox(5, 0),
+                                      Text(entity.premios,
+                                          style: TextStyle(fontSize: 13)),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              AutoSizeText(
+                                'Del ${new DateFormat.yMMMMd('es_BO').format(entity.fechaInicio)}',
+                                style: kSubSubTitleCardStyle,
+                                softWrap: true,
+                                overflow: TextOverflow.clip,
+                                textAlign: TextAlign.justify,
+                              ),
+                              //_showAction(entity.idTorneo.toString()),
+                            ],
+                          ),
+                          null, //FaIcon(FontAwesomeIcons.infoCircle),
+                          null,
+                          EdgeInsets.all(4.0),
+                          EdgeInsets.all(4.0)),
+                      Positioned(
+                          left: MediaQuery.of(context).size.width * 0.72,
+                          child: RadialProgress(
+                              child: avatarCircle(entity.foto, 60.0))),
                     ],
                   ),
-                  null, //FaIcon(FontAwesomeIcons.infoCircle),
-                  avatarCircle(entity.foto, 25.0),
-                  EdgeInsets.all(4.0),
-                  EdgeInsets.all(4.0)),
-            ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -358,4 +374,28 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
       showSnackbar('El usuario ya salio del torneo!!', scaffoldKey);
     }
   }
+
+  Widget _simplePopup() => PopupMenuButton<int>(
+        itemBuilder: (context) => [
+          PopupMenuItem(
+            value: 1,
+            child: Text("First"),
+          ),
+          PopupMenuItem(
+            value: 2,
+            child: Text("Second"),
+          ),
+        ],
+        onCanceled: () {
+          print("You have canceled the menu.");
+        },
+        onSelected: (value) {
+          print("value:$value");
+        },
+        icon: Icon(
+          Icons.menu,
+          color: Colors.black,
+        ),
+        offset: Offset(0, 100),
+      );
 }
