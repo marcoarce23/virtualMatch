@@ -156,7 +156,7 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
             //decoration: boxDecoration(),
             child: Column(
               children: <Widget>[
-                FadeInLeftBig(
+                SlideInUp(
                   duration: Duration(seconds: 1),
                   child: Stack(
                     children: [
@@ -232,7 +232,7 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
                       Positioned(
                           left: MediaQuery.of(context).size.width * 0.72,
                           child: RadialProgress(
-                              child: avatarCircle(entity.foto, 60.0))),
+                              child: avatarCircle(entity.foto, 55.0))),
                     ],
                   ),
                 ),
@@ -394,7 +394,7 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
         },
         icon: Icon(
           Icons.menu,
-          color: Colors.black,
+          color: Colors.white,
         ),
         offset: Offset(0, 100),
       );
