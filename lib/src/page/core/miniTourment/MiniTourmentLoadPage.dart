@@ -124,8 +124,8 @@ class _MiniTourmentLoadPageState extends State<MiniTourmentLoadPage> {
   TextEditingController _inputFieldTimeController = new TextEditingController();
 
 //DEFINICION DE BLOC Y MODEL
-  TourmentService entityService;
-  MiniTorneoModel entity = new MiniTorneoModel();
+  TourmentService entityService = new TourmentService();
+  TorneoModel entity = new TorneoModel();
   ImageService entityImage = new ImageService();
   final prefs = new Preferense();
 
@@ -152,10 +152,9 @@ class _MiniTourmentLoadPageState extends State<MiniTourmentLoadPage> {
   @override
   Widget build(BuildContext context) {
     entity.states = StateEntity.Insert;
-   // entityService = Provider.of<TourmentService>(context);
+    // entityService = Provider.of<TourmentService>(context);
 
-    final MiniTorneoModel entityModel =
-        ModalRoute.of(context).settings.arguments;
+    final TorneoModel entityModel = ModalRoute.of(context).settings.arguments;
 
     if (entityModel != null) {
       entity = entityModel;
@@ -476,9 +475,10 @@ class _MiniTourmentLoadPageState extends State<MiniTourmentLoadPage> {
     entity.fechaInicio = _inputFieldDateController.text + ' ' + '12:00';
     entity.horaInicio = _inputFieldTimeController.text;
     entity.usuarioAuditoria = prefs.email;
+    entity.idJugador = 1;
   }
 
-  void executeCUD(TourmentService entityService, MiniTorneoModel entity) async {
+  void executeCUD(TourmentService entityService, TorneoModel entity) async {
     try {
       await entityService.repository(entity).then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');

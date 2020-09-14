@@ -2,9 +2,11 @@ import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/page/core/player/PlayerLoadPage.dart';
+import 'package:virtual_match/src/page/core/player/PlayerPage.dart';
 import 'package:virtual_match/src/page/core/player/PlayerWinnePage.dart';
 import 'package:virtual_match/src/page/core/tourment/ListTournamentPage.dart';
 import 'package:virtual_match/src/page/new/NewListPage.dart';
+import 'package:virtual_match/src/page/new/NewPage.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/widget/image/imageOvalWidget.dart';
@@ -71,7 +73,7 @@ class _BottonNavigationState extends State<BottonNavigation> {
           if (value == 0) navegation(context, NewListPage());
           if (value == 1) navegation(context, PlayerWinnerPage());
           if (value == 2) navegation(context, ListTournamentPage());
-          if (value == 3) navegation(context, PlayerLoadPage());
+          if (value == 3) navegation(context, PlayerPage());
           if (value == 4) navegation(context, PlayerLoadPage());
         });
       },

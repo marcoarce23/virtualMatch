@@ -13,6 +13,7 @@ import 'package:virtual_match/src/model/entity/EntityFromJson/ListadoTorneoModel
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
+import 'package:virtual_match/src/page/core/tourment/TourmentListPage.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/ClasificadorService.dart';
@@ -42,7 +43,7 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
 //DEFINICION DE BLOC Y MODEL
-  TourmentService entityService;
+  TourmentService entityService = new TourmentService();
   FormatoModel entity = new FormatoModel();
   ImageService entityImage = new ImageService();
   ClasificadorService entityGet = ClasificadorService();
@@ -60,7 +61,7 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
   String image = IMAGE_DEFAULT;
   String _opcionTipoCompeticion = '27';
   String _opcionTipoTorneo = '23';
-  String _opcionTipoModalidad = '43';
+  String _opcionTipoModalidad = '44';
   String _opcionCodTorneo = '48';
 
   List<String> _cantidad = ['2', '3', '4', '5', '6', '7', '8'];
@@ -138,9 +139,9 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
         _comboCodTroneo(_opcionCodTorneo),
         _comboTorneoCreado(_opcionTipoCompeticion),
         _comboJugador(),
-        _comboCompeticion(_opcionTipoCompeticion),
-        _comboTorneo(_opcionTipoTorneo),
         _comboModalidad(_opcionTipoModalidad),
+        _comboTorneo(_opcionTipoTorneo),
+        // _comboModalidad(_opcionTipoModalidad),
         //  _porEquipo('Por equipo?'),
         //  _inscription('Torneo de Pago'),
         //   _selection('Selección Manual'),
@@ -195,7 +196,37 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
     );
   }
 
-  Widget _comboCodTroneo(String _opcionCodTorneo) {
+  Widget _comboModalidad(String _opcionTipoModalidadss) {
+    return Center(
+        child: FutureBuilder(
+            future: entityGet.get(new ClasificadorModel(), 42),
+            builder: (context, AsyncSnapshot snapshot) {
+              if (snapshot.hasData) {
+                return Row(
+                  children: <Widget>[
+                    sizedBox(15.0, 0),
+                    Text('Tipo Moldalidad'),
+                    sizedBox(15.0, 0),
+                    DropdownButton(
+                      icon: FaIcon(FontAwesomeIcons.sort,
+                          color: AppTheme.themePurple),
+                      value: _opcionTipoModalidad,
+                      items: getDropDown(snapshot),
+                      onChanged: (value) {
+                        setState(() {
+                          _opcionTipoModalidad = value;
+                        });
+                      },
+                    ),
+                  ],
+                );
+              } else {
+                return GFLoader(type: GFLoaderType.circle, size: 35.0);
+              }
+            }));
+  }
+
+  Widget _comboCodTroneo(String _opcionCodTorneos) {
     return Center(
         child: FutureBuilder(
             future: entityGet1.get(new ListaTorneoModel()),
@@ -245,7 +276,7 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
     );
   }
 
-  Widget _comboTorneoCreado(String _opcionTipoCompeticion) {
+  Widget _comboTorneoCreado(String _opcionTipoCompeticions) {
     return Center(
         child: FutureBuilder(
             future: entityGet.get(new ClasificadorModel(), 26),
@@ -275,7 +306,7 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
             }));
   }
 
-  Widget _comboCompeticion(String _opcionTipoCompeticion) {
+  Widget _comboCompeticion(String _opcionTipoCompeticions) {
     return Center(
         child: FutureBuilder(
             future: entityGet.get(new ClasificadorModel(), 26),
@@ -324,36 +355,6 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
                       onChanged: (value) {
                         setState(() {
                           _opcionTipoTorneo = value;
-                        });
-                      },
-                    ),
-                  ],
-                );
-              } else {
-                return GFLoader(type: GFLoaderType.circle, size: 35.0);
-              }
-            }));
-  }
-
-  Widget _comboModalidad(String _opcionTipoModalidad) {
-    return Center(
-        child: FutureBuilder(
-            future: entityGet.get(new ClasificadorModel(), 42),
-            builder: (context, AsyncSnapshot snapshot) {
-              if (snapshot.hasData) {
-                return Row(
-                  children: <Widget>[
-                    SizedBox(width: 35.0),
-                    Text('Tipo Moldalidad'),
-                    SizedBox(width: 15.0),
-                    DropdownButton(
-                      icon: FaIcon(FontAwesomeIcons.sort,
-                          color: AppTheme.themePurple),
-                      value: _opcionTipoModalidad,
-                      items: getDropDown(snapshot),
-                      onChanged: (value) {
-                        setState(() {
-                          _opcionTipoModalidad = value;
                         });
                       },
                     ),
@@ -466,7 +467,7 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
   }
 
   void loadingEntity() {
-    entity.idTorneo = 43;
+    entity.idTorneo = 67;
     entity.idTipoCompeticion = int.parse(_opcionTipoCompeticion);
     entity.idaTipoTorneo = int.parse(_opcionTipoTorneo);
     entity.idaInscripcion = 1;
@@ -478,18 +479,12 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
 
   void executeCUD(TourmentService entityService, FormatoModel entity) async {
     try {
-      await entityService.repository(entity).then((result) {
+      await entityService.repositoryDetail(entity).then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0') {
           showSnackbar(STATUS_OK, scaffoldKey);
 
-          // Navigator.push(
-          //     context,
-          //     PageTransition(
-          //         curve: Curves.bounceOut,
-          //         type: PageTransitionType.rotate,
-          //         alignment: Alignment.topCenter,
-          //         child: FormatLoadPage(idTorneo: '8')));
+          navegation(context, TourmentListPage());
         } else
           showSnackbar(STATUS_ERROR, scaffoldKey);
       });
