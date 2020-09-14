@@ -20,7 +20,7 @@ class _BottonNavigationState extends State<BottonNavigation> {
   @override
   Widget build(BuildContext context) {
     return ConvexAppBar.badge(
-      {3: '200+', 1: '10+', 2: '3+'},
+      {3: '', 1: '', 2: ''},
 
       backgroundColor: AppTheme.themeDefault,
       badgeColor: AppTheme.themePurple,
@@ -28,12 +28,20 @@ class _BottonNavigationState extends State<BottonNavigation> {
       elevation: 3.0,
       items: [
         TabItem(
-            icon: ImageOvalNetwork(
-                imageNetworkUrl: IMAGE_LOGO, sizeImage: Size.fromWidth(50)),
+            icon: Image.asset(
+              'assets/image/mensajeria.png',
+              //scale: 0.4,
+              width: 30,
+              height: 30,
+            ),
             title: 'Noticias'),
         TabItem(
-            icon: ImageOvalNetwork(
-                imageNetworkUrl: IMAGE_LOGO, sizeImage: Size.fromWidth(50)),
+            icon: Image.asset(
+              'assets/image/trofeo.png',
+              //scale: 0.4,
+              width: 30,
+              height: 30,
+            ),
             title: 'Ganadores'),
         TabItem(
             icon: ImageOvalNetwork(
@@ -41,12 +49,20 @@ class _BottonNavigationState extends State<BottonNavigation> {
             title: 'Torneos',
             isIconBlend: false),
         TabItem(
-            icon: ImageOvalNetwork(
-                imageNetworkUrl: IMAGE_LOGO, sizeImage: Size.fromWidth(50)),
+            icon: Image.asset(
+              'assets/image/jugador2.png',
+              //scale: 0.4,
+              width: 28,
+              height: 28,
+            ),
             title: 'Jugador'),
         TabItem(
-            icon: ImageOvalNetwork(
-                imageNetworkUrl: IMAGE_LOGO, sizeImage: Size.fromWidth(50)),
+            icon: Image.asset(
+              'assets/image/control.png',
+              //scale: 0.4,
+              width: 28,
+              height: 28,
+            ),
             title: '1 Vs.1'),
       ],
       initialActiveIndex: 2, //optional, default as 0

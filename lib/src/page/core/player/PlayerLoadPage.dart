@@ -729,7 +729,6 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
   }
 
   _obtenerPlayer() {
-<<<<<<< HEAD
     // FutureBuilder(
     //     future: entityService.get(
     //         entityModel, API + '/api/Jugador/' + prefs.idPlayer.toString()),
@@ -746,23 +745,5 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
     //           }
     //       }
     //     });
-=======
-    FutureBuilder(
-        future: entityService.get(new JugadorModelJson(),
-            API + '/api/Jugador/' + prefs.idPlayer.toString()),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.waiting:
-              return Center(child: CircularProgressIndicator());
-              break;
-            default:
-              //mostramos los datos
-              for (var i = 0; i < snapshot.data.length; i++) {
-                //  ProfesionalesAgrupados listaProfesionales = snapshot.data[i];
-                //   lista.add(tarjetaProfessional(context, listaProfesionales));
-              }
-          }
-        });
->>>>>>> master
   }
 }

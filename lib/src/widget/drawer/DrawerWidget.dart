@@ -109,56 +109,70 @@ class DrawerMenu extends StatelessWidget {
         ),
         CustomListTile(
             ImageOvalNetwork(
-                imageNetworkUrl: IMAGE_SOROJCHI, sizeImage: Size.fromWidth(35)),
+                imageNetworkUrl: IMAGE_SOROJCHI, sizeImage: Size.fromWidth(30)),
             '   SOROJCHI eclub',
             () => navegation(context, SorojchiPage())),
         CustomListTile(
             ImageOvalNetwork(
-                imageNetworkUrl: IMAGE_SOROJCHI, sizeImage: Size.fromWidth(35)),
+                imageNetworkUrl: IMAGE_SOROJCHI, sizeImage: Size.fromWidth(30)),
             '   Sobre Auspiciador',
             () => navegation(context, PlayerLoadPage())),
         CustomListTile(
-            FaIcon(
-              FontAwesomeIcons.userFriends,
-              size: 25,
+             Image.asset(
+              'assets/image/jugador2.png',
+              //scale: 0.4,
+              width: 30,
+              height: 30,
             ),
             '   Jugadores de la comunidad',
             () => navegation(context, PlayerLoadPage())),
         CustomListTile(
-            FaIcon(
-              FontAwesomeIcons.gamepad,
-              size: 25,
+            Image.asset(
+              'assets/image/control.png',
+              //scale: 0.4,
+              width: 30,
+              height: 30,
             ),
             '    Clubes Pro (Crea tu equipo)',
             () => navegation(context, TourmentAllPage())),
         CustomListTile(
-            ImageOvalNetwork(
-                imageNetworkUrl: IMAGE_DEFAULT, sizeImage: Size.fromWidth(35)),
+             Image.asset(
+              'assets/image/pelota.png',
+              //scale: 0.4,
+              width: 28,
+              height: 28,
+            ),
             '   Crea MiniTorneo',
             () => navegation(context, MiniTourmentAllPage())),
         CustomListTile(
             ImageOvalNetwork(
-                imageNetworkUrl: IMAGE_DEFAULT, sizeImage: Size.fromWidth(35)),
+                imageNetworkUrl: IMAGE_DEFAULT, sizeImage: Size.fromWidth(30)),
             '   Crea Torneo ',
             () => navegation(context, TourmentAllPage())),
         CustomListTile(
-            FaIcon(
-              FontAwesomeIcons.listAlt,
-              size: 25,
+            Image.asset(
+              'assets/image/mensajeria.png',
+              //scale: 0.4,
+              width: 30,
+              height: 30,
             ),
             '   Crear Notificaciones',
             () => navegation(context, NotificationAllPage())),
         CustomListTile(
-            FaIcon(
-              FontAwesomeIcons.edit,
-              size: 25,
+            Image.asset(
+              'assets/image/noticias.png',
+              //scale: 0.4,
+              width: 38,
+              height: 38,
             ),
             '   Crear Noticias-Evento',
             () => navegation(context, NewAllPage())),
         CustomListTile(
-            FaIcon(
-              FontAwesomeIcons.images,
-              size: 25,
+            Image.asset(
+              'assets/image/multimeda3.png',
+              //scale: 0.4,
+              width: 30,
+              height: 30,
             ),
             '   Cargar Multimedia',
             () => navegation(context, MultimediaAllPage())),
@@ -178,25 +192,29 @@ class DrawerMenu extends StatelessWidget {
                 '*Virtual Match.*\n *Una aplicación de la Comunidad FIFA Bolivia.*\n💬 Con  *Virtual Match podrás.* \n 🔺 Leer Noticias de la Comunidad. \n 🔺 Enterarte de los eventos. \n 🔺Crear tu jugador y equipos. \n🔺Participar en los torneos. \n 🔺 Conocer campeones de torneos e influencers. \n🔺 Mucho mas... \n📲 *Descargar la App en el siguiente enlace:* https://play.google.com/store/apps/details?id=bo.virtual_matchBolivia',
                 'text/html')),
         CustomListTile(
-            Image.asset(
+             Image.asset(
               'assets/pregunta1.png',
-              scale: 0.4,
-              width: 20,
-              height: 20,
+              //scale: 0.4,
+              width: 30,
+              height: 30,
             ),
             '    ¿ Alguna duda? Preguntas',
             () => navegation(context, FaqListPage())),
         CustomListTile(
-            FaIcon(
-              FontAwesomeIcons.questionCircle,
-              size: 25,
+            Image.asset(
+              'assets/image/penal.png',
+              //scale: 0.4,
+              width: 30,
+              height: 30,
             ),
             '    Acerca de la APP.',
             () => navegation(context, IntroPage())),
         CustomListTile(
-            FaIcon(
-              FontAwesomeIcons.home,
-              size: 25,
+            Image.asset(
+              'assets/image/casa.png',
+              //scale: 0.4,
+              width: 30,
+              height: 30,
             ),
             '    Cerrar Sesión',
             () => navegation(context, LogOutPage())),
