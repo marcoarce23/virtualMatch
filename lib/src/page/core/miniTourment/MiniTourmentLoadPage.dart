@@ -465,7 +465,7 @@ class _MiniTourmentLoadPageState extends State<MiniTourmentLoadPage> {
 
   void loadingEntity() {
     entity.idTorneo = 0;
-    entity.idOrganizacion = int.parse(prefs.idInstitution);
+    entity.idOrganizacion = 2;
     entity.nombre = controllerName.text;
     entity.detalle = controllerDetail.text;
     entity.hastag = '#VirtualMatch';
@@ -475,7 +475,7 @@ class _MiniTourmentLoadPageState extends State<MiniTourmentLoadPage> {
     entity.fechaInicio = _inputFieldDateController.text + ' ' + '12:00';
     entity.horaInicio = _inputFieldTimeController.text;
     entity.usuarioAuditoria = prefs.email;
-    entity.idJugador = 1;
+    entity.idJugador = int.parse(prefs.idPlayer);
   }
 
   void executeCUD(TourmentService entityService, TorneoModel entity) async {

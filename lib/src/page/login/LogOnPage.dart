@@ -384,8 +384,12 @@ class _LogOnPageState extends State<LogOnPage> {
   // }
 
   _submit() async {
-    loadingEntity();
-    executeCUD(loginService, entity);
+    if (prefs.idPlayer != '0') {
+      navegation(context, HomePage());
+    } else {
+      loadingEntity();
+      executeCUD(loginService, entity);
+    }
   }
 
   void loadingEntity() {
@@ -406,9 +410,26 @@ class _LogOnPageState extends State<LogOnPage> {
           prefs.idLogin = result["data"]["idLogin"].toString();
           prefs.idPlayer = result["data"]["idPlayer"].toString();
 
-          if (prefs.idPlayer != '0')
+          print('EL NOMBRE : ${prefs.nameUser.toString()}');
+
+          if (prefs.idPlayer != '0') {
+            prefs.idOrganization =
+                result["jugador"]["idOrganizacion"].toString();
+            prefs.idDepartament =
+                int.parse(result["jugador"]["idaDepartamento"].toString());
+            prefs.nameUser = result["jugador"]["nombre"].toString();
+            prefs.apellido = result["jugador"]["apellido"].toString();
+            prefs.avatarImage = result["jugador"]["foto"].toString();
+            prefs.idPsdn = result["jugador"]["idPsdn"].toString();
+            prefs.telefono = result["jugador"]["telefono"].toString();
+            prefs.idaSexo = int.parse(result["jugador"]["idaSexo"].toString());
+            prefs.informacionComplementaria =
+                result["jugador"]["informacionComplementaria"].toString();
+            prefs.facebook = result["jugador"]["facebook"].toString();
+            prefs.twitter = result["jugador"]["twitter"].toString();
+
             navegation(context, HomePage());
-          else
+          } else
             navegation(context, IntroPage());
         } else
           showSnackbar(STATUS_ERROR, scaffoldKey);

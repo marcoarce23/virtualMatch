@@ -111,7 +111,7 @@ class CrudService with ChangeNotifier {
   _update(IEntityMap entity, String url) async {
     String _body = json.encode(entity.toJson());
     print('body: $_body');
-    final apiRest = url; // eventResourceAdd['add'][0].toString()   ;
+    final apiRest = url ; // eventResourceAdd['add'][0].toString()   ;
     //RouteAdd().postEvent(); // METODO QUE OBTENFA EL POST DEL EVENTO; MULTIMEDIA, VOLUTNARIO; HORARIO
     print('urlDDDDDDD: $apiRest');
     final response = await http.put(apiRest,

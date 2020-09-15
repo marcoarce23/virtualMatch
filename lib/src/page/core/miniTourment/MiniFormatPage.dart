@@ -229,7 +229,8 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
   Widget _comboCodTroneo(String _opcionCodTorneos) {
     return Center(
         child: FutureBuilder(
-            future: entityGet1.get(new ListaTorneoModel()),
+            future: entityGet1.getId(
+                new ListaTorneoModel(), int.parse(prefs.idPlayer)),
             builder: (context, AsyncSnapshot snapshot) {
               if (snapshot.hasData) {
                 return Row(
@@ -336,7 +337,7 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
             }));
   }
 
-  Widget _comboTorneo(String _opcionTipoTorneo) {
+  Widget _comboTorneo(String _opcionTipoTorneowww) {
     return Center(
         child: FutureBuilder(
             future: entityGet.get(new ClasificadorModel(), 22),
@@ -467,13 +468,13 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
   }
 
   void loadingEntity() {
-    entity.idTorneo = 67;
+    entity.idTorneo = 68;
     entity.idTipoCompeticion = int.parse(_opcionTipoCompeticion);
     entity.idaTipoTorneo = int.parse(_opcionTipoTorneo);
     entity.idaInscripcion = 1;
     entity.idaAsignacion = 1;
     entity.cantidadJugadores = int.parse(typeCount);
-    entity.idaTipoModalidad = int.parse(_opcionTipoModalidad);
+    entity.idaTipoModalidad = int.parse(_opcionTipoCompeticion);
     entity.usuarioAuditoria = prefs.email;
   }
 
