@@ -14,6 +14,7 @@ import 'package:virtual_match/src/page/multimedia/MultimediaLoadPage.dart';
 import 'package:virtual_match/src/page/new/NewLoadPage.dart';
 import 'package:virtual_match/src/page/notification/NotificationLoadPage.dart';
 import 'package:virtual_match/src/page/organization/OrganizationPage.dart';
+import 'package:virtual_match/src/page/organization/SocialPage.dart';
 import 'package:virtual_match/src/page/organization/SorojchiPage.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
@@ -64,9 +65,9 @@ class DrawerMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (prefs.idJugador == '1')
-      return drawerVirtualMatch(context);
-    else
+     if (prefs.idPlayer == '1')
+       return drawerVirtualMatch(context);
+     else
       return drawerUser(context);
   }
 
@@ -120,6 +121,16 @@ class DrawerMenu extends StatelessWidget {
         //         imageNetworkUrl: IMAGE_SOROJCHI, sizeImage: Size.fromWidth(30)),
         //     '   SOROJCHI eclubss',
         //     () => navegation(context, ViewPage(title:'mapa catastro', url: 'https://geovisorec.000webhostapp.com/index.html'))),
+
+        CustomListTile(
+            Image.asset(
+              'assets/image/jugador1.png',
+              //scale: 0.4,
+              width: 30,
+              height: 30,
+            ),
+            '   Ayuda Social',
+            () => navegation(context, SocialPage())),
 
         CustomListTile(
             ImageOvalNetwork(
@@ -256,6 +267,16 @@ class DrawerMenu extends StatelessWidget {
 //                 imageNetworkUrl: IMAGE_SOROJCHI, sizeImage: Size.fromWidth(30)),
 //             '   SOROJCHI eclubss',
 //             () => navegation(context, ViewPage(title:'mapa catastro', url: 'https://geovisorec.000webhostapp.com/index.html'))),
+
+        CustomListTile(
+            Image.asset(
+              'assets/image/jugador1.png',
+              //scale: 0.4,
+              width: 30,
+              height: 30,
+            ),
+            '   Ayuda Social',
+            () => navegation(context, SocialPage())),
 
         CustomListTile(
             ImageOvalNetwork(

@@ -380,15 +380,8 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
   Widget build(BuildContext context) {
     entity.states = StateEntity.Insert;
     entity.foto = image;
-    // entityService = Provider.of<CrudService>(context);
 
-    final JugadorModel entityModel = ModalRoute.of(context).settings.arguments;
-    JugadorModelJson entityModelJson = new JugadorModelJson();
-
-    if (entityModel != null) {
-      entity = entityModel;
-      entity.states = StateEntity.Update;
-    }
+    if (prefs.idPlayer != "0") entity.states = StateEntity.Update;
 
     return MultiProvider(
       providers: [
@@ -663,7 +656,7 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
     if (!formKey.currentState.validate()) return;
     formKey.currentState.save();
 
-    print('myControllerSOY EL VALOR DE ' + controllerName.text);
+    print('myControllerSOY EL VALOR DE  ${prefs.idPlayer.toString()}');
 
     setState(() => _save = true);
     loadingEntity();
@@ -672,10 +665,13 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
   }
 
   void loadingEntity() {
-    entity.idJugador = 0;
+    if (entity.states == StateEntity.Insert) entity.idJugador = 0;
+    if (entity.states == StateEntity.Update)
+      entity.idJugador = int.parse(prefs.idPlayer);
+
     entity.idOrganizacion = int.parse(prefs.idOrganization);
     entity.idaDepartamento = int.parse(_opcionDepartamento);
-    entity.idLogin = 1;
+    entity.idLogin = int.parse(prefs.idLogin);
     entity.idPsdn = controllerIpsdn.text;
     entity.nombre = controllerName.text;
     entity.apellido = controllerSecondName.text;
@@ -690,9 +686,14 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
 
   void executeCUD(
       CrudService entityService, JugadorModel entity, var _result) async {
+    String _url = '/api/Jugador';
+
+    if(prefs.idPlayer != '0')
+    _url = '/api/Jugador'+'/'+ prefs.idPlayer.toString();
+    
     try {
       await entityService
-          .repository(entity, API + '/api/Jugador')
+          .repository(entity, API + _url)
           .then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
 
