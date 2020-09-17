@@ -160,10 +160,10 @@ class _NotificationLoadPageState extends State<NotificationLoadPage> {
         key: formKey,
         child: Container(
           //  color: Colors.black87,
-       
+
           child: Column(
             children: <Widget>[
-         //      
+              //
               sizedBox(0.0, 8.0),
               showInformationBasic(
                 context,
