@@ -1,6 +1,6 @@
-import 'package:animated_splash/animated_splash.dart';
+//import 'package:animated_splash/animated_splash.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+//import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:virtual_match/src/model/Preference.dart';
@@ -69,18 +69,18 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    Function duringSplash = () {
-      int a = 123 + 23;
+    // Function duringSplash = () {
+    //   int a = 123 + 23;
 
-      if (a > 100)
-        return 1;
-      else
-        return 2;
-    };
+    //   if (a > 100)
+    //     return 1;
+    //   else
+    //     return 2;
+    // };
 
-    Map<int, Widget> option = {1: LogOnPage(), 2: HomePage()};
+  //  Map<int, Widget> option = {1: LogOnPage(), 2: HomePage()};
 
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
+  //  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
 
     return MultiProvider(
       providers: [
@@ -112,7 +112,7 @@ class _MyAppState extends State<MyApp> {
             outputAndHome: option,
           ),  
           */
-          home: LogOnPage(),
+          home: HomePage(),
 
           //new HomePage(), //MapAdressModule(),
 

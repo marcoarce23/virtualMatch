@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/JugadorModel.dart';
-import 'package:virtual_match/src/model/entity/EntityFromJson/NoticiaEventoModel.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/JugadorModel.dart'
     as model;
 import 'package:virtual_match/src/model/util/Const.dart';
-import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/core/PlayerService.dart';
 import 'package:virtual_match/src/theme/Theme.dart';

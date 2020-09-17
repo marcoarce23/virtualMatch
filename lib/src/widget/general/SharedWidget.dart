@@ -1,5 +1,3 @@
-
-import 'package:flutter/services.dart';
 import 'package:share/share.dart';
 
 sharedImage(String imagePath, String nameImage, String nameAttachExtension,

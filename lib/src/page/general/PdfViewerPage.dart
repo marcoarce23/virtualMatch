@@ -1,6 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/services.dart';
 import 'package:meta/meta.dart';
@@ -31,19 +30,21 @@ String path;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "CodingBoot Flutter PDF Viewer",
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
-      ),
-      body: path != null
-          ? PDFView(
-              filePath: path,
-            )
-          : Center(child: CircularProgressIndicator()),
-    );
+    return null;
+    
+    // return Scaffold(
+    //   appBar: AppBar(
+    //     title: Text(
+    //       "CodingBoot Flutter PDF Viewer",
+    //       style: TextStyle(fontWeight: FontWeight.bold),
+    //     ),
+    //   ),
+    //   body: path != null
+    //       ? PDFView(
+    //           filePath: path,
+    //         )
+    //       : Center(child: CircularProgressIndicator()),
+    // );
   }
 }
 

@@ -3,21 +3,13 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
-import 'package:virtual_match/src/page/home/HomePage.dart';
-import 'package:virtual_match/src/service/crudService.dart';
-
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
-import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
-import 'package:virtual_match/src/widget/bottonNavigationBar/BottonNavigatorWidget.dart';
-import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/service/core/TournamentService.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
-import 'package:virtual_match/src/widget/menu/CircularMenu.dart';
 import 'package:virtual_match/src/widget/util/Util.dart';
 import 'TourmentPage.dart';
 

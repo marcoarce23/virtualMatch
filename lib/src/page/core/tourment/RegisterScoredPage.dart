@@ -22,9 +22,6 @@ import 'package:virtual_match/src/widget/bottonNavigationBar/BottonNavigatorWidg
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
-import 'package:virtual_match/src/widget/image/ImageWidget.dart';
-
-import 'ListTournamentPage.dart';
 import 'TourmentPage.dart';
 
 // ignore: must_be_immutable

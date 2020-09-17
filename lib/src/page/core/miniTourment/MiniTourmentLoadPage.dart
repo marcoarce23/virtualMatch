@@ -6,7 +6,7 @@ import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
+//import 'package:provider/provider.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/TorneoModelo.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
@@ -456,7 +456,7 @@ class _MiniTourmentLoadPageState extends State<MiniTourmentLoadPage> {
     formKey.currentState.save();
 
     print('myControllerSOY EL VALOR DE ' + controllerDetail.text);
-
+print('ID PLAYERRR ' + prefs.idPlayer);
     setState(() => _save = true);
     loadingEntity();
     executeCUD(entityService, entity);

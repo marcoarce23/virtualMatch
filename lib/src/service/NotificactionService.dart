@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:virtual_match/src/api/notification/ApiGet.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/api/notification/ApiAdd.dart';

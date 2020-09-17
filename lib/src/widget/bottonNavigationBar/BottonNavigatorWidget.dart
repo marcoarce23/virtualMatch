@@ -6,7 +6,6 @@ import 'package:virtual_match/src/page/core/player/PlayerPage.dart';
 import 'package:virtual_match/src/page/core/player/PlayerWinnePage.dart';
 import 'package:virtual_match/src/page/core/tourment/ListTournamentPage.dart';
 import 'package:virtual_match/src/page/new/NewListPage.dart';
-import 'package:virtual_match/src/page/new/NewPage.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/widget/image/imageOvalWidget.dart';

@@ -6,7 +6,7 @@ import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/components/loader/gf_loader.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:getwidget/types/gf_loader_type.dart';
-import 'package:provider/provider.dart';
+//import 'package:provider/provider.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/ClasificadorModel.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/ListadoTorneoModel.dart';
@@ -227,6 +227,8 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
   }
 
   Widget _comboCodTroneo(String _opcionCodTorneos) {
+    print("prefsss:${prefs.idPlayer}");
+
     return Center(
         child: FutureBuilder(
             future: entityGet1.getId(
