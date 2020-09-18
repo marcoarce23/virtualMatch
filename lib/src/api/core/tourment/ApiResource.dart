@@ -5,7 +5,7 @@ Map<String, List<String>> api = {
   'get': [API + '/api/Torneo/getTodosLosTorneos', ''],
   'get1': [API + '/api/Torneo/getTodosLosTorneosSinFormato', ''],
   'delete': [API + '/api/Torneo', ''],
-  'getId': [API + '/api/Torneo/getDatosPorTorneo', ''],
+  'getId': [API + '/api/Torneo/getTodosLosTorneosSinFormato', ''],
   'update': [API + '/api/Torneo', ''],
   'getPartidosPorTorneo': [API + '/api/Torneo/getPartidosPorTorneo', ''],
   'getTablaPosiciones': [API + '/api/Torneo/getTablaPosicionesTorneo', ''],

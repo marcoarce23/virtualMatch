@@ -64,9 +64,9 @@ class DrawerMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     if (prefs.idPlayer == '1')
-       return drawerVirtualMatch(context);
-     else
+    if (prefs.idPlayer == '1' || prefs.idLogin == '9' /*COAV login*/)
+      return drawerVirtualMatch(context);
+    else
       return drawerUser(context);
   }
 
@@ -287,6 +287,7 @@ class DrawerMenu extends StatelessWidget {
                 imageNetworkUrl: IMAGE_SOROJCHI, sizeImage: Size.fromWidth(30)),
             '   Sobre Auspiciador',
             () => navegation(context, PlayerLoadPage())),
+        /*
         CustomListTile(
             Image.asset(
               'assets/image/jugador2.png',
@@ -296,6 +297,9 @@ class DrawerMenu extends StatelessWidget {
             ),
             '   Jugadores de la comunidad',
             () => navegation(context, PlayerLoadPage())),
+            ====================================================================>>>>>>>>>>>>>>>>>>> los jugadores de la comunidad se debe corregir
+            */
+        /*
         CustomListTile(
             Image.asset(
               'assets/image/control.png',
@@ -305,6 +309,8 @@ class DrawerMenu extends StatelessWidget {
             ),
             '    Clubes Pro (Crea tu equipo)',
             () => navegation(context, TourmentAllPage())),
+            ====================================================================>>>>>>>>>>>>>>>>>>> crea tu equipo             
+            */
         CustomListTile(
             Image.asset(
               'assets/image/pelota.png',

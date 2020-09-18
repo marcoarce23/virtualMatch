@@ -10,6 +10,8 @@ Map dataMap(http.Response response) {
   print('Response body: ${response.body}');
   if (response.statusCode == STATUSCODE200)
     dataMap = json.decode(response.body);
+  else if (response.statusCode == STATUSCODE400)
+    dataMap = json.decode(response.body);
   else
     throw Exception(
         'Error occured while Communication with Server with StatusCode : ${response.statusCode}');

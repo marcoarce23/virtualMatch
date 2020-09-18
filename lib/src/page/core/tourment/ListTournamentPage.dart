@@ -132,15 +132,7 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
   Widget showListTournament(BuildContext context, ListaTorneoModel entity) {
     return Container(
       child: InkWell(
-        onTap: () {
-          if (entity.cantidadInscritos == entity.cantidadJugadores) {
-            navegation(context, TourmentPage(idTorneo: entity.idTorneo));
-          } else {
-            showSnackbar(
-                'Aun no se completo la cantidad de inscritos al torneo  ',
-                scaffoldKey);
-          }
-        },
+        onTap: () {},
         child: Align(
           alignment: Alignment.centerLeft,
           child: Container(
@@ -227,6 +219,10 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
                                 overflow: TextOverflow.clip,
                                 textAlign: TextAlign.justify,
                               ),
+                              Align(
+                                  alignment: Alignment.centerRight,
+                                  child:
+                                      _simplePopup(entity.idTorneo.toString())),
                               //_showAction(entity.idTorneo.toString()),
                             ],
                           ),
@@ -271,69 +267,20 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
     //  entityModel.states = StateEntity.Update;
     // entityModel.usuarioAuditoria = prefs.email;
 
-    return Row(
-      children: [
-        Text('Inscribirse: ', style: TextStyle(color: AppTheme.themeWhite)),
-        InkWell(
-          child: FaIcon(
-            FontAwesomeIcons.handPointUp,
-            color: AppTheme.themePurple,
-            semanticLabel: 'Inscribirse',
-            size: 27,
-          ),
-          onTap: () {
-            setState(() {
-              _executeInscription(keyId, prefs.idPlayer);
-            });
-          },
-        ),
-      ],
-    );
+    return _executeInscription(keyId, prefs.idPlayer);
   }
 
   _delete(String keyId) {
-    return Row(
-      children: [
-        Text('Salirse: ', style: TextStyle(color: AppTheme.themeWhite)),
-        InkWell(
-          key: Key(keyId),
-          child: FaIcon(
-            FontAwesomeIcons.handPointDown,
-            color: AppTheme.themePurple,
-            size: 27,
-          ),
-          onTap: () {
-            setState(() {
-              // entityModel.idNotificacion = int.parse(keyId);
-              // print('eliminar ${entityModel.idNotificacion}');
-              _executeUnsuscription(keyId, prefs.idPlayer);
-            });
-          },
-        ),
-      ],
-    );
+    return _executeUnsuscription(keyId, prefs.idPlayer);
   }
 
   _detail(String keyId) {
-    return Row(
-      children: [
-        Text('VER DETALLE DEL TORNEO : ',
-            style: TextStyle(color: AppTheme.themeWhite)),
-        InkWell(
-          //
-          child: FaIcon(
-            FontAwesomeIcons.commentDots,
-            color: AppTheme.themePurple,
-            size: 27,
-          ),
-          onTap: () {
-            setState(() {
-              _executeUnsuscription('1', '3');
-            });
-          },
-        ),
-      ],
-    );
+    if (entity.cantidadInscritos == entity.cantidadJugadores) {
+      navegation(context, TourmentPage(idTorneo: int.parse(keyId)));
+    } else {
+      showSnackbar('Aun no se completo la cantidad de inscritos al torneo  ',
+          scaffoldKey);
+    }
   }
 
   void _executeInscription(String idTorneo, String idJugador) async {
@@ -381,22 +328,39 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
     }
   }
 
-  Widget _simplePopup() => PopupMenuButton<int>(
+  Widget _simplePopup(String idTorneo) => PopupMenuButton<int>(
         itemBuilder: (context) => [
           PopupMenuItem(
             value: 1,
-            child: Text("First"),
+            child: Text("Ver detalle"),
           ),
           PopupMenuItem(
             value: 2,
-            child: Text("Second"),
+            child: Text("Inscribirse al torneo"),
+          ),
+          PopupMenuItem(
+            value: 3,
+            child: Text("Salir del torneo"),
           ),
         ],
         onCanceled: () {
           print("You have canceled the menu.");
         },
         onSelected: (value) {
-          print("value:$value");
+          switch (value) {
+            case 1:
+              _detail(idTorneo);
+              break;
+            case 2:
+              _subcription(idTorneo);
+              break;
+            case 3:
+              _delete(idTorneo);
+              break;
+            default:
+              showSnackbarWithOutKey("No hay opcion seleccionada", context);
+              break;
+          }
         },
         icon: Icon(
           Icons.menu,

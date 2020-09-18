@@ -99,7 +99,6 @@ class _TourmentListPageState extends State<TourmentListPage> {
         itemCount: snapshot.data.length,
         itemBuilder: (context, index) {
           ListaTorneoModel entity = snapshot.data[index];
-
           return _showListTile(entity);
         },
       ),
@@ -137,7 +136,11 @@ class _TourmentListPageState extends State<TourmentListPage> {
                   ),
                   Text('DETALLE: ${entity.detalle}',
                       style: TextStyle(color: AppTheme.themeWhite)),
-                  _showAction(entity, entity.idTorneo.toString()),
+                  Align(
+                      alignment: Alignment.centerRight,
+                      child: _simplePopup(entity.idTorneo.toString(),
+                          entity.idTipoCompeticion.toString())),
+                  //_showAction(entity, entity.idTorneo.toString()),
                   null,
                   null, //avatarCircle((entity.foto ?? IMAGE_LOGO), 35),
                   EdgeInsets.all(5.0),
@@ -148,33 +151,6 @@ class _TourmentListPageState extends State<TourmentListPage> {
       ],
     );
     //Text(entity.nombreEquipo);
-  }
-
-  Widget _showAction(ListaTorneoModel entity, String keyId) {
-    return Column(
-      children: <Widget>[
-        Row(
-          children: [
-            Text('OPERACIONES: $keyId',
-                style: TextStyle(color: AppTheme.themeWhite)),
-            sizedBox(10, 0),
-            _update(),
-            sizedBox(10, 0),
-            _delete(keyId),
-          ],
-        ),
-        sizedBox(0, 10),
-        Row(
-          children: [
-            Text('$keyId', style: TextStyle(color: AppTheme.themeWhite)),
-            sizedBox(10, 0),
-            _complete(keyId),
-            sizedBox(10, 0),
-            _start(keyId, entity.idTipoCompeticion.toString()),
-          ],
-        ),
-      ],
-    );
   }
 
   _update() {
@@ -234,39 +210,15 @@ class _TourmentListPageState extends State<TourmentListPage> {
     );
   }
 
-  _start(String keyId, String tipoCompetencia) {
-    return Row(
-      children: [
-        Text('Empezar Torneo:', style: TextStyle(color: AppTheme.themeWhite)),
-        sizedBox(10, 0),
-        InkWell(
-          key: Key(keyId),
-          child: FaIcon(
-            FontAwesomeIcons.futbol,
-            color: AppTheme.themePurple,
-            size: 25,
-          ),
-          onTap: () {
-            setState(() {
-              print('XXXXXX: $tipoCompetencia');
-              if (tipoCompetencia == '27')
-                _executeGenerator('/api/Torneo/execGenerarPlayOff/' +
-                    keyId +
-                    '/usuario/' +
-                    prefs.email);
-              else
-                _executeGenerator('/api/Torneo/execGenerarLiga/' +
-                    keyId +
-                    '/usuario/' +
-                    prefs.email);
-              //    entityModel.idTorneo = int.parse(keyId);
-              //     print('eliminar ${entityModel.idTorneo}');
-              //      executeDelete(entityModel.idTorneo.toString(), prefs.email);
-            });
-          },
-        ),
-      ],
-    );
+  void generateTournament(String tipoCompetencia, String keyId) {
+    if (tipoCompetencia == '27')
+      _executeGenerator('/api/Torneo/execGenerarPlayOff/' +
+          keyId +
+          '/usuario/' +
+          prefs.email);
+    else
+      _executeGenerator(
+          '/api/Torneo/execGenerarLiga/' + keyId + '/usuario/' + prefs.email);
   }
 
   void executeDelete(String id, String usuario) async {
@@ -299,12 +251,8 @@ class _TourmentListPageState extends State<TourmentListPage> {
   }
 
   _executeGenerator(String url) {
-    print('ENTROSSSSWWW $url');
-
     try {
       entityService.execute(API + url).then((result) {
-        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
-
         if (result["tipo_mensaje"] == '0')
           showSnackbar(result["mensaje"], scaffoldKey);
         if (result["tipo_mensaje"] == '3')
@@ -316,4 +264,59 @@ class _TourmentListPageState extends State<TourmentListPage> {
       showSnackbar('El torneo ya se ha iniciado.!!! ', scaffoldKey);
     }
   }
+
+  Widget _simplePopup(String idTorneo, String idTipoCompeticion) =>
+      PopupMenuButton<int>(
+        itemBuilder: (context) => [
+          /*
+          PopupMenuItem(
+            value: 1,
+            child: Text("Editar"),
+          ),
+          PopupMenuItem(
+            value: 2,
+            child: Text("Eliminar"),
+          ),
+          */
+          PopupMenuItem(
+            value: 3,
+            child: Text("Adicionar jugadores"),
+          ),
+          PopupMenuItem(
+            value: 4,
+            child: Text("Iniciar el torneo"),
+          ),
+        ],
+        onCanceled: () {
+          print("You have canceled the menu.");
+        },
+        onSelected: (value) {
+          switch (value) {
+            case 1:
+              print('Editar');
+              //_update();
+              break;
+            case 2:
+              print('Eliminar');
+              //_delete(idTorneo);
+              break;
+            case 3:
+              print('Adicionar jugadores');
+              _complete(idTorneo);
+              break;
+            case 4:
+              print('Empezar torneo');
+              generateTournament(idTipoCompeticion, idTorneo);
+              break;
+            default:
+              showSnackbarWithOutKey("No hay opcion seleccionada", context);
+              break;
+          }
+        },
+        icon: Icon(
+          Icons.menu,
+          color: Colors.white,
+        ),
+        offset: Offset(0, 100),
+      );
 } // FIN DE LA CLASE

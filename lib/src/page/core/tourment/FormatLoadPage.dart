@@ -90,8 +90,8 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
 
     return Scaffold(
       key: scaffoldKey,
-       appBar: appBar('CREACIÓN DEL TORNEO'),
-        drawer: DrawerMenu(),
+      appBar: appBar('CREACIÓN DEL TORNEO'),
+      drawer: DrawerMenu(),
       body: Stack(
         children: <Widget>[
           background(context, 'IMAGE_LOGO'),
@@ -218,7 +218,7 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
   Widget _comboCodTroneo(String _opcionCodTorneosss) {
     return Center(
         child: FutureBuilder(
-            future: entityGet1.get1(new ListaTorneoModel()),
+            future: entityGet1.get1(new ListaTorneoModel(), prefs.idJugador),
             builder: (context, AsyncSnapshot snapshot) {
               if (snapshot.hasData) {
                 return Row(
@@ -503,7 +503,7 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
         if (result["tipo_mensaje"] == '0') {
           showSnackbar(STATUS_OK, scaffoldKey);
 
-           navegation(context, TourmentListPage());
+          navegation(context, TourmentListPage());
         } else
           showSnackbar(STATUS_ERROR, scaffoldKey);
       });
