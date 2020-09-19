@@ -75,11 +75,6 @@ class _FaqPageState extends State<FaqPage> {
         sizedBox(0.0, 7.0),
         //   showPicture(photo, '', 130.0),
         //divider(),
-        textSimple1(
-            FaIcon(FontAwesomeIcons.storeAlt, color: AppTheme.themeGrey),
-            'Preguntas Frecuentes',
-            AppTheme.themeOrange),
-
         listAcordion(),
         listAcordion2(),
         listAcordion3(),

@@ -121,26 +121,25 @@ class DrawerMenu extends StatelessWidget {
         //     '   SOROJCHI eclubss',
         //     () => navegation(context, ViewPage(title:'mapa catastro', url: 'https://geovisorec.000webhostapp.com/index.html'))),
 
-        CustomListTile(
-            Image.asset(
-              'assets/image/jugador1.png',
-              //scale: 0.4,
-              width: 30,
-              height: 30,
-            ),
-            '   Ayuda Social',
-            () => navegation(context, SocialPage())),
+      
 
-        CustomListTile(
+ CustomListTile(
             ImageOvalNetwork(
                 imageNetworkUrl: IMAGE_SOROJCHI, sizeImage: Size.fromWidth(30)),
             '   SOROJCHI eclub',
             () => navegation(context, SorojchiPage())),
+
         CustomListTile(
-            ImageOvalNetwork(
-                imageNetworkUrl: IMAGE_SOROJCHI, sizeImage: Size.fromWidth(30)),
-            '   Sobre Auspiciador',
-            () => navegation(context, PlayerLoadPage())),
+            Image.asset(
+              'assets/aus1.jpg',
+              //scale: 0.4,
+              width: 50,
+              height: 60,
+            ),
+            'Auspiciador DxrAcer',
+            () => navegation(context, SocialPage())),
+
+       
         CustomListTile(
             Image.asset(
               'assets/image/jugador2.png',
@@ -174,6 +173,17 @@ class DrawerMenu extends StatelessWidget {
                 imageNetworkUrl: IMAGE_LOGO, sizeImage: Size.fromWidth(35)),
             '    Sobre Virtual Match',
             () => navegation(context, OrganizationPage())),
+        
+          CustomListTile(
+            Image.asset(
+              'assets/image/jugador1.png',
+              //scale: 0.4,
+              width: 30,
+              height: 30,
+            ),
+            '   Ayuda Social',
+            () => navegation(context, SocialPage())),
+            
         CustomListTile(
             FaIcon(
               FontAwesomeIcons.shareAlt,

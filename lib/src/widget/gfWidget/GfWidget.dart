@@ -178,7 +178,11 @@ GFCard gfCardAdvanced(
 GFAccordion accordion(String title, String content,
     Color expandedTitlebackgroundColor, Color collapsedTitlebackgroundColor) {
   return GFAccordion(
-    textStyle: TextStyle(color: Colors.white),
+    textStyle: TextStyle(
+      color: Colors.white,
+      fontSize: 17.0,
+      fontFamily: 'CM Sans Serif',
+    ),
     title: title,
     content: content,
     contentPadding: EdgeInsets.all(5.0),
@@ -302,7 +306,7 @@ GFAvatar avatarSquare(String image, double size) {
 GFAvatar avatarCircle(String image, double size) {
   return GFAvatar(
     backgroundImage: NetworkImage(image),
-    backgroundColor: Colors.black,
+    backgroundColor: Colors.white,
     foregroundColor: Colors.black,
     shape: GFAvatarShape.circle,
     size: size,

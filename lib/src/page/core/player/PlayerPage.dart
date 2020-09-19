@@ -149,8 +149,8 @@ class _PlayerPageState extends State<PlayerPage> {
                   _showAction(entity, entity.idJugador.toString(), context),
                   null,
                   avatarCircle((entity.foto ?? IMAGE_LOGO), 35),
-                  EdgeInsets.all(5.0),
-                  EdgeInsets.all(3.0)),
+                  EdgeInsets.all(0.0),
+                  EdgeInsets.all(0.0)),
             ],
           ),
         ),
@@ -178,7 +178,7 @@ class _PlayerPageState extends State<PlayerPage> {
     return InkWell(
       child: FaIcon(
         FontAwesomeIcons.phone,
-        color: AppTheme.themePurple,
+        color: AppTheme.themeWhite,
         size: 26,
       ),
       onTap: () {
@@ -195,7 +195,7 @@ class _PlayerPageState extends State<PlayerPage> {
       key: Key(keyId),
       child: FaIcon(
         FontAwesomeIcons.whatsapp,
-        color: AppTheme.themePurple,
+        color: AppTheme.themeWhite,
         size: 26,
       ),
       onTap: () {
@@ -211,7 +211,7 @@ class _PlayerPageState extends State<PlayerPage> {
     return InkWell(
       child: FaIcon(
         FontAwesomeIcons.envelopeOpen,
-        color: AppTheme.themePurple,
+        color: AppTheme.themeWhite,
         size: 26,
       ),
       onTap: () {

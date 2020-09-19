@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/page/general/ViewPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
+import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
@@ -19,10 +20,9 @@ class SorojchiPage extends StatefulWidget {
 
 class _SorojchiPageState extends State<SorojchiPage> {
   final estiloTitulo = TextStyle(
-      fontSize: 18.0,
-      fontWeight: FontWeight.bold, color: Colors.black
-    );
-  final estiloSubTitulo = TextStyle(fontSize: 18.0, color: AppTheme.themeDefault);
+      fontSize: 18.0, fontWeight: FontWeight.bold, color: Colors.black);
+  final estiloSubTitulo =
+      TextStyle(fontSize: 18.0, color: AppTheme.themeDefault);
 
   @override
   Widget build(BuildContext context) {
@@ -45,8 +45,6 @@ class _SorojchiPageState extends State<SorojchiPage> {
               _crearTexto1(),
               sizedBox(0, 10),
               _crearTexto2(),
-              sizedBox(0, 10),
-              _crearTexto3(),
               sizedBox(0, 10),
               copyRigthBlack()
             ],
@@ -76,7 +74,7 @@ class _SorojchiPageState extends State<SorojchiPage> {
           children: <Widget>[
             Expanded(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Text('Acerca de Sorojchi eClub'.toUpperCase(),
                       style: estiloTitulo),
@@ -181,7 +179,10 @@ class _SorojchiPageState extends State<SorojchiPage> {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20.0),
         child: Text(
-          'Sorojchi eClub es un nuevo club de deportes electrónicos fundado el 2 de julio de 2019 por Edison Paredes (Presidente de Comunidad FIFA Bolivia) que tiene por objetivo reunir a los jugadores más talentosos para participar en competiciones oficiales de EA Sports FIFA.',
+          '■Sorojchi eClub es un nuevo club de deportes electrónicos fundado el 2 de julio de 2019 por Edison Paredes (Presidente de Comunidad FIFA Bolivia) que tiene por objetivo reunir a los jugadores más talentosos para participar en competiciones oficiales de EA Sports FIFA.',
+          style: kSubtitleStyleBlack,
+          softWrap: true,
+          overflow: TextOverflow.clip,
           textAlign: TextAlign.justify,
         ),
       ),
@@ -193,7 +194,10 @@ class _SorojchiPageState extends State<SorojchiPage> {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20.0),
         child: Text(
-          'En la actualidad el club está formado por los bolivianos Julio Calderón,  Mauricio Angulo y Jorge Trigo. Julio es el máximo campeón de torneos FIFA de todo el país, actualmente es poseedor de los campeonatos nacionales de FIFA 18 – FIFA 19 Y FIFA20 sin duda el jugador con más campeonatos nacionales en su haber. También es el jugador de fútbol virtual más seguido del país por jóvenes promesas fiferas que quieren llegar a ser como él y lo toman como ejemplo.',
+          '■En la actualidad el club está formado por los bolivianos Julio Calderón,  Mauricio Angulo y Jorge Trigo. Julio es el máximo campeón de torneos FIFA de todo el país, actualmente es poseedor de los campeonatos nacionales de FIFA 18 – FIFA 19 Y FIFA20 sin duda el jugador con más campeonatos nacionales en su haber. También es el jugador de fútbol virtual más seguido del país por jóvenes promesas fiferas que quieren llegar a ser como él y lo toman como ejemplo.',
+          style: kSubtitleStyleBlack,
+          softWrap: true,
+          overflow: TextOverflow.clip,
           textAlign: TextAlign.justify,
         ),
       ),
@@ -205,19 +209,10 @@ class _SorojchiPageState extends State<SorojchiPage> {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20.0),
         child: Text(
-          'Mauricio Angulo es el vigente campeón (en la modalidad de equipos libres) de los últimos torneos más importantes del panorama nacional pertenecientes a las competiciones de EA Sports Fifa20 y organizada por FIFA BOLIVIA. ',
-          textAlign: TextAlign.justify,
-        ),
-      ),
-    );
-  }
-
-  Widget _crearTexto3() {
-    return SafeArea(
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20.0),
-        child: Text(
-          'FRASES PARA DESTACAR\n\n  •	El club que busca, impulsa y promueve a nuevo talentos bolivianos del futbol virtual. \n  •	Sorojchi eClub es el club de futbol virtual que mejor representa a los miles de fans que aman los esports con corazón amateur y a los que sueñan con algún día formar parte del mundo profesional.',
+          '■Mauricio Angulo es el vigente campeón (en la modalidad de equipos libres) de los últimos torneos más importantes del panorama nacional pertenecientes a las competiciones de EA Sports Fifa20 y organizada por FIFA BOLIVIA. ',
+          style: kSubtitleStyleBlack,
+          softWrap: true,
+          overflow: TextOverflow.clip,
           textAlign: TextAlign.justify,
         ),
       ),

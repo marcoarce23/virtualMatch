@@ -6,6 +6,7 @@ const String fontName = 'WorkSans';
 
 final kTitleAppBar = TextStyle(
   color: AppTheme.themeWhite,
+  fontFamily: 'CM Sans Serif',
   fontSize: 17,
 );
 
@@ -32,7 +33,7 @@ final kSubSubTitleCardStyle = TextStyle(
 
 final kSubtitleStyleBlack = TextStyle(
   color: AppTheme.themeBlackBlack,
-  fontSize: 15.0,
+  fontSize: 17.0,
   height: 1.2,
 );
 
