@@ -3,6 +3,8 @@ const String IMAGE_LOGO =
 
 const String IMAGE_LOGOB =
     'https://res.cloudinary.com/propia/image/upload/v1599167231/bptu2ayo1lomgnteqelm.png';
+    const String IMAGE_LOGOC =
+    'https://res.cloudinary.com/propia/image/upload/v1599167231/bptu2ayo1lomgnteqelm.png';
 
 // 'https://res.cloudinary.com/propia/image/upload/v1594739598/v93fwhgfuyndbofhotbv.jpg';
 const String IMAGE_DEFAULT =

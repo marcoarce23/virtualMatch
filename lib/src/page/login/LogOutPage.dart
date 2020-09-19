@@ -118,7 +118,7 @@ class _LogOutPageState extends State<LogOutPage> {
               style: kSigssTitleStyle,
             ),
             Image.asset(
-              'assets/icono2.png',
+              'assets/icono3.png',
               //scale: 0.4,
               width: 180,
               height: 180,

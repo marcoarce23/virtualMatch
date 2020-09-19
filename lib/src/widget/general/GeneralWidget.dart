@@ -23,9 +23,9 @@ Widget showInformationBasic(
             Text(subTitle, style: kSigssTitleStyle),
             null,
             null,
-            avatarCircle(IMAGE_LOGOB, 35),
-            EdgeInsets.all(5.0),
-            EdgeInsets.all(3.0)),
+            avatarCircle(IMAGE_LOGO, 35),
+            EdgeInsets.all(0.0),
+            EdgeInsets.all(0.0)),
       ],
     ),
   );
@@ -63,8 +63,8 @@ Widget showInformation(BuildContext context, String title, String subTitle,
             ),
             null,
             avatarCircle(IMAGE_LOGO, 35),
-            EdgeInsets.all(5.0),
-            EdgeInsets.all(3.0)),
+            EdgeInsets.all(0.0),
+            EdgeInsets.all(0.0)),
       ],
     ),
   );
@@ -273,10 +273,10 @@ boxDecoration() {
       borderRadius: BorderRadius.circular(5.0),
       boxShadow: <BoxShadow>[
         BoxShadow(
-            color: Colors.black,
-            blurRadius: 7.0,
-            offset: Offset(2.0, 3.0),
-            spreadRadius: 4.0)
+            color: AppTheme.themeBlackGrey,
+            blurRadius: 9.0,
+            offset: Offset(1.0, 1.0),
+            spreadRadius: 1.0)
       ],
       gradient: LinearGradient(
         begin: Alignment.topCenter,
