@@ -98,7 +98,12 @@ class _LogOutPageState extends State<LogOutPage> {
   Widget _buildBody() {
     if (_currentUser != null) {
       return Container(
-        color: Colors.black87,
+         decoration: new BoxDecoration(
+                  image: new DecorationImage(
+                    image: new AssetImage('assets/portada2.png'),
+                    fit: BoxFit.cover,
+                  ),
+                ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[

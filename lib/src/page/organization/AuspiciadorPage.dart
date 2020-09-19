@@ -25,7 +25,7 @@ class _AuspiciadorPageState extends State<AuspiciadorPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: appBar('CONOCE LA COMUNIDAD'),
+        appBar: appBar('CONOCE DXRACER'),
         drawer: DrawerMenu(),
         floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
             FaIcon(FontAwesomeIcons.playstation), HomePage()),

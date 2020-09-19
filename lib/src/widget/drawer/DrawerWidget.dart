@@ -297,6 +297,17 @@ class DrawerMenu extends StatelessWidget {
             ),
             'Auspiciador DxrAcer',
             () => navegation(context, AuspiciadorPage())),
+
+              CustomListTile(
+            Image.asset(
+              'assets/image/jugador2.png',
+              //scale: 0.4,
+              width: 30,
+              height: 30,
+            ),
+            '   Jugadores de la comunidad',
+            () => navegation(context, PlayerLoadPage())),
+            
         CustomListTile(
             Image.asset(
               'assets/image/pelota.png',
