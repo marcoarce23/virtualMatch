@@ -11,38 +11,34 @@ import 'package:virtual_match/src/widget/general/CallWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/widget/general/SenWidget.dart';
 
-class SorojchiPage extends StatefulWidget {
-  SorojchiPage({Key key}) : super(key: key);
+class AuspiciadorPage extends StatefulWidget {
+  AuspiciadorPage({Key key}) : super(key: key);
 
   @override
-  _SorojchiPageState createState() => _SorojchiPageState();
+  _AuspiciadorPageState createState() => _AuspiciadorPageState();
 }
 
-class _SorojchiPageState extends State<SorojchiPage> {
-  final estiloTitulo = TextStyle(
-      fontSize: 18.0, fontWeight: FontWeight.bold, color: Colors.black);
-  final estiloSubTitulo =
-      TextStyle(fontSize: 18.0, color: AppTheme.themeDefault);
+class _AuspiciadorPageState extends State<AuspiciadorPage> {
+  final estiloTitulo = TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold);
+  final estiloSubTitulo = TextStyle(fontSize: 18.0, color: Colors.grey);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        //  backgroundColor: Colors.black87,
-        appBar: appBar('SOROJCHI ECLUB'),
+        appBar: appBar('CONOCE LA COMUNIDAD'),
         drawer: DrawerMenu(),
         floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
             FaIcon(FontAwesomeIcons.playstation), HomePage()),
         body: SingleChildScrollView(
-          child: Container(
-            decoration: new BoxDecoration(
-              image: new DecorationImage(
-                image: new AssetImage('assets/portada1.png'),
-                fit: BoxFit.cover,
-              ),
+            child: Container(
+             decoration: new BoxDecoration(
+            image: new DecorationImage(
+              image: new AssetImage('assets/portada1.png'),
+              fit: BoxFit.cover,
             ),
+          ),
             child: Column(
               children: <Widget>[
-                backgroundBasic(context),
                 _crearImagen(context),
                 _crearTitulo(),
                 _crearAcciones(context),
@@ -53,6 +49,7 @@ class _SorojchiPageState extends State<SorojchiPage> {
                 sizedBox(0, 10),
                 _crearTexto2(),
                 sizedBox(0, 10),
+                _crearTexto3(),
                 copyRigthBlack()
               ],
             ),
@@ -64,13 +61,14 @@ class _SorojchiPageState extends State<SorojchiPage> {
     return Container(
       width: double.infinity,
       child: GestureDetector(
-          onTap: () => Navigator.pushNamed(context, 'scroll'),
-          child: Image.asset(
-            'assets/vm_sorojchi.png',
-            //scale: 0.4,
-            height: 150.0,
-            fit: BoxFit.fill,
-          )),
+        onTap: () => Navigator.pushNamed(context, 'scroll'),
+        child: Image.asset(
+          'assets/aus3.jpg',
+          //scale: 0.4,
+          height: 150.0,
+          fit: BoxFit.fill,
+        ),
+      ),
     );
   }
 
@@ -84,9 +82,11 @@ class _SorojchiPageState extends State<SorojchiPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Text('Acerca de Sorojchi eClub'.toUpperCase(),
-                      style: estiloTitulo),
+                  Text('ACERCA DE DxrAcer.', style: estiloTitulo),
+                  // Text('Terrasur, haciendo tus sueños realidad',
+                  //     style: estiloTitulo),
                   sizedBox(0, 7.0),
+                  //Text('Fecha: XXXXX', style: estiloSubTitulo ),
                 ],
               ),
             ),
@@ -107,10 +107,8 @@ class _SorojchiPageState extends State<SorojchiPage> {
             color: Colors.blueAccent,
             padding: EdgeInsets.all(0),
             shape: CircleBorder(),
-            onPressed: () => navegation(
-                context,
-                ViewPage(
-                    title: 'FACEBOOK VIRTUAL MATCH'.toString(), url: facebook)),
+            onPressed: () => navegation(context,
+                ViewPage(title: 'FACEBOOK DXRACER'.toString(), url: facebook)),
             child: Icon(
               FontAwesomeIcons.facebookF,
               color: Colors.white,
@@ -126,11 +124,8 @@ class _SorojchiPageState extends State<SorojchiPage> {
             color: Colors.red,
             padding: EdgeInsets.all(0),
             shape: CircleBorder(),
-            onPressed: () => navegation(
-                context,
-                ViewPage(
-                    title: 'FACEBOOK VIRTUAL MATCH'.toString(),
-                    url: instagram)),
+            onPressed: () => navegation(context,
+                ViewPage(title: 'FACEBOOK DXRACER'.toString(), url: instagram)),
             child: Icon(
               FontAwesomeIcons.instagram,
               color: Colors.white,
@@ -148,7 +143,7 @@ class _SorojchiPageState extends State<SorojchiPage> {
             shape: CircleBorder(),
             onPressed: () {
               callWhatsAppText(whatsApp,
-                  '*Comunidad Virtual Match:* \n Mensaje. Me gustaría ponerme en contacto. Gracias. \nEnviado desde la aplicación \n*Virtual Match Digital*.');
+                  '*DXRACER:* \n Mensaje. Me gustaría ponerme en contacto con su empresa. Gracias. \nEnviado desde la aplicación \n*Virtual Match Digital*.');
             },
             child: Icon(
               FontAwesomeIcons.whatsapp,
@@ -168,8 +163,8 @@ class _SorojchiPageState extends State<SorojchiPage> {
             onPressed: () {
               sendEmailAdvanced(
                   email,
-                  "Comunidad Virtual Match. Deseo comunicarme con usted.",
-                  "A la Comunidad Virtual Match:\n Deseo más información sobre la Comunidad y de como formar parte de FIFA BOLIVIA.\n Saludos cordiales. Gracias");
+                  "Empresa DXRACER. Deseo comunicarme con usted.",
+                  "DXRACER:\n Deseo más información sobre la Comunidad y consultar sobre sus productos.\n Saludos cordiales. Gracias");
             },
             child: Icon(
               FontAwesomeIcons.solidEnvelope,
@@ -187,7 +182,7 @@ class _SorojchiPageState extends State<SorojchiPage> {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20.0),
         child: Text(
-          '■Sorojchi eClub es un nuevo club de deportes electrónicos fundado el 2 de julio de 2019 por Edison Paredes (Presidente de Comunidad FIFA Bolivia) que tiene por objetivo reunir a los jugadores más talentosos para participar en competiciones oficiales de EA Sports FIFA.',
+          '■  DXRACER .......',
           style: kSubtitleStyleBlack,
           softWrap: true,
           overflow: TextOverflow.clip,
@@ -202,7 +197,7 @@ class _SorojchiPageState extends State<SorojchiPage> {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20.0),
         child: Text(
-          '■En la actualidad el club está formado por los bolivianos Julio Calderón,  Mauricio Angulo y Jorge Trigo. Julio es el máximo campeón de torneos FIFA de todo el país, actualmente es poseedor de los campeonatos nacionales de FIFA 18 – FIFA 19 Y FIFA20 sin duda el jugador con más campeonatos nacionales en su haber. También es el jugador de fútbol virtual más seguido del país por jóvenes promesas fiferas que quieren llegar a ser como él y lo toman como ejemplo.',
+          '■  DXRACER .......',
           style: kSubtitleStyleBlack,
           softWrap: true,
           overflow: TextOverflow.clip,
@@ -217,7 +212,22 @@ class _SorojchiPageState extends State<SorojchiPage> {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20.0),
         child: Text(
-          '■Mauricio Angulo es el vigente campeón (en la modalidad de equipos libres) de los últimos torneos más importantes del panorama nacional pertenecientes a las competiciones de EA Sports Fifa20 y organizada por FIFA BOLIVIA. ',
+          '■  DXRACER .......',
+          style: kSubtitleStyleBlack,
+          softWrap: true,
+          overflow: TextOverflow.clip,
+          textAlign: TextAlign.justify,
+        ),
+      ),
+    );
+  }
+
+  Widget _crearTexto3() {
+    return SafeArea(
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 20.0),
+        child: Text(
+          '■  DXRACER .......',
           style: kSubtitleStyleBlack,
           softWrap: true,
           overflow: TextOverflow.clip,

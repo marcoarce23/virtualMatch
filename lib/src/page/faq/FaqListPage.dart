@@ -38,7 +38,12 @@ class _FaqListPagetate extends State<FaqListPage> {
     final size = MediaQuery.of(context).size;
 
     return Container(
-      color: Colors.white,
+      decoration: new BoxDecoration(
+        image: new DecorationImage(
+          image: new AssetImage('assets/portada1.png'),
+          fit: BoxFit.cover,
+        ),
+      ),
       child: SingleChildScrollView(
         child: Column(
           children: <Widget>[
@@ -81,7 +86,6 @@ class _FaqListPagetate extends State<FaqListPage> {
     );
   }
 
-  
   Widget listAcordion() {
     return accordion(
         '¿Cómo puedo contactarlos?',

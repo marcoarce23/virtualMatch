@@ -57,7 +57,13 @@ class _IntroPageState extends State<IntroPage> {
     return Scaffold(
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
-        child: Container(
+          child: Container(
+             decoration: new BoxDecoration(
+            image: new DecorationImage(
+              image: new AssetImage('assets/portada1.png'),
+              fit: BoxFit.cover,
+            ),
+          ),
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: 20.0),
             child: Column(
@@ -116,10 +122,10 @@ class _IntroPageState extends State<IntroPage> {
                               baseColor: AppTheme.themeDefault,
                               highlightColor: AppTheme.themePurple,
                               child: AutoSizeText(
-                                'Somos la comunidad más grande de fútbol virtual de Bolivia',
+                                'La comunidad más grande de fútbol virtual de Bolivia.',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
-                                  fontSize: 18.0,
+                                  fontSize: 22.0,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -136,7 +142,7 @@ class _IntroPageState extends State<IntroPage> {
                                     //   baseColor: AppTheme.themeDefault,
                                     //   highlightColor: AppTheme.themePurple,
                                     //   child:
-                                    avatarCircle(IMAGE_LOGOB, 25.0),
+                                    avatarCircle(IMAGE_LOGO, 25.0),
                                     //  ),
                                     sizedBox(10, 15.0),
                                     Expanded(
@@ -187,7 +193,7 @@ class _IntroPageState extends State<IntroPage> {
                                     //       color: AppTheme.themeDefault,
                                     //       size: 35.0),
                                     // ),
-                                    avatarCircle(IMAGE_LOGOB, 25.0),
+                                    avatarCircle(IMAGE_LOGO, 25.0),
                                     sizedBox(10, 10.0),
                                     Expanded(
                                       child: AutoSizeText(
@@ -224,7 +230,7 @@ class _IntroPageState extends State<IntroPage> {
                               baseColor: AppTheme.themeDefault,
                               highlightColor: AppTheme.themePurple,
                               child: AutoSizeText(
-                                'Qué ofrecemos',
+                                'Qué ofrecemos.'.toUpperCase(),
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontSize: 24.0,
@@ -273,7 +279,7 @@ class _IntroPageState extends State<IntroPage> {
                                     //       color: AppTheme.themeDefault,
                                     //       size: 35.0),
                                     // ),
-                                    avatarCircle(IMAGE_LOGOB, 25.0),
+                                    avatarCircle(IMAGE_LOGO, 25.0),
                                     sizedBox(10, 10.0),
                                     Expanded(
                                       child: AutoSizeText(
@@ -334,7 +340,7 @@ class _IntroPageState extends State<IntroPage> {
                               baseColor: AppTheme.themeDefault,
                               highlightColor: AppTheme.themePurple,
                               child: AutoSizeText(
-                                'Qué buscamos en la Comunidad.',
+                                'Qué buscamos en la Comunidad.'.toUpperCase(),
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontSize: 22.0,
@@ -357,7 +363,7 @@ class _IntroPageState extends State<IntroPage> {
                                       //       color: AppTheme.themeDefault,
                                       //       size: 35.0),
                                       // ),
-                                      avatarCircle(IMAGE_LOGOB, 25.0),
+                                      avatarCircle(IMAGE_LOGO, 25.0),
                                       sizedBox(10.0, 0),
                                       Expanded(
                                         child: AutoSizeText(
@@ -407,7 +413,7 @@ class _IntroPageState extends State<IntroPage> {
                                       //       color: AppTheme.themeDefault,
                                       //       size: 35.0),
                                       // ),
-                                      avatarCircle(IMAGE_LOGOB, 25.0),
+                                      avatarCircle(IMAGE_LOGO, 25.0),
                                       sizedBox(10, 10.0),
                                       Expanded(
                                         child: AutoSizeText(
@@ -497,7 +503,7 @@ class _IntroPageState extends State<IntroPage> {
                           ),
                         ),
                         sizedBox(10.0, 0),
-                        avatarCircle(IMAGE_LOGOB, 15),
+                        avatarCircle(IMAGE_LOGO, 15),
                       ],
                     ),
                   ),

@@ -49,11 +49,16 @@ class _NotificationListPageState extends State<NotificationListPage> {
       drawer: DrawerMenu(),
       body: SafeArea(
         child: Container(
-          //  color: Colors.black87,
+          decoration: new BoxDecoration(
+            image: new DecorationImage(
+              image: new AssetImage('assets/portada2.png'),
+              fit: BoxFit.cover,
+            ),
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              backgroundBasic(context),
+              //  backgroundBasic(context),
               Container(
                 width: size.width * 0.95,
                 margin: EdgeInsets.symmetric(vertical: 0.0),
@@ -66,12 +71,12 @@ class _NotificationListPageState extends State<NotificationListPage> {
                       'En esta pantalla puedes modificar y eliminar las notificaciones que haz creado anteriormente.',
                     ),
                     sizedBox(0.0, 3),
-                    dividerBlack(),
+                    divider(),
                   ],
                 ),
               ),
               futureBuilder(context),
-              copyRigthBlack(),
+              copyRigth(),
             ],
           ),
         ),
@@ -136,8 +141,8 @@ class _NotificationListPageState extends State<NotificationListPage> {
                       entity, entity.idNotificacion.toString(), context),
                   null,
                   null, //avatarCircle((entity.foto ?? IMAGE_LOGO), 35),
-                  EdgeInsets.all(5.0),
-                  EdgeInsets.all(3.0)),
+                  EdgeInsets.all(0.0),
+                  EdgeInsets.all(0.0)),
             ],
           ),
         ),
@@ -166,7 +171,7 @@ class _NotificationListPageState extends State<NotificationListPage> {
     return InkWell(
       child: FaIcon(
         FontAwesomeIcons.edit,
-        color: AppTheme.themePurple,
+        color: AppTheme.themeWhite,
         size: 26,
       ),
       onTap: () {
@@ -183,7 +188,7 @@ class _NotificationListPageState extends State<NotificationListPage> {
       key: Key(keyId),
       child: FaIcon(
         FontAwesomeIcons.trashAlt,
-        color: AppTheme.themePurple,
+        color: AppTheme.themeWhite,
         size: 26,
       ),
       onTap: () {
@@ -202,7 +207,7 @@ class _NotificationListPageState extends State<NotificationListPage> {
     return InkWell(
       child: FaIcon(
         FontAwesomeIcons.bell,
-        color: AppTheme.themePurple,
+        color: AppTheme.themeWhite,
         size: 26,
       ),
       onTap: () {

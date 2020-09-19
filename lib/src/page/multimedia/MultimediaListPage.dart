@@ -25,7 +25,7 @@ class _MultimediaListPageState extends State<MultimediaListPage> {
   //DEFINICION DE BLOC Y MODEL
   MultimediaModel entity = new MultimediaModel();
   model.MultimediaModel entityModel = new model.MultimediaModel();
-  MultimediaService entityService =  new MultimediaService();
+  MultimediaService entityService = new MultimediaService();
   MultimediaService entityGet = MultimediaService();
 
   // DEFINICIOND E VARIABLES
@@ -41,13 +41,18 @@ class _MultimediaListPageState extends State<MultimediaListPage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-   // entityService = Provider.of<MultimediaService>(context);
+    // entityService = Provider.of<MultimediaService>(context);
 
     return Scaffold(
       key: scaffoldKey,
       body: SafeArea(
         child: Container(
-          color: Colors.black87,
+          decoration: new BoxDecoration(
+            image: new DecorationImage(
+              image: new AssetImage('assets/portada2.png'),
+              fit: BoxFit.cover,
+            ),
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
@@ -59,9 +64,10 @@ class _MultimediaListPageState extends State<MultimediaListPage> {
                 child: Column(
                   children: <Widget>[
                     showInformationBasic(
-                        context,
-                        'GESTIONA GALERIA MULTIMEDIA',
-                        'En esta pantalla puedes modificar y eliminar las galerias multimedia que haz creado anteriormente.',),
+                      context,
+                      'GESTIONA GALERIA MULTIMEDIA',
+                      'En esta pantalla puedes modificar y eliminar las galerias multimedia que haz creado anteriormente.',
+                    ),
                     sizedBox(0.0, 5.0),
                     divider(),
                   ],
@@ -125,11 +131,16 @@ class _MultimediaListPageState extends State<MultimediaListPage> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text('DETALLE: ${entity.resumen}', style: TextStyle(color: AppTheme.themeWhite)),
-                      Text('ENLACE: ${entity.enlace}', style: TextStyle(color: AppTheme.themeWhite)),
-                      Text('NOTICIA/EVENTO: ${entity.idaCategoria}', style: TextStyle(color: AppTheme.themeWhite)),
-                      Text('FECHA INICIO: ${entity.fechainicio}', style: TextStyle(color: AppTheme.themeWhite)),
-                      Text('FECHA FIN     :  ${entity.fechafin}', style: TextStyle(color: AppTheme.themeWhite)),
+                      Text('DETALLE: ${entity.resumen}',
+                          style: TextStyle(color: AppTheme.themeWhite)),
+                      Text('ENLACE: ${entity.enlace}',
+                          style: TextStyle(color: AppTheme.themeWhite)),
+                      Text('NOTICIA/EVENTO: ${entity.idaCategoria}',
+                          style: TextStyle(color: AppTheme.themeWhite)),
+                      Text('FECHA INICIO: ${entity.fechainicio}',
+                          style: TextStyle(color: AppTheme.themeWhite)),
+                      Text('FECHA FIN     :  ${entity.fechafin}',
+                          style: TextStyle(color: AppTheme.themeWhite)),
                     ],
                   ),
                   _showAction(entity, entity.idMultimedia.toString()),
@@ -191,9 +202,9 @@ class _MultimediaListPageState extends State<MultimediaListPage> {
     );
   }
 
-  void executeDelete(String id, String usuario)  {
+  void executeDelete(String id, String usuario) {
     try {
-       entityService.delete(id, usuario).then((result) {
+      entityService.delete(id, usuario).then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0')
           showSnackbar(STATUS_OK, scaffoldKey);

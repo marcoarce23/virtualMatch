@@ -12,6 +12,7 @@ import 'package:virtual_match/src/page/login/LogOutPage.dart';
 import 'package:virtual_match/src/page/multimedia/MultimediaLoadPage.dart';
 import 'package:virtual_match/src/page/new/NewLoadPage.dart';
 import 'package:virtual_match/src/page/notification/NotificationLoadPage.dart';
+import 'package:virtual_match/src/page/organization/AuspiciadorPage.dart';
 import 'package:virtual_match/src/page/organization/OrganizationPage.dart';
 import 'package:virtual_match/src/page/organization/SocialPage.dart';
 import 'package:virtual_match/src/page/organization/SorojchiPage.dart';
@@ -64,10 +65,11 @@ class DrawerMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (prefs.idPlayer == '1' || prefs.idLogin == '9' /*COAV login*/)
-      return drawerVirtualMatch(context);
-    else
-      return drawerUser(context);
+    // if (prefs.idPlayer == '1' || prefs.idLogin == '9' /*COAV login*/)
+    //  return
+    return drawerVirtualMatch(context);
+    // else
+    //   return drawerUser(context);
   }
 
   Drawer drawerUser(BuildContext context) {
@@ -77,43 +79,49 @@ class DrawerMenu extends StatelessWidget {
         DrawerHeader(
           decoration: boxDecorationMenu(context, IMAGE_DEFAULT),
           child: Container(
-              child: Column(
-            children: <Widget>[
-              Material(
-                  color: AppTheme.themeWhite,
-                  borderRadius: BorderRadius.all(Radius.circular(60.0)),
-                  elevation: 10.0,
-                  child: Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: ImageOvalNetwork(
-                        imageNetworkUrl: prefs.avatarImage, //IMAGE_LOGO,
-                        sizeImage: Size.fromWidth(70)),
-
-                    //  child: showPictureOval(null, IMAGE_SOROJCHI, 70.0),
-                  )),
-              Flexible(
-                child: Column(
-                  children: <Widget>[
-                    Expanded(
-                      child: Text(
-                        prefs.nameUser,
-                        style: TextStyle(
-                            color: AppTheme.themeWhite, fontSize: 18.0),
-                        softWrap: true,
-                        overflow: TextOverflow.clip,
-                      ),
-                    ),
-                    AutoSizeText(
-                      prefs.email,
-                      style:
-                          TextStyle(color: AppTheme.themeWhite, fontSize: 16.0),
-                      maxLines: 2,
-                    ),
-                  ],
+              decoration: new BoxDecoration(
+                image: new DecorationImage(
+                  image: new AssetImage('assets/portada1.png'),
+                  fit: BoxFit.cover,
                 ),
               ),
-            ],
-          )),
+              child: Column(
+                children: <Widget>[
+                  Material(
+                      color: AppTheme.themeWhite,
+                      borderRadius: BorderRadius.all(Radius.circular(60.0)),
+                      elevation: 10.0,
+                      child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: ImageOvalNetwork(
+                            imageNetworkUrl: prefs.avatarImage, //IMAGE_LOGO,
+                            sizeImage: Size.fromWidth(70)),
+
+                        //  child: showPictureOval(null, IMAGE_SOROJCHI, 70.0),
+                      )),
+                  Flexible(
+                    child: Column(
+                      children: <Widget>[
+                        Expanded(
+                          child: Text(
+                            prefs.nameUser,
+                            style: TextStyle(
+                                color: AppTheme.themeWhite, fontSize: 18.0),
+                            softWrap: true,
+                            overflow: TextOverflow.clip,
+                          ),
+                        ),
+                        AutoSizeText(
+                          prefs.email,
+                          style: TextStyle(
+                              color: AppTheme.themeWhite, fontSize: 16.0),
+                          maxLines: 2,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              )),
         ),
         //  CustomListTile(
         //     ImageOvalNetwork(
@@ -121,9 +129,7 @@ class DrawerMenu extends StatelessWidget {
         //     '   SOROJCHI eclubss',
         //     () => navegation(context, ViewPage(title:'mapa catastro', url: 'https://geovisorec.000webhostapp.com/index.html'))),
 
-      
-
- CustomListTile(
+        CustomListTile(
             ImageOvalNetwork(
                 imageNetworkUrl: IMAGE_SOROJCHI, sizeImage: Size.fromWidth(30)),
             '   SOROJCHI eclub',
@@ -137,9 +143,8 @@ class DrawerMenu extends StatelessWidget {
               height: 60,
             ),
             'Auspiciador DxrAcer',
-            () => navegation(context, SocialPage())),
+            () => navegation(context, AuspiciadorPage())),
 
-       
         CustomListTile(
             Image.asset(
               'assets/image/jugador2.png',
@@ -173,8 +178,8 @@ class DrawerMenu extends StatelessWidget {
                 imageNetworkUrl: IMAGE_LOGO, sizeImage: Size.fromWidth(35)),
             '    Sobre Virtual Match',
             () => navegation(context, OrganizationPage())),
-        
-          CustomListTile(
+
+        CustomListTile(
             Image.asset(
               'assets/image/jugador1.png',
               //scale: 0.4,
@@ -183,7 +188,7 @@ class DrawerMenu extends StatelessWidget {
             ),
             '   Ayuda Social',
             () => navegation(context, SocialPage())),
-            
+
         CustomListTile(
             FaIcon(
               FontAwesomeIcons.shareAlt,
@@ -278,49 +283,20 @@ class DrawerMenu extends StatelessWidget {
 //             () => navegation(context, ViewPage(title:'mapa catastro', url: 'https://geovisorec.000webhostapp.com/index.html'))),
 
         CustomListTile(
-            Image.asset(
-              'assets/image/jugador1.png',
-              //scale: 0.4,
-              width: 30,
-              height: 30,
-            ),
-            '   Ayuda Social',
-            () => navegation(context, SocialPage())),
-
-        CustomListTile(
             ImageOvalNetwork(
                 imageNetworkUrl: IMAGE_SOROJCHI, sizeImage: Size.fromWidth(30)),
             '   SOROJCHI eclub',
             () => navegation(context, SorojchiPage())),
-        CustomListTile(
-            ImageOvalNetwork(
-                imageNetworkUrl: IMAGE_SOROJCHI, sizeImage: Size.fromWidth(30)),
-            '   Sobre Auspiciador',
-            () => navegation(context, PlayerLoadPage())),
-        /*
+
         CustomListTile(
             Image.asset(
-              'assets/image/jugador2.png',
+              'assets/aus1.jpg',
               //scale: 0.4,
-              width: 30,
-              height: 30,
+              width: 50,
+              height: 60,
             ),
-            '   Jugadores de la comunidad',
-            () => navegation(context, PlayerLoadPage())),
-            ====================================================================>>>>>>>>>>>>>>>>>>> los jugadores de la comunidad se debe corregir
-            */
-        /*
-        CustomListTile(
-            Image.asset(
-              'assets/image/control.png',
-              //scale: 0.4,
-              width: 30,
-              height: 30,
-            ),
-            '    Clubes Pro (Crea tu equipo)',
-            () => navegation(context, TourmentAllPage())),
-            ====================================================================>>>>>>>>>>>>>>>>>>> crea tu equipo             
-            */
+            'Auspiciador DxrAcer',
+            () => navegation(context, AuspiciadorPage())),
         CustomListTile(
             Image.asset(
               'assets/image/pelota.png',
@@ -367,6 +343,17 @@ class DrawerMenu extends StatelessWidget {
                 imageNetworkUrl: IMAGE_LOGO, sizeImage: Size.fromWidth(35)),
             '    Sobre Virtual Match',
             () => navegation(context, OrganizationPage())),
+
+        CustomListTile(
+            Image.asset(
+              'assets/image/jugador1.png',
+              //scale: 0.4,
+              width: 30,
+              height: 30,
+            ),
+            '   Ayuda Social',
+            () => navegation(context, SocialPage())),
+
         CustomListTile(
             FaIcon(
               FontAwesomeIcons.shareAlt,

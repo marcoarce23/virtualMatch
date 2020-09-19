@@ -182,17 +182,21 @@ Widget backgroundBasic(BuildContext context) {
     // height: double.infinity,
     width: double.infinity,
     decoration: BoxDecoration(
+        image: new DecorationImage(
+          image: new AssetImage('assets/portada2.png'),
+          fit: BoxFit.cover,
+        ),
         gradient: LinearGradient(
-      begin: Alignment.topCenter,
-      end: Alignment.bottomRight,
-      stops: [0.1, 0.4, 0.7, 0.9],
-      colors: [
-        Color.fromRGBO(113, 113, 113, 1.0),
-        Color.fromRGBO(93, 93, 93, 3.0),
-        Color.fromRGBO(48, 50, 48, 1.0),
-        Color.fromRGBO(22, 23, 22, 1.0),
-      ],
-    )),
+          begin: Alignment.topCenter,
+          end: Alignment.bottomRight,
+          stops: [0.1, 0.4, 0.7, 0.9],
+          colors: [
+            Color.fromRGBO(113, 113, 113, 1.0),
+            Color.fromRGBO(93, 93, 93, 3.0),
+            Color.fromRGBO(48, 50, 48, 1.0),
+            Color.fromRGBO(22, 23, 22, 1.0),
+          ],
+        )),
   );
 }
 
@@ -243,6 +247,10 @@ Widget background(BuildContext context, String imagen) {
 BoxDecoration containerFileds() {
   // return boxDecorationList();
   return BoxDecoration(
+     image: new DecorationImage(
+        image: new AssetImage('assets/portada1.png'),
+        fit: BoxFit.cover,
+      ),
       color: Colors.white,
       // gradient: boxDecorationList(),
       borderRadius: BorderRadius.circular(10.0),
@@ -257,7 +265,11 @@ BoxDecoration containerFileds() {
 
 BoxDecoration containerImage() {
   return BoxDecoration(
-      color: AppTheme.themeWhite,
+      image: new DecorationImage(
+        image: new AssetImage('assets/portada1.png'),
+        fit: BoxFit.cover,
+      ),
+      // color: AppTheme.themeWhite,
       borderRadius: BorderRadius.circular(8.0),
       boxShadow: <BoxShadow>[
         BoxShadow(
@@ -270,10 +282,14 @@ BoxDecoration containerImage() {
 
 boxDecoration() {
   return BoxDecoration(
+      image: new DecorationImage(
+        image: new AssetImage('assets/portada1.png'),
+        fit: BoxFit.cover,
+      ),
       borderRadius: BorderRadius.circular(5.0),
       boxShadow: <BoxShadow>[
         BoxShadow(
-            color: AppTheme.themeBlackGrey,
+            color: AppTheme.themePurple,
             blurRadius: 9.0,
             offset: Offset(1.0, 1.0),
             spreadRadius: 1.0)

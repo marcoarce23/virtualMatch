@@ -50,9 +50,14 @@ class _PlayerPageState extends State<PlayerPage> {
       drawer: DrawerMenu(),
       body: SafeArea(
         child: Container(
-          //  color: Colors.black87,
+          decoration: new BoxDecoration(
+            image: new DecorationImage(
+              image: new AssetImage('assets/portada2.png'),
+              fit: BoxFit.cover,
+            ),
+          ),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            //  crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               backgroundBasic(context),
               sizedBox(0.0, 8.0),
@@ -67,16 +72,17 @@ class _PlayerPageState extends State<PlayerPage> {
                       'Busca y comunicate con los jugadores.',
                     ),
                     sizedBox(0.0, 2.0),
-                    dividerBlack(),
+                    divider(),
                   ],
                 ),
               ),
               futureBuilder(context),
-              copyRigthBlack(),
+              copyRigth(),
             ],
           ),
         ),
       ),
+      //  ),
       floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
           FaIcon(FontAwesomeIcons.futbol), HomePage()),
 
@@ -177,9 +183,9 @@ class _PlayerPageState extends State<PlayerPage> {
   _update(BuildContext context, model.JugadorModel entity) {
     return InkWell(
       child: FaIcon(
-        FontAwesomeIcons.phone,
+        FontAwesomeIcons.mobileAlt,
         color: AppTheme.themeWhite,
-        size: 26,
+        size: 24,
       ),
       onTap: () {
         setState(() {

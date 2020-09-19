@@ -45,7 +45,12 @@ class _TourmentListPageState extends State<TourmentListPage> {
       drawer: DrawerMenu(),
       body: SafeArea(
         child: Container(
-          // color: Colors.black87,
+           decoration: new BoxDecoration(
+                  image: new DecorationImage(
+                    image: new AssetImage('assets/portada2.png'),
+                    fit: BoxFit.cover,
+                  ),
+                ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
@@ -61,12 +66,12 @@ class _TourmentListPageState extends State<TourmentListPage> {
                       'INICIA EL TORNEO VIRTUAL MATCH',
                       'En esta pantalla puedes iniciar el torneo y agregar personas que faltantes.',
                     ),
-                    dividerBlack(),
+                    divider(),
                   ],
                 ),
               ),
               futureBuilder(context),
-              copyRigthBlack(),
+              copyRigth(),
             ],
           ),
         ),
@@ -143,8 +148,8 @@ class _TourmentListPageState extends State<TourmentListPage> {
                   //_showAction(entity, entity.idTorneo.toString()),
                   null,
                   null, //avatarCircle((entity.foto ?? IMAGE_LOGO), 35),
-                  EdgeInsets.all(5.0),
-                  EdgeInsets.all(3.0)),
+                  EdgeInsets.all(0.0),
+                  EdgeInsets.all(0.0)),
             ],
           ),
         ),

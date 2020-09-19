@@ -200,6 +200,7 @@ class _MiniTourmentLoadPageState extends State<MiniTourmentLoadPage> {
             ),
             sizedBox(0.0, 8.0),
             Container(
+              
               width: size.width * 0.94,
               margin: EdgeInsets.symmetric(vertical: 0.0),
               decoration: containerFileds(),

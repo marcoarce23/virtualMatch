@@ -192,7 +192,7 @@ GFAccordion accordion(String title, String content,
     collapsedTitlebackgroundColor: collapsedTitlebackgroundColor,
     showAccordion: true,
     titleborder: Border.all(
-        color: AppTheme.themeWhite, width: 0.5, style: BorderStyle.solid),
+        color: AppTheme.themeBlackBlack, width: 0.5, style: BorderStyle.solid),
     contentBorder: Border.all(
         color: collapsedTitlebackgroundColor,
         width: 0.5,

@@ -50,7 +50,12 @@ class _NewListPageState extends State<NewListPage> {
       drawer: DrawerMenu(),
       body: SafeArea(
         child: Container(
-          //  color: Colors.black87,
+          decoration: new BoxDecoration(
+                  image: new DecorationImage(
+                    image: new AssetImage('assets/portada2.png'),
+                    fit: BoxFit.cover,
+                  ),
+                ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
@@ -67,12 +72,12 @@ class _NewListPageState extends State<NewListPage> {
                       'En esta pantalla puedes modificar y eliminar las notificaciones que haz creado anteriormente.',
                     ),
                     sizedBox(0.0, 5.0),
-                    dividerBlack(),
+                    divider(),
                   ],
                 ),
               ),
               futureBuilder(context),
-              copyRigthBlack(),
+              copyRigth(),
             ],
           ),
         ),

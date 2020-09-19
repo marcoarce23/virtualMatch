@@ -41,13 +41,17 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-   
 
     return Scaffold(
       key: scaffoldKey,
       body: SafeArea(
         child: Container(
-          color: Colors.black87,
+          decoration: new BoxDecoration(
+            image: new DecorationImage(
+              image: new AssetImage('assets/portada2.png'),
+              fit: BoxFit.cover,
+            ),
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
@@ -132,8 +136,8 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
                   _showAction(entity, entity.idTorneo.toString()),
                   null,
                   null, //avatarCircle((entity.foto ?? IMAGE_LOGO), 35),
-                  EdgeInsets.all(5.0),
-                  EdgeInsets.all(3.0)),
+                  EdgeInsets.all(0.0),
+                  EdgeInsets.all(0.0)),
             ],
           ),
         ),
@@ -141,7 +145,8 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
     );
     //Text(entity.nombreEquipo);
   }
- Widget _showAction(ListaTorneoModel entity, String keyId) {
+
+  Widget _showAction(ListaTorneoModel entity, String keyId) {
     return Column(
       children: <Widget>[
         Row(
@@ -157,11 +162,10 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
         sizedBox(0, 10),
         Row(
           children: [
-            Text('$keyId',
-                style: TextStyle(color: AppTheme.themeWhite)),
+            Text('$keyId', style: TextStyle(color: AppTheme.themeWhite)),
             sizedBox(10, 0),
-        //    _complete(keyId),
-           // sizedBox(10, 0),
+            //    _complete(keyId),
+            // sizedBox(10, 0),
             _start(keyId, entity.idTipoModalidad.toString()),
           ],
         ),
@@ -176,7 +180,7 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
     return InkWell(
       child: FaIcon(
         FontAwesomeIcons.edit,
-        color: AppTheme.themePurple,
+        color: AppTheme.themeWhite,
         size: 20,
       ),
       onTap: () {
@@ -189,7 +193,7 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
     return InkWell(
       child: FaIcon(
         FontAwesomeIcons.trashAlt,
-        color: AppTheme.themePurple,
+        color: AppTheme.themeWhite,
         size: 20,
       ),
       onTap: () {
@@ -207,7 +211,7 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
       //  key: Key(keyId),
       child: FaIcon(
         FontAwesomeIcons.users,
-        color: AppTheme.themePurple,
+        color: AppTheme.themeWhite,
         size: 20,
       ),
       onTap: () {
@@ -223,14 +227,14 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
   _start(String keyId, String modalidad) {
     return Row(
       children: [
-         Text('Empezar Torneo:'.toUpperCase(),
-                style: TextStyle(color: AppTheme.themeWhite)),
-            sizedBox(10, 0),
+        Text('Empezar Torneo:'.toUpperCase(),
+            style: TextStyle(color: AppTheme.themeWhite)),
+        sizedBox(10, 0),
         InkWell(
           key: Key(keyId),
           child: FaIcon(
             FontAwesomeIcons.futbol,
-            color: AppTheme.themePurple,
+            color: AppTheme.themeWhite,
             size: 25,
           ),
           onTap: () {
@@ -257,7 +261,12 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
 
   void executeDelete(String id, String usuario) async {
     try {
-      await entityService.delete(id, usuario,).then((result) {
+      await entityService
+          .delete(
+        id,
+        usuario,
+      )
+          .then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0')
           showSnackbar(STATUS_OK, scaffoldKey);
@@ -299,5 +308,5 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
     // }
   }
 } // FIN DE LA CLASE
- // FIN DE LA CLASE
+// FIN DE LA CLASE
 // FIN DE LA CLASE
