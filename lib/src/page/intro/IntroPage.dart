@@ -98,11 +98,18 @@ class _IntroPageState extends State<IntroPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Center(
-                              child: Image(
-                                image: NetworkImage(IMAGE_ORGANIZATION),
-                                height: 180.0,
+                              child: Image.asset(
+                                'assets/vm_quienessomos.png',
+                                //scale: 0.4,
+                                height: 150.0,
                                 fit: BoxFit.fill,
                               ),
+
+                              // Image(
+                              //   image: NetworkImage(IMAGE_ORGANIZATION),
+                              //   height: 180.0,
+                              //   fit: BoxFit.fill,
+                              // ),
                             ),
 
                             Shimmer.fromColors(
@@ -124,17 +131,17 @@ class _IntroPageState extends State<IntroPage> {
                               children: <Widget>[
                                 Row(
                                   children: <Widget>[
-                                    sizedBox(0, 11.0),
+                                    sizedBox(0, 20.0),
                                     // Shimmer.fromColors(
                                     //   baseColor: AppTheme.themeDefault,
                                     //   highlightColor: AppTheme.themePurple,
                                     //   child:
                                     avatarCircle(IMAGE_LOGOB, 25.0),
                                     //  ),
-                                    sizedBox(0, 11.0),
+                                    sizedBox(10, 15.0),
                                     Expanded(
                                       child: AutoSizeText(
-                                        'Organizamos e impulsamos  los torneos más competitivos de fútbol virtual del país.',
+                                        'Organizamos los torneos más competitivos de fútbol virtual del país.',
                                         style: kSubtitleStyleBlack,
                                         softWrap: true,
                                         overflow: TextOverflow.clip,
@@ -143,7 +150,7 @@ class _IntroPageState extends State<IntroPage> {
                                     ),
                                   ],
                                 ),
-                                sizedBox(0, 10.0),
+                                sizedBox(0, 15.0),
                                 Row(
                                   children: <Widget>[
                                     sizedBox(0, 15.0),
@@ -155,11 +162,11 @@ class _IntroPageState extends State<IntroPage> {
                                     //       color: AppTheme.themeDefault,
                                     //       size: 35.0),
                                     // ),
-                                     avatarCircle(IMAGE_DEFAULT, 25.0),
-                                    sizedBox(0, 15.0),
+                                    avatarCircle(IMAGE_DEFAULT, 25.0),
+                                    sizedBox(10, 15.0),
                                     Expanded(
                                       child: AutoSizeText(
-                                        'Te mantenemos informado de todos los campeonatos de la comunidad (Fixture, resultados, tablas, estadísticas y ranking).',
+                                        'Te mantenemos informado de todos los campeonatos de la comunidad .',
                                         style: kSubtitleStyleBlack,
                                         softWrap: true,
                                         overflow: TextOverflow.clip,
@@ -180,11 +187,11 @@ class _IntroPageState extends State<IntroPage> {
                                     //       color: AppTheme.themeDefault,
                                     //       size: 35.0),
                                     // ),
-                                     avatarCircle(IMAGE_LOGOB, 25.0),
-                                    sizedBox(0, 10.0),
+                                    avatarCircle(IMAGE_LOGOB, 25.0),
+                                    sizedBox(10, 10.0),
                                     Expanded(
                                       child: AutoSizeText(
-                                        'Impulsamos la competitividad y el entretenimiento, por eso, te  brindamos la posibilidad de crear tus propios torneos de una manera sencilla, para realizar campeonatos personalizados con  tus amigos y/o familiares.',
+                                        'Impulsamos la competitividad y el entretenimiento. Crea tus propios torneos y realiza campeonatos personalizados con  tus amig@s',
                                         style: kSubtitleStyleBlack,
                                         softWrap: true,
                                         overflow: TextOverflow.clip,
@@ -205,9 +212,10 @@ class _IntroPageState extends State<IntroPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Center(
-                              child: Image(
-                                image: NetworkImage(IMAGE_SCREEN2),
-                                height: 180.0,
+                              child: Image.asset(
+                                'assets/vm_queofrecemos.png',
+                                //scale: 0.4,
+                                height: 150.0,
                                 fit: BoxFit.fill,
                               ),
                             ),
@@ -240,11 +248,11 @@ class _IntroPageState extends State<IntroPage> {
                                     //       color: AppTheme.themeDefault,
                                     //       size: 35.0),
                                     // ),
-                                     avatarCircle(IMAGE_DEFAULT, 25.0),
+                                    avatarCircle(IMAGE_DEFAULT, 25.0),
                                     sizedBox(10, 10.0),
                                     Expanded(
                                       child: AutoSizeText(
-                                        'Reunimos a la mayor cantidad de FIFEROS de Bolivia, consolidando la comunidad de FIFA más grande y con mejores jugadores del país. ',
+                                        'Reunir a la mayor cantidad de FIFEROS de Bolivia, consolidando la comunidad de FIFA. ',
                                         style: kSubtitleStyleBlack,
                                         softWrap: true,
                                         overflow: TextOverflow.clip,
@@ -265,11 +273,11 @@ class _IntroPageState extends State<IntroPage> {
                                     //       color: AppTheme.themeDefault,
                                     //       size: 35.0),
                                     // ),
-                                     avatarCircle(IMAGE_LOGOB, 25.0),
-                                    sizedBox(0, 10.0),
+                                    avatarCircle(IMAGE_LOGOB, 25.0),
+                                    sizedBox(10, 10.0),
                                     Expanded(
                                       child: AutoSizeText(
-                                        'Te damos la oportunidad de medir tus habilidades contra los mejores FIFEROS de Bolivia, los mismos que han representado al país en torneos internacionales oficiales.',
+                                        'Medir tus habilidades contra los mejores FIFEROS de nacionales e internacionales de Bolivia.',
                                         style: kSubtitleStyleBlack,
                                         softWrap: true,
                                         overflow: TextOverflow.clip,
@@ -290,11 +298,11 @@ class _IntroPageState extends State<IntroPage> {
                                     //       color: AppTheme.themeDefault,
                                     //       size: 35.0),
                                     // ),
-                                     avatarCircle(IMAGE_DEFAULT, 25.0),
+                                    avatarCircle(IMAGE_DEFAULT, 25.0),
                                     sizedBox(10, 10.0),
                                     Expanded(
                                       child: AutoSizeText(
-                                        'Te ofrecemos la posibilidad de ganar grandes premios por divertirte y hacer lo que más te gusta.',
+                                        'La posibilidad de ganar grandes premios por divertirte y hacer lo que más te gusta.',
                                         style: kSubtitleStyleBlack,
                                         softWrap: true,
                                         overflow: TextOverflow.clip,
@@ -349,11 +357,11 @@ class _IntroPageState extends State<IntroPage> {
                                       //       color: AppTheme.themeDefault,
                                       //       size: 35.0),
                                       // ),
-                                       avatarCircle(IMAGE_LOGOB, 25.0),
+                                      avatarCircle(IMAGE_LOGOB, 25.0),
                                       sizedBox(10.0, 0),
                                       Expanded(
                                         child: AutoSizeText(
-                                          'El club que busca, impulsa y promueve a nuevo talentos bolivianos del futbol virtual.',
+                                          'Impulsar y promover a nuevos talentos bolivianos del futbol virtual.',
                                           style: kSubtitleStyleBlack,
                                           softWrap: true,
                                           overflow: TextOverflow.clip,
@@ -374,11 +382,11 @@ class _IntroPageState extends State<IntroPage> {
                                       //       color: AppTheme.themeDefault,
                                       //       size: 35.0),
                                       // ),
-                                       avatarCircle(IMAGE_DEFAULT, 25.0),
-                                      sizedBox(0, 10.0),
+                                      avatarCircle(IMAGE_DEFAULT, 25.0),
+                                      sizedBox(10, 10.0),
                                       Expanded(
                                         child: AutoSizeText(
-                                          'Sorojchi eClub es el club de futbol virtual que mejor representa a los miles de fans que aman los esports con corazón amateur y a los que sueñan con algún día formar parte del mundo profesional.',
+                                          'Competir con nuestros represantes nacioanle se internacionales para medir tus habilidades.',
                                           style: kSubtitleStyleBlack,
                                           softWrap: true,
                                           overflow: TextOverflow.clip,
@@ -399,8 +407,8 @@ class _IntroPageState extends State<IntroPage> {
                                       //       color: AppTheme.themeDefault,
                                       //       size: 35.0),
                                       // ),
-                                       avatarCircle(IMAGE_LOGOB, 25.0),
-                                      sizedBox(0, 10.0),
+                                      avatarCircle(IMAGE_LOGOB, 25.0),
+                                      sizedBox(10, 10.0),
                                       Expanded(
                                         child: AutoSizeText(
                                           'Creamos puentes de integración a través de la diversión y el entretenimiento sano.',

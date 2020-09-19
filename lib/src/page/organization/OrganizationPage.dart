@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/page/general/ViewPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
+import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
@@ -55,9 +56,10 @@ class _OrganizationPageState extends State<OrganizationPage> {
       width: double.infinity,
       child: GestureDetector(
         onTap: () => Navigator.pushNamed(context, 'scroll'),
-        child: Image(
-          image: NetworkImage(IMAGE_ORGANIZATION),
-          height: 180.0,
+        child: Image.asset(
+          'assets/vm_quienessomos.png',
+          //scale: 0.4,
+          height: 150.0,
           fit: BoxFit.fill,
         ),
       ),
@@ -72,9 +74,9 @@ class _OrganizationPageState extends State<OrganizationPage> {
           children: <Widget>[
             Expanded(
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Text('Acerca de COMUNIDAD FIFA BOLIVIA. ¿Quiénes somos?',
+                  Text('ACERCA DE LA COMUNIDAD FIFA BOLIVIA.',
                       style: estiloTitulo),
                   // Text('Terrasur, haciendo tus sueños realidad',
                   //     style: estiloTitulo),
@@ -180,7 +182,10 @@ class _OrganizationPageState extends State<OrganizationPage> {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20.0),
         child: Text(
-          'Virtual Match en una comunidad de FIFA en Bolivia que nació en febrero del 2016, constituido como empresa unipersonal legalmente registrada en Bolivia el 1 de agosto de 2017,  representada legalmente por su propietario Edison Paredes. Desde su inicio, apuesta por asentar unas bases sólidas y de referencia dentro del mundo del fútbol virtual en los deportes electrónicos. Teniendo como pilares la Identidad,  determinación, identidad, determinación, pasión y trabajo en equipo que hacen parte de nuestro ADN.',
+          '■Virtual Match en una comunidad de FIFA en Bolivia que nació en febrero del 2016, constituido como empresa unipersonal legalmente registrada en Bolivia el 1 de agosto de 2017,  representada legalmente por su propietario Edison Paredes. Desde su inicio, apuesta por asentar unas bases sólidas y de referencia dentro del mundo del fútbol virtual en los deportes electrónicos. Teniendo como pilares la Identidad,  determinación, identidad, determinación, pasión y trabajo en equipo que hacen parte de nuestro ADN.',
+          style: kSubtitleStyleBlack,
+          softWrap: true,
+          overflow: TextOverflow.clip,
           textAlign: TextAlign.justify,
         ),
       ),
@@ -192,7 +197,10 @@ class _OrganizationPageState extends State<OrganizationPage> {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20.0),
         child: Text(
-          'Desde nuestro inicio solo tenemos un objetivo: Profesionalizar el fútbol virtual en Bolivia y al mismo tiempo formar jugadores profesionales de fifa para que en un futuro cercano Bolivia sea representado profesionalmente a nivel internacional.',
+          '■Desde nuestro inicio solo tenemos un objetivo: Profesionalizar el fútbol virtual en Bolivia y al mismo tiempo formar jugadores profesionales de fifa para que en un futuro cercano Bolivia sea representado profesionalmente a nivel internacional.',
+          style: kSubtitleStyleBlack,
+          softWrap: true,
+          overflow: TextOverflow.clip,
           textAlign: TextAlign.justify,
         ),
       ),
@@ -204,7 +212,10 @@ class _OrganizationPageState extends State<OrganizationPage> {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20.0),
         child: Text(
-          'Por otro lado, buscamos llevar a otro nivel los E-Sports en Bolivia, haciendo lo posible de llamar la atención de los clubes bolivianos en el país y formar jugadores profesionales de fifa para que algún día Bolivia sea representado profesionalmente.',
+          '■Por otro lado, buscamos llevar a otro nivel los E-Sports en Bolivia, haciendo lo posible de llamar la atención de los clubes bolivianos en el país y formar jugadores profesionales de fifa para que algún día Bolivia sea representado profesionalmente.',
+          style: kSubtitleStyleBlack,
+          softWrap: true,
+          overflow: TextOverflow.clip,
           textAlign: TextAlign.justify,
         ),
       ),
@@ -216,7 +227,10 @@ class _OrganizationPageState extends State<OrganizationPage> {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20.0),
         child: Text(
-          'Así mismo, se pretende llegar a ser una de las empresas de eSports de referencia en el panorama de los deportes electrónicos. Para ello, contamos con un equipo de profesionales multidisciplinares que nos acompañan en el desarrollo de la marca.',
+          '■Así mismo, se pretende llegar a ser una de las empresas de eSports de referencia en el panorama de los deportes electrónicos. Para ello, contamos con un equipo de profesionales multidisciplinares que nos acompañan en el desarrollo de la marca.',
+          style: kSubtitleStyleBlack,
+          softWrap: true,
+          overflow: TextOverflow.clip,
           textAlign: TextAlign.justify,
         ),
       ),
@@ -228,7 +242,10 @@ class _OrganizationPageState extends State<OrganizationPage> {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20.0),
         child: Text(
-          'Además se pretende que en la comunidad fifera exista una diversidad de culturas y una integración de todo el país, donde se comparta con otras personas de diferentes ciudades o departamentos de Bolivia. La idea es que nuestros miembros disfruten y aprovechen al máximo tus habilidades en el juego FIFA. Ya que es un juego que promueve la competitividad e incentiva a la mejora constante de habilidades del jugador, donde se desarrollan mejor  compitiendo contra otros rivales y dando la posibilidad de representar al país en eventos Internacionales.',
+          '■Además se pretende que en la comunidad fifera exista una diversidad de culturas y una integración de todo el país, donde se comparta con otras personas de diferentes ciudades o departamentos de Bolivia. La idea es que nuestros miembros disfruten y aprovechen al máximo tus habilidades en el juego FIFA. Ya que es un juego que promueve la competitividad e incentiva a la mejora constante de habilidades del jugador, donde se desarrollan mejor  compitiendo contra otros rivales y dando la posibilidad de representar al país en eventos Internacionales.',
+          style: kSubtitleStyleBlack,
+          softWrap: true,
+          overflow: TextOverflow.clip,
           textAlign: TextAlign.justify,
         ),
       ),

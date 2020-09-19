@@ -372,7 +372,13 @@ Widget floatButtonImage(
       navegation(context, page);
     },
     elevation: 2.0,
-    child: avatarCircle(IMAGE_LOGOB, 34.0),
+    child: Image.asset(
+      'assets/icono3.png',
+      //scale: 0.4,
+      height: 50.0,
+
+      fit: BoxFit.fill,
+    ),
     backgroundColor: color,
   );
 }

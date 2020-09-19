@@ -178,7 +178,11 @@ GFCard gfCardAdvanced(
 GFAccordion accordion(String title, String content,
     Color expandedTitlebackgroundColor, Color collapsedTitlebackgroundColor) {
   return GFAccordion(
-    textStyle: TextStyle(color: Colors.white),
+    textStyle: TextStyle(
+      color: Colors.white,
+      fontSize: 17.0,
+      fontFamily: 'CM Sans Serif',
+    ),
     title: title,
     content: content,
     contentPadding: EdgeInsets.all(5.0),
