@@ -9,7 +9,7 @@ class AppTheme {
       Colors.black; //Colors.red; //84, 153, 199,1.0);
   static const Color themeOrange = Colors.orange;
   static const Color themePink = Colors.pinkAccent;
-  static const Color themePurple = Colors.purple;
+  static const Color themePurple = Color.fromRGBO(123, 68, 242, 95);
   static const Color themeGrey = Colors.grey;
   static const Color themeBlackGrey = Colors.black87;
 }
