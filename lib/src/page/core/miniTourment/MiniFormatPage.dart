@@ -62,7 +62,7 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
   String _opcionTipoCompeticion = '27';
   String _opcionTipoTorneo = '23';
   String _opcionTipoModalidad = '44';
-  String _opcionCodTorneo = '48';
+  String _opcionCodTorneo = '0';
 
   List<String> _cantidad = ['2', '3', '4', '5', '6', '7', '8'];
 
@@ -141,10 +141,6 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
         _comboJugador(),
         _comboModalidad(_opcionTipoModalidad),
         _comboTorneo(_opcionTipoTorneo),
-        // _comboModalidad(_opcionTipoModalidad),
-        //  _porEquipo('Por equipo?'),
-        //  _inscription('Torneo de Pago'),
-        //   _selection('Selección Manual'),
         Text(
           '(*) Campos obligatorios. ',
           style: kCamposTitleStyle,
