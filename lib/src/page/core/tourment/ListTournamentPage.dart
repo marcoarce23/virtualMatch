@@ -7,6 +7,7 @@ import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
+import 'package:virtual_match/src/widget/bottonNavigationBar/BottonNavigatorWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/service/core/TournamentService.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
@@ -57,7 +58,7 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
       //drawer: DrawerMenu(),
       //floatingActionButton: CircularMenu(),
       //floatingActionButtonLocation: FloatingActionButtonLocation.miniEndDocked,
-      //bottomNavigationBar: new BottonNavigation(),
+      bottomNavigationBar: new BottonNavigation(),
       //   ),
     );
   }

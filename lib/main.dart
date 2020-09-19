@@ -13,6 +13,7 @@ import 'package:virtual_match/src/page/login/LogOnPage.dart';
 import 'package:virtual_match/src/page/new/NewLoadPage.dart';
 import 'package:virtual_match/src/page/notification/NotificationLoadPage.dart';
 import 'package:virtual_match/src/service/LogInService.dart';
+import 'package:virtual_match/src/widget/menu/bottomMenu.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -78,9 +79,9 @@ class _MyAppState extends State<MyApp> {
     //     return 2;
     // };
 
-  //  Map<int, Widget> option = {1: LogOnPage(), 2: HomePage()};
+    //  Map<int, Widget> option = {1: LogOnPage(), 2: HomePage()};
 
-  //  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
+    //  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light);
 
     return MultiProvider(
       providers: [
@@ -113,7 +114,6 @@ class _MyAppState extends State<MyApp> {
           ),  
           */
           home: HomePage(),
-
           //new HomePage(), //MapAdressModule(),
 
           routes: <String, WidgetBuilder>{
