@@ -105,8 +105,9 @@ class TourmentService {
     return _result;
   }
 
-  Future<List<IEntityJson>> getTodosLosTorneos(IEntityJson entityJson) async {
-    var _result = await _apiGet.getTodosLosTorneos(entityJson);
+  Future<List<IEntityJson>> getTodosLosTorneos(
+      IEntityJson entityJson, int idJugador) async {
+    var _result = await _apiGet.getTodosLosTorneos(entityJson, idJugador);
     isLoading = false;
     //notifyListeners();
     return _result;
@@ -119,14 +120,15 @@ class TourmentService {
     //notifyListeners();
     return _result;
   }
-
-  Future<List<IEntityJson>> getTodosLosTorneosPersona(
+/*
+  Future<List<IEntityJson>> getTodosLosTorneosPersona1(
       IEntityJson entityJson) async {
     var _result = await _apiGet.getTodosLosTorneos(entityJson);
     isLoading = false;
     //  notifyListeners();
     return _result;
   }
+  */
 
   Future<Map<String, dynamic>> execute(String url) async {
     final apiRest = url; // eventResourceAdd['add'][0].toString()   ;

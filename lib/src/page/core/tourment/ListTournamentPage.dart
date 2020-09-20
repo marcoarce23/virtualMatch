@@ -77,7 +77,7 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
 
   Widget futureBuilder(BuildContext context) {
     return FutureBuilder(
-        future: entityGet.getTodosLosTorneos(new ListaTorneoModel()),
+        future: entityGet.getTodosLosTorneos(new ListaTorneoModel(), 1),
         builder: (context, AsyncSnapshot snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
@@ -162,7 +162,7 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
                     color: AppTheme.themeWhite)),
             Text(entity.premios, style: TextStyle(fontSize: 13)),
             AutoSizeText(
-              'Del ${new DateFormat.yMMMMd('es_BO').format(entity.fechaInicio)}',
+              'Fecha: ${new DateFormat.yMMMMd('es_BO').format(entity.fechaInicio)}',
               style: kSubSubTitleCardStyle,
               softWrap: true,
               overflow: TextOverflow.clip,
