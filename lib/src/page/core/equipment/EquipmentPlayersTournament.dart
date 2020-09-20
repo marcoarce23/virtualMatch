@@ -51,6 +51,7 @@ class _EquipmentPlayersTournamentState
   Widget listView(BuildContext context, AsyncSnapshot snapshot) {
     final size = MediaQuery.of(context).size;
     return Container(
+      
       width: size.width * 0.97,
       child: ListView.builder(
         shrinkWrap: true,

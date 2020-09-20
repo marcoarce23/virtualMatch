@@ -1,11 +1,14 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:intl/intl.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/ListadoTorneoModel.dart';
+import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/page/core/equipment/EquipmentPlayersTournament.dart';
+import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/core/TournamentService.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
@@ -58,8 +61,8 @@ class _TourmentPageState extends State<TourmentPage> {
         appBar: appBar('TORNEOS'),
         body: SingleChildScrollView(child: bodyContainer(context)),
         drawer: DrawerMenu(),
-        //floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
-        //  FaIcon(FontAwesomeIcons.playstation), HomePage()),
+        floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
+            FaIcon(FontAwesomeIcons.playstation), HomePage()),
         // bottomNavigationBar: new BottonNavigation(),
       ),
     );
@@ -68,10 +71,16 @@ class _TourmentPageState extends State<TourmentPage> {
   Widget bodyContainer(BuildContext context) {
     return Column(
       children: <Widget>[
-        sizedBox(0, 10),
+        sizedBox(0, 1),
         futureBuilderTorneo(context),
-        sizedBox(0, 10),
+        sizedBox(0, 5),
         Container(
+          decoration: new BoxDecoration(
+            image: new DecorationImage(
+              image: new AssetImage('assets/portada1.png'),
+              fit: BoxFit.cover,
+            ),
+          ),
           width: MediaQuery.of(context).size.width * 0.95,
           child: GFTabs(
             tabBarColor: AppTheme.themeDefault,
@@ -106,15 +115,10 @@ class _TourmentPageState extends State<TourmentPage> {
                 ),
               ),
               Tab(
-                icon: Image.asset(
-                  'assets/icono1.png',
-                  //scale: 0.4,
-                  width: 30,
-                  height: 25,
-                ),
+                icon: avatarCircle(IMAGE_DEFAULT, 20),
                 child: Text(
                   "Posiciones".toUpperCase(),
-                  style: TextStyle(fontSize: 11),
+                  style: TextStyle(fontSize: 10),
                 ),
               ),
               Tab(
@@ -133,33 +137,35 @@ class _TourmentPageState extends State<TourmentPage> {
             tabBarView: GFTabBarView(
               children: <Widget>[
                 SingleChildScrollView(
-                  child: Column(
-                    children: <Widget>[
-                      divider(),
-                      Shimmer.fromColors(
-                        baseColor: AppTheme.themeDefault,
-                        highlightColor: AppTheme.themePurple,
-                        child: AutoSizeText(
-                          'Listado de Equipos'.toUpperCase(),
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 19.0,
-                            fontWeight: FontWeight.bold,
+                  child: Container(
+                    child: Column(
+                      children: <Widget>[
+                        dividerBlack(),
+                        Shimmer.fromColors(
+                          baseColor: AppTheme.themeDefault,
+                          highlightColor: AppTheme.themePurple,
+                          child: AutoSizeText(
+                            'Listado de Equipos'.toUpperCase(),
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 19.0,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
-                      ),
-                      sizedBox(0, 0),
-                      EquipmentPlayersTournament(
-                        idTorneo: widget.idTorneo,
-                      ),
-                      //copyRigth(),
-                    ],
+                        sizedBox(0, 0),
+                        EquipmentPlayersTournament(
+                          idTorneo: widget.idTorneo,
+                        ),
+                        //copyRigth(),
+                      ],
+                    ),
                   ),
                 ),
                 SingleChildScrollView(
                   child: Column(
                     children: <Widget>[
-                      divider(),
+                      dividerBlack(),
                       Shimmer.fromColors(
                         baseColor: AppTheme.themeDefault,
                         highlightColor: AppTheme.themePurple,
@@ -182,7 +188,7 @@ class _TourmentPageState extends State<TourmentPage> {
                 SingleChildScrollView(
                   child: Column(
                     children: <Widget>[
-                      divider(),
+                      dividerBlack(),
                       Shimmer.fromColors(
                         baseColor: AppTheme.themeDefault,
                         highlightColor: AppTheme.themePurple,
@@ -205,7 +211,7 @@ class _TourmentPageState extends State<TourmentPage> {
                 SingleChildScrollView(
                   child: Column(
                     children: <Widget>[
-                      divider(),
+                      dividerBlack(),
                       Shimmer.fromColors(
                         baseColor: AppTheme.themeDefault,
                         highlightColor: AppTheme.themePurple,

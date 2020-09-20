@@ -62,61 +62,70 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         appBar: appBar('Virtual Match'),
         body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Center(
-                child: Container(
-                    width: MediaQuery.of(context).size.width * 0.75,
-                    child: CarouselSimple(lista, Colors.white12, Colors.black)),
+          child: Container(
+            decoration: new BoxDecoration(
+              image: new DecorationImage(
+                image: new AssetImage('assets/portada1.png'),
+                fit: BoxFit.cover,
               ),
-              sizedBox(0, 10),
-              CardVM(
-                size: 150,
-                imageAssets: 'assets/icono3.png',
-                opciones: _simplePopup(),
-                accesosRapidos: xxxx(),
-                listWidgets: [
-                  Text(
-                    "sssss",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ],
-              ),
-              /*
-              CardVM(
-                size: 150,
-                imageAssets: 'assets/icono3.png',
-                opciones: _simplePopup(),
-                accesosRapidos: xxxx(),
-                listWidgets: [
-                  Text(
-                    "xxxxx",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  Text(
-                    "sdasdasd",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  Text(
-                    "dsdfsdf",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  Text(
-                    "asdasdasd",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  Text(
-                    "asdasdasd",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  Text(
-                    "asdasdasd",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ],
-              ),
-              */
-            ],
+            ),
+            child: Column(
+              children: [
+                Center(
+                  child: Container(
+                      width: MediaQuery.of(context).size.width * 0.75,
+                      child: CarouselSimple(
+                          lista, AppTheme.themePurple, AppTheme.themeWhite)),
+                ),
+                sizedBox(0, 10),
+                CardVM(
+                  size: 150,
+                  imageAssets: 'assets/icono3.png',
+                  opciones: _simplePopup(),
+                  accesosRapidos: xxxx(),
+                  listWidgets: [
+                    Text(
+                      "sssss",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ],
+                ),
+                /*
+                CardVM(
+                  size: 150,
+                  imageAssets: 'assets/icono3.png',
+                  opciones: _simplePopup(),
+                  accesosRapidos: xxxx(),
+                  listWidgets: [
+                    Text(
+                      "xxxxx",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    Text(
+                      "sdasdasd",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    Text(
+                      "dsdfsdf",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    Text(
+                      "asdasdasd",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    Text(
+                      "asdasdasd",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    Text(
+                      "asdasdasd",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ],
+                ),
+                */
+              ],
+            ),
           ),
         ),
         drawer: DrawerMenu(),

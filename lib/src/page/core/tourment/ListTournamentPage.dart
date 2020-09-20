@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
+import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
@@ -44,11 +45,23 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       key: scaffoldKey,
       appBar: appBar('TORNEOS VIRTUAL MATCH'),
-      body: SingleChildScrollView(child: bodyContainer(context)),
+      body: SingleChildScrollView(
+          child: Container(
+              height: size.height,
+              decoration: new BoxDecoration(
+                image: new DecorationImage(
+                  image: new AssetImage('assets/portada2.png'),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              child: bodyContainer(context))),
       drawer: DrawerMenu(),
+      floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
+          FaIcon(FontAwesomeIcons.playstation), HomePage()),
       //floatingActionButton: CircularMenu(),
       //floatingActionButtonLocation: FloatingActionButtonLocation.miniEndDocked,
       bottomNavigationBar: new BottonNavigation(),
@@ -58,6 +71,7 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
   }
 
   Widget bodyContainer(BuildContext context) {
+    sizedBox(0, 7);
     return futureBuilder(context);
   }
 
@@ -78,7 +92,7 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
                     'Conoce los resultados actuales de los torneos de la comunidad.',
                   ),
                   sizedBox(0, 5.0),
-                  dividerBlack(),
+                  divider(),
                   listView(context, snapshot),
                   //     copyRigthBlack(),
                 ],
