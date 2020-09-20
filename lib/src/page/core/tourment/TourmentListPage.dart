@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:getwidget/components/button/gf_button.dart';
+import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/ListadoTorneoModel.dart';
+import 'package:virtual_match/src/model/entity/EntityMap/JugadorModel.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
+import 'package:virtual_match/src/service/core/PlayerService.dart';
 import 'package:virtual_match/src/service/core/TournamentService.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
@@ -15,6 +19,8 @@ import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/TorneoModelo.dart'
     as model;
+import 'package:virtual_match/src/model/entity/EntityMap/JugadorModel.dart'
+    as model1;
 
 class TourmentListPage extends StatefulWidget {
   static final String routeName = 'tourmentList';
@@ -36,6 +42,7 @@ class _TourmentListPageState extends State<TourmentListPage> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   bool _save = false;
   String _opcionJugador = '1';
+  PlayerService entityGet1 = PlayerService();
 
   @override
   Widget build(BuildContext context) {
@@ -126,6 +133,12 @@ class _TourmentListPageState extends State<TourmentListPage> {
                   entity.idTipoCompeticion.toString()),
               accesosRapidos: null,
               listWidgets: [
+                Text(
+                  'ID TOREO : ${entity.idTorneo.toString()}',
+                  style: TextStyle(
+                    color: AppTheme.themeWhite,
+                  ),
+                ),
                 Text(
                   'TÍTULO : ${entity.nombreTorneo}',
                   style: TextStyle(
@@ -296,7 +309,10 @@ class _TourmentListPageState extends State<TourmentListPage> {
               break;
             case 3:
               print('Adicionar jugadores');
-              _complete(idTorneo);
+              setState(() {
+                _showPlayer(idTorneo);
+              });
+              //  _complete(idTorneo);
               break;
             case 4:
               print('Empezar torneo');
@@ -313,4 +329,115 @@ class _TourmentListPageState extends State<TourmentListPage> {
         ),
         offset: Offset(0, 100),
       );
+
+  _showPlayer(String idTorneo) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Column(
+              children: [
+                Text('Selecionar Jugadores'),
+                //  setState(() {
+                _comboJugador(),
+                _button('Guardar', 18.0, 20.0, idTorneo),
+                // }),
+              ],
+            ),
+            // actions: [
+            //   MaterialButton(
+            //     child: Text('Agregar'),
+            //      onPressed: () {}),
+            // ],
+          );
+        });
+  }
+
+  List<DropdownMenuItem<String>> getDropDown(AsyncSnapshot snapshot) {
+    List<DropdownMenuItem<String>> lista = new List();
+
+    for (var i = 0; i < snapshot.data.length; i++) {
+      JugadorModel item = snapshot.data[i];
+      lista.add(DropdownMenuItem(
+        child: Text(item.idPsdn + ' - ' + item.nombre + ' ' + item.apellido),
+        value: item.idJugador.toString(),
+      ));
+    }
+    return lista;
+  }
+
+  Widget _comboJugador() {
+    return Center(
+        child: FutureBuilder(
+            future: entityGet1.get(new model1.JugadorModel()),
+            builder: (context, AsyncSnapshot snapshot) {
+              if (snapshot.hasData) {
+                return Row(
+                  children: <Widget>[
+                    sizedBox(15.0, 0),
+                    // Text('Tipo Moldalidad'),
+                    sizedBox(15.0, 0),
+                    DropdownButton(
+                      icon: FaIcon(FontAwesomeIcons.sort,
+                          color: AppTheme.themePurple),
+                      value: _opcionJugador,
+                      items: getDropDown(snapshot),
+                      onChanged: (value) {
+                        setState(() {
+                          _opcionJugador = value;
+                          print('valorrr: $_opcionJugador');
+                        });
+                      },
+                    ),
+                  ],
+                );
+              } else {
+                return loading();
+              }
+            }));
+  }
+
+  Widget _button(
+      String text, double fontSize, double edgeInsets, String idTorneo) {
+    return GFButton(
+      padding: EdgeInsets.symmetric(horizontal: edgeInsets),
+      text: text,
+      textStyle: TextStyle(fontSize: fontSize),
+      textColor: AppTheme.themeWhite,
+      color: AppTheme.themeDefault,
+      icon: FaIcon(FontAwesomeIcons.checkCircle, color: AppTheme.themeWhite),
+      shape: GFButtonShape.pills,
+      onPressed: (_save) ? null : _submit(idTorneo),
+    );
+  }
+
+  _submit(String idTorneo) {
+    setState(() => _save = true);
+    _executeInscription(entity.idTorneo.toString(), _opcionJugador);
+    setState(() => _save = false);
+  }
+
+  void _executeInscription(String idTorneo, String idJugador) async {
+    print('ENTROSSSS $idTorneo y $idJugador');
+    String respuesta;
+    String mensaje;
+    try {
+      await entityService
+          .execute(API +
+              '/api/Torneo/Inscribir/Torneo/' +
+              idTorneo +
+              '/Jugador/' +
+              idJugador)
+          .then((result) {
+        respuesta = result["tipo_mensaje"].toString();
+        mensaje = result["mensaje"].toString();
+        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
+
+        if (respuesta == '0') showSnackbar(mensaje, scaffoldKey);
+        if (respuesta == '2') showSnackbar(mensaje, scaffoldKey);
+      });
+    } catch (error) {
+      showSnackbar('Usuario registrado !!!', scaffoldKey);
+    }
+  }
 } // FIN DE LA CLASE
