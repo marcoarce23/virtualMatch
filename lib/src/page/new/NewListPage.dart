@@ -6,6 +6,7 @@ import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/NewService.dart';
+import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/card/CardVM.dart';
@@ -127,31 +128,49 @@ class _NewListPageState extends State<NewListPage> {
       children: <Widget>[
         sizedBox(0, 7.0),
         CardVM(
-          size: 150,
+          size: 120,
           imageAssets: 'assets/icono3.png',
           opciones:
               _simplePopup(entity, entity.idNoticiaEvento.toString(), context),
           accesosRapidos: null,
           listWidgets: [
-            Text('Titulo: ${entity.titulo}'),
+            Text(
+              'Titulo: ${entity.titulo}',
+              style: kSubtitleStyleWhite,
+              softWrap: true,
+              overflow: TextOverflow.clip,
+              textAlign: TextAlign.justify,
+            ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
                   'Detalle: ${entity.objetivo}',
-                  style: TextStyle(color: AppTheme.themeWhite),
+                  style: kSubtitleStyleWhite,
+                  softWrap: true,
+                  overflow: TextOverflow.clip,
+                  textAlign: TextAlign.justify,
                 ),
                 Text(
                   'Dirigo a: ${entity.dirigidoa}',
-                  style: TextStyle(color: AppTheme.themeWhite),
+                  style: kSubtitleStyleWhite,
+                  softWrap: true,
+                  overflow: TextOverflow.clip,
+                  textAlign: TextAlign.justify,
                 ),
                 Text(
                   'Lugar/Virtual: ${entity.dirigidoa}',
-                  style: TextStyle(color: AppTheme.themeWhite),
+                  style: kSubtitleStyleWhite,
+                  softWrap: true,
+                  overflow: TextOverflow.clip,
+                  textAlign: TextAlign.justify,
                 ),
                 Text(
                   'Fecha y Hora: ${entity.fecha} ${entity.hora}',
-                  style: TextStyle(color: AppTheme.themeWhite),
+                  style: kSubtitleStyleWhite,
+                  softWrap: true,
+                  overflow: TextOverflow.clip,
+                  textAlign: TextAlign.justify,
                 ),
               ],
             )
@@ -185,7 +204,11 @@ class _NewListPageState extends State<NewListPage> {
               break;
             case 2:
               entityModel.idNoticiaEvento = int.parse(keyId);
-              executeDelete(keyId, prefs.email);
+
+              setState(() {
+                executeDelete(keyId, prefs.email);
+              });
+
               break;
             default:
               showSnackbarWithOutKey("No hay opcion seleccionada", context);

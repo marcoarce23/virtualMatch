@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
+import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/card/CardVM.dart';
@@ -125,7 +126,7 @@ class _NotificationListPageState extends State<NotificationListPage> {
           children: <Widget>[
             sizedBox(0, 7),
             CardVM(
-              size: 100,
+              size: 90,
               imageAssets: 'assets/icono3.png',
               opciones: _simplePopup(
                   entity, entity.idNotificacion.toString(), context),
@@ -133,12 +134,18 @@ class _NotificationListPageState extends State<NotificationListPage> {
               listWidgets: [
                 Text(
                   'TÍTULO : ${entity.titulo}',
-                  style: TextStyle(
-                    color: AppTheme.themeWhite,
-                  ),
+                  style: kSubtitleStyleWhite,
+                  softWrap: true,
+                  overflow: TextOverflow.clip,
+                  textAlign: TextAlign.justify,
                 ),
-                Text('DETALLE: ${entity.detalle}',
-                    style: TextStyle(color: AppTheme.themeWhite)),
+                Text(
+                  'DETALLE: ${entity.detalle}',
+                  style: kSubtitleStyleWhite,
+                  softWrap: true,
+                  overflow: TextOverflow.clip,
+                  textAlign: TextAlign.justify,
+                ),
               ],
             ),
           ],
@@ -179,10 +186,14 @@ class _NotificationListPageState extends State<NotificationListPage> {
               break;
             case 3:
               entityModel.idNotificacion = int.parse(keyId);
-              executeDelete(
-                entityModel.idNotificacion.toString(),
-                prefs.email,
-              );
+
+              setState(() {
+                executeDelete(
+                  entityModel.idNotificacion.toString(),
+                  prefs.email,
+                );
+              });
+
               break;
             default:
               showSnackbarWithOutKey("No hay opcion seleccionada", context);

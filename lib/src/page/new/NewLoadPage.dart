@@ -334,6 +334,7 @@ class _NewLoadPageState extends State<NewLoadPage> {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 15.0),
       child: TextFormField(
+        style: TextStyle(color: AppTheme.themeBlackBlack, fontWeight: FontWeight.bold),
         initialValue: initialValue,
         textCapitalization: TextCapitalization.sentences,
         enableSuggestions: true,

@@ -37,6 +37,13 @@ final kSubtitleStyleBlack = TextStyle(
   height: 1.2,
 );
 
+final kSubtitleStyleWhite = TextStyle(
+  color: AppTheme.themeWhite,
+  fontFamily: 'CM Sans Serif',
+  fontSize: 16.0,
+  height: 1.1,
+);
+
 final kSigTitleStyle = TextStyle(
   color: AppTheme.themeBlackBlack,
   fontFamily: 'CM Sans Serif',
@@ -47,14 +54,14 @@ final kSigTitleStyle = TextStyle(
 final kSigsTitleStyle = TextStyle(
   color: AppTheme.themeWhite,
   fontFamily: FONT_FAMILY_CM_SANS_SERIF,
-  fontSize: 15.0,
+  fontSize: 17.0,
   height: 1.0,
 );
 
 final kSigssTitleStyle = TextStyle(
   color: AppTheme.themeWhite,
   fontFamily: FONT_FAMILY_CM_SANS_SERIF,
-  fontSize: 14.0,
+  fontSize: 15.0,
   height: 1.0,
 );
 

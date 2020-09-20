@@ -298,7 +298,7 @@ class DrawerMenu extends StatelessWidget {
             'Auspiciador DxrAcer',
             () => navegation(context, AuspiciadorPage())),
 
-              CustomListTile(
+        CustomListTile(
             Image.asset(
               'assets/image/jugador2.png',
               //scale: 0.4,
@@ -307,7 +307,7 @@ class DrawerMenu extends StatelessWidget {
             ),
             '   Jugadores de la comunidad',
             () => navegation(context, PlayerLoadPage())),
-            
+
         CustomListTile(
             Image.asset(
               'assets/image/pelota.png',

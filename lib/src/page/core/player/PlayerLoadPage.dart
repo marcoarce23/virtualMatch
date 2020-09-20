@@ -380,11 +380,22 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
 
   @override
   Widget build(BuildContext context) {
+    print('ID PALYER: ${prefs.idPersonal.toString()}');
     entity.states = StateEntity.Insert;
     entity.foto = image;
 
-    if (prefs.idPlayer != "0") entity.states = StateEntity.Update;
+    if (prefs.idPlayer != "0") {
+      entity.nombre = prefs.nameUser;
+      entity.apellido = prefs.lastPage;
+      entity.idPsdn = prefs.idPsdn;
+      entity.telefono = prefs.telefono;
+      entity.informacionComplementaria = prefs.informacionComplementaria;
+      entity.facebook = prefs.facebook;
+      // _opcionDepartamento = prefs.idDepartament.toString();
+      entity.states = StateEntity.Update;
 
+      print('ID PALYER: ${entity.informacionComplementaria}');
+    }
     return MultiProvider(
       providers: [
         // ignore: missing_required_param
@@ -392,7 +403,7 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
       ],
       child: Scaffold(
         key: scaffoldKey,
-        appBar: appBar('Jugador Virtual Match'),
+        appBar: appBar('Jugador Virtual Match'.toUpperCase()),
         drawer: DrawerMenu(),
         body: Stack(
           children: <Widget>[
