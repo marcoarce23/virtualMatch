@@ -82,27 +82,51 @@ class _TourmentPageState extends State<TourmentPage> {
             length: 4,
             tabs: <Widget>[
               Tab(
-                icon: Icon(Icons.perm_identity),
+                icon: Image.asset(
+                  'assets/icono3.png',
+                  //scale: 0.4,
+                  width: 30,
+                  height: 25,
+                ),
                 child: Text(
                   "EQUIPOS",
+                  style: TextStyle(fontSize: 11),
                 ),
               ),
               Tab(
-                icon: Icon(Icons.score),
+                icon: Image.asset(
+                  'assets/icono2.png',
+                  //scale: 0.4,
+                  width: 30,
+                  height: 25,
+                ),
                 child: Text(
                   "Fixture".toUpperCase(),
+                  style: TextStyle(fontSize: 11),
                 ),
               ),
               Tab(
-                icon: Icon(Icons.table_chart),
+                icon: Image.asset(
+                  'assets/icono1.png',
+                  //scale: 0.4,
+                  width: 30,
+                  height: 25,
+                ),
                 child: Text(
                   "Posiciones".toUpperCase(),
+                  style: TextStyle(fontSize: 11),
                 ),
               ),
               Tab(
-                icon: Icon(Icons.history),
+                icon: Image.asset(
+                  'assets/icono3.png',
+                  //scale: 0.4,
+                  width: 30,
+                  height: 25,
+                ),
                 child: Text(
                   "Historial".toUpperCase(),
+                  style: TextStyle(fontSize: 11),
                 ),
               ),
             ],

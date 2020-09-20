@@ -14,8 +14,6 @@ import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/service/core/TournamentService.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
-import 'package:virtual_match/src/widget/menu/bottomMenu.dart';
-import 'package:virtual_match/src/widget/util/Util.dart';
 import 'TourmentPage.dart';
 
 import 'package:virtual_match/src/model/entity/EntityFromJson/ListadoTorneoModel.dart';
@@ -46,16 +44,7 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
-    return
-        // return MultiProvider(
-        //   providers: [
-        //     ChangeNotifierProvider(builder: (_) => new CrudService()),
-        //   ],
-        //   child:
-
-        Scaffold(
+    return Scaffold(
       key: scaffoldKey,
       appBar: appBar('TORNEOS VIRTUAL MATCH'),
       body: SingleChildScrollView(child: bodyContainer(context)),
@@ -116,84 +105,55 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
   }
 
   Widget showListTournament(BuildContext context, ListaTorneoModel entity) {
-    return Container(
-      child: InkWell(
-        onTap: () {},
-        child: Align(
-          alignment: Alignment.centerLeft,
-          child: Container(
-            margin: EdgeInsets.symmetric(vertical: 0.0),
-            //decoration: boxDecoration(),
-            child: Column(
-              children: <Widget>[
-                CardVM(
-                  size: 150,
-                  imageAssets: 'assets/icono3.png',
-                  opciones: _simplePopup(entity.idTorneo.toString()),
-                  accesosRapidos: null,
-                  listWidgets: [
-                    Text('TORNEO: ${entity.nombreTorneo}',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15,
-                            color: AppTheme.themeWhite)),
-                    Text('TIPO:  ${entity.tipoCompeticion}',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15,
-                            color: AppTheme.themeWhite)),
-                    Text(
-                        'INSCRITOS:  ${entity.cantidadInscritos}/${entity.cantidadJugadores}',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15,
-                            color: AppTheme.themeWhite)),
-                    Text('DETALLE:',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 13,
-                            color: AppTheme.themeWhite)),
-                    AutoSizeText(
-                      entity.detalle,
-                      style: kSubSubTitleCardStyle,
-                      softWrap: true,
-                      overflow: TextOverflow.clip,
-                      textAlign: TextAlign.justify,
-                    ),
-                    Text('PREMIOS:',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 13,
-                            color: AppTheme.themeWhite)),
-                    Text(entity.premios, style: TextStyle(fontSize: 13)),
-                    AutoSizeText(
-                      'Del ${new DateFormat.yMMMMd('es_BO').format(entity.fechaInicio)}',
-                      style: kSubSubTitleCardStyle,
-                      softWrap: true,
-                      overflow: TextOverflow.clip,
-                      textAlign: TextAlign.justify,
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _showAction(String keyId) {
     return Column(
-      children: [
-        sizedBox(5, 0),
-        _detail(keyId),
-        sizedBox(0, 6),
-        Row(
-          children: <Widget>[
-            _subcription(keyId),
-            sizedBox(5, 0),
-            _delete(keyId),
+      children: <Widget>[
+        CardVM(
+          size: 170,
+          imageAssets: 'assets/icono3.png',
+          opciones: _simplePopup(entity.idTorneo.toString()),
+          accesosRapidos: null,
+          listWidgets: [
+            Text('TORNEO: ${entity.nombreTorneo}',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                    color: AppTheme.themeWhite)),
+            Text('TIPO:  ${entity.tipoCompeticion}',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                    color: AppTheme.themeWhite)),
+            Text(
+                'INSCRITOS:  ${entity.cantidadInscritos}/${entity.cantidadJugadores}',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                    color: AppTheme.themeWhite)),
+            Text('DETALLE:',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 13,
+                    color: AppTheme.themeWhite)),
+            AutoSizeText(
+              entity.detalle,
+              style: kSubSubTitleCardStyle,
+              softWrap: true,
+              overflow: TextOverflow.clip,
+              textAlign: TextAlign.justify,
+            ),
+            Text('PREMIOS:',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 13,
+                    color: AppTheme.themeWhite)),
+            Text(entity.premios, style: TextStyle(fontSize: 13)),
+            AutoSizeText(
+              'Del ${new DateFormat.yMMMMd('es_BO').format(entity.fechaInicio)}',
+              style: kSubSubTitleCardStyle,
+              softWrap: true,
+              overflow: TextOverflow.clip,
+              textAlign: TextAlign.justify,
+            ),
           ],
         ),
       ],

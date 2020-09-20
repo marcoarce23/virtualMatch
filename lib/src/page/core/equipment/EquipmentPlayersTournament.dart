@@ -5,6 +5,7 @@ import 'package:virtual_match/src/model/entity/EntityFromJson/ListadoJugadoresMo
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/service/core/EquipmentService.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
+import 'package:virtual_match/src/widget/card/CardVM.dart';
 import 'package:virtual_match/src/widget/general/CallWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/widget/general/SenWidget.dart';
@@ -68,143 +69,81 @@ class _EquipmentPlayersTournamentState
   }
 
   Widget showPlayers(ListadoJugadoresModel entity) {
-    final size = MediaQuery.of(context).size;
-    // sizedBox(0, 7);
-    return Container(
-      width: size.width * 0.97,
-      //   margin: EdgeInsets.all(3.0),
-      decoration: boxDecoration(),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          //  sizedBox(0, 7),
-          gfListTile(
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Flexible(flex: 7, child: _showAvatarDetail(entity)),
-                  Flexible(
-                    flex: 1,
-                    child: InkWell(
-                      onTap: () {
-                        callNumber(int.parse(entity.telefono));
-                      },
-                      child: FaIcon(FontAwesomeIcons.phone,
-                          color: AppTheme.themePurple, size:27),
-                    ),
-                  ),
-                  Flexible(
-                    flex: 1,
-                    child: InkWell(
-                      onTap: () {
-                        sendSMS(int.parse(entity.telefono));
-                      },
-                      child: FaIcon(FontAwesomeIcons.sms,
-                          color: AppTheme.themePurple, size:27),
-                    ),
-                  ),
-                  Flexible(
-                    flex: 1,
-                    child: InkWell(
-                      onTap: () {
-                        callWhatsApp1(int.parse(entity.telefono));
-                      },
-                      child: FaIcon(FontAwesomeIcons.whatsapp,
-                          color: Colors.white, size:27),
-                    ),
-                  ),
-                ],
-              ),
-              null,
-              null, //_showPlayerDetail(entity),
-              null,
-              null, //avatarCircle((entity.fotoJugador ?? IMAGE_DEFAULT), 35),
-              null,
-              EdgeInsets.all(3.0)),
-          // sizedBox(0, 7),
-        ],
-      ),
-    );
-    //Text(entity.nombreEquipo);
-  }
-
-  Widget _showPlayerDetail(ListadoJugadoresModel entity) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
-        //sizedBox(5, 0),
-
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            FaIcon(
-              FontAwesomeIcons.trophy,
-              size: 10,
-              color: Colors.green,
+        CardVM(
+          size: 120,
+          imageAssets: 'assets/icono3.png',
+          opciones: avatarCircle(
+              (entity.fotoJugador == null ? IMAGE_LOGOB : entity.fotoJugador),
+              30),
+          accesosRapidos: opcionesLlamada(entity),
+          listWidgets: [
+            AutoSizeText(
+              entity.nombreJugador,
+              style: TextStyle(color: Colors.white),
+              overflow: TextOverflow.ellipsis,
+              softWrap: true,
+              maxLines: 1,
+              textAlign: TextAlign.left,
             ),
-            Text('20 ganados', style: TextStyle(color: AppTheme.themeWhite)),
-            FaIcon(
-              FontAwesomeIcons.handPointDown,
-              size: 10,
-              color: Colors.red,
+            AutoSizeText(
+              entity.apellidoJugador,
+              style: TextStyle(color: Colors.white),
+              overflow: TextOverflow.ellipsis,
+              softWrap: true,
+              maxLines: 1,
+              textAlign: TextAlign.left,
             ),
-            Text('10 Perdidos', style: TextStyle(color: AppTheme.themePurple)),
+            AutoSizeText(
+              'DPTO: ${entity.departamento}',
+              style: TextStyle(color: Colors.white),
+              overflow: TextOverflow.ellipsis,
+              softWrap: true,
+              maxLines: 2,
+              textAlign: TextAlign.left,
+            ),
+            AutoSizeText(
+              'IPSDN: ${entity.idJugador.toString()}',
+              style: TextStyle(color: Colors.white),
+              overflow: TextOverflow.ellipsis,
+              softWrap: true,
+              maxLines: 1,
+              textAlign: TextAlign.left,
+            ),
           ],
         ),
-        //sizedBox(5, 0),
+        // sizedBox(0, 7),
       ],
     );
+    //Text(entity.nombreEquipo);
   }
 
-  Widget _showAvatarDetail(ListadoJugadoresModel entity) {
-    return Row(
-      children: <Widget>[
-        avatarCircle(
-            (entity.fotoJugador == null ? IMAGE_LOGOB : entity.fotoJugador),
-            24),
-        sizedBox(10, 0),
-        Expanded(
-          child: Column(
-            //    mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              AutoSizeText(
-                entity.nombreJugador,
-                style: TextStyle(color: Colors.white),
-                overflow: TextOverflow.ellipsis,
-                softWrap: true,
-                maxLines: 1,
-                textAlign: TextAlign.left,
-              ),
-              AutoSizeText(
-                entity.apellidoJugador,
-                style: TextStyle(color: Colors.white),
-                overflow: TextOverflow.ellipsis,
-                softWrap: true,
-                maxLines: 1,
-                textAlign: TextAlign.left,
-              ),
-              AutoSizeText(
-                'DPTO: ${entity.departamento}',
-                style: TextStyle(color: Colors.white),
-                overflow: TextOverflow.ellipsis,
-                softWrap: true,
-                maxLines: 2,
-                textAlign: TextAlign.left,
-              ),
-              AutoSizeText(
-                'IPSDN: ${entity.idJugador.toString()}',
-                style: TextStyle(color: Colors.white),
-                overflow: TextOverflow.ellipsis,
-                softWrap: true,
-                maxLines: 1,
-                textAlign: TextAlign.left,
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
+  List<Widget> opcionesLlamada(ListadoJugadoresModel entity) {
+    return [
+      sizedBox(30, 0),
+      InkWell(
+        onTap: () {
+          callNumber(int.parse(entity.telefono));
+        },
+        child: FaIcon(FontAwesomeIcons.phone, color: Colors.white, size: 27),
+      ),
+      sizedBox(30, 0),
+      InkWell(
+        onTap: () {
+          sendSMS(int.parse(entity.telefono));
+        },
+        child: FaIcon(FontAwesomeIcons.sms, color: Colors.white, size: 27),
+      ),
+      sizedBox(30, 0),
+      InkWell(
+        onTap: () {
+          callWhatsApp1(int.parse(entity.telefono));
+        },
+        child: FaIcon(FontAwesomeIcons.whatsapp, color: Colors.white, size: 27),
+      ),
+    ];
   }
 }
