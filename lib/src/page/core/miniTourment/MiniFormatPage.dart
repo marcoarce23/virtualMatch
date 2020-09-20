@@ -223,7 +223,7 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
   }
 
   Widget _comboCodTroneo(String _opcionCodTorneos) {
-    print("prefsss:${prefs.idPlayer}");
+    print("prefsss:${prefs.idPlayer.toString()}");
 
     return Center(
         child: FutureBuilder(
