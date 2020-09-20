@@ -121,6 +121,8 @@ class _TourmentListPageState extends State<TourmentListPage> {
   }
 
   Widget _showListTile(ListaTorneoModel entity) {
+    print('ddddd: ${entity.idTorneo.toString()}');
+
     final size = MediaQuery.of(context).size;
     return Column(
       children: <Widget>[
@@ -309,9 +311,9 @@ class _TourmentListPageState extends State<TourmentListPage> {
               break;
             case 3:
               print('Adicionar jugadores');
-              setState(() {
+             
                 _showPlayer(idTorneo);
-              });
+            
               //  _complete(idTorneo);
               break;
             case 4:
@@ -331,6 +333,7 @@ class _TourmentListPageState extends State<TourmentListPage> {
       );
 
   _showPlayer(String idTorneo) {
+    print('vvvvv $idTorneo');
     showDialog(
         context: context,
         builder: (context) {
@@ -338,17 +341,20 @@ class _TourmentListPageState extends State<TourmentListPage> {
             title: Column(
               children: [
                 Text('Selecionar Jugadores'),
-                //  setState(() {
-                _comboJugador(),
-                _button('Guardar', 18.0, 20.0, idTorneo),
-                // }),
+                 
+                _comboJugador(_opcionJugadord),
+               //   _button('Guardar', 18.0, 20.0, idTorneo),
+              
               ],
             ),
-            // actions: [
-            //   MaterialButton(
-            //     child: Text('Agregar'),
-            //      onPressed: () {}),
-            // ],
+            actions: [
+              MaterialButton(
+                  child: Text('Agregar'),
+                  onPressed: () {
+                    _executeInscription(
+                        idTorneo, _opcionJugador);
+                  }),
+            ],
           );
         });
   }
@@ -407,7 +413,8 @@ class _TourmentListPageState extends State<TourmentListPage> {
       color: AppTheme.themeDefault,
       icon: FaIcon(FontAwesomeIcons.checkCircle, color: AppTheme.themeWhite),
       shape: GFButtonShape.pills,
-      onPressed: (_save) ? null : _submit(idTorneo),
+      onPressed: () =>
+          _executeInscription(entity.idTorneo.toString(), _opcionJugador),
     );
   }
 
