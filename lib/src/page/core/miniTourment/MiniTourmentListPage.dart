@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
 //import 'package:provider/provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:getwidget/components/button/gf_button.dart';
+import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:virtual_match/src/model/Preference.dart';
+import 'package:virtual_match/src/model/entity/EntityFromJson/ClasificadorModel.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/ListadoTorneoModel.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
+import 'package:virtual_match/src/service/core/PlayerService.dart';
 import 'package:virtual_match/src/service/core/TournamentService.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/card/CardVM.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
+import 'package:virtual_match/src/model/entity/EntityMap/JugadorModel.dart'
+    as model;
 import 'package:virtual_match/src/model/entity/EntityMap/TorneoModelo.dart'
     as model;
 
@@ -29,10 +35,12 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
   model.TorneoModel entityModel = new model.TorneoModel();
   TourmentService entityService;
   TourmentService entityGet = TourmentService();
-
+  PlayerService entityGet1 = PlayerService();
   // DEFINICIOND E VARIABLES
   final prefs = new Preferense();
   final scaffoldKey = GlobalKey<ScaffoldState>();
+ bool _save = false;
+  String _opcionJugador = '44';
 
   @override
   void initState() {
@@ -171,14 +179,18 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
         itemBuilder: (context) => [
           PopupMenuItem(
             value: 1,
-            child: Text("Empezar el torneo"),
+            child: Text("Agregar participantes"),
           ),
           PopupMenuItem(
             value: 2,
-            child: Text("Editar"),
+            child: Text("Empezar el torneo"),
           ),
           PopupMenuItem(
             value: 3,
+            child: Text("Editar"),
+          ),
+          PopupMenuItem(
+            value: 4,
             child: Text("Eliminar"),
           ),
         ],
@@ -186,14 +198,20 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
         onSelected: (value) {
           switch (value) {
             case 1:
-              _start(keyId, entity.idTipoModalidad.toString());
+              setState(() {
+                _showPlayer();
+              });
+
               break;
             case 2:
+              _start(keyId, entity.idTipoModalidad.toString());
+              break;
+            case 3:
               entityModel.states = StateEntity.Update;
               entityModel.usuarioAuditoria = prefs.email;
               showSnackbarWithOutKey("Metodo por implementar", context);
               break;
-            case 3:
+            case 4:
               entityModel.states = StateEntity.Delete;
               entityModel.usuarioAuditoria = prefs.email;
               showSnackbarWithOutKey("Metodo por implementar", context);
@@ -210,6 +228,113 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
         ),
         offset: Offset(0, 100),
       );
+
+  _showPlayer() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Column(
+              children: [
+                Text('Selecionar Jugadores'),
+                _comboJugador(),
+              _button('Guardar', 18.0, 20.0),
+              ],
+            ),
+            // actions: [
+            //   MaterialButton(
+            //     child: Text('Agregar'),
+            //      onPressed: () {}),
+            // ],
+          );
+        });
+  }
+
+  List<DropdownMenuItem<String>> getDropDown(AsyncSnapshot snapshot) {
+    List<DropdownMenuItem<String>> lista = new List();
+
+    for (var i = 0; i < snapshot.data.length; i++) {
+      ClasificadorModel item = snapshot.data[i];
+      lista.add(DropdownMenuItem(
+        child: Text(item.nombre),
+        value: item.idClasificador.toString(),
+      ));
+    }
+    return lista;
+  }
+
+  Widget _comboJugador() {
+    return Center(
+        child: FutureBuilder(
+             future: entityGet1.get(new model.JugadorModel()),
+            builder: (context, AsyncSnapshot snapshot) {
+              if (snapshot.hasData) {
+                return Row(
+                  children: <Widget>[
+                    sizedBox(15.0, 0),
+                   // Text('Tipo Moldalidad'),
+                    sizedBox(15.0, 0),
+                    DropdownButton(
+                      icon: FaIcon(FontAwesomeIcons.sort,
+                          color: AppTheme.themePurple),
+                      value: _opcionJugador,
+                      items: getDropDown(snapshot),
+                      onChanged: (value) {
+                        setState(() {
+                          _opcionJugador = value;
+                        });
+                      },
+                    ),
+                  ],
+                );
+              } else {
+                return loading();
+              }
+            }));
+  }
+
+Widget _button(String text, double fontSize, double edgeInsets) {
+    return GFButton(
+      padding: EdgeInsets.symmetric(horizontal: edgeInsets),
+      text: text,
+      textStyle: TextStyle(fontSize: fontSize),
+      textColor: AppTheme.themeWhite,
+      color: AppTheme.themeDefault,
+      icon: FaIcon(FontAwesomeIcons.checkCircle, color: AppTheme.themeWhite),
+      shape: GFButtonShape.pills,
+      onPressed: (_save) ? null : _submit,
+    );
+  }
+  
+  _submit() async {
+ 
+
+    setState(() => _save = true);
+   // executeCUD(entityService, entity);
+    setState(() => _save = false);
+  }
+
+
+void executeCUD() async {
+    // try {
+    //   await entityService.repository(entity).then((result) {
+    //     print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
+
+    //     if (result["tipo_mensaje"] == '0') {
+    //       showSnackbar(STATUS_OK, scaffoldKey);
+
+    //       // navigation(
+    //       //   context, TourmentListPage()
+    //       // );
+
+    //     } else
+    //       showSnackbar(STATUS_ERROR, scaffoldKey);
+    //   });
+    // } catch (error) {
+    //   showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
+    // }
+    //  navegation(context, FormatLoadPage());
+  }
 
   Widget _showAction(ListaTorneoModel entity, String keyId) {
     return Column(
