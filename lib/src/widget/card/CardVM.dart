@@ -23,7 +23,6 @@ class CardVM extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       margin: EdgeInsets.all(0.5),
-      //padding: EdgeInsets.all(0.5),
       child: Center(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
@@ -90,12 +89,15 @@ class CardVM extends StatelessWidget {
                 bottom: 0,
                 child: SlideInUp(
                   duration: Duration(seconds: 1),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: (accesosRapidos == null)
-                        ? [Container()]
-                        : accesosRapidos,
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: (accesosRapidos == null)
+                          ? [Container()]
+                          : accesosRapidos,
+                    ),
                   ),
                 ),
               )

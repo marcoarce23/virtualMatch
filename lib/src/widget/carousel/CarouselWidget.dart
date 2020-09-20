@@ -14,8 +14,8 @@ class CarouselSimple extends StatefulWidget {
   @override
   _CarouselSimpleState createState() => _CarouselSimpleState();
 
-  CarouselSimple(List<CarouselSimpleModel> list,
-     Color colorBackGround, @required Color colorText) {
+  CarouselSimple(List<CarouselSimpleModel> list, Color colorBackGround,
+      @required Color colorText) {
     this.listCarousel = list;
     this.colorBackGround = colorBackGround;
     this.colorText = colorText;
@@ -34,7 +34,7 @@ class _CarouselSimpleState extends State<CarouselSimple> {
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         Container(
-          height: containerHeight,
+          height: containerHeight * 0.70,
           child: PageView.builder(
               itemCount: widget.listCarousel.length,
               onPageChanged: (int position) {
@@ -48,16 +48,16 @@ class _CarouselSimpleState extends State<CarouselSimple> {
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     Container(
-                      width: 270,
-                      height: 380,
-                      margin: EdgeInsets.only(top: 100.0),
+                      width: MediaQuery.of(context).size.width * 0.85,
+                      height: MediaQuery.of(context).size.height * 0.43,
+                      margin: EdgeInsets.only(top: 20.0),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20.0),
                         boxShadow: [
                           BoxShadow(
                               color: Color(0xFF3C4858).withOpacity(.4),
-                              offset: Offset(6.0, 10.0),
-                              blurRadius: 20.0),
+                              offset: Offset(2.0, 2.0),
+                              blurRadius: 10.0),
                         ],
                         image: DecorationImage(
                           image: NetworkImage(
@@ -69,8 +69,8 @@ class _CarouselSimpleState extends State<CarouselSimple> {
                       child: Align(
                         alignment: Alignment(0.1, 1.0),
                         child: Container(
-                          padding: EdgeInsets.all(15.0),
-                          height: 100,
+                          padding: EdgeInsets.all(5.0),
+                          height: 30,
                           width: double.infinity,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20.0),
@@ -78,9 +78,10 @@ class _CarouselSimpleState extends State<CarouselSimple> {
                           ),
                           child: Text(
                             currentSlide.textFromImage,
+                            textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: widget.colorText,
-                                fontSize: 20.0,
+                                fontSize: 15.0,
                                 fontWeight: FontWeight.bold),
                           ),
                         ),
@@ -91,10 +92,9 @@ class _CarouselSimpleState extends State<CarouselSimple> {
               }),
         ),
         Container(
-          width: 60,
-          margin: EdgeInsets.only(bottom: 40),
+          width: 25,
           child: Row(
-            mainAxisSize: MainAxisSize.min,
+            //mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: List.generate(
               widget.listCarousel.length,
