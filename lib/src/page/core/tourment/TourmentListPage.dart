@@ -8,6 +8,7 @@ import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/service/core/TournamentService.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
+import 'package:virtual_match/src/widget/card/CardVM.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
@@ -45,12 +46,12 @@ class _TourmentListPageState extends State<TourmentListPage> {
       drawer: DrawerMenu(),
       body: SafeArea(
         child: Container(
-           decoration: new BoxDecoration(
-                  image: new DecorationImage(
-                    image: new AssetImage('assets/portada2.png'),
-                    fit: BoxFit.cover,
-                  ),
-                ),
+          decoration: new BoxDecoration(
+            image: new DecorationImage(
+              image: new AssetImage('assets/portada2.png'),
+              fit: BoxFit.cover,
+            ),
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
@@ -114,44 +115,32 @@ class _TourmentListPageState extends State<TourmentListPage> {
     final size = MediaQuery.of(context).size;
     return Column(
       children: <Widget>[
-        sizedBox(0, 7.0),
-        Container(
-          width: size.width * 0.95,
-          margin: EdgeInsets.symmetric(vertical: 0.0),
-          decoration: boxDecoration(),
-          child: Column(
-            children: <Widget>[
-              gfListTileKey(
-                  Key(entity.idTorneo.toString()),
-                  Column(
-                    children: [
-                      Text(
-                        'TÍTULO : ${entity.nombreTorneo}',
-                        style: TextStyle(
-                          color: AppTheme.themeWhite,
-                        ),
-                      ),
-                      Text(
-                        'TIPO: ${entity.tipoCompeticion}',
-                        style: TextStyle(
-                          color: AppTheme.themeWhite,
-                        ),
-                      ),
-                    ],
+        Column(
+          children: <Widget>[
+            CardVM(
+              size: 100,
+              imageAssets: 'assets/icono3.png',
+              opciones: _simplePopup(entity.idTorneo.toString(),
+                  entity.idTipoCompeticion.toString()),
+              accesosRapidos: null,
+              listWidgets: [
+                Text(
+                  'TÍTULO : ${entity.nombreTorneo}',
+                  style: TextStyle(
+                    color: AppTheme.themeWhite,
                   ),
-                  Text('DETALLE: ${entity.detalle}',
-                      style: TextStyle(color: AppTheme.themeWhite)),
-                  Align(
-                      alignment: Alignment.centerRight,
-                      child: _simplePopup(entity.idTorneo.toString(),
-                          entity.idTipoCompeticion.toString())),
-                  //_showAction(entity, entity.idTorneo.toString()),
-                  null,
-                  null, //avatarCircle((entity.foto ?? IMAGE_LOGO), 35),
-                  EdgeInsets.all(0.0),
-                  EdgeInsets.all(0.0)),
-            ],
-          ),
+                ),
+                Text(
+                  'TIPO: ${entity.tipoCompeticion}',
+                  style: TextStyle(
+                    color: AppTheme.themeWhite,
+                  ),
+                ),
+                Text('DETALLE: ${entity.detalle}',
+                    style: TextStyle(color: AppTheme.themeWhite)),
+              ],
+            ),
+          ],
         ),
       ],
     );

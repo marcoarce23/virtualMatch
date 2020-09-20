@@ -9,6 +9,7 @@ import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/bottonNavigationBar/BottonNavigatorWidget.dart';
+import 'package:virtual_match/src/widget/card/CardVM.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/service/core/TournamentService.dart';
@@ -145,6 +146,54 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
             //decoration: boxDecoration(),
             child: Column(
               children: <Widget>[
+                CardVM(
+                  size: 150,
+                  imageAssets: 'assets/icono3.png',
+                  opciones: null,
+                  accesosRapidos: null,
+                  listWidgets: [
+                    Text('TORNEO: ${entity.nombreTorneo}',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                            color: AppTheme.themeWhite)),
+                    Text('TIPO:  ${entity.tipoCompeticion}',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                            color: AppTheme.themeWhite)),
+                    Text(
+                        'INSCRITOS:  ${entity.cantidadInscritos}/${entity.cantidadJugadores}',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                            color: AppTheme.themeWhite)),
+                    Row(
+                      children: <Widget>[
+                        Flexible(
+                          flex: 2,
+                          child: Text('DETALLE:',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 13,
+                                  color: AppTheme.themeWhite)),
+                        ),
+                        sizedBox(5, 0),
+                        Flexible(
+                          flex: 5,
+                          child: AutoSizeText(
+                            entity.detalle,
+                            style: kSubSubTitleCardStyle,
+                            softWrap: true,
+                            overflow: TextOverflow.clip,
+                            textAlign: TextAlign.justify,
+                          ),
+                        ),
+                        Flexible(flex: 3, child: Container())
+                      ],
+                    )
+                  ],
+                ),
                 SlideInUp(
                   duration: Duration(seconds: 1),
                   child: Stack(

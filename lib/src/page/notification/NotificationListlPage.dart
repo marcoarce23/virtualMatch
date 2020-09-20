@@ -4,6 +4,7 @@ import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
+import 'package:virtual_match/src/widget/card/CardVM.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
@@ -120,104 +121,80 @@ class _NotificationListPageState extends State<NotificationListPage> {
     final size = MediaQuery.of(context).size;
     return Column(
       children: <Widget>[
-        sizedBox(0, 7.0),
-        Container(
-          width: size.width * 0.95,
-          margin: EdgeInsets.symmetric(vertical: 0.0),
-          decoration: boxDecoration(),
-          child: Column(
-            children: <Widget>[
-              gfListTileKey(
-                  Key(entity.idNotificacion.toString()),
-                  Text(
-                    'TÍTULO : ${entity.titulo}',
-                    style: TextStyle(
-                      color: AppTheme.themeWhite,
-                    ),
+        Column(
+          children: <Widget>[
+            sizedBox(0, 7),
+            CardVM(
+              size: 100,
+              imageAssets: 'assets/icono3.png',
+              opciones: _simplePopup(
+                  entity, entity.idNotificacion.toString(), context),
+              accesosRapidos: null,
+              listWidgets: [
+                Text(
+                  'TÍTULO : ${entity.titulo}',
+                  style: TextStyle(
+                    color: AppTheme.themeWhite,
                   ),
-                  Text('DETALLE: ${entity.detalle}',
-                      style: TextStyle(color: AppTheme.themeWhite)),
-                  _showAction(
-                      entity, entity.idNotificacion.toString(), context),
-                  null,
-                  null, //avatarCircle((entity.foto ?? IMAGE_LOGO), 35),
-                  EdgeInsets.all(0.0),
-                  EdgeInsets.all(0.0)),
-            ],
-          ),
+                ),
+                Text('DETALLE: ${entity.detalle}',
+                    style: TextStyle(color: AppTheme.themeWhite)),
+              ],
+            ),
+          ],
         ),
       ],
     );
     //Text(entity.nombreEquipo);
   }
 
-  Widget _showAction(
-      NotificacionModel entity, String keyId, BuildContext context) {
-    return Row(
-      children: <Widget>[
-        sizedBox(0, 15),
-        Text('OPERACIONES: ', style: TextStyle(color: AppTheme.themeWhite)),
-        sizedBox(10, 0),
-        _update(context, entity),
-        sizedBox(10, 0),
-        _delete(keyId),
-        sizedBox(10, 0),
-        _notification(keyId),
-      ],
-    );
-  }
-
-  _update(BuildContext context, NotificacionModel entity) {
-    return InkWell(
-      child: FaIcon(
-        FontAwesomeIcons.edit,
-        color: AppTheme.themeWhite,
-        size: 26,
-      ),
-      onTap: () {
-        setState(() {
-          Navigator.pushNamed(context, 'notificationLoad', arguments: entity);
-        });
-      },
-      //  ),
-    );
-  }
-
-  _delete(String keyId) {
-    return InkWell(
-      key: Key(keyId),
-      child: FaIcon(
-        FontAwesomeIcons.trashAlt,
-        color: AppTheme.themeWhite,
-        size: 26,
-      ),
-      onTap: () {
-        setState(() {
-          entityModel.idNotificacion = int.parse(keyId);
-          executeDelete(
-            entityModel.idNotificacion.toString(),
-            prefs.email,
-          );
-        });
-      },
-    );
-  }
-
-  _notification(String keyId) {
-    return InkWell(
-      child: FaIcon(
-        FontAwesomeIcons.bell,
-        color: AppTheme.themeWhite,
-        size: 26,
-      ),
-      onTap: () {
-        setState(() {
-          //    entityModel.idNotificacion = int.parse(keyId);
-          //   executeDelete(entityModel.idNotificacion.toString(), prefs.email);
-        });
-      },
-    );
-  }
+  Widget _simplePopup(
+          NotificacionModel entity, String keyId, BuildContext context) =>
+      PopupMenuButton<int>(
+        itemBuilder: (context) => [
+          PopupMenuItem(
+            value: 1,
+            child: Text("Notificar"),
+          ),
+          PopupMenuItem(
+            value: 2,
+            child: Text("Editar"),
+          ),
+          PopupMenuItem(
+            value: 3,
+            child: Text("Eliminar"),
+          ),
+        ],
+        onCanceled: () {
+          print("You have canceled the menu.");
+        },
+        onSelected: (value) {
+          switch (value) {
+            case 1:
+              showSnackbarWithOutKey("Por implementar", context);
+              break;
+            case 2:
+              Navigator.pushNamed(context, 'notificationLoad',
+                  arguments: entity);
+              break;
+            case 3:
+              entityModel.idNotificacion = int.parse(keyId);
+              executeDelete(
+                entityModel.idNotificacion.toString(),
+                prefs.email,
+              );
+              break;
+            default:
+              showSnackbarWithOutKey("No hay opcion seleccionada", context);
+              break;
+          }
+        },
+        icon: Icon(
+          Icons.menu,
+          color: Colors.white,
+        ),
+        offset: Offset(0, 100),
+      );
 
   void executeDelete(String id, String usuario) async {
     try {
