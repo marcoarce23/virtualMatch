@@ -9,8 +9,11 @@ import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/core/PlayerService.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
+import 'package:virtual_match/src/widget/card/CardVM.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
+import 'package:virtual_match/src/widget/general/CallWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
+import 'package:virtual_match/src/widget/general/SenWidget.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/NoticiaEventoModel.dart'
     as model;
@@ -125,106 +128,64 @@ class _PlayerPageState extends State<PlayerPage> {
     final size = MediaQuery.of(context).size;
     return Column(
       children: <Widget>[
-        sizedBox(0, 7.0),
-        Container(
-          width: size.width * 0.95,
-          margin: EdgeInsets.symmetric(vertical: 0.0),
-          decoration: boxDecoration(),
-          child: Column(
-            children: <Widget>[
-              gfListTileKey(
-                  Key(entity.idJugador.toString()),
-                  Text('Titulo: ${entity.nombre} ${entity.apellido} '),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        '${entity.nombre} ${entity.apellido}',
-                        style: TextStyle(color: AppTheme.themeWhite),
-                      ),
-                      Text(
-                        'IPSDN: ${entity.idPsdn}',
-                        style: TextStyle(color: AppTheme.themeWhite),
-                      ),
-                      Text(
-                        'Departamento: ${entity.idaDepartamento}',
-                        style: TextStyle(color: AppTheme.themeWhite),
-                      ),
-                    ],
-                  ),
-                  _showAction(entity, entity.idJugador.toString(), context),
-                  null,
-                  avatarCircle((entity.foto ?? IMAGE_LOGO), 35),
-                  EdgeInsets.all(0.0),
-                  EdgeInsets.all(0.0)),
-            ],
-          ),
+        Column(
+          children: <Widget>[
+            sizedBox(0, 7),
+            CardVM(
+              size: 120,
+              imageAssets: 'assets/icono3.png',
+              opciones: avatarCircle((entity.foto ?? IMAGE_LOGO), 35),
+              accesosRapidos: opcionesLlamada(entity),
+              listWidgets: [
+                Text('Titulo: ${entity.nombre} ${entity.apellido} '),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      '${entity.nombre} ${entity.apellido}',
+                      style: TextStyle(color: AppTheme.themeWhite),
+                    ),
+                    Text(
+                      'IPSDN: ${entity.idPsdn}',
+                      style: TextStyle(color: AppTheme.themeWhite),
+                    ),
+                    Text(
+                      'Departamento: ${entity.idaDepartamento}',
+                      style: TextStyle(color: AppTheme.themeWhite),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ],
         ),
       ],
     );
   }
 
-  Widget _showAction(
-      model.JugadorModel entity, String keyId, BuildContext context) {
-    return Row(
-      children: <Widget>[
-        sizedBox(0, 15),
-        Text('COMUNICATE POR:', style: TextStyle(color: AppTheme.themeWhite)),
-        sizedBox(10, 0),
-        _update(context, entity),
-        sizedBox(10, 0),
-        _delete(keyId),
-        sizedBox(10, 0),
-        _email(),
-      ],
-    );
-  }
-
-  _update(BuildContext context, model.JugadorModel entity) {
-    return InkWell(
-      child: FaIcon(
-        FontAwesomeIcons.mobileAlt,
-        color: AppTheme.themeWhite,
-        size: 24,
+  List<Widget> opcionesLlamada(model.JugadorModel entity) {
+    return [
+      sizedBox(30, 0),
+      InkWell(
+        onTap: () {
+          callNumber(int.parse(entity.telefono));
+        },
+        child: FaIcon(FontAwesomeIcons.phone, color: Colors.white, size: 27),
       ),
-      onTap: () {
-        setState(() {
-          Navigator.pushNamed(context, 'notificationLoad', arguments: entity);
-        });
-      },
-      //  ),
-    );
-  }
-
-  _delete(String keyId) {
-    return InkWell(
-      key: Key(keyId),
-      child: FaIcon(
-        FontAwesomeIcons.whatsapp,
-        color: AppTheme.themeWhite,
-        size: 26,
+      sizedBox(30, 0),
+      InkWell(
+        onTap: () {
+          sendSMS(int.parse(entity.telefono));
+        },
+        child: FaIcon(FontAwesomeIcons.sms, color: Colors.white, size: 27),
       ),
-      onTap: () {
-        setState(() {
-          entityModel.idJugador = int.parse(keyId);
-          executeDelete(keyId, prefs.email);
-        });
-      },
-    );
-  }
-
-  _email() {
-    return InkWell(
-      child: FaIcon(
-        FontAwesomeIcons.envelopeOpen,
-        color: AppTheme.themeWhite,
-        size: 26,
+      sizedBox(30, 0),
+      InkWell(
+        onTap: () {
+          callWhatsApp1(int.parse(entity.telefono));
+        },
+        child: FaIcon(FontAwesomeIcons.whatsapp, color: Colors.white, size: 27),
       ),
-      onTap: () {
-        setState(() {});
-      },
-    );
+    ];
   }
-
-  void executeDelete(String id, String usuario) {}
-} // FIN DE LA CLASE
+}
