@@ -30,13 +30,13 @@ class _AuspiciadorPageState extends State<AuspiciadorPage> {
         floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
             FaIcon(FontAwesomeIcons.playstation), HomePage()),
         body: SingleChildScrollView(
-            child: Container(
-             decoration: new BoxDecoration(
-            image: new DecorationImage(
-              image: new AssetImage('assets/portada1.png'),
-              fit: BoxFit.cover,
+          child: Container(
+            decoration: new BoxDecoration(
+              image: new DecorationImage(
+                image: new AssetImage('assets/portada1.png'),
+                //   fit: BoxFit.cover,
+              ),
             ),
-          ),
             child: Column(
               children: <Widget>[
                 _crearImagen(context),
@@ -108,7 +108,7 @@ class _AuspiciadorPageState extends State<AuspiciadorPage> {
             padding: EdgeInsets.all(0),
             shape: CircleBorder(),
             onPressed: () => navegation(context,
-                ViewPage(title: 'FACEBOOK DXRACER'.toString(), url: facebook)),
+                ViewPage(title: 'FACEBOOK DXRACER'.toString(), url: 'www.facebook.com/TecmarkFans')),
             child: Icon(
               FontAwesomeIcons.facebookF,
               color: Colors.white,
@@ -125,7 +125,7 @@ class _AuspiciadorPageState extends State<AuspiciadorPage> {
             padding: EdgeInsets.all(0),
             shape: CircleBorder(),
             onPressed: () => navegation(context,
-                ViewPage(title: 'FACEBOOK DXRACER'.toString(), url: instagram)),
+                ViewPage(title: 'INSTAGRAM DXRACER'.toString(), url: 'tecmark_fans')),
             child: Icon(
               FontAwesomeIcons.instagram,
               color: Colors.white,
@@ -142,8 +142,8 @@ class _AuspiciadorPageState extends State<AuspiciadorPage> {
             padding: EdgeInsets.all(0),
             shape: CircleBorder(),
             onPressed: () {
-              callWhatsAppText(whatsApp,
-                  '*DXRACER:* \n Mensaje. Me gustaría ponerme en contacto con su empresa. Gracias. \nEnviado desde la aplicación \n*Virtual Match Digital*.');
+              callWhatsAppText(70121723,
+                  '*DXRACER:* \n Mensaje. Me gustaría ponerme en contacto con su empresa. Gracias. \nEnviado desde la aplicación \n*Virtual Match*.');
             },
             child: Icon(
               FontAwesomeIcons.whatsapp,

@@ -6,6 +6,7 @@ import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/service/MultimediaService.dart';
+import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/card/CardVM.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
@@ -119,7 +120,7 @@ class _MultimediaListPageState extends State<MultimediaListPage> {
     return Column(
       children: <Widget>[
         CardVM(
-          size: 150,
+          size: 135,
           imageAssets: 'assets/icono3.png',
           opciones: _simplePopup(entity, entity.idMultimedia.toString()),
           accesosRapidos: null,
@@ -128,16 +129,41 @@ class _MultimediaListPageState extends State<MultimediaListPage> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text('DETALLE: ${entity.resumen}',
-                    style: TextStyle(color: AppTheme.themeWhite)),
-                Text('ENLACE: ${entity.enlace}',
-                    style: TextStyle(color: AppTheme.themeWhite)),
-                Text('NOTICIA/EVENTO: ${entity.idaCategoria}',
-                    style: TextStyle(color: AppTheme.themeWhite)),
-                Text('FECHA INICIO: ${entity.fechainicio}',
-                    style: TextStyle(color: AppTheme.themeWhite)),
-                Text('FECHA FIN     :  ${entity.fechafin}',
-                    style: TextStyle(color: AppTheme.themeWhite)),
+                Text(
+                  'DETALLE: ${entity.resumen}',
+                  style: kSubtitleStyleWhite,
+                  softWrap: true,
+                  overflow: TextOverflow.clip,
+                  textAlign: TextAlign.justify,
+                ),
+                Text(
+                  'ENLACE: ${entity.enlace}',
+                  style: kSubtitleStyleWhite,
+                  softWrap: true,
+                  overflow: TextOverflow.clip,
+                  textAlign: TextAlign.justify,
+                ),
+                Text(
+                  'NOTICIA/EVENTO: ${entity.idaCategoria}',
+                  style: kSubtitleStyleWhite,
+                  softWrap: true,
+                  overflow: TextOverflow.clip,
+                  textAlign: TextAlign.justify,
+                ),
+                Text(
+                  'FECHA INICIO: ${entity.fechainicio}',
+                  style: kSubtitleStyleWhite,
+                  softWrap: true,
+                  overflow: TextOverflow.clip,
+                  textAlign: TextAlign.justify,
+                ),
+                Text(
+                  'FECHA FIN     :  ${entity.fechafin}',
+                  style: kSubtitleStyleWhite,
+                  softWrap: true,
+                  overflow: TextOverflow.clip,
+                  textAlign: TextAlign.justify,
+                ),
               ],
             ),
           ],
@@ -169,7 +195,11 @@ class _MultimediaListPageState extends State<MultimediaListPage> {
             case 2:
               entityModel.idMultimedia = int.parse(keyId);
               print('eliminar ${entityModel.idMultimedia}');
-              executeDelete(entityModel.idMultimedia.toString(), prefs.email);
+
+              setState(() {
+                executeDelete(entityModel.idMultimedia.toString(), prefs.email);
+              });
+
               break;
             default:
               showSnackbarWithOutKey("No hay opcion seleccionada", context);

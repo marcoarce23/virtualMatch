@@ -72,11 +72,10 @@ class _FaqListPagetate extends State<FaqListPage> {
   Widget _fields(BuildContext context) {
     return Column(
       children: <Widget>[
-        sizedBox(0.0, 0.0),
-        showInformationBasic(
+           showInformationBasic(
           context,
           'TIENES CONSULTAS ?',
-          'Acá te respondemos las preguntas mas comunes sobre la Comunidad Virtual Match y nuestra APP',
+          'Acá te respondemos las preguntas mas comunes sobre la Comunidad Virtual Match y nuestra APP.',
         ),
         listAcordion(),
         listAcordion2(),

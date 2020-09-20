@@ -19,11 +19,22 @@ Widget showInformationBasic(
     child: Column(
       children: <Widget>[
         gfListTile(
-            Text(title, style: kSigsTitleStyle),
-            Text(subTitle, style: kSigssTitleStyle),
+            Column(
+              children: [
+                sizedBox(0, 10),
+                Text(title, style: kSigsTitleStyle),
+                sizedBox(0, 4),
+              ],
+            ),
+            Column(
+              children: [
+                Text(subTitle, style: kSigssTitleStyle),
+                sizedBox(0, 8),
+              ],
+            ),
             null,
             null,
-            avatarCircle(IMAGE_LOGO, 35),
+            null, // avatarCircle(IMAGE_LOGO, 35),
             EdgeInsets.all(0.0),
             EdgeInsets.all(0.0)),
       ],
@@ -247,7 +258,7 @@ Widget background(BuildContext context, String imagen) {
 BoxDecoration containerFileds() {
   // return boxDecorationList();
   return BoxDecoration(
-     image: new DecorationImage(
+      image: new DecorationImage(
         image: new AssetImage('assets/portada1.png'),
         fit: BoxFit.cover,
       ),
@@ -401,7 +412,7 @@ Widget floatButtonImage(
 
 showSnackbar(String message, GlobalKey<ScaffoldState> scaffoldKey) {
   final snackbar = SnackBar(
-    backgroundColor: Colors.pinkAccent,
+    backgroundColor: AppTheme.themePurple,
     content: Text(message),
     duration: Duration(milliseconds: 2500),
   );
@@ -411,7 +422,7 @@ showSnackbar(String message, GlobalKey<ScaffoldState> scaffoldKey) {
 
 showSnackbarWithOutKey(String message, BuildContext context) {
   return Scaffold.of(context).showSnackBar(SnackBar(
-    backgroundColor: Colors.pinkAccent,
+    backgroundColor: AppTheme.themePurple,
     content: Text(message),
     duration: Duration(milliseconds: 2500),
   ));

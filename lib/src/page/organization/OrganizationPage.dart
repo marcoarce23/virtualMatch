@@ -31,12 +31,12 @@ class _OrganizationPageState extends State<OrganizationPage> {
             FaIcon(FontAwesomeIcons.playstation), HomePage()),
         body: SingleChildScrollView(
           child: Container(
-             decoration: new BoxDecoration(
-            image: new DecorationImage(
-              image: new AssetImage('assets/portada1.png'),
-              fit: BoxFit.cover,
+            decoration: new BoxDecoration(
+              image: new DecorationImage(
+                image: new AssetImage('assets/portada1.png'),
+                fit: BoxFit.cover,
+              ),
             ),
-          ),
             child: Column(
               children: <Widget>[
                 _crearImagen(context),
@@ -132,7 +132,7 @@ class _OrganizationPageState extends State<OrganizationPage> {
             onPressed: () => navegation(
                 context,
                 ViewPage(
-                    title: 'FACEBOOK VIRTUAL MATCH'.toString(),
+                    title: 'INSTAGRAM VIRTUAL MATCH'.toString(),
                     url: instagram)),
             child: Icon(
               FontAwesomeIcons.instagram,
