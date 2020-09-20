@@ -4,9 +4,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/ListadoTorneoModel.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
+import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/service/core/TournamentService.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
+import 'package:virtual_match/src/widget/card/CardVM.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
@@ -117,6 +119,7 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
     return Column(
       children: <Widget>[
         sizedBox(0, 7.0),
+        /*
         Container(
           width: size.width * 0.95,
           margin: EdgeInsets.symmetric(vertical: 0.0),
@@ -141,10 +144,72 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
             ],
           ),
         ),
+        */
+        CardVM(
+          size: 100,
+          imageAssets: 'assets/icono3.png',
+          opciones: _simplePopup(entity, entity.idTorneo.toString()),
+          accesosRapidos: null,
+          listWidgets: [
+            Text(
+              'TÍTULO : ${entity.nombreTorneo}',
+              style: TextStyle(
+                color: AppTheme.themeWhite,
+              ),
+            ),
+            Text('DETALLE: ${entity.detalle}',
+                style: TextStyle(color: AppTheme.themeWhite)),
+          ],
+        ),
       ],
     );
     //Text(entity.nombreEquipo);
   }
+
+  Widget _simplePopup(ListaTorneoModel entity, String keyId) =>
+      PopupMenuButton<int>(
+        itemBuilder: (context) => [
+          PopupMenuItem(
+            value: 1,
+            child: Text("Empezar el torneo"),
+          ),
+          PopupMenuItem(
+            value: 2,
+            child: Text("Editar"),
+          ),
+          PopupMenuItem(
+            value: 3,
+            child: Text("Eliminar"),
+          ),
+        ],
+        onCanceled: () {},
+        onSelected: (value) {
+          switch (value) {
+            case 1:
+              _start(keyId, entity.idTipoModalidad.toString());
+              break;
+            case 2:
+              entityModel.states = StateEntity.Update;
+              entityModel.usuarioAuditoria = prefs.email;
+              showSnackbarWithOutKey("Metodo por implementar", context);
+              break;
+            case 3:
+              entityModel.states = StateEntity.Delete;
+              entityModel.usuarioAuditoria = prefs.email;
+              showSnackbarWithOutKey("Metodo por implementar", context);
+              break;
+            default:
+              showSnackbarWithOutKey("No hay opcion seleccionada", context);
+              break;
+          }
+        },
+        icon: Icon(
+          Icons.menu,
+          color: Colors.white,
+          size: 30,
+        ),
+        offset: Offset(0, 100),
+      );
 
   Widget _showAction(ListaTorneoModel entity, String keyId) {
     return Column(
@@ -225,38 +290,16 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
   }
 
   _start(String keyId, String modalidad) {
-    return Row(
-      children: [
-        Text('Empezar Torneo:'.toUpperCase(),
-            style: TextStyle(color: AppTheme.themeWhite)),
-        sizedBox(10, 0),
-        InkWell(
-          key: Key(keyId),
-          child: FaIcon(
-            FontAwesomeIcons.futbol,
-            color: AppTheme.themeWhite,
-            size: 25,
-          ),
-          onTap: () {
-            setState(() {
-              if (modalidad == '0')
-                _executeGenerator('/api/Torneo/execGenerarPlayOff/' +
-                    keyId +
-                    '/usuario/' +
-                    prefs.email);
-              else
-                _executeGenerator('/api/Torneo/execGenerarLiga/usuario/' +
-                    keyId +
-                    '/usuario/' +
-                    prefs.email);
-              //    entityModel.idTorneo = int.parse(keyId);
-              //     print('eliminar ${entityModel.idTorneo}');
-              //      executeDelete(entityModel.idTorneo.toString(), prefs.email);
-            });
-          },
-        ),
-      ],
-    );
+    if (modalidad == '0')
+      _executeGenerator('/api/Torneo/execGenerarPlayOff/' +
+          keyId +
+          '/usuario/' +
+          prefs.email);
+    else
+      _executeGenerator('/api/Torneo/execGenerarLiga/usuario/' +
+          keyId +
+          '/usuario/' +
+          prefs.email);
   }
 
   void executeDelete(String id, String usuario) async {
@@ -294,18 +337,18 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
   }
 
   void _executeGenerator(String url) async {
-    // print('ENTROSSSSWWW $url');
-    // try {
-    //   await entityService.execute(API + url).then((result) {
-    //     print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
-    //     if (result["tipo_mensaje"] == '0')
-    //       showSnackbar(result["mensaje"], scaffoldKey);
-    //     else
-    //       showSnackbar(result["mensaje"], scaffoldKey);
-    //   });
-    // } catch (error) {
-    //   showSnackbar('No puede generar porque aun no se completo la cantidad de jugadores inscritos !!', scaffoldKey);
-    // }
+    try {
+      await entityService.execute(API + url).then((result) {
+        if (result["tipo_mensaje"] == '0')
+          showSnackbar(result["mensaje"], scaffoldKey);
+        else
+          showSnackbar(result["mensaje"], scaffoldKey);
+      });
+    } catch (error) {
+      showSnackbar(
+          'No puede generar porque aun no se completo la cantidad de jugadores inscritos !!',
+          scaffoldKey);
+    }
   }
 } // FIN DE LA CLASE
 // FIN DE LA CLASE

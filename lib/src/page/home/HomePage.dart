@@ -52,6 +52,7 @@ class _HomePageState extends State<HomePage> {
         body: Column(
           children: [
             CardVM(
+              size: 150,
               imageAssets: 'assets/icono3.png',
               opciones: _simplePopup(),
               accesosRapidos: xxxx(),
@@ -63,6 +64,7 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
             CardVM(
+              size: 150,
               imageAssets: 'assets/icono3.png',
               opciones: _simplePopup(),
               accesosRapidos: xxxx(),

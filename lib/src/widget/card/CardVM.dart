@@ -7,83 +7,99 @@ class CardVM extends StatelessWidget {
   final List<Widget> listWidgets;
   final Widget opciones;
   final List<Widget> accesosRapidos;
+  final double size;
   const CardVM(
-      {this.imageAssets, this.listWidgets, this.opciones, this.accesosRapidos});
+      {this.imageAssets,
+      this.listWidgets,
+      this.opciones,
+      this.accesosRapidos,
+      this.size});
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Stack(
-          children: [
-            Container(
-              height: 150,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  gradient: LinearGradient(colors: [
-                    //Color.fromRGBO(123, 68, 242, 95),
-                    Colors.black,
-                    Colors.black
-                  ], begin: Alignment.topLeft, end: Alignment.bottomRight)),
-            ),
-            Positioned(
-              top: 0,
-              right: 0,
-              bottom: 0,
-              child: CustomPaint(
-                size: Size(100, 150),
-                painter: CustomShape(
-                    10, Colors.white, Color.fromRGBO(123, 68, 242, 95)),
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white30,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      margin: EdgeInsets.all(0.5),
+      //padding: EdgeInsets.all(0.5),
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Stack(
+            children: [
+              Container(
+                height: size,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    gradient: LinearGradient(colors: [
+                      //Color.fromRGBO(123, 68, 242, 95),
+                      Colors.black,
+                      Colors.black
+                    ], begin: Alignment.topLeft, end: Alignment.bottomRight)),
               ),
-            ),
-            Positioned(
+              Positioned(
+                top: 0,
                 right: 0,
                 bottom: 0,
-                child: Opacity(
-                  opacity: 0.5,
-                  child: Image.asset(
-                    imageAssets,
-                    width: 50,
-                  ),
-                )),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: FadeIn(
-                duration: Duration(seconds: 3),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      flex: 8,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: listWidgets,
-                      ),
+                child: CustomPaint(
+                  size: Size(size - 50, size),
+                  painter: CustomShape(
+                      10, Colors.white, Color.fromRGBO(123, 68, 242, 95)),
+                ),
+              ),
+              Positioned(
+                  right: 0,
+                  bottom: 0,
+                  child: Opacity(
+                    opacity: 0.5,
+                    child: Image.asset(
+                      imageAssets,
+                      width: 50,
                     ),
-                    Expanded(
-                      flex: 2,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [(opciones == null) ? Container() : opciones],
+                  )),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: FadeIn(
+                  duration: Duration(seconds: 3),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        flex: 8,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: listWidgets,
+                        ),
                       ),
-                    )
-                  ],
+                      Expanded(
+                        flex: 2,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            (opciones == null) ? Container() : opciones
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               ),
-            ),
-            Positioned(
-              bottom: 0,
-              child: FadeIn(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children:
-                      (accesosRapidos == null) ? [Container()] : accesosRapidos,
+              Positioned(
+                bottom: 0,
+                child: FadeIn(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: (accesosRapidos == null)
+                        ? [Container()]
+                        : accesosRapidos,
+                  ),
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );
