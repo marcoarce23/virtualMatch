@@ -4,8 +4,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:virtual_match/src/model/Preference.dart';
-import 'package:virtual_match/src/model/entity/EntityFromJson/ClasificadorModel.dart';
+
 import 'package:virtual_match/src/model/entity/EntityFromJson/ListadoTorneoModel.dart';
+import 'package:virtual_match/src/model/entity/EntityMap/JugadorModel.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
@@ -16,10 +17,10 @@ import 'package:virtual_match/src/widget/card/CardVM.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
-import 'package:virtual_match/src/model/entity/EntityMap/JugadorModel.dart'
-    as model;
 import 'package:virtual_match/src/model/entity/EntityMap/TorneoModelo.dart'
     as model;
+import 'package:virtual_match/src/model/entity/EntityMap/JugadorModel.dart'
+    as model1;
 
 class MiniTourmentListPage extends StatefulWidget {
   static final String routeName = 'MiniTtourmentList';
@@ -39,7 +40,6 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
   // DEFINICIOND E VARIABLES
   final prefs = new Preferense();
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  bool _save = false;
   String _opcionJugador = '1';
 
   @override
@@ -199,7 +199,7 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
           switch (value) {
             case 1:
               setState(() {
-                _showPlayer();
+                _showPlayer(entity.idTorneo.toString());
               });
 
               break;
@@ -229,7 +229,8 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
         offset: Offset(0, 100),
       );
 
-  _showPlayer() {
+  _showPlayer(String idTorneo) {
+    print('vvvvv $idTorneo');
     showDialog(
         context: context,
         builder: (context) {
@@ -237,15 +238,18 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
             title: Column(
               children: [
                 Text('Selecionar Jugadores'),
+
                 _comboJugador(),
-                _button('Guardar', 18.0, 20.0),
+                //   _button('Guardar', 18.0, 20.0, idTorneo),
               ],
             ),
-            // actions: [
-            //   MaterialButton(
-            //     child: Text('Agregar'),
-            //      onPressed: () {}),
-            // ],
+            actions: [
+              MaterialButton(
+                  child: Text('Agregar'),
+                  onPressed: () {
+                    _executeInscription(idTorneo, _opcionJugador);
+                  }),
+            ],
           );
         });
   }
@@ -254,10 +258,10 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
     List<DropdownMenuItem<String>> lista = new List();
 
     for (var i = 0; i < snapshot.data.length; i++) {
-      ClasificadorModel item = snapshot.data[i];
+      JugadorModel item = snapshot.data[i];
       lista.add(DropdownMenuItem(
-        child: Text(item.nombre),
-        value: item.idClasificador.toString(),
+        child: Text(item.idPsdn + ' - ' + item.nombre + ' ' + item.apellido),
+        value: item.idJugador.toString(),
       ));
     }
     return lista;
@@ -266,7 +270,7 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
   Widget _comboJugador() {
     return Center(
         child: FutureBuilder(
-            future: entityGet1.get(new model.JugadorModel()),
+            future: entityGet1.get(new model1.JugadorModel()),
             builder: (context, AsyncSnapshot snapshot) {
               if (snapshot.hasData) {
                 return Row(
@@ -282,6 +286,8 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
                       onChanged: (value) {
                         setState(() {
                           _opcionJugador = value;
+                          print('valorrr: $_opcionJugador');
+                          // _showPlayer('2');
                         });
                       },
                     ),
@@ -293,7 +299,8 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
             }));
   }
 
-  Widget _button(String text, double fontSize, double edgeInsets) {
+  Widget _button(
+      String text, double fontSize, double edgeInsets, String idTorneo) {
     return GFButton(
       padding: EdgeInsets.symmetric(horizontal: edgeInsets),
       text: text,
@@ -302,35 +309,39 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
       color: AppTheme.themeDefault,
       icon: FaIcon(FontAwesomeIcons.checkCircle, color: AppTheme.themeWhite),
       shape: GFButtonShape.pills,
-      onPressed: (_save) ? null : _submit,
+      onPressed: () =>
+          _executeInscription(entity.idTorneo.toString(), _opcionJugador),
     );
   }
 
-  _submit() async {
-    setState(() => _save = true);
-    // executeCUD(entityService, entity);
-    setState(() => _save = false);
+  _submit(String idTorneo) {
+    //  setState(() => _save = true);
+    _executeInscription(entity.idTorneo.toString(), _opcionJugador);
+    //  setState(() => _save = false);
   }
 
-  void executeCUD() async {
-    // try {
-    //   await entityService.repository(entity).then((result) {
-    //     print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
+  void _executeInscription(String idTorneo, String idJugador) async {
+    print('ENTROSSSS $idTorneo y $idJugador');
+    String respuesta;
+    String mensaje;
+    try {
+      await entityService
+          .execute(API +
+              '/api/Torneo/Inscribir/Torneo/' +
+              idTorneo +
+              '/Jugador/' +
+              idJugador)
+          .then((result) {
+        respuesta = result["tipo_mensaje"].toString();
+        mensaje = result["mensaje"].toString();
+        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
 
-    //     if (result["tipo_mensaje"] == '0') {
-    //       showSnackbar(STATUS_OK, scaffoldKey);
-
-    //       // navigation(
-    //       //   context, TourmentListPage()
-    //       // );
-
-    //     } else
-    //       showSnackbar(STATUS_ERROR, scaffoldKey);
-    //   });
-    // } catch (error) {
-    //   showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
-    // }
-    //  navegation(context, FormatLoadPage());
+        if (respuesta == '0') showSnackbar(mensaje, scaffoldKey);
+        if (respuesta == '2') showSnackbar(mensaje, scaffoldKey);
+      });
+    } catch (error) {
+      showSnackbar('Usuario registrado !!!', scaffoldKey);
+    }
   }
 
   Widget _showAction(ListaTorneoModel entity, String keyId) {

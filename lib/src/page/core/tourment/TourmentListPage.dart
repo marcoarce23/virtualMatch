@@ -311,9 +311,9 @@ class _TourmentListPageState extends State<TourmentListPage> {
               break;
             case 3:
               print('Adicionar jugadores');
-             
-                _showPlayer(idTorneo);
-            
+
+              _showPlayer(idTorneo);
+
               //  _complete(idTorneo);
               break;
             case 4:
@@ -341,18 +341,16 @@ class _TourmentListPageState extends State<TourmentListPage> {
             title: Column(
               children: [
                 Text('Selecionar Jugadores'),
-                 
-                _comboJugador(_opcionJugadord),
-               //   _button('Guardar', 18.0, 20.0, idTorneo),
-              
+
+                _comboJugador(),
+                //   _button('Guardar', 18.0, 20.0, idTorneo),
               ],
             ),
             actions: [
               MaterialButton(
                   child: Text('Agregar'),
                   onPressed: () {
-                    _executeInscription(
-                        idTorneo, _opcionJugador);
+                    _executeInscription(idTorneo, _opcionJugador);
                   }),
             ],
           );
@@ -392,6 +390,7 @@ class _TourmentListPageState extends State<TourmentListPage> {
                         setState(() {
                           _opcionJugador = value;
                           print('valorrr: $_opcionJugador');
+                          // _showPlayer('2');
                         });
                       },
                     ),
