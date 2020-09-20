@@ -84,7 +84,7 @@ class _TourmentListPageState extends State<TourmentListPage> {
 
   Widget futureBuilder(BuildContext context) {
     return FutureBuilder(
-        future: entityGet.get(new ListaTorneoModel()),
+        future: entityGet.get(new ListaTorneoModel(), 1),
         builder: (context, AsyncSnapshot snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:

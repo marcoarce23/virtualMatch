@@ -4,11 +4,12 @@ import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/api/core/tourment/ApiResource.dart';
 
 class ApiGet {
-  Future<List<IEntityJson>> get(IEntityJson entity) async {
+  Future<List<IEntityJson>> get(IEntityJson entity, int idJugador) async {
     final List<IEntityJson> list = new List();
     Map<String, dynamic> decodeData;
 
-    final _apiRest = api['get'][0].toString();
+    final _apiRest =
+        api['getTodosLosTorneos'][0].toString() + '/' + idJugador.toString();
     final response = await http.get(_apiRest);
 
     print(_apiRest);

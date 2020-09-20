@@ -73,8 +73,8 @@ class TourmentService {
     return result;
   }
 
-  Future<List<IEntityJson>> get(IEntityJson entityJson) async {
-    var _result = await _apiGet.get(entityJson);
+  Future<List<IEntityJson>> get(IEntityJson entityJson, int idJugador) async {
+    var _result = await _apiGet.get(entityJson, idJugador);
 
     isLoading = false;
     //   notifyListeners();
