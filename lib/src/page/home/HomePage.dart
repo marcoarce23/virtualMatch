@@ -1,12 +1,16 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_launcher_icons/xml_templates.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/page/core/tourment/ListTournamentPage.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
+import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/bottonNavigationBar/BottonNavigatorWidget.dart';
+import 'package:virtual_match/src/widget/card/CardVM.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
+import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/widget/menu/CircularMenu.dart';
 import 'package:virtual_match/src/widget/menu/bottomMenu.dart';
 
@@ -45,12 +49,133 @@ class _HomePageState extends State<HomePage> {
       top: true,
       child: Scaffold(
         appBar: appBar('Virtual Match'),
-        body: ListTournamentPage(),
+        body: Column(
+          children: [
+            CardVM(
+              imageAssets: 'assets/icono3.png',
+              opciones: _simplePopup(),
+              accesosRapidos: xxxx(),
+              listWidgets: [
+                Text(
+                  "sssss",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ],
+            ),
+            CardVM(
+              imageAssets: 'assets/icono3.png',
+              opciones: _simplePopup(),
+              accesosRapidos: xxxx(),
+              listWidgets: [
+                Text(
+                  "xxxxx",
+                  style: TextStyle(color: Colors.white),
+                ),
+                Text(
+                  "sdasdasd",
+                  style: TextStyle(color: Colors.white),
+                ),
+                Text(
+                  "dsdfsdf",
+                  style: TextStyle(color: Colors.white),
+                ),
+                Text(
+                  "asdasdasd",
+                  style: TextStyle(color: Colors.white),
+                ),
+                Text(
+                  "asdasdasd",
+                  style: TextStyle(color: Colors.white),
+                ),
+                Text(
+                  "asdasdasd",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ],
+            ),
+          ],
+        ),
         drawer: DrawerMenu(),
-        floatingActionButton: new CircularMenu(),
+        bottomNavigationBar: new BottonNavigation(),
       ),
     );
   }
+
+  List<Widget> xxxx() {
+    return [
+      sizedBox(30, 0),
+      InkWell(
+          child: FaIcon(
+            FontAwesomeIcons.whatsapp,
+            color: AppTheme.themeWhite,
+            size: 35,
+          ),
+          onTap: () {
+            print('ss');
+          }),
+      sizedBox(30, 0),
+      InkWell(
+          child: FaIcon(
+            FontAwesomeIcons.whatsapp,
+            color: AppTheme.themeWhite,
+            size: 35,
+          ),
+          onTap: () {
+            print('ss');
+          }),
+      sizedBox(30, 0),
+      InkWell(
+          child: FaIcon(
+            FontAwesomeIcons.whatsapp,
+            color: AppTheme.themeWhite,
+            size: 35,
+          ),
+          onTap: () {
+            print('ss');
+          }),
+    ];
+  }
+
+  Widget _simplePopup() => PopupMenuButton<int>(
+        itemBuilder: (context) => [
+          PopupMenuItem(
+            value: 1,
+            child: Text("Ver detalle"),
+          ),
+          PopupMenuItem(
+            value: 2,
+            child: Text("Inscribirse al torneo"),
+          ),
+          PopupMenuItem(
+            value: 3,
+            child: Text("Salir del torneo"),
+          ),
+        ],
+        onCanceled: () {
+          print("You have canceled the menu.");
+        },
+        onSelected: (value) {
+          switch (value) {
+            case 1:
+              showSnackbarWithOutKey("No hay opcion seleccionada", context);
+              break;
+            case 2:
+              showSnackbarWithOutKey("No hay opcion seleccionada", context);
+              break;
+            case 3:
+              showSnackbarWithOutKey("No hay opcion seleccionada", context);
+              break;
+            default:
+              showSnackbarWithOutKey("No hay opcion seleccionada", context);
+              break;
+          }
+        },
+        icon: Icon(
+          Icons.menu,
+          color: Colors.white,
+        ),
+        offset: Offset(0, 100),
+      );
 
   Positioned menu() {
     Size tamanioPantalla = MediaQuery.of(context).size;

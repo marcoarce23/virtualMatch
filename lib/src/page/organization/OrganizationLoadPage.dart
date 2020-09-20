@@ -55,6 +55,7 @@ class _OrganizationAllPageState extends State<OrganizationAllPage> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        // ignore: missing_required_param
         ChangeNotifierProvider(builder: (_) => new OrganizationService()),
       ],
       child: Scaffold(

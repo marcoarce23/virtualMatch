@@ -60,6 +60,7 @@ class _PlayerAllPagePageState extends State<PlayerAllPage> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        // ignore: missing_required_param
         ChangeNotifierProvider(builder: (_) => new CrudService()),
       ],
       child: Scaffold(
@@ -224,6 +225,7 @@ class _PlayerWithTournementState extends State<PlayerWithTournement> {
 
     return MultiProvider(
       providers: [
+        // ignore: missing_required_param
         ChangeNotifierProvider(builder: (_) => new CrudService()),
       ],
       child: Scaffold(
@@ -385,6 +387,7 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
 
     return MultiProvider(
       providers: [
+        // ignore: missing_required_param
         ChangeNotifierProvider(builder: (_) => new CrudService()),
       ],
       child: Scaffold(
@@ -688,13 +691,11 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
       CrudService entityService, JugadorModel entity, var _result) async {
     String _url = '/api/Jugador';
 
-    if(prefs.idPlayer != '0')
-    _url = '/api/Jugador'+'/'+ prefs.idPlayer.toString();
-    
+    if (prefs.idPlayer != '0')
+      _url = '/api/Jugador' + '/' + prefs.idPlayer.toString();
+
     try {
-      await entityService
-          .repository(entity, API + _url)
-          .then((result) {
+      await entityService.repository(entity, API + _url).then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
 
         if (result["tipo_mensaje"] == '0') {

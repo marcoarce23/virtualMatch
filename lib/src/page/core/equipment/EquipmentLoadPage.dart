@@ -54,6 +54,7 @@ class _EquipmentAllPageState extends State<EquipmentAllPage> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        // ignore: missing_required_param
         ChangeNotifierProvider(builder: (_) => new EquipmentService()),
       ],
       child: Scaffold(

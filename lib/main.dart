@@ -85,6 +85,7 @@ class _MyAppState extends State<MyApp> {
 
     return MultiProvider(
       providers: [
+        // ignore: missing_required_param
         ChangeNotifierProvider(builder: (_) => new LoginService()),
       ],
       child: MaterialApp(

@@ -60,6 +60,7 @@ class _MultimediaAllPageState extends State<MultimediaAllPage> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        // ignore: missing_required_param
         ChangeNotifierProvider(builder: (_) => new MultimediaService()),
       ],
       child: Scaffold(
@@ -561,7 +562,7 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
     valueImage = 1;
 
     if (photo != null) {
-       image = await entityImage.uploadImage(file);
+      image = await entityImage.uploadImage(file);
       setState(() {
         entity.foto = image;
         print('cargadod e iagen ${entity.foto}');

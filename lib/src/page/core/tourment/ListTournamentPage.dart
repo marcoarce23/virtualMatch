@@ -7,10 +7,13 @@ import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
+import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/bottonNavigationBar/BottonNavigatorWidget.dart';
+import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/service/core/TournamentService.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
+import 'package:virtual_match/src/widget/menu/bottomMenu.dart';
 import 'package:virtual_match/src/widget/util/Util.dart';
 import 'TourmentPage.dart';
 
@@ -53,12 +56,13 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
 
         Scaffold(
       key: scaffoldKey,
-      //appBar: appBar('TORNEOS VIRTUAL MATCH'),
+      appBar: appBar('TORNEOS VIRTUAL MATCH'),
       body: SingleChildScrollView(child: bodyContainer(context)),
-      //drawer: DrawerMenu(),
+      drawer: DrawerMenu(),
       //floatingActionButton: CircularMenu(),
       //floatingActionButtonLocation: FloatingActionButtonLocation.miniEndDocked,
       bottomNavigationBar: new BottonNavigation(),
+
       //   ),
     );
   }
