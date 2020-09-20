@@ -39,8 +39,8 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
   // DEFINICIOND E VARIABLES
   final prefs = new Preferense();
   final scaffoldKey = GlobalKey<ScaffoldState>();
- bool _save = false;
-  String _opcionJugador = '44';
+  bool _save = false;
+  String _opcionJugador = '1';
 
   @override
   void initState() {
@@ -238,7 +238,7 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
               children: [
                 Text('Selecionar Jugadores'),
                 _comboJugador(),
-              _button('Guardar', 18.0, 20.0),
+                _button('Guardar', 18.0, 20.0),
               ],
             ),
             // actions: [
@@ -266,13 +266,13 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
   Widget _comboJugador() {
     return Center(
         child: FutureBuilder(
-             future: entityGet1.get(new model.JugadorModel()),
+            future: entityGet1.get(new model.JugadorModel()),
             builder: (context, AsyncSnapshot snapshot) {
               if (snapshot.hasData) {
                 return Row(
                   children: <Widget>[
                     sizedBox(15.0, 0),
-                   // Text('Tipo Moldalidad'),
+                    // Text('Tipo Moldalidad'),
                     sizedBox(15.0, 0),
                     DropdownButton(
                       icon: FaIcon(FontAwesomeIcons.sort,
@@ -293,7 +293,7 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
             }));
   }
 
-Widget _button(String text, double fontSize, double edgeInsets) {
+  Widget _button(String text, double fontSize, double edgeInsets) {
     return GFButton(
       padding: EdgeInsets.symmetric(horizontal: edgeInsets),
       text: text,
@@ -305,17 +305,14 @@ Widget _button(String text, double fontSize, double edgeInsets) {
       onPressed: (_save) ? null : _submit,
     );
   }
-  
-  _submit() async {
- 
 
+  _submit() async {
     setState(() => _save = true);
-   // executeCUD(entityService, entity);
+    // executeCUD(entityService, entity);
     setState(() => _save = false);
   }
 
-
-void executeCUD() async {
+  void executeCUD() async {
     // try {
     //   await entityService.repository(entity).then((result) {
     //     print('EL RESULTTTTT: ${result["tipo_mensaje"]}');

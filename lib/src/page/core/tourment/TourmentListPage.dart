@@ -34,6 +34,8 @@ class _TourmentListPageState extends State<TourmentListPage> {
   // DEFINICIOND E VARIABLES
   final prefs = new Preferense();
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  bool _save = false;
+  String _opcionJugador = '1';
 
   @override
   Widget build(BuildContext context) {
@@ -262,7 +264,6 @@ class _TourmentListPageState extends State<TourmentListPage> {
   Widget _simplePopup(String idTorneo, String idTipoCompeticion) =>
       PopupMenuButton<int>(
         itemBuilder: (context) => [
-          /*
           PopupMenuItem(
             value: 1,
             child: Text("Editar"),
@@ -271,7 +272,6 @@ class _TourmentListPageState extends State<TourmentListPage> {
             value: 2,
             child: Text("Eliminar"),
           ),
-          */
           PopupMenuItem(
             value: 3,
             child: Text("Adicionar jugadores"),
