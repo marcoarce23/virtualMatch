@@ -7,6 +7,7 @@ import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/service/MultimediaService.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
+import 'package:virtual_match/src/widget/card/CardVM.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
@@ -107,7 +108,6 @@ class _MultimediaListPageState extends State<MultimediaListPage> {
         itemCount: snapshot.data.length,
         itemBuilder: (context, index) {
           MultimediaModel entity = snapshot.data[index];
-
           return _showListTile(entity);
         },
       ),
@@ -118,89 +118,70 @@ class _MultimediaListPageState extends State<MultimediaListPage> {
     final size = MediaQuery.of(context).size;
     return Column(
       children: <Widget>[
-        sizedBox(0, 7.0),
-        Container(
-          width: size.width * 0.95,
-          margin: EdgeInsets.symmetric(vertical: 0.0),
-          decoration: boxDecoration(),
-          child: Column(
-            children: <Widget>[
-              gfListTileKey(
-                  Key(entity.idMultimedia.toString()),
-                  Text('Titulo: ${entity.titulo}'),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text('DETALLE: ${entity.resumen}',
-                          style: TextStyle(color: AppTheme.themeWhite)),
-                      Text('ENLACE: ${entity.enlace}',
-                          style: TextStyle(color: AppTheme.themeWhite)),
-                      Text('NOTICIA/EVENTO: ${entity.idaCategoria}',
-                          style: TextStyle(color: AppTheme.themeWhite)),
-                      Text('FECHA INICIO: ${entity.fechainicio}',
-                          style: TextStyle(color: AppTheme.themeWhite)),
-                      Text('FECHA FIN     :  ${entity.fechafin}',
-                          style: TextStyle(color: AppTheme.themeWhite)),
-                    ],
-                  ),
-                  _showAction(entity, entity.idMultimedia.toString()),
-                  null,
-                  avatarCircle((entity.foto ?? IMAGE_LOGO), 35),
-                  EdgeInsets.all(5.0),
-                  EdgeInsets.all(3.0)),
-            ],
-          ),
+        CardVM(
+          size: 150,
+          imageAssets: 'assets/icono3.png',
+          opciones: _simplePopup(entity, entity.idMultimedia.toString()),
+          accesosRapidos: null,
+          listWidgets: [
+            Text('Titulo: ${entity.titulo}'),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text('DETALLE: ${entity.resumen}',
+                    style: TextStyle(color: AppTheme.themeWhite)),
+                Text('ENLACE: ${entity.enlace}',
+                    style: TextStyle(color: AppTheme.themeWhite)),
+                Text('NOTICIA/EVENTO: ${entity.idaCategoria}',
+                    style: TextStyle(color: AppTheme.themeWhite)),
+                Text('FECHA INICIO: ${entity.fechainicio}',
+                    style: TextStyle(color: AppTheme.themeWhite)),
+                Text('FECHA FIN     :  ${entity.fechafin}',
+                    style: TextStyle(color: AppTheme.themeWhite)),
+              ],
+            ),
+          ],
         ),
       ],
     );
   }
 
-  Widget _showAction(MultimediaModel entity, String keyId) {
-    sizedBox(0, 10.0);
-    return Row(
-      children: <Widget>[
-        Text('Operaciones: $keyId'),
-        sizedBox(10, 0),
-        _update(),
-        sizedBox(10, 0),
-        _delete(keyId),
-      ],
-    );
-  }
-
-  _update() {
-    entityModel.states = StateEntity.Update;
-    entityModel.usuarioAuditoria = prefs.email;
-
-    return InkWell(
-      child: FaIcon(
-        FontAwesomeIcons.edit,
-        color: AppTheme.themePurple,
-        size: 23,
-      ),
-      onTap: () {
-        setState(() {});
-      },
-    );
-  }
-
-  _delete(String keyId) {
-    return InkWell(
-      key: Key(keyId),
-      child: FaIcon(
-        FontAwesomeIcons.trashAlt,
-        color: AppTheme.themePurple,
-        size: 23,
-      ),
-      onTap: () {
-        setState(() {
-          entityModel.idMultimedia = int.parse(keyId);
-          print('eliminar ${entityModel.idMultimedia}');
-          executeDelete(entityModel.idMultimedia.toString(), prefs.email);
-        });
-      },
-    );
-  }
+  Widget _simplePopup(MultimediaModel entity, String keyId) =>
+      PopupMenuButton<int>(
+        itemBuilder: (context) => [
+          PopupMenuItem(
+            value: 1,
+            child: Text("Editar"),
+          ),
+          PopupMenuItem(
+            value: 2,
+            child: Text("Eliminar"),
+          ),
+        ],
+        onCanceled: () {
+          print("You have canceled the menu.");
+        },
+        onSelected: (value) {
+          switch (value) {
+            case 1:
+              showSnackbarWithOutKey("Metodo por implementar", context);
+              break;
+            case 2:
+              entityModel.idMultimedia = int.parse(keyId);
+              print('eliminar ${entityModel.idMultimedia}');
+              executeDelete(entityModel.idMultimedia.toString(), prefs.email);
+              break;
+            default:
+              showSnackbarWithOutKey("No hay opcion seleccionada", context);
+              break;
+          }
+        },
+        icon: Icon(
+          Icons.menu,
+          color: Colors.white,
+        ),
+        offset: Offset(0, 100),
+      );
 
   void executeDelete(String id, String usuario) {
     try {

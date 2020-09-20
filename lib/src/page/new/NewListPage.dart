@@ -8,6 +8,7 @@ import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/NewService.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
+import 'package:virtual_match/src/widget/card/CardVM.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
@@ -51,11 +52,11 @@ class _NewListPageState extends State<NewListPage> {
       body: SafeArea(
         child: Container(
           decoration: new BoxDecoration(
-                  image: new DecorationImage(
-                    image: new AssetImage('assets/portada2.png'),
-                    fit: BoxFit.cover,
-                  ),
-                ),
+            image: new DecorationImage(
+              image: new AssetImage('assets/portada2.png'),
+              fit: BoxFit.cover,
+            ),
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
@@ -125,96 +126,78 @@ class _NewListPageState extends State<NewListPage> {
     return Column(
       children: <Widget>[
         sizedBox(0, 7.0),
-        Container(
-          width: size.width * 0.95,
-          margin: EdgeInsets.symmetric(vertical: 0.0),
-          decoration: boxDecoration(),
-          child: Column(
-            children: <Widget>[
-              gfListTileKey(
-                  Key(entity.idNoticiaEvento.toString()),
-                  Text('Titulo: ${entity.titulo}'),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        'Detalle: ${entity.objetivo}',
-                        style: TextStyle(color: AppTheme.themeWhite),
-                      ),
-                      Text(
-                        'Dirigo a: ${entity.dirigidoa}',
-                        style: TextStyle(color: AppTheme.themeWhite),
-                      ),
-                      Text(
-                        'Lugar/Virtual: ${entity.dirigidoa}',
-                        style: TextStyle(color: AppTheme.themeWhite),
-                      ),
-                      Text(
-                        'Fecha y Hora: ${entity.fecha} ${entity.hora}',
-                        style: TextStyle(color: AppTheme.themeWhite),
-                      ),
-                    ],
-                  ),
-                  _showAction(
-                      entity, entity.idNoticiaEvento.toString(), context),
-                  null,
-                  avatarCircle((entity.foto ?? IMAGE_LOGO), 35),
-                  EdgeInsets.all(5.0),
-                  EdgeInsets.all(3.0)),
-            ],
-          ),
+        CardVM(
+          size: 150,
+          imageAssets: 'assets/icono3.png',
+          opciones:
+              _simplePopup(entity, entity.idNoticiaEvento.toString(), context),
+          accesosRapidos: null,
+          listWidgets: [
+            Text('Titulo: ${entity.titulo}'),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  'Detalle: ${entity.objetivo}',
+                  style: TextStyle(color: AppTheme.themeWhite),
+                ),
+                Text(
+                  'Dirigo a: ${entity.dirigidoa}',
+                  style: TextStyle(color: AppTheme.themeWhite),
+                ),
+                Text(
+                  'Lugar/Virtual: ${entity.dirigidoa}',
+                  style: TextStyle(color: AppTheme.themeWhite),
+                ),
+                Text(
+                  'Fecha y Hora: ${entity.fecha} ${entity.hora}',
+                  style: TextStyle(color: AppTheme.themeWhite),
+                ),
+              ],
+            )
+          ],
         ),
       ],
     );
   }
 
-  Widget _showAction(
-      NoticiaEventoModel entity, String keyId, BuildContext context) {
-    return Row(
-      children: <Widget>[
-        sizedBox(0, 15),
-        Text('OPERACIONES: $keyId',
-            style: TextStyle(color: AppTheme.themeWhite)),
-        sizedBox(10, 0),
-        _update(context, entity),
-        sizedBox(10, 0),
-        _delete(keyId),
-      ],
-    );
-  }
-
-  _update(BuildContext context, NoticiaEventoModel entity) {
-    return InkWell(
-      child: FaIcon(
-        FontAwesomeIcons.edit,
-        color: AppTheme.themePurple,
-        size: 26,
-      ),
-      onTap: () {
-        setState(() {
-          Navigator.pushNamed(context, 'notificationLoad', arguments: entity);
-        });
-      },
-      //  ),
-    );
-  }
-
-  _delete(String keyId) {
-    return InkWell(
-      key: Key(keyId),
-      child: FaIcon(
-        FontAwesomeIcons.trashAlt,
-        color: AppTheme.themePurple,
-        size: 26,
-      ),
-      onTap: () {
-        setState(() {
-          entityModel.idNoticiaEvento = int.parse(keyId);
-          executeDelete(keyId, prefs.email);
-        });
-      },
-    );
-  }
+  Widget _simplePopup(
+          NoticiaEventoModel entity, String keyId, BuildContext context) =>
+      PopupMenuButton<int>(
+        itemBuilder: (context) => [
+          PopupMenuItem(
+            value: 1,
+            child: Text("Editar"),
+          ),
+          PopupMenuItem(
+            value: 2,
+            child: Text("Eliminar"),
+          ),
+        ],
+        onCanceled: () {
+          print("You have canceled the menu.");
+        },
+        onSelected: (value) {
+          switch (value) {
+            case 1:
+              Navigator.pushNamed(context, 'notificationLoad',
+                  arguments: entity);
+              break;
+            case 2:
+              entityModel.idNoticiaEvento = int.parse(keyId);
+              executeDelete(keyId, prefs.email);
+              break;
+            default:
+              showSnackbarWithOutKey("No hay opcion seleccionada", context);
+              break;
+          }
+        },
+        icon: Icon(
+          Icons.menu,
+          color: Colors.white,
+        ),
+        offset: Offset(0, 100),
+      );
 
   void executeDelete(String id, String usuario) {
     try {

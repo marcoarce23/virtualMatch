@@ -83,26 +83,6 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
             default:
               return Column(
                 children: <Widget>[
-                  // Row(
-                  //   children: <Widget>[
-                  //     Shimmer.fromColors(
-                  //       baseColor: AppTheme.themeDefault,
-                  //       highlightColor: AppTheme.themePurple,
-                  //       child: FaIcon(FontAwesomeIcons.playstation,
-                  //           color: AppTheme.themeDefault, size: 35.0),
-                  //     ),
-                  //     AutoSizeText(
-                  //       'Listado de torneos'.toUpperCase(),
-                  //       style: kTitleStyleBlack,
-                  //       softWrap: true,
-                  //       overflow: TextOverflow.clip,
-                  //       textAlign: TextAlign.justify,
-                  //     ),
-                  //   ],
-                  // ),
-
-                  sizedBox(0, 8.0),
-
                   showInformationBasic(
                     context,
                     'TORNEOS - VIRTUAL MATCH',
@@ -149,7 +129,7 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
                 CardVM(
                   size: 150,
                   imageAssets: 'assets/icono3.png',
-                  opciones: null,
+                  opciones: _simplePopup(entity.idTorneo.toString()),
                   accesosRapidos: null,
                   listWidgets: [
                     Text('TORNEO: ${entity.nombreTorneo}',
@@ -168,129 +148,32 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
                             fontWeight: FontWeight.bold,
                             fontSize: 15,
                             color: AppTheme.themeWhite)),
-                    Row(
-                      children: <Widget>[
-                        Flexible(
-                          flex: 2,
-                          child: Text('DETALLE:',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 13,
-                                  color: AppTheme.themeWhite)),
-                        ),
-                        sizedBox(5, 0),
-                        Flexible(
-                          flex: 5,
-                          child: AutoSizeText(
-                            entity.detalle,
-                            style: kSubSubTitleCardStyle,
-                            softWrap: true,
-                            overflow: TextOverflow.clip,
-                            textAlign: TextAlign.justify,
-                          ),
-                        ),
-                        Flexible(flex: 3, child: Container())
-                      ],
-                    )
+                    Text('DETALLE:',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                            color: AppTheme.themeWhite)),
+                    AutoSizeText(
+                      entity.detalle,
+                      style: kSubSubTitleCardStyle,
+                      softWrap: true,
+                      overflow: TextOverflow.clip,
+                      textAlign: TextAlign.justify,
+                    ),
+                    Text('PREMIOS:',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                            color: AppTheme.themeWhite)),
+                    Text(entity.premios, style: TextStyle(fontSize: 13)),
+                    AutoSizeText(
+                      'Del ${new DateFormat.yMMMMd('es_BO').format(entity.fechaInicio)}',
+                      style: kSubSubTitleCardStyle,
+                      softWrap: true,
+                      overflow: TextOverflow.clip,
+                      textAlign: TextAlign.justify,
+                    ),
                   ],
-                ),
-                SlideInUp(
-                  duration: Duration(seconds: 1),
-                  child: Stack(
-                    children: [
-                      gfListTile(
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Text('TORNEO: ${entity.nombreTorneo}',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15,
-                                      color: AppTheme.themeWhite)),
-                              Text('TIPO:  ${entity.tipoCompeticion}',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15,
-                                      color: AppTheme.themeWhite)),
-                              Text(
-                                  'INSCRITOS:  ${entity.cantidadInscritos}/${entity.cantidadJugadores}',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15,
-                                      color: AppTheme.themeWhite)),
-                            ],
-                          ),
-                          Row(
-                            children: <Widget>[
-                              Flexible(
-                                flex: 2,
-                                child: Text('DETALLE:',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 13,
-                                        color: AppTheme.themeWhite)),
-                              ),
-                              sizedBox(5, 0),
-                              Flexible(
-                                flex: 5,
-                                child: AutoSizeText(
-                                  entity.detalle,
-                                  style: kSubSubTitleCardStyle,
-                                  softWrap: true,
-                                  overflow: TextOverflow.clip,
-                                  textAlign: TextAlign.justify,
-                                ),
-                              ),
-                              Flexible(flex: 3, child: Container())
-                            ],
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Row(
-                                    children: <Widget>[
-                                      Text('PREMIOS:',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 13,
-                                              color: AppTheme.themeWhite)),
-                                      sizedBox(5, 0),
-                                      Text(entity.premios,
-                                          style: TextStyle(fontSize: 13)),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              AutoSizeText(
-                                'Del ${new DateFormat.yMMMMd('es_BO').format(entity.fechaInicio)}',
-                                style: kSubSubTitleCardStyle,
-                                softWrap: true,
-                                overflow: TextOverflow.clip,
-                                textAlign: TextAlign.justify,
-                              ),
-                              Align(
-                                  alignment: Alignment.centerRight,
-                                  child:
-                                      _simplePopup(entity.idTorneo.toString())),
-                              //_showAction(entity.idTorneo.toString()),
-                            ],
-                          ),
-                          null, //FaIcon(FontAwesomeIcons.infoCircle),
-                          null,
-                          EdgeInsets.all(4.0),
-                          EdgeInsets.all(4.0)),
-                      Positioned(
-                          left: MediaQuery.of(context).size.width * 0.72,
-                          child: RadialProgress(
-                              progressColor: AppTheme.themePurple,
-                              child: avatarCircle(entity.foto, 55.0))),
-                    ],
-                  ),
                 ),
               ],
             ),

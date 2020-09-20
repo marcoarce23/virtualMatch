@@ -61,8 +61,8 @@ class CardVM extends StatelessWidget {
                   )),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: FadeIn(
-                  duration: Duration(seconds: 3),
+                child: SlideInUp(
+                  duration: Duration(seconds: 1),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -88,7 +88,8 @@ class CardVM extends StatelessWidget {
               ),
               Positioned(
                 bottom: 0,
-                child: FadeIn(
+                child: SlideInUp(
+                  duration: Duration(seconds: 1),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
