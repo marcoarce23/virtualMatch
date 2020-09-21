@@ -119,7 +119,6 @@ class _NotificationListPageState extends State<NotificationListPage> {
   }
 
   Widget _showListTile(NotificacionModel entity, BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Column(
       children: <Widget>[
         Column(

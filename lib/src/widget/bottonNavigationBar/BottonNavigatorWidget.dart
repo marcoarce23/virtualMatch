@@ -5,7 +5,7 @@ import 'package:virtual_match/src/page/core/miniTourment/ListMiniTournamentPage.
 import 'package:virtual_match/src/page/core/player/PlayerPage.dart';
 import 'package:virtual_match/src/page/core/player/PlayerWinnePage.dart';
 import 'package:virtual_match/src/page/core/tourment/ListTournamentPage.dart';
-import 'package:virtual_match/src/page/new/NewListPage.dart';
+
 import 'package:virtual_match/src/page/notification/NotificationPage.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
@@ -72,6 +72,7 @@ class _BottonNavigationState extends State<BottonNavigation> {
       backgroundColor: AppTheme.themeDefault,
       badgeColor: AppTheme.themePurple,
       style: TabStyle.reactCircle,
+      color: AppTheme.themeWhite,
       elevation: 3.0,
       items: [
         TabItem(
@@ -81,7 +82,7 @@ class _BottonNavigationState extends State<BottonNavigation> {
               width: 30,
               height: 30,
             ),
-            title: 'Noticias'),
+            title: 'Último'),
         TabItem(
             icon: Image.asset(
               'assets/image/trofeo.png',
