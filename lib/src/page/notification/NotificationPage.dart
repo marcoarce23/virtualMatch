@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:virtual_match/src/model/Preference.dart';
-import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/card/CardVM.dart';
@@ -23,7 +22,6 @@ class NotificationPage extends StatefulWidget {
 class _NotificationPageState extends State<NotificationPage> {
   //DEFINICION DE BLOC Y MODEL
   NotificacionModel entity = new NotificacionModel();
-  NotificationService entityService;
   NotificationService entityGet = NotificationService();
 
   // DEFINICIOND E VARIABLES
@@ -97,15 +95,29 @@ class _NotificationPageState extends State<NotificationPage> {
   }
 
   Widget listView(BuildContext context, AsyncSnapshot snapshot) {
-    final size = MediaQuery.of(context).size;
+    return Expanded(
+      child: ListView.builder(
+        shrinkWrap: true,
+        scrollDirection: Axis.vertical,
+        physics: ClampingScrollPhysics(),
+        itemCount: snapshot.data.length,
+        itemBuilder: (context, index) {
+          NotificacionModel entity = snapshot.data[index];
 
+          return _showListTile(entity, context);
+        },
+      ),
+    );
+  }
+
+  Widget _showListTile(NotificacionModel entity, BuildContext context) {
     return Column(
       children: <Widget>[
         Column(
           children: <Widget>[
             sizedBox(0, 7),
             CardVM(
-              size: 120,
+              size: 90,
               imageAssets: 'assets/icono3.png',
               //   opciones: avatarCircle((entity.foto ?? IMAGE_LOGO), 35),
               listWidgets: [
@@ -114,7 +126,7 @@ class _NotificationPageState extends State<NotificationPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      'TITULO: ${entity.detalle}',
+                      'TITULO: ${entity.titulo}',
                       style: TextStyle(color: AppTheme.themeWhite),
                     ),
                     Text(
@@ -122,7 +134,7 @@ class _NotificationPageState extends State<NotificationPage> {
                       style: TextStyle(color: AppTheme.themeWhite),
                     ),
                     Text(
-                      'FECHA: ${entity.detalle}',
+                      'FECHA: ${entity.fechacreacion}',
                       style: TextStyle(color: AppTheme.themeWhite),
                     ),
                   ],

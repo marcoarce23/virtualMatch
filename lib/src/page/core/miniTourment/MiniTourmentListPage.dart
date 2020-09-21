@@ -124,7 +124,6 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
   }
 
   Widget _showListTile(ListaTorneoModel entity) {
-    final size = MediaQuery.of(context).size;
     return Column(
       children: <Widget>[
         sizedBox(0, 7.0),

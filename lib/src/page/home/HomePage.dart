@@ -1,9 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:flutter_launcher_icons/xml_templates.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:virtual_match/src/model/Preference.dart';
-import 'package:virtual_match/src/page/core/tourment/ListTournamentPage.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
@@ -12,7 +10,6 @@ import 'package:virtual_match/src/widget/card/CardVM.dart';
 import 'package:virtual_match/src/widget/carousel/CarouselWidget.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
-import 'package:virtual_match/src/widget/menu/CircularMenu.dart';
 import 'package:virtual_match/src/widget/menu/bottomMenu.dart';
 
 class HomePage extends StatefulWidget {
@@ -27,6 +24,8 @@ class _HomePageState extends State<HomePage> {
   final prefs = new Preferense();
   File photo;
   final GlobalKey<FabCircularMenuState> fabKey = GlobalKey();
+  int _selectedRadio = 18;
+  int _group = 0;
 
   @override
   void initState() {
@@ -71,6 +70,47 @@ class _HomePageState extends State<HomePage> {
             ),
             child: Column(
               children: [
+                Row(
+              children: <Widget>[
+                SizedBox(width: 10.0),
+                //  FaIcon(FontAwesomeIcons.male, color: AppTheme.themeVino),
+                SizedBox(width: 5.0),
+                Text('Noticias'),
+                Radio(
+                  value: 0,
+                  groupValue: _group,
+                  onChanged: (T) {
+                    _selectedRadio = 18;
+                    setState(() {
+                      _group = T;
+                    });
+                  },
+                ),
+                Text('Eventos'),
+                Radio(
+                  value: 1,
+                  groupValue: _group,
+                  onChanged: (T) {
+                    _selectedRadio = 19;
+                    setState(() {
+                      _group = T;
+                    });
+                  },
+                ),
+                Text('Multimedia'),
+                Radio(
+                  value: 2,
+                  groupValue: _group,
+                  onChanged: (T) {
+                    _selectedRadio = 15;
+                    setState(() {
+                      _group = T;
+                    });
+                  },
+                ),
+              ],
+            ),
+
                 Center(
                   child: Container(
                       width: MediaQuery.of(context).size.width * 0.75,

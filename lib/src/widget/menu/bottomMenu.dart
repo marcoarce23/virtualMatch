@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:virtual_match/src/model/util/Resource.dart';
-import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 
 class ItemBottomMenu {
   Function onPressed;

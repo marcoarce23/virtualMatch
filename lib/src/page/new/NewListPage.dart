@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/NoticiaEventoModel.dart';
-import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/NewService.dart';
@@ -123,7 +122,6 @@ class _NewListPageState extends State<NewListPage> {
   }
 
   Widget _showListTile(NoticiaEventoModel entity) {
-    final size = MediaQuery.of(context).size;
     return Column(
       children: <Widget>[
         sizedBox(0, 7.0),

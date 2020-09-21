@@ -4,7 +4,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/ListadoJugadoresModel.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/service/core/EquipmentService.dart';
-import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/card/CardVM.dart';
 import 'package:virtual_match/src/widget/general/CallWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
