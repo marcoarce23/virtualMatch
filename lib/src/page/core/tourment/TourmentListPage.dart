@@ -337,9 +337,8 @@ class _TourmentListPageState extends State<TourmentListPage> {
     showDialog(
         context: context,
         builder: (context) {
-          return AlertDialog(content: StatefulBuilder(
-              builder: (BuildContext context, StateSetter setState) {
-            return Column(
+          return AlertDialog(
+            title: Column(
               children: [
                 Text('Selecionar Jugadores'),
 
@@ -351,7 +350,9 @@ class _TourmentListPageState extends State<TourmentListPage> {
               MaterialButton(
                   child: Text('Agregar'),
                   onPressed: () {
-                    _executeInscription(idTorneo, _opcionJugador);
+                    setState(() {
+                      _executeInscription(idTorneo, _opcionJugador);
+                    });
                   }),
             ],
           );
@@ -419,7 +420,9 @@ class _TourmentListPageState extends State<TourmentListPage> {
   }
 
   _submit(String idTorneo) {
+    setState(() => _save = true);
     _executeInscription(entity.idTorneo.toString(), _opcionJugador);
+    setState(() => _save = false);
   }
 
   void _executeInscription(String idTorneo, String idJugador) async {

@@ -4,6 +4,7 @@ import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
+import 'package:virtual_match/src/widget/card/CardVM.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
@@ -43,7 +44,12 @@ class _NotificationPageState extends State<NotificationPage> {
       drawer: DrawerMenu(),
       body: SafeArea(
         child: Container(
-          color: Colors.black87,
+          decoration: new BoxDecoration(
+            image: new DecorationImage(
+              image: new AssetImage('assets/portada2.png'),
+              fit: BoxFit.cover,
+            ),
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
@@ -93,46 +99,39 @@ class _NotificationPageState extends State<NotificationPage> {
   Widget listView(BuildContext context, AsyncSnapshot snapshot) {
     final size = MediaQuery.of(context).size;
 
-    return Expanded(
-      child: ListView.builder(
-        shrinkWrap: true,
-        scrollDirection: Axis.vertical,
-        physics: ClampingScrollPhysics(),
-        itemCount: snapshot.data.length,
-        itemBuilder: (context, index) {
-          NotificacionModel entity = snapshot.data[index];
-
-          return Column(
-            children: <Widget>[
-              Container(
-                width: size.width * 0.95,
-                margin: EdgeInsets.symmetric(vertical: 0.0),
-                decoration: boxDecoration(),
-                child: Column(
+    return Column(
+      children: <Widget>[
+        Column(
+          children: <Widget>[
+            sizedBox(0, 7),
+            CardVM(
+              size: 120,
+              imageAssets: 'assets/icono3.png',
+              //   opciones: avatarCircle((entity.foto ?? IMAGE_LOGO), 35),
+              listWidgets: [
+                Text('Notificación: ${entity.titulo} '),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    gfListTileKey(
-                        Key(entity.idNotificacion.toString()),
-                        Text(
-                          'TÍTULO : ${entity.titulo}',
-                          style: TextStyle(
-                            color: AppTheme.themeWhite,
-                          ),
-                        ),
-                        Text('DETALLE: ${entity.detalle}',
-                            style: TextStyle(color: AppTheme.themeWhite)),
-                        null,
-                        null,
-                        avatarCircle((entity.foto ?? IMAGE_LOGO), 35),
-                        EdgeInsets.all(5.0),
-                        EdgeInsets.all(3.0)),
+                    Text(
+                      'TITULO: ${entity.detalle}',
+                      style: TextStyle(color: AppTheme.themeWhite),
+                    ),
+                    Text(
+                      'DETALLE: ${entity.detalle}',
+                      style: TextStyle(color: AppTheme.themeWhite),
+                    ),
+                    Text(
+                      'FECHA: ${entity.detalle}',
+                      style: TextStyle(color: AppTheme.themeWhite),
+                    ),
                   ],
                 ),
-              ),
-              sizedBox(0.0, 8.0),
-            ],
-          );
-        },
-      ),
+              ],
+            ),
+          ],
+        ),
+      ],
     );
   }
 }
