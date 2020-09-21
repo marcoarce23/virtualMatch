@@ -31,9 +31,9 @@ class FormatoModel implements IEntityMap {
         "IdaTipoCompeticion": idTipoCompeticion,
         "IdaTipoTorneo": idaTipoTorneo,
         "IdaInscripcion": idaInscripcion,
-        "IdAsignacion": idaAsignacion,
+        "IdaAsignacion": idaAsignacion,
         "CantidadJugadores": cantidadJugadores,
-        "IdTipoModalidad": idaTipoModalidad,
+        "IdaTipoModalidad": idaTipoModalidad,
         "UsuarioAuditoria": usuarioAuditoria,
       };
 }

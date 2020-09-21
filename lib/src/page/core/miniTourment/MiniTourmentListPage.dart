@@ -168,14 +168,13 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
             ),
             Text('DETALLE: ${entity.detalle}',
                 style: TextStyle(color: AppTheme.themeWhite)),
-                  Text('DETALLE: ${entity.cantidadInscritos}/${entity.cantidadJugadores}',
+            Text(
+                'INSCRITOS: ${entity.cantidadInscritos}/${entity.cantidadJugadores}',
                 style: TextStyle(color: AppTheme.themeWhite)),
-                  Text('DETALLE: ${entity.tipoCompeticion}',
+            Text('COMPETICIÓN: ${entity.tipoCompeticion}',
                 style: TextStyle(color: AppTheme.themeWhite)),
-                  Text('DETALLE: ${entity.tipoModalidad}',
+            Text('MODALIDAD: ${entity.tipoModalidad}',
                 style: TextStyle(color: AppTheme.themeWhite)),
-  
-                
           ],
         ),
       ],
@@ -440,10 +439,8 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
           '/usuario/' +
           prefs.email);
     else
-      _executeGenerator('/api/Torneo/execGenerarLiga/' +
-          keyId +
-          '/usuario/' +
-          prefs.email);
+      _executeGenerator(
+          '/api/Torneo/execGenerarLiga/' + keyId + '/usuario/' + prefs.email);
   }
 
   void executeDelete(String id, String usuario) async {
@@ -481,7 +478,7 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
   }
 
   void _executeGenerator(String url) async {
-print('EL URLLL: $url}');
+    print('EL URLLL: $url}');
     try {
       await entityService.execute(API + url).then((result) {
         if (result["tipo_mensaje"] == '0')

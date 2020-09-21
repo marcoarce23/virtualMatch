@@ -13,6 +13,7 @@ import 'package:virtual_match/src/model/entity/EntityFromJson/ListadoTorneoModel
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
+import 'package:virtual_match/src/page/core/miniTourment/MiniTourmentListPage.dart';
 import 'package:virtual_match/src/page/core/tourment/TourmentListPage.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
@@ -24,6 +25,7 @@ import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/model/util/Validator.dart' as validator;
 import 'package:virtual_match/src/model/entity/EntityMap/FormatoModel.dart';
+import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 import 'package:virtual_match/src/widget/image/ImageWidget.dart';
 
 class MiniFormatLoadPage extends StatefulWidget {
@@ -211,6 +213,7 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
                       onChanged: (value) {
                         setState(() {
                           _opcionTipoModalidad = value;
+                          print('OPCION MOALDIDAD $_opcionTipoModalidad');
                         });
                       },
                     ),
@@ -330,7 +333,7 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
                   ],
                 );
               } else {
-                return GFLoader(type: GFLoaderType.circle, size: 35.0);
+                return loading();
               }
             }));
   }
@@ -472,7 +475,7 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
     entity.idaInscripcion = 1;
     entity.idaAsignacion = 1;
     entity.cantidadJugadores = int.parse(typeCount);
-    entity.idaTipoModalidad = int.parse(_opcionTipoCompeticion);
+    entity.idaTipoModalidad = int.parse(_opcionTipoModalidad);
     entity.usuarioAuditoria = prefs.email;
   }
 
@@ -483,7 +486,7 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
         if (result["tipo_mensaje"] == '0') {
           showSnackbar(STATUS_OK, scaffoldKey);
 
-          navegation(context, TourmentListPage());
+          navegation(context, MiniTourmentListPage());
         } else
           showSnackbar(STATUS_ERROR, scaffoldKey);
       });

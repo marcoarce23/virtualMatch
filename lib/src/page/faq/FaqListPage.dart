@@ -80,7 +80,7 @@ class _FaqListPagetate extends State<FaqListPage> {
         listAcordion(),
         listAcordion2(),
         listAcordion3(),
-        listAcordion4(),
+     
       ],
     );
   }
@@ -109,11 +109,5 @@ class _FaqListPagetate extends State<FaqListPage> {
         AppTheme.themePurple);
   }
 
-  Widget listAcordion4() {
-    return accordion(
-        '¿Cómo realizan el servicio de despacho?',
-        'Los despachos los realizamos habiendo confirmado la información de los pedidos y realizado el empaque y procediendo de despacho hasta las 9:00 AM en días hábiles. Para que tu producto este seguro tenemos tres métodos de entrega:\nEntrega gratuita a domicilio para las principales ciudades del país.\nEntrega mediante oficinas FedEx de todo el país (si vive en una provincia o bien lo desee así).\nEntrega mediante las tiendas Impulse.',
-        AppTheme.themeDefault,
-        AppTheme.themePurple);
-  }
+
 }

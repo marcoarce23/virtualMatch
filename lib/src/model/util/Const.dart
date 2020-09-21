@@ -36,6 +36,6 @@ const String API = 'http://virtualmatch.neuronatexnology.com';
 const String PRIMARY_KEY = 'data';
 const String FONT_FAMILY_CM_SANS_SERIF = 'CM Sans Serif';
 const String FONT_FAMILY_DANCING = 'Dancing';
-const String VIRTUAL_MATCH = 'Virtual Match@2020. ';
+const String VIRTUAL_MATCH = 'Virtual Match 2020. ';
 const String ASSETS_ICON = 'assets/ico/ico.png';
 const String TITLE = 'VIRTUAL MATCH';

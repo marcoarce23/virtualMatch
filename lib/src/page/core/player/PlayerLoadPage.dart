@@ -380,41 +380,41 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
 
   @override
   Widget build(BuildContext context) {
-    print('ID PALYER: ${prefs.idPersonal.toString()}');
+    print('ID PALYER: ${prefs.idPlayer.toString()}');
     entity.states = StateEntity.Insert;
     entity.foto = image;
 
-    if (prefs.idPlayer != "0") {
+   if (prefs.idPlayer.toString() != '0') {
       entity.nombre = prefs.nameUser;
       entity.apellido = prefs.lastPage;
-      entity.idPsdn = prefs.idPsdn;
+      entity.idPsdn = 'prefs.idPsdn';
       entity.telefono = prefs.telefono;
-      entity.informacionComplementaria = prefs.informacionComplementaria;
+      entity.informacionComplementaria = 'prefs.informacionComplementaria';
       entity.facebook = prefs.facebook;
       // _opcionDepartamento = prefs.idDepartament.toString();
       entity.states = StateEntity.Update;
 
-      print('ID PALYER: ${entity.informacionComplementaria}');
+      print('ID SSSS: ${entity.telefono}');
+      print('ID SSSS: ${prefs.telefono}');
     }
-    return MultiProvider(
-      providers: [
-        // ignore: missing_required_param
-        ChangeNotifierProvider(builder: (_) => new CrudService()),
-      ],
-      child: Scaffold(
-        key: scaffoldKey,
-        appBar: appBar('Jugador Virtual Match'.toUpperCase()),
-        drawer: DrawerMenu(),
-        body: Stack(
-          children: <Widget>[
-            background(context, ''),
-            // crearFondo(context, imagen),
-            _form(context),
-          ],
-        ),
-        floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
-            FaIcon(FontAwesomeIcons.playstation), HomePage()),
+    // return MultiProvider(
+    //   providers: [
+    //     // ignore: missing_required_param
+    //     ChangeNotifierProvider(builder: (_) => new CrudService()),
+    //   ],
+    return Scaffold(
+      key: scaffoldKey,
+      appBar: appBar('Jugador Virtual Match'.toUpperCase()),
+      drawer: DrawerMenu(),
+      body: Stack(
+        children: <Widget>[
+          background(context, ''),
+          // crearFondo(context, imagen),
+          _form(context),
+        ],
       ),
+      floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
+          FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }
 

@@ -46,7 +46,7 @@ class _IntroPageState extends State<IntroPage> {
       height: 8.0,
       width: isActive ? 24.0 : 16.0,
       decoration: BoxDecoration(
-        color: isActive ? AppTheme.themeDefault : AppTheme.themePurple,
+        color: isActive ? AppTheme.themeWhite : AppTheme.themePurple,
         borderRadius: BorderRadius.all(Radius.circular(12)),
       ),
     );
@@ -57,10 +57,10 @@ class _IntroPageState extends State<IntroPage> {
     return Scaffold(
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.light,
-          child: Container(
-             decoration: new BoxDecoration(
+        child: Container(
+          decoration: new BoxDecoration(
             image: new DecorationImage(
-              image: new AssetImage('assets/portada1.png'),
+              image: new AssetImage('assets/portada2.png'),
               fit: BoxFit.cover,
             ),
           ),
@@ -80,7 +80,7 @@ class _IntroPageState extends State<IntroPage> {
                     child: Text(
                       'Iniciar',
                       style: TextStyle(
-                        color: AppTheme.themeDefault,
+                        color: AppTheme.themeWhite,
                         fontSize: 20.0,
                         fontWeight: FontWeight.bold,
                       ),
@@ -119,7 +119,7 @@ class _IntroPageState extends State<IntroPage> {
                             ),
 
                             Shimmer.fromColors(
-                              baseColor: AppTheme.themeDefault,
+                              baseColor: AppTheme.themeWhite,
                               highlightColor: AppTheme.themePurple,
                               child: AutoSizeText(
                                 'La comunidad más grande de fútbol virtual de Bolivia.',
@@ -139,7 +139,7 @@ class _IntroPageState extends State<IntroPage> {
                                   children: <Widget>[
                                     sizedBox(0, 20.0),
                                     // Shimmer.fromColors(
-                                    //   baseColor: AppTheme.themeDefault,
+                                    //   baseColor: AppTheme.themeWhite,
                                     //   highlightColor: AppTheme.themePurple,
                                     //   child:
                                     avatarCircle(IMAGE_LOGO, 25.0),
@@ -148,7 +148,7 @@ class _IntroPageState extends State<IntroPage> {
                                     Expanded(
                                       child: AutoSizeText(
                                         'Organizamos los torneos más competitivos de fútbol virtual del país.',
-                                        style: kSubtitleStyleBlack,
+                                        style: kSubtitleStyle,
                                         softWrap: true,
                                         overflow: TextOverflow.clip,
                                         textAlign: TextAlign.justify,
@@ -161,19 +161,20 @@ class _IntroPageState extends State<IntroPage> {
                                   children: <Widget>[
                                     sizedBox(0, 15.0),
                                     // Shimmer.fromColors(
-                                    //   baseColor: AppTheme.themeDefault,
+                                    //   baseColor: AppTheme.themeWhite,
                                     //   highlightColor: AppTheme.themePurple,
                                     //   child: FaIcon(
                                     //       FontAwesomeIcons.playstation,
-                                    //       color: AppTheme.themeDefault,
+                                    //       color: AppTheme.themeWhite,
                                     //       size: 35.0),
                                     // ),
-                                    avatarCircle(IMAGE_DEFAULT, 25.0),
+                                    avatarCircle(IMAGE_LOGO, 25.0),
+
                                     sizedBox(10, 15.0),
                                     Expanded(
                                       child: AutoSizeText(
                                         'Te mantenemos informado de todos los campeonatos de la comunidad .',
-                                        style: kSubtitleStyleBlack,
+                                        style: kSubtitleStyle,
                                         softWrap: true,
                                         overflow: TextOverflow.clip,
                                         textAlign: TextAlign.justify,
@@ -186,11 +187,11 @@ class _IntroPageState extends State<IntroPage> {
                                   children: <Widget>[
                                     sizedBox(0, 11.0),
                                     // Shimmer.fromColors(
-                                    //   baseColor: AppTheme.themeDefault,
+                                    //   baseColor: AppTheme.themeWhite,
                                     //   highlightColor: AppTheme.themePurple,
                                     //   child: FaIcon(
                                     //       FontAwesomeIcons.playstation,
-                                    //       color: AppTheme.themeDefault,
+                                    //       color: AppTheme.themeWhite,
                                     //       size: 35.0),
                                     // ),
                                     avatarCircle(IMAGE_LOGO, 25.0),
@@ -198,7 +199,7 @@ class _IntroPageState extends State<IntroPage> {
                                     Expanded(
                                       child: AutoSizeText(
                                         'Impulsamos la competitividad y el entretenimiento. Crea tus propios torneos y realiza campeonatos personalizados con  tus amig@s',
-                                        style: kSubtitleStyleBlack,
+                                        style: kSubtitleStyle,
                                         softWrap: true,
                                         overflow: TextOverflow.clip,
                                         textAlign: TextAlign.justify,
@@ -227,7 +228,7 @@ class _IntroPageState extends State<IntroPage> {
                             ),
                             sizedBox(0, 10.0),
                             Shimmer.fromColors(
-                              baseColor: AppTheme.themeDefault,
+                              baseColor: AppTheme.themeWhite,
                               highlightColor: AppTheme.themePurple,
                               child: AutoSizeText(
                                 'Qué ofrecemos.'.toUpperCase(),
@@ -247,19 +248,19 @@ class _IntroPageState extends State<IntroPage> {
                                   children: <Widget>[
                                     sizedBox(0, 10.0),
                                     // Shimmer.fromColors(
-                                    //   baseColor: AppTheme.themeDefault,
+                                    //   baseColor: AppTheme.themeWhite,
                                     //   highlightColor: AppTheme.themePurple,
                                     //   child: FaIcon(
                                     //       FontAwesomeIcons.playstation,
-                                    //       color: AppTheme.themeDefault,
+                                    //       color: AppTheme.themeWhite,
                                     //       size: 35.0),
                                     // ),
-                                    avatarCircle(IMAGE_DEFAULT, 25.0),
+                                    avatarCircle(IMAGE_LOGO, 25.0),
                                     sizedBox(10, 10.0),
                                     Expanded(
                                       child: AutoSizeText(
                                         'Reunir a la mayor cantidad de FIFEROS de Bolivia, consolidando la comunidad de FIFA. ',
-                                        style: kSubtitleStyleBlack,
+                                        style: kSubtitleStyle,
                                         softWrap: true,
                                         overflow: TextOverflow.clip,
                                         textAlign: TextAlign.justify,
@@ -272,19 +273,19 @@ class _IntroPageState extends State<IntroPage> {
                                   children: <Widget>[
                                     sizedBox(0, 10),
                                     // Shimmer.fromColors(
-                                    //   baseColor: AppTheme.themeDefault,
+                                    //   baseColor: AppTheme.themeWhite,
                                     //   highlightColor: AppTheme.themePurple,
                                     //   child: FaIcon(
                                     //       FontAwesomeIcons.playstation,
-                                    //       color: AppTheme.themeDefault,
+                                    //       color: AppTheme.themeWhite,
                                     //       size: 35.0),
                                     // ),
                                     avatarCircle(IMAGE_LOGO, 25.0),
                                     sizedBox(10, 10.0),
                                     Expanded(
                                       child: AutoSizeText(
-                                        'Medir tus habilidades contra los mejores FIFEROS de nacionales e internacionales de Bolivia.',
-                                        style: kSubtitleStyleBlack,
+                                        'Medir tus habilidades contra los mejores FIFEROS nacionales e internacionales.',
+                                        style: kSubtitleStyle,
                                         softWrap: true,
                                         overflow: TextOverflow.clip,
                                         textAlign: TextAlign.justify,
@@ -297,19 +298,19 @@ class _IntroPageState extends State<IntroPage> {
                                   children: <Widget>[
                                     sizedBox(0, 10.0),
                                     // Shimmer.fromColors(
-                                    //   baseColor: AppTheme.themeDefault,
+                                    //   baseColor: AppTheme.themeWhite,
                                     //   highlightColor: AppTheme.themePurple,
                                     //   child: FaIcon(
                                     //       FontAwesomeIcons.playstation,
-                                    //       color: AppTheme.themeDefault,
+                                    //       color: AppTheme.themeWhite,
                                     //       size: 35.0),
                                     // ),
-                                    avatarCircle(IMAGE_DEFAULT, 25.0),
+                                    avatarCircle(IMAGE_LOGO, 25.0),
                                     sizedBox(10, 10.0),
                                     Expanded(
                                       child: AutoSizeText(
                                         'La posibilidad de ganar grandes premios por divertirte y hacer lo que más te gusta.',
-                                        style: kSubtitleStyleBlack,
+                                        style: kSubtitleStyle,
                                         softWrap: true,
                                         overflow: TextOverflow.clip,
                                         textAlign: TextAlign.justify,
@@ -337,7 +338,7 @@ class _IntroPageState extends State<IntroPage> {
                             ),
                             sizedBox(0, 5.0),
                             Shimmer.fromColors(
-                              baseColor: AppTheme.themeDefault,
+                              baseColor: AppTheme.themeWhite,
                               highlightColor: AppTheme.themePurple,
                               child: AutoSizeText(
                                 'Qué buscamos en la Comunidad.'.toUpperCase(),
@@ -356,11 +357,11 @@ class _IntroPageState extends State<IntroPage> {
                                     children: <Widget>[
                                       sizedBox(0, 10.0),
                                       // Shimmer.fromColors(
-                                      //   baseColor: AppTheme.themeDefault,
+                                      //   baseColor: AppTheme.themeWhite,
                                       //   highlightColor: AppTheme.themePurple,
                                       //   child: FaIcon(
                                       //       FontAwesomeIcons.playstation,
-                                      //       color: AppTheme.themeDefault,
+                                      //       color: AppTheme.themeWhite,
                                       //       size: 35.0),
                                       // ),
                                       avatarCircle(IMAGE_LOGO, 25.0),
@@ -368,7 +369,7 @@ class _IntroPageState extends State<IntroPage> {
                                       Expanded(
                                         child: AutoSizeText(
                                           'Impulsar y promover a nuevos talentos bolivianos del futbol virtual.',
-                                          style: kSubtitleStyleBlack,
+                                          style: kSubtitleStyle,
                                           softWrap: true,
                                           overflow: TextOverflow.clip,
                                           textAlign: TextAlign.justify,
@@ -381,11 +382,11 @@ class _IntroPageState extends State<IntroPage> {
                                     children: <Widget>[
                                       sizedBox(0, 10.0),
                                       // Shimmer.fromColors(
-                                      //   baseColor: AppTheme.themeDefault,
+                                      //   baseColor: AppTheme.themeWhite,
                                       //   highlightColor: AppTheme.themePurple,
                                       //   child: FaIcon(
                                       //       FontAwesomeIcons.playstation,
-                                      //       color: AppTheme.themeDefault,
+                                      //       color: AppTheme.themeWhite,
                                       //       size: 35.0),
                                       // ),
                                       avatarCircle(IMAGE_DEFAULT, 25.0),
@@ -393,7 +394,7 @@ class _IntroPageState extends State<IntroPage> {
                                       Expanded(
                                         child: AutoSizeText(
                                           'Competir con nuestros represantes nacioanle se internacionales para medir tus habilidades.',
-                                          style: kSubtitleStyleBlack,
+                                          style: kSubtitleStyle,
                                           softWrap: true,
                                           overflow: TextOverflow.clip,
                                           textAlign: TextAlign.justify,
@@ -406,11 +407,11 @@ class _IntroPageState extends State<IntroPage> {
                                     children: <Widget>[
                                       sizedBox(0, 10.0),
                                       // Shimmer.fromColors(
-                                      //   baseColor: AppTheme.themeDefault,
+                                      //   baseColor: AppTheme.themeWhite,
                                       //   highlightColor: AppTheme.themePurple,
                                       //   child: FaIcon(
                                       //       FontAwesomeIcons.playstation,
-                                      //       color: AppTheme.themeDefault,
+                                      //       color: AppTheme.themeWhite,
                                       //       size: 35.0),
                                       // ),
                                       avatarCircle(IMAGE_LOGO, 25.0),
@@ -418,7 +419,7 @@ class _IntroPageState extends State<IntroPage> {
                                       Expanded(
                                         child: AutoSizeText(
                                           'Creamos puentes de integración a través de la diversión y el entretenimiento sano.',
-                                          style: kSubtitleStyleBlack,
+                                          style: kSubtitleStyle,
                                           softWrap: true,
                                           overflow: TextOverflow.clip,
                                           textAlign: TextAlign.justify,
@@ -457,14 +458,14 @@ class _IntroPageState extends State<IntroPage> {
                                 Text(
                                   'Siguiente',
                                   style: TextStyle(
-                                    color: AppTheme.themeDefault,
+                                    color: AppTheme.themeWhite,
                                     fontSize: 22.0,
                                   ),
                                 ),
                                 sizedBox(0, 10.0),
                                 Icon(
                                   Icons.arrow_forward,
-                                  color: AppTheme.themeDefault,
+                                  color: AppTheme.themeWhite,
                                   size: 30.0,
                                 ),
                               ],

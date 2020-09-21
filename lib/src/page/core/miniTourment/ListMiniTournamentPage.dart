@@ -42,10 +42,10 @@ class _ListMiniTournamentPageState extends State<ListMiniTournamentPage> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       key: scaffoldKey,
-      appBar: appBar('MINI TORNEOS VIRTUAL MATCH'),
+      appBar: appBar('MIS TORNEOS VIRTUAL MATCH'),
       body: SingleChildScrollView(
           child: Container(
-              height: size.height,
+             // height: size.height,
               decoration: new BoxDecoration(
                 image: new DecorationImage(
                   image: new AssetImage('assets/portada2.png'),
@@ -56,9 +56,7 @@ class _ListMiniTournamentPageState extends State<ListMiniTournamentPage> {
       drawer: DrawerMenu(),
       floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
-      //floatingActionButton: CircularMenu(),
-      //floatingActionButtonLocation: FloatingActionButtonLocation.miniEndDocked,
-      bottomNavigationBar: new BottonNavigation(),
+       bottomNavigationBar: new BottonNavigation(),
 
       //   ),
     );
@@ -82,8 +80,8 @@ class _ListMiniTournamentPageState extends State<ListMiniTournamentPage> {
                 children: <Widget>[
                   showInformationBasic(
                     context,
-                    'MINI TORNEOS - VIRTUAL MATCH',
-                    'Conoce los resultados actuales de los torneos de la comunidad.',
+                    'MIS TORNEOS - VIRTUAL MATCH',
+                    'Conoce los resultados actuales de tus torneos.',
                   ),
                   sizedBox(0, 5.0),
                   divider(),

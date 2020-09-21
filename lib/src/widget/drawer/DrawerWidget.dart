@@ -132,7 +132,7 @@ class DrawerMenu extends StatelessWidget {
         CustomListTile(
             ImageOvalNetwork(
                 imageNetworkUrl: IMAGE_SOROJCHI, sizeImage: Size.fromWidth(30)),
-            '   SOROJCHI eclub',
+            '   Sorojchi eclub',
             () => navegation(context, SorojchiPage())),
 
         CustomListTile(
@@ -142,7 +142,7 @@ class DrawerMenu extends StatelessWidget {
               width: 50,
               height: 60,
             ),
-            'Auspiciador DxrAcer',
+            'DxrAcer',
             () => navegation(context, AuspiciadorPage())),
 
         CustomListTile(
@@ -170,7 +170,7 @@ class DrawerMenu extends StatelessWidget {
               width: 28,
               height: 28,
             ),
-            '   Crea MiniTorneo',
+            '   Crear MiniTorneo',
             () => navegation(context, MiniTourmentAllPage())),
 
         CustomListTile(
@@ -285,7 +285,7 @@ class DrawerMenu extends StatelessWidget {
         CustomListTile(
             ImageOvalNetwork(
                 imageNetworkUrl: IMAGE_SOROJCHI, sizeImage: Size.fromWidth(30)),
-            '   SOROJCHI eclub',
+            '      Sorojchi eclub',
             () => navegation(context, SorojchiPage())),
 
         CustomListTile(
@@ -295,7 +295,7 @@ class DrawerMenu extends StatelessWidget {
               width: 50,
               height: 60,
             ),
-            'Auspiciador DxrAcer',
+            'DxrAcer',
             () => navegation(context, AuspiciadorPage())),
 
         CustomListTile(
@@ -305,7 +305,7 @@ class DrawerMenu extends StatelessWidget {
               width: 30,
               height: 30,
             ),
-            '   Jugadores de la comunidad',
+            '      Jugadores de la comunidad',
             () => navegation(context, PlayerLoadPage())),
 
         CustomListTile(
@@ -315,12 +315,12 @@ class DrawerMenu extends StatelessWidget {
               width: 28,
               height: 28,
             ),
-            '   Crea MiniTorneo',
+            '      Crear MiniTorneo',
             () => navegation(context, MiniTourmentAllPage())),
         CustomListTile(
             ImageOvalNetwork(
                 imageNetworkUrl: IMAGE_DEFAULT, sizeImage: Size.fromWidth(30)),
-            '   Crea Torneo ',
+            '      Crear Torneo ',
             () => navegation(context, TourmentAllPage())),
         CustomListTile(
             Image.asset(
@@ -329,7 +329,7 @@ class DrawerMenu extends StatelessWidget {
               width: 30,
               height: 30,
             ),
-            '   Crear Notificaciones',
+            '       Crear Notificaciones',
             () => navegation(context, NotificationAllPage())),
         CustomListTile(
             Image.asset(
@@ -338,7 +338,7 @@ class DrawerMenu extends StatelessWidget {
               width: 38,
               height: 38,
             ),
-            '   Crear Noticias-Evento',
+            '     Crear Noticias-Evento',
             () => navegation(context, NewAllPage())),
         CustomListTile(
             Image.asset(
@@ -347,12 +347,12 @@ class DrawerMenu extends StatelessWidget {
               width: 30,
               height: 30,
             ),
-            '   Cargar Multimedia',
+            '       Cargar Multimedia',
             () => navegation(context, MultimediaAllPage())),
         CustomListTile(
             ImageOvalNetwork(
                 imageNetworkUrl: IMAGE_LOGO, sizeImage: Size.fromWidth(35)),
-            '    Sobre Virtual Match',
+            '      Sobre Virtual Match',
             () => navegation(context, OrganizationPage())),
 
         CustomListTile(
@@ -362,7 +362,7 @@ class DrawerMenu extends StatelessWidget {
               width: 30,
               height: 30,
             ),
-            '   Ayuda Social',
+            '        Ayuda Social',
             () => navegation(context, SocialPage())),
 
         CustomListTile(
@@ -370,7 +370,7 @@ class DrawerMenu extends StatelessWidget {
               FontAwesomeIcons.shareAlt,
               size: 25,
             ),
-            '    Apoya a la comunidad',
+            '          Apoya a la comunidad',
             () => sharedText(
                 'BIENVENIDO A LA COMUNIDAD',
                 '*Virtual Match.*\n *Una aplicación de la Comunidad FIFA Bolivia.*\n💬 Con  *Virtual Match podrás.* \n 🔺 Leer Noticias de la Comunidad. \n 🔺 Enterarte de los eventos. \n 🔺Crear tu jugador y equipos. \n🔺Participar en los torneos. \n 🔺 Conocer campeones de torneos e influencers. \n🔺 Mucho mas... \n📲 *Descargar la App en el siguiente enlace:* https://play.google.com/store/apps/details?id=bo.virtual_matchBolivia',
@@ -382,7 +382,7 @@ class DrawerMenu extends StatelessWidget {
               width: 30,
               height: 30,
             ),
-            '    ¿ Alguna duda? Preguntas',
+            '       ¿ Alguna duda? Preguntas',
             () => navegation(context, FaqListPage())),
         CustomListTile(
             Image.asset(
@@ -391,7 +391,7 @@ class DrawerMenu extends StatelessWidget {
               width: 30,
               height: 30,
             ),
-            '    Acerca de la APP.',
+            '       Acerca de la APP.',
             () => navegation(context, IntroPage())),
         CustomListTile(
             Image.asset(
@@ -400,7 +400,7 @@ class DrawerMenu extends StatelessWidget {
               width: 30,
               height: 30,
             ),
-            '    Cerrar Sesión',
+            '       Cerrar Sesión',
             () => navegation(context, LogOutPage())),
       ],
     ));
