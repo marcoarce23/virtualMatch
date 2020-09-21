@@ -114,7 +114,7 @@ class _MyAppState extends State<MyApp> {
             outputAndHome: option,
           ),  
           */
-          home: HomePage(),
+          home: LogOnPage(),
           //new HomePage(), //MapAdressModule(),
 
           routes: <String, WidgetBuilder>{

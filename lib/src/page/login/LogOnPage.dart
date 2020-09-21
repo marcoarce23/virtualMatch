@@ -162,16 +162,16 @@ class _LogOnPageState extends State<LogOnPage> {
 
   Future<void> handleSignIn() async {
     try {
-      await _googleSignIn.signIn().then((value) {
+      await _googleSignIn.signIn();
         _crearInformacion();
-      });
+  
     } catch (error) {
       showSnackbar(
           result["mensaje"].toString() + error.toString(), scaffoldKey);
     }
   }
 
-  _crearInformacion() {
+  _crearInformacion() async {
     _googleSignIn.signIn().then((value) {
       prefs.nameUser = currentUser.displayName;
       prefs.email = currentUser.email;
@@ -180,7 +180,7 @@ class _LogOnPageState extends State<LogOnPage> {
 
       print('DDDD. ${prefs.email}');
       _submit();
-    });
+   });
   }
 
   Widget _gmailButton() {
@@ -384,34 +384,38 @@ class _LogOnPageState extends State<LogOnPage> {
   // }
 
   _submit() async {
-    if (prefs.idPlayer != '0') {
-      navegation(context, HomePage());
-    } else {
+    print('IDPLAYERRR;; ${prefs.idPlayer.toString()}' );
+    
+    // if (prefs.idPlayer != '0') {
+    //   navegation(context, HomePage());
+    // } else {
       loadingEntity();
-      executeCUD(loginService, entity);
-    }
+   
+    // }
   }
 
-  void loadingEntity() {
+   loadingEntity() async {
     entity.states = StateEntity.Insert;
     entity.foto = prefs.avatarImage;
     entity.nombre = prefs.nameUser;
     entity.correo = prefs.email;
     entity.imei = _platformImei;
     entity.token = prefs.token;
+     await executeCUD(loginService, entity);
   }
 
-  void executeCUD(LoginService entityService, model.LoginModel entity) async {
+   executeCUD(LoginService entityService, model.LoginModel entity) async {
+     print('IDPLAYERRR222222;; ${prefs.idPlayer.toString()}' );
     try {
       await entityService.repository(entity).then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
+
         if (result["tipo_mensaje"] == '0') {
-          //  showSnackbar(STATUS_OK, scaffoldKey);
           prefs.idLogin = result["data"]["idLogin"].toString();
           prefs.idPlayer = result["data"]["idPlayer"].toString();
 
-          print('EL NOMBRE : ${prefs.nameUser.toString()}');
-
+          print('EL NOMBRE : ${prefs.idPlayer.toString()}');
+print('EL NOMBRE : ${prefs.idLogin.toString()}');
           if (prefs.idPlayer != '0') {
             prefs.idOrganization =
                 result["jugador"]["idOrganizacion"].toString();

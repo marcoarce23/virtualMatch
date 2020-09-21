@@ -34,7 +34,7 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
   //DEFINICION DE BLOC Y MODEL
   ListaTorneoModel entity = new ListaTorneoModel();
   model.TorneoModel entityModel = new model.TorneoModel();
-  TourmentService entityService;
+  TourmentService entityService = new TourmentService();
   TourmentService entityGet = TourmentService();
   PlayerService entityGet1 = PlayerService();
   // DEFINICIOND E VARIABLES
@@ -94,7 +94,8 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
 
   Widget futureBuilder(BuildContext context) {
     return FutureBuilder(
-        future: entityGet.get(new ListaTorneoModel(), prefs.idJugador),
+        future:
+            entityGet.get(new ListaTorneoModel(), int.parse(prefs.idPlayer)),
         builder: (context, AsyncSnapshot snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
@@ -154,7 +155,7 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
         ),
         */
         CardVM(
-          size: 100,
+          size: 110,
           imageAssets: 'assets/icono3.png',
           opciones: _simplePopup(entity, entity.idTorneo.toString()),
           accesosRapidos: null,
@@ -167,6 +168,14 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
             ),
             Text('DETALLE: ${entity.detalle}',
                 style: TextStyle(color: AppTheme.themeWhite)),
+                  Text('DETALLE: ${entity.cantidadInscritos}/${entity.cantidadJugadores}',
+                style: TextStyle(color: AppTheme.themeWhite)),
+                  Text('DETALLE: ${entity.tipoCompeticion}',
+                style: TextStyle(color: AppTheme.themeWhite)),
+                  Text('DETALLE: ${entity.tipoModalidad}',
+                style: TextStyle(color: AppTheme.themeWhite)),
+  
+                
           ],
         ),
       ],
@@ -247,7 +256,9 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
               MaterialButton(
                   child: Text('Agregar'),
                   onPressed: () {
-                    _executeInscription(idTorneo, _opcionJugador);
+                    setState(() {
+                      _executeInscription(idTorneo, _opcionJugador);
+                    });
                   }),
             ],
           );
@@ -320,7 +331,7 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
     //  setState(() => _save = false);
   }
 
-  void _executeInscription(String idTorneo, String idJugador) async {
+  _executeInscription(String idTorneo, String idJugador) async {
     print('ENTROSSSS $idTorneo y $idJugador');
     String respuesta;
     String mensaje;
@@ -334,7 +345,7 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
           .then((result) {
         respuesta = result["tipo_mensaje"].toString();
         mensaje = result["mensaje"].toString();
-        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
+        print('EL RESULTTTTTAAA: ${result["tipo_mensaje"]}');
 
         if (respuesta == '0') showSnackbar(mensaje, scaffoldKey);
         if (respuesta == '2') showSnackbar(mensaje, scaffoldKey);
@@ -429,7 +440,7 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
           '/usuario/' +
           prefs.email);
     else
-      _executeGenerator('/api/Torneo/execGenerarLiga/usuario/' +
+      _executeGenerator('/api/Torneo/execGenerarLiga/' +
           keyId +
           '/usuario/' +
           prefs.email);
@@ -470,6 +481,7 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
   }
 
   void _executeGenerator(String url) async {
+print('EL URLLL: $url}');
     try {
       await entityService.execute(API + url).then((result) {
         if (result["tipo_mensaje"] == '0')

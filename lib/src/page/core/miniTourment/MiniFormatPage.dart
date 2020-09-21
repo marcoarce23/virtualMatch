@@ -466,7 +466,7 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
   }
 
   void loadingEntity() {
-    entity.idTorneo = 68;
+    entity.idTorneo = int.parse(_opcionCodTorneo);
     entity.idTipoCompeticion = int.parse(_opcionTipoCompeticion);
     entity.idaTipoTorneo = int.parse(_opcionTipoTorneo);
     entity.idaInscripcion = 1;
