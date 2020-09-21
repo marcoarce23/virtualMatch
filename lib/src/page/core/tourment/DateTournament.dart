@@ -142,7 +142,8 @@ class _DateTournamentState extends State<DateTournament> {
         _fecha = DateFormat("yyyy-MM-dd").format(picked);
         _inputFieldDateController.text = _fecha;
         showDialog(
-            context: context, child: AlertDialog(content: Text('se cerro')));
+            context: context,
+            child: AlertDialog(content: Text('se cerro ${_fecha.toString()}')));
       });
     }
   }
