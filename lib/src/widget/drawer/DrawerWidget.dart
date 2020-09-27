@@ -73,6 +73,130 @@ class DrawerMenu extends StatelessWidget {
     //   return drawerUser(context);
   }
 
+  Drawer drawerAnonimus(BuildContext context) {
+    return Drawer(
+        child: ListView(
+      children: <Widget>[
+        DrawerHeader(
+          decoration: boxDecorationMenu(context, IMAGE_ORGANIZATION),
+          child: Container(
+              decoration: new BoxDecoration(
+                image: new DecorationImage(
+                  image: new AssetImage('assets/portada1.png'),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              child: Column(
+                children: <Widget>[
+                  Material(
+                      color: AppTheme.themeWhite,
+                      borderRadius: BorderRadius.all(Radius.circular(60.0)),
+                      elevation: 10.0,
+                      child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: ImageOvalNetwork(
+                            imageNetworkUrl: prefs.avatarImage, //IMAGE_LOGO,
+                            sizeImage: Size.fromWidth(70)),
+
+                        //  child: showPictureOval(null, IMAGE_SOROJCHI, 70.0),
+                      )),
+                  Flexible(
+                    child: Column(
+                      children: <Widget>[
+                        Expanded(
+                          child: Text(
+                            prefs.nameUser,
+                            style: TextStyle(
+                                color: AppTheme.themeWhite, fontSize: 18.0),
+                            softWrap: true,
+                            overflow: TextOverflow.clip,
+                          ),
+                        ),
+                        AutoSizeText(
+                          prefs.email,
+                          style: TextStyle(
+                              color: AppTheme.themeWhite, fontSize: 16.0),
+                          maxLines: 2,
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              )),
+        ),
+        CustomListTile(
+            ImageOvalNetwork(
+                imageNetworkUrl: IMAGE_SOROJCHI, sizeImage: Size.fromWidth(30)),
+            '      Sorojchi eclub',
+            () => navegation(context, SorojchiPage())),
+        CustomListTile(
+            Image.asset(
+              'assets/aus1.jpg',
+              //scale: 0.4,
+              width: 50,
+              height: 60,
+            ),
+            'DxrAcer',
+            () => navegation(
+                context,
+                ViewPage(
+                    title: 'PAGINA OFICIAL DE DxrAcer'.toString(),
+                    url: 'https://www.facebook.com/Tecmarkfans'))),
+        CustomListTile(
+            ImageOvalNetwork(
+                imageNetworkUrl: IMAGE_LOGO, sizeImage: Size.fromWidth(35)),
+            '      Sobre Virtual Match',
+            () => navegation(context, OrganizationPage())),
+        CustomListTile(
+            Image.asset(
+              'assets/image/jugador1.png',
+              //scale: 0.4,
+              width: 30,
+              height: 30,
+            ),
+            '        Ayuda Social',
+            () => navegation(context, SocialPage())),
+        CustomListTile(
+            FaIcon(
+              FontAwesomeIcons.shareAlt,
+              size: 25,
+            ),
+            '          Apoya a la comunidad',
+            () => sharedText(
+                'BIENVENIDO A LA COMUNIDAD',
+                '*Virtual Match.*\n *Una aplicación de la Comunidad FIFA Bolivia.*\n💬 Con  *Virtual Match podrás.* \n 🔺 Leer Noticias de la Comunidad. \n 🔺 Enterarte de los eventos. \n 🔺Crear tu jugador y equipos. \n🔺Participar en los torneos. \n 🔺 Conocer campeones de torneos e influencers. \n🔺 Mucho mas... \n📲 *Descargar la App en el siguiente enlace:* https://play.google.com/store/apps/details?id=bo.virtual_matchBolivia',
+                'text/html')),
+        CustomListTile(
+            Image.asset(
+              'assets/pregunta1.png',
+              //scale: 0.4,
+              width: 30,
+              height: 30,
+            ),
+            '       ¿ Alguna duda? Preguntas',
+            () => navegation(context, FaqListPage())),
+        CustomListTile(
+            Image.asset(
+              'assets/image/penal.png',
+              //scale: 0.4,
+              width: 30,
+              height: 30,
+            ),
+            '       Acerca de la APP.',
+            () => navegation(context, IntroPage())),
+        CustomListTile(
+            Image.asset(
+              'assets/image/casa.png',
+              //scale: 0.4,
+              width: 30,
+              height: 30,
+            ),
+            '       Cerrar Sesión',
+            () => navegation(context, LogOutPage())),
+      ],
+    ));
+  }
+
   Drawer drawerUser(BuildContext context) {
     return Drawer(
         child: ListView(
@@ -124,18 +248,11 @@ class DrawerMenu extends StatelessWidget {
                 ],
               )),
         ),
-        //  CustomListTile(
-        //     ImageOvalNetwork(
-        //         imageNetworkUrl: IMAGE_SOROJCHI, sizeImage: Size.fromWidth(30)),
-        //     '   SOROJCHI eclubss',
-        //     () => navegation(context, ViewPage(title:'mapa catastro', url: 'https://geovisorec.000webhostapp.com/index.html'))),
-
         CustomListTile(
             ImageOvalNetwork(
                 imageNetworkUrl: IMAGE_SOROJCHI, sizeImage: Size.fromWidth(30)),
-            '   Sorojchi eclub',
+            '      Sorojchi eclub',
             () => navegation(context, SorojchiPage())),
-
         CustomListTile(
             Image.asset(
               'assets/aus1.jpg',
@@ -144,8 +261,11 @@ class DrawerMenu extends StatelessWidget {
               height: 60,
             ),
             'DxrAcer',
-            () => navegation(context, AuspiciadorPage())),
-
+            () => navegation(
+                context,
+                ViewPage(
+                    title: 'PAGINA OFICIAL DE DxrAcer'.toString(),
+                    url: 'https://www.facebook.com/Tecmarkfans'))),
         CustomListTile(
             Image.asset(
               'assets/image/jugador2.png',
@@ -153,17 +273,8 @@ class DrawerMenu extends StatelessWidget {
               width: 30,
               height: 30,
             ),
-            '   Jugadores de la comunidad',
+            '      Jugadores de la comunidad',
             () => navegation(context, PlayerLoadPage())),
-        // CustomListTile(
-        //     Image.asset(
-        //       'assets/image/control.png',
-        //       //scale: 0.4,
-        //       width: 30,
-        //       height: 30,
-        //     ),
-        //     '    Clubes Pro (Crea tu equipo)',
-        //     () => navegation(context, TourmentAllPage())),
         CustomListTile(
             Image.asset(
               'assets/image/pelota.png',
@@ -171,15 +282,13 @@ class DrawerMenu extends StatelessWidget {
               width: 28,
               height: 28,
             ),
-            '   Crear MiniTorneo',
+            '      Crear MiniTorneo',
             () => navegation(context, MiniTourmentAllPage())),
-
         CustomListTile(
             ImageOvalNetwork(
                 imageNetworkUrl: IMAGE_LOGO, sizeImage: Size.fromWidth(35)),
-            '    Sobre Virtual Match',
+            '      Sobre Virtual Match',
             () => navegation(context, OrganizationPage())),
-
         CustomListTile(
             Image.asset(
               'assets/image/jugador1.png',
@@ -187,15 +296,14 @@ class DrawerMenu extends StatelessWidget {
               width: 30,
               height: 30,
             ),
-            '   Ayuda Social',
+            '        Ayuda Social',
             () => navegation(context, SocialPage())),
-
         CustomListTile(
             FaIcon(
               FontAwesomeIcons.shareAlt,
               size: 25,
             ),
-            '    Apoya a la comunidad',
+            '          Apoya a la comunidad',
             () => sharedText(
                 'BIENVENIDO A LA COMUNIDAD',
                 '*Virtual Match.*\n *Una aplicación de la Comunidad FIFA Bolivia.*\n💬 Con  *Virtual Match podrás.* \n 🔺 Leer Noticias de la Comunidad. \n 🔺 Enterarte de los eventos. \n 🔺Crear tu jugador y equipos. \n🔺Participar en los torneos. \n 🔺 Conocer campeones de torneos e influencers. \n🔺 Mucho mas... \n📲 *Descargar la App en el siguiente enlace:* https://play.google.com/store/apps/details?id=bo.virtual_matchBolivia',
@@ -207,7 +315,7 @@ class DrawerMenu extends StatelessWidget {
               width: 30,
               height: 30,
             ),
-            '    ¿ Alguna duda? Preguntas',
+            '       ¿ Alguna duda? Preguntas',
             () => navegation(context, FaqListPage())),
         CustomListTile(
             Image.asset(
@@ -216,7 +324,7 @@ class DrawerMenu extends StatelessWidget {
               width: 30,
               height: 30,
             ),
-            '    Acerca de la APP.',
+            '       Acerca de la APP.',
             () => navegation(context, IntroPage())),
         CustomListTile(
             Image.asset(
@@ -225,7 +333,7 @@ class DrawerMenu extends StatelessWidget {
               width: 30,
               height: 30,
             ),
-            '    Cerrar Sesión',
+            '       Cerrar Sesión',
             () => navegation(context, LogOutPage())),
       ],
     ));
