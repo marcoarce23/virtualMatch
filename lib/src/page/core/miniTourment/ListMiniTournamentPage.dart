@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/ListadoTorneoModel.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
+import 'package:virtual_match/src/page/core/tourment/DateTournament.dart';
 import 'package:virtual_match/src/page/core/tourment/TourmentPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/core/TournamentService.dart';
@@ -170,14 +171,18 @@ class _ListMiniTournamentPageState extends State<ListMiniTournamentPage> {
         itemBuilder: (context) => [
           PopupMenuItem(
             value: 1,
-            child: Text("Ver detalle"),
+            child: Text("Fechas de torneo"),
           ),
           PopupMenuItem(
             value: 2,
-            child: Text("Inscribirse al torneo"),
+            child: Text("Ver detalle"),
           ),
           PopupMenuItem(
             value: 3,
+            child: Text("Inscribirse al torneo"),
+          ),
+          PopupMenuItem(
+            value: 4,
             child: Text("Salir del torneo"),
           ),
         ],
@@ -187,12 +192,21 @@ class _ListMiniTournamentPageState extends State<ListMiniTournamentPage> {
         onSelected: (value) {
           switch (value) {
             case 1:
+              navegation(
+                  context,
+                  DateTournament(
+                    idTorneo: int.parse(idTorneo),
+                    idJugador: prefs.idJugador,
+                  ));
+              break;
+
+            case 2:
               _detail(idTorneo);
               break;
-            case 2:
+            case 3:
               _subcription(idTorneo);
               break;
-            case 3:
+            case 4:
               _delete(idTorneo);
               break;
             default:

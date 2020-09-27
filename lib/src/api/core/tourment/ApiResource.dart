@@ -15,4 +15,5 @@ Map<String, List<String>> api = {
     ''
   ],
   'getHistoricoTorneo': [API + '/api/Torneo/GetDatosHistoricoPorTorneo', ''],
+  'getFechasTorneo': [API + '/api/Torneo/getDevuelveFechasTorneos', ''],
 };

@@ -146,4 +146,13 @@ class TourmentService {
     isLoading = false;
     return _result;
   }
+
+  Future<List<IEntityJson>> getFechasTorneo(
+      IEntityJson entityJson, int idTorneo, int idJugador) async {
+    var _result =
+        await _apiGet.getFechasTorneo(entityJson, idTorneo, idJugador);
+    isLoading = false;
+    //notifyListeners();
+    return _result;
+  }
 }
