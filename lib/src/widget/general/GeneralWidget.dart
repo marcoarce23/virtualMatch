@@ -327,7 +327,10 @@ boxDecoration() {
 
 boxDecorationMenu(BuildContext context, String imagen) {
   return BoxDecoration(
-    // image: DecorationImage(image: ImageProvider<String>imagen) ,
+    image: new DecorationImage(
+      image: new NetworkImage(IMAGE_LOGO),
+      fit: BoxFit.cover,
+    ),
     color: AppTheme.themeDefault,
   );
   //     gradient: LinearGradient(

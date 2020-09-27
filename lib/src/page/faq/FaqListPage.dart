@@ -29,7 +29,7 @@ class _FaqListPagetate extends State<FaqListPage> {
           _form(context),
         ],
       ),
-      floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
+      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
           FaIcon(FontAwesomeIcons.futbol), HomePage()),
     );
   }
@@ -40,7 +40,7 @@ class _FaqListPagetate extends State<FaqListPage> {
     return Container(
       decoration: new BoxDecoration(
         image: new DecorationImage(
-          image: new AssetImage('assets/portada1.png'),
+          image: new AssetImage('assets/portada2.png'),
           fit: BoxFit.cover,
         ),
       ),
@@ -62,7 +62,7 @@ class _FaqListPagetate extends State<FaqListPage> {
               margin: EdgeInsets.symmetric(vertical: 0.0),
               child: _fields(context),
             ),
-            copyRigthBlack(),
+            copyRigth(),
           ],
         ),
       ),

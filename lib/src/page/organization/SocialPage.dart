@@ -26,7 +26,7 @@ class _SocialPagePageState extends State<SocialPage> {
     return Scaffold(
       appBar: appBar('AYUDA SOCIAL'),
       drawer: DrawerMenu(),
-      floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
+      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
       body: SingleChildScrollView(child: bodyContainer(context)),
     );
@@ -41,16 +41,17 @@ class _SocialPagePageState extends State<SocialPage> {
         Container(
           decoration: new BoxDecoration(
             image: new DecorationImage(
-              image: new AssetImage('assets/portada1.png'),
+              image: new AssetImage('assets/portada2.png'),
               fit: BoxFit.cover,
+              repeat: ImageRepeat.repeat,
             ),
           ),
-          width: MediaQuery.of(context).size.width * 0.98,
+         // width: MediaQuery.of(context).size.width * 0.98,
           child: GFTabs(
             tabBarColor: AppTheme.themeDefault,
             indicatorColor: AppTheme.themePurple,
-            height: MediaQuery.of(context).size.height * 0.80,
-            indicatorWeight: 6.0,
+            height: MediaQuery.of(context).size.height ,
+            indicatorWeight: 5.0,
             initialIndex: 0,
             length: 3,
             tabs: <Widget>[
@@ -84,7 +85,7 @@ class _SocialPagePageState extends State<SocialPage> {
                   height: 35,
                 ),
                 child: Text(
-                  "Social",
+                  "Ayuda social",
                 ),
               ),
             ],
@@ -95,10 +96,10 @@ class _SocialPagePageState extends State<SocialPage> {
                     children: <Widget>[
                       divider(),
                       Shimmer.fromColors(
-                        baseColor: AppTheme.themeDefault,
+                        baseColor: AppTheme.themeWhite,
                         highlightColor: AppTheme.themePurple,
                         child: AutoSizeText(
-                          'ayuda social 1'.toUpperCase(),
+                          'CLASES FIFA'.toUpperCase(),
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 19.0,
@@ -106,8 +107,13 @@ class _SocialPagePageState extends State<SocialPage> {
                           ),
                         ),
                       ),
-                      sizedBox(0, 0),
-                      copyRigthBlack(),
+                      sizedBox(0, 15),
+                      showInformationBasic(
+                        context,
+                        'MUY PRONTO...',
+                        'La Comunidad Virtual Match, te traerá nuevas sorpresas.',
+                      ),
+                      copyRigth(),
                     ],
                   ),
                 ),
@@ -116,10 +122,10 @@ class _SocialPagePageState extends State<SocialPage> {
                     children: <Widget>[
                       divider(),
                       Shimmer.fromColors(
-                        baseColor: AppTheme.themeDefault,
+                        baseColor: AppTheme.themeWhite,
                         highlightColor: AppTheme.themePurple,
                         child: AutoSizeText(
-                          'Ayuda social 2'.toUpperCase(),
+                          'LA COMUNIDAD VM'.toUpperCase(),
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 20.0,
@@ -127,8 +133,13 @@ class _SocialPagePageState extends State<SocialPage> {
                           ),
                         ),
                       ),
-
-                      //copyRigth(),
+                      sizedBox(0, 15),
+                      showInformationBasic(
+                        context,
+                        'MUY PRONTO...',
+                        'La Comunidad Virtual Match, te traerá nuevas sorpresas.',
+                      ),
+                      copyRigth(),
                     ],
                   ),
                 ),
@@ -137,10 +148,10 @@ class _SocialPagePageState extends State<SocialPage> {
                     children: <Widget>[
                       divider(),
                       Shimmer.fromColors(
-                        baseColor: AppTheme.themeDefault,
+                        baseColor: AppTheme.themeWhite,
                         highlightColor: AppTheme.themePurple,
                         child: AutoSizeText(
-                          'Ayuda social 3',
+                          'AYUDA SOCIAL',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 18.0,
@@ -148,8 +159,13 @@ class _SocialPagePageState extends State<SocialPage> {
                           ),
                         ),
                       ),
-
-                      //copyRigth(),
+                      sizedBox(0, 15),
+                      showInformationBasic(
+                        context,
+                        'MUY PRONTO...',
+                        'La Comunidad Virtual Match, te traerá nuevas sorpresas.',
+                      ),
+                      copyRigth(),
                     ],
                   ),
                 ),

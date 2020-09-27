@@ -86,7 +86,7 @@ class _PlayerPageState extends State<PlayerPage> {
         ),
       ),
       //  ),
-      floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
+      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
           FaIcon(FontAwesomeIcons.futbol), HomePage()),
 
       // floatButton(AppTheme.themeDefault, context,

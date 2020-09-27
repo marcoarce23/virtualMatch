@@ -7,6 +7,7 @@ import 'package:virtual_match/src/page/core/formatTourment/FormatTourmentPage.da
 import 'package:virtual_match/src/page/core/miniTourment/MiniTourmentLoadPage.dart';
 import 'package:virtual_match/src/page/core/player/PlayerLoadPage.dart';
 import 'package:virtual_match/src/page/faq/FaqListPage.dart';
+import 'package:virtual_match/src/page/general/ViewPage.dart';
 import 'package:virtual_match/src/page/intro/IntroPage.dart';
 import 'package:virtual_match/src/page/login/LogOutPage.dart';
 import 'package:virtual_match/src/page/multimedia/MultimediaLoadPage.dart';
@@ -77,7 +78,7 @@ class DrawerMenu extends StatelessWidget {
         child: ListView(
       children: <Widget>[
         DrawerHeader(
-          decoration: boxDecorationMenu(context, IMAGE_DEFAULT),
+          decoration: boxDecorationMenu(context, IMAGE_ORGANIZATION),
           child: Container(
               decoration: new BoxDecoration(
                 image: new DecorationImage(
@@ -296,7 +297,11 @@ class DrawerMenu extends StatelessWidget {
               height: 60,
             ),
             'DxrAcer',
-            () => navegation(context, AuspiciadorPage())),
+            () => navegation(
+                context,
+                ViewPage(
+                    title: 'PAGINA OFICIAL DE DxrAcer'.toString(),
+                    url: 'https://www.facebook.com/Tecmarkfans'))),
 
         CustomListTile(
             Image.asset(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/page/general/ViewPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
@@ -20,7 +21,7 @@ class SorojchiPage extends StatefulWidget {
 
 class _SorojchiPageState extends State<SorojchiPage> {
   final estiloTitulo = TextStyle(
-      fontSize: 18.0, fontWeight: FontWeight.bold, color: Colors.black);
+      fontSize: 22.0, fontWeight: FontWeight.bold, color: Colors.black);
   final estiloSubTitulo =
       TextStyle(fontSize: 18.0, color: AppTheme.themeDefault);
 
@@ -28,9 +29,9 @@ class _SorojchiPageState extends State<SorojchiPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         //  backgroundColor: Colors.black87,
-        appBar: appBar('SOROJCHI ECLUB'),
+        appBar: appBar('Sorojchi Eclub'),
         drawer: DrawerMenu(),
-        floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
+        floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
             FaIcon(FontAwesomeIcons.playstation), HomePage()),
         body: SingleChildScrollView(
           child: Container(
@@ -44,6 +45,7 @@ class _SorojchiPageState extends State<SorojchiPage> {
               children: <Widget>[
                 backgroundBasic(context),
                 _crearImagen(context),
+                sizedBox(0, 10),
                 _crearTitulo(),
                 _crearAcciones(context),
                 dividerBlack(),
@@ -84,8 +86,12 @@ class _SorojchiPageState extends State<SorojchiPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Text('Acerca de Sorojchi eClub'.toUpperCase(),
-                      style: estiloTitulo),
+                  Shimmer.fromColors(
+                    baseColor: AppTheme.themeDefault,
+                    highlightColor: AppTheme.themePurple,
+                    child: Text('Acerca de Sorojchi eClub'.toUpperCase(),
+                        style: estiloTitulo),
+                  ),
                   sizedBox(0, 7.0),
                 ],
               ),

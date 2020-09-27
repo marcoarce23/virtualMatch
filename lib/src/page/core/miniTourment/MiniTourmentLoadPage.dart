@@ -152,7 +152,7 @@ class _MiniTourmentLoadPageState extends State<MiniTourmentLoadPage> {
   @override
   Widget build(BuildContext context) {
     entity.states = StateEntity.Insert;
-    // entityService = Provider.of<TourmentService>(context);
+    entity.foto = image;
 
     final TorneoModel entityModel = ModalRoute.of(context).settings.arguments;
 
@@ -200,7 +200,6 @@ class _MiniTourmentLoadPageState extends State<MiniTourmentLoadPage> {
             ),
             sizedBox(0.0, 8.0),
             Container(
-              
               width: size.width * 0.94,
               margin: EdgeInsets.symmetric(vertical: 0.0),
               decoration: containerFileds(),
@@ -457,7 +456,7 @@ class _MiniTourmentLoadPageState extends State<MiniTourmentLoadPage> {
     formKey.currentState.save();
 
     print('myControllerSOY EL VALOR DE ' + controllerDetail.text);
-print('ID PLAYERRR ' + prefs.idPlayer);
+    print('ID PLAYERRR ' + prefs.idPlayer);
     setState(() => _save = true);
     loadingEntity();
     executeCUD(entityService, entity);

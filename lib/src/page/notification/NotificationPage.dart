@@ -75,7 +75,7 @@ class _NotificationPageState extends State<NotificationPage> {
           ),
         ),
       ),
-      floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
+      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }

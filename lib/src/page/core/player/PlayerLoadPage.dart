@@ -413,7 +413,7 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
           _form(context),
         ],
       ),
-      floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
+      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }
@@ -634,7 +634,7 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
                     SizedBox(width: 15.0),
                     DropdownButton(
                       icon: FaIcon(FontAwesomeIcons.sort,
-                          color: AppTheme.themeDefault),
+                          color: AppTheme.themePurple),
                       value: _opcionDepartamento,
                       items: getDropDown(snapshot),
                       onChanged: (value) {
