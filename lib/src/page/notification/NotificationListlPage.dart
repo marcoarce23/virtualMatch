@@ -15,6 +15,8 @@ import 'package:virtual_match/src/model/entity/EntityFromJson/NotificacionModel.
 import 'package:virtual_match/src/model/entity/EntityMap/NotificacionModel.dart'
     as model;
 
+
+
 class NotificationListPage extends StatefulWidget {
   static final String routeName = 'notificationList';
   NotificationListPage({Key key}) : super(key: key);
