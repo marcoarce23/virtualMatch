@@ -79,7 +79,7 @@ class _MultimediaListPageState extends State<MultimediaListPage> {
           ),
         ),
       ),
-      floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
+      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }

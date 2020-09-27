@@ -43,8 +43,6 @@ class _NewListPageState extends State<NewListPage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    // entityService = Provider.of<NewService>(context);
-
     return Scaffold(
       key: scaffoldKey,
       appBar: appBar('CREA NOTICIAS-EVENTOS'),
@@ -83,11 +81,8 @@ class _NewListPageState extends State<NewListPage> {
           ),
         ),
       ),
-      floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
+      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
           FaIcon(FontAwesomeIcons.futbol), HomePage()),
-
-      // floatButton(AppTheme.themeDefault, context,
-      //   FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }
 

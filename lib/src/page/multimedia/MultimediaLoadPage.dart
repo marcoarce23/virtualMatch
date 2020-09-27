@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -60,7 +59,6 @@ class _MultimediaAllPageState extends State<MultimediaAllPage> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        // ignore: missing_required_param
         ChangeNotifierProvider(builder: (_) => new MultimediaService()),
       ],
       child: Scaffold(
@@ -71,15 +69,17 @@ class _MultimediaAllPageState extends State<MultimediaAllPage> {
           backgroundColor: AppTheme.themeDefault,
           items: [
             BottomNavigationBarItem(
-                icon: FaIcon(
-                  FontAwesomeIcons.images,
-                  size: 25,
+                icon: Image.asset(
+                  'assets/image/papelvideo.png',
+                  width: 28,
+                  height: 28,
                 ),
                 title: Text('Multimedia')),
             BottomNavigationBarItem(
-                icon: FaIcon(
-                  FontAwesomeIcons.youtube,
-                  size: 25,
+                icon: Image.asset(
+                  'assets/image/multimeda3.png',
+                  width: 28,
+                  height: 28,
                 ),
                 title: Text('Galería Multimedia')),
           ],
@@ -126,15 +126,10 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
   File photo;
   String _fecha = '';
   int typeMaterial = 14;
-
   int valueImage = 0;
   String image = IMAGE_DEFAULT;
-  //String image = IMAGE_DEFAULT;
-  String imagenPDF =
-      'https://res.cloudinary.com/propia/image/upload/v1590680683/mbzeu6fr44aizrr9dl0f.jpg';
-  String imagenVideo =
-      'https://res.cloudinary.com/propia/image/upload/v1590680880/lmbkvadzzymfcfwqosj9.webp';
-
+  String imagenPDF = IMAGE_DEFAULT;
+  String imagenVideo = IMAGE_DEFAULT;
   String _pdfPath = '';
 
   @override
@@ -146,12 +141,9 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
 
   @override
   Widget build(BuildContext context) {
-    if (valueImage == 0) image = image;
-    if (valueImage == 1) image = imagenPDF;
-    if (valueImage == 2) image = imagenVideo;
-
     entity.states = StateEntity.Insert;
     entityService = Provider.of<MultimediaService>(context);
+    entity.foto = image;
 
     final MultimediaModel entityModel =
         ModalRoute.of(context).settings.arguments;
@@ -165,12 +157,12 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
       key: scaffoldKey,
       body: Stack(
         children: <Widget>[
-          background(context, image),
-          showPictureOval(photo, image, 130.0),
+          background(context, entity.foto),
+          showPictureOval(photo, entity.foto, 130.0),
           _form(context),
         ],
       ),
-      floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
+      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
           FaIcon(FontAwesomeIcons.futbol), HomePage()),
     );
   }
@@ -193,11 +185,11 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                    text('CARGAR MULTIMEDIA', AppTheme.themeDefault, 1, 13.5),
+                    text('   CARGAR  MULTIMEDIA', AppTheme.themeDefault, 1,
+                        13.5),
                     _crearIconAppImagenes(),
                     _crearIconAppCamara(),
                     _crearIconAppVideo(),
-                    _crearIconAppPDF()
                   ],
                 ),
               ),
@@ -246,16 +238,6 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
     );
   }
 
-  _crearIconAppPDF() {
-    return IconButton(
-      icon: FaIcon(
-        FontAwesomeIcons.solidFilePdf,
-        color: AppTheme.themePurple,
-      ),
-      onPressed: _pickPDF,
-    );
-  }
-
   Widget _fields(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -263,7 +245,6 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
         sizedBox(0.0, 7.0),
         showPictureOval(photo, image, 70.0),
         dividerBlack(),
-
         _combox('Seleccionar multimedia:'.toUpperCase()),
         _text(
             controllerNoticia,
@@ -277,7 +258,6 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             Colors.red),
-
         _text(
             controllerDetalle,
             entity.resumen,
@@ -304,13 +284,11 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
             Colors.red),
         _initDate('(*) Fecha de inicio del torneo'),
         _endDate('(*) Fecha de conclusión del torneo'),
-        //  _comboBox('Tipo.', myController.text),
         Text(
           '(*) Campos obligatorios. ',
           style: kCamposTitleStyle,
           textAlign: TextAlign.left,
         ),
-
         _button('Guardar', 18.0, 20.0),
       ],
     );
@@ -383,13 +361,12 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
                     sizedBox(10.0, 15.0),
                     DropdownButton(
                       icon: FaIcon(FontAwesomeIcons.sort,
-                          color: AppTheme.themeDefault),
+                          color: AppTheme.themePurple),
                       value: typeMaterial.toString(), //valor
                       items: getDropDown(snapshot),
                       onChanged: (value) {
                         setState(() {
                           typeMaterial = int.parse(value);
-                          //print('valorTipoMaterial $valorTipoMaterial');
                         });
                       },
                     ),
@@ -442,12 +419,8 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
         enableInteractiveSelection: false,
         controller: _inputFieldDateInicioController,
         decoration: InputDecoration(
-            // border: OutlineInputBorder(
-            //   borderRadius: BorderRadius.circular(20.0)
-            // ),
             hintText: text,
             labelText: text,
-            //    suffixIcon: Icon(Icons.perm_contact_calendar),
             icon: FaIcon(FontAwesomeIcons.calendarAlt,
                 color: AppTheme.themeDefault)),
         onTap: () {
@@ -465,12 +438,8 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
         enableInteractiveSelection: false,
         controller: _inputFieldDateFinController,
         decoration: InputDecoration(
-            // border: OutlineInputBorder(
-            //   borderRadius: BorderRadius.circular(20.0)
-            // ),
             hintText: text,
             labelText: text,
-            //    suffixIcon: Icon(Icons.perm_contact_calendar),
             icon: FaIcon(FontAwesomeIcons.calendarAlt,
                 color: AppTheme.themeDefault)),
         onTap: () {
@@ -495,12 +464,8 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
   }
 
   _submit() async {
-    //var _result;
-
     if (!formKey.currentState.validate()) return;
     formKey.currentState.save();
-
-    print('myControllerSOY EL VALOR DE ' + controllerDetalle.text);
 
     setState(() => _save = true);
     loadingEntity();
@@ -558,46 +523,14 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
     }
   }
 
-  _procesarFile(String file) async {
-    valueImage = 1;
-
-    if (photo != null) {
-      image = await entityImage.uploadImage(file);
-      setState(() {
-        entity.foto = image;
-        print('cargadod e iagen ${entity.foto}');
-      });
-    }
-  }
-
   _procesarVideo2(String file) async {
     valueImage = 2;
 
     image = await entityImage.uploadVideo(file);
     setState(() {
-      entity.foto = image;
+      entity.foto = IMAGE_LOGO;
       print('cargadod e iagen ${entity.foto}');
     });
-  }
-
-  void _pickPDF() async {
-    try {
-      var _extension = 'PDF';
-      _pdfPath = await FilePicker.getFilePath(
-          type: FileType.custom,
-          allowedExtensions: (_extension?.isNotEmpty ?? false)
-              ? _extension?.replaceAll(' ', '')?.split(',')
-              : null);
-
-      setState(() {});
-      if (_pdfPath == '') {
-        return;
-      }
-      valueImage = 1;
-      _procesarFile(_pdfPath);
-    } on PlatformException catch (exception) {
-      showSnackbar('Se produjo un error. $exception', scaffoldKey);
-    }
   }
 
   void _pickVideo() async {
@@ -613,11 +546,7 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
       if (_pdfPath == '') {
         return;
       }
-      //print("File path11: " + _pdfPath);
       _procesarVideo2(_pdfPath);
-      // setState(() {
-      //   _isLoading = true;
-      // });
     } on PlatformException catch (exception) {
       showSnackbar('Se produjo un error. $exception', scaffoldKey);
     }

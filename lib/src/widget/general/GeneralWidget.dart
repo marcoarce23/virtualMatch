@@ -328,7 +328,7 @@ boxDecoration() {
 boxDecorationMenu(BuildContext context, String imagen) {
   return BoxDecoration(
     image: new DecorationImage(
-      image: new NetworkImage(IMAGE_LOGO),
+      image: new AssetImage('assets/portada2.png'),
       fit: BoxFit.cover,
     ),
     color: AppTheme.themeDefault,
@@ -404,9 +404,7 @@ Widget floatButtonImage(
     elevation: 2.0,
     child: Image.asset(
       'assets/icono3.png',
-      //scale: 0.4,
-      height: 50.0,
-
+       height: 50.0,
       fit: BoxFit.fill,
     ),
     backgroundColor: color,

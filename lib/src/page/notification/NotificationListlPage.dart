@@ -15,8 +15,6 @@ import 'package:virtual_match/src/model/entity/EntityFromJson/NotificacionModel.
 import 'package:virtual_match/src/model/entity/EntityMap/NotificacionModel.dart'
     as model;
 
-
-
 class NotificationListPage extends StatefulWidget {
   static final String routeName = 'notificationList';
   NotificationListPage({Key key}) : super(key: key);
@@ -45,7 +43,6 @@ class _NotificationListPageState extends State<NotificationListPage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    //  entityService = Provider.of<NotificationService>(context);
 
     return Scaffold(
       key: scaffoldKey,
@@ -85,7 +82,7 @@ class _NotificationListPageState extends State<NotificationListPage> {
           ),
         ),
       ),
-      floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
+      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }
@@ -153,7 +150,6 @@ class _NotificationListPageState extends State<NotificationListPage> {
         ),
       ],
     );
-    //Text(entity.nombreEquipo);
   }
 
   Widget _simplePopup(

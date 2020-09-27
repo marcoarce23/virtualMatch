@@ -57,45 +57,37 @@ class _TourmentAllPageState extends State<TourmentAllPage> {
 
   @override
   Widget build(BuildContext context) {
-    return
-    //  MultiProvider(
-    //   providers: [
-    //     ChangeNotifierProvider(builder: (_) => new TourmentService()),
-    //   ],
-    //   child: 
-      Scaffold(
-        // appBar: appBar('TORNEOS'),
-        // drawer: DrawerMenu(),
-        bottomNavigationBar: BottomNavigationBar(
-          elevation: 21.0,
-          backgroundColor: AppTheme.themeDefault,
-          items: [
-            BottomNavigationBarItem(
-                icon: FaIcon(
-                  FontAwesomeIcons.bell,
-                  size: 25,
-                ),
-                title: Text('Torneo')),
-            BottomNavigationBarItem(
-                icon: FaIcon(
-                  FontAwesomeIcons.futbol,
-                  size: 25,
-                ),
-                title: Text('Formato')),
-            BottomNavigationBarItem(
-                icon: FaIcon(
-                  FontAwesomeIcons.listAlt,
-                  size: 25,
-                ),
-                title: Text('Listado Torneos')),
-          ],
-          currentIndex: page,
-          unselectedItemColor: AppTheme.themeWhite,
-          selectedItemColor: AppTheme.themePurple,
-          onTap: _onItemTapped,
-        ),
-        body: optionPage[page],
-     // ),
+    return Scaffold(
+      bottomNavigationBar: BottomNavigationBar(
+        elevation: 21.0,
+        backgroundColor: AppTheme.themeDefault,
+        items: [
+          BottomNavigationBarItem(
+              icon: FaIcon(
+                FontAwesomeIcons.bell,
+                size: 25,
+              ),
+              title: Text('Torneo')),
+          BottomNavigationBarItem(
+              icon: FaIcon(
+                FontAwesomeIcons.futbol,
+                size: 25,
+              ),
+              title: Text('Formato')),
+          BottomNavigationBarItem(
+              icon: FaIcon(
+                FontAwesomeIcons.listAlt,
+                size: 25,
+              ),
+              title: Text('Listado Torneos')),
+        ],
+        currentIndex: page,
+        unselectedItemColor: AppTheme.themeWhite,
+        selectedItemColor: AppTheme.themePurple,
+        onTap: _onItemTapped,
+      ),
+      body: optionPage[page],
+      // ),
     );
   }
 }
@@ -143,22 +135,15 @@ class _FormatTourmentPageState extends State<FormatTourmentPage> {
       entity.states = StateEntity.Update;
     }
 
-    // return ChangeNotifierProvider(
-    //   builder: (_) => new NotificationService(),
-    //   child:
-
     return Scaffold(
       key: scaffoldKey,
       body: Stack(
         children: <Widget>[
           background(context, 'IMAGE_LOGO'),
-          // showPictureOval(photo, IMAGE_DEFAULT, 130.0),
-          //   crearFondo(context, IMAGE_LOGO),
-
           _form(context),
         ],
       ),
-      floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
+      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }
@@ -307,8 +292,6 @@ class _FormatTourmentPageState extends State<FormatTourmentPage> {
     entity.detalle = controllerDetalle.text;
     entity.usuarioAuditoria = prefs.email;
     entity.foto = IMAGE_LOGO;
-    entity.fechaAuditoria = '2020-08-10 08:25';
-    // entity.states = StateEntity.Insert;
 
     print('EL ENTITY NOTIFICA: ${entity.detalle}');
   }

@@ -13,7 +13,7 @@ import 'package:virtual_match/src/page/login/LogOutPage.dart';
 import 'package:virtual_match/src/page/multimedia/MultimediaLoadPage.dart';
 import 'package:virtual_match/src/page/new/NewLoadPage.dart';
 import 'package:virtual_match/src/page/notification/NotificationLoadPage.dart';
-import 'package:virtual_match/src/page/organization/AuspiciadorPage.dart';
+import 'package:virtual_match/src/page/notification/NotificationPage.dart';
 import 'package:virtual_match/src/page/organization/OrganizationPage.dart';
 import 'package:virtual_match/src/page/organization/SocialPage.dart';
 import 'package:virtual_match/src/page/organization/SorojchiPage.dart';
@@ -66,11 +66,15 @@ class DrawerMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // if (prefs.idPlayer == '1' || prefs.idLogin == '9' /*COAV login*/)
-    //  return
-    return drawerVirtualMatch(context);
-    // else
-    //   return drawerUser(context);
+    
+     if (prefs.idPlayer == '-1' || prefs.idLogin == '-1' /*COAV login*/)
+      return drawerAnonimus(context);
+
+     if (prefs.idPlayer == '1' || prefs.idLogin == '9' /*COAV login*/)
+      return drawerVirtualMatch(context);
+
+     if (int.parse(prefs.idPlayer) > 1)
+       return drawerUser(context);
   }
 
   Drawer drawerAnonimus(BuildContext context) {
@@ -82,7 +86,7 @@ class DrawerMenu extends StatelessWidget {
           child: Container(
               decoration: new BoxDecoration(
                 image: new DecorationImage(
-                  image: new AssetImage('assets/portada1.png'),
+                  image: new AssetImage('assets/portada2.png'),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -124,6 +128,15 @@ class DrawerMenu extends StatelessWidget {
                 ],
               )),
         ),
+        CustomListTile(
+            Image.asset(
+              'assets/image/control.png',
+              //scale: 0.4,
+              width: 30,
+              height: 30,
+            ),
+            '      Notificaciones',
+            () => navegation(context, NotificationPage())),
         CustomListTile(
             ImageOvalNetwork(
                 imageNetworkUrl: IMAGE_SOROJCHI, sizeImage: Size.fromWidth(30)),
@@ -206,7 +219,7 @@ class DrawerMenu extends StatelessWidget {
           child: Container(
               decoration: new BoxDecoration(
                 image: new DecorationImage(
-                  image: new AssetImage('assets/portada1.png'),
+                  image: new AssetImage('assets/portada2.png'),
                   fit: BoxFit.cover,
                 ),
               ),
@@ -248,6 +261,15 @@ class DrawerMenu extends StatelessWidget {
                 ],
               )),
         ),
+        CustomListTile(
+            Image.asset(
+              'assets/image/control.png',
+              //scale: 0.4,
+              width: 30,
+              height: 30,
+            ),
+            '      Notificaciones',
+            () => navegation(context, NotificationPage())),
         CustomListTile(
             ImageOvalNetwork(
                 imageNetworkUrl: IMAGE_SOROJCHI, sizeImage: Size.fromWidth(30)),
@@ -384,19 +406,20 @@ class DrawerMenu extends StatelessWidget {
             ],
           )),
         ),
-
-//  CustomListTile(
-//             ImageOvalNetwork(
-//                 imageNetworkUrl: IMAGE_SOROJCHI, sizeImage: Size.fromWidth(30)),
-//             '   SOROJCHI eclubss',
-//             () => navegation(context, ViewPage(title:'mapa catastro', url: 'https://geovisorec.000webhostapp.com/index.html'))),
-
+        CustomListTile(
+            Image.asset(
+              'assets/image/control.png',
+              //scale: 0.4,
+              width: 30,
+              height: 30,
+            ),
+            '      Notificaciones',
+            () => navegation(context, NotificationPage())),
         CustomListTile(
             ImageOvalNetwork(
                 imageNetworkUrl: IMAGE_SOROJCHI, sizeImage: Size.fromWidth(30)),
             '      Sorojchi eclub',
             () => navegation(context, SorojchiPage())),
-
         CustomListTile(
             Image.asset(
               'assets/aus1.jpg',
@@ -410,7 +433,6 @@ class DrawerMenu extends StatelessWidget {
                 ViewPage(
                     title: 'PAGINA OFICIAL DE DxrAcer'.toString(),
                     url: 'https://www.facebook.com/Tecmarkfans'))),
-
         CustomListTile(
             Image.asset(
               'assets/image/jugador2.png',
@@ -420,7 +442,6 @@ class DrawerMenu extends StatelessWidget {
             ),
             '      Jugadores de la comunidad',
             () => navegation(context, PlayerLoadPage())),
-
         CustomListTile(
             Image.asset(
               'assets/image/pelota.png',
@@ -467,7 +488,6 @@ class DrawerMenu extends StatelessWidget {
                 imageNetworkUrl: IMAGE_LOGO, sizeImage: Size.fromWidth(35)),
             '      Sobre Virtual Match',
             () => navegation(context, OrganizationPage())),
-
         CustomListTile(
             Image.asset(
               'assets/image/jugador1.png',
@@ -477,7 +497,6 @@ class DrawerMenu extends StatelessWidget {
             ),
             '        Ayuda Social',
             () => navegation(context, SocialPage())),
-
         CustomListTile(
             FaIcon(
               FontAwesomeIcons.shareAlt,

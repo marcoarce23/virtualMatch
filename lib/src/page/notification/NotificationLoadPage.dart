@@ -54,28 +54,25 @@ class _NotificationAllPageState extends State<NotificationAllPage> {
 
   @override
   Widget build(BuildContext context) {
-    // return MultiProvider(
-    //   providers: [
-    //     ChangeNotifierProvider(builder: (_) => new NotificationService()),
-    //   ],
-    //   child:
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         elevation: 21.0,
         backgroundColor: AppTheme.themeDefault,
         items: [
           BottomNavigationBarItem(
-              icon: FaIcon(
-                FontAwesomeIcons.bell,
-                size: 25,
+              icon: Image.asset(
+                'assets/image/mensajeria.png',
+                width: 28,
+                height: 28,
+              ),
+              title: Text('Nuevo')),
+          BottomNavigationBarItem(
+              icon: Image.asset(
+                'assets/image/noticias.png',
+                width: 28,
+                height: 28,
               ),
               title: Text('Notificaciones')),
-          BottomNavigationBarItem(
-              icon: FaIcon(
-                FontAwesomeIcons.listAlt,
-                size: 25,
-              ),
-              title: Text('Listado Notificación')),
         ],
         currentIndex: page,
         unselectedItemColor: AppTheme.themeWhite,
@@ -121,9 +118,7 @@ class _NotificationLoadPageState extends State<NotificationLoadPage> {
 
   @override
   Widget build(BuildContext context) {
-    //   entityService = Provider.of<NotificationService>(context);
     entity.states = StateEntity.Insert;
-
     final gets.NotificacionModel entityModelGet =
         ModalRoute.of(context).settings.arguments;
 
@@ -142,11 +137,10 @@ class _NotificationLoadPageState extends State<NotificationLoadPage> {
       body: Stack(
         children: <Widget>[
           background(context, 'IMAGE_LOGO'),
-          //  showPictureOval(photo, image, 130.0),
           _form(context),
         ],
       ),
-      floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
+      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
           FaIcon(FontAwesomeIcons.futbol), HomePage()),
     );
   }
@@ -158,18 +152,15 @@ class _NotificationLoadPageState extends State<NotificationLoadPage> {
       child: Form(
         key: formKey,
         child: Container(
-          //  color: Colors.black87,
-
           child: Column(
             children: <Widget>[
-              //
               sizedBox(0.0, 8.0),
               showInformationBasic(
                 context,
                 'GESTIONA LAS NOTIFICACIONES',
                 'En la pantalla podrás crear y modficar las notificaciones.\nLos campos con (*) son obligatorios.',
               ),
-              sizedBox(0.0, 5.0),
+              sizedBox(0.0, 10.0),
               Container(
                 width: size.width * 0.94,
                 margin: EdgeInsets.symmetric(vertical: 0.0),
@@ -195,7 +186,7 @@ class _NotificationLoadPageState extends State<NotificationLoadPage> {
             entity.titulo,
             '(*) Notificación',
             100,
-            3,
+            2,
             'Ingrese la notificación',
             true,
             FaIcon(FontAwesomeIcons.newspaper, color: AppTheme.themeDefault),
@@ -208,7 +199,7 @@ class _NotificationLoadPageState extends State<NotificationLoadPage> {
             entity.detalle,
             '(*) Detalle de la notificación',
             140,
-            4,
+            3,
             'Ingrese Detalle de la notificación',
             true,
             FaIcon(FontAwesomeIcons.wpforms, color: AppTheme.themeDefault),
@@ -299,14 +290,12 @@ class _NotificationLoadPageState extends State<NotificationLoadPage> {
     entity.detalle = controllerDetalle.text;
     entity.usuarioAuditoria = prefs.email;
     entity.foto = IMAGE_LOGO;
-    entity.fechaAuditoria = '2020-08-10 08:25';
   }
 
   void executeCUD(
       NotificationService entityService, NotificacionModel entity) async {
     try {
       await entityService.repository(entity).then((result) {
-        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0')
           showSnackbar(STATUS_OK, scaffoldKey);
         else

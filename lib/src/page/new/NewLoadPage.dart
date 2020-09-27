@@ -17,7 +17,6 @@ import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/page/new/NewListPage.dart';
 import 'package:virtual_match/src/service/ImageService.dart';
 import 'package:virtual_match/src/service/NewService.dart';
-
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
@@ -53,28 +52,25 @@ class _NewAllPagePageState extends State<NewAllPage> {
 
   @override
   Widget build(BuildContext context) {
-    // return MultiProvider(
-    //   providers: [
-    //     ChangeNotifierProvider(builder: (_) => new NewService()),
-    //   ],
-    //   child:
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         elevation: 21.0,
         backgroundColor: AppTheme.themeDefault,
         items: [
           BottomNavigationBarItem(
-              icon: FaIcon(
-                FontAwesomeIcons.newspaper,
-                size: 25,
+              icon:Image.asset(
+                'assets/image/noticias_eventos.png',
+                width: 28,
+                height: 28,
+              ),
+              title: Text('Nueva')),
+          BottomNavigationBarItem(
+              icon:Image.asset(
+                'assets/image/noticias.png',
+                width: 28,
+                height: 28,
               ),
               title: Text('Noticias')),
-          BottomNavigationBarItem(
-              icon: FaIcon(
-                FontAwesomeIcons.listAlt,
-                size: 25,
-              ),
-              title: Text('Listado Noticias')),
         ],
         currentIndex: page,
         unselectedItemColor: AppTheme.themeWhite,
@@ -134,7 +130,6 @@ class _NewLoadPageState extends State<NewLoadPage> {
   Widget build(BuildContext context) {
     entity.states = StateEntity.Insert;
     entity.foto = image;
-    //   entityService = Provider.of<NewService>(context);
 
     final NoticiaEventoModel entityModel =
         ModalRoute.of(context).settings.arguments;
@@ -155,7 +150,7 @@ class _NewLoadPageState extends State<NewLoadPage> {
           _form(context),
         ],
       ),
-      floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
+      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
           FaIcon(FontAwesomeIcons.futbol), HomePage()),
     );
   }
@@ -170,7 +165,6 @@ class _NewLoadPageState extends State<NewLoadPage> {
           children: <Widget>[
             sizedBox(0.0, 15.0),
             Container(
-              //  color: Colors.black87,
               width: size.width * 0.94,
               margin: EdgeInsets.symmetric(vertical: 0.0),
               decoration: containerImage(),
@@ -229,7 +223,6 @@ class _NewLoadPageState extends State<NewLoadPage> {
         Row(
           children: <Widget>[
             SizedBox(width: 1),
-            //  FaIcon(FontAwesomeIcons.newspaper, color: AppTheme.themeDefault),
             sizedBox(15.0, 0.0),
             Text('Noticia'),
             Radio(
@@ -410,12 +403,8 @@ class _NewLoadPageState extends State<NewLoadPage> {
         enableInteractiveSelection: false,
         controller: _inputFieldDateController,
         decoration: InputDecoration(
-            // border: OutlineInputBorder(
-            //   borderRadius: BorderRadius.circular(20.0)
-            // ),
             hintText: text,
             labelText: text,
-            //    suffixIcon: Icon(Icons.perm_contact_calendar),
             icon: FaIcon(FontAwesomeIcons.calendarAlt,
                 color: AppTheme.themeDefault)),
         onTap: () {
@@ -433,12 +422,8 @@ class _NewLoadPageState extends State<NewLoadPage> {
         enableInteractiveSelection: false,
         controller: _inputFieldTimeController,
         decoration: InputDecoration(
-            // border: OutlineInputBorder(
-            //   borderRadius: BorderRadius.circular(20.0)
-            // ),
             hintText: text,
             labelText: text,
-            //    suffixIcon: Icon(Icons.perm_contact_calendar),
             icon: FaIcon(FontAwesomeIcons.clock, color: AppTheme.themeDefault)),
         onTap: () {
           FocusScope.of(context).requestFocus(new FocusNode());
@@ -483,7 +468,6 @@ class _NewLoadPageState extends State<NewLoadPage> {
     entity.fecha = _inputFieldDateController.text;
     entity.hora = _inputFieldTimeController.text;
     entity.tipo = _selectedRadio;
-    // entity.foto = IMAGE_LOGO;
     entity.fechaAuditoria = '2020-08-10 08:25';
   }
 
@@ -513,12 +497,9 @@ class _NewLoadPageState extends State<NewLoadPage> {
     final photo = await ImagePicker().getImage(source: origen);
     if (photo != null) {
       image = await entityImage.uploadImage(photo.path);
-      print('imagennnnn $image');
       setState(() {
         entity.foto = image;
-
-        //print('cargadod e iagen ${entity.foto}');
-      });
+     });
     }
   }
 }

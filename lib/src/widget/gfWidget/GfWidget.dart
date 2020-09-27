@@ -313,6 +313,16 @@ GFAvatar avatarCircle(String image, double size) {
   );
 }
 
+GFAvatar avatarCircleDefault(String image, double size) {
+  return GFAvatar(
+    backgroundImage: NetworkImage(image),
+    backgroundColor: AppTheme.themeDefault,
+   // foregroundColor: Colors.black,
+    shape: GFAvatarShape.circle,
+    size: size,
+  );
+}
+
 GFProgressBar progressCircle(String text, double fontSize) {
   return GFProgressBar(
     percentage: 0.5,
