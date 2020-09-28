@@ -121,10 +121,7 @@ class _TourmentListPageState extends State<TourmentListPage> {
   }
 
   Widget _showListTile(ListaTorneoModel entity) {
-    print('ddddd: ${entity.idTorneo.toString()}');
-
-    final size = MediaQuery.of(context).size;
-    return Column(
+       return Column(
       children: <Widget>[
         Column(
           children: <Widget>[
@@ -136,7 +133,7 @@ class _TourmentListPageState extends State<TourmentListPage> {
               accesosRapidos: null,
               listWidgets: [
                 Text(
-                  'ID TOREO : ${entity.idTorneo.toString()}',
+                  'ID TORNEO : ${entity.idTorneo.toString()}',
                   style: TextStyle(
                     color: AppTheme.themeWhite,
                   ),
@@ -419,11 +416,11 @@ class _TourmentListPageState extends State<TourmentListPage> {
     );
   }
 
-  _submit(String idTorneo) {
-    setState(() => _save = true);
-    _executeInscription(entity.idTorneo.toString(), _opcionJugador);
-    setState(() => _save = false);
-  }
+  // _submit(String idTorneo) {
+  //   setState(() => _save = true);
+  //   _executeInscription(entity.idTorneo.toString(), _opcionJugador);
+  //   setState(() => _save = false);
+  // }
 
   void _executeInscription(String idTorneo, String idJugador) async {
     print('ENTROSSSS $idTorneo y $idJugador');

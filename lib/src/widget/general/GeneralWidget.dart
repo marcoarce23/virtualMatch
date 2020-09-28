@@ -2,7 +2,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
-import 'package:virtual_match/src/page/general/ViewPage.dart';
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/general/OpenWebWidget.dart';

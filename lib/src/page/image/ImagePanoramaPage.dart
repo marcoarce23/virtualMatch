@@ -1,7 +1,6 @@
-import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
-import 'package:virtual_match/src/theme/Theme.dart';
 
 class ImapePanoramaPage extends StatefulWidget {
   ImapePanoramaPage({Key key, this.title}) : super(key: key);
@@ -13,8 +12,6 @@ class ImapePanoramaPage extends StatefulWidget {
 }
 
 class _ImapePanoramaPageState extends State<ImapePanoramaPage> {
-  File _imageFile;
-
   final GlobalKey<FabCircularMenuState> fabKey = GlobalKey();
 
   @override
@@ -118,11 +115,5 @@ class _ImapePanoramaPageState extends State<ImapePanoramaPage> {
     // );
   }
 
-  void _showSnackBar(BuildContext context, String message) {
-    Scaffold.of(context).showSnackBar(SnackBar(
-      content: Text(message),
-      duration: const Duration(milliseconds: 1000),
-      backgroundColor: AppTheme.themeGrey,
-    ));
-  }
+
 }

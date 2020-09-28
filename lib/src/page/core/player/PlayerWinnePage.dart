@@ -1,12 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:getwidget/components/avatar/gf_avatar.dart';
-import 'package:getwidget/components/button/gf_button.dart';
-import 'package:getwidget/components/button/gf_button_bar.dart';
-import 'package:getwidget/components/button/gf_icon_button.dart';
-import 'package:getwidget/components/card/gf_card.dart';
-import 'package:getwidget/components/list_tile/gf_list_tile.dart';
-import 'package:getwidget/types/gf_button_type.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/ListadoGanadores.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/TorneoModel.dart';
@@ -17,11 +10,7 @@ import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
-import 'package:virtual_match/src/service/NotificactionService.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
-import 'package:virtual_match/src/model/entity/EntityFromJson/NotificacionModel.dart';
-import 'package:virtual_match/src/widget/image/imageOvalWidget.dart';
-import 'package:virtual_match/src/widget/util/Util.dart';
 import 'package:virtual_match/src/widget/winner/WinnerPlayer.dart';
 
 class PlayerWinnerPage extends StatefulWidget {
@@ -131,7 +120,7 @@ class _PlayerWinnerPageState extends State<PlayerWinnerPage> {
           ),
         ),
       ),
-      floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
+      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }

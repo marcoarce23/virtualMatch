@@ -1,4 +1,3 @@
-import 'package:animate_do/animate_do.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -60,7 +59,7 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
               ),
               child: bodyContainer(context))),
       drawer: DrawerMenu(),
-      floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
+      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
       //floatingActionButton: CircularMenu(),
       //floatingActionButtonLocation: FloatingActionButtonLocation.miniEndDocked,

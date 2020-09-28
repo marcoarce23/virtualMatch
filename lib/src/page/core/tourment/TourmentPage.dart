@@ -32,7 +32,6 @@ class TourmentPage extends StatefulWidget {
 class _TourmentPageState extends State<TourmentPage> {
   final prefs = new Preferense();
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  bool _isExpanded = true;
 
   ListaTorneoModel entity = new ListaTorneoModel();
   TourmentService entityService;
@@ -53,9 +52,7 @@ class _TourmentPageState extends State<TourmentPage> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
-    return SafeArea(
+     return SafeArea(
       child: Scaffold(
         key: scaffoldKey,
         appBar: appBar('TORNEOS'),

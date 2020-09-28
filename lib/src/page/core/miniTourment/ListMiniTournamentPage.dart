@@ -40,7 +40,6 @@ class _ListMiniTournamentPageState extends State<ListMiniTournamentPage> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Scaffold(
       key: scaffoldKey,
       appBar: appBar('MIS TORNEOS VIRTUAL MATCH'),
@@ -55,7 +54,7 @@ class _ListMiniTournamentPageState extends State<ListMiniTournamentPage> {
               ),
               child: bodyContainer(context))),
       drawer: DrawerMenu(),
-      floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
+      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
        bottomNavigationBar: new BottonNavigation(),
 

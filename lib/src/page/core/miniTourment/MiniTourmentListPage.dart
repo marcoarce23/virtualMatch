@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:getwidget/components/button/gf_button.dart';
-import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/ListadoTorneoModel.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/JugadorModel.dart';
@@ -12,7 +10,6 @@ import 'package:virtual_match/src/page/core/player/PlayerSelectionPage.dart';
 import 'package:virtual_match/src/service/core/PlayerService.dart';
 import 'package:virtual_match/src/service/core/TournamentService.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
-import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/card/CardVM.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
@@ -228,20 +225,6 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
     return lista;
   }
 
-  Widget _button(
-      String text, double fontSize, double edgeInsets, String idTorneo) {
-    return GFButton(
-      padding: EdgeInsets.symmetric(horizontal: edgeInsets),
-      text: text,
-      textStyle: TextStyle(fontSize: fontSize),
-      textColor: AppTheme.themeWhite,
-      color: AppTheme.themeDefault,
-      icon: FaIcon(FontAwesomeIcons.checkCircle, color: AppTheme.themeWhite),
-      shape: GFButtonShape.pills,
-      onPressed: () =>
-          _executeInscription(entity.idTorneo.toString(), _opcionJugador),
-    );
-  }
 
   _executeInscription(String idTorneo, String idJugador) async {
     print('ENTROSSSS $idTorneo y $idJugador');

@@ -8,11 +8,8 @@ import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/ClasificadorModel.dart';
-import 'package:virtual_match/src/model/entity/EntityFromJson/JugadorModel.dart'
-    as list;
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/JugadorModel.dart';
-import 'package:virtual_match/src/model/entity/EntityFromJson/ListadoJugadoresModel.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/JugadorModel.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
@@ -27,11 +24,7 @@ import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/model/util/Validator.dart' as validator;
-import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 import 'package:virtual_match/src/widget/image/ImageWidget.dart';
-import 'package:virtual_match/src/model/entity/EntityMap/JugadorModel.dart'
-    as model;
-
 class PlayerAllPage extends StatefulWidget {
   static final String routeName = 'player';
   const PlayerAllPage({Key key}) : super(key: key);

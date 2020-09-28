@@ -39,11 +39,14 @@ List<IEntityJson> getListIEntityJson(http.Response response, IEntityJson entity,
 
 Map getListIEntityJsonId(http.Response response, IEntityJson entity,
     Map<String, dynamic> decodeData, IEntityJson list) {
+  Map dataMap;
+
   if (response.statusCode == 200) {
-    Map dataMap = json.decode(response.body);
+    dataMap = json.decode(response.body);
     print('ZZZZ: ${dataMap["data"]}');
     return dataMap;
   } else {
     Exception('Error: Status 400');
   }
+  return dataMap;
 }

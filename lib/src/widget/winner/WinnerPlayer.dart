@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
-import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/widget/image/imageOvalWidget.dart';
 import 'package:virtual_match/src/widget/util/Util.dart';
 

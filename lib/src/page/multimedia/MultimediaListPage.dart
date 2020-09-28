@@ -114,7 +114,6 @@ class _MultimediaListPageState extends State<MultimediaListPage> {
   }
 
   Widget _showListTile(MultimediaModel entity) {
-    final size = MediaQuery.of(context).size;
     return Column(
       children: <Widget>[
         CardVM(

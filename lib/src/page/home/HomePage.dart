@@ -6,11 +6,9 @@ import 'package:virtual_match/src/model/entity/EntityFromJson/NoticiaEventoModel
 import 'package:virtual_match/src/model/entity/EntityFromJson/NotificacionModel.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
 import 'package:virtual_match/src/service/NewService.dart';
-import 'package:virtual_match/src/service/NotificactionService.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/bottonNavigationBar/BottonNavigatorWidget.dart';
-import 'package:virtual_match/src/widget/card/CardVM.dart';
 import 'package:virtual_match/src/widget/carousel/CarouselWidget.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
@@ -93,12 +91,12 @@ class _HomePageState extends State<HomePage> {
       bottom: true,
       top: true,
       child: Scaffold(
-        appBar: appBar('Virtual Match'),
+        appBar: appBar('LO ÚLTIMO '),
         body: SingleChildScrollView(
           child: Container(
             decoration: new BoxDecoration(
               image: new DecorationImage(
-                image: new AssetImage('assets/portada1.png'),
+                image: new AssetImage('assets/portada2.png'),
                 fit: BoxFit.cover,
               ),
             ),

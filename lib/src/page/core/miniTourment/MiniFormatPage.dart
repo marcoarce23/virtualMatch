@@ -22,9 +22,8 @@ import 'package:virtual_match/src/service/core/TournamentService.dart';
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
-import 'package:virtual_match/src/model/util/Validator.dart' as validator;
+
 import 'package:virtual_match/src/model/entity/EntityMap/FormatoModel.dart';
-import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 import 'package:virtual_match/src/widget/image/ImageWidget.dart';
 
 class MiniFormatLoadPage extends StatefulWidget {
@@ -152,46 +151,46 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
     );
   }
 
-  Widget _text(
-      TextEditingController controller,
-      String initialValue,
-      String labelText,
-      int maxLength,
-      int maxLines,
-      String hintText,
-      bool isValidate,
-      FaIcon icon,
-      Color hoverColor,
-      Color fillColor,
-      Color focusColor) {
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 15.0),
-      child: TextFormField(
-        initialValue: initialValue,
-        textCapitalization: TextCapitalization.sentences,
-        enableSuggestions: true,
-        maxLength: maxLength,
-        maxLines: maxLines,
-        autocorrect: true,
-        autovalidate: false,
-        cursorColor: AppTheme.themeDefault,
-        toolbarOptions:
-            ToolbarOptions(copy: true, cut: true, paste: true, selectAll: true),
-        keyboardType: TextInputType.text,
-        // controller: controller,
-        decoration: inputDecoration(
-            hintText, labelText, icon, hoverColor, fillColor, focusColor),
-        onChanged: (value) {
-          setState(() {
-            controller.text = value;
-          });
-        },
-        validator: (value) =>
-            validator.validateTextfieldEmpty(value, isValidate),
-        onSaved: (value) => controller.text = value,
-      ),
-    );
-  }
+  // Widget _text(
+  //     TextEditingController controller,
+  //     String initialValue,
+  //     String labelText,
+  //     int maxLength,
+  //     int maxLines,
+  //     String hintText,
+  //     bool isValidate,
+  //     FaIcon icon,
+  //     Color hoverColor,
+  //     Color fillColor,
+  //     Color focusColor) {
+  //   return Padding(
+  //     padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 15.0),
+  //     child: TextFormField(
+  //       initialValue: initialValue,
+  //       textCapitalization: TextCapitalization.sentences,
+  //       enableSuggestions: true,
+  //       maxLength: maxLength,
+  //       maxLines: maxLines,
+  //       autocorrect: true,
+  //       autovalidate: false,
+  //       cursorColor: AppTheme.themeDefault,
+  //       toolbarOptions:
+  //           ToolbarOptions(copy: true, cut: true, paste: true, selectAll: true),
+  //       keyboardType: TextInputType.text,
+  //       // controller: controller,
+  //       decoration: inputDecoration(
+  //           hintText, labelText, icon, hoverColor, fillColor, focusColor),
+  //       onChanged: (value) {
+  //         setState(() {
+  //           controller.text = value;
+  //         });
+  //       },
+  //       validator: (value) =>
+  //           validator.validateTextfieldEmpty(value, isValidate),
+  //       onSaved: (value) => controller.text = value,
+  //     ),
+  //   );
+  // }
 
   Widget _comboModalidad(String _opcionTipoModalidadss) {
     return Center(
@@ -307,35 +306,35 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
             }));
   }
 
-  Widget _comboCompeticion(String _opcionTipoCompeticions) {
-    return Center(
-        child: FutureBuilder(
-            future: entityGet.get(new ClasificadorModel(), 26),
-            builder: (context, AsyncSnapshot snapshot) {
-              if (snapshot.hasData) {
-                return Row(
-                  children: <Widget>[
-                    SizedBox(width: 35.0),
-                    Text('Tipo Competición:'),
-                    SizedBox(width: 15.0),
-                    DropdownButton(
-                      icon: FaIcon(FontAwesomeIcons.sort,
-                          color: AppTheme.themePurple),
-                      value: _opcionTipoCompeticion,
-                      items: getDropDown(snapshot),
-                      onChanged: (value) {
-                        setState(() {
-                          _opcionTipoCompeticion = value;
-                        });
-                      },
-                    ),
-                  ],
-                );
-              } else {
-                return loading();
-              }
-            }));
-  }
+  // Widget _comboCompeticion(String _opcionTipoCompeticions) {
+  //   return Center(
+  //       child: FutureBuilder(
+  //           future: entityGet.get(new ClasificadorModel(), 26),
+  //           builder: (context, AsyncSnapshot snapshot) {
+  //             if (snapshot.hasData) {
+  //               return Row(
+  //                 children: <Widget>[
+  //                   SizedBox(width: 35.0),
+  //                   Text('Tipo Competición:'),
+  //                   SizedBox(width: 15.0),
+  //                   DropdownButton(
+  //                     icon: FaIcon(FontAwesomeIcons.sort,
+  //                         color: AppTheme.themePurple),
+  //                     value: _opcionTipoCompeticion,
+  //                     items: getDropDown(snapshot),
+  //                     onChanged: (value) {
+  //                       setState(() {
+  //                         _opcionTipoCompeticion = value;
+  //                       });
+  //                     },
+  //                   ),
+  //                 ],
+  //               );
+  //             } else {
+  //               return loading();
+  //             }
+  //           }));
+  // }
 
   Widget _comboTorneo(String _opcionTipoTorneowww) {
     return Center(
@@ -405,44 +404,7 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
     return lista;
   }
 
-  Widget _porEquipo(String text) {
-    return SwitchListTile(
-      value: isFree,
-      title: Text(text),
-      subtitle: Text(
-          'Habilitar opción si será equipo, caso contrario sera individual'),
-      activeColor: AppTheme.themePurple,
-      onChanged: (value) => setState(() {
-        isFree = value;
-      }),
-    );
-  }
-
-  Widget _inscription(String text) {
-    return SwitchListTile(
-      value: isIndividual,
-      title: Text(text),
-      subtitle: Text('Habilitar opción si será de pago.'),
-      activeColor: AppTheme.themePurple,
-      onChanged: (value) => setState(() {
-        isIndividual = value;
-      }),
-    );
-  }
-
-  Widget _selection(String text) {
-    return SwitchListTile(
-      value: isManual,
-      title: Text(text),
-      subtitle: Text('Habilitar opción si será manual.'),
-      activeColor: AppTheme.themePurple,
-      onChanged: (value) => setState(() {
-        isManual = value;
-      }),
-    );
-  }
-
-  Widget _button(String text, double fontSize, double edgeInsets) {
+   Widget _button(String text, double fontSize, double edgeInsets) {
     return GFButton(
       padding: EdgeInsets.symmetric(horizontal: edgeInsets),
       text: text,

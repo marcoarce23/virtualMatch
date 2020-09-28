@@ -177,25 +177,25 @@ class _TournamentPlayerScoredState extends State<TournamentPlayerScored> {
     );
   }
 
-  Widget _showActionIzq(PartidosPorTorneoModel entity) {
-    return Row(
-      children: <Widget>[
-        _phoneIzq(entity.iTelefono),
-        sizedBox(15, 0),
-        _whatAppIzq(entity.iTelefono),
-      ],
-    );
-  }
+  // Widget _showActionIzq(PartidosPorTorneoModel entity) {
+  //   return Row(
+  //     children: <Widget>[
+  //       _phoneIzq(entity.iTelefono),
+  //       sizedBox(15, 0),
+  //       _whatAppIzq(entity.iTelefono),
+  //     ],
+  //   );
+  // }
 
-  Widget _showActionDer(PartidosPorTorneoModel entity) {
-    return Row(
-      children: <Widget>[
-        _phoneDer(entity.dTelefono),
-        sizedBox(15, 0),
-        _whatAppDer(entity.dTelefono),
-      ],
-    );
-  }
+  // Widget _showActionDer(PartidosPorTorneoModel entity) {
+  //   return Row(
+  //     children: <Widget>[
+  //       _phoneDer(entity.dTelefono),
+  //       sizedBox(15, 0),
+  //       _whatAppDer(entity.dTelefono),
+  //     ],
+  //   );
+  // }
 
   _phoneDer(String telefono) {
     return InkWell(

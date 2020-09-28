@@ -1,6 +1,4 @@
 import 'dart:io';
-
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -126,7 +124,7 @@ class _AlbumLoadPagePageState extends State<AlbumLoadPage> {
       'https://res.cloudinary.com/propia/image/upload/v1592950093/rohprekln9plcyolgw0d.jpg';
   String imageVideo =
       'https://res.cloudinary.com/propia/image/upload/v1592950136/hy2vrcig1hwdikhjzx2b.jpg';
-  String _pdfPath = '';
+
   List<String> _listTipo = [
     'Trimestral 2020',
     'Año nuevo 2020',
@@ -459,27 +457,27 @@ class _AlbumLoadPagePageState extends State<AlbumLoadPage> {
     }
   }
 
-  _procesarFile(String file) async {
-    valueImage = 1;
+  // _procesarFile(String file) async {
+  //   valueImage = 1;
 
-    if (photo != null) {
-      image = await entityImage.uploadImage(file);
-      setState(() {
-        entity.foto = image;
-        //print('cargadod e iagen ${entity.foto}');
-      });
-    }
-  }
+  //   if (photo != null) {
+  //     image = await entityImage.uploadImage(file);
+  //     setState(() {
+  //       entity.foto = image;
+  //       //print('cargadod e iagen ${entity.foto}');
+  //     });
+  //   }
+  // }
 
-  _procesarVideo2(String file) async {
-    valueImage = 2;
+  // _procesarVideo2(String file) async {
+  //   valueImage = 2;
 
-    image = await entityImage.uploadVideo(file);
-    setState(() {
-      entity.foto = image;
-      //print('cargadod e iagen ${entity.foto}');
-    });
-  }
+  //   image = await entityImage.uploadVideo(file);
+  //   setState(() {
+  //     entity.foto = image;
+  //     //print('cargadod e iagen ${entity.foto}');
+  //   });
+  // }
 
   // void _pickPDF() async {
   //   try {
@@ -501,26 +499,26 @@ class _AlbumLoadPagePageState extends State<AlbumLoadPage> {
   //   }
   // }
 
-  void _pickVideo() async {
-    try {
-      var _extension = 'MP4';
-      _pdfPath = await FilePicker.getFilePath(
-          type: FileType.custom,
-          allowedExtensions: (_extension?.isNotEmpty ?? false)
-              ? _extension?.replaceAll(' ', '')?.split(',')
-              : null);
+  // void _pickVideo() async {
+  //   try {
+  //     var _extension = 'MP4';
+  //     _pdfPath = await FilePicker.getFilePath(
+  //         type: FileType.custom,
+  //         allowedExtensions: (_extension?.isNotEmpty ?? false)
+  //             ? _extension?.replaceAll(' ', '')?.split(',')
+  //             : null);
 
-      setState(() {});
-      if (_pdfPath == '') {
-        return;
-      }
-      //print("File path11: " + _pdfPath);
-      _procesarVideo2(_pdfPath);
-      // setState(() {
-      //   _isLoading = true;
-      // });
-    } on PlatformException catch (exception) {
-      showSnackbar('Se produjo un error. $exception', scaffoldKey);
-    }
-  }
+  //     setState(() {});
+  //     if (_pdfPath == '') {
+  //       return;
+  //     }
+  //     //print("File path11: " + _pdfPath);
+  //     _procesarVideo2(_pdfPath);
+  //     // setState(() {
+  //     //   _isLoading = true;
+  //     // });
+  //   } on PlatformException catch (exception) {
+  //     showSnackbar('Se produjo un error. $exception', scaffoldKey);
+  //   }
+  // }
 }
