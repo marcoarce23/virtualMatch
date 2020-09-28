@@ -41,6 +41,18 @@ class ApiGet {
     return getListIEntityJson(response, entity, decodeData, list);
   }
 
+  Future<List<IEntityJson>> getGanadores(IEntityJson entity) async {
+    final List<IEntityJson> list = new List();
+    Map<String, dynamic> decodeData;
+
+    final _apiRest = api['getGanadores'][0].toString();
+    final response = await http.get(_apiRest);
+
+    print(_apiRest);
+
+    return getListIEntityJson(response, entity, decodeData, list);
+  }
+
   Future<List<IEntityJson>> getPartidosTorneo(
       IEntityJson entity, int value) async {
     final List<IEntityJson> list = new List();
