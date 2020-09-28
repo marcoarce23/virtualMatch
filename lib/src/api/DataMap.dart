@@ -6,8 +6,7 @@ import 'package:virtual_match/src/model/util/StatusCode.dart';
 
 Map dataMap(http.Response response) {
   Map dataMap;
-  print('Response status: ${response.statusCode}');
-  print('Response body: ${response.body}');
+
   if (response.statusCode == STATUSCODE200)
     dataMap = json.decode(response.body);
   else if (response.statusCode == STATUSCODE400)
@@ -26,7 +25,7 @@ List<IEntityJson> getListIEntityJson(http.Response response, IEntityJson entity,
   if (response.statusCode == 200) {
     Map dataMap = json.decode(response.body);
     List<dynamic> listDynamic = dataMap[PRIMARY_KEY];
-    //      //print(listDynamic);
+    print(listDynamic);
     for (int i = 0; i < listDynamic.length; i++) {
       decodeData = listDynamic[i];
       list.add(entity.fromJson(decodeData));
@@ -36,4 +35,15 @@ List<IEntityJson> getListIEntityJson(http.Response response, IEntityJson entity,
   }
 
   return list;
+}
+
+Map getListIEntityJsonId(http.Response response, IEntityJson entity,
+    Map<String, dynamic> decodeData, IEntityJson list) {
+  if (response.statusCode == 200) {
+    Map dataMap = json.decode(response.body);
+    print('ZZZZ: ${dataMap["data"]}');
+    return dataMap;
+  } else {
+    Exception('Error: Status 400');
+  }
 }

@@ -8,8 +8,12 @@ import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/ClasificadorModel.dart';
-import 'package:virtual_match/src/model/entity/EntityMap/JugadorModel.dart';
+import 'package:virtual_match/src/model/entity/EntityFromJson/JugadorModel.dart'
+    as list;
 import 'package:virtual_match/src/model/Preference.dart';
+import 'package:virtual_match/src/model/entity/EntityFromJson/JugadorModel.dart';
+import 'package:virtual_match/src/model/entity/EntityFromJson/ListadoJugadoresModel.dart';
+import 'package:virtual_match/src/model/entity/EntityMap/JugadorModel.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
@@ -26,7 +30,7 @@ import 'package:virtual_match/src/model/util/Validator.dart' as validator;
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 import 'package:virtual_match/src/widget/image/ImageWidget.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/JugadorModel.dart'
-    as model1;
+    as model;
 
 class PlayerAllPage extends StatefulWidget {
   static final String routeName = 'player';
@@ -41,8 +45,6 @@ class _PlayerAllPagePageState extends State<PlayerAllPage> {
   final prefs = new Preferense();
   final List<Widget> optionPage = [
     PlayerLoadPage(),
-    PlayerWithTournement(),
-    PlayerWithTournement()
   ];
 
   void _onItemTapped(int index) {
@@ -102,182 +104,6 @@ class _PlayerAllPagePageState extends State<PlayerAllPage> {
   }
 }
 
-class PlayerWithTournement extends StatefulWidget {
-  PlayerWithTournement({Key key}) : super(key: key);
-
-  @override
-  _PlayerWithTournementState createState() => _PlayerWithTournementState();
-}
-
-class _PlayerWithTournementState extends State<PlayerWithTournement> {
-  final formKey = GlobalKey<FormState>();
-  final scaffoldKey = GlobalKey<ScaffoldState>();
-
-  final controllerIpsdb = TextEditingController();
-  final controllerName = TextEditingController();
-  final controllerSecondName = TextEditingController();
-  final controllerPhone = TextEditingController();
-  final controllerInformation = TextEditingController();
-  final controllerFacebook = TextEditingController();
-  final controllerTwitter = TextEditingController();
-
-//DEFINICION DE BLOC Y MODEL
-  CrudService entityService;
-  JugadorModel entity = new JugadorModel();
-  ImageService entityImage = new ImageService();
-  final prefs = new Preferense();
-
-  //DEFINICION DE VARIABLES
-  bool _save = false;
-  File photo;
-  String image = IMAGE_DEFAULT;
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    entity.states = StateEntity.Insert;
-    entity.foto = image;
-
-    if (prefs.idPlayer != '-1') {
-      _cargarInformacion();
-    }
-
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(builder: (_) => new CrudService()),
-      ],
-      child: Scaffold(
-        body: Container(
-          child: Column(
-            children: <Widget>[
-              itemPlayer(),
-              divider(),
-              Text("Torneos disponbles"),
-              divider(),
-              itemTournament(),
-              itemTournament(),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  _cargarInformacion() {
-    // prefs.idOrganization =
-    //     result["jugador"]["idOrganizacion"].toString();
-    // prefs.idDepartament =
-    //     int.parse(result["jugador"]["idaDepartamento"].toString());
-    // prefs.nameUser = result["jugador"]["nombre"].toString();
-    // prefs.apellido = result["jugador"]["apellido"].toString();
-    // prefs.avatarImage = result["jugador"]["foto"].toString();
-    // prefs.idPsdn = result["jugador"]["idPsdn"].toString();
-    // prefs.telefono = result["jugador"]["telefono"].toString();
-    // prefs.idaSexo = int.parse(result["jugador"]["idaSexo"].toString());
-    // prefs.informacionComplementaria =
-    //     result["jugador"]["informacionComplementaria"].toString();
-    // prefs.facebook = result["jugador"]["facebook"].toString();
-    // prefs.twitter = result["jugador"]["twitter"].toString();
-  }
-  Widget itemPlayer() {
-    return Container(
-      width: MediaQuery.of(context).size.width * 0.95,
-      margin: EdgeInsets.symmetric(vertical: 5.0),
-      decoration: boxDecoration(),
-      child: Column(
-        children: <Widget>[
-          gfListTile(
-              Text("Jugador: Marco Antonio Arce Valdivia"),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text("# 150 partidos Jugados"),
-                  Text("# 100 Ganados"),
-                  Text("# 50 Perdidos"),
-                ],
-              ),
-              Text(""),
-              null,
-              avatarCircle(IMAGE_DEFAULT, 35),
-              EdgeInsets.all(5.0),
-              EdgeInsets.all(3.0)),
-        ],
-      ),
-    );
-  }
-
-  Widget itemTournament() {
-    return Container(
-      width: MediaQuery.of(context).size.width * 0.95,
-      margin: EdgeInsets.symmetric(vertical: 5.0),
-      decoration: boxDecoration(),
-      child: Column(
-        children: <Widget>[
-          gfListTile(
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text("Torneo Wistupiku"),
-                  Text("126/128"),
-                ],
-              ),
-              Text("Eliminatoria"),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text("Torneo relampago para eliminatoria "),
-                  Text("Del 01/01/2020 al 31/08/2020 "),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: <Widget>[
-                      GFButton(
-                        onPressed: () {},
-                        text: "Inscribirse",
-                      ),
-                      Text("2 días para cerrar"),
-                    ],
-                  ),
-                  Row(
-                    children: <Widget>[
-                      GFImageOverlay(
-                          height: 20,
-                          width: 20,
-                          shape: BoxShape.circle,
-                          image: NetworkImage(IMAGE_DEFAULT)),
-                      GFImageOverlay(
-                          height: 20,
-                          width: 20,
-                          shape: BoxShape.circle,
-                          image: NetworkImage(IMAGE_DEFAULT)),
-                      GFImageOverlay(
-                          height: 20,
-                          width: 20,
-                          shape: BoxShape.circle,
-                          image: NetworkImage(IMAGE_DEFAULT)),
-                      GFImageOverlay(
-                          height: 20,
-                          width: 20,
-                          shape: BoxShape.circle,
-                          image: NetworkImage(IMAGE_DEFAULT)),
-                      Text(" + 126 jugadores inscritos")
-                    ],
-                  )
-                ],
-              ),
-              null,
-              avatarCircle(IMAGE_DEFAULT, 35),
-              EdgeInsets.all(5.0),
-              EdgeInsets.all(3.0)),
-        ],
-      ),
-    );
-  }
-}
-
 class PlayerLoadPage extends StatefulWidget {
   static final String routeName = 'playerLoad';
 
@@ -324,7 +150,7 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
     entity.states = StateEntity.Insert;
     entity.foto = image;
 
-    if (prefs.idPlayer.toString() != '0') {
+    if (prefs.idPlayer != '-1') {
       futureBuilder(context);
     }
 
@@ -344,33 +170,17 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
     );
   }
 
-  Widget futureBuilder(BuildContext context) {
+  FutureBuilder futureBuilder(BuildContext context) {
+    print('XXXXXAAAA:');
     return FutureBuilder(
-        future: entityGet1.getId(
-            new model1.JugadorModel(), int.parse(prefs.idPlayer)),
-        builder: (context, AsyncSnapshot snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.waiting:
-              return loading();
-              break;
-            default:
-              return listView(context, snapshot);
-          }
+        future:
+            entityGet1.getId(new JugadorModelJson(), int.parse(prefs.idPlayer)),
+        builder: (context, snapshot) {
+          if (snapshot.hasData)
+            print('PPPPPP:');
+          else
+            print('RRRRR:');
         });
-  }
-
-  Widget listView(BuildContext context, AsyncSnapshot snapshot) {
-    ListView.builder(
-      shrinkWrap: true,
-      scrollDirection: Axis.vertical,
-      physics: ClampingScrollPhysics(),
-      itemCount: snapshot.data.length,
-      itemBuilder: (context, index) {
-        entity = snapshot.data[index];
-
-        // return _showListTile(entity);
-      },
-    );
   }
 
 // "idJugador": 208,

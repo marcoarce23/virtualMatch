@@ -6,7 +6,7 @@ import 'package:virtual_match/src/api/core/player/ApiUpdate.dart';
 import 'package:virtual_match/src/api/core/player/ApiDelete.dart';
 
 class PlayerService with ChangeNotifier {
- bool isLoading = true;
+  bool isLoading = true;
 
   final _apiAdd = new ApiAdd();
   final _apiDelete = new ApiDelete();
@@ -51,7 +51,8 @@ class PlayerService with ChangeNotifier {
     return _result;
   }
 
-  Future<List<IEntityJson>> getId(IEntityJson entityJson, int value) async {
+  Future<Map> getId(IEntityJson entityJson, int value) async {
+    print('111');
     var _result = await _apiGet.getId(entityJson, value);
 
     isLoading = false;

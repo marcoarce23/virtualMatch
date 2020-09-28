@@ -7,6 +7,7 @@ import 'package:virtual_match/src/page/core/formatTourment/FormatTourmentPage.da
 import 'package:virtual_match/src/page/core/miniTourment/MiniTourmentLoadPage.dart';
 import 'package:virtual_match/src/page/core/player/OnceVsOncePage.dart';
 import 'package:virtual_match/src/page/core/player/PlayerLoadPage.dart';
+import 'package:virtual_match/src/page/core/player/play.dart';
 import 'package:virtual_match/src/page/faq/FaqListPage.dart';
 import 'package:virtual_match/src/page/general/ViewPage.dart';
 import 'package:virtual_match/src/page/intro/IntroPage.dart';
@@ -73,9 +74,8 @@ class DrawerMenu extends StatelessWidget {
     // if (prefs.idPlayer == '1' || prefs.idLogin == '9' /*COAV login*/)
     //   return drawerVirtualMatch(context);
 
-    // if (int.parse(prefs.idPlayer) > 1) 
-    
-    
+    // if (int.parse(prefs.idPlayer) > 1)
+
     return drawerUser(context);
   }
 
@@ -299,6 +299,15 @@ class DrawerMenu extends StatelessWidget {
             ),
             '      Jugadores de la comunidad',
             () => navegation(context, PlayerLoadPage())),
+        CustomListTile(
+            Image.asset(
+              'assets/image/jugador2.png',
+              //scale: 0.4,
+              width: 30,
+              height: 30,
+            ),
+            '      Jugadores 111',
+            () => navegation(context, Play())),
         CustomListTile(
             Image.asset(
               'assets/image/pelota.png',
