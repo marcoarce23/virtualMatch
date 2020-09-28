@@ -5,6 +5,7 @@ import 'package:virtual_match/src/page/core/miniTourment/ListMiniTournamentPage.
 import 'package:virtual_match/src/page/core/player/PlayerPage.dart';
 import 'package:virtual_match/src/page/core/player/PlayerWinnePage.dart';
 import 'package:virtual_match/src/page/core/tourment/ListTournamentPage.dart';
+import 'package:virtual_match/src/page/new/NewListPage.dart';
 
 import 'package:virtual_match/src/page/notification/NotificationPage.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
@@ -20,7 +21,7 @@ class BottonNavigation extends StatefulWidget {
 
 class _BottonNavigationState extends State<BottonNavigation> {
   @override
-   Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     return ConvexAppBar.badge(
       {3: '', 1: '', 2: ''},
 
@@ -71,7 +72,7 @@ class _BottonNavigationState extends State<BottonNavigation> {
       initialActiveIndex: 2, //optional, default as 0
       onTap: (value) {
         setState(() {
-          if (value == 0) navegation(context, NotificationPage());
+          if (value == 0) navegation(context, NewListPage());
           if (value == 1) navegation(context, PlayerWinnerPage());
           if (value == 2) navegation(context, ListTournamentPage());
           if (value == 3) navegation(context, PlayerPage());
