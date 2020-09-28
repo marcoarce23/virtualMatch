@@ -53,7 +53,7 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
 
     return Scaffold(
       key: scaffoldKey,
-      appBar: appBar('MIS TORNEOS'),
+  //    appBar: appBar('MIS TORNEOS'),
       drawer: DrawerMenu(),
       body: SafeArea(
         child: Container(

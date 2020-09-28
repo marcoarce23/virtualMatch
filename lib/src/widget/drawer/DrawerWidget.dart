@@ -67,13 +67,16 @@ class DrawerMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (prefs.idPlayer == '-1' || prefs.idLogin == '-1' /*COAV login*/)
-      return drawerAnonimus(context);
+    // if (prefs.idPlayer == '-1' || prefs.idLogin == '-1' /*COAV login*/)
+    //   return drawerAnonimus(context);
 
-    if (prefs.idPlayer == '1' || prefs.idLogin == '9' /*COAV login*/)
-      return drawerVirtualMatch(context);
+    // if (prefs.idPlayer == '1' || prefs.idLogin == '9' /*COAV login*/)
+    //   return drawerVirtualMatch(context);
 
-    if (int.parse(prefs.idPlayer) > 1) return drawerUser(context);
+    // if (int.parse(prefs.idPlayer) > 1) 
+    
+    
+    return drawerUser(context);
   }
 
   Drawer drawerAnonimus(BuildContext context) {
