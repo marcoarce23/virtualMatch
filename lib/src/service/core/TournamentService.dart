@@ -97,6 +97,13 @@ class TourmentService {
     return _result;
   }
 
+  Future<List<IEntityJson>> getGanadores(IEntityJson entityJson) async {
+    var _result = await _apiGet.getGanadores(entityJson);
+    isLoading = false;
+    //  notifyListeners();
+    return _result;
+  }
+
   Future<List<IEntityJson>> getTablaPosiciones(
       IEntityJson entityJson, int value) async {
     var _result = await _apiGet.getTablaPosiciones(entityJson, value);

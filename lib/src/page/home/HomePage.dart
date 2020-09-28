@@ -2,7 +2,11 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:virtual_match/src/model/Preference.dart';
+import 'package:virtual_match/src/model/entity/EntityFromJson/NoticiaEventoModel.dart';
+import 'package:virtual_match/src/model/entity/EntityFromJson/NotificacionModel.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
+import 'package:virtual_match/src/service/NewService.dart';
+import 'package:virtual_match/src/service/NotificactionService.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/bottonNavigationBar/BottonNavigatorWidget.dart';
@@ -21,7 +25,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  NotificacionModel entity = new NotificacionModel();
+  NewService entityGet = NewService();
+
+  // DEFINICIOND E VARIABLES
   final prefs = new Preferense();
+
   File photo;
   final GlobalKey<FabCircularMenuState> fabKey = GlobalKey();
   int _selectedRadio = 18;
@@ -38,19 +47,44 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
+  Widget futureBuilderNoticias(BuildContext context, int grupo) {
+    List<CarouselSimpleModel> lista = new List();
+    return FutureBuilder(
+        future: entityGet.get(new NoticiaEventoModel()),
+        builder: (context, AsyncSnapshot snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.waiting:
+              return Container();
+              break;
+            default:
+              List lis = snapshot.data;
+
+              for (var i = 0; i < lis.length; i++) {
+                NoticiaEventoModel ent = lis[i];
+
+                if (grupo == 0) {
+                  if (ent.tipo == 0) {
+                    CarouselSimpleModel card = CarouselSimpleModel(
+                        imageUrl: ent.foto, textFromImage: ent.titulo);
+                    lista.add(card);
+                  }
+                } else {
+                  if (ent.tipo == 1) {
+                    CarouselSimpleModel card = CarouselSimpleModel(
+                        imageUrl: ent.foto, textFromImage: ent.titulo);
+                    lista.add(card);
+                  }
+                }
+              }
+
+              return CarouselSimple(
+                  lista, AppTheme.themePurple, AppTheme.themeWhite);
+          }
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
-    List<CarouselSimpleModel> lista = [
-      CarouselSimpleModel(
-          imageUrl:
-              'https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Carrusel%2C_tio_vivo_Albacete.jpg/1024px-Carrusel%2C_tio_vivo_Albacete.jpg',
-          textFromImage: 'text'),
-      CarouselSimpleModel(
-          imageUrl:
-              'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/LakesideParkCarousel.jpg/1200px-LakesideParkCarousel.jpg',
-          textFromImage: 'sello'),
-    ];
-
     prefs.lastPage = HomePage.routeName;
 
     return SafeArea(
@@ -71,65 +105,52 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               children: [
                 Row(
-              children: <Widget>[
-                SizedBox(width: 10.0),
-                //  FaIcon(FontAwesomeIcons.male, color: AppTheme.themeVino),
-                SizedBox(width: 5.0),
-                Text('Noticias'),
-                Radio(
-                  value: 0,
-                  groupValue: _group,
-                  onChanged: (T) {
-                    _selectedRadio = 18;
-                    setState(() {
-                      _group = T;
-                    });
-                  },
-                ),
-                Text('Eventos'),
-                Radio(
-                  value: 1,
-                  groupValue: _group,
-                  onChanged: (T) {
-                    _selectedRadio = 19;
-                    setState(() {
-                      _group = T;
-                    });
-                  },
-                ),
-                Text('Multimedia'),
-                Radio(
-                  value: 2,
-                  groupValue: _group,
-                  onChanged: (T) {
-                    _selectedRadio = 15;
-                    setState(() {
-                      _group = T;
-                    });
-                  },
-                ),
-              ],
-            ),
-
-                Center(
-                  child: Container(
-                      width: MediaQuery.of(context).size.width * 0.75,
-                      child: CarouselSimple(
-                          lista, AppTheme.themePurple, AppTheme.themeWhite)),
-                ),
-                sizedBox(0, 10),
-                CardVM(
-                  size: 150,
-                  imageAssets: 'assets/icono3.png',
-                  opciones: _simplePopup(),
-                  accesosRapidos: xxxx(),
-                  listWidgets: [
-                    Text(
-                      "sssss",
-                      style: TextStyle(color: Colors.white),
+                  children: <Widget>[
+                    SizedBox(width: 10.0),
+                    //  FaIcon(FontAwesomeIcons.male, color: AppTheme.themeVino),
+                    SizedBox(width: 5.0),
+                    Text('Noticias'),
+                    Radio(
+                      value: 0,
+                      groupValue: _group,
+                      onChanged: (T) {
+                        _selectedRadio = 18;
+                        setState(() {
+                          _group = T;
+                        });
+                      },
+                    ),
+                    Text('Eventos'),
+                    Radio(
+                      value: 1,
+                      groupValue: _group,
+                      onChanged: (T) {
+                        _selectedRadio = 19;
+                        setState(() {
+                          _group = T;
+                        });
+                      },
+                    ),
+                    Text('Multimedia'),
+                    Radio(
+                      value: 2,
+                      groupValue: _group,
+                      onChanged: (T) {
+                        _selectedRadio = 15;
+                        setState(() {
+                          _group = T;
+                        });
+                      },
                     ),
                   ],
                 ),
+                Center(
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.75,
+                    child: futureBuilderNoticias(context, _group),
+                  ),
+                ),
+                sizedBox(0, 10),
                 /*
                 CardVM(
                   size: 150,
