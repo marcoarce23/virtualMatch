@@ -9,13 +9,13 @@ import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/ClasificadorModel.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/JugadorModel.dart';
-//import 'package:virtual_match/src/model/entity/EntityFromJson/JugadorModel.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/ClasificadorService.dart';
 import 'package:virtual_match/src/service/ImageService.dart';
+import 'package:virtual_match/src/service/core/PlayerService.dart';
 import 'package:virtual_match/src/service/crudService.dart';
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
@@ -25,6 +25,8 @@ import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/model/util/Validator.dart' as validator;
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 import 'package:virtual_match/src/widget/image/ImageWidget.dart';
+import 'package:virtual_match/src/model/entity/EntityMap/JugadorModel.dart'
+    as model1;
 
 class PlayerAllPage extends StatefulWidget {
   static final String routeName = 'player';
@@ -100,88 +102,6 @@ class _PlayerAllPagePageState extends State<PlayerAllPage> {
   }
 }
 
-// class PlayerListTeams extends StatefulWidget {
-//   PlayerListTeams({Key key}) : super(key: key);
-
-//   @override
-//   _PlayerListTeamsState createState() => _PlayerListTeamsState();
-// }
-
-// class _PlayerListTeamsState extends State<PlayerListTeams> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: Container(
-//         child: Column(
-//           children: <Widget>[
-//             itemPlayer(),
-//             divider(),
-//             Text("Tus equipos"),
-//             divider(),
-//             itemTeam()
-//           ],
-//         ),
-//       ),
-//       floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
-//           FaIcon(FontAwesomeIcons.plus), EquipmentAllPage()),
-//     );
-//   }
-
-//   Widget itemPlayer() {
-//     return Container(
-//       width: MediaQuery.of(context).size.width * 0.95,
-//       margin: EdgeInsets.symmetric(vertical: 5.0),
-//       decoration: boxDecoration(),
-//       child: Column(
-//         children: <Widget>[
-//           gfListTile(
-//               Text("Jugador: Marco Antonio Arce Valdivia"),
-//               null,
-//               Column(
-//                 crossAxisAlignment: CrossAxisAlignment.start,
-//                 children: <Widget>[
-//                   Text("# 150 partidos Jugados"),
-//                   Text("# 100 Ganados"),
-//                   Text("# 50 Perdidos"),
-//                 ],
-//               ),
-//               null,
-//               avatarCircle(IMAGE_DEFAULT, 35),
-//               EdgeInsets.all(5.0),
-//               EdgeInsets.all(3.0)),
-//         ],
-//       ),
-//     );
-//   }
-
-//   Widget itemTeam() {
-//     return Container(
-//       width: MediaQuery.of(context).size.width * 0.95,
-//       margin: EdgeInsets.symmetric(vertical: 5.0),
-//       decoration: boxDecoration(),
-//       child: Column(
-//         children: <Widget>[
-//           gfListTile(
-//               Text("Bomberos teams"),
-//               Row(
-//                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                 children: <Widget>[
-//                   Text("#15 partidos jugados"),
-//                   Text("#10 Ganados"),
-//                   Text("#5 Perdidos"),
-//                 ],
-//               ),
-//               null,
-//               null,
-//               avatarCircle(IMAGE_DEFAULT, 35),
-//               EdgeInsets.all(5.0),
-//               EdgeInsets.all(3.0)),
-//         ],
-//       ),
-//     );
-//   }
-// }
-
 class PlayerWithTournement extends StatefulWidget {
   PlayerWithTournement({Key key}) : super(key: key);
 
@@ -228,7 +148,6 @@ class _PlayerWithTournementState extends State<PlayerWithTournement> {
 
     return MultiProvider(
       providers: [
-        // ignore: missing_required_param
         ChangeNotifierProvider(builder: (_) => new CrudService()),
       ],
       child: Scaffold(
@@ -383,6 +302,8 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
   ImageService entityImage = new ImageService();
   JugadorModel entity = new JugadorModel();
   ClasificadorService entityGet = ClasificadorService();
+  PlayerService entityGet1 = PlayerService();
+
   final prefs = new Preferense();
 
   //
@@ -404,23 +325,9 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
     entity.foto = image;
 
     if (prefs.idPlayer.toString() != '0') {
-      entity.nombre = prefs.nameUser;
-      entity.apellido = prefs.lastPage;
-      entity.idPsdn = 'prefs.idPsdn';
-      entity.telefono = prefs.telefono;
-      entity.informacionComplementaria = 'prefs.informacionComplementaria';
-      entity.facebook = prefs.facebook;
-      // _opcionDepartamento = prefs.idDepartament.toString();
-      entity.states = StateEntity.Update;
-
-      print('ID SSSS: ${entity.telefono}');
-      print('ID SSSS: ${prefs.telefono}');
+      futureBuilder(context);
     }
-    // return MultiProvider(
-    //   providers: [
-    //     // ignore: missing_required_param
-    //     ChangeNotifierProvider(builder: (_) => new CrudService()),
-    //   ],
+
     return Scaffold(
       key: scaffoldKey,
       appBar: appBar('Jugador Virtual Match'.toUpperCase()),
@@ -436,6 +343,56 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }
+
+  Widget futureBuilder(BuildContext context) {
+    return FutureBuilder(
+        future: entityGet1.getId(
+            new model1.JugadorModel(), int.parse(prefs.idPlayer)),
+        builder: (context, AsyncSnapshot snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.waiting:
+              return loading();
+              break;
+            default:
+              return listView(context, snapshot);
+          }
+        });
+  }
+
+  Widget listView(BuildContext context, AsyncSnapshot snapshot) {
+    ListView.builder(
+      shrinkWrap: true,
+      scrollDirection: Axis.vertical,
+      physics: ClampingScrollPhysics(),
+      itemCount: snapshot.data.length,
+      itemBuilder: (context, index) {
+        entity = snapshot.data[index];
+
+        // return _showListTile(entity);
+      },
+    );
+  }
+
+// "idJugador": 208,
+//     "idOrganizacion": 2,
+//     "idaDepartamento": 7,
+//     "idLogin": 19,
+//     "idPsdn": "marcoarce3242",
+//     "nombre": "marco antonio\t",
+//     "apellido": "arce  valdivia",
+//     "correo": "marcoarce23@gmail.com",
+//     "telefono": "72038768",
+//     "idaSexo": 0,
+//     "informacionComplementaria": "soy buen amigo",
+//     "facebook": "faceboook.marco.arce",
+//     "twitter": "sinTwitter",
+//     "fechacreacion": "2020-09-27T18:53:03.69",
+//     "usuariocreacion": "marcoarce23@gmail.com",
+//     "usuariomodificacion": null,
+//     "fechamodificacion": null,
+//     "usuarioeliminacion": null,
+//     "fechaeliminacion": null,
+//     "foto": "https://res.cloudinary.co
 
   Widget _form(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -758,24 +715,5 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
         //print('cargadod e iagen ${entity.foto}');
       });
     }
-  }
-
-  _obtenerPlayer() {
-    // FutureBuilder(
-    //     future: entityService.get(
-    //         entityModel, API + '/api/Jugador/' + prefs.idPlayer.toString()),
-    //     builder: (BuildContext context, AsyncSnapshot snapshot) {
-    //       switch (snapshot.connectionState) {
-    //         case ConnectionState.waiting:
-    //           return Center(child: CircularProgressIndicator());
-    //           break;
-    //         default:
-    //           //mostramos los datos
-    //           for (var i = 0; i < snapshot.data.length; i++) {
-    //             //  ProfesionalesAgrupados listaProfesionales = snapshot.data[i];
-    //             //   lista.add(tarjetaProfessional(context, listaProfesionales));
-    //           }
-    //       }
-    //     });
   }
 }

@@ -18,6 +18,15 @@ class Preferense {
   }
   // GET y SET del Genero
 
+  get invitado {
+    return _prefs.getString('invitado') ?? '-1';
+  }
+
+  set invitado(String value) {
+    _prefs.setString('invitado', value);
+  }
+
+
   get imei {
     return _prefs.getString('imei') ?? '-1';
   }
@@ -143,7 +152,7 @@ class Preferense {
   }
 
   get idPlayer {
-    return _prefs.getString('idPlayer') ?? '0';
+    return _prefs.getString('idPlayer') ?? '-1';
   }
 
   set idPlayer(String value) {
