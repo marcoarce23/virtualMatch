@@ -306,7 +306,7 @@ GFAvatar avatarSquare(String image, double size) {
 GFAvatar avatarCircle(String image, double size) {
   return GFAvatar(
     backgroundImage: NetworkImage(image),
-    backgroundColor: Colors.white,
+    backgroundColor: AppTheme.themePurple,//Colors.white,
     foregroundColor: Colors.black,
     shape: GFAvatarShape.circle,
     size: size,

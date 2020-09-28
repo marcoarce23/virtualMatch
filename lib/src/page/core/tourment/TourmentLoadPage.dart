@@ -58,12 +58,7 @@ class _TourmentAllPageState extends State<TourmentAllPage> {
   @override
   Widget build(BuildContext context) {
     return
-        //  MultiProvider(
-        //   providers: [
-        //     ChangeNotifierProvider(builder: (_) => new TourmentService()),
-        //   ],
-        //   child:
-        Scaffold(
+          Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         elevation: 21.0,
         backgroundColor: AppTheme.themeDefault,

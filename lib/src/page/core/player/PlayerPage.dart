@@ -125,7 +125,6 @@ class _PlayerPageState extends State<PlayerPage> {
   }
 
   Widget _showListTile(model.JugadorModel entity) {
-    final size = MediaQuery.of(context).size;
     return Column(
       children: <Widget>[
         Column(

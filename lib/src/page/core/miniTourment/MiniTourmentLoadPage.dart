@@ -1,12 +1,10 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
-//import 'package:provider/provider.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/TorneoModelo.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
@@ -58,13 +56,7 @@ class _MiniTourmentAllPageState extends State<MiniTourmentAllPage> {
 
   @override
   Widget build(BuildContext context) {
-    return
-        //  MultiProvider(
-        //   providers: [
-        //     ChangeNotifierProvider(builder: (_) => new TourmentService()),
-        //   ],
-        //   child:
-        Scaffold(
+    return Scaffold(
       appBar: appBar('MINI TORNEOS'),
       drawer: DrawerMenu(),
       bottomNavigationBar: BottomNavigationBar(
@@ -72,23 +64,26 @@ class _MiniTourmentAllPageState extends State<MiniTourmentAllPage> {
         backgroundColor: AppTheme.themeDefault,
         items: [
           BottomNavigationBarItem(
-              icon: FaIcon(
-                FontAwesomeIcons.bell,
-                size: 25,
+              icon: Image.asset(
+                'assets/image/control.png',
+                width: 28,
+                height: 28,
               ),
-              title: Text('Torneo')),
+              title: Text('Mi torneo')),
           BottomNavigationBarItem(
-              icon: FaIcon(
-                FontAwesomeIcons.futbol,
-                size: 25,
+              icon: Image.asset(
+                'assets/image/pelota.png',
+                width: 28,
+                height: 28,
               ),
-              title: Text('Formato')),
+              title: Text('Mi formato')),
           BottomNavigationBarItem(
-              icon: FaIcon(
-                FontAwesomeIcons.listAlt,
-                size: 25,
+              icon: Image.asset(
+                'assets/image/penal.png',
+                width: 28,
+                height: 28,
               ),
-              title: Text('Lista tus Torneos')),
+              title: Text('Mis Torneos')),
         ],
         currentIndex: page,
         unselectedItemColor: AppTheme.themeWhite,
@@ -262,42 +257,6 @@ class _MiniTourmentLoadPageState extends State<MiniTourmentLoadPage> {
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             Colors.red),
-        // _text(
-        //     controllerHastag,
-        //     entity.hastag,
-        //     '#Hastag Virtual Match',
-        //     100,
-        //     1,
-        //     'Ingrese #Hastag',
-        //     true,
-        //     FaIcon(FontAwesomeIcons.hashtag, color: AppTheme.themeDefault),
-        //     AppTheme.themeDefault,
-        //     AppTheme.themeDefault,
-        //     Colors.red),
-        // _text(
-        //     controllerGift,
-        //     entity.premios,
-        //     'Premios en Bs.',
-        //     5,
-        //     1,
-        //     'Ingrese el monto el premio en Bs.',
-        //     true,
-        //     FaIcon(FontAwesomeIcons.moneyCheck, color: AppTheme.themeDefault),
-        //     AppTheme.themeDefault,
-        //     AppTheme.themeDefault,
-        //     Colors.red),
-        // _text(
-        //     controllerOrganization,
-        //     entity.organizador,
-        //     'Inscripción en Bs.',
-        //     5,
-        //     1,
-        //     'Ingrese el monto de la Inscripción',
-        //     true,
-        //     FaIcon(FontAwesomeIcons.moneyBillAlt, color: AppTheme.themeDefault),
-        //     AppTheme.themeDefault,
-        //     AppTheme.themeDefault,
-        //     Colors.red),
         _dateInit('(*) Fecha de inicio'),
         _hourInit('(*) Hora de inicio'),
         Text(
@@ -423,12 +382,8 @@ class _MiniTourmentLoadPageState extends State<MiniTourmentLoadPage> {
         enableInteractiveSelection: false,
         controller: _inputFieldTimeController,
         decoration: InputDecoration(
-            // border: OutlineInputBorder(
-            //   borderRadius: BorderRadius.circular(20.0)
-            // ),
             hintText: text,
             labelText: text,
-            //    suffixIcon: Icon(Icons.perm_contact_calendar),
             icon: FaIcon(FontAwesomeIcons.clock, color: AppTheme.themeDefault)),
         onTap: () {
           FocusScope.of(context).requestFocus(new FocusNode());
@@ -471,7 +426,6 @@ class _MiniTourmentLoadPageState extends State<MiniTourmentLoadPage> {
     entity.hastag = '#VirtualMatch';
     entity.premios = '0';
     entity.organizador = '0';
-    //  entity.foto = IMAGE_LOGO;
     entity.fechaInicio = _inputFieldDateController.text + ' ' + '12:00';
     entity.horaInicio = _inputFieldTimeController.text;
     entity.usuarioAuditoria = prefs.email;
@@ -485,18 +439,12 @@ class _MiniTourmentLoadPageState extends State<MiniTourmentLoadPage> {
 
         if (result["tipo_mensaje"] == '0') {
           showSnackbar(STATUS_OK, scaffoldKey);
-
-          // navigation(
-          //   context, TourmentListPage()
-          // );
-
         } else
           showSnackbar(STATUS_ERROR, scaffoldKey);
       });
     } catch (error) {
       showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
     }
-    //  navegation(context, FormatLoadPage());
   }
 
   _seleccionarFoto() async {
@@ -514,7 +462,6 @@ class _MiniTourmentLoadPageState extends State<MiniTourmentLoadPage> {
       print('imagennnnn $image');
       setState(() {
         entity.foto = image;
-
         print('cargadod e iagen ${entity.foto}');
       });
     }

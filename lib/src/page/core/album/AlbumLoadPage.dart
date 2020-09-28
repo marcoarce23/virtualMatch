@@ -481,25 +481,25 @@ class _AlbumLoadPagePageState extends State<AlbumLoadPage> {
     });
   }
 
-  void _pickPDF() async {
-    try {
-      var _extension = 'PDF';
-      _pdfPath = await FilePicker.getFilePath(
-          type: FileType.custom,
-          allowedExtensions: (_extension?.isNotEmpty ?? false)
-              ? _extension?.replaceAll(' ', '')?.split(',')
-              : null);
+  // void _pickPDF() async {
+  //   try {
+  //     var _extension = 'PDF';
+  //     _pdfPath = await FilePicker.getFilePath(
+  //         type: FileType.custom,
+  //         allowedExtensions: (_extension?.isNotEmpty ?? false)
+  //             ? _extension?.replaceAll(' ', '')?.split(',')
+  //             : null);
 
-      setState(() {});
-      if (_pdfPath == '') {
-        return;
-      }
-      valueImage = 1;
-      _procesarFile(_pdfPath);
-    } on PlatformException catch (exception) {
-      showSnackbar('Se produjo un error. $exception', scaffoldKey);
-    }
-  }
+  //     setState(() {});
+  //     if (_pdfPath == '') {
+  //       return;
+  //     }
+  //     valueImage = 1;
+  //     _procesarFile(_pdfPath);
+  //   } on PlatformException catch (exception) {
+  //     showSnackbar('Se produjo un error. $exception', scaffoldKey);
+  //   }
+  // }
 
   void _pickVideo() async {
     try {

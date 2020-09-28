@@ -176,8 +176,6 @@ class _LogOnPageState extends State<LogOnPage> {
       prefs.email = currentUser.email;
       prefs.avatarImage = currentUser.photoUrl;
       prefs.userId = currentUser.displayName;
-
-      print('DDDD. ${prefs.email}');
       _submit();
     });
   }
@@ -336,51 +334,17 @@ class _LogOnPageState extends State<LogOnPage> {
       textColor: AppTheme.themeWhite,
       color: AppTheme.themeBlackBlack,
       icon: avatarCircle(IMAGE_DEFAULT, 20),
-      // Shimmer.fromColors(
-      //   baseColor: AppTheme.themePurple,
-      //   highlightColor: AppTheme.themeWhite,
-      //   child: avatarCircle(IMAGE_LOGOB, 35),
-      // ),
       shape: GFButtonShape.pills,
-      onPressed: () => navegation(context, IntroPage()),
+      onPressed: () => _submitInvitado,
     );
   }
 
-  // Widget _botonInvitado(String text) {
-  //   return Container(
-  //     padding: EdgeInsets.symmetric(horizontal: 70.0),
-  //     width: MediaQuery.of(context).size.width,
-  //     child: RaisedButton.icon(
-  //       shape:
-  //           RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-  //       color: AppTheme.themeDefault,
-  //       textColor: Colors.white,
-  //       label: Text(
-  //         text,
-  //         style: kSubtitleStyle,
-  //       ),
-  //       icon: FaIcon(FontAwesomeIcons.earlybirds, color: Colors.white),
-  //       onPressed: () {
-  //         // prefs.imei = entity.imei;
-  //         // prefs.nombreUsuario = 'Invitado';
-  //         // prefs.correoElectronico = 'Invitado';
-  //         // prefs.nombreInstitucion = 'Invitado';
-  //         // prefs.idInsitucion = '0';
-  //         // prefs.idPersonal = '-2';
-  //         // prefs.userId = '0';
+  _submitInvitado() async {
+    prefs.idPlayer = '-1';
+    prefs.idLogin = '-1';
 
-  //         // Navigator.push(
-  //         //     context,
-  //         //     PageTransition(
-  //         //       curve: Curves.bounceOut,
-  //         //       type: PageTransitionType.rotate,
-  //         //       alignment: Alignment.topCenter,
-  //         //       child: LoginPage(),
-  //         //     ));
-  //       },
-  //     ),
-  //   );
-  // }
+    navegation(context, IntroPage());
+  }
 
   _submit() async {
     print('IDPLAYERRR;; ${prefs.idPlayer.toString()}');
@@ -412,27 +376,7 @@ class _LogOnPageState extends State<LogOnPage> {
           prefs.idLogin = result["data"]["idLogin"].toString();
           prefs.idPlayer = result["data"]["idPlayer"].toString();
 
-          print('EL NOMBRE : ${prefs.idPlayer.toString()}');
-          print('EL NOMBRE : ${prefs.idLogin.toString()}');
-          if (prefs.idPlayer != '0') {
-            prefs.idOrganization =
-                result["jugador"]["idOrganizacion"].toString();
-            prefs.idDepartament =
-                int.parse(result["jugador"]["idaDepartamento"].toString());
-            prefs.nameUser = result["jugador"]["nombre"].toString();
-            prefs.apellido = result["jugador"]["apellido"].toString();
-            prefs.avatarImage = result["jugador"]["foto"].toString();
-            prefs.idPsdn = result["jugador"]["idPsdn"].toString();
-            prefs.telefono = result["jugador"]["telefono"].toString();
-            prefs.idaSexo = int.parse(result["jugador"]["idaSexo"].toString());
-            prefs.informacionComplementaria =
-                result["jugador"]["informacionComplementaria"].toString();
-            prefs.facebook = result["jugador"]["facebook"].toString();
-            prefs.twitter = result["jugador"]["twitter"].toString();
-
-            navegation(context, HomePage());
-          } else
-            navegation(context, IntroPage());
+          navegation(context, HomePage());
         } else
           showSnackbar(STATUS_ERROR, scaffoldKey);
       });

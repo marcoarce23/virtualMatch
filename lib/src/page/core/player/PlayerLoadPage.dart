@@ -221,7 +221,10 @@ class _PlayerWithTournementState extends State<PlayerWithTournement> {
   Widget build(BuildContext context) {
     entity.states = StateEntity.Insert;
     entity.foto = image;
-    // entityService = Provider.of<CrudService>(context);
+
+    if (prefs.idPlayer != '-1') {
+      _cargarInformacion();
+    }
 
     return MultiProvider(
       providers: [
@@ -245,6 +248,22 @@ class _PlayerWithTournementState extends State<PlayerWithTournement> {
     );
   }
 
+  _cargarInformacion() {
+    // prefs.idOrganization =
+    //     result["jugador"]["idOrganizacion"].toString();
+    // prefs.idDepartament =
+    //     int.parse(result["jugador"]["idaDepartamento"].toString());
+    // prefs.nameUser = result["jugador"]["nombre"].toString();
+    // prefs.apellido = result["jugador"]["apellido"].toString();
+    // prefs.avatarImage = result["jugador"]["foto"].toString();
+    // prefs.idPsdn = result["jugador"]["idPsdn"].toString();
+    // prefs.telefono = result["jugador"]["telefono"].toString();
+    // prefs.idaSexo = int.parse(result["jugador"]["idaSexo"].toString());
+    // prefs.informacionComplementaria =
+    //     result["jugador"]["informacionComplementaria"].toString();
+    // prefs.facebook = result["jugador"]["facebook"].toString();
+    // prefs.twitter = result["jugador"]["twitter"].toString();
+  }
   Widget itemPlayer() {
     return Container(
       width: MediaQuery.of(context).size.width * 0.95,
@@ -384,7 +403,7 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
     entity.states = StateEntity.Insert;
     entity.foto = image;
 
-   if (prefs.idPlayer.toString() != '0') {
+    if (prefs.idPlayer.toString() != '0') {
       entity.nombre = prefs.nameUser;
       entity.apellido = prefs.lastPage;
       entity.idPsdn = 'prefs.idPsdn';

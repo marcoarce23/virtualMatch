@@ -52,28 +52,25 @@ Widget showInformation(BuildContext context, String title, String subTitle,
     decoration: boxDecoration(),
     child: Column(
       children: <Widget>[
+        
         gfListTile(
-            Text(title),
-            Text(subTitle),
+            Text(title, style: TextStyle(color: AppTheme.themeWhite)),
+            Text(subTitle, style: TextStyle(color: AppTheme.themeWhite)),
             Row(
               children: <Widget>[
+                sizedBox(0, 4),
                 Text(
                   subSubTitle,
                   style: TextStyle(
-                      color: AppTheme.themePurple,
+                      color: AppTheme.themeWhite,
                       textBaseline: TextBaseline.ideographic,
                       //   decoration: TextDecoration.underline,
                       fontSize: 15.0),
                 ),
-                InkWell(
-                  child: avatarCircle(IMAGE_SOROJCHI, 20),
-                  onTap: () =>
-                      navegation(context, ViewPage(title: titlePage, url: url)),
-                ),
               ],
             ),
             null,
-            avatarCircle(IMAGE_LOGO, 35),
+            avatarCircle(IMAGE_LOGOB, 35),
             EdgeInsets.all(0.0),
             EdgeInsets.all(0.0)),
       ],
@@ -404,7 +401,7 @@ Widget floatButtonImage(
     elevation: 2.0,
     child: Image.asset(
       'assets/icono3.png',
-       height: 50.0,
+      height: 50.0,
       fit: BoxFit.fill,
     ),
     backgroundColor: color,

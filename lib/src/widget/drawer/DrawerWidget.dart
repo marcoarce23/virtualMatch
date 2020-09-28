@@ -5,6 +5,7 @@ import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/page/core/formatTourment/FormatTourmentPage.dart';
 import 'package:virtual_match/src/page/core/miniTourment/MiniTourmentLoadPage.dart';
+import 'package:virtual_match/src/page/core/player/OnceVsOncePage.dart';
 import 'package:virtual_match/src/page/core/player/PlayerLoadPage.dart';
 import 'package:virtual_match/src/page/faq/FaqListPage.dart';
 import 'package:virtual_match/src/page/general/ViewPage.dart';
@@ -66,15 +67,13 @@ class DrawerMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
-     if (prefs.idPlayer == '-1' || prefs.idLogin == '-1' /*COAV login*/)
+    if (prefs.idPlayer == '-1' || prefs.idLogin == '-1' /*COAV login*/)
       return drawerAnonimus(context);
 
-     if (prefs.idPlayer == '1' || prefs.idLogin == '9' /*COAV login*/)
+    if (prefs.idPlayer == '1' || prefs.idLogin == '9' /*COAV login*/)
       return drawerVirtualMatch(context);
 
-     if (int.parse(prefs.idPlayer) > 1)
-       return drawerUser(context);
+    if (int.parse(prefs.idPlayer) > 1) return drawerUser(context);
   }
 
   Drawer drawerAnonimus(BuildContext context) {
@@ -456,6 +455,15 @@ class DrawerMenu extends StatelessWidget {
                 imageNetworkUrl: IMAGE_DEFAULT, sizeImage: Size.fromWidth(30)),
             '      Crear Torneo ',
             () => navegation(context, TourmentAllPage())),
+        CustomListTile(
+            Image.asset(
+              'assets/image/podio.png',
+              //scale: 0.4,
+              width: 30,
+              height: 30,
+            ),
+            '       Crear 11 Vs. 11',
+            () => navegation(context, OnceVsOncePage())),
         CustomListTile(
             Image.asset(
               'assets/image/mensajeria.png',
