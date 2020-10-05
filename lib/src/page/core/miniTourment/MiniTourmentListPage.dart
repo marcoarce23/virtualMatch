@@ -50,7 +50,7 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
 
     return Scaffold(
       key: scaffoldKey,
-  //    appBar: appBar('MIS TORNEOS'),
+      //    appBar: appBar('MIS TORNEOS'),
       drawer: DrawerMenu(),
       body: SafeArea(
         child: Container(
@@ -187,7 +187,7 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
 
               break;
             case 2:
-              _start(keyId, entity.idTipoModalidad.toString());
+              _start(keyId, entity.idTipoCompeticion.toString());
               break;
             case 3:
               entityModel.states = StateEntity.Update;
@@ -224,7 +224,6 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
     }
     return lista;
   }
-
 
   _executeInscription(String idTorneo, String idJugador) async {
     print('ENTROSSSS $idTorneo y $idJugador');
@@ -301,8 +300,7 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
         size: 20,
       ),
       onTap: () {
-        setState(() {
-        });
+        setState(() {});
       },
     );
   }
@@ -316,14 +314,13 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
         size: 20,
       ),
       onTap: () {
-        setState(() {
-         });
+        setState(() {});
       },
     );
   }
 
   _start(String keyId, String modalidad) {
-    if (modalidad == '0')
+    if (modalidad == '27')
       _executeGenerator('/api/Torneo/execGenerarPlayOff/' +
           keyId +
           '/usuario/' +
