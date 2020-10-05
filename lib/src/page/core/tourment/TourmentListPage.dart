@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:getwidget/components/button/gf_button.dart';
-import 'package:getwidget/shape/gf_button_shape.dart';
+
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/ListadoTorneoModel.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/JugadorModel.dart';
@@ -87,7 +86,7 @@ class _TourmentListPageState extends State<TourmentListPage> {
           ),
         ),
       ),
-       floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
+      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }
@@ -153,12 +152,12 @@ class _TourmentListPageState extends State<TourmentListPage> {
     //Text(entity.nombreEquipo);
   }
 
-   Widget _simplePopup(ListaTorneoModel entity, String keyId) =>
+  Widget _simplePopup(ListaTorneoModel entity, String keyId) =>
       PopupMenuButton<int>(
         itemBuilder: (context) => [
           PopupMenuItem(
             value: 1,
-            child: Text("Participantes"),
+            child: Text("Registrar Participantes"),
           ),
           PopupMenuItem(
             value: 2,
@@ -179,7 +178,7 @@ class _TourmentListPageState extends State<TourmentListPage> {
             case 1:
               navegation(
                   context,
-                  PlayerSelectionPage(
+                  PlayerSelectionVMPage(
                       idTorneo: entity.idTorneo,
                       torneo: entity.nombreTorneo,
                       competicion: entity.tipoCompeticion,
@@ -187,7 +186,7 @@ class _TourmentListPageState extends State<TourmentListPage> {
 
               break;
             case 2:
-              _start(keyId, entity.idTipoModalidad.toString());
+              _start(keyId, entity.idTipoCompeticion.toString());
               break;
             case 3:
               entityModel.states = StateEntity.Update;
@@ -212,7 +211,7 @@ class _TourmentListPageState extends State<TourmentListPage> {
         offset: Offset(0, 100),
       );
 
- List<DropdownMenuItem<String>> getDropDown(AsyncSnapshot snapshot) {
+  List<DropdownMenuItem<String>> getDropDown(AsyncSnapshot snapshot) {
     List<DropdownMenuItem<String>> lista = new List();
 
     for (var i = 0; i < snapshot.data.length; i++) {
@@ -224,7 +223,6 @@ class _TourmentListPageState extends State<TourmentListPage> {
     }
     return lista;
   }
-
 
   _executeInscription(String idTorneo, String idJugador) async {
     print('ENTROSSSS $idTorneo y $idJugador');
@@ -248,33 +246,6 @@ class _TourmentListPageState extends State<TourmentListPage> {
     } catch (error) {
       showSnackbar('Usuario registrado !!!', scaffoldKey);
     }
-  }
-
-  Widget _showAction(ListaTorneoModel entity, String keyId) {
-    return Column(
-      children: <Widget>[
-        Row(
-          children: [
-            Text('OPERACIONES: $keyId',
-                style: TextStyle(color: AppTheme.themeWhite)),
-            sizedBox(10, 0),
-            _update(),
-            sizedBox(10, 0),
-            _delete(keyId),
-          ],
-        ),
-        sizedBox(0, 10),
-        Row(
-          children: [
-            Text('$keyId', style: TextStyle(color: AppTheme.themeWhite)),
-            sizedBox(10, 0),
-            //    _complete(keyId),
-            // sizedBox(10, 0),
-            _start(keyId, entity.idTipoModalidad.toString()),
-          ],
-        ),
-      ],
-    );
   }
 
   _update() {
@@ -301,8 +272,7 @@ class _TourmentListPageState extends State<TourmentListPage> {
         size: 20,
       ),
       onTap: () {
-        setState(() {
-        });
+        setState(() {});
       },
     );
   }
@@ -316,14 +286,14 @@ class _TourmentListPageState extends State<TourmentListPage> {
         size: 20,
       ),
       onTap: () {
-        setState(() {
-         });
+        setState(() {});
       },
     );
   }
 
   _start(String keyId, String modalidad) {
-    if (modalidad == '0')
+    print('MODALIDADDD: $modalidad');
+    if (modalidad == '27')
       _executeGenerator('/api/Torneo/execGenerarPlayOff/' +
           keyId +
           '/usuario/' +

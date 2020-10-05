@@ -25,75 +25,75 @@ import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/model/util/Validator.dart' as validator;
 import 'package:virtual_match/src/widget/image/ImageWidget.dart';
 
-class TourmentAllPage extends StatefulWidget {
-  static final String routeName = 'tourment';
-  const TourmentAllPage({Key key}) : super(key: key);
+// class TourmentAllPage extends StatefulWidget {
+//   static final String routeName = 'tourment';
+//   const TourmentAllPage({Key key}) : super(key: key);
 
-  @override
-  _TourmentAllPageState createState() => _TourmentAllPageState();
-}
+//   @override
+//   _TourmentAllPageState createState() => _TourmentAllPageState();
+// }
 
-class _TourmentAllPageState extends State<TourmentAllPage> {
-  int page = 0;
-  final prefs = new Preferense();
-  final List<Widget> optionPage = [
-    TourmentLoadPage(),
-    FormatLoadPage(),
-    TourmentListPage()
-  ];
+// class _TourmentAllPageState extends State<TourmentAllPage> {
+//   int page = 0;
+//   final prefs = new Preferense();
+//   final List<Widget> optionPage = [
+//     TourmentLoadPage(),
+//     FormatLoadPage(),
+//     TourmentListPage()
+//   ];
 
-  void _onItemTapped(int index) {
-    setState(() {
-      page = index;
-    });
-  }
+//   void _onItemTapped(int index) {
+//     setState(() {
+//       page = index;
+//     });
+//   }
 
-  @override
-  void initState() {
-    prefs.lastPage = TourmentAllPage.routeName;
-    page = 0;
-    super.initState();
-  }
+//   @override
+//   void initState() {
+//     prefs.lastPage = TourmentAllPage.routeName;
+//     page = 0;
+//     super.initState();
+//   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        elevation: 21.0,
-        backgroundColor: AppTheme.themeDefault,
-        items: [
-          BottomNavigationBarItem(
-              icon: Image.asset(
-                'assets/image/control.png',
-                width: 28,
-                height: 28,
-              ),
-              title: Text('Mi torneo')),
-          BottomNavigationBarItem(
-              icon: Image.asset(
-                'assets/image/pelota.png',
-                width: 28,
-                height: 28,
-              ),
-              title: Text('Mi formato')),
-          BottomNavigationBarItem(
-              icon: Image.asset(
-                'assets/image/penal.png',
-                width: 28,
-                height: 28,
-              ),
-              title: Text('Torneos Virtual Match')),
-        ],
-        currentIndex: page,
-        unselectedItemColor: Colors.purple,
-        selectedItemColor: AppTheme.themeWhite,
-        onTap: _onItemTapped,
-      ),
-      body: optionPage[page],
-      //  ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       bottomNavigationBar: BottomNavigationBar(
+//         elevation: 21.0,
+//         backgroundColor: AppTheme.themeDefault,
+//         items: [
+//           BottomNavigationBarItem(
+//               icon: Image.asset(
+//                 'assets/image/control.png',
+//                 width: 28,
+//                 height: 28,
+//               ),
+//               title: Text('Mi torneo')),
+//           BottomNavigationBarItem(
+//               icon: Image.asset(
+//                 'assets/image/pelota.png',
+//                 width: 28,
+//                 height: 28,
+//               ),
+//               title: Text('Formato')),
+//           BottomNavigationBarItem(
+//               icon: Image.asset(
+//                 'assets/image/penal.png',
+//                 width: 28,
+//                 height: 28,
+//               ),
+//               title: Text('Torneos Virtual Match')),
+//         ],
+//         currentIndex: page,
+//         unselectedItemColor: Colors.purple,
+//         selectedItemColor: AppTheme.themeWhite,
+//         onTap: _onItemTapped,
+//       ),
+//       body: optionPage[page],
+//       //  ),
+//     );
+//   }
+// }
 
 class TourmentLoadPage extends StatefulWidget {
   static final String routeName = 'tourmnetLoad';

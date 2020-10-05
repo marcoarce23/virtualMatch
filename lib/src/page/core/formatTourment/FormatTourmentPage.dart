@@ -63,23 +63,26 @@ class _TourmentAllPageState extends State<TourmentAllPage> {
         backgroundColor: AppTheme.themeDefault,
         items: [
           BottomNavigationBarItem(
-              icon: FaIcon(
-                FontAwesomeIcons.bell,
-                size: 25,
+              icon: Image.asset(
+                'assets/image/control.png',
+                width: 28,
+                height: 28,
               ),
-              title: Text('Torneo')),
+              title: Text('Mi torneo')),
           BottomNavigationBarItem(
-              icon: FaIcon(
-                FontAwesomeIcons.futbol,
-                size: 25,
+              icon: Image.asset(
+                'assets/image/pelota.png',
+                width: 28,
+                height: 28,
               ),
               title: Text('Formato')),
           BottomNavigationBarItem(
-              icon: FaIcon(
-                FontAwesomeIcons.listAlt,
-                size: 25,
+              icon: Image.asset(
+                'assets/image/penal.png',
+                width: 28,
+                height: 28,
               ),
-              title: Text('Listado Torneos')),
+              title: Text('Torneos Virtual Match')),
         ],
         currentIndex: page,
         unselectedItemColor: AppTheme.themeWhite,

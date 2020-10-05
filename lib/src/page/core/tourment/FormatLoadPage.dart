@@ -64,18 +64,6 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
   String _opcionTipoModalidad = '44';
   String _opcionCodTorneo = '0';
 
-  List<String> _cantidad = [
-    '2',
-    '4',
-    '8',
-    '16',
-    '32',
-    '64',
-    '128',
-    '256',
-    '512'
-  ];
-
   @override
   void initState() {
     super.initState();
@@ -86,18 +74,17 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
   @override
   Widget build(BuildContext context) {
     entity.states = StateEntity.Insert;
-      return Scaffold(
+    return Scaffold(
       key: scaffoldKey,
       appBar: appBar('CREACIÓN DEL TORNEO'),
       drawer: DrawerMenu(),
       body: Stack(
         children: <Widget>[
           background(context, 'IMAGE_LOGO'),
-          //  showPictureOval(photo, image, 130.0),
           _form(context),
         ],
       ),
-    floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
+      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }
@@ -139,10 +126,7 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         sizedBox(0.0, 8.0),
-
         _comboCodTroneo(_opcionCodTorneo),
-        //  _comboTorneoCreado(_opcionTipoCompeticion),
-        //_comboJugador(),
         _text(
             controllerCantidad,
             '0',
@@ -155,11 +139,10 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             AppTheme.themePurple),
-
         _comboCompeticion(_opcionTipoCompeticion),
         _comboTorneo(_opcionTipoTorneo),
         _comboModalidad(_opcionTipoModalidad),
-        _porEquipo('Por equipo?'),
+        //     _porEquipo('Por equipo?'),
         _inscription('Torneo de Pago'),
         _selection('Selección Manual'),
         Text(
@@ -216,8 +199,7 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
   Widget _comboCodTroneo(String _opcionCodTorneosss) {
     return Center(
         child: FutureBuilder(
-            future: entityGet1.getId(
-                new ListaTorneoModel(), int.parse('1')),
+            future: entityGet1.getId(new ListaTorneoModel(), int.parse('1')),
             builder: (context, AsyncSnapshot snapshot) {
               if (snapshot.hasData) {
                 return Row(
@@ -242,26 +224,6 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
               }
             }));
   }
-
-  // Widget _comboJugador() {
-  //   return Row(
-  //     children: <Widget>[
-  //       sizedBox(10.0, 0),
-  //       Text('Cantidad Jugadores:'),
-  //       sizedBox(15.0, 0),
-  //       DropdownButton(
-  //         value: typeCount,
-  //         icon: FaIcon(FontAwesomeIcons.sort, color: AppTheme.themePurple),
-  //         items: _count(),
-  //         onChanged: (opt) {
-  //           setState(() {
-  //             typeCount = opt;
-  //           });
-  //         },
-  //       ),
-  //     ],
-  //   );
-  // }
 
   Widget _comboTorneoCreado(String _opcionTipoCompeticionss) {
     return Center(
@@ -410,30 +372,18 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
     return lista;
   }
 
-  // List<DropdownMenuItem<String>> _count() {
-  //   List<DropdownMenuItem<String>> lista = new List();
-
-  //   _cantidad.forEach((cantidad) {
-  //     lista.add(DropdownMenuItem(
-  //       child: Text(cantidad),
-  //       value: cantidad,
-  //     ));
-  //   });
-  //   return lista;
+  // Widget _porEquipo(String text) {
+  //   return SwitchListTile(
+  //     value: isFree,
+  //     title: Text(text),
+  //     subtitle: Text(
+  //         'Habilitar opción si será equipo, caso contrario sera individual'),
+  //     activeColor: AppTheme.themePurple,
+  //     onChanged: (value) => setState(() {
+  //       isFree = value;
+  //     }),
+  //   );
   // }
-
-  Widget _porEquipo(String text) {
-    return SwitchListTile(
-      value: isFree,
-      title: Text(text),
-      subtitle: Text(
-          'Habilitar opción si será equipo, caso contrario sera individual'),
-      activeColor: AppTheme.themePurple,
-      onChanged: (value) => setState(() {
-        isFree = value;
-      }),
-    );
-  }
 
   Widget _inscription(String text) {
     return SwitchListTile(
@@ -485,11 +435,17 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
   }
 
   void loadingEntity() {
+    int intFree = 0;
+    int intManual = 0;
+
+    if (isFree) intFree = 1;
+    if (isManual) intManual = 1;
+
     entity.idTorneo = int.parse(_opcionCodTorneo);
     entity.idTipoCompeticion = int.parse(_opcionTipoCompeticion);
     entity.idaTipoTorneo = int.parse(_opcionTipoTorneo);
-    entity.idaInscripcion = 1;
-    entity.idaAsignacion = 1;
+    entity.idaInscripcion = intFree;
+    entity.idaAsignacion = intManual;
     entity.cantidadJugadores = int.parse(controllerCantidad.text);
     entity.idaTipoModalidad = int.parse(_opcionTipoModalidad);
     entity.usuarioAuditoria = prefs.email;
