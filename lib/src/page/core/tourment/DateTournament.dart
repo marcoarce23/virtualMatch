@@ -3,6 +3,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/ListaFechasTorneo.dart';
+import 'package:virtual_match/src/model/entity/EntityMap/ChangeDate.dart';
+import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/core/TournamentService.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
@@ -99,7 +101,7 @@ class _DateTournamentState extends State<DateTournament> {
       children: <Widget>[
         InkWell(
           onTap: () {
-            _selectDate(context);
+            _selectDate(context, entity.id, int.parse(entity.torneo));
           },
           child: CardVM(
             size: 100,
@@ -117,7 +119,8 @@ class _DateTournamentState extends State<DateTournament> {
                       fontWeight: FontWeight.bold,
                       fontSize: 15,
                       color: AppTheme.themeWhite)),
-              Text('Fecha: ${(new DateFormat.yMMMMd('es_BO').format(entity.fecha) ) ?? 'N/A'}',
+              Text(
+                  'Fecha: ${(new DateFormat.yMMMMd('es_BO').format(entity.fecha)) ?? 'N/A'}',
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 15,
@@ -129,7 +132,28 @@ class _DateTournamentState extends State<DateTournament> {
     );
   }
 
-  _selectDate(BuildContext context) async {
+  void _cambiarFecha(int identificador, int torneo, DateTime fecha) async {
+    ChangeDate entity = ChangeDate();
+
+    entity.fecha = fecha;
+    entity.idTorneo = torneo;
+    entity.idJugador = 1;
+    entity.identificador = identificador;
+
+    try {
+      await entityService.cambiarFechasTorneo(entity).then((result) {
+        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
+        if (result["tipo_mensaje"] == '0')
+          showSnackbar(result["mensaje"], scaffoldKey);
+        else
+          showSnackbar(result["mensaje"], scaffoldKey);
+      });
+    } catch (error) {
+      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
+    }
+  }
+
+  _selectDate(BuildContext context, int identificador, int torneo) async {
     DateTime picked = await showDatePicker(
         context: context,
         initialDate: new DateTime.now(),
@@ -139,11 +163,21 @@ class _DateTournamentState extends State<DateTournament> {
 
     if (picked != null) {
       setState(() {
+        _fecha = DateFormat("dd/MM/yyyy").format(picked);
+        _inputFieldDateController.text = _fecha;
+        //print(_inputFieldDateController.text);
+      });
+    }
+
+    if (picked != null) {
+      setState(() {
+        _cambiarFecha(identificador, torneo, picked);
         _fecha = DateFormat("yyyy-MM-dd").format(picked);
         _inputFieldDateController.text = _fecha;
-        showDialog(
-            context: context,
-            child: AlertDialog(content: Text('se cerro ${_fecha.toString()}')));
+
+        // showDialog(
+        //     context: context,
+        //     child: AlertDialog(content: Text('se cerro ${_fecha.toString()}')));
       });
     }
   }
