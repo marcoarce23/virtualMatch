@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
+import 'package:virtual_match/src/page/core/tourment/DateTournament.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
@@ -123,7 +124,7 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
         CardVM(
           size: 170,
           imageAssets: 'assets/icono3.png',
-          opciones: _simplePopup(entity.idTorneo.toString()),
+          opciones: _simplePopup(entity.idTorneo.toString(), context),
           accesosRapidos: null,
           listWidgets: [
             Text('TORNEO: ${entity.nombreTorneo}',
@@ -238,8 +239,13 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
     }
   }
 
-  Widget _simplePopup(String idTorneo) => PopupMenuButton<int>(
+  Widget _simplePopup(String idTorneo, BuildContext context) =>
+      PopupMenuButton<int>(
         itemBuilder: (context) => [
+          PopupMenuItem(
+            value: 0,
+            child: Text("Fechas del torneo"),
+          ),
           PopupMenuItem(
             value: 1,
             child: Text("Ver detalle"),
@@ -258,6 +264,14 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
         },
         onSelected: (value) {
           switch (value) {
+            case 0:
+              navegation(
+                  context,
+                  DateTournament(
+                    idTorneo: int.parse(idTorneo),
+                    idJugador: prefs.idJugador,
+                  ));
+              break;
             case 1:
               _detail(idTorneo);
               break;

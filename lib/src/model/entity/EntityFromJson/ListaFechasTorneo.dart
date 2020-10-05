@@ -18,6 +18,6 @@ class ListaFechasTorneo implements IEntityJson {
         id: json["id"],
         nrO_FECHA: json["nrO_FECHA"],
         torneo: json["torneo"],
-        fecha: json["fecha"],
+        fecha: DateTime.parse(json["fecha"]),
       );
 }

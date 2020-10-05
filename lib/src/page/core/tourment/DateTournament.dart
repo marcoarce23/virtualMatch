@@ -117,7 +117,7 @@ class _DateTournamentState extends State<DateTournament> {
                       fontWeight: FontWeight.bold,
                       fontSize: 15,
                       color: AppTheme.themeWhite)),
-              Text('Fecha: ${(entity.fecha) ?? 'N/A'}',
+              Text('Fecha: ${(new DateFormat.yMMMMd('es_BO').format(entity.fecha) ) ?? 'N/A'}',
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 15,
