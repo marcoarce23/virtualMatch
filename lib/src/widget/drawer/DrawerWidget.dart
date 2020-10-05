@@ -317,6 +317,13 @@ class DrawerMenu extends StatelessWidget {
             ),
             '      Crear MiniTorneo',
             () => navegation(context, MiniTourmentAllPage())),
+        
+         CustomListTile(
+            ImageOvalNetwork(
+                imageNetworkUrl: IMAGE_DEFAULT, sizeImage: Size.fromWidth(30)),
+            '      Crear Torneo ',
+            () => navegation(context, TourmentAllPage())),
+
         CustomListTile(
             ImageOvalNetwork(
                 imageNetworkUrl: IMAGE_LOGO, sizeImage: Size.fromWidth(35)),
@@ -462,6 +469,13 @@ class DrawerMenu extends StatelessWidget {
             ),
             '      Crear MiniTorneo',
             () => navegation(context, MiniTourmentAllPage())),
+        
+          CustomListTile(
+            ImageOvalNetwork(
+                imageNetworkUrl: IMAGE_DEFAULT, sizeImage: Size.fromWidth(30)),
+            '      Crear Torneo ',
+            () => navegation(context, TourmentAllPage())), 
+
         CustomListTile(
             ImageOvalNetwork(
                 imageNetworkUrl: IMAGE_DEFAULT, sizeImage: Size.fromWidth(30)),

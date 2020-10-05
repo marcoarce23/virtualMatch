@@ -57,24 +57,32 @@ class _TourmentAllPageState extends State<TourmentAllPage> {
 
   @override
   Widget build(BuildContext context) {
-    return
-          Scaffold(
+    return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         elevation: 21.0,
         backgroundColor: AppTheme.themeDefault,
         items: [
           BottomNavigationBarItem(
-              icon: FaIcon(
-                FontAwesomeIcons.newspaper,
-                size: 25,
+              icon: Image.asset(
+                'assets/image/control.png',
+                width: 28,
+                height: 28,
               ),
-              title: Text('Noticias')),
+              title: Text('Mi torneo')),
           BottomNavigationBarItem(
-              icon: FaIcon(
-                FontAwesomeIcons.paperPlane,
-                size: 25,
+              icon: Image.asset(
+                'assets/image/pelota.png',
+                width: 28,
+                height: 28,
               ),
-              title: Text('Listado Noticias')),
+              title: Text('Mi formato')),
+          BottomNavigationBarItem(
+              icon: Image.asset(
+                'assets/image/penal.png',
+                width: 28,
+                height: 28,
+              ),
+              title: Text('Torneos Virtual Match')),
         ],
         currentIndex: page,
         unselectedItemColor: Colors.purple,
@@ -157,7 +165,7 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
           _form(context),
         ],
       ),
-      floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
+      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }

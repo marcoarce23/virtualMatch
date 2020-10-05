@@ -86,9 +86,7 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
   @override
   Widget build(BuildContext context) {
     entity.states = StateEntity.Insert;
-    // entityService = Provider.of<CrudService>(context);
-
-    return Scaffold(
+      return Scaffold(
       key: scaffoldKey,
       appBar: appBar('CREACIÓN DEL TORNEO'),
       drawer: DrawerMenu(),
@@ -99,7 +97,7 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
           _form(context),
         ],
       ),
-      floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
+    floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }
@@ -218,7 +216,8 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
   Widget _comboCodTroneo(String _opcionCodTorneosss) {
     return Center(
         child: FutureBuilder(
-            future: entityGet1.get1(new ListaTorneoModel(), prefs.idJugador),
+            future: entityGet1.getId(
+                new ListaTorneoModel(), int.parse('1')),
             builder: (context, AsyncSnapshot snapshot) {
               if (snapshot.hasData) {
                 return Row(
@@ -244,25 +243,25 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
             }));
   }
 
-  Widget _comboJugador() {
-    return Row(
-      children: <Widget>[
-        sizedBox(10.0, 0),
-        Text('Cantidad Jugadores:'),
-        sizedBox(15.0, 0),
-        DropdownButton(
-          value: typeCount,
-          icon: FaIcon(FontAwesomeIcons.sort, color: AppTheme.themePurple),
-          items: _count(),
-          onChanged: (opt) {
-            setState(() {
-              typeCount = opt;
-            });
-          },
-        ),
-      ],
-    );
-  }
+  // Widget _comboJugador() {
+  //   return Row(
+  //     children: <Widget>[
+  //       sizedBox(10.0, 0),
+  //       Text('Cantidad Jugadores:'),
+  //       sizedBox(15.0, 0),
+  //       DropdownButton(
+  //         value: typeCount,
+  //         icon: FaIcon(FontAwesomeIcons.sort, color: AppTheme.themePurple),
+  //         items: _count(),
+  //         onChanged: (opt) {
+  //           setState(() {
+  //             typeCount = opt;
+  //           });
+  //         },
+  //       ),
+  //     ],
+  //   );
+  // }
 
   Widget _comboTorneoCreado(String _opcionTipoCompeticionss) {
     return Center(
@@ -411,17 +410,17 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
     return lista;
   }
 
-  List<DropdownMenuItem<String>> _count() {
-    List<DropdownMenuItem<String>> lista = new List();
+  // List<DropdownMenuItem<String>> _count() {
+  //   List<DropdownMenuItem<String>> lista = new List();
 
-    _cantidad.forEach((cantidad) {
-      lista.add(DropdownMenuItem(
-        child: Text(cantidad),
-        value: cantidad,
-      ));
-    });
-    return lista;
-  }
+  //   _cantidad.forEach((cantidad) {
+  //     lista.add(DropdownMenuItem(
+  //       child: Text(cantidad),
+  //       value: cantidad,
+  //     ));
+  //   });
+  //   return lista;
+  // }
 
   Widget _porEquipo(String text) {
     return SwitchListTile(
@@ -491,7 +490,7 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
     entity.idaTipoTorneo = int.parse(_opcionTipoTorneo);
     entity.idaInscripcion = 1;
     entity.idaAsignacion = 1;
-    entity.cantidadJugadores = int.parse(typeCount);
+    entity.cantidadJugadores = int.parse(controllerCantidad.text);
     entity.idaTipoModalidad = int.parse(_opcionTipoModalidad);
     entity.usuarioAuditoria = prefs.email;
   }
