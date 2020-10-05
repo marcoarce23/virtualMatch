@@ -138,6 +138,35 @@ GFCard gfCard(String textButton, String textContext, String textTitle,
   );
 }
 
+GFCard gfCardAdvancedPlus2(
+    String textContext,
+    Widget textTitle,
+    Widget textSubTitle,
+    Widget textdescription,
+    Widget textDirigido,
+    Widget textDate,
+    Widget avatar,
+    Widget icon,
+    double elevation,
+    String imgURL,
+    Color color) {
+  return GFCard(
+    boxFit: BoxFit.cover,
+    image: Image.network(imgURL),
+    border: Border.all(color: color, width: 2.0, style: BorderStyle.solid),
+    elevation: elevation,
+    content: Column(
+      children: <Widget>[
+        textTitle,
+        textSubTitle,
+        textdescription,
+        avatar,
+        icon,
+      ],
+    ),
+  );
+}
+
 GFCard gfCardAdvancedPlus(
     String textContext,
     Widget textTitle,
