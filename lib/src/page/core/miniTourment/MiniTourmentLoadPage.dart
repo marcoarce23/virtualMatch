@@ -359,10 +359,7 @@ class _MiniTourmentLoadPageState extends State<MiniTourmentLoadPage> {
         enableInteractiveSelection: false,
         controller: _inputFieldDateController,
         decoration: InputDecoration(
-            // border: OutlineInputBorder(
-            //   borderRadius: BorderRadius.circular(20.0)
-            // ),
-            hintText: text,
+              hintText: text,
             labelText: text,
             //    suffixIcon: Icon(Icons.perm_contact_calendar),
             icon: FaIcon(FontAwesomeIcons.calendarAlt,

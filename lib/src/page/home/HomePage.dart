@@ -86,15 +86,11 @@ class _HomePageState extends State<HomePage> {
                     entity.foto),
               ),
               Positioned(
-                bottom: 18,
-                right: 15,
+                top: 25,
+                right: 50,
                 child: Opacity(
-                  opacity: 0.6,
-                  child: Image.network(
-                    IMAGE_LOGO,
-                    height: 40,
-                    width: 40,
-                  ),
+                  opacity: 0.5,
+                  child:avatarCircle(IMAGE_LOGOB,25),
                 ),
               ),
             ],
