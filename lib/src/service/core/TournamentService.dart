@@ -1,5 +1,6 @@
 import 'package:virtual_match/src/api/DataMap.dart';
 import 'package:virtual_match/src/api/core/tourment/ApiGet.dart';
+import 'package:virtual_match/src/model/entity/EntityMap/ChangeDate.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/api/core/tourment/ApiAdd.dart';
 import 'package:virtual_match/src/api/core/tourment/ApiUpdate.dart';
@@ -161,5 +162,15 @@ class TourmentService {
     isLoading = false;
     //notifyListeners();
     return _result;
+  }
+
+  Future<Map<String, dynamic>> cambiarFechasTorneo(ChangeDate fechas) async {
+    var result;
+    isLoading = true;
+
+    result = await _apiAdd.changeDate(fechas);
+    isLoading = false;
+    //  notifyListeners();
+    return result;
   }
 }

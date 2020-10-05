@@ -138,40 +138,20 @@ GFCard gfCard(String textButton, String textContext, String textTitle,
   );
 }
 
-GFCard gfCardAdvanced(
-    String textButton,
-    String textContext,
-    String textTitle,
-    String textSubTitle,
-    double elevation,
-    Widget avatar,
-    Function iconFuction,
-    Function onPressed) {
+GFCard gfCardAdvanced(String textContext, String textTitle, String textSubTitle,
+    double elevation, String imgURL) {
   return GFCard(
     boxFit: BoxFit.cover,
-    image: Image.network(IMAGE_LOGO),
+    image: Image.network(imgURL),
     border:
         Border.all(color: Colors.black, width: 2.0, style: BorderStyle.solid),
     elevation: elevation,
     title: GFListTile(
         title: Text(textTitle),
         subTitle: Text(textSubTitle),
-        avatar: avatar,
-        icon: GFIconButton(
-          onPressed: iconFuction,
-          icon: Icon(Icons.favorite_border),
-          type: GFButtonType.transparent,
-        )),
+        avatar: null,
+        icon: null),
     content: Text(textContext),
-    buttonBar: GFButtonBar(
-      alignment: WrapAlignment.start,
-      children: <Widget>[
-        GFButton(
-          onPressed: onPressed,
-          text: textButton,
-        ),
-      ],
-    ),
   );
 }
 
@@ -306,7 +286,7 @@ GFAvatar avatarSquare(String image, double size) {
 GFAvatar avatarCircle(String image, double size) {
   return GFAvatar(
     backgroundImage: NetworkImage(image),
-    backgroundColor: AppTheme.themePurple,//Colors.white,
+    backgroundColor: AppTheme.themePurple, //Colors.white,
     foregroundColor: Colors.black,
     shape: GFAvatarShape.circle,
     size: size,
@@ -317,7 +297,7 @@ GFAvatar avatarCircleDefault(String image, double size) {
   return GFAvatar(
     backgroundImage: NetworkImage(image),
     backgroundColor: AppTheme.themeDefault,
-   // foregroundColor: Colors.black,
+    // foregroundColor: Colors.black,
     shape: GFAvatarShape.circle,
     size: size,
   );
