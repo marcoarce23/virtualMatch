@@ -109,12 +109,12 @@ class _DateTournamentState extends State<DateTournament> {
             opciones: null,
             accesosRapidos: null,
             listWidgets: [
-              Text('Nro: ${entity.nrO_FECHA}',
+              Text('Fecha: ${entity.nrO_FECHA}',
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 15,
                       color: AppTheme.themeWhite)),
-              Text('Torneo: ${entity.torneo}',
+              Text('Torneo: ${entity.detalle}',
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 15,
@@ -132,12 +132,12 @@ class _DateTournamentState extends State<DateTournament> {
     );
   }
 
-  void _cambiarFecha(int identificador, int torneo, DateTime fecha) async {
+  void _cambiarFecha(int identificador, int torneo, String fecha) async {
     ChangeDate entity = ChangeDate();
 
     entity.fecha = fecha;
     entity.idTorneo = torneo;
-    entity.idJugador = 1;
+    entity.idJugador = prefs.idJugador;
     entity.identificador = identificador;
 
     try {
@@ -163,21 +163,9 @@ class _DateTournamentState extends State<DateTournament> {
 
     if (picked != null) {
       setState(() {
-        _fecha = DateFormat("dd/MM/yyyy").format(picked);
+        _cambiarFecha(
+            identificador, torneo, DateFormat('yyyy-MM-dd').format(picked));
         _inputFieldDateController.text = _fecha;
-        //print(_inputFieldDateController.text);
-      });
-    }
-
-    if (picked != null) {
-      setState(() {
-        _cambiarFecha(identificador, torneo, picked);
-        _fecha = DateFormat("yyyy-MM-dd").format(picked);
-        _inputFieldDateController.text = _fecha;
-
-        // showDialog(
-        //     context: context,
-        //     child: AlertDialog(content: Text('se cerro ${_fecha.toString()}')));
       });
     }
   }

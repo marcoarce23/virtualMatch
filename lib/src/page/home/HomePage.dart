@@ -12,6 +12,7 @@ import 'package:virtual_match/src/widget/bottonNavigationBar/BottonNavigatorWidg
 import 'package:virtual_match/src/widget/carousel/CarouselWidget.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
+import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 import 'package:virtual_match/src/widget/menu/bottomMenu.dart';
 
 class HomePage extends StatefulWidget {
@@ -46,15 +47,16 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget futureBuilderNoticias(BuildContext context, int grupo) {
-    List<CarouselSimpleModel> lista = new List();
     return FutureBuilder(
         future: entityGet.get(new NoticiaEventoModel()),
         builder: (context, AsyncSnapshot snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
-              return Container();
+              return loading();
               break;
             default:
+              return listView(grupo, context, snapshot);
+            /*
               List lis = snapshot.data;
 
               for (var i = 0; i < lis.length; i++) {
@@ -77,8 +79,32 @@ class _HomePageState extends State<HomePage> {
 
               return CarouselSimple(
                   lista, AppTheme.themePurple, AppTheme.themeWhite);
+                  */
+
           }
         });
+  }
+
+  Widget listView(int grupo, BuildContext context, AsyncSnapshot snapshot) {
+    return ListView.builder(
+      shrinkWrap: true,
+      scrollDirection: Axis.vertical,
+      physics: ClampingScrollPhysics(),
+      itemCount: snapshot.data.length,
+      itemBuilder: (context, index) {
+        NoticiaEventoModel entity = snapshot.data[index];
+        if (entity.tipo == grupo) {
+          return gfCardAdvanced(
+              "Publicado en fecha ${entity.fecha}",
+              "Titulo:  ${entity.titulo}",
+              "Dirigido a: ${entity.dirigidoa} \n Descripción: ${entity.dirigidoa}",
+              2,
+              entity.foto);
+        } else {
+          return Container();
+        }
+      },
+    );
   }
 
   @override
@@ -103,11 +129,16 @@ class _HomePageState extends State<HomePage> {
             child: Column(
               children: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     SizedBox(width: 10.0),
                     //  FaIcon(FontAwesomeIcons.male, color: AppTheme.themeVino),
                     SizedBox(width: 5.0),
-                    Text('Noticias'),
+                    Text('Noticias',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                            color: AppTheme.themeWhite)),
                     Radio(
                       value: 0,
                       groupValue: _group,
@@ -118,7 +149,11 @@ class _HomePageState extends State<HomePage> {
                         });
                       },
                     ),
-                    Text('Eventos'),
+                    Text('Eventos',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                            color: AppTheme.themeWhite)),
                     Radio(
                       value: 1,
                       groupValue: _group,
@@ -129,7 +164,12 @@ class _HomePageState extends State<HomePage> {
                         });
                       },
                     ),
-                    Text('Multimedia'),
+                    /*
+                    Text('Multimedia',
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 13,
+                            color: AppTheme.themeWhite)),
                     Radio(
                       value: 2,
                       groupValue: _group,
@@ -139,50 +179,11 @@ class _HomePageState extends State<HomePage> {
                           _group = T;
                         });
                       },
-                    ),
+                    ),*/
                   ],
                 ),
-                Center(
-                  child: Container(
-                    width: MediaQuery.of(context).size.width * 0.75,
-                    child: futureBuilderNoticias(context, _group),
-                  ),
-                ),
+                futureBuilderNoticias(context, _group),
                 sizedBox(0, 10),
-                /*
-                CardVM(
-                  size: 150,
-                  imageAssets: 'assets/icono3.png',
-                  opciones: _simplePopup(),
-                  accesosRapidos: xxxx(),
-                  listWidgets: [
-                    Text(
-                      "xxxxx",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    Text(
-                      "sdasdasd",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    Text(
-                      "dsdfsdf",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    Text(
-                      "asdasdasd",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    Text(
-                      "asdasdasd",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    Text(
-                      "asdasdasd",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ],
-                ),
-                */
               ],
             ),
           ),
@@ -191,90 +192,5 @@ class _HomePageState extends State<HomePage> {
         bottomNavigationBar: new BottonNavigation(),
       ),
     );
-  }
-
-  List<Widget> xxxx() {
-    return [
-      sizedBox(30, 0),
-      InkWell(
-          child: FaIcon(
-            FontAwesomeIcons.whatsapp,
-            color: AppTheme.themeWhite,
-            size: 35,
-          ),
-          onTap: () {
-            print('ss');
-          }),
-      sizedBox(30, 0),
-      InkWell(
-          child: FaIcon(
-            FontAwesomeIcons.whatsapp,
-            color: AppTheme.themeWhite,
-            size: 35,
-          ),
-          onTap: () {
-            print('ss');
-          }),
-      sizedBox(30, 0),
-      InkWell(
-          child: FaIcon(
-            FontAwesomeIcons.whatsapp,
-            color: AppTheme.themeWhite,
-            size: 35,
-          ),
-          onTap: () {
-            print('ss');
-          }),
-    ];
-  }
-
-  Widget _simplePopup() => PopupMenuButton<int>(
-        itemBuilder: (context) => [
-          PopupMenuItem(
-            value: 1,
-            child: Text("Ver detalle"),
-          ),
-          PopupMenuItem(
-            value: 2,
-            child: Text("Inscribirse al torneo"),
-          ),
-          PopupMenuItem(
-            value: 3,
-            child: Text("Salir del torneo"),
-          ),
-        ],
-        onCanceled: () {
-          print("You have canceled the menu.");
-        },
-        onSelected: (value) {
-          switch (value) {
-            case 1:
-              showSnackbarWithOutKey("No hay opcion seleccionada", context);
-              break;
-            case 2:
-              showSnackbarWithOutKey("No hay opcion seleccionada", context);
-              break;
-            case 3:
-              showSnackbarWithOutKey("No hay opcion seleccionada", context);
-              break;
-            default:
-              showSnackbarWithOutKey("No hay opcion seleccionada", context);
-              break;
-          }
-        },
-        icon: Icon(
-          Icons.menu,
-          color: Colors.white,
-        ),
-        offset: Offset(0, 100),
-      );
-
-  Positioned menu() {
-    Size tamanioPantalla = MediaQuery.of(context).size;
-    return Positioned(
-        bottom: 35,
-        child: Container(
-            width: tamanioPantalla.width,
-            child: Align(alignment: Alignment.center, child: BottomMenu())));
   }
 }

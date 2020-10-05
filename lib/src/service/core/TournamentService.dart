@@ -168,8 +168,6 @@ class TourmentService {
     var result;
     isLoading = true;
 
-    fechas.fecha = DateTime.now();
-
     result = await _apiAdd.changeDate(fechas);
     isLoading = false;
     //  notifyListeners();

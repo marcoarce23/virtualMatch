@@ -19,6 +19,7 @@ class ApiAdd {
   }
 
   Future<Map<String, dynamic>> changeDate(IEntityMap entity) async {
+    print(entity.toJson());
     String _body = json.encode(entity.toJson());
     print('body: $_body');
     final apiRest = api['updateFecha'][0]

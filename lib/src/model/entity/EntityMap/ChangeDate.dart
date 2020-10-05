@@ -6,7 +6,7 @@ class ChangeDate implements IEntityMap {
   int identificador;
   int idTorneo;
   int idJugador;
-  DateTime fecha;
+  String fecha;
 
   ChangeDate({
     this.states = StateEntity.None,
