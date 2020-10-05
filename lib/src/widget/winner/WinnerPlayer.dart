@@ -1,4 +1,6 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/image/imageOvalWidget.dart';
 import 'package:virtual_match/src/widget/util/Util.dart';
@@ -26,40 +28,50 @@ class WinnerPlayer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white70,
+          borderRadius: BorderRadius.circular(10),
+        ),
         width: MediaQuery.of(context).size.width - 75,
         height: 170,
         child: Stack(
           children: <Widget>[
             Positioned(
-              left: (MediaQuery.of(context).size.width / 2) - 100,
+              //left: (MediaQuery.of(context).size.width / 2) - 130,
               top: 0,
-              child: Center(
-                child: Text(
-                  nombreTorneo.toUpperCase(),
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: AppTheme.themeWhite,
+              child: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: Center(
+                    child: Shimmer.fromColors(
+                  baseColor: AppTheme.themeDefault,
+                  highlightColor: AppTheme.themePurple,
+                  child: AutoSizeText(
+                    nombreTorneo.toUpperCase(),
+                    maxLines: 2,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 20.0,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                  textAlign: TextAlign.center,
-                ),
+                )),
               ),
             ),
-
             Positioned(
                 left: (MediaQuery.of(context).size.width / 2) - 150,
-                top: 25,
+                top: 35,
                 height: 68,
                 width: 68,
                 child: _cardJugador(false, url3erGanador)), // 3er lugar
             Positioned(
                 left: (MediaQuery.of(context).size.width / 2) - 20,
-                top: 20,
+                top: 30,
                 height: 90,
                 width: 90,
                 child: _cardJugador(false, url2doGanador)), // 2do lugar
             Positioned(
                 left: (MediaQuery.of(context).size.width / 2) - 100,
-                top: 20,
+                top: 30,
                 height: 110,
                 width: 110,
                 child: _cardJugador(true, url1erGanador)), // 1erlugar
@@ -71,10 +83,17 @@ class WinnerPlayer extends StatelessWidget {
               width: 80,
               child: Column(
                 children: [
-                  Text(
-                    '3º LUGAR',
-                    style: TextStyle(
-                      color: AppTheme.themeWhite,
+                  Shimmer.fromColors(
+                    baseColor: AppTheme.themeDefault,
+                    highlightColor: AppTheme.themePurple,
+                    child: AutoSizeText(
+                      '3º LUGAR',
+                      maxLines: 2,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 10.0,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                   Text(
@@ -93,10 +112,17 @@ class WinnerPlayer extends StatelessWidget {
                 width: 90,
                 child: Column(
                   children: [
-                    Text(
-                      '2º LUGAR',
-                      style: TextStyle(
-                        color: AppTheme.themeWhite,
+                    Shimmer.fromColors(
+                      baseColor: AppTheme.themeDefault,
+                      highlightColor: AppTheme.themePurple,
+                      child: AutoSizeText(
+                        '2º LUGAR',
+                        maxLines: 2,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 13.0,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                     Text(
@@ -114,10 +140,17 @@ class WinnerPlayer extends StatelessWidget {
                 width: 100,
                 child: Column(
                   children: [
-                    Text(
-                      '1º LUGAR',
-                      style: TextStyle(
-                        color: AppTheme.themeWhite,
+                    Shimmer.fromColors(
+                      baseColor: AppTheme.themeDefault,
+                      highlightColor: AppTheme.themePurple,
+                      child: AutoSizeText(
+                        '1º LUGAR',
+                        maxLines: 2,
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 15.0,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                     Text(
