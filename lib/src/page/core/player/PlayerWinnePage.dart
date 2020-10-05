@@ -70,11 +70,10 @@ class _PlayerWinnerPageState extends State<PlayerWinnerPage> {
                     ],
                   ),
                 ),
-                divider(),
                 sizedBox(0.0, 10.0),
                 futureBuilder(context),
                 sizedBox(0.0, 10.0),
-                divider(),
+
                 /*
                 WinnerPlayer(
                   nombreTorneo: 'Los gatos rabiosos',
