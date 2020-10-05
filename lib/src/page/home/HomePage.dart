@@ -57,36 +57,12 @@ class _HomePageState extends State<HomePage> {
               break;
             default:
               return listView(grupo, context, snapshot);
-            /*
-              List lis = snapshot.data;
-
-              for (var i = 0; i < lis.length; i++) {
-                NoticiaEventoModel ent = lis[i];
-
-                if (grupo == 0) {
-                  if (ent.tipo == 0) {
-                    CarouselSimpleModel card = CarouselSimpleModel(
-                        imageUrl: ent.foto, textFromImage: ent.titulo);
-                    lista.add(card);
-                  }
-                } else {
-                  if (ent.tipo == 1) {
-                    CarouselSimpleModel card = CarouselSimpleModel(
-                        imageUrl: ent.foto, textFromImage: ent.titulo);
-                    lista.add(card);
-                  }
-                }
-              }
-
-              return CarouselSimple(
-                  lista, AppTheme.themePurple, AppTheme.themeWhite);
-                  */
-
           }
         });
   }
 
   Widget listView(int grupo, BuildContext context, AsyncSnapshot snapshot) {
+    final size = MediaQuery.of(context).size;
     return ListView.builder(
       shrinkWrap: true,
       scrollDirection: Axis.vertical,
@@ -97,12 +73,18 @@ class _HomePageState extends State<HomePage> {
         if (entity.tipo == grupo) {
           return Stack(
             children: [
-              gfCardAdvanced(
-                  "Publicado en fecha ${entity.fecha}",
-                  " ${entity.titulo}",
-                  "Dirigido a: ${entity.dirigidoa} \n Descripción: ${entity.dirigidoa}",
-                  2,
-                  entity.foto),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 0.0),
+                decoration: containerImage2(),
+                width: size.width * 0.94,
+                child: gfCardAdvanced(
+                    context,
+                    "Publicado en fecha ${entity.fecha}",
+                    " ${entity.titulo}",
+                    "Dirigido a: ${entity.dirigidoa} \n Descripción: ${entity.dirigidoa}",
+                    2,
+                    entity.foto),
+              ),
               Positioned(
                 bottom: 18,
                 right: 15,
@@ -157,6 +139,9 @@ class _HomePageState extends State<HomePage> {
                             fontSize: 13,
                             color: AppTheme.themeWhite)),
                     Radio(
+                      activeColor: AppTheme.themeWhite,
+                      focusColor: AppTheme.themePurple,
+                      autofocus: true,
                       value: 0,
                       groupValue: _group,
                       onChanged: (T) {
@@ -172,6 +157,9 @@ class _HomePageState extends State<HomePage> {
                             fontSize: 13,
                             color: AppTheme.themeWhite)),
                     Radio(
+                      activeColor: AppTheme.themeWhite,
+                      focusColor: AppTheme.themePurple,
+                      autofocus: true,
                       value: 1,
                       groupValue: _group,
                       onChanged: (T) {

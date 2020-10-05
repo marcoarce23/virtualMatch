@@ -41,7 +41,7 @@ class _DateTournamentState extends State<DateTournament> {
       body: SingleChildScrollView(
           child: Container(child: bodyContainer(context))),
       drawer: DrawerMenu(),
-      floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
+      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }

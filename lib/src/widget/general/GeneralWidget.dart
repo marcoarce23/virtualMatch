@@ -287,6 +287,23 @@ BoxDecoration containerImage() {
       ]);
 }
 
+
+BoxDecoration containerImage2() {
+  return BoxDecoration(
+      image: new DecorationImage(
+        image: new AssetImage('assets/portada2.png'),
+        fit: BoxFit.cover,
+      ),
+      // color: AppTheme.themeWhite,
+      borderRadius: BorderRadius.circular(8.0),
+      boxShadow: <BoxShadow>[
+        BoxShadow(
+            color: AppTheme.themePurple,
+            blurRadius: 15.0,
+            offset: Offset(2.0, 1.0),
+            spreadRadius: 2.0)
+      ]);
+}
 boxDecoration() {
   return BoxDecoration(
       image: new DecorationImage(

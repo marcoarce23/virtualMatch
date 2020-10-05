@@ -7,6 +7,7 @@ import 'package:shimmer/shimmer.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
+import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 
 final prefs = new Preferense();
 
@@ -166,63 +167,67 @@ GFCard gfCardAdvancedPlus(
   );
 }
 
-GFCard gfCardAdvanced(String textContext, String textTitle, String textSubTitle,
-    double elevation, String imgURL) {
+GFCard gfCardAdvanced(BuildContext context, String textContext,
+    String textTitle, String textSubTitle, double elevation, String imgURL) {
+ 
   return GFCard(
-    boxFit: BoxFit.cover,
-    border:
-        Border.all(color: Colors.black, width: 2.0, style: BorderStyle.solid),
-    elevation: elevation,
-    content: Column(
-      children: [
-        SlideInUp(
-          child: Shimmer.fromColors(
-            baseColor: AppTheme.themeDefault,
-            highlightColor: AppTheme.themePurple,
-            child: AutoSizeText(
-              textTitle,
-              maxLines: 2,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold,
+      color: Colors.black,
+      boxFit: BoxFit.cover,
+      border:
+          Border.all(color: Colors.purple, width: 1.0, style: BorderStyle.solid),
+      elevation: elevation,
+      content: Column(
+        children: [
+          SlideInUp(
+            child: Shimmer.fromColors(
+              baseColor: AppTheme.themeWhite,
+              highlightColor: AppTheme.themePurple,
+              child: AutoSizeText(
+                textTitle,
+                maxLines: 2,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),
-        ),
-        SlideInUp(child: avatarCircle(imgURL, 155)),
-        SlideInUp(
-          child: Shimmer.fromColors(
-            baseColor: AppTheme.themeDefault,
-            highlightColor: AppTheme.themePurple,
-            child: AutoSizeText(
-              textSubTitle,
-              maxLines: 2,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 15.0,
-                fontWeight: FontWeight.bold,
+          divider(),
+          SlideInUp(child: avatarCircle(imgURL, 90)),
+          SlideInUp(
+            child: Shimmer.fromColors(
+              baseColor: AppTheme.themeWhite,
+              highlightColor: AppTheme.themePurple,
+              child: AutoSizeText(
+                textSubTitle,
+                maxLines: 2,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),
-        ),
-        SlideInUp(
-          child: Shimmer.fromColors(
-            baseColor: AppTheme.themeDefault,
-            highlightColor: AppTheme.themePurple,
-            child: AutoSizeText(
-              textContext,
-              maxLines: 1,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 12.0,
-                fontWeight: FontWeight.bold,
+          SlideInUp(
+            child: Shimmer.fromColors(
+              baseColor: AppTheme.themeWhite,
+              highlightColor: AppTheme.themePurple,
+              child: AutoSizeText(
+                textContext,
+                maxLines: 1,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 14.0,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),
-        ),
-      ],
-    ),
+        ],
+      ),
+
   );
 }
 
