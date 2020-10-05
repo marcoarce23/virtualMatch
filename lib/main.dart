@@ -7,6 +7,7 @@ import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/provider/PushProvider.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:virtual_match/src/page/core/player/PlayerLoadPage.dart';
 import 'package:virtual_match/src/page/faq/FaqPage.dart';
 import 'package:virtual_match/src/page/login/LogOnPage.dart';
 import 'package:virtual_match/src/page/new/NewLoadPage.dart';
@@ -124,6 +125,8 @@ class _MyAppState extends State<MyApp> {
                 new NotificationAllPage(),
             'notificationLoad': (BuildContext context) =>
                 new NotificationLoadPage(),
+                'playerLoad': (BuildContext context) =>
+                new PlayerLoadPage(),
           }),
     );
   }

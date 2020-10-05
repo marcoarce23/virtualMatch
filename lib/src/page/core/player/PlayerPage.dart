@@ -15,8 +15,6 @@ import 'package:virtual_match/src/widget/general/CallWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/widget/general/SenWidget.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
-import 'package:virtual_match/src/model/entity/EntityMap/NoticiaEventoModel.dart'
-    as model;
 
 class PlayerPage extends StatefulWidget {
   static final String routeName = 'notificationList';
@@ -28,7 +26,7 @@ class PlayerPage extends StatefulWidget {
 
 class _PlayerPageState extends State<PlayerPage> {
   //DEFINICION DE BLOC Y MODEL
-  JugadorModelJson entity = new JugadorModelJson();
+  JugadorModelList entity = new JugadorModelList();
   model.JugadorModel entityModel = new model.JugadorModel();
   PlayerService entityGet = PlayerService();
 
@@ -45,8 +43,7 @@ class _PlayerPageState extends State<PlayerPage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    // entityService = Provider.of<NewService>(context);
-
+  
     return Scaffold(
       key: scaffoldKey,
       appBar: appBar('CONOCE A LA COMUNIDAD'),
@@ -88,9 +85,6 @@ class _PlayerPageState extends State<PlayerPage> {
       //  ),
       floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
           FaIcon(FontAwesomeIcons.futbol), HomePage()),
-
-      // floatButton(AppTheme.themeDefault, context,
-      //   FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }
 

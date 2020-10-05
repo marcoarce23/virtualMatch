@@ -46,7 +46,7 @@ class PlayerSelectionPage extends StatefulWidget {
 
 class _PlayerSelectionPageState extends State<PlayerSelectionPage> {
   //DEFINICION DE BLOC Y MODEL
-  JugadorModelJson entity = new JugadorModelJson();
+  JugadorModelList entity = new JugadorModelList();
   model.JugadorModel entityModel = new model.JugadorModel();
   PlayerService entityGet = PlayerService();
   PlayerService entityGet1 = PlayerService();
@@ -305,7 +305,6 @@ class _PlayerSelectionPageState extends State<PlayerSelectionPage> {
   }
 }
 
-
 class PlayerSelectionVMPage extends StatefulWidget {
   static final String routeName = 'playerSelection';
   final int idTorneo;
@@ -327,7 +326,7 @@ class PlayerSelectionVMPage extends StatefulWidget {
 
 class _PlayerSelectionVMPageState extends State<PlayerSelectionVMPage> {
   //DEFINICION DE BLOC Y MODEL
-  JugadorModelJson entity = new JugadorModelJson();
+  JugadorModelList entity = new JugadorModelList();
   model.JugadorModel entityModel = new model.JugadorModel();
   PlayerService entityGet = PlayerService();
   PlayerService entityGet1 = PlayerService();

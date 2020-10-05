@@ -51,7 +51,7 @@ class PlayerService with ChangeNotifier {
     return _result;
   }
 
-  Future<Map> getId(IEntityJson entityJson, int value) async {
+ Future<List<IEntityJson>> getId(IEntityJson entityJson, int value) async {
     print('111');
     var _result = await _apiGet.getId(entityJson, value);
 
