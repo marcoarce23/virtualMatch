@@ -71,9 +71,9 @@ class _PlayerWinnerPageState extends State<PlayerWinnerPage> {
                   ),
                 ),
                 divider(),
-                sizedBox(0.0, 7.0),
+                sizedBox(0.0, 10.0),
                 futureBuilder(context),
-                sizedBox(0.0, 7.0),
+                sizedBox(0.0, 10.0),
                 divider(),
                 /*
                 WinnerPlayer(
@@ -147,15 +147,23 @@ class _PlayerWinnerPageState extends State<PlayerWinnerPage> {
       itemCount: snapshot.data.length,
       itemBuilder: (context, index) {
         ListadoGanadores entity = snapshot.data[index];
-        return Center(
-          child: WinnerPlayer(
-              nombreTorneo: entity.nombre_torneo,
-              url1erGanador: (entity.foto_1 != '') ? entity.foto_1 : IMAGE_LOGO,
-              url2doGanador: (entity.foto_2 != '') ? entity.foto_2 : IMAGE_LOGO,
-              url3erGanador: (entity.foto_3 != '') ? entity.foto_3 : IMAGE_LOGO,
-              nombre1erGanador: entity.jugador_1,
-              nombre2doGanador: entity.jugador_2,
-              nombre3erGanador: entity.jugador_3),
+        return Column(
+          children: [
+            Center(
+              child: WinnerPlayer(
+                  nombreTorneo: "Torneo:: ${entity.nombre_torneo}",
+                  url1erGanador:
+                      (entity.foto_1 != '') ? entity.foto_1 : IMAGE_LOGO,
+                  url2doGanador:
+                      (entity.foto_2 != '') ? entity.foto_2 : IMAGE_LOGO,
+                  url3erGanador:
+                      (entity.foto_3 != '') ? entity.foto_3 : IMAGE_LOGO,
+                  nombre1erGanador: entity.jugador_1,
+                  nombre2doGanador: entity.jugador_2,
+                  nombre3erGanador: entity.jugador_3),
+            ),
+            divider(),
+          ],
         );
       },
     );

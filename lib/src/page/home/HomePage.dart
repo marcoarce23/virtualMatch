@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/NoticiaEventoModel.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/NotificacionModel.dart';
+import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
 import 'package:virtual_match/src/service/NewService.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
@@ -94,12 +95,28 @@ class _HomePageState extends State<HomePage> {
       itemBuilder: (context, index) {
         NoticiaEventoModel entity = snapshot.data[index];
         if (entity.tipo == grupo) {
-          return gfCardAdvanced(
-              "Publicado en fecha ${entity.fecha}",
-              "Titulo:  ${entity.titulo}",
-              "Dirigido a: ${entity.dirigidoa} \n Descripción: ${entity.dirigidoa}",
-              2,
-              entity.foto);
+          return Stack(
+            children: [
+              gfCardAdvanced(
+                  "Publicado en fecha ${entity.fecha}",
+                  " ${entity.titulo}",
+                  "Dirigido a: ${entity.dirigidoa} \n Descripción: ${entity.dirigidoa}",
+                  2,
+                  entity.foto),
+              Positioned(
+                bottom: 18,
+                right: 15,
+                child: Opacity(
+                  opacity: 0.6,
+                  child: Image.network(
+                    IMAGE_LOGO,
+                    height: 40,
+                    width: 40,
+                  ),
+                ),
+              ),
+            ],
+          );
         } else {
           return Container();
         }

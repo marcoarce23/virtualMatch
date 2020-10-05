@@ -1,6 +1,9 @@
+import 'package:animate_do/animate_do.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
@@ -138,35 +141,6 @@ GFCard gfCard(String textButton, String textContext, String textTitle,
   );
 }
 
-GFCard gfCardAdvancedPlus2(
-    String textContext,
-    Widget textTitle,
-    Widget textSubTitle,
-    Widget textdescription,
-    Widget textDirigido,
-    Widget textDate,
-    Widget avatar,
-    Widget icon,
-    double elevation,
-    String imgURL,
-    Color color) {
-  return GFCard(
-    boxFit: BoxFit.cover,
-    image: Image.network(imgURL),
-    border: Border.all(color: color, width: 2.0, style: BorderStyle.solid),
-    elevation: elevation,
-    content: Column(
-      children: <Widget>[
-        textTitle,
-        textSubTitle,
-        textdescription,
-        avatar,
-        icon,
-      ],
-    ),
-  );
-}
-
 GFCard gfCardAdvancedPlus(
     String textContext,
     Widget textTitle,
@@ -196,16 +170,59 @@ GFCard gfCardAdvanced(String textContext, String textTitle, String textSubTitle,
     double elevation, String imgURL) {
   return GFCard(
     boxFit: BoxFit.cover,
-    image: Image.network(imgURL),
     border:
         Border.all(color: Colors.black, width: 2.0, style: BorderStyle.solid),
     elevation: elevation,
-    title: GFListTile(
-        title: Text(textTitle),
-        subTitle: Text(textSubTitle),
-        avatar: null,
-        icon: null),
-    content: Text(textContext),
+    content: Column(
+      children: [
+        SlideInUp(
+          child: Shimmer.fromColors(
+            baseColor: AppTheme.themeDefault,
+            highlightColor: AppTheme.themePurple,
+            child: AutoSizeText(
+              textTitle,
+              maxLines: 2,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ),
+        SlideInUp(child: avatarCircle(imgURL, 155)),
+        SlideInUp(
+          child: Shimmer.fromColors(
+            baseColor: AppTheme.themeDefault,
+            highlightColor: AppTheme.themePurple,
+            child: AutoSizeText(
+              textSubTitle,
+              maxLines: 2,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 15.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ),
+        SlideInUp(
+          child: Shimmer.fromColors(
+            baseColor: AppTheme.themeDefault,
+            highlightColor: AppTheme.themePurple,
+            child: AutoSizeText(
+              textContext,
+              maxLines: 1,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 12.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ),
+      ],
+    ),
   );
 }
 
