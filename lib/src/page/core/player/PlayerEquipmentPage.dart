@@ -43,11 +43,11 @@ class _PlayerEquipmentPageState extends State<PlayerEquipmentPage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-  
+
     return Scaffold(
       key: scaffoldKey,
-      appBar: appBar('TUS JUGADORES'),
-      drawer: DrawerMenu(),
+      //  appBar: appBar('TUS JUGADORES'),
+      // drawer: DrawerMenu(),
       body: SafeArea(
         child: Container(
           decoration: new BoxDecoration(
@@ -68,8 +68,8 @@ class _PlayerEquipmentPageState extends State<PlayerEquipmentPage> {
                   children: <Widget>[
                     showInformationBasic(
                       context,
-                      'CONOCE A NUESTROS JUGADORES',
-                      'Busca y comunicate con los jugadores.',
+                      'TUS JUGADORES PARA 11 VS. 11',
+                      'Busca, acepta y comunicate con tus jugadores.',
                     ),
                     sizedBox(0.0, 2.0),
                     divider(),
@@ -158,26 +158,26 @@ class _PlayerEquipmentPageState extends State<PlayerEquipmentPage> {
 
   List<Widget> opcionesLlamada(model.JugadorModel entity) {
     return [
-      sizedBox(30, 0),
-      InkWell(
-        onTap: () {
-          callNumber(int.parse(entity.telefono));
-        },
-        child: FaIcon(FontAwesomeIcons.phone, color: Colors.white, size: 27),
-      ),
-      sizedBox(30, 0),
-      InkWell(
-        onTap: () {
-          sendSMS(int.parse(entity.telefono));
-        },
-        child: FaIcon(FontAwesomeIcons.sms, color: Colors.white, size: 27),
-      ),
-      sizedBox(30, 0),
+      sizedBox(20, 0),
       InkWell(
         onTap: () {
           callWhatsApp1(int.parse(entity.telefono));
         },
         child: FaIcon(FontAwesomeIcons.whatsapp, color: Colors.white, size: 27),
+      ),
+      sizedBox(20, 0),
+      InkWell(
+        onTap: () {},
+        child:
+            FaIcon(FontAwesomeIcons.handPointUp, color: Colors.white, size: 27),
+      ),
+      sizedBox(20, 0),
+      InkWell(
+        onTap: () {
+          callWhatsApp1(int.parse(entity.telefono));
+        },
+        child: FaIcon(FontAwesomeIcons.handPointDown,
+            color: Colors.white, size: 27),
       ),
     ];
   }
