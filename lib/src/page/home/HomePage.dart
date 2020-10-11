@@ -74,23 +74,30 @@ class _HomePageState extends State<HomePage> {
           return Stack(
             children: [
               Container(
+                alignment: Alignment.center,
                 margin: EdgeInsets.symmetric(vertical: 0.0),
                 decoration: containerImage2(),
-                width: size.width * 0.94,
-                child: gfCardAdvanced(
-                    context,
-                    "Publicado en fecha ${entity.fecha}",
-                    " ${entity.titulo}",
-                    "Dirigido a: ${entity.dirigidoa} \n Descripción: ${entity.dirigidoa}",
-                    2,
-                    entity.foto),
+                width: size.width * 0.98,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    gfCardAdvanced(
+                        context,
+                        "Publicado en fecha ${entity.fecha}",
+                        " ${entity.titulo}",
+                        "Dirigido a: ${entity.dirigidoa} \n Descripción: ${entity.dirigidoa}",
+                        2,
+                        entity.foto),
+                  ],
+                ),
               ),
               Positioned(
                 top: 25,
                 right: 50,
                 child: Opacity(
                   opacity: 0.5,
-                  child:avatarCircle(IMAGE_LOGOB,25),
+                  child: avatarCircle(IMAGE_LOGOB, 25),
                 ),
               ),
             ],
@@ -122,6 +129,8 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

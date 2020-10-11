@@ -164,7 +164,7 @@ class _MiniTourmentLoadPageState extends State<MiniTourmentLoadPage> {
           _form(context),
         ],
       ),
-      floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
+      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }

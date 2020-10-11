@@ -165,10 +165,14 @@ class _TourmentListPageState extends State<TourmentListPage> {
           ),
           PopupMenuItem(
             value: 3,
-            child: Text("Editar"),
+            child: Text("Editar Torneo"),
           ),
           PopupMenuItem(
             value: 4,
+            child: Text("Editar Formato"),
+          ),
+          PopupMenuItem(
+            value: 5,
             child: Text("Eliminar"),
           ),
         ],
@@ -194,6 +198,11 @@ class _TourmentListPageState extends State<TourmentListPage> {
               showSnackbarWithOutKey("Método por implementar", context);
               break;
             case 4:
+              entityModel.states = StateEntity.Update;
+              entityModel.usuarioAuditoria = prefs.email;
+              showSnackbarWithOutKey("Método por implementar", context);
+              break;
+            case 5:
               entityModel.states = StateEntity.Delete;
               entityModel.usuarioAuditoria = prefs.email;
               showSnackbarWithOutKey("Método por implementar", context);

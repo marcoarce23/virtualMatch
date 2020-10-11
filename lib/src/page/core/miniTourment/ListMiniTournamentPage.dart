@@ -42,7 +42,7 @@ class _ListMiniTournamentPageState extends State<ListMiniTournamentPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
-      appBar: appBar('MIS TORNEOS VIRTUAL MATCH'),
+      appBar: appBar('MIS TORNEOS.'),
       body: SingleChildScrollView(
           child: Container(
              // height: size.height,

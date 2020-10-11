@@ -51,7 +51,6 @@ Widget showInformation(BuildContext context, String title, String subTitle,
     decoration: boxDecoration(),
     child: Column(
       children: <Widget>[
-        
         gfListTile(
             Text(title, style: TextStyle(color: AppTheme.themeWhite)),
             Text(subTitle, style: TextStyle(color: AppTheme.themeWhite)),
@@ -287,7 +286,6 @@ BoxDecoration containerImage() {
       ]);
 }
 
-
 BoxDecoration containerImage2() {
   return BoxDecoration(
       image: new DecorationImage(
@@ -304,6 +302,7 @@ BoxDecoration containerImage2() {
             spreadRadius: 2.0)
       ]);
 }
+
 boxDecoration() {
   return BoxDecoration(
       image: new DecorationImage(
@@ -437,7 +436,12 @@ showSnackbar(String message, GlobalKey<ScaffoldState> scaffoldKey) {
 showSnackbarWithOutKey(String message, BuildContext context) {
   return Scaffold.of(context).showSnackBar(SnackBar(
     backgroundColor: AppTheme.themePurple,
-    content: Text(message),
+    content: Row(
+      children: [
+        FaIcon(FontAwesomeIcons.newspaper, color: AppTheme.themeDefault),
+        Text(message),
+      ],
+    ),
     duration: Duration(milliseconds: 2500),
   ));
 }

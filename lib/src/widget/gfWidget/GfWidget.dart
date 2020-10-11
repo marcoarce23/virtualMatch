@@ -171,7 +171,7 @@ GFCard gfCardAdvanced(BuildContext context, String textContext,
     String textTitle, String textSubTitle, double elevation, String imgURL) {
  
   return GFCard(
-      color: Colors.black,
+      color: Colors.white10,
       boxFit: BoxFit.cover,
       border:
           Border.all(color: Colors.purple, width: 1.0, style: BorderStyle.solid),
