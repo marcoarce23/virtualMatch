@@ -1,12 +1,16 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/NoticiaEventoModel.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/NotificacionModel.dart';
+import 'package:virtual_match/src/model/entity/EntityFromJson/TorneoPersonalizar.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
+import 'package:virtual_match/src/model/util/Resource.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
 import 'package:virtual_match/src/service/NewService.dart';
+import 'package:virtual_match/src/service/core/TournamentService.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/bottonNavigationBar/BottonNavigatorWidget.dart';
@@ -53,7 +57,7 @@ class _HomePageState extends State<HomePage> {
         builder: (context, AsyncSnapshot snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
-              return loading();
+              return Text("sss");
               break;
             default:
               return listView(grupo, context, snapshot);

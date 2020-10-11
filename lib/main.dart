@@ -8,7 +8,9 @@ import 'package:virtual_match/src/model/provider/PushProvider.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:virtual_match/src/page/core/player/PlayerLoadPage.dart';
+import 'package:virtual_match/src/page/core/tourment/CustomizePlayer.dart';
 import 'package:virtual_match/src/page/faq/FaqPage.dart';
+import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/page/login/LogOnPage.dart';
 import 'package:virtual_match/src/page/new/NewLoadPage.dart';
 import 'package:virtual_match/src/page/notification/NotificationLoadPage.dart';
@@ -113,8 +115,8 @@ class _MyAppState extends State<MyApp> {
             outputAndHome: option,
           ),  
           */
-          home: LogOnPage(),
-          //new HomePage(), //MapAdressModule(),
+          //home: LogOnPage(),
+          home: CustomizePlayer(), //MapAdressModule(),
 
           routes: <String, WidgetBuilder>{
             //        'splash': (BuildContext context) => new SplashPage(),
@@ -125,8 +127,7 @@ class _MyAppState extends State<MyApp> {
                 new NotificationAllPage(),
             'notificationLoad': (BuildContext context) =>
                 new NotificationLoadPage(),
-                'playerLoad': (BuildContext context) =>
-                new PlayerLoadPage(),
+            'playerLoad': (BuildContext context) => new PlayerLoadPage(),
           }),
     );
   }
