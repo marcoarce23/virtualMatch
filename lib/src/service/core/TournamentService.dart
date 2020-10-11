@@ -173,4 +173,15 @@ class TourmentService {
     //  notifyListeners();
     return result;
   }
+
+  Future<List<IEntityJson>> getDevuelveTorneoParaPersonalizar(
+      IEntityJson entityJson, int torneo) async {
+    var result;
+    isLoading = true;
+    result =
+        await _apiGet.getDevuelveTorneoParaPersonalizar(entityJson, torneo);
+    isLoading = false;
+    //  notifyListeners();
+    return result;
+  }
 }

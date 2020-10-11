@@ -18,4 +18,8 @@ Map<String, List<String>> api = {
   'getFechasTorneo': [API + '/api/Torneo/getDevuelveFechasTorneos', ''],
   'getGanadores': [API + '/api/Torneo/getListaGanadores', ''],
   'updateFecha': [API + '/api/Torneo/ActualizaFechas', ''],
+  'getDevuelveTorneoParaPersonalizar': [
+    API + '/api/Torneo/getDevuelveTorneoParaPersonalizar/torneo',
+    ''
+  ],
 };

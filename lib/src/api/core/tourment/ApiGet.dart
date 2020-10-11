@@ -136,4 +136,18 @@ class ApiGet {
 
     return getListIEntityJson(response, entity, decodeData, list);
   }
+
+  Future<List<IEntityJson>> getDevuelveTorneoParaPersonalizar(
+      IEntityJson entity, int idTorneo) async {
+    final List<IEntityJson> list = new List();
+    Map<String, dynamic> decodeData;
+
+    final _apiRest = api['getDevuelveTorneoParaPersonalizar'][0].toString() +
+        "/" +
+        idTorneo.toString();
+    print(_apiRest);
+    final response = await http.get(_apiRest);
+
+    return getListIEntityJson(response, entity, decodeData, list);
+  }
 }
