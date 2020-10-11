@@ -11,7 +11,6 @@ import 'package:virtual_match/src/page/core/equipment/EquipmentLoadPage.dart';
 import 'package:virtual_match/src/page/core/player/PlayerLoadPage.dart';
 import 'package:virtual_match/src/page/core/tourment/CustomizePlayer.dart';
 import 'package:virtual_match/src/page/faq/FaqPage.dart';
-import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/page/login/LogOnPage.dart';
 import 'package:virtual_match/src/page/new/NewLoadPage.dart';
 import 'package:virtual_match/src/page/notification/NotificationLoadPage.dart';
@@ -116,8 +115,8 @@ class _MyAppState extends State<MyApp> {
             outputAndHome: option,
           ),  
           */
-          //home: LogOnPage(),
-          home: CustomizePlayer(), //MapAdressModule(),
+          home: CustomizePlayer(),
+          //new HomePage(), //MapAdressModule(),
 
           routes: <String, WidgetBuilder>{
             //        'splash': (BuildContext context) => new SplashPage(),
@@ -129,6 +128,8 @@ class _MyAppState extends State<MyApp> {
             'notificationLoad': (BuildContext context) =>
                 new NotificationLoadPage(),
             'playerLoad': (BuildContext context) => new PlayerLoadPage(),
+
+            'equipment': (BuildContext context) => new EquipmentAllPage(),
           }),
     );
   }
