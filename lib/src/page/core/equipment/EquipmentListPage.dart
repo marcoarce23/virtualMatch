@@ -6,6 +6,7 @@ import 'package:virtual_match/src/model/entity/EntityFromJson/EquipoModel.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
+import 'package:virtual_match/src/page/core/equipment/EquipmentLoadPage.dart';
 import 'package:virtual_match/src/service/core/EquipmentService.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
@@ -63,18 +64,18 @@ EquipmentService entityService;
                         context,
                         'ADMINISTRA TUS EQUIPOS',
                         'En esta pantalla puedes modificar y eliminar (mientras no se inscribiste con el equipo) tus equipos que hayas creado anteriormente.',),
-                    divider(),
+                    dividerBlack(),
                   ],
                 ),
               ),
               futureBuilder(context),
-              copyRigth(),
+              copyRigthBlack(),
             ],
           ),
         ),
       ),
-      floatingActionButton: floatButton(AppTheme.themeDefault, context,
-          FaIcon(FontAwesomeIcons.futbol), HomePage()),
+       floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
+          FaIcon(FontAwesomeIcons.playstation), EquipmentAllPage()),
     );
   }
 

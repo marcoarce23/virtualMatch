@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
+import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/widget/image/imageOvalWidget.dart';
 import 'package:virtual_match/src/widget/util/Util.dart';
 
@@ -28,10 +29,7 @@ class WinnerPlayer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Container(
-        decoration: BoxDecoration(
-          color: Colors.white70,
-          borderRadius: BorderRadius.circular(10),
-        ),
+        decoration:  containerImage2(),
         width: MediaQuery.of(context).size.width - 75,
         height: 170,
         child: Stack(
@@ -42,18 +40,21 @@ class WinnerPlayer extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(5.0),
                 child: Center(
-                    child: Shimmer.fromColors(
-                  baseColor: AppTheme.themeDefault,
-                  highlightColor: AppTheme.themePurple,
-                  child: AutoSizeText(
+                    child:
+                  //    Shimmer.fromColors(
+                  // baseColor: AppTheme.themeWhite,
+                  // highlightColor: AppTheme.themePurple,
+                  // child: 
+                  AutoSizeText(
                     nombreTorneo.toUpperCase(),
                     maxLines: 2,
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      fontSize: 20.0,
+                      fontSize: 18.0,
+                      color: AppTheme.themeWhite,
                       fontWeight: FontWeight.bold,
                     ),
-                  ),
+                //  ),
                 )),
               ),
             ),
@@ -83,19 +84,17 @@ class WinnerPlayer extends StatelessWidget {
               width: 80,
               child: Column(
                 children: [
-                  Shimmer.fromColors(
-                    baseColor: AppTheme.themeDefault,
-                    highlightColor: AppTheme.themePurple,
-                    child: AutoSizeText(
+                  AutoSizeText(
                       '3º LUGAR',
                       maxLines: 2,
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 10.0,
+                        color: AppTheme.themeWhite,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                  ),
+                 
                   Text(
                     nombre3erGanador,
                     style: TextStyle(
@@ -112,19 +111,17 @@ class WinnerPlayer extends StatelessWidget {
                 width: 90,
                 child: Column(
                   children: [
-                    Shimmer.fromColors(
-                      baseColor: AppTheme.themeDefault,
-                      highlightColor: AppTheme.themePurple,
-                      child: AutoSizeText(
+                   AutoSizeText(
                         '2º LUGAR',
                         maxLines: 2,
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 13.0,
+                          color: AppTheme.themeWhite,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                    ),
+                   
                     Text(
                       nombre2doGanador,
                       style: TextStyle(
@@ -141,7 +138,7 @@ class WinnerPlayer extends StatelessWidget {
                 child: Column(
                   children: [
                     Shimmer.fromColors(
-                      baseColor: AppTheme.themeDefault,
+                      baseColor: AppTheme.themeWhite,
                       highlightColor: AppTheme.themePurple,
                       child: AutoSizeText(
                         '1º LUGAR',

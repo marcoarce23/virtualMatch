@@ -7,6 +7,7 @@ import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/provider/PushProvider.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:virtual_match/src/page/core/equipment/EquipmentLoadPage.dart';
 import 'package:virtual_match/src/page/core/player/PlayerLoadPage.dart';
 import 'package:virtual_match/src/page/core/tourment/CustomizePlayer.dart';
 import 'package:virtual_match/src/page/faq/FaqPage.dart';

@@ -11,8 +11,7 @@ import 'package:virtual_match/src/model/entity/EntityMap/TorneoModelo.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
-import 'package:virtual_match/src/page/core/tourment/FormatLoadPage.dart';
-import 'package:virtual_match/src/page/core/tourment/TourmentListPage.dart';
+
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/ImageService.dart';

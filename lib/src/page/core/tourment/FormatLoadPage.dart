@@ -43,6 +43,8 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final controllerCantidad = TextEditingController();
+  final controllerGrupos = TextEditingController();
+
 //DEFINICION DE BLOC Y MODEL
   FormatoModel entity = new FormatoModel();
   ImageService entityImage = new ImageService();
@@ -101,7 +103,6 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
             Container(
               margin: EdgeInsets.symmetric(vertical: 0.0),
               decoration: containerImage(),
-              //  color: Colors.black87,
               width: size.width * 0.94,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -128,12 +129,24 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
         sizedBox(0.0, 8.0),
         _comboCodTroneo(_opcionCodTorneo),
         _text(
-            controllerCantidad,
+            controllerGrupos,
             '0',
             '(*) Ingrese cantidad de jugadores',
             3,
             1,
             'Ingrese la cantidad de jugadores',
+            true,
+            null, // FaIcon(FontAwesomeIcons.futbol, color: AppTheme.themeDefault),
+            AppTheme.themeDefault,
+            AppTheme.themeDefault,
+            AppTheme.themePurple),
+          _text(
+            controllerCantidad,
+            '0',
+            '(*) Ingrese cantidad de grupos',
+            3,
+            1,
+            'Ingrese la cantidad de grupos',
             true,
             null, // FaIcon(FontAwesomeIcons.futbol, color: AppTheme.themeDefault),
             AppTheme.themeDefault,
@@ -181,8 +194,7 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
         cursorColor: AppTheme.themeDefault,
         toolbarOptions:
             ToolbarOptions(copy: true, cut: true, paste: true, selectAll: true),
-        // controller: controller,
-        decoration: inputDecoration(
+          decoration: inputDecoration(
             hintText, labelText, icon, hoverColor, fillColor, focusColor),
         onChanged: (value) {
           setState(() {
@@ -225,36 +237,36 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
             }));
   }
 
-  Widget _comboTorneoCreado(String _opcionTipoCompeticionss) {
-    return Center(
-        child: FutureBuilder(
-            future: entityGet.get(new ClasificadorModel(), 26),
-            builder: (context, AsyncSnapshot snapshot) {
-              if (snapshot.hasData) {
-                return Row(
-                  children: <Widget>[
-                    sizedBox(15.0, 0),
-                    Text('Selecciones el torneo:'),
-                    sizedBox(15.0, 0),
-                    DropdownButton(
-                      icon: FaIcon(FontAwesomeIcons.sort,
-                          color: AppTheme.themePurple),
-                      value: _opcionTipoCompeticion,
-                      items: getDropDown(snapshot),
-                      onChanged: (value) {
-                        setState(() {
-                          _opcionTipoCompeticion = value;
-                          print('ddddd: $_opcionTipoCompeticion');
-                        });
-                      },
-                    ),
-                  ],
-                );
-              } else {
-                return GFLoader(type: GFLoaderType.circle, size: 35.0);
-              }
-            }));
-  }
+  // Widget _comboTorneoCreado(String _opcionTipoCompeticionss) {
+  //   return Center(
+  //       child: FutureBuilder(
+  //           future: entityGet.get(new ClasificadorModel(), 26),
+  //           builder: (context, AsyncSnapshot snapshot) {
+  //             if (snapshot.hasData) {
+  //               return Row(
+  //                 children: <Widget>[
+  //                   sizedBox(15.0, 0),
+  //                   Text('Selecciones el torneo:'),
+  //                   sizedBox(15.0, 0),
+  //                   DropdownButton(
+  //                     icon: FaIcon(FontAwesomeIcons.sort,
+  //                         color: AppTheme.themePurple),
+  //                     value: _opcionTipoCompeticion,
+  //                     items: getDropDown(snapshot),
+  //                     onChanged: (value) {
+  //                       setState(() {
+  //                         _opcionTipoCompeticion = value;
+  //                         print('ddddd: $_opcionTipoCompeticion');
+  //                       });
+  //                     },
+  //                   ),
+  //                 ],
+  //               );
+  //             } else {
+  //               return GFLoader(type: GFLoaderType.circle, size: 35.0);
+  //             }
+  //           }));
+  // }
 
   Widget _comboCompeticion(String _opcionTipoCompeticionss) {
     return Center(
@@ -445,7 +457,7 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
     entity.idTipoCompeticion = int.parse(_opcionTipoCompeticion);
     entity.idaTipoTorneo = int.parse(_opcionTipoTorneo);
     entity.idaInscripcion = intFree;
-    entity.idaAsignacion = intManual;
+    entity.idaAsignacion = int.parse(controllerGrupos.text);
     entity.cantidadJugadores = int.parse(controllerCantidad.text);
     entity.idaTipoModalidad = int.parse(_opcionTipoModalidad);
     entity.usuarioAuditoria = prefs.email;
