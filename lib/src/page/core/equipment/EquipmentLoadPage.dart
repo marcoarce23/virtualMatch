@@ -12,6 +12,8 @@ import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/page/core/equipment/EquipmentListPage.dart';
+import 'package:virtual_match/src/page/core/player/PlayerEditPage.dart';
+import 'package:virtual_match/src/page/core/player/PlayerEquipmentPage.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/ImageService.dart';
@@ -35,7 +37,7 @@ class EquipmentAllPage extends StatefulWidget {
 class _EquipmentAllPageState extends State<EquipmentAllPage> {
   int page = 0;
   final prefs = new Preferense();
-  final List<Widget> optionPage = [EquipmentLoadPage(), EquipmentListPage()];
+  final List<Widget> optionPage = [EquipmentLoadPage(), EquipmentListPage(), PlayerEquipmentPage()];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -65,17 +67,29 @@ class _EquipmentAllPageState extends State<EquipmentAllPage> {
           backgroundColor: AppTheme.themeDefault,
           items: [
             BottomNavigationBarItem(
-                icon: FaIcon(
-                  FontAwesomeIcons.futbol,
-                  size: 25,
+                icon: Image.asset(
+                  'assets/image/pelota.png',
+                  //scale: 0.4,
+                  width: 28,
+                  height: 28,
                 ),
                 title: Text('Tu equipo')),
             BottomNavigationBarItem(
-                icon: FaIcon(
-                  FontAwesomeIcons.gamepad,
-                  size: 25,
+                icon: Image.asset(
+                  'assets/image/penal.png',
+                  //scale: 0.4,
+                  width: 28,
+                  height: 28,
                 ),
-                title: Text('Tus equipos')),
+                title: Text('Editar equipo')),
+            BottomNavigationBarItem(
+                icon: Image.asset(
+                  'assets/image/jugador2.png',
+                  //scale: 0.4,
+                  width: 28,
+                  height: 28,
+                ),
+                title: Text('Tus jugadores')),
           ],
           currentIndex: page,
           unselectedItemColor: AppTheme.themeWhite,
@@ -127,12 +141,12 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
     entity.states = StateEntity.Insert;
     entityService = Provider.of<EquipmentService>(context);
 
-    final EquipoModel entityModel = ModalRoute.of(context).settings.arguments;
+    // final EquipoModel entityModel = ModalRoute.of(context).settings.arguments;
 
-    if (entityModel != null) {
-      entity = entityModel;
-      entity.states = StateEntity.Update;
-    }
+    // if (entityModel != null) {
+    //   entity = entityModel;
+    //   entity.states = StateEntity.Update;
+    // }
 
     return Scaffold(
       key: scaffoldKey,
@@ -143,8 +157,8 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
           _form(context),
         ],
       ),
-      floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
-          FaIcon(FontAwesomeIcons.playstation), HomePage()),
+      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
+          FaIcon(FontAwesomeIcons.playstation), PlayerEditPage()),
     );
   }
 
@@ -178,7 +192,7 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
               decoration: containerFileds(),
               child: _fields(context),
             ),
-            copyRigth(),
+            copyRigthBlack(),
           ],
         ),
       ),
@@ -211,7 +225,7 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
       children: <Widget>[
         sizedBox(0.0, 7.0),
         showPictureOval(photo, image, 70.0),
-        divider(),
+        dividerBlack(),
         _text(
             controllerNoticia,
             entity.nombre,

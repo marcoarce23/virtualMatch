@@ -7,23 +7,24 @@ import 'package:virtual_match/src/model/entity/EntityMap/JugadorModel.dart'
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/core/PlayerService.dart';
-import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/card/CardVM.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
+import 'package:virtual_match/src/widget/general/CallWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
+import 'package:virtual_match/src/widget/general/SenWidget.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 
-class PlayerEditPage extends StatefulWidget {
-  static final String routeName = 'notificationList';
-  PlayerEditPage({Key key}) : super(key: key);
+class PlayerEquipmentPage extends StatefulWidget {
+  static final String routeName = 'playerEquipmentPage';
+  PlayerEquipmentPage({Key key}) : super(key: key);
 
   @override
-  _PlayerEditPageState createState() => _PlayerEditPageState();
+  _PlayerEquipmentPageState createState() => _PlayerEquipmentPageState();
 }
 
-class _PlayerEditPageState extends State<PlayerEditPage> {
+class _PlayerEquipmentPageState extends State<PlayerEquipmentPage> {
   //DEFINICION DE BLOC Y MODEL
   JugadorModelList entity = new JugadorModelList();
   model.JugadorModel entityModel = new model.JugadorModel();
@@ -35,17 +36,17 @@ class _PlayerEditPageState extends State<PlayerEditPage> {
 
   @override
   void initState() {
-    prefs.lastPage = PlayerEditPage.routeName;
+    prefs.lastPage = PlayerEquipmentPage.routeName;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-
+  
     return Scaffold(
       key: scaffoldKey,
-      appBar: appBar('EDITAR PERFIL'),
+      appBar: appBar('TUS JUGADORES'),
       drawer: DrawerMenu(),
       body: SafeArea(
         child: Container(
@@ -67,10 +68,11 @@ class _PlayerEditPageState extends State<PlayerEditPage> {
                   children: <Widget>[
                     showInformationBasic(
                       context,
-                      'EDITA TU PERFIL',
-                      'Puedes mejorar tu perfil modifica tus datos.',
+                      'CONOCE A NUESTROS JUGADORES',
+                      'Busca y comunicate con los jugadores.',
                     ),
                     sizedBox(0.0, 2.0),
+                    divider(),
                   ],
                 ),
               ),
@@ -88,7 +90,7 @@ class _PlayerEditPageState extends State<PlayerEditPage> {
 
   Widget futureBuilder(BuildContext context) {
     return FutureBuilder(
-        future: entityGet.getId(new model.JugadorModel(), 208),
+        future: entityGet.get(new model.JugadorModel()),
         builder: (context, AsyncSnapshot snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
@@ -121,53 +123,28 @@ class _PlayerEditPageState extends State<PlayerEditPage> {
       children: <Widget>[
         Column(
           children: <Widget>[
-            Center(
-              child: Image(
-                image: NetworkImage(IMAGE_SCREEN3),
-                height: 180.0,
-                fit: BoxFit.fill,
-              ),
-            ),
+            sizedBox(0, 7),
             CardVM(
-              size: 300,
+              size: 120,
               imageAssets: 'assets/icono3.png',
-              opciones:
-                  _simplePopup(entity, entity.idJugador.toString(), context),
-              accesosRapidos: null,
+              opciones: avatarCircle((entity.foto ?? IMAGE_LOGO), 35),
+              accesosRapidos: opcionesLlamada(entity),
               listWidgets: [
+                Text('Titulo: ${entity.nombre} ${entity.apellido} '),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    avatarCircle(entity.foto, 55),
-                    sizedBox(0, 7),
                     Text(
-                      'FIFERO: ${entity.nombre} ${entity.apellido}',
-                      style: kSigsTitleStyle,
+                      '${entity.nombre} ${entity.apellido}',
+                      style: TextStyle(color: AppTheme.themeWhite),
                     ),
-                    sizedBox(0, 7),
                     Text(
                       'IPSDN: ${entity.idPsdn}',
-                      style: kSigsTitleStyle,
+                      style: TextStyle(color: AppTheme.themeWhite),
                     ),
-                    sizedBox(0, 7),
                     Text(
-                      'Correo: ${entity.correo}',
-                      style: kSigsTitleStyle,
-                    ),
-                    sizedBox(0, 7),
-                    Text(
-                      'Facebook: ${entity.facebook}',
-                      style: kSigsTitleStyle,
-                    ),
-                    sizedBox(0, 7),
-                    Text(
-                      'WhatsApp: ${entity.telefono}',
-                      style: kSigsTitleStyle,
-                    ),
-                    sizedBox(0, 7),
-                    Text(
-                      'Información Complementaria: ${entity.informacionComplementaria}',
-                      style: kSigsTitleStyle,
+                      'Departamento: ${entity.idaDepartamento}',
+                      style: TextStyle(color: AppTheme.themeWhite),
                     ),
                   ],
                 ),
@@ -179,56 +156,29 @@ class _PlayerEditPageState extends State<PlayerEditPage> {
     );
   }
 
-  Widget _simplePopup(
-          model.JugadorModel entity, String keyId, BuildContext context) =>
-      PopupMenuButton<int>(
-        itemBuilder: (context) => [
-          // PopupMenuItem(
-          //   value: 1,
-          //   child: Text("Notificar"),
-          // ),
-          PopupMenuItem(
-            value: 1,
-            child: Text("Editar Perfil"),
-          ),
-          PopupMenuItem(
-            value: 2,
-            child: Text("Crear equipo"),
-          ),
-
-          PopupMenuItem(
-            value: 3,
-            child: Text("Aceptar Jugadores"),
-          ),
-        ],
-        onCanceled: () {
-          print("You have canceled the menu.");
+  List<Widget> opcionesLlamada(model.JugadorModel entity) {
+    return [
+      sizedBox(30, 0),
+      InkWell(
+        onTap: () {
+          callNumber(int.parse(entity.telefono));
         },
-        onSelected: (value) {
-          switch (value) {
-            // case 1:
-            //   showSnackbarWithOutKey("Por implementar", context);
-            //   break;
-            case 1:
-              Navigator.pushNamed(context, 'playerLoad', arguments: entity);
-              break;
-            case 2:
-              Navigator.pushNamed(context, 'equipment', arguments: entity);
-              break;
-            case 3:
-              Navigator.pushNamed(context, 'playerLoad', arguments: entity);
-              break;
-
-              break;
-            default:
-              showSnackbarWithOutKey("No hay opcion seleccionada", context);
-              break;
-          }
+        child: FaIcon(FontAwesomeIcons.phone, color: Colors.white, size: 27),
+      ),
+      sizedBox(30, 0),
+      InkWell(
+        onTap: () {
+          sendSMS(int.parse(entity.telefono));
         },
-        icon: Icon(
-          Icons.menu,
-          color: Colors.white,
-        ),
-        offset: Offset(0, 100),
-      );
+        child: FaIcon(FontAwesomeIcons.sms, color: Colors.white, size: 27),
+      ),
+      sizedBox(30, 0),
+      InkWell(
+        onTap: () {
+          callWhatsApp1(int.parse(entity.telefono));
+        },
+        child: FaIcon(FontAwesomeIcons.whatsapp, color: Colors.white, size: 27),
+      ),
+    ];
+  }
 }
