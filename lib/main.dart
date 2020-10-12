@@ -8,7 +8,9 @@ import 'package:virtual_match/src/model/provider/PushProvider.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:virtual_match/src/page/core/equipment/EquipmentLoadPage.dart';
+import 'package:virtual_match/src/page/core/equipment/EuipmentSelectionPage.dart';
 import 'package:virtual_match/src/page/core/player/PlayerLoadPage.dart';
+import 'package:virtual_match/src/page/core/player/PlayerPage.dart';
 import 'package:virtual_match/src/page/core/tourment/CustomizePlayer.dart';
 import 'package:virtual_match/src/page/faq/FaqPage.dart';
 import 'package:virtual_match/src/page/login/LogOnPage.dart';
@@ -130,6 +132,10 @@ class _MyAppState extends State<MyApp> {
             'playerLoad': (BuildContext context) => new PlayerLoadPage(),
 
             'equipment': (BuildContext context) => new EquipmentAllPage(),
+            'equipmentSelection': (BuildContext context) =>
+                new EquipmentSelectionPage(),
+            'playerPage': (BuildContext context) =>
+                new PlayerPage(),
           }),
     );
   }

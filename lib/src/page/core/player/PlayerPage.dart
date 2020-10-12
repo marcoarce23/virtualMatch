@@ -17,7 +17,7 @@ import 'package:virtual_match/src/widget/general/SenWidget.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 
 class PlayerPage extends StatefulWidget {
-  static final String routeName = 'notificationList';
+  static final String routeName = 'playerPage';
   PlayerPage({Key key}) : super(key: key);
 
   @override
