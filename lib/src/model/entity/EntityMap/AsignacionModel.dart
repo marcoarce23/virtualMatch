@@ -1,24 +1,28 @@
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 
-class AsignacionModel implements IEntityMap {
+class ReemplazarJugador implements IEntityMap {
   @override
   StateEntity states;
-  int idAsignacion;
-  int idFormato;
-  int idTipoAsignacion;
-  String usuario;
+  int idTorneo;
+  String izqDer;
+  int idPartido;
+  int idJugador;
+  int idJugadorReemplazo;
 
-  AsignacionModel(
-      {this.states = StateEntity.None,
-      this.idAsignacion = 0,
-      this.idFormato,
-      this.idTipoAsignacion,
-      this.usuario});
+  ReemplazarJugador({
+    this.states = StateEntity.None,
+    this.idTorneo,
+    this.izqDer,
+    this.idPartido,
+    this.idJugador,
+    this.idJugadorReemplazo,
+  });
 
   Map<String, dynamic> toJson() => {
-        "ID_ASIGNACION": idAsignacion,
-        "ID_FORMATO": idFormato,
-        "IDA_TIPO_ASIGNACION": idTipoAsignacion,
-        "USUARIO": usuario,
+        "idTorneo": idTorneo,
+        "izqDer": izqDer,
+        "idPartido": idPartido,
+        "idJugador": idJugador,
+        "idJugadorReemplazo": idJugadorReemplazo,
       };
 }

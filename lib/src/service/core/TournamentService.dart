@@ -1,5 +1,6 @@
 import 'package:virtual_match/src/api/DataMap.dart';
 import 'package:virtual_match/src/api/core/tourment/ApiGet.dart';
+import 'package:virtual_match/src/model/entity/EntityMap/AsignacionModel.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/ChangeDate.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/api/core/tourment/ApiAdd.dart';
@@ -180,6 +181,16 @@ class TourmentService {
     isLoading = true;
     result =
         await _apiGet.getDevuelveTorneoParaPersonalizar(entityJson, torneo);
+    isLoading = false;
+    //  notifyListeners();
+    return result;
+  }
+
+  Future<Map<String, dynamic>> cambiarJugadores(
+      ReemplazarJugador reemplazo) async {
+    var result;
+    isLoading = true;
+    result = await _apiAdd.reemplazarJugador(reemplazo);
     isLoading = false;
     //  notifyListeners();
     return result;
