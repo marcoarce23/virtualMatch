@@ -91,12 +91,19 @@ class _NotificationListPageState extends State<NotificationListPage> {
     return FutureBuilder(
         future: entityGet.get(new NotificacionModel()),
         builder: (context, AsyncSnapshot snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.waiting:
-              return loading();
-              break;
-            default:
-              return listView(context, snapshot);
+          if (snapshot.hasData) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.waiting:
+                return loading();
+                break;
+              default:
+                return 
+                  
+                  
+                  listView(context, snapshot);
+            }
+          } else {
+            return loading();
           }
         });
   }
@@ -185,7 +192,7 @@ class _NotificationListPageState extends State<NotificationListPage> {
               entityModel.idNotificacion = int.parse(keyId);
 
               setState(() {
-                executeDelete(
+                _executeDelete(
                   entityModel.idNotificacion.toString(),
                   prefs.email,
                 );
@@ -204,18 +211,22 @@ class _NotificationListPageState extends State<NotificationListPage> {
         offset: Offset(0, 100),
       );
 
-  void executeDelete(String id, String usuario) async {
+  _executeDelete(String id, String usuario) async {
     try {
-      entityService.delete(id, usuario).then((result) {
+      await entityService.delete(id, usuario).then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0') {
           showSnackbar(STATUS_OK, scaffoldKey);
-          //   futureBuilder(context);
+          // futureBuilder(context);
         } else
           showSnackbar(STATUS_ERROR, scaffoldKey);
       });
     } catch (error) {
-      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
+      //  showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
     }
+   
+   setState(() {
+     
+   });
   }
 } // FIN DE LA CLASE

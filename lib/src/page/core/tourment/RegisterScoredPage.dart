@@ -6,8 +6,10 @@ import 'package:getwidget/getwidget.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:virtual_match/src/model/Preference.dart';
+import 'package:virtual_match/src/model/entity/EntityFromJson/JugadorModel.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/ListadoTorneoModel.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/PartidosPorTorneoModel.dart';
+import 'package:virtual_match/src/model/entity/EntityMap/JugadorModel.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/ResultadoModel.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 
@@ -15,6 +17,7 @@ import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/service/ImageService.dart';
 import 'package:virtual_match/src/service/ResultadoService.dart';
+import 'package:virtual_match/src/service/core/PlayerService.dart';
 import 'package:virtual_match/src/service/core/TournamentService.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
@@ -23,6 +26,10 @@ import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 import 'TourmentPage.dart';
+import 'package:virtual_match/src/model/entity/EntityMap/JugadorModel.dart'
+    as model;
+import 'package:virtual_match/src/model/entity/EntityMap/JugadorModel.dart'
+    as model1;
 
 // ignore: must_be_immutable
 class RegisterScoredPage extends StatefulWidget {
@@ -50,6 +57,38 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
   ResultadoModel entityResultado = new ResultadoModel();
   ResultadoService entityResultadoService = new ResultadoService();
 
+  String _opcionJugador = '1' + '|' + '71298852';
+  PlayerService entityGet1 = PlayerService();
+  TourmentService servicioTorneoPersonalizar = new TourmentService();
+  //JugadorModelList entity = new JugadorModelList();
+  model.JugadorModel entityModel = new model.JugadorModel();
+  String typeCount = '1';
+  List<String> _cantidad = [
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    '10',
+    '11',
+    '12',
+    '13',
+    '14',
+    '15',
+    '16',
+    '17',
+    '18',
+    '19',
+    '20'
+  ];
+  int _group = 1;
+  int _selectedRadio = 1;
+  bool _saveGoleador = false;
+
   @override
   void initState() {
     super.initState();
@@ -73,7 +112,114 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
     );
   }
 
- //Widget 
+  Widget body11vs11(BuildContext context) {}
+
+  Widget _comboJugador() {
+    return Center(
+        child: FutureBuilder(
+            future: entityGet1.get(new model1.JugadorModel()),
+            builder: (context, AsyncSnapshot snapshot) {
+              if (snapshot.hasData) {
+                return Row(
+                  children: <Widget>[
+                    sizedBox(15.0, 0),
+                    sizedBox(15.0, 0),
+                    DropdownButton(
+                      isExpanded: false,
+                      dropdownColor: AppTheme.themePurple,
+                      icon: FaIcon(FontAwesomeIcons.sort,
+                          color: AppTheme.themePurple),
+                      value: _opcionJugador,
+                      items: getDropDown(snapshot),
+                      onChanged: (value) {
+                        setState(() {
+                          _opcionJugador = value;
+                          print('valorrr: $_opcionJugador');
+
+                          // _showPlayer('2');
+                        });
+                      },
+                    ),
+                  ],
+                );
+              } else {
+                return loading();
+              }
+            }));
+  }
+
+  List<DropdownMenuItem<String>> getDropDown(AsyncSnapshot snapshot) {
+    List<DropdownMenuItem<String>> lista = new List();
+
+    for (var i = 0; i < snapshot.data.length; i++) {
+      JugadorModel item = snapshot.data[i];
+      lista.add(DropdownMenuItem(
+          child: Text(
+              item.telefono +
+                  ' - ' +
+                  item.idPsdn +
+                  '\n - ' +
+                  item.nombre +
+                  ' ' +
+                  item.apellido,
+              style: TextStyle(color: AppTheme.themeWhite)),
+          value: item.idJugador.toString() + '|' + item.telefono));
+    }
+    return lista;
+  }
+
+  Widget _comboGolesAsistencia() {
+    return Row(
+      children: <Widget>[
+        SizedBox(width: 35.0),
+        Text('Cantidad Jugadores:'),
+        SizedBox(width: 15.0),
+        DropdownButton(
+          value: typeCount,
+          icon: FaIcon(FontAwesomeIcons.sort, color: AppTheme.themePurple),
+          items: _count(),
+          onChanged: (opt) {
+            setState(() {
+              typeCount = opt;
+            });
+          },
+        ),
+      ],
+    );
+  }
+
+  List<DropdownMenuItem<String>> _count() {
+    List<DropdownMenuItem<String>> lista = new List();
+
+    _cantidad.forEach((cantidad) {
+      lista.add(DropdownMenuItem(
+        child: Text(cantidad),
+        value: cantidad,
+      ));
+    });
+    return lista;
+  }
+
+  Widget _buttonGoleadores(String text, double fontSize, double edgeInsets) {
+    return GFButton(
+      padding: EdgeInsets.symmetric(horizontal: edgeInsets),
+      text: text,
+      textStyle: TextStyle(fontSize: fontSize),
+      textColor: AppTheme.themeWhite,
+      color: AppTheme.themeDefault,
+      icon: FaIcon(FontAwesomeIcons.checkCircle, color: AppTheme.themeWhite),
+      shape: GFButtonShape.pills,
+      onPressed: (_saveGoleador) ? null : _submitGoleador,
+    );
+  }
+
+  _submitGoleador() {
+    // setState(() => _save = true);
+    // loadingEntity();
+    // executeCUD(entityService, entity);
+    // setState(() => _save = false);
+  }
+
   Widget bodyContainer(BuildContext context) {
     final size = MediaQuery.of(context).size;
 

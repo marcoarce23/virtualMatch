@@ -306,6 +306,16 @@ class DrawerMenu extends StatelessWidget {
 
         }),
        
+         CustomListTile(
+            Image.asset(
+              'assets/image/mensajeria.png',
+              //scale: 0.4,
+              width: 30,
+              height: 30,
+            ),
+            '       Crear Notificaciones',
+            () => navegation(context, NotificationAllPage())),
+            
         CustomListTile(
             Image.asset(
               'assets/image/pelota.png',

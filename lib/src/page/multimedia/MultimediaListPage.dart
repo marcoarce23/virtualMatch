@@ -237,5 +237,8 @@ class _MultimediaListPageState extends State<MultimediaListPage> {
     } catch (error) {
       showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
     }
+       setState(() {
+     
+   });
   }
 } // FIN DE LA CLASE

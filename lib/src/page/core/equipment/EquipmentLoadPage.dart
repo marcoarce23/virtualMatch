@@ -330,7 +330,7 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
 
   void loadingEntity() {
     entity.idEquipo = 0;
-    entity.idJugador = 133;
+    entity.idJugador = prefs.idPlayer;
     entity.nombre = controllerNoticia.text;
     entity.detalle = controllerDetalle.text;
     entity.foto = IMAGE_LOGO;

@@ -63,7 +63,7 @@ EquipmentService entityService;
                     showInformationBasic(
                         context,
                         'ADMINISTRA TUS EQUIPOS',
-                        'En esta pantalla puedes modificar y eliminar (mientras no se inscribiste con el equipo) tus equipos que hayas creado anteriormente.',),
+                        'En esta pantalla puedes modificar y eliminar y gestionar tu equipo creado.',),
                     dividerBlack(),
                   ],
                 ),
@@ -196,6 +196,9 @@ EquipmentService entityService;
     } catch (error) {
       showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
     }
+       setState(() {
+     
+   });
   }
 
   void executeUpdate(
