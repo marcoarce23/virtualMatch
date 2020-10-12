@@ -22,4 +22,5 @@ Map<String, List<String>> api = {
     API + '/api/Torneo/getDevuelveTorneoParaPersonalizar/torneo',
     ''
   ],
+  'reemplazarFecha': [API + '/api/Torneo/ReemplazarJugadorEnTorneo', ''],
 };

@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:intl/intl.dart';
+import 'package:virtual_match/src/model/Preference.dart';
+
 import 'package:virtual_match/src/model/entity/EntityFromJson/JugadorModel.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/TorneoPersonalizar.dart';
+import 'package:virtual_match/src/model/entity/EntityMap/AsignacionModel.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/JugadorModel.dart';
+import 'package:virtual_match/src/model/entity/IEntity.dart';
+import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/service/core/PlayerService.dart';
 import 'package:virtual_match/src/service/core/TournamentService.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
@@ -24,6 +28,8 @@ class CustomizePlayer extends StatefulWidget {
 }
 
 class _CustomizePlayerState extends State<CustomizePlayer> {
+  final prefs = new Preferense();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
   String _opcionJugador = '1' + '|' + '71298852';
   PlayerService entityGet1 = PlayerService();
   TourmentService servicioTorneoPersonalizar = new TourmentService();
@@ -31,27 +37,35 @@ class _CustomizePlayerState extends State<CustomizePlayer> {
   model.JugadorModel entityModel = new model.JugadorModel();
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        key: scaffoldKey,
         appBar: appBar('CREA TU EQUIPO'),
         drawer: DrawerMenu(),
-        body: Container(
-
+        body: SingleChildScrollView(
+          child: Container(
             alignment: Alignment.center,
-          decoration: new BoxDecoration(
-            image: new DecorationImage(
-              image: new AssetImage('assets/portada2.png'),
-              fit: BoxFit.cover,
+            decoration: new BoxDecoration(
+              image: new DecorationImage(
+                image: new AssetImage('assets/portada2.png'),
+                fit: BoxFit.cover,
+              ),
             ),
-          ),
-          child: Column(
-            children: [
-              sizedBox(15.0, 20),
-              _comboJugador(),
-              divider(),
-              futureBuilderTorneoPersonalizar(context, 82),
-            ],
+            child: Column(
+              children: [
+                sizedBox(15.0, 20),
+                _comboJugador(),
+                divider(),
+                futureBuilderTorneoPersonalizar(context, 82),
+              ],
+            ),
           ),
         ),
       ),
@@ -141,54 +155,72 @@ class _CustomizePlayerState extends State<CustomizePlayer> {
         return Container(
           child: Column(
             children: [
+              Text(
+                entity.fechaTorneo,
+                style: TextStyle(color: AppTheme.themeWhite),
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                  Row(
                     children: [
-                      Text(
-                        entity.fechaTorneo,
-                        style: TextStyle(color: AppTheme.themeWhite),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Image.network(
+                            entity.fotoIzq,
+                            width: 50,
+                          ),
+                          Text(entity.nombreJugadorIzq.toString(),
+                              style: TextStyle(color: AppTheme.themeWhite)),
+                        ],
+                      ),
+                      InkWell(
+                        onTap: () {
+                          ReemplazarJugador reemplazo = new ReemplazarJugador();
+                          reemplazo.idJugador = entity.jugadorIzq;
+                          var x = _opcionJugador.split('|')[0];
+                          reemplazo.idJugadorReemplazo = int.parse(x);
+                          reemplazo.idPartido = entity.idPartida;
+                          reemplazo.idTorneo = entity.idTorneo;
+                          reemplazo.izqDer = "I";
+                          reemplazo.states = StateEntity.Insert;
+                          llamadaReemplazo(reemplazo);
+                        },
+                        child: FaIcon(FontAwesomeIcons.retweet,
+                            color: AppTheme.themePurple),
                       ),
                     ],
                   ),
                   Row(
                     children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Image.network(
+                            entity.fotoDer,
+                            width: 50,
+                          ),
+                          Text(entity.nombreJugadorDer.toString(),
+                              style: TextStyle(color: AppTheme.themeWhite)),
+                        ],
+                      ),
                       InkWell(
-                          onTap: () {
-                            print(entity.nombreJugadorIzq.toString());
-                          },
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Image.network(
-                                entity.fotoIzq,
-                                width: 50,
-                              ),
-                              Text(entity.nombreJugadorIzq.toString(),
-                                  style: TextStyle(color: AppTheme.themeWhite)),
-                            ],
-                          )),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      InkWell(
-                          onTap: () {
-                            print(entity.nombreJugadorDer.toString());
-                          },
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Image.network(
-                                entity.fotoDer,
-                                width: 50,
-                              ),
-                              Text(entity.nombreJugadorDer.toString(),
-                                  style: TextStyle(color: AppTheme.themeWhite)),
-                            ],
-                          )),
+                        onTap: () {
+                          ReemplazarJugador reemplazo = new ReemplazarJugador();
+                          reemplazo.idJugador = entity.jugadorDer;
+                          var x = _opcionJugador.split('|')[0];
+                          reemplazo.idJugadorReemplazo = int.parse(x);
+                          reemplazo.idPartido = entity.idPartida;
+                          reemplazo.idTorneo = entity.idTorneo;
+                          reemplazo.izqDer = "D";
+                          reemplazo.states = StateEntity.Insert;
+
+                          llamadaReemplazo(reemplazo);
+                        },
+                        child: FaIcon(FontAwesomeIcons.retweet,
+                            color: AppTheme.themePurple),
+                      ),
                     ],
                   ),
                 ],
@@ -197,12 +229,33 @@ class _CustomizePlayerState extends State<CustomizePlayer> {
                 height: 2,
               ),
               SizedBox(
-                height: 10,
+                height: 15,
               ),
             ],
           ),
         );
       },
     );
+  }
+
+  llamadaReemplazo(ReemplazarJugador reemplazo) async {
+    await _cambiarJugadores(reemplazo);
+    setState(() {});
+
+    //futureBuilderTorneoPersonalizar(context, 82);
+  }
+
+  _cambiarJugadores(ReemplazarJugador entity) async {
+    try {
+      await new TourmentService().cambiarJugadores(entity).then((result) {
+        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
+        if (result["tipo_mensaje"] == '0')
+          showSnackbar(result["mensaje"], scaffoldKey);
+        else
+          showSnackbar(result["mensaje"], scaffoldKey);
+      });
+    } catch (error) {
+      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
+    }
   }
 }
