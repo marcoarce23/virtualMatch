@@ -65,7 +65,7 @@ dependencies:
   shimmer: ^1.1.1
   get: ^3.4.4
   convex_bottom_bar: ^2.4.1
-  tabbar: ^0.1.1
+  tabbar: ^0.1.1  
   # flt_video_player: ^0.0.4
   # flutter_pdfview: ^1.0.0+10
   # pdf_previewer: ^0.1.0

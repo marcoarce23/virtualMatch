@@ -140,7 +140,7 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             AppTheme.themePurple),
-          _text(
+        _text(
             controllerCantidad,
             '0',
             '(*) Ingrese cantidad de grupos',
@@ -194,7 +194,7 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
         cursorColor: AppTheme.themeDefault,
         toolbarOptions:
             ToolbarOptions(copy: true, cut: true, paste: true, selectAll: true),
-          decoration: inputDecoration(
+        decoration: inputDecoration(
             hintText, labelText, icon, hoverColor, fillColor, focusColor),
         onChanged: (value) {
           setState(() {
@@ -457,23 +457,46 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
     entity.idTipoCompeticion = int.parse(_opcionTipoCompeticion);
     entity.idaTipoTorneo = int.parse(_opcionTipoTorneo);
     entity.idaInscripcion = intFree;
-    entity.idaAsignacion = int.parse(controllerGrupos.text);
-    entity.cantidadJugadores = int.parse(controllerCantidad.text);
+    entity.idaAsignacion = int.parse(controllerCantidad.text);
+    entity.cantidadJugadores = int.parse(controllerGrupos.text);
     entity.idaTipoModalidad = int.parse(_opcionTipoModalidad);
     entity.usuarioAuditoria = prefs.email;
+    entity.conBoot = intManual;
   }
 
   void executeCUD(TourmentService entityService, FormatoModel entity) async {
-    try {
-      await entityService.repositoryDetail(entity).then((result) {
-        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
-        if (result["tipo_mensaje"] == '0') {
-          showSnackbar(STATUS_OK, scaffoldKey);
+    int cantidadGrupos = int.parse(controllerGrupos.text);
 
-          navegation(context, TourmentListPage());
-        } else
-          showSnackbar(STATUS_ERROR, scaffoldKey);
-      });
+    try {
+      if (entity.conBoot == 1) {
+        await entityService.repositoryDetail(entity).then((result) {
+          entityService
+              .ejecutarTorneoManual(
+            entity,
+            int.parse(controllerCantidad.text),
+            (cantidadGrupos ~/ int.parse(controllerCantidad.text)),
+          )
+              .then((result) {
+            print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
+            if (result["tipo_mensaje"] == '0') {
+              showSnackbar(STATUS_OK, scaffoldKey);
+
+              navegation(context, TourmentListPage());
+            } else
+              showSnackbar(STATUS_ERROR, scaffoldKey);
+          });
+        });
+      } else {
+        await entityService.repositoryDetail(entity).then((result) {
+          print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
+          if (result["tipo_mensaje"] == '0') {
+            showSnackbar(STATUS_OK, scaffoldKey);
+
+            navegation(context, TourmentListPage());
+          } else
+            showSnackbar(STATUS_ERROR, scaffoldKey);
+        });
+      }
     } catch (error) {
       showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
     }

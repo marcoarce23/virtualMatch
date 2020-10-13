@@ -117,7 +117,7 @@ class _MyAppState extends State<MyApp> {
             outputAndHome: option,
           ),  
           */
-          home: CustomizePlayer(),
+          home: LogOnPage(),
           //new HomePage(), //MapAdressModule(),
 
           routes: <String, WidgetBuilder>{
@@ -134,8 +134,7 @@ class _MyAppState extends State<MyApp> {
             'equipment': (BuildContext context) => new EquipmentAllPage(),
             'equipmentSelection': (BuildContext context) =>
                 new EquipmentSelectionPage(),
-            'playerPage': (BuildContext context) =>
-                new PlayerPage(),
+            'playerPage': (BuildContext context) => new PlayerPage(),
           }),
     );
   }

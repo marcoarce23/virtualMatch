@@ -2,6 +2,7 @@ import 'package:virtual_match/src/api/DataMap.dart';
 import 'package:virtual_match/src/api/core/tourment/ApiGet.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/AsignacionModel.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/ChangeDate.dart';
+import 'package:virtual_match/src/model/entity/EntityMap/FormatoModel.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/api/core/tourment/ApiAdd.dart';
 import 'package:virtual_match/src/api/core/tourment/ApiUpdate.dart';
@@ -63,6 +64,17 @@ class TourmentService {
     print('DEL VALOR DE EVENT BLOC: $result');
     isLoading = false;
     // notifyListeners();
+    return result;
+  }
+
+  Future<Map<String, dynamic>> ejecutarTorneoManual(
+      FormatoModel formato, int grupo, int jugadoresPorGrupo) async {
+    var result;
+    isLoading = true;
+    result =
+        await _apiAdd.ejecutarTorneoManual(formato, grupo, jugadoresPorGrupo);
+    isLoading = false;
+    //  notifyListeners();
     return result;
   }
 

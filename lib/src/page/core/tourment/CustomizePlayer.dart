@@ -240,7 +240,7 @@ class _CustomizePlayerState extends State<CustomizePlayer> {
 
   llamadaReemplazo(ReemplazarJugador reemplazo) async {
     await _cambiarJugadores(reemplazo);
-    setState(() {});
+    //setState(() {});
 
     //futureBuilderTorneoPersonalizar(context, 82);
   }
