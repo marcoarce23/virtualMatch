@@ -1,12 +1,15 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/JugadorModel.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/JugadorModel.dart'
     as model;
+import 'package:virtual_match/src/model/entity/EntityMap/JugadorModel.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/core/PlayerService.dart';
+import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/card/CardVM.dart';
@@ -29,6 +32,7 @@ class _PlayerPageState extends State<PlayerPage> {
   JugadorModelList entity = new JugadorModelList();
   model.JugadorModel entityModel = new model.JugadorModel();
   PlayerService entityGet = PlayerService();
+  List<JugadorModel> listPlayers = new List<JugadorModel>();
 
   // DEFINICIOND E VARIABLES
   final prefs = new Preferense();
@@ -43,10 +47,32 @@ class _PlayerPageState extends State<PlayerPage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-  
+
     return Scaffold(
       key: scaffoldKey,
-      appBar: appBar('CONOCE A LA COMUNIDAD'),
+      appBar: AppBar(
+        backgroundColor: AppTheme.themeDefault,
+        //toolbarOpacity: 0.7,
+        iconTheme: IconThemeData(color: AppTheme.themeWhite, size: 16),
+        elevation: 2.0,
+        title: Text('CONOCE A LA COMUNIDAD', style: kTitleAppBar),
+        actions: <Widget>[
+          IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {
+                showSearch(
+                    context: context,
+                    delegate: SearchPlayer(list: listPlayers));
+              }),
+
+          avatarCircleDefault(IMAGE_DEFAULT, 31.0),
+          //  FaIcon(
+          //     FontAwesomeIcons.edit,
+          //     color: AppTheme.themePurple,
+          //     size: 23,
+          //   ),
+        ],
+      ),
       drawer: DrawerMenu(),
       body: SafeArea(
         child: Container(
@@ -97,6 +123,9 @@ class _PlayerPageState extends State<PlayerPage> {
               return loading();
               break;
             default:
+              for (var i = 0; i < snapshot.data.length; i++) {
+                listPlayers.add(snapshot.data[i] as JugadorModel);
+              }
               return listView(context, snapshot);
           }
         });
@@ -130,7 +159,6 @@ class _PlayerPageState extends State<PlayerPage> {
               opciones: avatarCircle((entity.foto ?? IMAGE_LOGO), 35),
               accesosRapidos: opcionesLlamada(entity),
               listWidgets: [
-                Text('Titulo: ${entity.nombre} ${entity.apellido} '),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -180,5 +208,85 @@ class _PlayerPageState extends State<PlayerPage> {
         child: FaIcon(FontAwesomeIcons.whatsapp, color: Colors.white, size: 27),
       ),
     ];
+  }
+}
+
+class SearchPlayer extends SearchDelegate {
+  List<JugadorModel> list = new List<JugadorModel>();
+
+  SearchPlayer({this.list});
+
+  String selectResult;
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    return <Widget>[
+      IconButton(
+          icon: Icon(Icons.close),
+          onPressed: () {
+            query = "";
+          }),
+    ];
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    return IconButton(
+        icon: AnimatedIcon(
+          icon: AnimatedIcons.menu_arrow,
+          progress: transitionAnimation,
+        ),
+        onPressed: () {
+          Navigator.pop(context);
+        });
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    return Container(
+      child: Center(
+        child: Text(selectResult),
+      ),
+    );
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    final suggestionList = query.isEmpty
+        ? list
+        : list
+            .where((p) =>
+                p.nombre.toUpperCase().startsWith(query.toUpperCase()) ||
+                p.idPsdn.toUpperCase().startsWith(query.toUpperCase()) ||
+                p.apellido.toUpperCase().startsWith(query.toUpperCase()))
+            .toList();
+
+    return ListView.builder(
+        itemCount: suggestionList.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            onTap: () {
+              print(query);
+            },
+            leading: Image.network(
+              (suggestionList[index].foto),
+              width: 20,
+            ),
+            trailing: Text(suggestionList[index].idPsdn),
+            title: Row(
+              children: [
+                AutoSizeText(
+                  suggestionList[index].nombre +
+                      ' ' +
+                      suggestionList[index].apellido,
+                  style: TextStyle(color: Colors.black),
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: true,
+                  maxLines: 2,
+                  textAlign: TextAlign.left,
+                )
+              ],
+            ),
+          );
+        });
   }
 }
