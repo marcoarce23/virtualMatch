@@ -8,6 +8,7 @@ import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/page/core/player/PlayerSelectionPage.dart';
+import 'package:virtual_match/src/page/core/tourment/CustomizePlayer.dart';
 import 'package:virtual_match/src/service/core/PlayerService.dart';
 import 'package:virtual_match/src/service/core/TournamentService.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
@@ -145,6 +146,8 @@ class _TourmentListPageState extends State<TourmentListPage> {
                 style: TextStyle(color: AppTheme.themeWhite)),
             Text('MODALIDAD: ${entity.tipoModalidad}',
                 style: TextStyle(color: AppTheme.themeWhite)),
+            Text((entity.conBoot == 1) ? 'Generado con jugadores boots' : '',
+                style: TextStyle(color: AppTheme.themeWhite)),
           ],
         ),
       ],
@@ -156,11 +159,23 @@ class _TourmentListPageState extends State<TourmentListPage> {
       PopupMenuButton<int>(
         itemBuilder: (context) => [
           PopupMenuItem(
+            value: -1,
+            enabled: (entity.conBoot == 1) ? true : false,
+            child: Text("Cerra el torneo sin bots"),
+          ),
+          PopupMenuItem(
+            value: 0,
+            enabled: (entity.conBoot == 1) ? true : false,
+            child: Text("Reemplazar bots"),
+          ),
+          PopupMenuItem(
             value: 1,
+            enabled: (entity.conBoot == 1) ? false : true,
             child: Text("Registrar Participantes"),
           ),
           PopupMenuItem(
             value: 2,
+            enabled: (entity.conBoot == 1) ? false : true,
             child: Text("Empezar el torneo"),
           ),
           PopupMenuItem(
@@ -179,6 +194,15 @@ class _TourmentListPageState extends State<TourmentListPage> {
         onCanceled: () {},
         onSelected: (value) {
           switch (value) {
+            case -1:
+              break;
+            case 0:
+              navegation(
+                  context,
+                  CustomizePlayer(
+                    idTorneo: entity.idTorneo,
+                  ));
+              break;
             case 1:
               navegation(
                   context,
