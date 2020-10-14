@@ -21,7 +21,9 @@ import 'package:virtual_match/src/model/entity/EntityMap/JugadorModel.dart'
     as model1;
 
 class CustomizePlayer extends StatefulWidget {
-  CustomizePlayer({Key key}) : super(key: key);
+  int idTorneo;
+
+  CustomizePlayer({this.idTorneo});
 
   @override
   _CustomizePlayerState createState() => _CustomizePlayerState();
@@ -63,7 +65,7 @@ class _CustomizePlayerState extends State<CustomizePlayer> {
                 sizedBox(15.0, 20),
                 _comboJugador(),
                 divider(),
-                futureBuilderTorneoPersonalizar(context, 82),
+                futureBuilderTorneoPersonalizar(context, widget.idTorneo),
               ],
             ),
           ),
@@ -93,7 +95,6 @@ class _CustomizePlayerState extends State<CustomizePlayer> {
                         setState(() {
                           _opcionJugador = value;
                           print('valorrr: $_opcionJugador');
-
                           // _showPlayer('2');
                         });
                       },
