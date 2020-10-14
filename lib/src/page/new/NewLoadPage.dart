@@ -24,6 +24,8 @@ import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/model/util/Validator.dart' as validator;
 import 'package:virtual_match/src/widget/image/ImageWidget.dart';
+import 'package:virtual_match/src/model/entity/EntityFromJson/NoticiaEventoModel.dart'
+    as gets;
 
 class NewAllPage extends StatefulWidget {
   static final String routeName = 'new';
@@ -58,14 +60,14 @@ class _NewAllPagePageState extends State<NewAllPage> {
         backgroundColor: AppTheme.themeDefault,
         items: [
           BottomNavigationBarItem(
-              icon:Image.asset(
+              icon: Image.asset(
                 'assets/image/noticias_eventos.png',
                 width: 28,
                 height: 28,
               ),
               title: Text('Nueva')),
           BottomNavigationBarItem(
-              icon:Image.asset(
+              icon: Image.asset(
                 'assets/image/noticias.png',
                 width: 28,
                 height: 28,
@@ -102,6 +104,7 @@ class _NewLoadPageState extends State<NewLoadPage> {
 //DEFINICION DE BLOC Y MODEL
   NewService entityService = new NewService();
   NoticiaEventoModel entity = new NoticiaEventoModel();
+  gets.NoticiaEventoModel entityGet = new gets.NoticiaEventoModel();
   ImageService entityImage = new ImageService();
   final prefs = new Preferense();
 
@@ -131,12 +134,21 @@ class _NewLoadPageState extends State<NewLoadPage> {
     entity.states = StateEntity.Insert;
     entity.foto = image;
 
-    final NoticiaEventoModel entityModel =
+    final gets.NoticiaEventoModel entityModelGet =
         ModalRoute.of(context).settings.arguments;
 
-    if (entityModel != null) {
-      entity = entityModel;
+    if (entityModelGet != null) {
+      entity.idNoticiaEvento = entityModelGet.idNoticiaEvento;
+      entity.objetivo = entityModelGet.objetivo;
+      entity.titulo = entityModelGet.titulo;
+      entity.dirigidoA = entityModelGet.dirigidoa;
+      entity.ubicacionUrl = entityModelGet.ubicacionUrl;
+      _inputFieldDateController.text = entityModelGet.fecha;
+      _inputFieldTimeController.text = entityModelGet.hora;
+      entity.foto = entityModelGet.foto;
+      _selectedRadio = entityModelGet.tipo;
       entity.states = StateEntity.Update;
+      print(entityModelGet.titulo);
     }
 
     return Scaffold(
@@ -276,7 +288,7 @@ class _NewLoadPageState extends State<NewLoadPage> {
             Colors.red),
         _text(
             controllerDirigidoA,
-            entity.titulo,
+            entity.dirigidoA,
             '(*) Dirigido a:',
             140,
             2,
@@ -288,7 +300,7 @@ class _NewLoadPageState extends State<NewLoadPage> {
             Colors.red),
         _text(
             controllerUbicacion,
-            entity.titulo,
+            entity.ubicacionUrl,
             '(*) Ubicación/Publicación digital del evento',
             160,
             2,
@@ -327,7 +339,8 @@ class _NewLoadPageState extends State<NewLoadPage> {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 15.0),
       child: TextFormField(
-        style: TextStyle(color: AppTheme.themeBlackBlack, fontWeight: FontWeight.bold),
+        style: TextStyle(
+            color: AppTheme.themeBlackBlack, fontWeight: FontWeight.bold),
         initialValue: initialValue,
         textCapitalization: TextCapitalization.sentences,
         enableSuggestions: true,
@@ -358,7 +371,7 @@ class _NewLoadPageState extends State<NewLoadPage> {
     DateTime picked = await showDatePicker(
         context: context,
         initialDate: new DateTime.now(),
-        firstDate: new DateTime(2020, 4),
+        firstDate: new DateTime(2020, 10),
         lastDate: new DateTime(2025, 12),
         locale: Locale('es', 'ES'));
 
@@ -366,7 +379,8 @@ class _NewLoadPageState extends State<NewLoadPage> {
       setState(() {
         _fecha = DateFormat("dd/MM/yyyy").format(picked);
         _inputFieldDateController.text = _fecha;
-        //print(_inputFieldDateController.text);
+        entity.fecha = _inputFieldDateController.text;
+        print(_inputFieldDateController.text);
       });
     }
   }
@@ -382,7 +396,7 @@ class _NewLoadPageState extends State<NewLoadPage> {
           child: child,
         );
       },
-      //    locale: Locale('es', 'ES')
+      //    locale: Locale('es', 'ES'),
     );
 
     if (picked != null) {
@@ -391,7 +405,9 @@ class _NewLoadPageState extends State<NewLoadPage> {
         _inputFieldTimeController.text = _time.hour.toString() +
             ':' +
             _time.minute
-                .toString(); //TimeOfDay(hour: _time.hour, minute: _time.minute).toString();
+                .toString(); 
+              //TimeOfDay(hour: _time.hour, minute: _time.minute).toString();
+        entity.hora = _inputFieldTimeController.text;
       });
     }
   }
@@ -457,7 +473,10 @@ class _NewLoadPageState extends State<NewLoadPage> {
   }
 
   void loadingEntity() {
-    entity.idNoticiaEvento = 0;
+    print('xxxxxxxxxxxx: ${_inputFieldDateController.text} ');
+
+    entity.idNoticiaEvento =
+        (entity.states == StateEntity.Insert) ? 0 : entity.idNoticiaEvento;
     entity.idOrganizacion = int.parse(prefs.idInstitution);
     entity.idPersonal = int.parse(prefs.idPersonal);
     entity.titulo = controllerNoticia.text;
@@ -465,11 +484,10 @@ class _NewLoadPageState extends State<NewLoadPage> {
     entity.dirigidoA = controllerDirigidoA.text;
     entity.ubicacionUrl = controllerUbicacion.text;
     entity.usuarioAuditoria = prefs.email;
-    entity.fecha = _inputFieldDateController.text;
-    entity.hora = _inputFieldTimeController.text;
+  //  entity.fecha = _inputFieldDateController.text;
+   // entity.hora = _inputFieldTimeController.text;
     entity.tipo = _selectedRadio;
-    entity.fechaAuditoria = '2020-08-10 08:25';
-  }
+   }
 
   void executeCUD(NewService entityBloc, NoticiaEventoModel entity) async {
     try {
@@ -499,7 +517,7 @@ class _NewLoadPageState extends State<NewLoadPage> {
       image = await entityImage.uploadImage(photo.path);
       setState(() {
         entity.foto = image;
-     });
+      });
     }
   }
 }

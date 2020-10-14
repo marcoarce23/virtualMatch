@@ -130,7 +130,7 @@ class _MyAppState extends State<MyApp> {
             'notificationLoad': (BuildContext context) =>
                 new NotificationLoadPage(),
             'playerLoad': (BuildContext context) => new PlayerLoadPage(),
-
+'newLoad': (BuildContext context) => new NewLoadPage(),
             'equipment': (BuildContext context) => new EquipmentAllPage(),
             'equipmentSelection': (BuildContext context) =>
                 new EquipmentSelectionPage(),

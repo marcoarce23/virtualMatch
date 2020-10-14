@@ -11,7 +11,9 @@ import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/JugadorModel.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
+import 'package:virtual_match/src/page/general/ViewPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
+import 'package:virtual_match/src/page/login/AgreePage.dart';
 import 'package:virtual_match/src/service/ClasificadorService.dart';
 import 'package:virtual_match/src/service/ImageService.dart';
 import 'package:virtual_match/src/service/core/PlayerService.dart';
@@ -57,6 +59,7 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
 
   //
   bool _save = false;
+  bool _checked = false;
   int valueImage = 0;
   File photo;
   String image = IMAGE_DEFAULT;
@@ -79,6 +82,7 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
     if (entityModel != null) {
       entity = entityModel;
       entity.states = StateEntity.Update;
+      _checked = true;
     }
 
     return Scaffold(
@@ -232,7 +236,14 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             Colors.red),
-
+        Row(
+          children: [
+            sizedBox(10, 0),
+            Icon(Icons.remove_red_eye, color: Colors.black),
+            _agree(context),
+          ],
+        ),
+        _checkList(),
 //        _posibleVenta('Cliente para venta'),
 
         Text(
@@ -244,6 +255,40 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
         _button('Guardar', 18.0, 20.0),
         // gfCard(),
       ],
+    );
+  }
+
+  Widget _checkList() {
+    return CheckboxListTile(
+      title: Text(
+        'Acepto los términos de privacidad',
+        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+      ),
+      //   secondary: Text('Si está de acuerdo con los terminos de privacidad, seleccionar '),
+      value: _checked,
+      controlAffinity: ListTileControlAffinity.platform,
+      onChanged: (bool value) {
+        setState(() {
+          _checked = value;
+        });
+      },
+      activeColor: AppTheme.themeBlackBlack,
+      checkColor: AppTheme.themePurple,
+    );
+  }
+
+  Widget _agree(BuildContext context) {
+    return FlatButton(
+      child: Text(
+        'Revisar Políticas de privacidad'.toUpperCase(),
+        style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+      ),
+      onPressed: () => navegation(
+        context,
+        ViewPage(
+            title: 'Políticas de Privacidad',
+            url: 'https://www.virtual_match.bo/politicas-de-privacidad'),
+      ),
     );
   }
 
@@ -352,39 +397,46 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
 
     setState(() => _save = true);
     loadingEntity(_result);
-    
+
     setState(() => _save = false);
   }
 
   void loadingEntity(var _result) {
     String _url = '/api/Jugador';
+    String checked = '0';
 
-    if (entity.states == StateEntity.Insert) {
-      entity.idJugador = 0;
-    }
-    if (entity.states == StateEntity.Update) {
-      entity.idJugador = entity.idJugador;
-      _url = '/api/Jugador' + '/' + entity.idJugador.toString();
-    }
+    if (!_checked) {
+      showSnackbar('Debe aceptar las políticas de privacidad ', scaffoldKey);
+      return;
+    } else {
+      if (entity.states == StateEntity.Insert) {
+        entity.idJugador = 0;
+      }
+      if (entity.states == StateEntity.Update) {
+        entity.idJugador = entity.idJugador;
+        _url = '/api/Jugador' + '/' + entity.idJugador.toString();
+      }
+      if (_checked) checked = '1';
 
-    entity.idOrganizacion = int.parse(prefs.idOrganization);
-    entity.idaDepartamento = int.parse(_opcionDepartamento);
-    entity.idLogin = int.parse(prefs.idLogin);
-    entity.idPsdn = controllerIpsdn.text;
-    entity.nombre = controllerName.text;
-    entity.apellido = controllerSecondName.text;
-    entity.correo = prefs.email;
-    entity.telefono = controllerPhone.text;
-    entity.idaSexo = 0;
-    entity.informacionComplementaria = controllerInformation.text;
-    entity.facebook = controllerFacebook.text;
-    entity.twitter = 'sinTwitter';
-    entity.usuarioAuditoria = prefs.email;
-    executeCUD(entityService, entity, _result,  _url);
+      entity.idOrganizacion = int.parse(prefs.idOrganization);
+      entity.idaDepartamento = int.parse(_opcionDepartamento);
+      entity.idLogin = int.parse(prefs.idLogin);
+      entity.idPsdn = controllerIpsdn.text;
+      entity.nombre = controllerName.text;
+      entity.apellido = controllerSecondName.text;
+      entity.correo = prefs.email;
+      entity.telefono = controllerPhone.text;
+      entity.idaSexo = 0;
+      entity.informacionComplementaria = controllerInformation.text;
+      entity.facebook = controllerFacebook.text;
+      entity.twitter = checked;
+      entity.usuarioAuditoria = prefs.email;
+      executeCUD(entityService, entity, _result, _url);
+    }
   }
 
-  void executeCUD(
-      CrudService entityService, JugadorModel entity, var _result, String _url) async {
+  void executeCUD(CrudService entityService, JugadorModel entity, var _result,
+      String _url) async {
     // String _url = '/api/Jugador';
 
     // if (prefs.idPlayer != '0')

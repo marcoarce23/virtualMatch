@@ -299,14 +299,12 @@ class DrawerMenu extends StatelessWidget {
               height: 30,
             ),
             '      Jugadores de la comunidad', () {
-              if(prefs.idPlayer != '-1')
-                  navegation(context, PlayerEditPage());
-                  else
-                navegation(context, PlayerLoadPage());  
-
+          if (prefs.idPlayer != '-1')
+            navegation(context, PlayerEditPage());
+          else
+            navegation(context, PlayerLoadPage());
         }),
-       
-         CustomListTile(
+        CustomListTile(
             Image.asset(
               'assets/image/mensajeria.png',
               //scale: 0.4,
@@ -315,7 +313,6 @@ class DrawerMenu extends StatelessWidget {
             ),
             '       Crear Notificaciones',
             () => navegation(context, NotificationAllPage())),
-            
         CustomListTile(
             Image.asset(
               'assets/image/pelota.png',
@@ -335,6 +332,24 @@ class DrawerMenu extends StatelessWidget {
                 imageNetworkUrl: IMAGE_LOGO, sizeImage: Size.fromWidth(35)),
             '      Sobre Virtual Match',
             () => navegation(context, OrganizationPage())),
+        CustomListTile(
+            Image.asset(
+              'assets/image/noticias.png',
+              //scale: 0.4,
+              width: 38,
+              height: 38,
+            ),
+            '     Crear Noticias-Evento',
+            () => navegation(context, NewAllPage())),
+        CustomListTile(
+            Image.asset(
+              'assets/image/multimeda3.png',
+              //scale: 0.4,
+              width: 30,
+              height: 30,
+            ),
+            '       Cargar Multimedia',
+            () => navegation(context, MultimediaAllPage())),
         CustomListTile(
             Image.asset(
               'assets/image/jugador1.png',

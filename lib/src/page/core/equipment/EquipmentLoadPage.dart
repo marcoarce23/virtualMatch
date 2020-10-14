@@ -15,7 +15,6 @@ import 'package:virtual_match/src/page/core/equipment/EquipmentListPage.dart';
 import 'package:virtual_match/src/page/core/player/PlayerEditPage.dart';
 import 'package:virtual_match/src/page/core/player/PlayerEquipmentPage.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
-import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/ImageService.dart';
 import 'package:virtual_match/src/service/core/EquipmentService.dart';
 import 'package:virtual_match/src/style/Style.dart';
@@ -37,7 +36,11 @@ class EquipmentAllPage extends StatefulWidget {
 class _EquipmentAllPageState extends State<EquipmentAllPage> {
   int page = 0;
   final prefs = new Preferense();
-  final List<Widget> optionPage = [EquipmentLoadPage(), EquipmentListPage(), PlayerEquipmentPage()];
+  final List<Widget> optionPage = [
+    EquipmentLoadPage(),
+    EquipmentListPage(),
+    PlayerEquipmentPage()
+  ];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -126,7 +129,6 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
   //DEFINICION DE VARIABLES
   bool _save = false;
   File photo;
-  int valueImage = 0;
   String image = IMAGE_DEFAULT;
 
   @override
@@ -138,6 +140,7 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
 
   @override
   Widget build(BuildContext context) {
+    entity.foto = image;
     entity.states = StateEntity.Insert;
     entityService = Provider.of<EquipmentService>(context);
 
@@ -330,7 +333,7 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
 
   void loadingEntity() {
     entity.idEquipo = 0;
-    entity.idJugador = prefs.idPlayer;
+    entity.idJugador = 1;
     entity.nombre = controllerNoticia.text;
     entity.detalle = controllerDetalle.text;
     entity.foto = IMAGE_LOGO;

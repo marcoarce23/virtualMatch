@@ -307,17 +307,11 @@ class _LogOnPageState extends State<LogOnPage> {
         children: <Widget>[
           FlatButton(
             child: Text('Política de Privacidad'),
-            onPressed: () => Navigator.push(
+            onPressed: () => navegation(
               context,
-              PageTransition(
-                curve: Curves.bounceOut,
-                type: PageTransitionType.rotate,
-                alignment: Alignment.topCenter,
-                child: ViewPage(
-                    title: 'Políticas de Privacidad',
-                    url:
-                        'https://www.virtual_match.bo/politicas-de-privacidad'),
-              ),
+              ViewPage(
+                  title: 'Políticas de Privacidad',
+                  url: 'https://www.virtual_match.bo/politicas-de-privacidad'),
             ),
           ),
         ],

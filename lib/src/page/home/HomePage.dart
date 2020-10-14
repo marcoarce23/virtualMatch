@@ -123,7 +123,7 @@ class _HomePageState extends State<HomePage> {
       bottom: true,
       top: true,
       child: Scaffold(
-        appBar: appBar('LO ÚLTIMO '),
+        appBar: appBar('VIRTUAL MATCH'),
         body: SingleChildScrollView(
           child: Container(
             decoration: new BoxDecoration(
@@ -150,7 +150,8 @@ class _HomePageState extends State<HomePage> {
                     Radio(
                       activeColor: AppTheme.themeWhite,
                       focusColor: AppTheme.themePurple,
-                      autofocus: true,
+                      hoverColor: AppTheme.themePurple,
+                      //      autofocus: true,
                       value: 0,
                       groupValue: _group,
                       onChanged: (T) {
@@ -168,7 +169,8 @@ class _HomePageState extends State<HomePage> {
                     Radio(
                       activeColor: AppTheme.themeWhite,
                       focusColor: AppTheme.themePurple,
-                      autofocus: true,
+                      hoverColor: AppTheme.themePurple,
+                      //   autofocus: true,
                       value: 1,
                       groupValue: _group,
                       onChanged: (T) {
