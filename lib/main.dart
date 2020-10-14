@@ -14,6 +14,7 @@ import 'package:virtual_match/src/page/core/player/PlayerPage.dart';
 import 'package:virtual_match/src/page/core/tourment/CustomizePlayer.dart';
 import 'package:virtual_match/src/page/faq/FaqPage.dart';
 import 'package:virtual_match/src/page/login/LogOnPage.dart';
+import 'package:virtual_match/src/page/multimedia/MultimediaLoadPage.dart';
 import 'package:virtual_match/src/page/new/NewLoadPage.dart';
 import 'package:virtual_match/src/page/notification/NotificationLoadPage.dart';
 import 'package:virtual_match/src/service/LogInService.dart';
@@ -130,7 +131,8 @@ class _MyAppState extends State<MyApp> {
             'notificationLoad': (BuildContext context) =>
                 new NotificationLoadPage(),
             'playerLoad': (BuildContext context) => new PlayerLoadPage(),
-'newLoad': (BuildContext context) => new NewLoadPage(),
+            'newLoad': (BuildContext context) => new NewLoadPage(),
+            'newMultimedia': (BuildContext context) => MultimediaLoadPage(),
             'equipment': (BuildContext context) => new EquipmentAllPage(),
             'equipmentSelection': (BuildContext context) =>
                 new EquipmentSelectionPage(),

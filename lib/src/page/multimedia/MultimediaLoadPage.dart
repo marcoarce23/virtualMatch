@@ -28,6 +28,8 @@ import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/model/util/Validator.dart' as validator;
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 import 'package:virtual_match/src/widget/image/ImageWidget.dart';
+import 'package:virtual_match/src/model/entity/EntityFromJson/MultimediaModel.dart'
+    as gets;
 
 class MultimediaAllPage extends StatefulWidget {
   static final String routeName = 'multimedia';
@@ -57,45 +59,48 @@ class _MultimediaAllPageState extends State<MultimediaAllPage> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(builder: (_) => new MultimediaService()),
-      ],
-      child: Scaffold(
-        appBar: appBar('GALERÍA MULTIMEDIA'),
-        drawer: DrawerMenu(),
-        bottomNavigationBar: BottomNavigationBar(
-          elevation: 21.0,
-          backgroundColor: AppTheme.themeDefault,
-          items: [
-            BottomNavigationBarItem(
-                icon: Image.asset(
-                  'assets/image/papelvideo.png',
-                  width: 28,
-                  height: 28,
-                ),
-                title: Text('Multimedia')),
-            BottomNavigationBarItem(
-                icon: Image.asset(
-                  'assets/image/multimeda3.png',
-                  width: 28,
-                  height: 28,
-                ),
-                title: Text('Galería Multimedia')),
-          ],
-          currentIndex: page,
-          unselectedItemColor: AppTheme.themeWhite,
-          selectedItemColor: AppTheme.themePurple,
-          onTap: _onItemTapped,
-        ),
-        body: optionPage[page],
+    return
+
+        // MultiProvider(
+        //   providers: [
+        //     ChangeNotifierProvider(builder: (_) => new MultimediaService()),
+        //   ],
+        //  child:
+        Scaffold(
+      //    appBar: appBar('GALERÍA MULTIMEDIA'),
+      //   drawer: DrawerMenu(),
+      bottomNavigationBar: BottomNavigationBar(
+        elevation: 21.0,
+        backgroundColor: AppTheme.themeDefault,
+        items: [
+          BottomNavigationBarItem(
+              icon: Image.asset(
+                'assets/image/papelvideo.png',
+                width: 28,
+                height: 28,
+              ),
+              title: Text('Multimedia')),
+          BottomNavigationBarItem(
+              icon: Image.asset(
+                'assets/image/multimeda3.png',
+                width: 28,
+                height: 28,
+              ),
+              title: Text('Galería Multimedia')),
+        ],
+        currentIndex: page,
+        unselectedItemColor: AppTheme.themeWhite,
+        selectedItemColor: AppTheme.themePurple,
+        onTap: _onItemTapped,
       ),
+      body: optionPage[page],
+      //   ),
     );
   }
 }
 
 class MultimediaLoadPage extends StatefulWidget {
-  static final String routeName = 'newLoad';
+  static final String routeName = 'newMultimedia';
 
   @override
   _MultimediaLoadPageState createState() => _MultimediaLoadPageState();
@@ -115,11 +120,12 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
       new TextEditingController();
 
 //DEFINICION DE BLOC Y MODEL
-  MultimediaService entityService;
+  MultimediaService entityService = new MultimediaService();
   MultimediaModel entity = new MultimediaModel();
   ClasificadorService entityGet = ClasificadorService();
   ImageService entityImage = new ImageService();
   final prefs = new Preferense();
+  gets.MultimediaModel entityGet1 = new gets.MultimediaModel();
 
   //DEFINICION DE VARIABLES
   bool _save = false;
@@ -142,19 +148,26 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
   @override
   Widget build(BuildContext context) {
     entity.states = StateEntity.Insert;
-    entityService = Provider.of<MultimediaService>(context);
     entity.foto = image;
 
-    final MultimediaModel entityModel =
+    final gets.MultimediaModel entityModelGet =
         ModalRoute.of(context).settings.arguments;
 
-    if (entityModel != null) {
-      entity = entityModel;
+    if (entityModelGet != null) {
+      entity.idMultimedia = entityModelGet.idMultimedia;
+      entity.titulo = entityModelGet.titulo;
+      entity.resumen = entityModelGet.resumen;
+      _inputFieldDateInicioController.text = entityModelGet.fechainicio;
+      _inputFieldDateFinController.text = entityModelGet.fechafin;
       entity.states = StateEntity.Update;
+      entity.foto = entityModelGet.foto;
+      print(entityModelGet.foto);
     }
-
+    print(entityModelGet.foto);
     return Scaffold(
       key: scaffoldKey,
+      appBar: appBar('GALERÍA DE IMÁGENES'),
+      drawer: DrawerMenu(),
       body: Stack(
         children: <Widget>[
           background(context, entity.foto),
@@ -185,11 +198,11 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                    text('   CARGAR  MULTIMEDIA', AppTheme.themeDefault, 1,
-                        13.5),
+                    text('   CARGAR  GALERÍA DE IMÁGENES',
+                        AppTheme.themeDefault, 1, 13.5),
                     _crearIconAppImagenes(),
                     _crearIconAppCamara(),
-                    _crearIconAppVideo(),
+                    //    _crearIconAppVideo(),
                   ],
                 ),
               ),
@@ -245,14 +258,14 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
         sizedBox(0.0, 7.0),
         showPictureOval(photo, image, 70.0),
         dividerBlack(),
-        _combox('Seleccionar multimedia:'.toUpperCase()),
+        //    _combox('Seleccionar multimedia:'.toUpperCase()),
         _text(
             controllerNoticia,
             entity.titulo,
-            '(*) Nombre material multimedia',
+            '(*) Nombre material imágenes',
             100,
             2,
-            'Ingrese el nombre del matarial multimedia',
+            'Ingrese el nombre del material imágenes',
             true,
             FaIcon(FontAwesomeIcons.images, color: AppTheme.themeDefault),
             AppTheme.themeDefault,
@@ -261,29 +274,29 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
         _text(
             controllerDetalle,
             entity.resumen,
-            '(*) Detalle del material multimedia',
+            '(*) Detalle del material imágenes',
             140,
             2,
-            'Ingrese detalle del material multimedia',
+            'Ingrese detalle del material imágenes',
             true,
             FaIcon(FontAwesomeIcons.wpforms, color: AppTheme.themeDefault),
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             Colors.red),
-        _text(
-            controllerUbicacion,
-            entity.enlace,
-            '(*) Enlace digital del torneo',
-            140,
-            2,
-            '(*) Ingrese enlace del torneo (facebook, youtube)',
-            true,
-            FaIcon(FontAwesomeIcons.link, color: AppTheme.themeDefault),
-            AppTheme.themeDefault,
-            AppTheme.themeDefault,
-            Colors.red),
-        _initDate('(*) Fecha de inicio del torneo'),
-        _endDate('(*) Fecha de conclusión del torneo'),
+        // _text(
+        //     controllerUbicacion,
+        //     entity.enlace,
+        //     '(*) Enlace digital del torneo',
+        //     140,
+        //     2,
+        //     '(*) Ingrese enlace del torneo (facebook, youtube)',
+        //     true,
+        //     FaIcon(FontAwesomeIcons.link, color: AppTheme.themeDefault),
+        //     AppTheme.themeDefault,
+        //     AppTheme.themeDefault,
+        //     Colors.red),
+        _initDate('(*) Fecha de inicio de la publicación'),
+        _endDate('(*) Fecha de conclusión de la publicación'),
         Text(
           '(*) Campos obligatorios. ',
           style: kCamposTitleStyle,
@@ -382,7 +395,7 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
     DateTime picked = await showDatePicker(
         context: context,
         initialDate: new DateTime.now(),
-        firstDate: new DateTime(2020, 4),
+        firstDate: new DateTime(2020, 10),
         lastDate: new DateTime(2025, 12),
         locale: Locale('es', 'ES'));
 
@@ -399,7 +412,7 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
     DateTime picked = await showDatePicker(
         context: context,
         initialDate: new DateTime.now(),
-        firstDate: new DateTime(2020, 4),
+        firstDate: new DateTime(2020, 10),
         lastDate: new DateTime(2025, 12),
         locale: Locale('es', 'ES'));
 
@@ -474,16 +487,20 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
   }
 
   void loadingEntity() {
-    entity.idMultimedia = 0;
+    // entity.idMultimedia = 0;
+    entity.idMultimedia =
+        (entity.states == StateEntity.Insert) ? 0 : entity.idMultimedia;
+    entity.idOrganizacion = 1;
+
     entity.idOrganizacion = int.parse(prefs.idOrganization);
-    entity.idaCategoria = typeMaterial;
+    entity.idaCategoria = 14; //typeMaterial;
     entity.titulo = controllerNoticia.text;
     entity.resumen = controllerDetalle.text;
     entity.fechaInicio = _inputFieldDateInicioController.text;
     entity.fechaFin = _inputFieldDateFinController.text;
     entity.usuarioAuditoria = prefs.email;
-    entity.fechaAuditoria = '2020-08-10 08:25';
-    entity.enlace = controllerUbicacion.text;
+    // entity.fechaAuditoria = '2020-08-10 08:25';
+    entity.enlace = ''; // controllerUbicacion.text;
   }
 
   void executeCUD(

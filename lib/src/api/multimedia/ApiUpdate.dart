@@ -13,7 +13,7 @@ class ApiUpdate {
         .toString(); // eventResourceAdd['add'][0].toString()   ;
     //RouteAdd().postEvent(); // METODO QUE OBTENFA EL POST DEL EVENTO; MULTIMEDIA, VOLUTNARIO; HORARIO
     print('url: $apiRest');
-    final response = await http.post(apiRest,
+    final response = await http.put(apiRest,
         headers: {"Content-Type": "application/json"}, body: _body);
     return dataMap(response);
   }
