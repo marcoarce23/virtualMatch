@@ -137,6 +137,7 @@ class _MyAppState extends State<MyApp> {
             'equipmentSelection': (BuildContext context) =>
                 new EquipmentSelectionPage(),
             'playerPage': (BuildContext context) => new PlayerPage(),
+            'equipmentLoad': (BuildContext context) => new EquipmentLoadPage(),
           }),
     );
   }

@@ -8,7 +8,9 @@ import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/page/core/equipment/EquipmentLoadPage.dart';
 import 'package:virtual_match/src/service/core/EquipmentService.dart';
+import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
+import 'package:virtual_match/src/widget/card/CardVM.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/NotificactionService.dart';
@@ -28,7 +30,7 @@ class _EquipmentListPageState extends State<EquipmentListPage> {
   //DEFINICION DE BLOC Y MODEL
   EquipoModel entity = new EquipoModel();
   model.EquipoModel entityModel = new model.EquipoModel();
-EquipmentService entityService;
+  EquipmentService entityService;
   EquipmentService entityGet = EquipmentService();
 
   // DEFINICIOND E VARIABLES
@@ -50,38 +52,47 @@ EquipmentService entityService;
       key: scaffoldKey,
       body: SafeArea(
         child: Container(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              backgroundBasic(context),
-              Container(
-                width: size.width * 0.95,
-                margin: EdgeInsets.symmetric(vertical: 0.0),
-                child: Column(
-                  children: <Widget>[
-                    sizedBox(0.0, 8),
-                    showInformationBasic(
+          decoration: new BoxDecoration(
+            image: new DecorationImage(
+              image: new AssetImage('assets/portada2.png'),
+              fit: BoxFit.cover,
+            ),
+          ),
+          child: Container(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                backgroundBasic(context),
+                Container(
+                  width: size.width * 0.95,
+                  margin: EdgeInsets.symmetric(vertical: 0.0),
+                  child: Column(
+                    children: <Widget>[
+                      sizedBox(0.0, 8),
+                      showInformationBasic(
                         context,
-                        'ADMINISTRA TUS EQUIPOS',
-                        'En esta pantalla puedes modificar y eliminar y gestionar tu equipo creado.',),
-                    dividerBlack(),
-                  ],
+                        'ADMINISTRA TU EQUIPO',
+                        'En esta pantalla puedes modificar y eliminar y gestionar tu equipo creado.',
+                      ),
+                      dividerBlack(),
+                    ],
+                  ),
                 ),
-              ),
-              futureBuilder(context),
-              copyRigthBlack(),
-            ],
+                futureBuilder(context),
+                copyRigthBlack(),
+              ],
+            ),
           ),
         ),
       ),
-       floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
+      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
           FaIcon(FontAwesomeIcons.playstation), EquipmentAllPage()),
     );
   }
 
   Widget futureBuilder(BuildContext context) {
     return FutureBuilder(
-        future: entityGet.get (new EquipoModel()),
+        future: entityGet.get(new EquipoModel()),
         builder: (context, AsyncSnapshot snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
@@ -109,78 +120,83 @@ EquipmentService entityService;
     );
   }
 
+  Widget _simplePopup(EquipoModel entity, String keyId, BuildContext context) =>
+      PopupMenuButton<int>(
+        itemBuilder: (context) => [
+          PopupMenuItem(
+            value: 1,
+            child: Text("Editar"),
+          ),
+          PopupMenuItem(
+            value: 2,
+            child: Text("Eliminar"),
+          ),
+        ],
+        onCanceled: () {
+          print("You have canceled the menu.");
+        },
+        onSelected: (value) {
+          switch (value) {
+            case 1:
+              Navigator.pushNamed(context, 'equipmentLoad',
+                  arguments: entity);
+              break;
+            case 2:
+              entityModel.idEquipo = int.parse(keyId);
+
+              setState(() {
+                setState(() {
+                  entityModel.idEquipo = int.parse(keyId);
+                  print('eliminar ${entityModel.idEquipo}');
+                  executeDelete(entityModel.idEquipo.toString(), prefs.email);
+                });
+              });
+
+              break;
+            default:
+              showSnackbarWithOutKey("No hay opcion seleccionada", context);
+              break;
+          }
+        },
+        icon: Icon(
+          Icons.menu,
+          color: Colors.white,
+        ),
+        offset: Offset(0, 100),
+      );
+
   Widget _showListTile(EquipoModel entity) {
-    final size = MediaQuery.of(context).size;
     return Column(
       children: <Widget>[
-        sizedBox(0, 7.0),
-        Container(
-          width: size.width * 0.95,
-          margin: EdgeInsets.symmetric(vertical: 0.0),
-          decoration: boxDecoration(),
-          child: Column(
-            children: <Widget>[
-              gfListTileKey(
-                  Key(entity.idEquipo.toString()),
-                  Text('Equipo: ${entity.nombre}'),
-                  Text('Detalle: ${entity.detalle}'),
-                  _showAction(entity, entity.idEquipo.toString()),
-                  null,
-                  avatarCircle((entity.foto ?? IMAGE_LOGO), 35),
-                  EdgeInsets.all(5.0),
-                  EdgeInsets.all(3.0)),
-            ],
-          ),
+        Column(
+          children: <Widget>[
+            sizedBox(0, 7),
+            CardVM(
+              size: 90,
+              imageAssets: 'assets/icono3.png',
+              opciones:
+                  _simplePopup(entity, entity.idEquipo.toString(), context),
+              accesosRapidos: null,
+              listWidgets: [
+                Text(
+                  'TÍTULO : ${entity.nombre}',
+                  style: kSubtitleStyleWhite,
+                  softWrap: true,
+                  overflow: TextOverflow.clip,
+                  textAlign: TextAlign.justify,
+                ),
+                Text(
+                  'DETALLE: ${entity.detalle}',
+                  style: kSubtitleStyleWhite,
+                  softWrap: true,
+                  overflow: TextOverflow.clip,
+                  textAlign: TextAlign.justify,
+                ),
+              ],
+            ),
+          ],
         ),
       ],
-    );
-    //Text(entity.nombreEquipo);
-  }
-
-  Widget _showAction(EquipoModel entity, String keyId) {
-    return Row(
-      children: <Widget>[
-        Text('Operaciones: $keyId'),
-        sizedBox(10, 0),
-        _update(),
-        sizedBox(10, 0),
-        _delete(keyId),
-      ],
-    );
-  }
-
- 
-  _update() {
-    entityModel.states = StateEntity.Update;
-    entityModel.usuarioAuditoria = prefs.email;
-
-    return InkWell(
-      child: FaIcon(
-        FontAwesomeIcons.edit,
-        color: AppTheme.themePurple,
-        size: 23,
-      ),
-      onTap: () {
-        setState(() {});
-      },
-    );
-  }
-
-  _delete(String keyId) {
-    return InkWell(
-      key: Key(keyId),
-      child: FaIcon(
-        FontAwesomeIcons.trashAlt,
-        color: AppTheme.themePurple,
-        size: 23,
-      ),
-      onTap: () {
-        setState(() {
-          entityModel.idEquipo = int.parse(keyId);
-          print('eliminar ${entityModel.idEquipo}');
-          executeDelete(entityModel.idEquipo.toString(), prefs.email);
-        });
-      },
     );
   }
 
@@ -196,9 +212,7 @@ EquipmentService entityService;
     } catch (error) {
       showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
     }
-       setState(() {
-     
-   });
+    setState(() {});
   }
 
   void executeUpdate(

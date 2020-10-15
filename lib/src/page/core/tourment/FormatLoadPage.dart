@@ -58,6 +58,8 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
   bool isFree = false;
   bool isManual = false;
   bool isIndividual = false;
+  bool is11vs11 = false;
+  int int11vs11 = 0;
   File photo;
   String typeCount = '2';
   String image = IMAGE_DEFAULT;
@@ -157,7 +159,8 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
         _comboModalidad(_opcionTipoModalidad),
         //     _porEquipo('Por equipo?'),
         _inscription('Torneo de Pago'),
-        _selection('Selección Manual'),
+        _selection('Será creará con boots'),
+        _vs11vs('Será Torneo 11 Vs. 11'),
         Text(
           '(*) Campos obligatorios. ',
           style: kCamposTitleStyle,
@@ -413,10 +416,22 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
     return SwitchListTile(
       value: isManual,
       title: Text(text),
-      subtitle: Text('Habilitar opción si será manual.'),
+      subtitle: Text('Habilitar opción si se crearán boots'),
       activeColor: AppTheme.themePurple,
       onChanged: (value) => setState(() {
         isManual = value;
+      }),
+    );
+  }
+
+  Widget _vs11vs(String text) {
+    return SwitchListTile(
+      value: is11vs11,
+      title: Text(text),
+      subtitle: Text('Habilitar opción si será 11 Vs. 11.'),
+      activeColor: AppTheme.themePurple,
+      onChanged: (value) => setState(() {
+        is11vs11 = value;
       }),
     );
   }
@@ -452,6 +467,7 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
 
     if (isFree) intFree = 1;
     if (isManual) intManual = 1;
+    if (is11vs11) int11vs11 = 1;
 
     entity.idTorneo = int.parse(_opcionCodTorneo);
     entity.idTipoCompeticion = int.parse(_opcionTipoCompeticion);
@@ -462,6 +478,7 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
     entity.idaTipoModalidad = int.parse(_opcionTipoModalidad);
     entity.usuarioAuditoria = prefs.email;
     entity.conBoot = intManual;
+    entity.con11vs11 = int11vs11;
   }
 
   void executeCUD(TourmentService entityService, FormatoModel entity) async {

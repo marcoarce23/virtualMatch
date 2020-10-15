@@ -203,6 +203,11 @@ class _PlayerEditPageState extends State<PlayerEditPage> {
 
           PopupMenuItem(
             value: 4,
+            child: Text("Salir de un equipo"),
+          ),
+
+          PopupMenuItem(
+            value: 5,
             child: Text("Sobre mi equipo"),
           ),
         ],
@@ -221,12 +226,14 @@ class _PlayerEditPageState extends State<PlayerEditPage> {
               Navigator.pushNamed(context, 'equipment', arguments: entity);
               break;
             case 3:
-              Navigator.pushNamed(context, 'equipmentSelection',
-                  arguments: entity);
+
+              ///api/Equipo/InscribirJugador
+
+              ///api/Equipo/SalirEquipo/{agrupador}/jugador/{idJugador}
+
               break;
-            case 4:
+            case 5:
               Navigator.pushNamed(context, 'playerPage', arguments: entity);
-              break;
 
               break;
             default:
@@ -240,4 +247,30 @@ class _PlayerEditPageState extends State<PlayerEditPage> {
         ),
         offset: Offset(0, 100),
       );
+
+  _inscribirse(String keyId, String modalidad) {
+    _executeGenerator(
+        '/api/Torneo/execGenerarLiga/' + keyId + '/usuario/' + prefs.email);
+  }
+
+  _salirse(String keyId, String agrupador) {
+    _executeGenerator(
+        '/api/Equipo/SalirEquipo/' + agrupador + '/jugador/' + prefs.idPlayer);
+  }
+
+  void _executeGenerator(String url) async {
+    print('EL URLLL: $url}');
+    try {
+      // await entityService.execute(API + url).then((result) {
+      //   if (result["tipo_mensaje"] == '0')
+      //     showSnackbar(result["mensaje"], scaffoldKey);
+      //   else
+      //     showSnackbar(result["mensaje"], scaffoldKey);
+      // });
+    } catch (error) {
+      showSnackbar(
+          'No puede generar porque aun no se completo la cantidad de jugadores inscritos !!',
+          scaffoldKey);
+    }
+  }
 }

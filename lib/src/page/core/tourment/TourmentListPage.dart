@@ -336,24 +336,7 @@ class _TourmentListPageState extends State<TourmentListPage> {
           '/api/Torneo/execGenerarLiga/' + keyId + '/usuario/' + prefs.email);
   }
 
-  void executeDelete(String id, String usuario) async {
-    try {
-      await entityService
-          .delete(
-        id,
-        usuario,
-      )
-          .then((result) {
-        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
-        if (result["tipo_mensaje"] == '0')
-          showSnackbar(STATUS_OK, scaffoldKey);
-        else
-          showSnackbar(STATUS_ERROR, scaffoldKey);
-      });
-    } catch (error) {
-      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
-    }
-  }
+
 
   void executeUpdate(
       TourmentService entityService, model.TorneoModel entity) async {

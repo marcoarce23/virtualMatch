@@ -9,7 +9,8 @@ class EquipoModel implements IEntityMap {
   String detalle;
   String foto;
   String usuarioAuditoria;
-  String fechaAuditoria;
+  int agrupador;
+  int esCapitan;
 
   EquipoModel(
       {this.states = StateEntity.None,
@@ -19,15 +20,17 @@ class EquipoModel implements IEntityMap {
       this.detalle,
       this.foto,
       this.usuarioAuditoria,
-      this.fechaAuditoria});
+      this.agrupador,
+      this.esCapitan});
 
   Map<String, dynamic> toJson() => {
         "idEquipo": idEquipo,
-        "idJugador": idJugador,
         "nombre": nombre,
         "detalle": detalle,
         "foto": foto,
         "usuarioAuditoria": usuarioAuditoria,
-        "fechaAuditoria": fechaAuditoria
+        "idJugador": idJugador,
+        "agrupador": agrupador,
+        "esCapitan": esCapitan
       };
 }

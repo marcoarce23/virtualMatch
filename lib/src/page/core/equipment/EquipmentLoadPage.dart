@@ -332,13 +332,15 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
   }
 
   void loadingEntity() {
-    entity.idEquipo = 0;
-    entity.idJugador = 1;
+    entity.idEquipo =
+        (entity.states == StateEntity.Insert) ? 0 : entity.idEquipo;
+    entity.idJugador = 208;
+    //int.parse(prefs.idPlayer);
     entity.nombre = controllerNoticia.text;
     entity.detalle = controllerDetalle.text;
-    entity.foto = IMAGE_LOGO;
     entity.usuarioAuditoria = prefs.email;
-    entity.fechaAuditoria = '2020-08-10 08:25';
+    entity.agrupador = 0;
+    entity.esCapitan = 1;
   }
 
   void executeCUD(EquipmentService entityService, EquipoModel entity) async {
