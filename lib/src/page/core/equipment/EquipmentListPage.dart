@@ -74,12 +74,20 @@ class _EquipmentListPageState extends State<EquipmentListPage> {
                         'ADMINISTRA TU EQUIPO',
                         'En esta pantalla puedes modificar y eliminar y gestionar tu equipo creado.',
                       ),
-                      dividerBlack(),
+                      sizedBox(0.0, 8),
+                      Center(
+                        child: Image(
+                          image: NetworkImage(IMAGE_SCREEN3),
+                          height: 180.0,
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      divider(),
                     ],
                   ),
                 ),
                 futureBuilder(context),
-                copyRigthBlack(),
+                copyRigth(),
               ],
             ),
           ),
@@ -138,8 +146,7 @@ class _EquipmentListPageState extends State<EquipmentListPage> {
         onSelected: (value) {
           switch (value) {
             case 1:
-              Navigator.pushNamed(context, 'equipmentLoad',
-                  arguments: entity);
+              Navigator.pushNamed(context, 'equipmentLoad', arguments: entity);
               break;
             case 2:
               entityModel.idEquipo = int.parse(keyId);
@@ -172,12 +179,14 @@ class _EquipmentListPageState extends State<EquipmentListPage> {
           children: <Widget>[
             sizedBox(0, 7),
             CardVM(
-              size: 90,
+              size: 150,
               imageAssets: 'assets/icono3.png',
               opciones:
                   _simplePopup(entity, entity.idEquipo.toString(), context),
               accesosRapidos: null,
               listWidgets: [
+                avatarCircle(entity.foto, 55),
+                sizedBox(0, 7),
                 Text(
                   'TÍTULO : ${entity.nombre}',
                   style: kSubtitleStyleWhite,
