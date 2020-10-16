@@ -34,3 +34,23 @@ class EquipoModel implements IEntityMap {
         "esCapitan": esCapitan
       };
 }
+
+class EquipoStateModel implements IEntityMap {
+  @override
+  StateEntity states;
+  int idEquipo;
+  int estado;
+  int idJugador;
+
+  EquipoStateModel(
+      {this.states = StateEntity.None,
+      this.idEquipo = 0,
+      this.estado,
+      this.idJugador});
+
+  Map<String, dynamic> toJson() => {
+        "idEquipo": idEquipo,
+        "estado": estado,
+        "idJugador": idJugador,
+      };
+}

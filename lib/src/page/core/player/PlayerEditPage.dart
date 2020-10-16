@@ -5,6 +5,8 @@ import 'package:virtual_match/src/model/entity/EntityFromJson/JugadorModel.dart'
 import 'package:virtual_match/src/model/entity/EntityMap/JugadorModel.dart'
     as model;
 import 'package:virtual_match/src/model/util/Const.dart';
+import 'package:virtual_match/src/page/core/equipment/EquipmetAllListPage.dart';
+import 'package:virtual_match/src/page/core/player/PlayerEquipmentPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/core/PlayerService.dart';
 import 'package:virtual_match/src/style/Style.dart';
@@ -198,16 +200,11 @@ class _PlayerEditPageState extends State<PlayerEditPage> {
 
           PopupMenuItem(
             value: 3,
-            child: Text("Incribite a un equipo"),
+            child: Text("Incribirse o salirse de un equipo"),
           ),
 
           PopupMenuItem(
             value: 4,
-            child: Text("Salir de un equipo"),
-          ),
-
-          PopupMenuItem(
-            value: 5,
             child: Text("Sobre mi equipo"),
           ),
         ],
@@ -226,14 +223,13 @@ class _PlayerEditPageState extends State<PlayerEditPage> {
               Navigator.pushNamed(context, 'equipment', arguments: entity);
               break;
             case 3:
-
-              ///api/Equipo/InscribirJugador
+              navegation(context, EquipmentAllListPage());
 
               ///api/Equipo/SalirEquipo/{agrupador}/jugador/{idJugador}
 
               break;
-            case 5:
-              Navigator.pushNamed(context, 'playerPage', arguments: entity);
+            case 4:
+              navegation(context, PlayerEquipmentPage());
 
               break;
             default:
@@ -248,29 +244,29 @@ class _PlayerEditPageState extends State<PlayerEditPage> {
         offset: Offset(0, 100),
       );
 
-  _inscribirse(String keyId, String modalidad) {
-    _executeGenerator(
-        '/api/Torneo/execGenerarLiga/' + keyId + '/usuario/' + prefs.email);
-  }
+  // _inscribirse(String keyId, String modalidad) {
+  //   _executeGenerator(
+  //       '/api/Torneo/execGenerarLiga/' + keyId + '/usuario/' + prefs.email);
+  // }
 
-  _salirse(String keyId, String agrupador) {
-    _executeGenerator(
-        '/api/Equipo/SalirEquipo/' + agrupador + '/jugador/' + prefs.idPlayer);
-  }
+  // _salirse(String keyId, String agrupador) {
+  //   _executeGenerator(
+  //       '/api/Equipo/SalirEquipo/' + agrupador + '/jugador/' + prefs.idPlayer);
+  // }
 
-  void _executeGenerator(String url) async {
-    print('EL URLLL: $url}');
-    try {
-      // await entityService.execute(API + url).then((result) {
-      //   if (result["tipo_mensaje"] == '0')
-      //     showSnackbar(result["mensaje"], scaffoldKey);
-      //   else
-      //     showSnackbar(result["mensaje"], scaffoldKey);
-      // });
-    } catch (error) {
-      showSnackbar(
-          'No puede generar porque aun no se completo la cantidad de jugadores inscritos !!',
-          scaffoldKey);
-    }
-  }
+  // void _executeGenerator(String url) async {
+  //   print('EL URLLL: $url}');
+  //   try {
+  //     // await entityService.execute(API + url).then((result) {
+  //     //   if (result["tipo_mensaje"] == '0')
+  //     //     showSnackbar(result["mensaje"], scaffoldKey);
+  //     //   else
+  //     //     showSnackbar(result["mensaje"], scaffoldKey);
+  //     // });
+  //   } catch (error) {
+  //     showSnackbar(
+  //         'No puede generar porque aun no se completo la cantidad de jugadores inscritos !!',
+  //         scaffoldKey);
+  //   }
+  // }
 }

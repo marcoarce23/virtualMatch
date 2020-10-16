@@ -53,11 +53,31 @@ class EquipmentService with ChangeNotifier {
     return _result;
   }
 
+Future<List<IEntityJson>> getListarEquipos(IEntityJson entityJson) async {
+    var _result = await _apiGet.getListarEquipos(entityJson);
+
+    isLoading = false;
+    notifyListeners();
+    notifyListeners();
+    return _result;
+  }
+
   Future<List<IEntityJson>> getTodosJugadores(
       IEntityJson entityJson, int value) async {
     var _result = await _apiGet.getTodosJugadores(entityJson, value);
 
     isLoading = false;
+    notifyListeners();
+    return _result;
+  }
+
+  Future<List<IEntityJson>> getMisEquipos(
+      IEntityJson entityJson, String idPlayer) async {
+    print('idplaeee: ${idPlayer}');
+    var _result = await _apiGet.getMisEquipos(entityJson, idPlayer);
+
+    isLoading = false;
+    notifyListeners();
     notifyListeners();
     return _result;
   }

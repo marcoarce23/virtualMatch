@@ -17,11 +17,13 @@ import 'package:virtual_match/src/widget/general/SenWidget.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 
 class PlayerEquipmentPage extends StatefulWidget {
-  static final String routeName = 'playerEquipmentPage';
-  PlayerEquipmentPage({Key key}) : super(key: key);
-
+  static final String routeName = 'player11vs11';
   @override
   _PlayerEquipmentPageState createState() => _PlayerEquipmentPageState();
+
+  int grupo;
+
+  PlayerEquipmentPage({this.grupo}) ;
 }
 
 class _PlayerEquipmentPageState extends State<PlayerEquipmentPage> {
@@ -46,8 +48,8 @@ class _PlayerEquipmentPageState extends State<PlayerEquipmentPage> {
 
     return Scaffold(
       key: scaffoldKey,
-      //  appBar: appBar('TUS JUGADORES'),
-      // drawer: DrawerMenu(),
+       appBar: appBar('TUS JUGADORES'),
+       drawer: DrawerMenu(),
       body: SafeArea(
         child: Container(
           decoration: new BoxDecoration(
@@ -90,7 +92,7 @@ class _PlayerEquipmentPageState extends State<PlayerEquipmentPage> {
 
   Widget futureBuilder(BuildContext context) {
     return FutureBuilder(
-        future: entityGet.get(new model.JugadorModel()),
+        future: entityGet.getMisJugadores(new model.JugadorModel(), '198'),
         builder: (context, AsyncSnapshot snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
