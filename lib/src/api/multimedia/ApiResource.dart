@@ -6,4 +6,5 @@ Map<String, List<String>> api = {
   'delete': [API + '/api/Multimedia', ''],
   'getId': [API + '/api/Multimedia', ''],
   'update': [API + '/api/Multimedia', ''],
+  'patrocinador': [API + '/api/Multimedia/getPatrocinadores', ''],
 };
