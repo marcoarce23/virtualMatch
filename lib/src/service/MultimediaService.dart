@@ -6,7 +6,7 @@ import 'package:virtual_match/src/api/multimedia/ApiUpdate.dart';
 import 'package:virtual_match/src/api/multimedia/ApiDelete.dart';
 
 class MultimediaService with ChangeNotifier {
- bool isLoading = true;
+  bool isLoading = true;
 
   final _apiAdd = new ApiAdd();
   final _apiDelete = new ApiDelete();
@@ -53,6 +53,14 @@ class MultimediaService with ChangeNotifier {
 
   Future<List<IEntityJson>> getId(IEntityJson entityJson, int value) async {
     var _result = await _apiGet.getId(entityJson, value);
+
+    isLoading = false;
+    notifyListeners();
+    return _result;
+  }
+
+  Future<List<IEntityJson>> getPatrocinador(IEntityJson entityJson) async {
+    var _result = await _apiGet.getPatrocinador(entityJson);
 
     isLoading = false;
     notifyListeners();

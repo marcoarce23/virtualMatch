@@ -1,24 +1,19 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:intl/intl.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/NoticiaEventoModel.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/NotificacionModel.dart';
-import 'package:virtual_match/src/model/entity/EntityFromJson/TorneoPersonalizar.dart';
+import 'package:virtual_match/src/model/entity/EntityMap/CardSlideProduct.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
-import 'package:virtual_match/src/model/util/Resource.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
 import 'package:virtual_match/src/service/NewService.dart';
-import 'package:virtual_match/src/service/core/TournamentService.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/bottonNavigationBar/BottonNavigatorWidget.dart';
-import 'package:virtual_match/src/widget/carousel/CarouselWidget.dart';
+import 'package:virtual_match/src/widget/card/CardSlideProductWidget.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
-import 'package:virtual_match/src/widget/menu/bottomMenu.dart';
 
 class HomePage extends StatefulWidget {
   static final String routeName = 'home';
@@ -180,22 +175,6 @@ class _HomePageState extends State<HomePage> {
                         });
                       },
                     ),
-                    /*
-                    Text('Multimedia',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 13,
-                            color: AppTheme.themeWhite)),
-                    Radio(
-                      value: 2,
-                      groupValue: _group,
-                      onChanged: (T) {
-                        _selectedRadio = 15;
-                        setState(() {
-                          _group = T;
-                        });
-                      },
-                    ),*/
                   ],
                 ),
                 futureBuilderNoticias(context, _group),
