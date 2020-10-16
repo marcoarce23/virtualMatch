@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/JugadorModel.dart';
-import 'package:virtual_match/src/model/entity/EntityMap/JugadorModel.dart'
-    as model;
+import 'package:virtual_match/src/model/entity/EntityMap/EquipoModel.dart';
+import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
+import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
+import 'package:virtual_match/src/service/core/EquipmentService.dart';
 import 'package:virtual_match/src/service/core/PlayerService.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
@@ -23,14 +25,15 @@ class PlayerEquipmentPage extends StatefulWidget {
 
   int grupo;
 
-  PlayerEquipmentPage({this.grupo}) ;
+  PlayerEquipmentPage({this.grupo});
 }
 
 class _PlayerEquipmentPageState extends State<PlayerEquipmentPage> {
   //DEFINICION DE BLOC Y MODEL
-  JugadorModelList entity = new JugadorModelList();
-  model.JugadorModel entityModel = new model.JugadorModel();
+  JugadorEquipoModelList entity = new JugadorEquipoModelList();
   PlayerService entityGet = PlayerService();
+  EquipoStateModel entityStateModel = new EquipoStateModel();
+  EquipmentService entityService = new EquipmentService();
 
   // DEFINICIOND E VARIABLES
   final prefs = new Preferense();
@@ -48,8 +51,8 @@ class _PlayerEquipmentPageState extends State<PlayerEquipmentPage> {
 
     return Scaffold(
       key: scaffoldKey,
-       appBar: appBar('TUS JUGADORES'),
-       drawer: DrawerMenu(),
+      appBar: appBar('TUS JUGADORES'),
+      drawer: DrawerMenu(),
       body: SafeArea(
         child: Container(
           decoration: new BoxDecoration(
@@ -92,7 +95,7 @@ class _PlayerEquipmentPageState extends State<PlayerEquipmentPage> {
 
   Widget futureBuilder(BuildContext context) {
     return FutureBuilder(
-        future: entityGet.getMisJugadores(new model.JugadorModel(), '198'),
+        future: entityGet.getMisJugadores(new JugadorEquipoModelList(), '198'),
         builder: (context, AsyncSnapshot snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
@@ -112,7 +115,7 @@ class _PlayerEquipmentPageState extends State<PlayerEquipmentPage> {
         physics: ClampingScrollPhysics(),
         itemCount: snapshot.data.length,
         itemBuilder: (context, index) {
-          model.JugadorModel entity = snapshot.data[index];
+          JugadorEquipoModelList entity = snapshot.data[index];
 
           return _showListTile(entity);
         },
@@ -120,32 +123,43 @@ class _PlayerEquipmentPageState extends State<PlayerEquipmentPage> {
     );
   }
 
-  Widget _showListTile(model.JugadorModel entity) {
+  Widget _showListTile(JugadorEquipoModelList entity) {
     return Column(
       children: <Widget>[
         Column(
           children: <Widget>[
             sizedBox(0, 7),
             CardVM(
-              size: 120,
+              size: 170,
               imageAssets: 'assets/icono3.png',
               opciones: avatarCircle((entity.foto ?? IMAGE_LOGO), 35),
               accesosRapidos: opcionesLlamada(entity),
               listWidgets: [
-                Text('Titulo: ${entity.nombre} ${entity.apellido} '),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      '${entity.nombre} ${entity.apellido}',
+                      'EQUIPO: ${entity.nombreEquipo}',
                       style: TextStyle(color: AppTheme.themeWhite),
                     ),
                     Text(
-                      'IPSDN: ${entity.idPsdn}',
+                      'DETALLE: ${entity.detalle}',
                       style: TextStyle(color: AppTheme.themeWhite),
                     ),
                     Text(
-                      'Departamento: ${entity.idaDepartamento}',
+                      'JUGADOR: ${entity.nombreJugador}',
+                      style: TextStyle(color: AppTheme.themeWhite),
+                    ),
+                    Text(
+                      'IPSDN: ${entity.psdnJugador}',
+                      style: TextStyle(color: AppTheme.themeWhite),
+                    ),
+                    Text(
+                      'CAPITAN:  ${entity.esCapitan == 1 ? 'ES EL CAPITAN' : 'JUGADOR'}',
+                      style: TextStyle(color: AppTheme.themeWhite),
+                    ),
+                    Text(
+                      'ESTADO: ${entity.estado == 1 ? 'VIGENTE' : entity.estado == 0 ? 'SOLICITUD' : entity.estado == 3 ? 'INACTIVO' : entity.estado == 2 ? 'DESEO SALIRME' : 'sin estado'}',
                       style: TextStyle(color: AppTheme.themeWhite),
                     ),
                   ],
@@ -158,29 +172,56 @@ class _PlayerEquipmentPageState extends State<PlayerEquipmentPage> {
     );
   }
 
-  List<Widget> opcionesLlamada(model.JugadorModel entity) {
+  List<Widget> opcionesLlamada(JugadorEquipoModelList entity) {
     return [
       sizedBox(20, 0),
       InkWell(
         onTap: () {
-          callWhatsApp1(int.parse(entity.telefono));
+          callWhatsAppText(int.parse(entity.telefonoJugador),
+              '*/FIFERO :${entity.nombreJugador}. Deseo contactarme contigo. Saludos Fifero*/');
         },
         child: FaIcon(FontAwesomeIcons.whatsapp, color: Colors.white, size: 27),
       ),
       sizedBox(20, 0),
       InkWell(
-        onTap: () {},
+        onTap: () {
+          loadingEntity(1, entity.idJugador, entity.idEquipo);
+        },
         child:
             FaIcon(FontAwesomeIcons.handPointUp, color: Colors.white, size: 27),
       ),
       sizedBox(20, 0),
       InkWell(
         onTap: () {
-          callWhatsApp1(int.parse(entity.telefono));
+          loadingEntity(3, entity.idJugador, entity.idEquipo);
         },
         child: FaIcon(FontAwesomeIcons.handPointDown,
             color: Colors.white, size: 27),
       ),
     ];
+  }
+
+  void loadingEntity(int estado, int idJugador, int idEquipo) {
+    entityStateModel.states = StateEntity.None;
+    entityStateModel.idEquipo = idEquipo;
+    entityStateModel.idJugador = idJugador;
+    entityStateModel.estado = estado;
+
+    executeUpdateCUD(entityService, entityStateModel);
+  }
+
+  void executeUpdateCUD(
+      EquipmentService entityService, EquipoStateModel entity) async {
+    try {
+      await entityService.repository(entity).then((result) {
+        print('EL RESULTTTTT CAMBIO ESTADO: ${result["tipo_mensaje"]}');
+        if (result["tipo_mensaje"] == '0')
+          showSnackbar(STATUS_OK, scaffoldKey);
+        else
+          showSnackbar(STATUS_ERROR, scaffoldKey);
+      });
+    } catch (error) {
+      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
+    }
   }
 }

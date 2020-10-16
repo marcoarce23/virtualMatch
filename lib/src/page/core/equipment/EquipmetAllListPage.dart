@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:virtual_match/src/model/Preference.dart';
+import 'package:virtual_match/src/model/entity/EntityMap/EquipoModel.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/page/core/equipment/EquipmentLoadPage.dart';
@@ -29,7 +30,7 @@ class EquipmentAllListPage extends StatefulWidget {
 
 class _EquipmentAllListPageState extends State<EquipmentAllListPage> {
   //DEFINICION DE BLOC Y MODEL
-  list.EquipoModel entity = new list.EquipoModel();
+  list.EquipoCapitanesModel entity = new list.EquipoCapitanesModel();
   model.EquipoModel entityModel = new model.EquipoModel();
   model.EquipoStateModel entityStateModel = new model.EquipoStateModel();
   EquipmentService entityService = new EquipmentService();
@@ -103,7 +104,7 @@ class _EquipmentAllListPageState extends State<EquipmentAllListPage> {
 
   Widget futureBuilder(BuildContext context) {
     return FutureBuilder(
-        future: entityGet.getListarEquipos(new list.EquipoModel()),
+        future: entityGet.getEquipos(new list.EquipoCapitanesModel()),
         builder: (context, AsyncSnapshot snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
@@ -123,7 +124,7 @@ class _EquipmentAllListPageState extends State<EquipmentAllListPage> {
         physics: ClampingScrollPhysics(),
         itemCount: snapshot.data.length,
         itemBuilder: (context, index) {
-          list.EquipoModel entity = snapshot.data[index];
+          list.EquipoCapitanesModel entity = snapshot.data[index];
 
           return _showListTile(entity);
         },
@@ -132,7 +133,7 @@ class _EquipmentAllListPageState extends State<EquipmentAllListPage> {
   }
 
   Widget _simplePopup(
-          list.EquipoModel entity, int keyId, BuildContext context) =>
+          list.EquipoCapitanesModel entity, int keyId, BuildContext context) =>
       PopupMenuButton<int>(
         itemBuilder: (context) => [
           PopupMenuItem(
@@ -141,11 +142,11 @@ class _EquipmentAllListPageState extends State<EquipmentAllListPage> {
           ),
           PopupMenuItem(
             value: 2,
-            child: Text("Insrbirse"),
+            child: Text("Inscribirse a un equipos"),
           ),
           PopupMenuItem(
             value: 3,
-            child: Text("Salirse"),
+            child: Text("Salirme de mi equipo"),
           ),
         ],
         onCanceled: () {
@@ -154,7 +155,8 @@ class _EquipmentAllListPageState extends State<EquipmentAllListPage> {
         onSelected: (value) {
           switch (value) {
             case 1:
-              callWhatsApp1(int.parse('72038768'));
+              callWhatsAppText(int.parse(entity.telefono),
+                  'Capitan del equipo ${entity.nombre}, deseo formar parte de su equipo mando mi solictud para que sea evaluada por su persona. Saludos.');
               break;
             case 2:
               setState(() {
@@ -167,7 +169,7 @@ class _EquipmentAllListPageState extends State<EquipmentAllListPage> {
             case 3:
               setState(() {
                 setState(() {
-                  loadingUpdateEntity();
+                  loadingUpdateEntity(2, prefs.idPlayer, entity.agrupador);
                 });
               });
               break;
@@ -183,7 +185,7 @@ class _EquipmentAllListPageState extends State<EquipmentAllListPage> {
         offset: Offset(0, 100),
       );
 
-  Widget _showListTile(list.EquipoModel entity) {
+  Widget _showListTile(list.EquipoCapitanesModel entity) {
     return Column(
       children: <Widget>[
         Column(
@@ -210,6 +212,20 @@ class _EquipmentAllListPageState extends State<EquipmentAllListPage> {
                   overflow: TextOverflow.clip,
                   textAlign: TextAlign.justify,
                 ),
+                Text(
+                  'CAPITAN: ${entity.nombre}',
+                  style: kSubtitleStyleWhite,
+                  softWrap: true,
+                  overflow: TextOverflow.clip,
+                  textAlign: TextAlign.justify,
+                ),
+                Text(
+                  'PSDN : ${entity.psdn}',
+                  style: kSubtitleStyleWhite,
+                  softWrap: true,
+                  overflow: TextOverflow.clip,
+                  textAlign: TextAlign.justify,
+                ),
               ],
             ),
           ],
@@ -221,7 +237,7 @@ class _EquipmentAllListPageState extends State<EquipmentAllListPage> {
   void loadingEntity() {
     entityModel.states = StateEntity.Insert;
     entityModel.idEquipo = 0;
-    entityModel.idJugador = 208;
+    entityModel.idJugador = prefs.idPlayer;
     //int.parse(prefs.idPlayer);
     entityModel.nombre = entity.nombre;
     entityModel.detalle = entity.detalle;
@@ -233,20 +249,20 @@ class _EquipmentAllListPageState extends State<EquipmentAllListPage> {
     executeCUD(entityService, entityModel);
   }
 
-  void loadingUpdateEntity() {
+  void loadingUpdateEntity(int estado, int idJugador, int idEquipo) {
     entityStateModel.states = StateEntity.None;
-    entityStateModel.idEquipo = 0;
-    entityStateModel.idJugador = 208;
-    entityStateModel.estado = 2;
+    entityStateModel.idEquipo = idEquipo;
+    entityStateModel.idJugador = idJugador;
+    entityStateModel.estado = estado;
 
     executeUpdateCUD(entityService, entityStateModel);
   }
 
-  void executeCUD(
-      EquipmentService entityService, model.EquipoModel entity) async {
+  void executeUpdateCUD(
+      EquipmentService entityService, EquipoStateModel entity) async {
     try {
       await entityService.repository(entity).then((result) {
-        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
+        print('EL RESULTTTTT CAMBIO ESTADO: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0')
           showSnackbar(STATUS_OK, scaffoldKey);
         else
@@ -257,8 +273,8 @@ class _EquipmentAllListPageState extends State<EquipmentAllListPage> {
     }
   }
 
-  void executeUpdateCUD(
-      EquipmentService entityService, model.EquipoStateModel entity) async {
+  void executeCUD(
+      EquipmentService entityService, model.EquipoModel entity) async {
     try {
       await entityService.repository(entity).then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');

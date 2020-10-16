@@ -16,6 +16,18 @@ class ApiGet {
     return getListIEntityJson(response, entity, decodeData, list);
   }
 
+  Future<List<IEntityJson>> getEquipos(IEntityJson entity) async {
+    final List<IEntityJson> list = new List();
+    Map<String, dynamic> decodeData;
+
+    final _apiRest = api['getEquipos'][0].toString();
+    final response = await http.get(_apiRest);
+
+    print(_apiRest);
+
+    return getListIEntityJson(response, entity, decodeData, list);
+  }
+
   Future<List<IEntityJson>> getListarEquipos(IEntityJson entity) async {
     final List<IEntityJson> list = new List();
     Map<String, dynamic> decodeData;
