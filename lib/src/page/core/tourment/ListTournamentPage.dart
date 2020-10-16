@@ -46,27 +46,30 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Scaffold(
-      key: scaffoldKey,
-      appBar: appBar('TORNEOS VIRTUAL MATCH'),
-      body: SingleChildScrollView(
-          child: Container(
-              height: size.height,
-              decoration: new BoxDecoration(
-                image: new DecorationImage(
-                  image: new AssetImage('assets/portada2.png'),
-                  fit: BoxFit.cover,
+    return SafeArea(
+      maintainBottomViewPadding: true,
+      child: Scaffold(
+        key: scaffoldKey,
+        appBar: appBar('TORNEOS VIRTUAL MATCH'),
+        body: SingleChildScrollView(
+            child: Container(
+                //height: size.height,
+                decoration: new BoxDecoration(
+                  image: new DecorationImage(
+                    image: new AssetImage('assets/portada2.png'),
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              ),
-              child: bodyContainer(context))),
-      drawer: DrawerMenu(),
-      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
-          FaIcon(FontAwesomeIcons.playstation), HomePage()),
-      //floatingActionButton: CircularMenu(),
-      //floatingActionButtonLocation: FloatingActionButtonLocation.miniEndDocked,
-      bottomNavigationBar: new BottonNavigation(),
+                child: bodyContainer(context))),
+        drawer: DrawerMenu(),
+        floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
+            FaIcon(FontAwesomeIcons.playstation), HomePage()),
+        //floatingActionButton: CircularMenu(),
+        //floatingActionButtonLocation: FloatingActionButtonLocation.miniEndDocked,
+        bottomNavigationBar: new BottonNavigation(),
 
-      //   ),
+        //   ),
+      ),
     );
   }
 
