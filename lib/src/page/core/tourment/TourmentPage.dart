@@ -12,6 +12,7 @@ import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/core/TournamentService.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
+import 'package:virtual_match/src/widget/card/CardSlideProductWidget.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
@@ -52,7 +53,7 @@ class _TourmentPageState extends State<TourmentPage> {
 
   @override
   Widget build(BuildContext context) {
-     return SafeArea(
+    return SafeArea(
       child: Scaffold(
         key: scaffoldKey,
         appBar: appBar('TORNEOS'),
@@ -71,6 +72,7 @@ class _TourmentPageState extends State<TourmentPage> {
         sizedBox(0, 1),
         futureBuilderTorneo(context),
         sizedBox(0, 5),
+        CardSlideWidget(),
         Container(
           decoration: new BoxDecoration(
             image: new DecorationImage(

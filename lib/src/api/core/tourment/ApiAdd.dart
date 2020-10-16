@@ -33,6 +33,16 @@ class ApiAdd {
     return dataMap(response);
   }
 
+  Future<Map<String, dynamic>> cerrarElTorneo(int idTorneo) async {
+    final apiRest = api['cerrarElTorneo'][0] + '/' + idTorneo.toString();
+    print('url: $apiRest');
+    final response = await http.put(
+      apiRest,
+      headers: {"Content-Type": "application/json"},
+    );
+    return dataMap(response);
+  }
+
   Future<Map<String, dynamic>> reemplazarJugador(
       ReemplazarJugador entity) async {
     print(entity.toJson());

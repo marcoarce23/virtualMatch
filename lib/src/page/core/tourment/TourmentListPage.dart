@@ -195,6 +195,9 @@ class _TourmentListPageState extends State<TourmentListPage> {
         onSelected: (value) {
           switch (value) {
             case -1:
+              cerrarTorneo(
+                entity.idTorneo,
+              );
               break;
             case 0:
               navegation(
@@ -336,7 +339,19 @@ class _TourmentListPageState extends State<TourmentListPage> {
           '/api/Torneo/execGenerarLiga/' + keyId + '/usuario/' + prefs.email);
   }
 
-
+  void cerrarTorneo(int idTorneo) async {
+    try {
+      await entityService.cerrarElTorneo(idTorneo).then((result) {
+        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
+        if (result["tipo_mensaje"] == '0')
+          showSnackbar(result["mensaje"], scaffoldKey);
+        else
+          showSnackbar(result["mensaje"], scaffoldKey);
+      });
+    } catch (error) {
+      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
+    }
+  }
 
   void executeUpdate(
       TourmentService entityService, model.TorneoModel entity) async {
