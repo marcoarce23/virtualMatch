@@ -33,7 +33,7 @@ class ApiGet {
     final List<IEntityJson> list = new List();
     Map<String, dynamic> decodeData;
 
-    final _apiRest = api['getId'][0].toString() + '/' + value.toString();
+    final _apiRest = api['getId1'][0].toString() + '/' + value.toString();
     final response = await http.get(_apiRest);
 
     print(_apiRest);
