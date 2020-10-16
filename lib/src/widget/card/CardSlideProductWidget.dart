@@ -1,8 +1,11 @@
 import 'dart:ui';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:getwidget/components/carousel/gf_carousel.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/Patrocinador.dart';
 import 'package:virtual_match/src/service/MultimediaService.dart';
+import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 
 class CardSlideWidget extends StatefulWidget {
@@ -52,26 +55,42 @@ class _CardSlideWidgetState extends State<CardSlideWidget> {
   }
 
   Widget listView(List<Patrocinador> lista) {
-    return GFCarousel(
-      items: lista.map(
-        (url) {
-          return Container(
-            margin: EdgeInsets.all(8.0),
-            child: ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(5.0)),
-              child: Image.network(
-                url.url,
-                fit: BoxFit.cover,
-                width: 280.0,
-                height: 100,
-              ),
+    return Column(
+      children: [
+        Shimmer.fromColors(
+          baseColor: AppTheme.themeDefault,
+          highlightColor: AppTheme.themePurple,
+          child: AutoSizeText(
+            'patrocinadores'.toUpperCase(),
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 19.0,
+              fontWeight: FontWeight.bold,
             ),
-          );
-        },
-      ).toList(),
-      onPageChanged: (index) {
-        index;
-      },
+          ),
+        ),
+        GFCarousel(
+          autoPlay: true,
+          aspectRatio: 4.5,
+          items: lista.map(
+            (url) {
+              return Container(
+                margin: EdgeInsets.all(8.0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                  child: Image.network(
+                    url.url,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              );
+            },
+          ).toList(),
+          onPageChanged: (index) {
+            index;
+          },
+        ),
+      ],
     );
   }
 }

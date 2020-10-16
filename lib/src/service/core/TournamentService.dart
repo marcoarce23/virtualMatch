@@ -187,6 +187,16 @@ class TourmentService {
     return result;
   }
 
+  Future<Map<String, dynamic>> cerrarElTorneo(int idTorneo) async {
+    var result;
+    isLoading = true;
+
+    result = await _apiAdd.cerrarElTorneo(idTorneo);
+    isLoading = false;
+    //  notifyListeners();
+    return result;
+  }
+
   Future<List<IEntityJson>> getDevuelveTorneoParaPersonalizar(
       IEntityJson entityJson, int torneo) async {
     var result;
