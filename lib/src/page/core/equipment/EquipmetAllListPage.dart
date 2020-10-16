@@ -1,39 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:virtual_match/src/model/Preference.dart';
-import 'package:virtual_match/src/model/entity/EntityFromJson/EquipoModel.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
-import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/page/core/equipment/EquipmentLoadPage.dart';
-import 'package:virtual_match/src/page/core/player/PlayerEquipmentPage.dart';
 import 'package:virtual_match/src/service/core/EquipmentService.dart';
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/card/CardVM.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
+import 'package:virtual_match/src/widget/general/CallWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
-import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/NotificactionService.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
+import 'package:virtual_match/src/model/entity/EntityFromJson/EquipoModel.dart'
+    as list;
 import 'package:virtual_match/src/model/entity/EntityMap/EquipoModel.dart'
     as model;
 
-class EquipmentListPage extends StatefulWidget {
+class EquipmentAllListPage extends StatefulWidget {
   static final String routeName = 'equipmentList';
-  EquipmentListPage({Key key}) : super(key: key);
+  EquipmentAllListPage({Key key}) : super(key: key);
 
   @override
-  _EquipmentListPageState createState() => _EquipmentListPageState();
+  _EquipmentAllListPageState createState() => _EquipmentAllListPageState();
 }
 
-class _EquipmentListPageState extends State<EquipmentListPage> {
+class _EquipmentAllListPageState extends State<EquipmentAllListPage> {
   //DEFINICION DE BLOC Y MODEL
-  EquipoModel entity = new EquipoModel();
+  list.EquipoModel entity = new list.EquipoModel();
   model.EquipoModel entityModel = new model.EquipoModel();
-  EquipmentService entityService;
+  model.EquipoStateModel entityStateModel = new model.EquipoStateModel();
+  EquipmentService entityService = new EquipmentService();
   EquipmentService entityGet = EquipmentService();
 
   // DEFINICIOND E VARIABLES
@@ -42,19 +41,18 @@ class _EquipmentListPageState extends State<EquipmentListPage> {
 
   @override
   void initState() {
-    prefs.lastPage = EquipmentListPage.routeName;
+    prefs.lastPage = EquipmentAllListPage.routeName;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    entityService = Provider.of<EquipmentService>(context);
 
     return Scaffold(
       key: scaffoldKey,
-        appBar: appBar('INFORMACIÓN DE TU EQUIPO'),
-        drawer: DrawerMenu(),
+      appBar: appBar('INFORMACIÓN DE TU EQUIPO'),
+      drawer: DrawerMenu(),
       body: SafeArea(
         child: Container(
           decoration: new BoxDecoration(
@@ -76,18 +74,18 @@ class _EquipmentListPageState extends State<EquipmentListPage> {
                       sizedBox(0.0, 8),
                       showInformationBasic(
                         context,
-                        'ADMINISTRA TU EQUIPO',
-                        'En esta pantalla puedes modificar y eliminar y gestionar tu equipo creado.',
+                        'ELIGE TU EQUIPO',
+                        'En esta pantalla podrás buscar los equipos inscritos y solicitar tu inscripción. Disfruta de  11 Vs. 11.',
                       ),
                       sizedBox(0.0, 8),
-                      Center(
-                        child: Image(
-                          image: NetworkImage(IMAGE_SCREEN3),
-                          height: 180.0,
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                      divider(),
+                      // Center(
+                      //   child: Image(
+                      //     image: NetworkImage(IMAGE_SCREEN3),
+                      //     height: 180.0,
+                      //     fit: BoxFit.fill,
+                      //   ),
+                      // ),
+                      // divider(),
                     ],
                   ),
                 ),
@@ -105,7 +103,7 @@ class _EquipmentListPageState extends State<EquipmentListPage> {
 
   Widget futureBuilder(BuildContext context) {
     return FutureBuilder(
-        future: entityGet.getMisEquipos(new EquipoModel(), '198'),
+        future: entityGet.getListarEquipos(new list.EquipoModel()),
         builder: (context, AsyncSnapshot snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
@@ -125,7 +123,7 @@ class _EquipmentListPageState extends State<EquipmentListPage> {
         physics: ClampingScrollPhysics(),
         itemCount: snapshot.data.length,
         itemBuilder: (context, index) {
-          EquipoModel entity = snapshot.data[index];
+          list.EquipoModel entity = snapshot.data[index];
 
           return _showListTile(entity);
         },
@@ -133,16 +131,21 @@ class _EquipmentListPageState extends State<EquipmentListPage> {
     );
   }
 
-  Widget _simplePopup(EquipoModel entity, int keyId, BuildContext context) =>
+  Widget _simplePopup(
+          list.EquipoModel entity, int keyId, BuildContext context) =>
       PopupMenuButton<int>(
         itemBuilder: (context) => [
           PopupMenuItem(
             value: 1,
-            child: Text("Editar"),
+            child: Text("Llamar por WhatsApp"),
           ),
           PopupMenuItem(
             value: 2,
-            child: Text("Eliminar"),
+            child: Text("Insrbirse"),
+          ),
+          PopupMenuItem(
+            value: 3,
+            child: Text("Salirse"),
           ),
         ],
         onCanceled: () {
@@ -151,21 +154,23 @@ class _EquipmentListPageState extends State<EquipmentListPage> {
         onSelected: (value) {
           switch (value) {
             case 1:
-              Navigator.pushNamed(context, 'equipmentLoad', arguments: entity);
+              callWhatsApp1(int.parse('72038768'));
               break;
             case 2:
-              //   entityModel.idEquipo = int.parse(keyId);
-
               setState(() {
                 setState(() {
-                  // entityModel.idEquipo = int.parse(keyId);
-                  // print('eliminar ${entityModel.idEquipo}');
-                  // executeDelete(entityModel.idEquipo.toString(), prefs.email);
+                  loadingEntity();
                 });
               });
-
               break;
 
+            case 3:
+              setState(() {
+                setState(() {
+                  loadingUpdateEntity();
+                });
+              });
+              break;
             default:
               showSnackbarWithOutKey("No hay opcion seleccionada", context);
               break;
@@ -178,17 +183,16 @@ class _EquipmentListPageState extends State<EquipmentListPage> {
         offset: Offset(0, 100),
       );
 
-  Widget _showListTile(EquipoModel entity) {
+  Widget _showListTile(list.EquipoModel entity) {
     return Column(
       children: <Widget>[
         Column(
           children: <Widget>[
             sizedBox(0, 7),
             CardVM(
-              size: 150,
+              size: 180,
               imageAssets: 'assets/icono3.png',
               opciones: _simplePopup(entity, entity.agrupador, context),
-              accesosRapidos: null,
               listWidgets: [
                 avatarCircle(entity.foto, 55),
                 sizedBox(0, 7),
@@ -212,6 +216,60 @@ class _EquipmentListPageState extends State<EquipmentListPage> {
         ),
       ],
     );
+  }
+
+  void loadingEntity() {
+    entityModel.states = StateEntity.Insert;
+    entityModel.idEquipo = 0;
+    entityModel.idJugador = 208;
+    //int.parse(prefs.idPlayer);
+    entityModel.nombre = entity.nombre;
+    entityModel.detalle = entity.detalle;
+    entityModel.foto = entity.foto;
+    entityModel.usuarioAuditoria = prefs.email;
+    entityModel.agrupador = entity.agrupador;
+    entityModel.esCapitan = 0;
+
+    executeCUD(entityService, entityModel);
+  }
+
+  void loadingUpdateEntity() {
+    entityStateModel.states = StateEntity.None;
+    entityStateModel.idEquipo = 0;
+    entityStateModel.idJugador = 208;
+    entityStateModel.estado = 2;
+
+    executeUpdateCUD(entityService, entityStateModel);
+  }
+
+  void executeCUD(
+      EquipmentService entityService, model.EquipoModel entity) async {
+    try {
+      await entityService.repository(entity).then((result) {
+        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
+        if (result["tipo_mensaje"] == '0')
+          showSnackbar(STATUS_OK, scaffoldKey);
+        else
+          showSnackbar(STATUS_ERROR, scaffoldKey);
+      });
+    } catch (error) {
+      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
+    }
+  }
+
+  void executeUpdateCUD(
+      EquipmentService entityService, model.EquipoStateModel entity) async {
+    try {
+      await entityService.repository(entity).then((result) {
+        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
+        if (result["tipo_mensaje"] == '0')
+          showSnackbar(STATUS_OK, scaffoldKey);
+        else
+          showSnackbar(STATUS_ERROR, scaffoldKey);
+      });
+    } catch (error) {
+      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
+    }
   }
 
   void executeDelete(String id, String usuario) async {

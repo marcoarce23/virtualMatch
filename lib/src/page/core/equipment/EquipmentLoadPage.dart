@@ -63,8 +63,7 @@ class _EquipmentAllPageState extends State<EquipmentAllPage> {
         ChangeNotifierProvider(builder: (_) => new EquipmentService()),
       ],
       child: Scaffold(
-        appBar: appBar('CREA TU EQUIPO'),
-        drawer: DrawerMenu(),
+      
         bottomNavigationBar: BottomNavigationBar(
           elevation: 21.0,
           backgroundColor: AppTheme.themeDefault,
@@ -153,6 +152,8 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
 
     return Scaffold(
       key: scaffoldKey,
+        appBar: appBar('CREA TU EQUIPO'),
+        drawer: DrawerMenu(),
       body: Stack(
         children: <Widget>[
           background(context, 'IMAGE_LOGO'),
