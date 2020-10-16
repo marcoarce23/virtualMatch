@@ -120,9 +120,7 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         appBar: appBar('VIRTUAL MATCH'),
         body: SingleChildScrollView(
-          child: CardSlideWidget(),
-          /*
-          Container(
+          child: Container(
             decoration: new BoxDecoration(
               image: new DecorationImage(
                 image: new AssetImage('assets/portada2.png'),
@@ -133,8 +131,6 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                
-                
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
@@ -178,17 +174,14 @@ class _HomePageState extends State<HomePage> {
                           _group = T;
                         });
                       },
-                    ),                  
+                    ),
                   ],
                 ),
                 futureBuilderNoticias(context, _group),
-                
                 sizedBox(0, 10),
-                
               ],
             ),
           ),
-          */
         ),
         drawer: DrawerMenu(),
         bottomNavigationBar: new BottonNavigation(),
