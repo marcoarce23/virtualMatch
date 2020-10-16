@@ -169,7 +169,7 @@ class _EquipmentAllListPageState extends State<EquipmentAllListPage> {
             case 3:
               setState(() {
                 setState(() {
-                  loadingUpdateEntity(2, prefs.idPlayer, entity.agrupador);
+                  loadingUpdateEntity(2, int.parse(prefs.idPlayer), entity.agrupador);
                 });
               });
               break;
@@ -237,7 +237,7 @@ class _EquipmentAllListPageState extends State<EquipmentAllListPage> {
   void loadingEntity() {
     entityModel.states = StateEntity.Insert;
     entityModel.idEquipo = 0;
-    entityModel.idJugador = prefs.idPlayer;
+    entityModel.idJugador = int.parse(prefs.idPlayer);
     //int.parse(prefs.idPlayer);
     entityModel.nombre = entity.nombre;
     entityModel.detalle = entity.detalle;
@@ -252,7 +252,7 @@ class _EquipmentAllListPageState extends State<EquipmentAllListPage> {
   void loadingUpdateEntity(int estado, int idJugador, int idEquipo) {
     entityStateModel.states = StateEntity.None;
     entityStateModel.idEquipo = idEquipo;
-    entityStateModel.idJugador = idJugador;
+    entityStateModel.idJugador =  idJugador;
     entityStateModel.estado = estado;
 
     executeUpdateCUD(entityService, entityStateModel);
