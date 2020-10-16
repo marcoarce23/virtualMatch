@@ -12,6 +12,7 @@ import 'package:virtual_match/src/service/core/PlayerService.dart';
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
+import 'package:virtual_match/src/widget/card/CardSlideProductWidget.dart';
 import 'package:virtual_match/src/widget/card/CardVM.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/CallWidget.dart';
@@ -97,8 +98,15 @@ class _PlayerPageState extends State<PlayerPage> {
                       'CONOCE A NUESTROS JUGADORES',
                       'Busca y comunicate con los jugadores.',
                     ),
-                    sizedBox(0.0, 2.0),
-                    divider(),
+                    sizedBox(0.0, 8.0),
+                    // Center(
+                    //   child: Image(
+                    //     image: NetworkImage(IMAGE_SCREEN3),
+                    //     height: 180.0,
+                    //     fit: BoxFit.fill,
+                    //   ),
+                    // ),
+                    CardSlideBalckWidget(),
                   ],
                 ),
               ),

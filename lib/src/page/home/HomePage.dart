@@ -131,6 +131,16 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                   sizedBox(0.0, 5.0),
+            // Center(
+            //   child: Image(
+            //     image: NetworkImage(IMAGE_SCREEN3),
+            //     height: 180.0,
+            //     fit: BoxFit.fill,
+            //   ),
+            // ),
+             CardSlideBalckWidget(),
+     
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[

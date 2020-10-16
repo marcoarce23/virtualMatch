@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
+import 'package:virtual_match/src/widget/card/CardSlideProductWidget.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
@@ -72,15 +73,24 @@ class _FaqListPagetate extends State<FaqListPage> {
   Widget _fields(BuildContext context) {
     return Column(
       children: <Widget>[
-           showInformationBasic(
-          context,
-          'TIENES CONSULTAS ?',
-          'Acá te respondemos las preguntas mas comunes sobre la Comunidad Virtual Match y nuestra APP.',
-        ),
+        // Center(
+        //   child: Image(
+        //     image: NetworkImage(IMAGE_SCREEN3),
+        //     height: 180.0,
+        //     fit: BoxFit.fill,
+        //   ),
+        // ),
+        CardSlideBalckWidget(),
+        sizedBox(0.0, 5.0),
+
+        //    showInformationBasic(
+        //   context,
+        //   'TIENES CONSULTAS ?',
+        //   'Acá te respondemos las preguntas mas comunes sobre la Comunidad Virtual Match y nuestra APP.',
+        // ),
         listAcordion(),
         listAcordion2(),
         listAcordion3(),
-     
       ],
     );
   }
@@ -108,6 +118,4 @@ class _FaqListPagetate extends State<FaqListPage> {
         AppTheme.themeDefault,
         AppTheme.themePurple);
   }
-
-
 }

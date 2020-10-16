@@ -20,6 +20,7 @@ import 'package:virtual_match/src/service/core/EquipmentService.dart';
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
+import 'package:virtual_match/src/widget/card/CardSlideProductWidget.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/model/util/Validator.dart' as validator;
@@ -174,7 +175,7 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
         key: formKey,
         child: Column(
           children: <Widget>[
-            sizedBox(0.0, 15.0),
+        
             Container(
               width: size.width * 0.94,
               margin: EdgeInsets.symmetric(vertical: 0.0),
@@ -182,6 +183,7 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
+                  
                   text('CARGA AVATAR DE TU EQUIPO', AppTheme.themeDefault, 1,
                       15.0),
                   _crearIconAppImagenes(),
@@ -196,6 +198,16 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
               decoration: containerFileds(),
               child: _fields(context),
             ),
+                  sizedBox(0.0, 5.0),
+            // Center(
+            //   child: Image(
+            //     image: NetworkImage(IMAGE_SCREEN3),
+            //     height: 180.0,
+            //     fit: BoxFit.fill,
+            //   ),
+            // ),
+             CardSlideWidget(),
+            sizedBox(0.0, 5.0),
             copyRigthBlack(),
           ],
         ),

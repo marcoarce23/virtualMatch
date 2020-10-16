@@ -12,6 +12,7 @@ import 'package:virtual_match/src/service/core/PlayerService.dart';
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
+import 'package:virtual_match/src/widget/card/CardSlideProductWidget.dart';
 import 'package:virtual_match/src/widget/card/CardVM.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
@@ -123,13 +124,16 @@ class _PlayerEditPageState extends State<PlayerEditPage> {
       children: <Widget>[
         Column(
           children: <Widget>[
-            Center(
-              child: Image(
-                image: NetworkImage(IMAGE_SCREEN3),
-                height: 180.0,
-                fit: BoxFit.fill,
-              ),
-            ),
+             sizedBox(0.0, 5.0),
+            // Center(
+            //   child: Image(
+            //     image: NetworkImage(IMAGE_SCREEN3),
+            //     height: 180.0,
+            //     fit: BoxFit.fill,
+            //   ),
+            // ),
+             CardSlideBalckWidget(),
+             sizedBox(0.0, 5.0),
             CardVM(
               size: 300,
               imageAssets: 'assets/icono3.png',

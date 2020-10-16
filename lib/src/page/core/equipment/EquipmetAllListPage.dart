@@ -9,6 +9,7 @@ import 'package:virtual_match/src/service/core/EquipmentService.dart';
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
+import 'package:virtual_match/src/widget/card/CardSlideProductWidget.dart';
 import 'package:virtual_match/src/widget/card/CardVM.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/CallWidget.dart';
@@ -78,15 +79,7 @@ class _EquipmentAllListPageState extends State<EquipmentAllListPage> {
                         'ELIGE TU EQUIPO',
                         'En esta pantalla podrás buscar los equipos inscritos y solicitar tu inscripción. Disfruta de  11 Vs. 11.',
                       ),
-                      sizedBox(0.0, 8),
-                      // Center(
-                      //   child: Image(
-                      //     image: NetworkImage(IMAGE_SCREEN3),
-                      //     height: 180.0,
-                      //     fit: BoxFit.fill,
-                      //   ),
-                      // ),
-                      // divider(),
+                     
                     ],
                   ),
                 ),
