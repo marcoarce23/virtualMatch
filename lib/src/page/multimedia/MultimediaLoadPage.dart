@@ -24,7 +24,6 @@ import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/model/util/Validator.dart' as validator;
-import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 import 'package:virtual_match/src/widget/image/ImageWidget.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/MultimediaModel.dart'
     as gets;
@@ -358,35 +357,35 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
     return lista;
   }
 
-  Widget _combox(String text) {
-    return Center(
-        child: FutureBuilder(
-            future: entityGet.get(new ClasificadorModel(), 13),
-            builder: (context, AsyncSnapshot snapshot) {
-              if (snapshot.hasData) {
-                return Row(
-                  children: <Widget>[
-                    sizedBox(15.0, 35.0),
-                    Text(text),
-                    sizedBox(10.0, 15.0),
-                    DropdownButton(
-                      icon: FaIcon(FontAwesomeIcons.sort,
-                          color: AppTheme.themePurple),
-                      value: typeMaterial.toString(), //valor
-                      items: getDropDown(snapshot),
-                      onChanged: (value) {
-                        setState(() {
-                          typeMaterial = int.parse(value);
-                        });
-                      },
-                    ),
-                  ],
-                );
-              } else {
-                return loading();
-              }
-            }));
-  }
+  // Widget _combox(String text) {
+  //   return Center(
+  //       child: FutureBuilder(
+  //           future: entityGet.get(new ClasificadorModel(), 13),
+  //           builder: (context, AsyncSnapshot snapshot) {
+  //             if (snapshot.hasData) {
+  //               return Row(
+  //                 children: <Widget>[
+  //                   sizedBox(15.0, 35.0),
+  //                   Text(text),
+  //                   sizedBox(10.0, 15.0),
+  //                   DropdownButton(
+  //                     icon: FaIcon(FontAwesomeIcons.sort,
+  //                         color: AppTheme.themePurple),
+  //                     value: typeMaterial.toString(), //valor
+  //                     items: getDropDown(snapshot),
+  //                     onChanged: (value) {
+  //                       setState(() {
+  //                         typeMaterial = int.parse(value);
+  //                       });
+  //                     },
+  //                   ),
+  //                 ],
+  //               );
+  //             } else {
+  //               return loading();
+  //             }
+  //           }));
+  // }
 
   _selectDateInicio(BuildContext context) async {
     DateTime picked = await showDatePicker(
@@ -537,15 +536,15 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
     }
   }
 
-  _procesarVideo2(String file) async {
-    valueImage = 2;
+  // _procesarVideo2(String file) async {
+  //   valueImage = 2;
 
-    image = await entityImage.uploadVideo(file);
-    setState(() {
-      entity.foto = IMAGE_LOGO;
-      print('cargadod e iagen ${entity.foto}');
-    });
-  }
+  //   image = await entityImage.uploadVideo(file);
+  //   setState(() {
+  //     entity.foto = IMAGE_LOGO;
+  //     print('cargadod e iagen ${entity.foto}');
+  //   });
+  // }
 
   // void _pickVideo() async {
   //   try {

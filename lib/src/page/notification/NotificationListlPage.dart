@@ -97,10 +97,7 @@ class _NotificationListPageState extends State<NotificationListPage> {
                 return loading();
                 break;
               default:
-                return 
-                  
-                  
-                  listView(context, snapshot);
+                return listView(context, snapshot);
             }
           } else {
             return loading();
@@ -191,12 +188,10 @@ class _NotificationListPageState extends State<NotificationListPage> {
             case 3:
               entityModel.idNotificacion = int.parse(keyId);
 
-              setState(() {
-                _executeDelete(
-                  entityModel.idNotificacion.toString(),
-                  prefs.email,
-                );
-              });
+              _executeDelete(
+                entityModel.idNotificacion.toString(),
+                prefs.email,
+              );
 
               break;
             default:
@@ -214,19 +209,15 @@ class _NotificationListPageState extends State<NotificationListPage> {
   _executeDelete(String id, String usuario) async {
     try {
       await entityService.delete(id, usuario).then((result) {
-        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0') {
-          showSnackbar(STATUS_OK, scaffoldKey);
-          // futureBuilder(context);
+          setState(() {
+            showSnackbar(STATUS_OK_DELETE, scaffoldKey);
+          });
         } else
           showSnackbar(STATUS_ERROR, scaffoldKey);
       });
     } catch (error) {
-      //  showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
+      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
     }
-   
-   setState(() {
-     
-   });
   }
 } // FIN DE LA CLASE
