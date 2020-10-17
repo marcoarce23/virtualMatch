@@ -87,7 +87,6 @@ class EquipmentService with ChangeNotifier {
 
   Future<List<IEntityJson>> getMisEquipos(
       IEntityJson entityJson, String idPlayer) async {
-    print('idplaeee: ${idPlayer}');
     var _result = await _apiGet.getMisEquipos(entityJson, idPlayer);
 
     isLoading = false;
