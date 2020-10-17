@@ -121,7 +121,7 @@ class _MultimediaListPageState extends State<MultimediaListPage> {
     return Column(
       children: <Widget>[
         CardVM(
-          size: 165,
+          size: 185,
           imageAssets: 'assets/icono3.png',
           opciones: _simplePopup(entity, entity.idMultimedia.toString()),
           accesosRapidos: null,

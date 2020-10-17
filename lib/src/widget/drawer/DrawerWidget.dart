@@ -68,6 +68,8 @@ class DrawerMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+     print('EL IDE PALYER EN EL DRAWER ES: ${prefs.idPlayer}');
+
     // if (prefs.idPlayer == '-1' || prefs.idLogin == '-1' /*COAV login*/)
     //   return drawerAnonimus(context);
 
@@ -213,6 +215,7 @@ class DrawerMenu extends StatelessWidget {
   }
 
   Drawer drawerUser(BuildContext context) {
+    print('EL IDE PALYER EN EL DRAWER ES: ${prefs.idPlayer}');
     return Drawer(
         child: ListView(
       children: <Widget>[
@@ -298,7 +301,7 @@ class DrawerMenu extends StatelessWidget {
               height: 30,
             ),
             '      Jugadores de la comunidad', () {
-          if (prefs.idPlayer != '-1')
+          if (prefs.idPlayer != '0')
             navegation(context, PlayerEditPage());
           else
             navegation(context, PlayerLoadPage());
