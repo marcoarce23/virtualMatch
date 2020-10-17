@@ -92,7 +92,7 @@ class _EquipmentSelectionPageState extends State<EquipmentSelectionPage> {
 
   Widget futureBuilder(BuildContext context) {
     return FutureBuilder(
-        future: entityGet.get(new model.JugadorModel()),
+        future: entityGet.get(new model.JugadorModelPersonalizado()),
         builder: (context, AsyncSnapshot snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
@@ -112,7 +112,7 @@ class _EquipmentSelectionPageState extends State<EquipmentSelectionPage> {
         physics: ClampingScrollPhysics(),
         itemCount: snapshot.data.length,
         itemBuilder: (context, index) {
-          model.JugadorModel entity = snapshot.data[index];
+          model.JugadorModelPersonalizado entity = snapshot.data[index];
 
           return _showListTile(entity);
         },
@@ -120,7 +120,7 @@ class _EquipmentSelectionPageState extends State<EquipmentSelectionPage> {
     );
   }
 
-  Widget _showListTile(model.JugadorModel entity) {
+  Widget _showListTile(model.JugadorModelPersonalizado entity) {
     return Column(
       children: <Widget>[
         Column(
@@ -132,7 +132,7 @@ class _EquipmentSelectionPageState extends State<EquipmentSelectionPage> {
               opciones: avatarCircle((entity.foto ?? IMAGE_LOGO), 35),
               accesosRapidos: opcionesLlamada(entity),
               listWidgets: [
-              //  Text('EQUIPO: ${entity.nombre} ${entity.apellido} '),
+                //  Text('EQUIPO: ${entity.nombre} ${entity.apellido} '),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -162,7 +162,7 @@ class _EquipmentSelectionPageState extends State<EquipmentSelectionPage> {
     );
   }
 
-  List<Widget> opcionesLlamada(model.JugadorModel entity) {
+  List<Widget> opcionesLlamada(model.JugadorModelPersonalizado entity) {
     return [
       sizedBox(30, 0),
       InkWell(

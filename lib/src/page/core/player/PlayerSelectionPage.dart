@@ -253,7 +253,7 @@ class _PlayerSelectionPageState extends State<PlayerSelectionPage> {
   Widget _comboJugador() {
     return Center(
         child: FutureBuilder(
-            future: entityGet1.get(new model1.JugadorModel()),
+            future: entityGet1.get(new model1.JugadorModelPersonalizado()),
             builder: (context, AsyncSnapshot snapshot) {
               if (snapshot.hasData) {
                 return Row(
