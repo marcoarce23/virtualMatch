@@ -411,8 +411,7 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
         entity.idJugador = 0;
       }
       if (entity.states == StateEntity.Update) {
-        entity.idJugador = entity.idJugador;
-        _url = '/api/Jugador' + '/' + entity.idJugador.toString();
+        _url = '/api/Jugador' + '/' + prefs.idPlayer;
       }
       if (_checked) checked = '1';
 
@@ -445,7 +444,9 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
 
         if (result["tipo_mensaje"] == '0') {
-          prefs.idPlayer = result["data"][""].toString();
+          if (entity.states == StateEntity.Insert) {
+            prefs.idPlayer = result["data"].toString();
+          }
           print('EL ID USUARIO ESSS: ${prefs.idPlayer}');
           showSnackbar(result["mensaje"].toString(), scaffoldKey);
         } else
