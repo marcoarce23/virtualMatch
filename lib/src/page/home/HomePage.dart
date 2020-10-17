@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/NoticiaEventoModel.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/NotificacionModel.dart';
-import 'package:virtual_match/src/model/entity/EntityMap/CardSlideProduct.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
 import 'package:virtual_match/src/service/NewService.dart';
@@ -131,16 +130,16 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                   sizedBox(0.0, 5.0),
-            // Center(
-            //   child: Image(
-            //     image: NetworkImage(IMAGE_SCREEN3),
-            //     height: 180.0,
-            //     fit: BoxFit.fill,
-            //   ),
-            // ),
-             CardSlideBalckWidget(),
-     
+                sizedBox(0.0, 5.0),
+                // Center(
+                //   child: Image(
+                //     image: NetworkImage(IMAGE_SCREEN3),
+                //     height: 180.0,
+                //     fit: BoxFit.fill,
+                //   ),
+                // ),
+                CardSlideBalckWidget(),
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[

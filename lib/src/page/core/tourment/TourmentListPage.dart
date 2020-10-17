@@ -20,8 +20,6 @@ import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/TorneoModelo.dart'
     as model;
-import 'package:virtual_match/src/model/entity/EntityMap/JugadorModel.dart'
-    as model1;
 
 class TourmentListPage extends StatefulWidget {
   static final String routeName = 'tourmentList';

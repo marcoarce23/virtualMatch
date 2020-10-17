@@ -8,7 +8,6 @@ import 'package:virtual_match/src/page/core/miniTourment/MiniTourmentLoadPage.da
 import 'package:virtual_match/src/page/core/player/OnceVsOncePage.dart';
 import 'package:virtual_match/src/page/core/player/PlayerEditPage.dart';
 import 'package:virtual_match/src/page/core/player/PlayerLoadPage.dart';
-import 'package:virtual_match/src/page/core/player/play.dart';
 import 'package:virtual_match/src/page/faq/FaqListPage.dart';
 import 'package:virtual_match/src/page/general/ViewPage.dart';
 import 'package:virtual_match/src/page/intro/IntroPage.dart';

@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 class CardSlideProduct {
   final String nameProduct;
   final String imageProduct;

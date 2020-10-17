@@ -1,31 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/JugadorModel.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/JugadorModel.dart'
     as model;
-import 'package:virtual_match/src/model/entity/EntityMap/JugadorModel.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
-import 'package:virtual_match/src/page/core/miniTourment/MiniTourmentListPage.dart';
-import 'package:virtual_match/src/page/core/tourment/TourmentListPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/core/PlayerService.dart';
-import 'package:virtual_match/src/service/core/TournamentService.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/card/CardVM.dart';
-
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/CallWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/widget/general/SenWidget.dart';
-import 'package:virtual_match/src/widget/general/SharedWidget.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/NoticiaEventoModel.dart'
     as model;
-import 'package:virtual_match/src/model/entity/EntityMap/JugadorModel.dart'
-    as model1;
 
 class EquipmentSelectionPage extends StatefulWidget {
   static final String routeName = 'equipmentSelection';

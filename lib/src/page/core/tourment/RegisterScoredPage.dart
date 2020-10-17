@@ -6,13 +6,11 @@ import 'package:getwidget/getwidget.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:virtual_match/src/model/Preference.dart';
-import 'package:virtual_match/src/model/entity/EntityFromJson/JugadorModel.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/ListadoTorneoModel.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/PartidosPorTorneoModel.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/JugadorModel.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/ResultadoModel.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
-
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/service/ImageService.dart';

@@ -40,7 +40,6 @@ class _CustomizePlayerState extends State<CustomizePlayer> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 

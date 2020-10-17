@@ -15,7 +15,6 @@ import 'package:virtual_match/src/widget/card/CardVM.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/CallWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
-import 'package:virtual_match/src/widget/general/SenWidget.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 
 class PlayerEquipmentPage extends StatefulWidget {

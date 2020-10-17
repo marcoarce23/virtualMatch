@@ -4,7 +4,6 @@ import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/JugadorModel.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/JugadorModel.dart'
     as model;
-import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/page/core/equipment/EquipmetAllListPage.dart';
 import 'package:virtual_match/src/page/core/player/PlayerEquipmentPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
@@ -135,7 +134,7 @@ class _PlayerEditPageState extends State<PlayerEditPage> {
              CardSlideBalckWidget(),
              sizedBox(0.0, 5.0),
             CardVM(
-              size: 300,
+              size: 330,
               imageAssets: 'assets/icono3.png',
               opciones:
                   _simplePopup(entity, entity.idJugador.toString(), context),

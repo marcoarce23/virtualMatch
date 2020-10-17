@@ -11,7 +11,6 @@ import 'package:virtual_match/src/page/core/equipment/EquipmentLoadPage.dart';
 import 'package:virtual_match/src/page/core/equipment/EuipmentSelectionPage.dart';
 import 'package:virtual_match/src/page/core/player/PlayerLoadPage.dart';
 import 'package:virtual_match/src/page/core/player/PlayerPage.dart';
-import 'package:virtual_match/src/page/core/tourment/CustomizePlayer.dart';
 import 'package:virtual_match/src/page/faq/FaqPage.dart';
 import 'package:virtual_match/src/page/login/LogOnPage.dart';
 import 'package:virtual_match/src/page/multimedia/MultimediaLoadPage.dart';
