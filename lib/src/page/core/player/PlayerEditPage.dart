@@ -89,8 +89,10 @@ class _PlayerEditPageState extends State<PlayerEditPage> {
   }
 
   Widget futureBuilder(BuildContext context) {
+    print('XXXXX: ${prefs.idPlayer}');
     return FutureBuilder(
-        future: entityGet.getId(new model.JugadorModel(), int.parse(prefs.idPlayer)),
+        future: entityGet.getId(
+            new model.JugadorModel(), int.parse(prefs.idPlayer)),
         builder: (context, AsyncSnapshot snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
@@ -123,7 +125,7 @@ class _PlayerEditPageState extends State<PlayerEditPage> {
       children: <Widget>[
         Column(
           children: <Widget>[
-             sizedBox(0.0, 5.0),
+            sizedBox(0.0, 5.0),
             // Center(
             //   child: Image(
             //     image: NetworkImage(IMAGE_SCREEN3),
@@ -131,8 +133,8 @@ class _PlayerEditPageState extends State<PlayerEditPage> {
             //     fit: BoxFit.fill,
             //   ),
             // ),
-             CardSlideBalckWidget(),
-             sizedBox(0.0, 5.0),
+            CardSlideBalckWidget(),
+            sizedBox(0.0, 5.0),
             CardVM(
               size: 330,
               imageAssets: 'assets/icono3.png',

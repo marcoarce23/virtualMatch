@@ -445,7 +445,7 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
 
         if (result["tipo_mensaje"] == '0') {
-          prefs.idPlayer = result["data"].toString();
+          prefs.idPlayer = result["data"][""].toString();
           print('EL ID USUARIO ESSS: ${prefs.idPlayer}');
           showSnackbar(result["mensaje"].toString(), scaffoldKey);
         } else

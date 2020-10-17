@@ -121,7 +121,7 @@ class _NewListPageState extends State<NewListPage> {
       children: <Widget>[
         sizedBox(0, 7.0),
         CardVM(
-          size: 190,
+          size: 245,
           imageAssets: 'assets/icono3.png',
           opciones:
               _simplePopup(entity, entity.idNoticiaEvento.toString(), context),
