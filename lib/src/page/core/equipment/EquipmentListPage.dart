@@ -102,7 +102,7 @@ class _EquipmentListPageState extends State<EquipmentListPage> {
 
   Widget futureBuilder(BuildContext context) {
     return FutureBuilder(
-        future: entityGet.getMisEquipos(new EquipoModel(), '198'),
+        future: entityGet.getMisEquipos(new EquipoModel(), prefs.idPlayer),
         builder: (context, AsyncSnapshot snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:

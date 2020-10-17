@@ -90,7 +90,7 @@ class _PlayerEditPageState extends State<PlayerEditPage> {
 
   Widget futureBuilder(BuildContext context) {
     return FutureBuilder(
-        future: entityGet.getId(new model.JugadorModel(), 208),
+        future: entityGet.getId(new model.JugadorModel(), int.parse(prefs.idPlayer)),
         builder: (context, AsyncSnapshot snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
