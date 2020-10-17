@@ -128,10 +128,11 @@ class JugadorModelPersonalizado implements IEntityJson {
         "boot": boot
       };
 
-  fromJson(Map<String, dynamic> json) => new JugadorModel(
+  fromJson(Map<String, dynamic> json) => new JugadorModelPersonalizado(
         idJugador: json["idJugador"],
         idOrganizacion: json["idOrganizacion"],
         idaDepartamento: json["idaDepartamento"],
+        departamento: json["departamento"],
         idLogin: json["idLogin"],
         idaSexo: json["idaSexo"],
         idPsdn: json["idPsdn"],
@@ -143,5 +144,6 @@ class JugadorModelPersonalizado implements IEntityJson {
         facebook: json["facebook"],
         twitter: json["twitter"],
         foto: json["foto"],
+        boot: json["boot"],
       );
 }

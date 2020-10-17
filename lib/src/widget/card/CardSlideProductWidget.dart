@@ -95,7 +95,6 @@ class _CardSlideWidgetState extends State<CardSlideWidget> {
   }
 }
 
-
 class CardSlideBalckWidget extends StatefulWidget {
   @override
   _CardSlideBalckWidgetState createState() => _CardSlideBalckWidgetState();
