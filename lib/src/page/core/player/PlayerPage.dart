@@ -30,9 +30,9 @@ class PlayerPage extends StatefulWidget {
 class _PlayerPageState extends State<PlayerPage> {
   //DEFINICION DE BLOC Y MODEL
   JugadorModelList entity = new JugadorModelList();
-  model.JugadorModel entityModel = new model.JugadorModel();
   PlayerService entityGet = PlayerService();
-  List<JugadorModel> listPlayers = new List<JugadorModel>();
+  List<JugadorModelPersonalizado> listPlayers =
+      new List<JugadorModelPersonalizado>();
 
   // DEFINICIOND E VARIABLES
   final prefs = new Preferense();
@@ -123,7 +123,7 @@ class _PlayerPageState extends State<PlayerPage> {
 
   Widget futureBuilder(BuildContext context) {
     return FutureBuilder(
-        future: entityGet.get(new model.JugadorModel()),
+        future: entityGet.get(new JugadorModelPersonalizado()),
         builder: (context, AsyncSnapshot snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
@@ -132,7 +132,7 @@ class _PlayerPageState extends State<PlayerPage> {
             default:
               listPlayers.clear();
               for (var i = 0; i < snapshot.data.length; i++) {
-                listPlayers.add(snapshot.data[i] as JugadorModel);
+                listPlayers.add(snapshot.data[i] as JugadorModelPersonalizado);
               }
               return listView(context, snapshot);
           }
@@ -147,7 +147,7 @@ class _PlayerPageState extends State<PlayerPage> {
         physics: ClampingScrollPhysics(),
         itemCount: snapshot.data.length,
         itemBuilder: (context, index) {
-          model.JugadorModel entity = snapshot.data[index];
+          model.JugadorModelPersonalizado entity = snapshot.data[index];
 
           return _showListTile(entity);
         },
@@ -155,7 +155,7 @@ class _PlayerPageState extends State<PlayerPage> {
     );
   }
 
-  Widget _showListTile(model.JugadorModel entity) {
+  Widget _showListTile(model.JugadorModelPersonalizado entity) {
     return Column(
       children: <Widget>[
         Column(
@@ -179,7 +179,7 @@ class _PlayerPageState extends State<PlayerPage> {
                       style: TextStyle(color: AppTheme.themeWhite),
                     ),
                     Text(
-                      'Departamento: ${entity.idaDepartamento}',
+                      'Departamento: ${entity.departamento}',
                       style: TextStyle(color: AppTheme.themeWhite),
                     ),
                   ],
@@ -192,7 +192,7 @@ class _PlayerPageState extends State<PlayerPage> {
     );
   }
 
-  List<Widget> opcionesLlamada(model.JugadorModel entity) {
+  List<Widget> opcionesLlamada(model.JugadorModelPersonalizado entity) {
     return [
       sizedBox(30, 0),
       InkWell(
@@ -220,7 +220,7 @@ class _PlayerPageState extends State<PlayerPage> {
 }
 
 class SearchPlayer extends SearchDelegate {
-  List<JugadorModel> list = new List<JugadorModel>();
+  List<JugadorModelPersonalizado> list = new List<JugadorModelPersonalizado>();
 
   SearchPlayer({this.list});
 

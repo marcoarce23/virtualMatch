@@ -97,7 +97,8 @@ class _PlayState extends State<Play> {
   futureBuilder(BuildContext context) {
     FutureBuilder(
         //  future: entityGet.getId(new model.JugadorModel(), 208),
-        future: entityGet.getId(new model.JugadorModel(), int.parse(prefs.idPlayer)),
+        future: entityGet.getId(
+            new model.JugadorModelPersonalizado(), prefs.idPlayer),
         builder: (context, AsyncSnapshot snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
@@ -117,7 +118,7 @@ class _PlayState extends State<Play> {
         physics: ClampingScrollPhysics(),
         itemCount: snapshot.data.length,
         itemBuilder: (context, index) {
-          model.JugadorModel entity = snapshot.data[index];
+          model.JugadorModelPersonalizado entity = snapshot.data[index];
 
           return _showListTile(entity);
         },
@@ -125,7 +126,7 @@ class _PlayState extends State<Play> {
     );
   }
 
-  Widget _showListTile(model.JugadorModel entity) {
+  Widget _showListTile(model.JugadorModelPersonalizado entity) {
     return Column(
       children: <Widget>[
         Column(
@@ -150,7 +151,7 @@ class _PlayState extends State<Play> {
                       style: TextStyle(color: AppTheme.themeWhite),
                     ),
                     Text(
-                      'Departamento: ${entity.idaDepartamento}',
+                      'Departamento: ${entity.departamento}',
                       style: TextStyle(color: AppTheme.themeWhite),
                     ),
                   ],
@@ -163,7 +164,7 @@ class _PlayState extends State<Play> {
     );
   }
 
-  List<Widget> opcionesLlamada(model.JugadorModel entity) {
+  List<Widget> opcionesLlamada(model.JugadorModelPersonalizado entity) {
     return [
       sizedBox(30, 0),
       InkWell(
