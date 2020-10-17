@@ -50,8 +50,8 @@ class _EquipmentListPageState extends State<EquipmentListPage> {
 
     return Scaffold(
       key: scaffoldKey,
-        appBar: appBar('INFORMACIÓN DE TU EQUIPO'),
-        drawer: DrawerMenu(),
+      appBar: appBar('INFORMACIÓN DE TU EQUIPO'),
+      drawer: DrawerMenu(),
       body: SafeArea(
         child: Container(
           decoration: new BoxDecoration(
@@ -148,21 +148,15 @@ class _EquipmentListPageState extends State<EquipmentListPage> {
         onSelected: (value) {
           switch (value) {
             case 1:
-              Navigator.pushNamed(context, 'equipmentLoad', arguments: entity);
+              Navigator.pushNamed(context, 'equipment', arguments: entity);
               break;
             case 2:
-              //   entityModel.idEquipo = int.parse(keyId);
-
+              print('eliminar ${entity.agrupador}');
               setState(() {
-                setState(() {
-                  // entityModel.idEquipo = int.parse(keyId);
-                  // print('eliminar ${entityModel.idEquipo}');
-                  // executeDelete(entityModel.idEquipo.toString(), prefs.email);
-                });
+                executeDelete(
+                    entity.agrupador.toString(), prefs.idPlayer.toString());
               });
-
               break;
-
             default:
               showSnackbarWithOutKey("No hay opcion seleccionada", context);
               break;
@@ -211,19 +205,20 @@ class _EquipmentListPageState extends State<EquipmentListPage> {
     );
   }
 
-  void executeDelete(String id, String usuario) async {
+  void executeDelete(String agrupador, String jugador) async {
     try {
-      await entityService.delete(id, usuario).then((result) {
+      await entityService.delete(agrupador, jugador).then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0')
-          showSnackbar(STATUS_OK, scaffoldKey);
+          setState(() {
+            showSnackbar(STATUS_OK_DELETE, scaffoldKey);
+          });
         else
           showSnackbar(STATUS_ERROR, scaffoldKey);
       });
     } catch (error) {
       showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
     }
-    setState(() {});
   }
 
   void executeUpdate(

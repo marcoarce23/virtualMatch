@@ -25,6 +25,8 @@ import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/model/util/Validator.dart' as validator;
 import 'package:virtual_match/src/widget/image/ImageWidget.dart';
+import 'package:virtual_match/src/model/entity/EntityFromJson/EquipoModel.dart'
+    as gets;
 
 class EquipmentAllPage extends StatefulWidget {
   static final String routeName = 'equipment';
@@ -64,7 +66,6 @@ class _EquipmentAllPageState extends State<EquipmentAllPage> {
         ChangeNotifierProvider(builder: (_) => new EquipmentService()),
       ],
       child: Scaffold(
-      
         bottomNavigationBar: BottomNavigationBar(
           elevation: 21.0,
           backgroundColor: AppTheme.themeDefault,
@@ -121,6 +122,7 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
   final controllerDirigidoA = TextEditingController();
   final controllerUbicacion = TextEditingController();
 //DEFINICION DE BLOC Y MODEL
+  gets.EquipoModel entityModelGet = new gets.EquipoModel();
   EquipmentService entityService;
   EquipoModel entity = new EquipoModel();
   ImageService entityImage = new ImageService();
@@ -142,19 +144,25 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
   Widget build(BuildContext context) {
     entity.foto = image;
     entity.states = StateEntity.Insert;
+    entity.agrupador = 0;
     entityService = Provider.of<EquipmentService>(context);
 
-    // final EquipoModel entityModel = ModalRoute.of(context).settings.arguments;
+    final gets.EquipoModel entityModelGet =
+        ModalRoute.of(context).settings.arguments;
 
-    // if (entityModel != null) {
-    //   entity = entityModel;
-    //   entity.states = StateEntity.Update;
-    // }
+    if (entityModelGet != null) {
+      entity.detalle = entityModelGet.detalle;
+      entity.nombre = entityModelGet.nombre;
+      entity.foto = entityModelGet.foto;
+      entity.agrupador = entityModelGet.agrupador;
+      entity.states = StateEntity.Update;
+      print(entity.detalle);
+    }
 
     return Scaffold(
       key: scaffoldKey,
-        appBar: appBar('CREA TU EQUIPO'),
-        drawer: DrawerMenu(),
+      appBar: appBar('CREA TU EQUIPO'),
+      drawer: DrawerMenu(),
       body: Stack(
         children: <Widget>[
           background(context, 'IMAGE_LOGO'),
@@ -175,7 +183,6 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
         key: formKey,
         child: Column(
           children: <Widget>[
-        
             Container(
               width: size.width * 0.94,
               margin: EdgeInsets.symmetric(vertical: 0.0),
@@ -183,7 +190,6 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
-                  
                   text('CARGA AVATAR DE TU EQUIPO', AppTheme.themeDefault, 1,
                       15.0),
                   _crearIconAppImagenes(),
@@ -198,15 +204,8 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
               decoration: containerFileds(),
               child: _fields(context),
             ),
-                  sizedBox(0.0, 5.0),
-            // Center(
-            //   child: Image(
-            //     image: NetworkImage(IMAGE_SCREEN3),
-            //     height: 180.0,
-            //     fit: BoxFit.fill,
-            //   ),
-            // ),
-             CardSlideWidget(),
+            sizedBox(0.0, 5.0),
+            CardSlideWidget(),
             sizedBox(0.0, 5.0),
             copyRigthBlack(),
           ],
@@ -347,12 +346,11 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
   void loadingEntity() {
     entity.idEquipo =
         (entity.states == StateEntity.Insert) ? 0 : entity.idEquipo;
-    entity.idJugador = 208;
-    //int.parse(prefs.idPlayer);
+    entity.idJugador = int.parse(prefs.idPlayer);
     entity.nombre = controllerNoticia.text;
     entity.detalle = controllerDetalle.text;
     entity.usuarioAuditoria = prefs.email;
-    entity.agrupador = 0;
+
     entity.esCapitan = 1;
   }
 
