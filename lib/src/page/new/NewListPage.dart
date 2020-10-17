@@ -121,14 +121,16 @@ class _NewListPageState extends State<NewListPage> {
       children: <Widget>[
         sizedBox(0, 7.0),
         CardVM(
-          size: 120,
+          size: 190,
           imageAssets: 'assets/icono3.png',
           opciones:
               _simplePopup(entity, entity.idNoticiaEvento.toString(), context),
           accesosRapidos: null,
           listWidgets: [
+            avatarCircle(entity.foto, 40),
+            sizedBox(0, 7),
             Text(
-              'Titulo: ${entity.titulo}',
+              'TÍTULO: ${entity.titulo}',
               style: kSubtitleStyleWhite,
               softWrap: true,
               overflow: TextOverflow.clip,
@@ -138,28 +140,28 @@ class _NewListPageState extends State<NewListPage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  'Detalle: ${entity.objetivo}',
+                  'DETALLE: ${entity.objetivo}',
                   style: kSubtitleStyleWhite,
                   softWrap: true,
                   overflow: TextOverflow.clip,
                   textAlign: TextAlign.justify,
                 ),
                 Text(
-                  'Dirigo a: ${entity.dirigidoa}',
+                  'DIRIGIDO A: ${entity.dirigidoa}',
                   style: kSubtitleStyleWhite,
                   softWrap: true,
                   overflow: TextOverflow.clip,
                   textAlign: TextAlign.justify,
                 ),
                 Text(
-                  'Lugar/Virtual: ${entity.dirigidoa}',
+                  'LIGAR/VIRTUAL: ${entity.dirigidoa}',
                   style: kSubtitleStyleWhite,
                   softWrap: true,
                   overflow: TextOverflow.clip,
                   textAlign: TextAlign.justify,
                 ),
                 Text(
-                  'Fecha y Hora: ${entity.fecha} ${entity.hora}',
+                  'FECHA Y HORA: ${entity.fecha} ${entity.hora}',
                   style: kSubtitleStyleWhite,
                   softWrap: true,
                   overflow: TextOverflow.clip,
@@ -197,9 +199,7 @@ class _NewListPageState extends State<NewListPage> {
             case 2:
               entityModel.idNoticiaEvento = int.parse(keyId);
 
-              setState(() {
-                executeDelete(keyId, prefs.email);
-              });
+              executeDelete(keyId, prefs.email);
 
               break;
             default:
@@ -214,13 +214,13 @@ class _NewListPageState extends State<NewListPage> {
         offset: Offset(0, 100),
       );
 
-  void executeDelete(String id, String usuario) {
+  void executeDelete(String id, String usuario) async {
     try {
-      entityService.delete(id, usuario).then((result) {
-        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
-
+      await entityService.delete(id, usuario).then((result) {
         if (result["tipo_mensaje"] == '0') {
-          showSnackbar(STATUS_OK, scaffoldKey);
+          setState(() {
+            showSnackbar(STATUS_OK_DELETE, scaffoldKey);
+          });
         } else
           showSnackbar(STATUS_ERROR, scaffoldKey);
       });

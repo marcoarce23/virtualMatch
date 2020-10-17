@@ -121,15 +121,16 @@ class _MultimediaListPageState extends State<MultimediaListPage> {
     return Column(
       children: <Widget>[
         CardVM(
-          size: 115,
+          size: 165,
           imageAssets: 'assets/icono3.png',
           opciones: _simplePopup(entity, entity.idMultimedia.toString()),
           accesosRapidos: null,
           listWidgets: [
-            Text('Titulo: ${entity.titulo}'),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
+                avatarCircle(entity.foto, 45),
+                sizedBox(0, 7),
                 Text(
                   'MATERIAL: ${entity.titulo}',
                   style: kSubtitleStyleWhite,
@@ -196,12 +197,7 @@ class _MultimediaListPageState extends State<MultimediaListPage> {
               break;
             case 2:
               entityModel.idMultimedia = int.parse(keyId);
-              print('eliminar ${entityModel.idMultimedia}');
-
-              setState(() {
-                executeDelete(entityModel.idMultimedia.toString(), prefs.email);
-              });
-
+              executeDelete(entityModel.idMultimedia.toString(), prefs.email);
               break;
             default:
               showSnackbarWithOutKey("No hay opcion seleccionada", context);
@@ -215,33 +211,33 @@ class _MultimediaListPageState extends State<MultimediaListPage> {
         offset: Offset(0, 100),
       );
 
-  void executeDelete(String id, String usuario) {
+  void executeDelete(String id, String usuario) async {
     try {
-      entityService.delete(id, usuario).then((result) {
-        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
+      await entityService.delete(id, usuario).then((result) {
         if (result["tipo_mensaje"] == '0')
-          showSnackbar(STATUS_OK, scaffoldKey);
+          setState(() {
+            showSnackbar(STATUS_OK_DELETE, scaffoldKey);
+          });
         else
           showSnackbar(STATUS_ERROR, scaffoldKey);
       });
     } catch (error) {
       showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
     }
+    //   setState(() {});
   }
 
   void executeUpdate(
       MultimediaService entityService, model.MultimediaModel entity) async {
     try {
       await entityService.repository(entity).then((result) {
-        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0')
-          showSnackbar(STATUS_OK, scaffoldKey);
+          showSnackbar(STATUS_OK_UPDATE, scaffoldKey);
         else
           showSnackbar(STATUS_ERROR, scaffoldKey);
       });
     } catch (error) {
       showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
     }
-    setState(() {});
   }
 } // FIN DE LA CLASE

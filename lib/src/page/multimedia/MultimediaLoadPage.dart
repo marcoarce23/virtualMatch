@@ -134,9 +134,6 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
   int typeMaterial = 14;
   int valueImage = 0;
   String image = IMAGE_DEFAULT;
-  String imagenPDF = IMAGE_DEFAULT;
-  String imagenVideo = IMAGE_DEFAULT;
-  String _pdfPath = '';
 
   @override
   void initState() {
@@ -163,7 +160,9 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
       entity.foto = entityModelGet.foto;
       print(entityModelGet.foto);
     }
-    print(entityModelGet.foto);
+
+  //  print(entityModelGet.foto);
+
     return Scaffold(
       key: scaffoldKey,
       appBar: appBar('GALERÍA DE IMÁGENES'),
@@ -241,15 +240,15 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
     );
   }
 
-  _crearIconAppVideo() {
-    return IconButton(
-      icon: FaIcon(
-        FontAwesomeIcons.youtube,
-        color: AppTheme.themePurple,
-      ),
-      onPressed: _pickVideo,
-    );
-  }
+  // _crearIconAppVideo() {
+  //   return IconButton(
+  //     icon: FaIcon(
+  //       FontAwesomeIcons.youtube,
+  //       color: AppTheme.themePurple,
+  //     ),
+  //     onPressed: _pickVideo,
+  //   );
+  // }
 
   Widget _fields(BuildContext context) {
     return Column(
@@ -550,22 +549,22 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
     });
   }
 
-  void _pickVideo() async {
-    try {
-      var _extension = 'MP4';
-      _pdfPath = await FilePicker.getFilePath(
-          type: FileType.custom,
-          allowedExtensions: (_extension?.isNotEmpty ?? false)
-              ? _extension?.replaceAll(' ', '')?.split(',')
-              : null);
+  // void _pickVideo() async {
+  //   try {
+  //     var _extension = 'MP4';
+  //     _pdfPath = await FilePicker.getFilePath(
+  //         type: FileType.custom,
+  //         allowedExtensions: (_extension?.isNotEmpty ?? false)
+  //             ? _extension?.replaceAll(' ', '')?.split(',')
+  //             : null);
 
-      setState(() {});
-      if (_pdfPath == '') {
-        return;
-      }
-      _procesarVideo2(_pdfPath);
-    } on PlatformException catch (exception) {
-      showSnackbar('Se produjo un error. $exception', scaffoldKey);
-    }
-  }
+  //     setState(() {});
+  //     if (_pdfPath == '') {
+  //       return;
+  //     }
+  //     _procesarVideo2(_pdfPath);
+  //   } on PlatformException catch (exception) {
+  //     showSnackbar('Se produjo un error. $exception', scaffoldKey);
+  //   }
+  // }
 }

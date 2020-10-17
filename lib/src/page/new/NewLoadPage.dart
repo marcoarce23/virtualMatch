@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -121,6 +120,7 @@ class _NewLoadPageState extends State<NewLoadPage> {
   // ignore: unused_field
   int _selectedRadio = 1;
   String image = IMAGE_DEFAULT;
+  int unaVez = 0;
 
   @override
   void initState() {
@@ -137,7 +137,7 @@ class _NewLoadPageState extends State<NewLoadPage> {
     final gets.NoticiaEventoModel entityModelGet =
         ModalRoute.of(context).settings.arguments;
 
-    if (entityModelGet != null) {
+    if (entityModelGet != null && unaVez == 0) {
       entity.idNoticiaEvento = entityModelGet.idNoticiaEvento;
       entity.objetivo = entityModelGet.objetivo;
       entity.titulo = entityModelGet.titulo;
@@ -148,8 +148,12 @@ class _NewLoadPageState extends State<NewLoadPage> {
       entity.foto = entityModelGet.foto;
       _selectedRadio = entityModelGet.tipo;
       entity.states = StateEntity.Update;
-      print(entityModelGet.titulo);
+
+      entity.foto = entityModelGet.foto;
+
+      print('ddd ${entity.foto}');
     }
+    unaVez = 1;
 
     return Scaffold(
       key: scaffoldKey,
@@ -402,11 +406,9 @@ class _NewLoadPageState extends State<NewLoadPage> {
     if (picked != null) {
       setState(() {
         _time = picked;
-        _inputFieldTimeController.text = _time.hour.toString() +
-            ':' +
-            _time.minute
-                .toString(); 
-              //TimeOfDay(hour: _time.hour, minute: _time.minute).toString();
+        _inputFieldTimeController.text =
+            _time.hour.toString() + ':' + _time.minute.toString();
+        //TimeOfDay(hour: _time.hour, minute: _time.minute).toString();
         entity.hora = _inputFieldTimeController.text;
       });
     }
@@ -484,10 +486,10 @@ class _NewLoadPageState extends State<NewLoadPage> {
     entity.dirigidoA = controllerDirigidoA.text;
     entity.ubicacionUrl = controllerUbicacion.text;
     entity.usuarioAuditoria = prefs.email;
-  //  entity.fecha = _inputFieldDateController.text;
-   // entity.hora = _inputFieldTimeController.text;
+    //  entity.fecha = _inputFieldDateController.text;
+    // entity.hora = _inputFieldTimeController.text;
     entity.tipo = _selectedRadio;
-   }
+  }
 
   void executeCUD(NewService entityBloc, NoticiaEventoModel entity) async {
     try {
