@@ -147,17 +147,17 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
     entity.agrupador = 0;
     entityService = Provider.of<EquipmentService>(context);
 
-    final gets.EquipoModel entityModelGet =
-        ModalRoute.of(context).settings.arguments;
+    // final gets.EquipoModel entityModelGet =
+    //     ModalRoute.of(context).settings.arguments;
 
-    if (entityModelGet != null) {
-      entity.detalle = entityModelGet.detalle;
-      entity.nombre = entityModelGet.nombre;
-      entity.foto = entityModelGet.foto;
-      entity.agrupador = entityModelGet.agrupador;
-      entity.states = StateEntity.Update;
-      print(entity.detalle);
-    }
+    // if (entityModelGet != null) {
+    //   entity.detalle = entityModelGet.detalle;
+    //   entity.nombre = entityModelGet.nombre;
+    //   entity.foto = entityModelGet.foto;
+    //   entity.agrupador = entityModelGet.agrupador;
+    //   entity.states = StateEntity.Update;
+    //   print(entity.detalle);
+    // }
 
     return Scaffold(
       key: scaffoldKey,

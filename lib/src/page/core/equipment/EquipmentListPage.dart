@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:virtual_match/src/model/Preference.dart';
-import 'package:virtual_match/src/model/entity/EntityFromJson/EquipoModel.dart';
+import 'package:virtual_match/src/model/entity/EntityFromJson/EquipoModel.dart' as gets;
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/page/core/equipment/EquipmentLoadPage.dart';
@@ -28,7 +28,7 @@ class EquipmentListPage extends StatefulWidget {
 
 class _EquipmentListPageState extends State<EquipmentListPage> {
   //DEFINICION DE BLOC Y MODEL
-  EquipoModel entity = new EquipoModel();
+  gets.EquipoModel entity = new gets.EquipoModel();
   model.EquipoModel entityModel = new model.EquipoModel();
   EquipmentService entityService;
   EquipmentService entityGet = EquipmentService();
@@ -102,7 +102,7 @@ class _EquipmentListPageState extends State<EquipmentListPage> {
 
   Widget futureBuilder(BuildContext context) {
     return FutureBuilder(
-        future: entityGet.getMisEquipos(new EquipoModel(), prefs.idPlayer),
+        future: entityGet.getMisEquipos(new gets.EquipoModel(), prefs.idPlayer),
         builder: (context, AsyncSnapshot snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
@@ -122,7 +122,7 @@ class _EquipmentListPageState extends State<EquipmentListPage> {
         physics: ClampingScrollPhysics(),
         itemCount: snapshot.data.length,
         itemBuilder: (context, index) {
-          EquipoModel entity = snapshot.data[index];
+          gets.EquipoModel entity = snapshot.data[index];
 
           return _showListTile(entity);
         },
@@ -130,7 +130,7 @@ class _EquipmentListPageState extends State<EquipmentListPage> {
     );
   }
 
-  Widget _simplePopup(EquipoModel entity, int keyId, BuildContext context) =>
+  Widget _simplePopup(gets.EquipoModel entity, int keyId, BuildContext context) =>
       PopupMenuButton<int>(
         itemBuilder: (context) => [
           PopupMenuItem(
@@ -148,7 +148,7 @@ class _EquipmentListPageState extends State<EquipmentListPage> {
         onSelected: (value) {
           switch (value) {
             case 1:
-              Navigator.pushNamed(context, 'equipment', arguments: entity);
+              Navigator.pushNamed(context, 'equipmentLoad', arguments: entity);
               break;
             case 2:
               print('eliminar ${entity.agrupador}');
@@ -169,7 +169,7 @@ class _EquipmentListPageState extends State<EquipmentListPage> {
         offset: Offset(0, 100),
       );
 
-  Widget _showListTile(EquipoModel entity) {
+  Widget _showListTile(gets.EquipoModel entity) {
     return Column(
       children: <Widget>[
         Column(
