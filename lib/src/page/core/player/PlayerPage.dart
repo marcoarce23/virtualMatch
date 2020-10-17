@@ -130,6 +130,7 @@ class _PlayerPageState extends State<PlayerPage> {
               return loading();
               break;
             default:
+              listPlayers.clear();
               for (var i = 0; i < snapshot.data.length; i++) {
                 listPlayers.add(snapshot.data[i] as JugadorModel);
               }
