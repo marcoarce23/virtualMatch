@@ -78,7 +78,6 @@ class _EquipmentAllListPageState extends State<EquipmentAllListPage> {
                         'ELIGE TU EQUIPO',
                         'En esta pantalla podrás buscar los equipos inscritos y solicitar tu inscripción. Disfruta de  11 Vs. 11.',
                       ),
-                     
                     ],
                   ),
                 ),
@@ -151,19 +150,14 @@ class _EquipmentAllListPageState extends State<EquipmentAllListPage> {
                   'Capitan del equipo ${entity.nombre}, deseo formar parte de su equipo mando mi solictud para que sea evaluada por su persona. Saludos.');
               break;
             case 2:
-              setState(() {
-                setState(() {
-                  loadingEntity();
-                });
-              });
+              loadingEntity(entity);
+
               break;
 
             case 3:
-              setState(() {
-                setState(() {
-                  loadingUpdateEntity(2, int.parse(prefs.idPlayer), entity.agrupador);
-                });
-              });
+              loadingUpdateEntity(
+                  2, int.parse(prefs.idPlayer), entity.idEquipo);
+
               break;
             default:
               showSnackbarWithOutKey("No hay opcion seleccionada", context);
@@ -226,11 +220,10 @@ class _EquipmentAllListPageState extends State<EquipmentAllListPage> {
     );
   }
 
-  void loadingEntity() {
+  void loadingEntity(list.EquipoCapitanesModel entity) {
     entityModel.states = StateEntity.Insert;
     entityModel.idEquipo = 0;
     entityModel.idJugador = int.parse(prefs.idPlayer);
-    //int.parse(prefs.idPlayer);
     entityModel.nombre = entity.nombre;
     entityModel.detalle = entity.detalle;
     entityModel.foto = entity.foto;
@@ -244,7 +237,7 @@ class _EquipmentAllListPageState extends State<EquipmentAllListPage> {
   void loadingUpdateEntity(int estado, int idJugador, int idEquipo) {
     entityStateModel.states = StateEntity.None;
     entityStateModel.idEquipo = idEquipo;
-    entityStateModel.idJugador =  idJugador;
+    entityStateModel.idJugador = idJugador;
     entityStateModel.estado = estado;
 
     executeUpdateCUD(entityService, entityStateModel);
@@ -256,7 +249,9 @@ class _EquipmentAllListPageState extends State<EquipmentAllListPage> {
       await entityService.repository(entity).then((result) {
         print('EL RESULTTTTT CAMBIO ESTADO: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0')
-          showSnackbar(STATUS_OK, scaffoldKey);
+          showSnackbar(
+              'Su solictud para salirse del equipo fue enviado con éxito!',
+              scaffoldKey);
         else
           showSnackbar(STATUS_ERROR, scaffoldKey);
       });
