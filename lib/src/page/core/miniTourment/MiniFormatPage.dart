@@ -228,7 +228,7 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
 
     return Center(
         child: FutureBuilder(
-            future: entityGet1.getId(
+            future: entityGet1.get1(
                 new ListaTorneoModel(), int.parse(prefs.idPlayer)),
             builder: (context, AsyncSnapshot snapshot) {
               if (snapshot.hasData) {
