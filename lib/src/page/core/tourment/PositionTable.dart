@@ -175,7 +175,7 @@ class _PositionTableState extends State<PositionTable> {
                               width: 15.0,
                               child: Center(
                                 child: Text(
-                                  data.puntaje.toString(),
+                                  data.jugados.toString(),
                                   style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 12),

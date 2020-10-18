@@ -124,7 +124,7 @@ class _TourmentListPageState extends State<TourmentListPage> {
       children: <Widget>[
         sizedBox(0, 7.0),
         CardVM(
-          size: 110,
+          size: 140,
           imageAssets: 'assets/icono3.png',
           opciones: _simplePopup(entity, entity.idTorneo.toString()),
           accesosRapidos: null,
