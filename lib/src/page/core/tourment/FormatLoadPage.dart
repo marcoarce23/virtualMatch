@@ -214,7 +214,7 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
   Widget _comboCodTroneo(String _opcionCodTorneosss) {
     return Center(
         child: FutureBuilder(
-            future: entityGet1.getId(new ListaTorneoModel(), int.parse('1')),
+            future: entityGet1.get1(new ListaTorneoModel(), int.parse('1')),
             builder: (context, AsyncSnapshot snapshot) {
               if (snapshot.hasData) {
                 return Row(
