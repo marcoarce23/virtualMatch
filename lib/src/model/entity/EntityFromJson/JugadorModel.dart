@@ -1,6 +1,6 @@
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 
-class JugadorModelJson implements IEntityJson {
+class JugadorModelList implements IEntityJson {
   int idJugador;
   int idOrganizacion;
   int idaDepartamento;
@@ -16,7 +16,7 @@ class JugadorModelJson implements IEntityJson {
   String twitter;
   String foto;
 
-  JugadorModelJson(
+  JugadorModelList(
       {this.idJugador,
       this.idOrganizacion,
       this.idaDepartamento,
@@ -32,7 +32,7 @@ class JugadorModelJson implements IEntityJson {
       this.twitter,
       this.foto});
 
-  fromJson(Map<String, dynamic> json) => new JugadorModelJson(
+  fromJson(Map<String, dynamic> json) => new JugadorModelList(
         idJugador: json["idJugador"],
         idOrganizacion: json["idOrganizacion"],
         idaDepartamento: json["idaDepartamento"],
@@ -47,5 +47,48 @@ class JugadorModelJson implements IEntityJson {
         facebook: json["facebook"],
         twitter: json["twitter"],
         foto: json["foto"],
+      );
+}
+
+class JugadorEquipoModelList implements IEntityJson {
+  int idEquipo;
+  String nombreEquipo;
+  String detalle;
+
+  String foto;
+  int idJugador;
+  String nombreJugador;
+  String psdnJugador;
+  String telefonoJugador;
+  int agrupador;
+  int esCapitan;
+  int estado;
+
+  JugadorEquipoModelList({
+    this.idEquipo,
+    this.nombreEquipo,
+    this.detalle,
+    this.foto,
+    this.idJugador,
+    this.nombreJugador,
+    this.psdnJugador,
+    this.telefonoJugador,
+    this.agrupador,
+    this.esCapitan,
+    this.estado,
+  });
+
+  fromJson(Map<String, dynamic> json) => new JugadorEquipoModelList(
+        idEquipo: json["idEquipo"],
+        nombreEquipo: json["nombreEquipo"],
+        detalle: json["detalle"],
+        foto: json["foto"],
+        idJugador: json["idJugador"],
+        nombreJugador: json["nombreJugador"],
+        psdnJugador: json["psdnJugador"],
+        telefonoJugador: json["telefonoJugador"],
+        agrupador: json["agrupador"],
+        esCapitan: json["esCapitan"],
+        estado: json["estado"],
       );
 }

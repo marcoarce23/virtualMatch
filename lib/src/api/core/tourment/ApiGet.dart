@@ -33,7 +33,7 @@ class ApiGet {
     final List<IEntityJson> list = new List();
     Map<String, dynamic> decodeData;
 
-    final _apiRest = api['getId'][0].toString() + '/' + value.toString();
+    final _apiRest = api['getId1'][0].toString() + '/' + value.toString();
     final response = await http.get(_apiRest);
 
     print(_apiRest);
@@ -131,6 +131,20 @@ class ApiGet {
         idTorneo.toString() +
         '/Jugador/' +
         idJugador.toString();
+    print(_apiRest);
+    final response = await http.get(_apiRest);
+
+    return getListIEntityJson(response, entity, decodeData, list);
+  }
+
+  Future<List<IEntityJson>> getDevuelveTorneoParaPersonalizar(
+      IEntityJson entity, int idTorneo) async {
+    final List<IEntityJson> list = new List();
+    Map<String, dynamic> decodeData;
+
+    final _apiRest = api['getDevuelveTorneoParaPersonalizar'][0].toString() +
+        "/" +
+        idTorneo.toString();
     print(_apiRest);
     final response = await http.get(_apiRest);
 

@@ -32,6 +32,7 @@ Widget showPictureRectangle(File file, String picture, double heigth) {
 }
 
 Widget showPictureOval(File file, String image, double heigth) {
+  print('valooo: $image');
   Container(
     width: 60.0,
     height: 60.0,

@@ -3,6 +3,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/ListaFechasTorneo.dart';
+import 'package:virtual_match/src/model/entity/EntityMap/ChangeDate.dart';
+import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/core/TournamentService.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
@@ -39,7 +41,7 @@ class _DateTournamentState extends State<DateTournament> {
       body: SingleChildScrollView(
           child: Container(child: bodyContainer(context))),
       drawer: DrawerMenu(),
-      floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
+      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }
@@ -99,7 +101,7 @@ class _DateTournamentState extends State<DateTournament> {
       children: <Widget>[
         InkWell(
           onTap: () {
-            _selectDate(context);
+            _selectDate(context, entity.id, int.parse(entity.torneo));
           },
           child: CardVM(
             size: 100,
@@ -107,17 +109,18 @@ class _DateTournamentState extends State<DateTournament> {
             opciones: null,
             accesosRapidos: null,
             listWidgets: [
-              Text('Nro: ${entity.nrO_FECHA}',
+              Text('Fecha: ${entity.nrO_FECHA}',
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 15,
                       color: AppTheme.themeWhite)),
-              Text('Torneo: ${entity.torneo}',
+              Text('Torneo: ${entity.detalle}',
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 15,
                       color: AppTheme.themeWhite)),
-              Text('Fecha: ${(entity.fecha) ?? 'N/A'}',
+              Text(
+                  'Fecha: ${(new DateFormat.yMMMMd('es_BO').format(entity.fecha)) ?? 'N/A'}',
                   style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 15,
@@ -129,7 +132,28 @@ class _DateTournamentState extends State<DateTournament> {
     );
   }
 
-  _selectDate(BuildContext context) async {
+  void _cambiarFecha(int identificador, int torneo, String fecha) async {
+    ChangeDate entity = ChangeDate();
+
+    entity.fecha = fecha;
+    entity.idTorneo = torneo;
+    entity.idJugador = prefs.idJugador;
+    entity.identificador = identificador;
+
+    try {
+      await entityService.cambiarFechasTorneo(entity).then((result) {
+        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
+        if (result["tipo_mensaje"] == '0')
+          showSnackbar(result["mensaje"], scaffoldKey);
+        else
+          showSnackbar(result["mensaje"], scaffoldKey);
+      });
+    } catch (error) {
+      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
+    }
+  }
+
+  _selectDate(BuildContext context, int identificador, int torneo) async {
     DateTime picked = await showDatePicker(
         context: context,
         initialDate: new DateTime.now(),
@@ -139,11 +163,9 @@ class _DateTournamentState extends State<DateTournament> {
 
     if (picked != null) {
       setState(() {
-        _fecha = DateFormat("yyyy-MM-dd").format(picked);
+        _cambiarFecha(
+            identificador, torneo, DateFormat('yyyy-MM-dd').format(picked));
         _inputFieldDateController.text = _fecha;
-        showDialog(
-            context: context,
-            child: AlertDialog(content: Text('se cerro ${_fecha.toString()}')));
       });
     }
   }

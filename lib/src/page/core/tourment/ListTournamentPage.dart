@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
+import 'package:virtual_match/src/page/core/tourment/DateTournament.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
@@ -45,27 +46,30 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Scaffold(
-      key: scaffoldKey,
-      appBar: appBar('TORNEOS VIRTUAL MATCH'),
-      body: SingleChildScrollView(
-          child: Container(
-              height: size.height,
-              decoration: new BoxDecoration(
-                image: new DecorationImage(
-                  image: new AssetImage('assets/portada2.png'),
-                  fit: BoxFit.cover,
+    return SafeArea(
+      maintainBottomViewPadding: true,
+      child: Scaffold(
+        key: scaffoldKey,
+        appBar: appBar('TORNEOS VIRTUAL MATCH'),
+        body: SingleChildScrollView(
+            child: Container(
+                //height: size.height,
+                decoration: new BoxDecoration(
+                  image: new DecorationImage(
+                    image: new AssetImage('assets/portada2.png'),
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              ),
-              child: bodyContainer(context))),
-      drawer: DrawerMenu(),
-      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
-          FaIcon(FontAwesomeIcons.playstation), HomePage()),
-      //floatingActionButton: CircularMenu(),
-      //floatingActionButtonLocation: FloatingActionButtonLocation.miniEndDocked,
-      bottomNavigationBar: new BottonNavigation(),
+                child: bodyContainer(context))),
+        drawer: DrawerMenu(),
+        floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
+            FaIcon(FontAwesomeIcons.playstation), HomePage()),
+        //floatingActionButton: CircularMenu(),
+        //floatingActionButtonLocation: FloatingActionButtonLocation.miniEndDocked,
+        bottomNavigationBar: new BottonNavigation(),
 
-      //   ),
+        //   ),
+      ),
     );
   }
 
@@ -123,7 +127,7 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
         CardVM(
           size: 170,
           imageAssets: 'assets/icono3.png',
-          opciones: _simplePopup(entity.idTorneo.toString()),
+          opciones: _simplePopup(entity.idTorneo.toString(), context),
           accesosRapidos: null,
           listWidgets: [
             Text('TORNEO: ${entity.nombreTorneo}',
@@ -209,8 +213,16 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
         mensaje = result["mensaje"].toString();
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
 
-        if (respuesta == '0') showSnackbar(mensaje, scaffoldKey);
-        if (respuesta == '2') showSnackbar(mensaje, scaffoldKey);
+        if (respuesta == '0') {
+          setState(() {
+            showSnackbar(mensaje, scaffoldKey);
+          });
+        }
+        if (respuesta == '2') {
+          setState(() {
+            showSnackbar(mensaje, scaffoldKey);
+          });
+        }
       });
     } catch (error) {
       showSnackbar('Usuario registrado !!!', scaffoldKey);
@@ -228,18 +240,29 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
               idJugador)
           .then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
-        if (result["tipo_mensaje"] == '0')
-          showSnackbar(result["mensaje"], scaffoldKey);
-        if (result["tipo_mensaje"] == '2')
-          showSnackbar(result["mensaje"], scaffoldKey);
+        if (result["tipo_mensaje"] == '0') {
+          setState(() {
+            showSnackbar(result["mensaje"], scaffoldKey);
+          });
+        }
+        if (result["tipo_mensaje"] == '2') {
+          setState(() {
+            showSnackbar(result["mensaje"], scaffoldKey);
+          });
+        }
       });
     } catch (error) {
       showSnackbar('El usuario ya salio del torneo!!', scaffoldKey);
     }
   }
 
-  Widget _simplePopup(String idTorneo) => PopupMenuButton<int>(
+  Widget _simplePopup(String idTorneo, BuildContext context) =>
+      PopupMenuButton<int>(
         itemBuilder: (context) => [
+          PopupMenuItem(
+            value: 0,
+            child: Text("Fechas del torneo"),
+          ),
           PopupMenuItem(
             value: 1,
             child: Text("Ver detalle"),
@@ -258,6 +281,14 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
         },
         onSelected: (value) {
           switch (value) {
+            case 0:
+              navegation(
+                  context,
+                  DateTournament(
+                    idTorneo: int.parse(idTorneo),
+                    idJugador: prefs.idJugador,
+                  ));
+              break;
             case 1:
               _detail(idTorneo);
               break;

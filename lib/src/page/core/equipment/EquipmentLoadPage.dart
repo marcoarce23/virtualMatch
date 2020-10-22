@@ -12,17 +12,21 @@ import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/page/core/equipment/EquipmentListPage.dart';
+import 'package:virtual_match/src/page/core/player/PlayerEditPage.dart';
+import 'package:virtual_match/src/page/core/player/PlayerEquipmentPage.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
-import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/ImageService.dart';
 import 'package:virtual_match/src/service/core/EquipmentService.dart';
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
+import 'package:virtual_match/src/widget/card/CardSlideProductWidget.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/model/util/Validator.dart' as validator;
 import 'package:virtual_match/src/widget/image/ImageWidget.dart';
+import 'package:virtual_match/src/model/entity/EntityFromJson/EquipoModel.dart'
+    as gets;
 
 class EquipmentAllPage extends StatefulWidget {
   static final String routeName = 'equipment';
@@ -35,7 +39,11 @@ class EquipmentAllPage extends StatefulWidget {
 class _EquipmentAllPageState extends State<EquipmentAllPage> {
   int page = 0;
   final prefs = new Preferense();
-  final List<Widget> optionPage = [EquipmentLoadPage(), EquipmentListPage()];
+  final List<Widget> optionPage = [
+    EquipmentLoadPage(),
+    EquipmentListPage(),
+    PlayerEquipmentPage()
+  ];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -58,24 +66,34 @@ class _EquipmentAllPageState extends State<EquipmentAllPage> {
         ChangeNotifierProvider(builder: (_) => new EquipmentService()),
       ],
       child: Scaffold(
-        appBar: appBar('CREA TU EQUIPO'),
-        drawer: DrawerMenu(),
         bottomNavigationBar: BottomNavigationBar(
           elevation: 21.0,
           backgroundColor: AppTheme.themeDefault,
           items: [
             BottomNavigationBarItem(
-                icon: FaIcon(
-                  FontAwesomeIcons.futbol,
-                  size: 25,
+                icon: Image.asset(
+                  'assets/image/pelota.png',
+                  //scale: 0.4,
+                  width: 28,
+                  height: 28,
                 ),
                 title: Text('Tu equipo')),
             BottomNavigationBarItem(
-                icon: FaIcon(
-                  FontAwesomeIcons.gamepad,
-                  size: 25,
+                icon: Image.asset(
+                  'assets/image/penal.png',
+                  //scale: 0.4,
+                  width: 28,
+                  height: 28,
                 ),
-                title: Text('Tus equipos')),
+                title: Text('Editar equipo')),
+            BottomNavigationBarItem(
+                icon: Image.asset(
+                  'assets/image/jugador2.png',
+                  //scale: 0.4,
+                  width: 28,
+                  height: 28,
+                ),
+                title: Text('Tus jugadores')),
           ],
           currentIndex: page,
           unselectedItemColor: AppTheme.themeWhite,
@@ -104,6 +122,7 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
   final controllerDirigidoA = TextEditingController();
   final controllerUbicacion = TextEditingController();
 //DEFINICION DE BLOC Y MODEL
+  gets.EquipoModel entityModelGet = new gets.EquipoModel();
   EquipmentService entityService;
   EquipoModel entity = new EquipoModel();
   ImageService entityImage = new ImageService();
@@ -112,7 +131,6 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
   //DEFINICION DE VARIABLES
   bool _save = false;
   File photo;
-  int valueImage = 0;
   String image = IMAGE_DEFAULT;
 
   @override
@@ -124,18 +142,27 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
 
   @override
   Widget build(BuildContext context) {
+    entity.foto = image;
     entity.states = StateEntity.Insert;
+    entity.agrupador = 0;
     entityService = Provider.of<EquipmentService>(context);
 
-    final EquipoModel entityModel = ModalRoute.of(context).settings.arguments;
+    // final gets.EquipoModel entityModelGet =
+    //     ModalRoute.of(context).settings.arguments;
 
-    if (entityModel != null) {
-      entity = entityModel;
-      entity.states = StateEntity.Update;
-    }
+    // if (entityModelGet != null) {
+    //   entity.detalle = entityModelGet.detalle;
+    //   entity.nombre = entityModelGet.nombre;
+    //   entity.foto = entityModelGet.foto;
+    //   entity.agrupador = entityModelGet.agrupador;
+    //   entity.states = StateEntity.Update;
+    //   print(entity.detalle);
+    // }
 
     return Scaffold(
       key: scaffoldKey,
+      appBar: appBar('CREA TU EQUIPO'),
+      drawer: DrawerMenu(),
       body: Stack(
         children: <Widget>[
           background(context, 'IMAGE_LOGO'),
@@ -143,8 +170,8 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
           _form(context),
         ],
       ),
-      floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
-          FaIcon(FontAwesomeIcons.playstation), HomePage()),
+      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
+          FaIcon(FontAwesomeIcons.playstation), PlayerEditPage()),
     );
   }
 
@@ -156,7 +183,6 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
         key: formKey,
         child: Column(
           children: <Widget>[
-            sizedBox(0.0, 15.0),
             Container(
               width: size.width * 0.94,
               margin: EdgeInsets.symmetric(vertical: 0.0),
@@ -178,7 +204,10 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
               decoration: containerFileds(),
               child: _fields(context),
             ),
-            copyRigth(),
+            sizedBox(0.0, 5.0),
+            CardSlideWidget(),
+            sizedBox(0.0, 5.0),
+            copyRigthBlack(),
           ],
         ),
       ),
@@ -211,7 +240,7 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
       children: <Widget>[
         sizedBox(0.0, 7.0),
         showPictureOval(photo, image, 70.0),
-        divider(),
+        dividerBlack(),
         _text(
             controllerNoticia,
             entity.nombre,
@@ -315,13 +344,14 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
   }
 
   void loadingEntity() {
-    entity.idEquipo = 0;
-    entity.idJugador = 133;
+    entity.idEquipo =
+        (entity.states == StateEntity.Insert) ? 0 : entity.idEquipo;
+    entity.idJugador = int.parse(prefs.idPlayer);
     entity.nombre = controllerNoticia.text;
     entity.detalle = controllerDetalle.text;
-    entity.foto = IMAGE_LOGO;
     entity.usuarioAuditoria = prefs.email;
-    entity.fechaAuditoria = '2020-08-10 08:25';
+
+    entity.esCapitan = 1;
   }
 
   void executeCUD(EquipmentService entityService, EquipoModel entity) async {

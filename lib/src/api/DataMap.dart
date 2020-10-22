@@ -37,16 +37,35 @@ List<IEntityJson> getListIEntityJson(http.Response response, IEntityJson entity,
   return list;
 }
 
-Map getListIEntityJsonId(http.Response response, IEntityJson entity,
-    Map<String, dynamic> decodeData, IEntityJson list) {
-  Map dataMap;
+List<IEntityJson> getListIEntityJsonId(http.Response response, IEntityJson entity,
+    Map<String, dynamic> decodeData, List<IEntityJson> list) {
+  // final List<IEntityJson> list = new List();
 
   if (response.statusCode == 200) {
-    dataMap = json.decode(response.body);
-    print('ZZZZ: ${dataMap["data"]}');
-    return dataMap;
+    Map dataMap = json.decode(response.body);
+    List<dynamic> listDynamic = dataMap[PRIMARY_KEY];
+    print(listDynamic);
+    for (int i = 0; i < listDynamic.length; i++) {
+      decodeData = listDynamic[i];
+      list.add(entity.fromJson(decodeData));
+    }
   } else {
     Exception('Error: Status 400');
   }
-  return dataMap;
+
+  return list;
 }
+
+// Map getListIEntityJsonId(http.Response response, IEntityJson entity,
+//     Map<String, dynamic> decodeData, IEntityJson list) {
+//   Map dataMap;
+
+//   if (response.statusCode == 200) {
+//     dataMap = json.decode(response.body);
+//   print('yyyyyyy: ${dataMap["data"]["telefono"].toString()}');
+
+//     return dataMap;
+//   } else {
+//     Exception('Error: Status 400');
+//   }
+

@@ -42,6 +42,40 @@ Widget showInformationBasic(
   //Text(entity.nombreEquipo);
 }
 
+Widget showInformationBasicIcon(
+    BuildContext context, String title, String subTitle, String icon, double size1) {
+  final size = MediaQuery.of(context).size;
+  return Container(
+    width: size.width * 0.95,
+    margin: EdgeInsets.symmetric(vertical: 0.0),
+    decoration: boxDecoration(),
+    child: Column(
+      children: <Widget>[
+        gfListTile(
+            Column(
+              children: [
+                sizedBox(0, 10),
+                Text(title, style: kSigsTitleStyle),
+                sizedBox(0, 4),
+              ],
+            ),
+            Column(
+              children: [
+                Text(subTitle, style: kSigssTitleStyle),
+                sizedBox(0, 8),
+              ],
+            ),
+            null,
+            null,
+            avatarCircle(icon, size1),
+            EdgeInsets.all(0.0),
+            EdgeInsets.all(0.0)),
+      ],
+    ),
+  );
+  //Text(entity.nombreEquipo);
+}
+
 Widget showInformation(BuildContext context, String title, String subTitle,
     String subSubTitle, String titlePage, String url) {
   final size = MediaQuery.of(context).size;
@@ -51,7 +85,6 @@ Widget showInformation(BuildContext context, String title, String subTitle,
     decoration: boxDecoration(),
     child: Column(
       children: <Widget>[
-        
         gfListTile(
             Text(title, style: TextStyle(color: AppTheme.themeWhite)),
             Text(subTitle, style: TextStyle(color: AppTheme.themeWhite)),
@@ -287,6 +320,23 @@ BoxDecoration containerImage() {
       ]);
 }
 
+BoxDecoration containerImage2() {
+  return BoxDecoration(
+      image: new DecorationImage(
+        image: new AssetImage('assets/portada2.png'),
+        fit: BoxFit.cover,
+      ),
+      // color: AppTheme.themeWhite,
+      borderRadius: BorderRadius.circular(8.0),
+      boxShadow: <BoxShadow>[
+        BoxShadow(
+            color: AppTheme.themePurple,
+            blurRadius: 15.0,
+            offset: Offset(2.0, 1.0),
+            spreadRadius: 2.0)
+      ]);
+}
+
 boxDecoration() {
   return BoxDecoration(
       image: new DecorationImage(
@@ -420,7 +470,12 @@ showSnackbar(String message, GlobalKey<ScaffoldState> scaffoldKey) {
 showSnackbarWithOutKey(String message, BuildContext context) {
   return Scaffold.of(context).showSnackBar(SnackBar(
     backgroundColor: AppTheme.themePurple,
-    content: Text(message),
+    content: Row(
+      children: [
+        FaIcon(FontAwesomeIcons.newspaper, color: AppTheme.themeDefault),
+        Text(message),
+      ],
+    ),
     duration: Duration(milliseconds: 2500),
   ));
 }

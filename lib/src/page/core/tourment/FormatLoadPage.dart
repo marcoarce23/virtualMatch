@@ -43,6 +43,8 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
   final formKey = GlobalKey<FormState>();
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final controllerCantidad = TextEditingController();
+  final controllerGrupos = TextEditingController();
+
 //DEFINICION DE BLOC Y MODEL
   FormatoModel entity = new FormatoModel();
   ImageService entityImage = new ImageService();
@@ -56,6 +58,8 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
   bool isFree = false;
   bool isManual = false;
   bool isIndividual = false;
+  bool is11vs11 = false;
+  int int11vs11 = 0;
   File photo;
   String typeCount = '2';
   String image = IMAGE_DEFAULT;
@@ -63,18 +67,6 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
   String _opcionTipoTorneo = '23';
   String _opcionTipoModalidad = '44';
   String _opcionCodTorneo = '0';
-
-  List<String> _cantidad = [
-    '2',
-    '4',
-    '8',
-    '16',
-    '32',
-    '64',
-    '128',
-    '256',
-    '512'
-  ];
 
   @override
   void initState() {
@@ -86,8 +78,6 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
   @override
   Widget build(BuildContext context) {
     entity.states = StateEntity.Insert;
-    // entityService = Provider.of<CrudService>(context);
-
     return Scaffold(
       key: scaffoldKey,
       appBar: appBar('CREACIÓN DEL TORNEO'),
@@ -95,11 +85,10 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
       body: Stack(
         children: <Widget>[
           background(context, 'IMAGE_LOGO'),
-          //  showPictureOval(photo, image, 130.0),
           _form(context),
         ],
       ),
-      floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
+      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }
@@ -116,7 +105,6 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
             Container(
               margin: EdgeInsets.symmetric(vertical: 0.0),
               decoration: containerImage(),
-              //  color: Colors.black87,
               width: size.width * 0.94,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -141,12 +129,9 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         sizedBox(0.0, 8.0),
-
         _comboCodTroneo(_opcionCodTorneo),
-        //  _comboTorneoCreado(_opcionTipoCompeticion),
-        //_comboJugador(),
         _text(
-            controllerCantidad,
+            controllerGrupos,
             '0',
             '(*) Ingrese cantidad de jugadores',
             3,
@@ -157,13 +142,25 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             AppTheme.themePurple),
-
+        _text(
+            controllerCantidad,
+            '0',
+            '(*) Ingrese cantidad de grupos',
+            3,
+            1,
+            'Ingrese la cantidad de grupos',
+            true,
+            null, // FaIcon(FontAwesomeIcons.futbol, color: AppTheme.themeDefault),
+            AppTheme.themeDefault,
+            AppTheme.themeDefault,
+            AppTheme.themePurple),
         _comboCompeticion(_opcionTipoCompeticion),
         _comboTorneo(_opcionTipoTorneo),
         _comboModalidad(_opcionTipoModalidad),
-        _porEquipo('Por equipo?'),
+        //     _porEquipo('Por equipo?'),
         _inscription('Torneo de Pago'),
-        _selection('Selección Manual'),
+        _selection('Será creará con boots'),
+        _vs11vs('Será Torneo 11 Vs. 11'),
         Text(
           '(*) Campos obligatorios. ',
           style: kCamposTitleStyle,
@@ -200,7 +197,6 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
         cursorColor: AppTheme.themeDefault,
         toolbarOptions:
             ToolbarOptions(copy: true, cut: true, paste: true, selectAll: true),
-        // controller: controller,
         decoration: inputDecoration(
             hintText, labelText, icon, hoverColor, fillColor, focusColor),
         onChanged: (value) {
@@ -218,7 +214,7 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
   Widget _comboCodTroneo(String _opcionCodTorneosss) {
     return Center(
         child: FutureBuilder(
-            future: entityGet1.get1(new ListaTorneoModel(), prefs.idJugador),
+            future: entityGet1.get1(new ListaTorneoModel(), int.parse('1')),
             builder: (context, AsyncSnapshot snapshot) {
               if (snapshot.hasData) {
                 return Row(
@@ -244,56 +240,36 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
             }));
   }
 
-  Widget _comboJugador() {
-    return Row(
-      children: <Widget>[
-        sizedBox(10.0, 0),
-        Text('Cantidad Jugadores:'),
-        sizedBox(15.0, 0),
-        DropdownButton(
-          value: typeCount,
-          icon: FaIcon(FontAwesomeIcons.sort, color: AppTheme.themePurple),
-          items: _count(),
-          onChanged: (opt) {
-            setState(() {
-              typeCount = opt;
-            });
-          },
-        ),
-      ],
-    );
-  }
-
-  Widget _comboTorneoCreado(String _opcionTipoCompeticionss) {
-    return Center(
-        child: FutureBuilder(
-            future: entityGet.get(new ClasificadorModel(), 26),
-            builder: (context, AsyncSnapshot snapshot) {
-              if (snapshot.hasData) {
-                return Row(
-                  children: <Widget>[
-                    sizedBox(15.0, 0),
-                    Text('Selecciones el torneo:'),
-                    sizedBox(15.0, 0),
-                    DropdownButton(
-                      icon: FaIcon(FontAwesomeIcons.sort,
-                          color: AppTheme.themePurple),
-                      value: _opcionTipoCompeticion,
-                      items: getDropDown(snapshot),
-                      onChanged: (value) {
-                        setState(() {
-                          _opcionTipoCompeticion = value;
-                          print('ddddd: $_opcionTipoCompeticion');
-                        });
-                      },
-                    ),
-                  ],
-                );
-              } else {
-                return GFLoader(type: GFLoaderType.circle, size: 35.0);
-              }
-            }));
-  }
+  // Widget _comboTorneoCreado(String _opcionTipoCompeticionss) {
+  //   return Center(
+  //       child: FutureBuilder(
+  //           future: entityGet.get(new ClasificadorModel(), 26),
+  //           builder: (context, AsyncSnapshot snapshot) {
+  //             if (snapshot.hasData) {
+  //               return Row(
+  //                 children: <Widget>[
+  //                   sizedBox(15.0, 0),
+  //                   Text('Selecciones el torneo:'),
+  //                   sizedBox(15.0, 0),
+  //                   DropdownButton(
+  //                     icon: FaIcon(FontAwesomeIcons.sort,
+  //                         color: AppTheme.themePurple),
+  //                     value: _opcionTipoCompeticion,
+  //                     items: getDropDown(snapshot),
+  //                     onChanged: (value) {
+  //                       setState(() {
+  //                         _opcionTipoCompeticion = value;
+  //                         print('ddddd: $_opcionTipoCompeticion');
+  //                       });
+  //                     },
+  //                   ),
+  //                 ],
+  //               );
+  //             } else {
+  //               return GFLoader(type: GFLoaderType.circle, size: 35.0);
+  //             }
+  //           }));
+  // }
 
   Widget _comboCompeticion(String _opcionTipoCompeticionss) {
     return Center(
@@ -411,30 +387,18 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
     return lista;
   }
 
-  List<DropdownMenuItem<String>> _count() {
-    List<DropdownMenuItem<String>> lista = new List();
-
-    _cantidad.forEach((cantidad) {
-      lista.add(DropdownMenuItem(
-        child: Text(cantidad),
-        value: cantidad,
-      ));
-    });
-    return lista;
-  }
-
-  Widget _porEquipo(String text) {
-    return SwitchListTile(
-      value: isFree,
-      title: Text(text),
-      subtitle: Text(
-          'Habilitar opción si será equipo, caso contrario sera individual'),
-      activeColor: AppTheme.themePurple,
-      onChanged: (value) => setState(() {
-        isFree = value;
-      }),
-    );
-  }
+  // Widget _porEquipo(String text) {
+  //   return SwitchListTile(
+  //     value: isFree,
+  //     title: Text(text),
+  //     subtitle: Text(
+  //         'Habilitar opción si será equipo, caso contrario sera individual'),
+  //     activeColor: AppTheme.themePurple,
+  //     onChanged: (value) => setState(() {
+  //       isFree = value;
+  //     }),
+  //   );
+  // }
 
   Widget _inscription(String text) {
     return SwitchListTile(
@@ -452,10 +416,22 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
     return SwitchListTile(
       value: isManual,
       title: Text(text),
-      subtitle: Text('Habilitar opción si será manual.'),
+      subtitle: Text('Habilitar opción si se crearán boots'),
       activeColor: AppTheme.themePurple,
       onChanged: (value) => setState(() {
         isManual = value;
+      }),
+    );
+  }
+
+  Widget _vs11vs(String text) {
+    return SwitchListTile(
+      value: is11vs11,
+      title: Text(text),
+      subtitle: Text('Habilitar opción si será 11 Vs. 11.'),
+      activeColor: AppTheme.themePurple,
+      onChanged: (value) => setState(() {
+        is11vs11 = value;
       }),
     );
   }
@@ -486,27 +462,58 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
   }
 
   void loadingEntity() {
+    int intFree = 0;
+    int intManual = 0;
+
+    if (isFree) intFree = 1;
+    if (isManual) intManual = 1;
+    if (is11vs11) int11vs11 = 1;
+
     entity.idTorneo = int.parse(_opcionCodTorneo);
     entity.idTipoCompeticion = int.parse(_opcionTipoCompeticion);
     entity.idaTipoTorneo = int.parse(_opcionTipoTorneo);
-    entity.idaInscripcion = 1;
-    entity.idaAsignacion = 1;
-    entity.cantidadJugadores = int.parse(typeCount);
+    entity.idaInscripcion = intFree;
+    entity.idaAsignacion = int.parse(controllerCantidad.text);
+    entity.cantidadJugadores = int.parse(controllerGrupos.text);
     entity.idaTipoModalidad = int.parse(_opcionTipoModalidad);
     entity.usuarioAuditoria = prefs.email;
+    entity.conBoot = intManual;
+    entity.con11vs11 = int11vs11;
   }
 
   void executeCUD(TourmentService entityService, FormatoModel entity) async {
-    try {
-      await entityService.repositoryDetail(entity).then((result) {
-        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
-        if (result["tipo_mensaje"] == '0') {
-          showSnackbar(STATUS_OK, scaffoldKey);
+    int cantidadGrupos = int.parse(controllerGrupos.text);
 
-          navegation(context, TourmentListPage());
-        } else
-          showSnackbar(STATUS_ERROR, scaffoldKey);
-      });
+    try {
+      if (entity.conBoot == 1) {
+        await entityService.repositoryDetail(entity).then((result) {
+          entityService
+              .ejecutarTorneoManual(
+            entity,
+            int.parse(controllerCantidad.text),
+            (cantidadGrupos ~/ int.parse(controllerCantidad.text)),
+          )
+              .then((result) {
+            print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
+            if (result["tipo_mensaje"] == '0') {
+              showSnackbar(STATUS_OK, scaffoldKey);
+
+              navegation(context, TourmentListPage());
+            } else
+              showSnackbar(STATUS_ERROR, scaffoldKey);
+          });
+        });
+      } else {
+        await entityService.repositoryDetail(entity).then((result) {
+          print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
+          if (result["tipo_mensaje"] == '0') {
+            showSnackbar(STATUS_OK, scaffoldKey);
+
+            navegation(context, TourmentListPage());
+          } else
+            showSnackbar(STATUS_ERROR, scaffoldKey);
+        });
+      }
     } catch (error) {
       showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
     }

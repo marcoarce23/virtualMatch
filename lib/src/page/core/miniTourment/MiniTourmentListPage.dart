@@ -50,7 +50,7 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
 
     return Scaffold(
       key: scaffoldKey,
-  //    appBar: appBar('MIS TORNEOS'),
+      //    appBar: appBar('MIS TORNEOS'),
       drawer: DrawerMenu(),
       body: SafeArea(
         child: Container(
@@ -85,7 +85,7 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
           ),
         ),
       ),
-      floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
+      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }
@@ -158,7 +158,7 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
         itemBuilder: (context) => [
           PopupMenuItem(
             value: 1,
-            child: Text("Participantes"),
+            child: Text("Registrar Participantes"),
           ),
           PopupMenuItem(
             value: 2,
@@ -187,7 +187,7 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
 
               break;
             case 2:
-              _start(keyId, entity.idTipoModalidad.toString());
+              _start(keyId, entity.idTipoCompeticion.toString());
               break;
             case 3:
               entityModel.states = StateEntity.Update;
@@ -225,57 +225,56 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
     return lista;
   }
 
+  // _executeInscription(String idTorneo, String idJugador) async {
+  //   print('ENTROSSSS $idTorneo y $idJugador');
+  //   String respuesta;
+  //   String mensaje;
+  //   try {
+  //     await entityService
+  //         .execute(API +
+  //             '/api/Torneo/Inscribir/Torneo/' +
+  //             idTorneo +
+  //             '/Jugador/' +
+  //             idJugador)
+  //         .then((result) {
+  //       respuesta = result["tipo_mensaje"].toString();
+  //       mensaje = result["mensaje"].toString();
+  //       print('EL RESULTTTTTAAA: ${result["tipo_mensaje"]}');
 
-  _executeInscription(String idTorneo, String idJugador) async {
-    print('ENTROSSSS $idTorneo y $idJugador');
-    String respuesta;
-    String mensaje;
-    try {
-      await entityService
-          .execute(API +
-              '/api/Torneo/Inscribir/Torneo/' +
-              idTorneo +
-              '/Jugador/' +
-              idJugador)
-          .then((result) {
-        respuesta = result["tipo_mensaje"].toString();
-        mensaje = result["mensaje"].toString();
-        print('EL RESULTTTTTAAA: ${result["tipo_mensaje"]}');
+  //       if (respuesta == '0') showSnackbar(mensaje, scaffoldKey);
+  //       if (respuesta == '2') showSnackbar(mensaje, scaffoldKey);
+  //     });
+  //   } catch (error) {
+  //     showSnackbar('Usuario registrado !!!', scaffoldKey);
+  //   }
+  // }
 
-        if (respuesta == '0') showSnackbar(mensaje, scaffoldKey);
-        if (respuesta == '2') showSnackbar(mensaje, scaffoldKey);
-      });
-    } catch (error) {
-      showSnackbar('Usuario registrado !!!', scaffoldKey);
-    }
-  }
-
-  Widget _showAction(ListaTorneoModel entity, String keyId) {
-    return Column(
-      children: <Widget>[
-        Row(
-          children: [
-            Text('OPERACIONES: $keyId',
-                style: TextStyle(color: AppTheme.themeWhite)),
-            sizedBox(10, 0),
-            _update(),
-            sizedBox(10, 0),
-            _delete(keyId),
-          ],
-        ),
-        sizedBox(0, 10),
-        Row(
-          children: [
-            Text('$keyId', style: TextStyle(color: AppTheme.themeWhite)),
-            sizedBox(10, 0),
-            //    _complete(keyId),
-            // sizedBox(10, 0),
-            _start(keyId, entity.idTipoModalidad.toString()),
-          ],
-        ),
-      ],
-    );
-  }
+  // Widget _showAction(ListaTorneoModel entity, String keyId) {
+  //   return Column(
+  //     children: <Widget>[
+  //       Row(
+  //         children: [
+  //           Text('OPERACIONES: $keyId',
+  //               style: TextStyle(color: AppTheme.themeWhite)),
+  //           sizedBox(10, 0),
+  //           _update(),
+  //           sizedBox(10, 0),
+  //           _delete(keyId),
+  //         ],
+  //       ),
+  //       sizedBox(0, 10),
+  //       Row(
+  //         children: [
+  //           Text('$keyId', style: TextStyle(color: AppTheme.themeWhite)),
+  //           sizedBox(10, 0),
+  //           //    _complete(keyId),
+  //           // sizedBox(10, 0),
+  //           _start(keyId, entity.idTipoModalidad.toString()),
+  //         ],
+  //       ),
+  //     ],
+  //   );
+  // }
 
   _update() {
     entityModel.states = StateEntity.Update;
@@ -301,29 +300,27 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
         size: 20,
       ),
       onTap: () {
-        setState(() {
-        });
+        setState(() {});
       },
     );
   }
 
-  _complete(String keyId) {
-    return InkWell(
-      //  key: Key(keyId),
-      child: FaIcon(
-        FontAwesomeIcons.users,
-        color: AppTheme.themeWhite,
-        size: 20,
-      ),
-      onTap: () {
-        setState(() {
-         });
-      },
-    );
-  }
+  // _complete(String keyId) {
+  //   return InkWell(
+  //     //  key: Key(keyId),
+  //     child: FaIcon(
+  //       FontAwesomeIcons.users,
+  //       color: AppTheme.themeWhite,
+  //       size: 20,
+  //     ),
+  //     onTap: () {
+  //       setState(() {});
+  //     },
+  //   );
+  // }
 
   _start(String keyId, String modalidad) {
-    if (modalidad == '0')
+    if (modalidad == '27')
       _executeGenerator('/api/Torneo/execGenerarPlayOff/' +
           keyId +
           '/usuario/' +

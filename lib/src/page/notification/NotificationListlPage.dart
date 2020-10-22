@@ -91,12 +91,16 @@ class _NotificationListPageState extends State<NotificationListPage> {
     return FutureBuilder(
         future: entityGet.get(new NotificacionModel()),
         builder: (context, AsyncSnapshot snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.waiting:
-              return loading();
-              break;
-            default:
-              return listView(context, snapshot);
+          if (snapshot.hasData) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.waiting:
+                return loading();
+                break;
+              default:
+                return listView(context, snapshot);
+            }
+          } else {
+            return loading();
           }
         });
   }
@@ -184,12 +188,10 @@ class _NotificationListPageState extends State<NotificationListPage> {
             case 3:
               entityModel.idNotificacion = int.parse(keyId);
 
-              setState(() {
-                executeDelete(
-                  entityModel.idNotificacion.toString(),
-                  prefs.email,
-                );
-              });
+              _executeDelete(
+                entityModel.idNotificacion.toString(),
+                prefs.email,
+              );
 
               break;
             default:
@@ -204,13 +206,13 @@ class _NotificationListPageState extends State<NotificationListPage> {
         offset: Offset(0, 100),
       );
 
-  void executeDelete(String id, String usuario) async {
+  _executeDelete(String id, String usuario) async {
     try {
-      entityService.delete(id, usuario).then((result) {
-        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
+      await entityService.delete(id, usuario).then((result) {
         if (result["tipo_mensaje"] == '0') {
-          showSnackbar(STATUS_OK, scaffoldKey);
-          //   futureBuilder(context);
+          setState(() {
+            showSnackbar(STATUS_OK_DELETE, scaffoldKey);
+          });
         } else
           showSnackbar(STATUS_ERROR, scaffoldKey);
       });

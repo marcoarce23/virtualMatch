@@ -1,9 +1,13 @@
+import 'package:animate_do/animate_do.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/getwidget.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
+import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 
 final prefs = new Preferense();
 
@@ -138,40 +142,92 @@ GFCard gfCard(String textButton, String textContext, String textTitle,
   );
 }
 
-GFCard gfCardAdvanced(
-    String textButton,
+GFCard gfCardAdvancedPlus(
     String textContext,
-    String textTitle,
-    String textSubTitle,
-    double elevation,
+    Widget textTitle,
+    Widget textSubTitle,
+    Widget textdescription,
     Widget avatar,
-    Function iconFuction,
-    Function onPressed) {
+    Widget icon,
+    double elevation,
+    String imgURL,
+    Color color) {
   return GFCard(
     boxFit: BoxFit.cover,
-    image: Image.network(IMAGE_LOGO),
-    border:
-        Border.all(color: Colors.black, width: 2.0, style: BorderStyle.solid),
+    image: Image.network(imgURL),
+    border: Border.all(color: color, width: 2.0, style: BorderStyle.solid),
     elevation: elevation,
     title: GFListTile(
-        title: Text(textTitle),
-        subTitle: Text(textSubTitle),
+        title: textTitle,
+        subTitle: textSubTitle,
+        description: textdescription,
         avatar: avatar,
-        icon: GFIconButton(
-          onPressed: iconFuction,
-          icon: Icon(Icons.favorite_border),
-          type: GFButtonType.transparent,
-        )),
+        icon: icon),
     content: Text(textContext),
-    buttonBar: GFButtonBar(
-      alignment: WrapAlignment.start,
-      children: <Widget>[
-        GFButton(
-          onPressed: onPressed,
-          text: textButton,
-        ),
-      ],
-    ),
+  );
+}
+
+GFCard gfCardAdvanced(BuildContext context, String textContext,
+    String textTitle, String textSubTitle, double elevation, String imgURL) {
+ 
+  return GFCard(
+      color: Colors.white10,
+      boxFit: BoxFit.cover,
+      border:
+          Border.all(color: Colors.purple, width: 1.0, style: BorderStyle.solid),
+      elevation: elevation,
+      content: Column(
+        children: [
+          SlideInUp(
+            child: Shimmer.fromColors(
+              baseColor: AppTheme.themeWhite,
+              highlightColor: AppTheme.themePurple,
+              child: AutoSizeText(
+                textTitle,
+                maxLines: 2,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 20.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+          divider(),
+          SlideInUp(child: avatarCircle(imgURL, 90)),
+          SlideInUp(
+            child: Shimmer.fromColors(
+              baseColor: AppTheme.themeWhite,
+              highlightColor: AppTheme.themePurple,
+              child: AutoSizeText(
+                textSubTitle,
+                maxLines: 2,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 16.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+          SlideInUp(
+            child: Shimmer.fromColors(
+              baseColor: AppTheme.themeWhite,
+              highlightColor: AppTheme.themePurple,
+              child: AutoSizeText(
+                textContext,
+                maxLines: 1,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 14.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+
   );
 }
 
@@ -306,7 +362,7 @@ GFAvatar avatarSquare(String image, double size) {
 GFAvatar avatarCircle(String image, double size) {
   return GFAvatar(
     backgroundImage: NetworkImage(image),
-    backgroundColor: AppTheme.themePurple,//Colors.white,
+    backgroundColor: AppTheme.themePurple, //Colors.white,
     foregroundColor: Colors.black,
     shape: GFAvatarShape.circle,
     size: size,
@@ -317,7 +373,7 @@ GFAvatar avatarCircleDefault(String image, double size) {
   return GFAvatar(
     backgroundImage: NetworkImage(image),
     backgroundColor: AppTheme.themeDefault,
-   // foregroundColor: Colors.black,
+    // foregroundColor: Colors.black,
     shape: GFAvatarShape.circle,
     size: size,
   );

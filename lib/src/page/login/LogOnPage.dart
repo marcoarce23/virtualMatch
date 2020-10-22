@@ -22,7 +22,6 @@ import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/general/CallWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/widget/general/SenWidget.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 
@@ -108,9 +107,9 @@ class _LogOnPageState extends State<LogOnPage> {
           children: [
             Container(),
             Image.asset(
-              "assets/image/babycare1.jpg",
+              "assets/vm_queofrecemos.png",
               fit: BoxFit.cover,
-              height: size.height * 0.70,
+              height: size.height * 0.60,
               width: size.width,
             ),
             Positioned(
@@ -307,17 +306,11 @@ class _LogOnPageState extends State<LogOnPage> {
         children: <Widget>[
           FlatButton(
             child: Text('Política de Privacidad'),
-            onPressed: () => Navigator.push(
+            onPressed: () => navegation(
               context,
-              PageTransition(
-                curve: Curves.bounceOut,
-                type: PageTransitionType.rotate,
-                alignment: Alignment.topCenter,
-                child: ViewPage(
-                    title: 'Políticas de Privacidad',
-                    url:
-                        'https://www.virtual_match.bo/politicas-de-privacidad'),
-              ),
+              ViewPage(
+                  title: 'Políticas de Privacidad',
+                  url: 'https://www.virtual_match.bo/politicas-de-privacidad'),
             ),
           ),
         ],
@@ -349,7 +342,7 @@ class _LogOnPageState extends State<LogOnPage> {
   _submit() async {
     print('IDPLAYERRR;; ${prefs.idPlayer.toString()}');
 
-    if (prefs.idPlayer != '0') {
+    if (prefs.idPlayer != '-1') {
       navegation(context, HomePage());
     } else {
       loadingEntity();
@@ -367,8 +360,7 @@ class _LogOnPageState extends State<LogOnPage> {
   }
 
   executeCUD(LoginService entityService, model.LoginModel entity) async {
-    print('IDPLAYERRR222222;; ${prefs.idPlayer.toString()}');
-    try {
+     try {
       await entityService.repository(entity).then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
 
@@ -393,7 +385,7 @@ class _LogOnPageState extends State<LogOnPage> {
             prefs.twitter = result["jugador"]["twitter"].toString();
           }
 
-          navegation(context, HomePage());
+          navegation(context, IntroPage());
         } else
           showSnackbar(STATUS_ERROR, scaffoldKey);
       });

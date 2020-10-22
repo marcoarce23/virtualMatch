@@ -6,8 +6,8 @@ import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/page/core/formatTourment/FormatTourmentPage.dart';
 import 'package:virtual_match/src/page/core/miniTourment/MiniTourmentLoadPage.dart';
 import 'package:virtual_match/src/page/core/player/OnceVsOncePage.dart';
+import 'package:virtual_match/src/page/core/player/PlayerEditPage.dart';
 import 'package:virtual_match/src/page/core/player/PlayerLoadPage.dart';
-import 'package:virtual_match/src/page/core/player/play.dart';
 import 'package:virtual_match/src/page/faq/FaqListPage.dart';
 import 'package:virtual_match/src/page/general/ViewPage.dart';
 import 'package:virtual_match/src/page/intro/IntroPage.dart';
@@ -68,6 +68,8 @@ class DrawerMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+     print('EL IDE PALYER EN EL DRAWER ES: ${prefs.idPlayer}');
+
     // if (prefs.idPlayer == '-1' || prefs.idLogin == '-1' /*COAV login*/)
     //   return drawerAnonimus(context);
 
@@ -213,6 +215,7 @@ class DrawerMenu extends StatelessWidget {
   }
 
   Drawer drawerUser(BuildContext context) {
+    print('EL IDE PALYER EN EL DRAWER ES: ${prefs.idPlayer}');
     return Drawer(
         child: ListView(
       children: <Widget>[
@@ -281,8 +284,8 @@ class DrawerMenu extends StatelessWidget {
             Image.asset(
               'assets/aus1.jpg',
               //scale: 0.4,
-              width: 50,
-              height: 60,
+              width: 47,
+              height: 62,
             ),
             'DxrAcer',
             () => navegation(
@@ -297,17 +300,21 @@ class DrawerMenu extends StatelessWidget {
               width: 30,
               height: 30,
             ),
-            '      Jugadores de la comunidad',
-            () => navegation(context, PlayerLoadPage())),
+            '     Jugador de la comunidad', () {
+          if (prefs.idPlayer != '0')
+            navegation(context, PlayerEditPage());
+          else
+            navegation(context, PlayerLoadPage());
+        }),
         CustomListTile(
             Image.asset(
-              'assets/image/jugador2.png',
+              'assets/image/mensajeria.png',
               //scale: 0.4,
               width: 30,
               height: 30,
             ),
-            '      Jugadores 111',
-            () => navegation(context, Play())),
+            '       Crear Notificaciones',
+            () => navegation(context, NotificationAllPage())),
         CustomListTile(
             Image.asset(
               'assets/image/pelota.png',
@@ -319,9 +326,32 @@ class DrawerMenu extends StatelessWidget {
             () => navegation(context, MiniTourmentAllPage())),
         CustomListTile(
             ImageOvalNetwork(
+                imageNetworkUrl: IMAGE_DEFAULT, sizeImage: Size.fromWidth(30)),
+            '      Crear Torneo ',
+            () => navegation(context, TourmentAllPage())),
+        CustomListTile(
+            ImageOvalNetwork(
                 imageNetworkUrl: IMAGE_LOGO, sizeImage: Size.fromWidth(35)),
             '      Sobre Virtual Match',
             () => navegation(context, OrganizationPage())),
+        CustomListTile(
+            Image.asset(
+              'assets/image/noticias.png',
+              //scale: 0.4,
+              width: 38,
+              height: 38,
+            ),
+            '     Crear Noticias-Evento',
+            () => navegation(context, NewAllPage())),
+        CustomListTile(
+            Image.asset(
+              'assets/image/multimeda3.png',
+              //scale: 0.4,
+              width: 30,
+              height: 30,
+            ),
+            '       Cargar Multimedia',
+            () => navegation(context, MultimediaAllPage())),
         CustomListTile(
             Image.asset(
               'assets/image/jugador1.png',
@@ -451,7 +481,7 @@ class DrawerMenu extends StatelessWidget {
               width: 30,
               height: 30,
             ),
-            '      Jugadores de la comunidad',
+            '   Jugadores de la comunidad',
             () => navegation(context, PlayerLoadPage())),
         CustomListTile(
             Image.asset(
@@ -462,6 +492,11 @@ class DrawerMenu extends StatelessWidget {
             ),
             '      Crear MiniTorneo',
             () => navegation(context, MiniTourmentAllPage())),
+        CustomListTile(
+            ImageOvalNetwork(
+                imageNetworkUrl: IMAGE_DEFAULT, sizeImage: Size.fromWidth(30)),
+            '      Crear Torneo ',
+            () => navegation(context, TourmentAllPage())),
         CustomListTile(
             ImageOvalNetwork(
                 imageNetworkUrl: IMAGE_DEFAULT, sizeImage: Size.fromWidth(30)),

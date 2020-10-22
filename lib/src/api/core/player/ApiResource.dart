@@ -6,4 +6,5 @@ Map<String, List<String>> api = {
   'delete': [API + '/api/Jugador', ''],
   'getId': [API + '/api/Jugador', ''],
   'update': [API + '/api/Jugador', ''],
+  'getMisJugadores' : [API + '/api/Equipo/getDevuelveJugadoresEquipoPorIdJugador', ''],
 };

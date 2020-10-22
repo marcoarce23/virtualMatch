@@ -12,6 +12,8 @@ class EquipmentService with ChangeNotifier {
   final _apiAdd = new ApiAdd();
   final _apiDelete = new ApiDelete();
   final _apiUpdate = new ApiUpdate();
+  final _apiState = new ApiState();
+
   final _apiGet = new ApiGet();
 
   Future<Map<String, dynamic>> repository(IEntityMap entity) async {
@@ -25,6 +27,9 @@ class EquipmentService with ChangeNotifier {
         break;
       case StateEntity.Update:
         result = await _apiUpdate.update(entity);
+        break;
+      case StateEntity.None:
+        result = await _apiState.state(entity);
         break;
       default:
     }
@@ -53,11 +58,39 @@ class EquipmentService with ChangeNotifier {
     return _result;
   }
 
+ Future<List<IEntityJson>> getEquipos(IEntityJson entityJson) async {
+    var _result = await _apiGet.getEquipos(entityJson);
+
+    isLoading = false;
+    notifyListeners();
+    notifyListeners();
+    return _result;
+  }
+
+  Future<List<IEntityJson>> getListarEquipos(IEntityJson entityJson) async {
+    var _result = await _apiGet.getListarEquipos(entityJson);
+
+    isLoading = false;
+    notifyListeners();
+    notifyListeners();
+    return _result;
+  }
+
   Future<List<IEntityJson>> getTodosJugadores(
       IEntityJson entityJson, int value) async {
     var _result = await _apiGet.getTodosJugadores(entityJson, value);
 
     isLoading = false;
+    notifyListeners();
+    return _result;
+  }
+
+  Future<List<IEntityJson>> getMisEquipos(
+      IEntityJson entityJson, String idPlayer) async {
+    var _result = await _apiGet.getMisEquipos(entityJson, idPlayer);
+
+    isLoading = false;
+    notifyListeners();
     notifyListeners();
     return _result;
   }

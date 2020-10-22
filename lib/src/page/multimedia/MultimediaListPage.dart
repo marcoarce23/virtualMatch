@@ -6,7 +6,9 @@ import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/service/MultimediaService.dart';
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
+import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/card/CardVM.dart';
+import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
@@ -45,6 +47,8 @@ class _MultimediaListPageState extends State<MultimediaListPage> {
 
     return Scaffold(
       key: scaffoldKey,
+      appBar: appBar('GALERÍA IMÁGENES'),
+      drawer: DrawerMenu(),
       body: SafeArea(
         child: Container(
           decoration: new BoxDecoration(
@@ -65,8 +69,8 @@ class _MultimediaListPageState extends State<MultimediaListPage> {
                   children: <Widget>[
                     showInformationBasic(
                       context,
-                      'GESTIONA GALERIA MULTIMEDIA',
-                      'En esta pantalla puedes modificar y eliminar las galerias multimedia que haz creado anteriormente.',
+                      'GESTIONA GALERÍA DE IMÁGENES',
+                      'En esta pantalla puedes modificar y eliminar las galerias de imágenes que haz creado anteriormente.',
                     ),
                     sizedBox(0.0, 5.0),
                     divider(),
@@ -117,15 +121,23 @@ class _MultimediaListPageState extends State<MultimediaListPage> {
     return Column(
       children: <Widget>[
         CardVM(
-          size: 135,
+          size: 185,
           imageAssets: 'assets/icono3.png',
           opciones: _simplePopup(entity, entity.idMultimedia.toString()),
           accesosRapidos: null,
           listWidgets: [
-            Text('Titulo: ${entity.titulo}'),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
+                avatarCircle(entity.foto, 45),
+                sizedBox(0, 7),
+                Text(
+                  'MATERIAL: ${entity.titulo}',
+                  style: kSubtitleStyleWhite,
+                  softWrap: true,
+                  overflow: TextOverflow.clip,
+                  textAlign: TextAlign.justify,
+                ),
                 Text(
                   'DETALLE: ${entity.resumen}',
                   style: kSubtitleStyleWhite,
@@ -133,22 +145,16 @@ class _MultimediaListPageState extends State<MultimediaListPage> {
                   overflow: TextOverflow.clip,
                   textAlign: TextAlign.justify,
                 ),
+
+                // Text(
+                //   'NOTICIA/EVENTO: ${entity.idaCategoria}',
+                //   style: kSubtitleStyleWhite,
+                //   softWrap: true,
+                //   overflow: TextOverflow.clip,
+                //   textAlign: TextAlign.justify,
+                // ),
                 Text(
-                  'ENLACE: ${entity.enlace}',
-                  style: kSubtitleStyleWhite,
-                  softWrap: true,
-                  overflow: TextOverflow.clip,
-                  textAlign: TextAlign.justify,
-                ),
-                Text(
-                  'NOTICIA/EVENTO: ${entity.idaCategoria}',
-                  style: kSubtitleStyleWhite,
-                  softWrap: true,
-                  overflow: TextOverflow.clip,
-                  textAlign: TextAlign.justify,
-                ),
-                Text(
-                  'FECHA INICIO: ${entity.fechainicio}',
+                  'FECHA INICIO:  ${entity.fechainicio}',
                   style: kSubtitleStyleWhite,
                   softWrap: true,
                   overflow: TextOverflow.clip,
@@ -187,16 +193,11 @@ class _MultimediaListPageState extends State<MultimediaListPage> {
         onSelected: (value) {
           switch (value) {
             case 1:
-              showSnackbarWithOutKey("Metodo por implementar", context);
+              Navigator.pushNamed(context, 'newMultimedia', arguments: entity);
               break;
             case 2:
               entityModel.idMultimedia = int.parse(keyId);
-              print('eliminar ${entityModel.idMultimedia}');
-
-              setState(() {
-                executeDelete(entityModel.idMultimedia.toString(), prefs.email);
-              });
-
+              executeDelete(entityModel.idMultimedia.toString(), prefs.email);
               break;
             default:
               showSnackbarWithOutKey("No hay opcion seleccionada", context);
@@ -210,27 +211,28 @@ class _MultimediaListPageState extends State<MultimediaListPage> {
         offset: Offset(0, 100),
       );
 
-  void executeDelete(String id, String usuario) {
+  void executeDelete(String id, String usuario) async {
     try {
-      entityService.delete(id, usuario).then((result) {
-        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
+      await entityService.delete(id, usuario).then((result) {
         if (result["tipo_mensaje"] == '0')
-          showSnackbar(STATUS_OK, scaffoldKey);
+          setState(() {
+            showSnackbar(STATUS_OK_DELETE, scaffoldKey);
+          });
         else
           showSnackbar(STATUS_ERROR, scaffoldKey);
       });
     } catch (error) {
       showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
     }
+    //   setState(() {});
   }
 
   void executeUpdate(
       MultimediaService entityService, model.MultimediaModel entity) async {
     try {
       await entityService.repository(entity).then((result) {
-        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0')
-          showSnackbar(STATUS_OK, scaffoldKey);
+          showSnackbar(STATUS_OK_UPDATE, scaffoldKey);
         else
           showSnackbar(STATUS_ERROR, scaffoldKey);
       });

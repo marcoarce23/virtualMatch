@@ -3,12 +3,12 @@ import 'package:virtual_match/src/api/core/equipment/ApiResource.dart';
 import 'package:virtual_match/src/api/dataMap.dart';
 
 class ApiDelete {
-  Future<Map<String, dynamic>> delete(String id, String usuario) async {
+  Future<Map<String, dynamic>> delete(String agrupador, String jugador) async {
     final apiRest = api['delete'][0].toString() +
         '/' +
-        id +
-        '/usuario/' +
-        usuario; // eventResourceAdd['add'][0].toString()   ;
+        agrupador +
+        '/jugador/' +
+        jugador; // eventResourceAdd['add'][0].toString()   ;
     print('url: $apiRest');
     final response = await http
         .delete(apiRest, headers: {"Content-Type": "application/json"});

@@ -6,13 +6,12 @@ import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:provider/provider.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/ClasificadorModel.dart';
 import 'package:virtual_match/src/model/Preference.dart';
-import 'package:virtual_match/src/model/entity/EntityFromJson/JugadorModel.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/JugadorModel.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
+import 'package:virtual_match/src/page/general/ViewPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/ClasificadorService.dart';
 import 'package:virtual_match/src/service/ImageService.dart';
@@ -25,77 +24,8 @@ import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/model/util/Validator.dart' as validator;
 import 'package:virtual_match/src/widget/image/ImageWidget.dart';
-class PlayerAllPage extends StatefulWidget {
-  static final String routeName = 'player';
-  const PlayerAllPage({Key key}) : super(key: key);
-
-  @override
-  _PlayerAllPagePageState createState() => _PlayerAllPagePageState();
-}
-
-class _PlayerAllPagePageState extends State<PlayerAllPage> {
-  int page = 0;
-  final prefs = new Preferense();
-  final List<Widget> optionPage = [
-    PlayerLoadPage(),
-  ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      page = index;
-    });
-  }
-
-  @override
-  void initState() {
-    prefs.lastPage = PlayerAllPage.routeName;
-    page = 0;
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        // ignore: missing_required_param
-        ChangeNotifierProvider(builder: (_) => new CrudService()),
-      ],
-      child: Scaffold(
-        appBar: appBar('JUGADOR VIRTUAL MATCH'),
-        drawer: DrawerMenu(),
-        bottomNavigationBar: BottomNavigationBar(
-          elevation: 21.0,
-          backgroundColor: AppTheme.themeDefault,
-          items: [
-            BottomNavigationBarItem(
-                icon: FaIcon(
-                  FontAwesomeIcons.gamepad,
-                  size: 25,
-                ),
-                title: Text('Jugador')),
-            BottomNavigationBarItem(
-                icon: FaIcon(
-                  FontAwesomeIcons.futbol,
-                  size: 25,
-                ),
-                title: Text('Tus equipos')),
-            BottomNavigationBarItem(
-                icon: FaIcon(
-                  FontAwesomeIcons.playstation,
-                  size: 25,
-                ),
-                title: Text('Tus Equipos')),
-          ],
-          currentIndex: page,
-          unselectedItemColor: AppTheme.themeWhite,
-          selectedItemColor: AppTheme.themePurple,
-          onTap: _onItemTapped,
-        ),
-        body: optionPage[page],
-      ),
-    );
-  }
-}
+import 'package:virtual_match/src/model/entity/EntityMap/JugadorModel.dart'
+    as model;
 
 class PlayerLoadPage extends StatefulWidget {
   static final String routeName = 'playerLoad';
@@ -119,7 +49,7 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
 
   CrudService entityService = new CrudService();
   ImageService entityImage = new ImageService();
-  JugadorModel entity = new JugadorModel();
+  model.JugadorModel entity = new model.JugadorModel();
   ClasificadorService entityGet = ClasificadorService();
   PlayerService entityGet1 = PlayerService();
 
@@ -127,6 +57,7 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
 
   //
   bool _save = false;
+  bool _checked = false;
   int valueImage = 0;
   File photo;
   String image = IMAGE_DEFAULT;
@@ -143,8 +74,13 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
     entity.states = StateEntity.Insert;
     entity.foto = image;
 
-    if (prefs.idPlayer != '-1') {
-      futureBuilder(context);
+    final model.JugadorModel entityModel =
+        ModalRoute.of(context).settings.arguments;
+
+    if (entityModel != null) {
+      entity = entityModel;
+      entity.states = StateEntity.Update;
+      _checked = true;
     }
 
     return Scaffold(
@@ -154,7 +90,6 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
       body: Stack(
         children: <Widget>[
           background(context, ''),
-          // crearFondo(context, imagen),
           _form(context),
         ],
       ),
@@ -162,40 +97,6 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }
-
-  FutureBuilder futureBuilder(BuildContext context) {
-    print('XXXXXAAAA:');
-    return FutureBuilder(
-        future:
-            entityGet1.getId(new JugadorModelJson(), int.parse(prefs.idPlayer)),
-        builder: (context, snapshot) {
-          if (snapshot.hasData)
-            print('PPPPPP:');
-          else
-            print('RRRRR:');
-        });
-  }
-
-// "idJugador": 208,
-//     "idOrganizacion": 2,
-//     "idaDepartamento": 7,
-//     "idLogin": 19,
-//     "idPsdn": "marcoarce3242",
-//     "nombre": "marco antonio\t",
-//     "apellido": "arce  valdivia",
-//     "correo": "marcoarce23@gmail.com",
-//     "telefono": "72038768",
-//     "idaSexo": 0,
-//     "informacionComplementaria": "soy buen amigo",
-//     "facebook": "faceboook.marco.arce",
-//     "twitter": "sinTwitter",
-//     "fechacreacion": "2020-09-27T18:53:03.69",
-//     "usuariocreacion": "marcoarce23@gmail.com",
-//     "usuariomodificacion": null,
-//     "fechamodificacion": null,
-//     "usuarioeliminacion": null,
-//     "fechaeliminacion": null,
-//     "foto": "https://res.cloudinary.co
 
   Widget _form(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -209,7 +110,6 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
             Container(
               margin: EdgeInsets.symmetric(vertical: 0.0),
               decoration: containerImage(),
-              //  color: Colors.black87,
               width: size.width * 0.94,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -256,6 +156,7 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
   }
 
   Widget _fields(BuildContext context) {
+    print('DEBERIA SETEAR EL PDSN ${entity.idPsdn}');
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
@@ -333,7 +234,14 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             Colors.red),
-
+        Row(
+          children: [
+            sizedBox(10, 0),
+            Icon(Icons.remove_red_eye, color: Colors.black),
+            _agree(context),
+          ],
+        ),
+        _checkList(),
 //        _posibleVenta('Cliente para venta'),
 
         Text(
@@ -345,6 +253,40 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
         _button('Guardar', 18.0, 20.0),
         // gfCard(),
       ],
+    );
+  }
+
+  Widget _checkList() {
+    return CheckboxListTile(
+      title: Text(
+        'Acepto los términos de privacidad',
+        style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+      ),
+      //   secondary: Text('Si está de acuerdo con los terminos de privacidad, seleccionar '),
+      value: _checked,
+      controlAffinity: ListTileControlAffinity.platform,
+      onChanged: (bool value) {
+        setState(() {
+          _checked = value;
+        });
+      },
+      activeColor: AppTheme.themeBlackBlack,
+      checkColor: AppTheme.themePurple,
+    );
+  }
+
+  Widget _agree(BuildContext context) {
+    return FlatButton(
+      child: Text(
+        'Revisar Políticas de privacidad'.toUpperCase(),
+        style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+      ),
+      onPressed: () => navegation(
+        context,
+        ViewPage(
+            title: 'Políticas de Privacidad',
+            url: 'https://www.virtual_match.bo/politicas-de-privacidad'),
+      ),
     );
   }
 
@@ -452,44 +394,59 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
     print('myControllerSOY EL VALOR DE  ${prefs.idPlayer.toString()}');
 
     setState(() => _save = true);
-    loadingEntity();
-    executeCUD(entityService, entity, _result);
+    loadingEntity(_result);
+
     setState(() => _save = false);
   }
 
-  void loadingEntity() {
-    if (entity.states == StateEntity.Insert) entity.idJugador = 0;
-    if (entity.states == StateEntity.Update)
-      entity.idJugador = int.parse(prefs.idPlayer);
+  void loadingEntity(var _result) {
+    String _url = '/api/Jugador';
+    String checked = '0';
 
-    entity.idOrganizacion = int.parse(prefs.idOrganization);
-    entity.idaDepartamento = int.parse(_opcionDepartamento);
-    entity.idLogin = int.parse(prefs.idLogin);
-    entity.idPsdn = controllerIpsdn.text;
-    entity.nombre = controllerName.text;
-    entity.apellido = controllerSecondName.text;
-    entity.correo = prefs.email;
-    entity.telefono = controllerPhone.text;
-    entity.idaSexo = 0;
-    entity.informacionComplementaria = controllerInformation.text;
-    entity.facebook = controllerFacebook.text;
-    entity.twitter = 'sinTwitter';
-    entity.usuarioAuditoria = prefs.email;
+    if (!_checked) {
+      showSnackbar('Debe aceptar las políticas de privacidad ', scaffoldKey);
+      return;
+    } else {
+      if (entity.states == StateEntity.Insert) {
+        entity.idJugador = 0;
+      }
+      if (entity.states == StateEntity.Update) {
+        _url = '/api/Jugador' + '/' + prefs.idPlayer;
+      }
+      if (_checked) checked = '1';
+
+      entity.idOrganizacion = int.parse(prefs.idOrganization);
+      entity.idaDepartamento = int.parse(_opcionDepartamento);
+      entity.idLogin = int.parse(prefs.idLogin);
+      entity.idPsdn = controllerIpsdn.text;
+      entity.nombre = controllerName.text;
+      entity.apellido = controllerSecondName.text;
+      entity.correo = prefs.email;
+      entity.telefono = controllerPhone.text;
+      entity.idaSexo = 0;
+      entity.informacionComplementaria = controllerInformation.text;
+      entity.facebook = controllerFacebook.text;
+      entity.twitter = checked;
+      entity.usuarioAuditoria = prefs.email;
+      executeCUD(entityService, entity, _result, _url);
+    }
   }
 
-  void executeCUD(
-      CrudService entityService, JugadorModel entity, var _result) async {
-    String _url = '/api/Jugador';
+  void executeCUD(CrudService entityService, JugadorModel entity, var _result,
+      String _url) async {
+    // String _url = '/api/Jugador';
 
-    if (prefs.idPlayer != '0')
-      _url = '/api/Jugador' + '/' + prefs.idPlayer.toString();
+    // if (prefs.idPlayer != '0')
+    //   _url = '/api/Jugador' + '/' + prefs.idPlayer.toString();
 
     try {
       await entityService.repository(entity, API + _url).then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
 
         if (result["tipo_mensaje"] == '0') {
-          prefs.idPlayer = result["data"].toString();
+          if (entity.states == StateEntity.Insert) {
+            prefs.idPlayer = result["data"].toString();
+          }
           print('EL ID USUARIO ESSS: ${prefs.idPlayer}');
           showSnackbar(result["mensaje"].toString(), scaffoldKey);
         } else

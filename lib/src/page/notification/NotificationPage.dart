@@ -117,11 +117,9 @@ class _NotificationPageState extends State<NotificationPage> {
           children: <Widget>[
             sizedBox(0, 7),
             CardVM(
-              size: 90,
+              size: 80,
               imageAssets: 'assets/icono3.png',
-              //   opciones: avatarCircle((entity.foto ?? IMAGE_LOGO), 35),
               listWidgets: [
-                Text('Notificación: ${entity.titulo} '),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -134,7 +132,7 @@ class _NotificationPageState extends State<NotificationPage> {
                       style: TextStyle(color: AppTheme.themeWhite),
                     ),
                     Text(
-                      'FECHA: ${entity.fechacreacion}',
+                      'FECHA: ${entity.fechacreacion.substring(0, 10)}',
                       style: TextStyle(color: AppTheme.themeWhite),
                     ),
                   ],

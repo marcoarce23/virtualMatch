@@ -86,7 +86,7 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
           _form(context),
         ],
       ),
-      floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
+      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }
@@ -228,7 +228,7 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
 
     return Center(
         child: FutureBuilder(
-            future: entityGet1.getId(
+            future: entityGet1.get1(
                 new ListaTorneoModel(), int.parse(prefs.idPlayer)),
             builder: (context, AsyncSnapshot snapshot) {
               if (snapshot.hasData) {
@@ -404,7 +404,7 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
     return lista;
   }
 
-   Widget _button(String text, double fontSize, double edgeInsets) {
+  Widget _button(String text, double fontSize, double edgeInsets) {
     return GFButton(
       padding: EdgeInsets.symmetric(horizontal: edgeInsets),
       text: text,

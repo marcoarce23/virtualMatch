@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/api/dataMap.dart';
-import 'package:virtual_match/src/api/core/formatEquipment/ApiResource.dart';
+import 'package:virtual_match/src/api/core/format/ApiResource.dart';
 
 class ApiUpdate {
   Future<Map<String, dynamic>> update(IEntityMap entity) async {
@@ -13,7 +13,7 @@ class ApiUpdate {
         .toString(); // eventResourceAdd['add'][0].toString()   ;
     //RouteAdd().postEvent(); // METODO QUE OBTENFA EL POST DEL EVENTO; MULTIMEDIA, VOLUTNARIO; HORARIO
     print('url: $apiRest');
-    final response = await http.post(apiRest,
+    final response = await http.put(apiRest,
         headers: {"Content-Type": "application/json"}, body: _body);
     return dataMap(response);
   }

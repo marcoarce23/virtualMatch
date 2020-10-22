@@ -100,7 +100,8 @@ class CrudService with ChangeNotifier {
 
     var dataMap;
 
-    if (response.statusCode == STATUSCODE200 || response.statusCode == STATUSCODE400  )
+    if (response.statusCode == STATUSCODE200 ||
+        response.statusCode == STATUSCODE400)
       dataMap = json.decode(response.body);
     else
       dataMap.addAll(throw Exception(STATUSCODE500));
@@ -111,7 +112,7 @@ class CrudService with ChangeNotifier {
   _update(IEntityMap entity, String url) async {
     String _body = json.encode(entity.toJson());
     print('body: $_body');
-    final apiRest = url ; // eventResourceAdd['add'][0].toString()   ;
+    final apiRest = url; // eventResourceAdd['add'][0].toString()   ;
     //RouteAdd().postEvent(); // METODO QUE OBTENFA EL POST DEL EVENTO; MULTIMEDIA, VOLUTNARIO; HORARIO
     print('urlDDDDDDD: $apiRest');
     final response = await http.put(apiRest,
