@@ -288,7 +288,7 @@ class _PlayerSelectionPageState extends State<PlayerSelectionPage> {
     List<DropdownMenuItem<String>> lista = new List();
 
     for (var i = 0; i < snapshot.data.length; i++) {
-      JugadorModel item = snapshot.data[i];
+      JugadorModelPersonalizado item = snapshot.data[i];
       lista.add(DropdownMenuItem(
           child: Text(
               item.telefono +

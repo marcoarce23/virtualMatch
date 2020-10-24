@@ -213,8 +213,16 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
         mensaje = result["mensaje"].toString();
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
 
-        if (respuesta == '0') showSnackbar(mensaje, scaffoldKey);
-        if (respuesta == '2') showSnackbar(mensaje, scaffoldKey);
+        if (respuesta == '0') {
+          setState(() {
+            showSnackbar(mensaje, scaffoldKey);
+          });
+        }
+        if (respuesta == '2') {
+          setState(() {
+            showSnackbar(mensaje, scaffoldKey);
+          });
+        }
       });
     } catch (error) {
       showSnackbar('Usuario registrado !!!', scaffoldKey);
@@ -232,10 +240,16 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
               idJugador)
           .then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
-        if (result["tipo_mensaje"] == '0')
-          showSnackbar(result["mensaje"], scaffoldKey);
-        if (result["tipo_mensaje"] == '2')
-          showSnackbar(result["mensaje"], scaffoldKey);
+        if (result["tipo_mensaje"] == '0') {
+          setState(() {
+            showSnackbar(result["mensaje"], scaffoldKey);
+          });
+        }
+        if (result["tipo_mensaje"] == '2') {
+          setState(() {
+            showSnackbar(result["mensaje"], scaffoldKey);
+          });
+        }
       });
     } catch (error) {
       showSnackbar('El usuario ya salio del torneo!!', scaffoldKey);

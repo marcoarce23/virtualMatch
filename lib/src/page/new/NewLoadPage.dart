@@ -137,19 +137,22 @@ class _NewLoadPageState extends State<NewLoadPage> {
     final gets.NoticiaEventoModel entityModelGet =
         ModalRoute.of(context).settings.arguments;
 
-    if (entityModelGet != null && unaVez == 0) {
-      entity.idNoticiaEvento = entityModelGet.idNoticiaEvento;
-      entity.objetivo = entityModelGet.objetivo;
-      entity.titulo = entityModelGet.titulo;
-      entity.dirigidoA = entityModelGet.dirigidoa;
-      entity.ubicacionUrl = entityModelGet.ubicacionUrl;
-      _inputFieldDateController.text = entityModelGet.fecha;
-      _inputFieldTimeController.text = entityModelGet.hora;
-      entity.foto = entityModelGet.foto;
-      _selectedRadio = entityModelGet.tipo;
+    if (entityModelGet != null) {
       entity.states = StateEntity.Update;
 
-      entity.foto = entityModelGet.foto;
+      if (unaVez == 0) {
+        entity.idNoticiaEvento = entityModelGet.idNoticiaEvento;
+        entity.objetivo = entityModelGet.objetivo;
+        entity.titulo = entityModelGet.titulo;
+        entity.dirigidoA = entityModelGet.dirigidoa;
+        entity.ubicacionUrl = entityModelGet.ubicacionUrl;
+        _inputFieldDateController.text = entityModelGet.fecha;
+        _inputFieldTimeController.text = entityModelGet.hora;
+        entity.foto = entityModelGet.foto;
+        _selectedRadio = entityModelGet.tipo;
+
+        entity.foto = entityModelGet.foto;
+      }
 
       print('ddd ${entity.foto}');
     }

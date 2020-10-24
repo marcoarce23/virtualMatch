@@ -8,6 +8,7 @@ import 'package:virtual_match/src/model/entity/EntityMap/AsignacionModel.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/JugadorModel.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
+import 'package:virtual_match/src/page/core/tourment/TourmentListPage.dart';
 import 'package:virtual_match/src/service/core/PlayerService.dart';
 import 'package:virtual_match/src/service/core/TournamentService.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
@@ -69,6 +70,8 @@ class _CustomizePlayerState extends State<CustomizePlayer> {
             ),
           ),
         ),
+           floatingActionButton: floatButton(AppTheme.themePurple, context,
+          FaIcon(FontAwesomeIcons.arrowLeft), TourmentListPage()),
       ),
     );
   }
@@ -110,7 +113,7 @@ class _CustomizePlayerState extends State<CustomizePlayer> {
     List<DropdownMenuItem<String>> lista = new List();
 
     for (var i = 0; i < snapshot.data.length; i++) {
-      JugadorModel item = snapshot.data[i];
+      JugadorModelPersonalizado item = snapshot.data[i];
       lista.add(DropdownMenuItem(
           child: Text(
               item.telefono +
@@ -216,7 +219,9 @@ class _CustomizePlayerState extends State<CustomizePlayer> {
                           reemplazo.izqDer = "D";
                           reemplazo.states = StateEntity.Insert;
 
-                          llamadaReemplazo(reemplazo);
+                          // llamadaReemplazo(reemplazo);
+
+                          _cambiarJugadores(reemplazo);
                         },
                         child: FaIcon(FontAwesomeIcons.retweet,
                             color: AppTheme.themePurple),
@@ -238,8 +243,8 @@ class _CustomizePlayerState extends State<CustomizePlayer> {
     );
   }
 
-  llamadaReemplazo(ReemplazarJugador reemplazo) async {
-    await _cambiarJugadores(reemplazo);
+  llamadaReemplazo(ReemplazarJugador reemplazo) {
+    _cambiarJugadores(reemplazo);
     //setState(() {});
 
     //futureBuilderTorneoPersonalizar(context, 82);
@@ -247,15 +252,17 @@ class _CustomizePlayerState extends State<CustomizePlayer> {
 
   _cambiarJugadores(ReemplazarJugador entity) async {
     try {
-      await new TourmentService().cambiarJugadores(entity).then((result) {
+      await servicioTorneoPersonalizar.cambiarJugadores(entity).then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0')
-          showSnackbar(result["mensaje"], scaffoldKey);
+          setState(() {
+            showSnackbar(result["mensaje"], scaffoldKey);
+          });
         else
           showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
-      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
+      showSnackbar(STATUS_ERROR + ' ${error.toString()} dddddddd', scaffoldKey);
     }
   }
 }

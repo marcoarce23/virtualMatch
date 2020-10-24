@@ -284,8 +284,8 @@ class DrawerMenu extends StatelessWidget {
             Image.asset(
               'assets/aus1.jpg',
               //scale: 0.4,
-              width: 50,
-              height: 60,
+              width: 47,
+              height: 62,
             ),
             'DxrAcer',
             () => navegation(
@@ -300,7 +300,7 @@ class DrawerMenu extends StatelessWidget {
               width: 30,
               height: 30,
             ),
-            '      Jugadores de la comunidad', () {
+            '     Jugador de la comunidad', () {
           if (prefs.idPlayer != '0')
             navegation(context, PlayerEditPage());
           else
@@ -481,7 +481,7 @@ class DrawerMenu extends StatelessWidget {
               width: 30,
               height: 30,
             ),
-            '      Jugadores de la comunidad',
+            '   Jugadores de la comunidad',
             () => navegation(context, PlayerLoadPage())),
         CustomListTile(
             Image.asset(

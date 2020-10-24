@@ -94,7 +94,8 @@ class _PlayerEquipmentPageState extends State<PlayerEquipmentPage> {
 
   Widget futureBuilder(BuildContext context) {
     return FutureBuilder(
-        future: entityGet.getMisJugadores(new JugadorEquipoModelList(), prefs.idPlayer),
+        future: entityGet.getMisJugadores(
+            new JugadorEquipoModelList(), prefs.idPlayer),
         builder: (context, AsyncSnapshot snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
@@ -159,6 +160,10 @@ class _PlayerEquipmentPageState extends State<PlayerEquipmentPage> {
                     ),
                     Text(
                       'ESTADO: ${entity.estado == 1 ? 'VIGENTE' : entity.estado == 0 ? 'SOLICITUD' : entity.estado == 3 ? 'INACTIVO' : entity.estado == 2 ? 'DESEO SALIRME' : 'sin estado'}',
+                      style: TextStyle(color: AppTheme.themeWhite),
+                    ),
+                    Text(
+                      'ESTADO: ${entity.estado}',
                       style: TextStyle(color: AppTheme.themeWhite),
                     ),
                   ],

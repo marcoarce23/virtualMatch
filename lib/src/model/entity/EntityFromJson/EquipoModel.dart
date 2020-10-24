@@ -32,6 +32,7 @@ class EquipoCapitanesModel implements IEntityJson {
   String jugadorCapitan;
   String telefono;
   String psdn;
+  int idEquipo;
 //   int idEquipo;
 // int
 
@@ -48,7 +49,8 @@ class EquipoCapitanesModel implements IEntityJson {
       this.agrupador,
       this.psdn,
       this.telefono,
-      this.jugadorCapitan});
+      this.jugadorCapitan,
+      this.idEquipo});
 
   fromJson(Map<String, dynamic> json) => new EquipoCapitanesModel(
         nombre: json["nombre"],
@@ -58,5 +60,6 @@ class EquipoCapitanesModel implements IEntityJson {
         jugadorCapitan: json["jugadorCapitan"],
         telefono: json["telefono"],
         psdn: json["psdn"],
+        idEquipo: json["idEquipo"],
       );
 }
