@@ -73,21 +73,9 @@ class _FaqListPagetate extends State<FaqListPage> {
   Widget _fields(BuildContext context) {
     return Column(
       children: <Widget>[
-        // Center(
-        //   child: Image(
-        //     image: NetworkImage(IMAGE_SCREEN3),
-        //     height: 180.0,
-        //     fit: BoxFit.fill,
-        //   ),
-        // ),
+
         CardSlideBalckWidget(),
         sizedBox(0.0, 5.0),
-
-        //    showInformationBasic(
-        //   context,
-        //   'TIENES CONSULTAS ?',
-        //   'Acá te respondemos las preguntas mas comunes sobre la Comunidad Virtual Match y nuestra APP.',
-        // ),
         listAcordion(),
         listAcordion2(),
         listAcordion3(),

@@ -151,9 +151,8 @@ class _LogOnPageState extends State<LogOnPage> {
           _gmailButton(),
           _button(context, 'Virtual Match', 18.0, 20.0),
           _crearAcciones(context),
-          sizedBox(0.0, 8.0),
           _egree(context),
-          copyRigthBlack(),
+          copyRigthClear(),
         ],
       ),
     );
@@ -244,7 +243,7 @@ class _LogOnPageState extends State<LogOnPage> {
             onPressed: () => navegation(
                 context,
                 ViewPage(
-                    title: 'FACEBOOK VIRTUAL MATCH'.toString(),
+                    title: 'INSTAGRAM VIRTUAL MATCH'.toString(),
                     url: instagram)),
             child: Icon(
               FontAwesomeIcons.instagram,
@@ -263,7 +262,7 @@ class _LogOnPageState extends State<LogOnPage> {
             shape: CircleBorder(),
             onPressed: () {
               callWhatsAppText(whatsApp,
-                  '*Comunidad Virtual Match:* \n Mensaje. Me gustaría ponerme en contacto. Gracias. \nEnviado desde la aplicación \n*Virtual Match Digital*.');
+                  '*Comunidad Virtual Match:* \n Mensaje. Me gustaría ponerme en contacto. Gracias. \n\nEnviado desde la aplicación \n\n*Virtual Match Digital*.');
             },
             child: Icon(
               FontAwesomeIcons.whatsapp,
@@ -284,7 +283,7 @@ class _LogOnPageState extends State<LogOnPage> {
               sendEmailAdvanced(
                   email,
                   "Comunidad Virtual Match. Deseo comunicarme con usted.",
-                  "A la Comunidad Virtual Match:\n Deseo más información sobre la Comunidad y de como formar parte de FIFA BOLIVIA.\n Saludos cordiales. Gracias");
+                  "A la Comunidad Virtual Match:\n\n Deseo más información sobre la Comunidad y de como formar parte de FIFA BOLIVIA.\n\n Saludos cordiales. Gracias");
             },
             child: Icon(
               FontAwesomeIcons.solidEnvelope,
@@ -326,13 +325,19 @@ class _LogOnPageState extends State<LogOnPage> {
       textStyle: TextStyle(fontSize: fontSize),
       textColor: AppTheme.themeWhite,
       color: AppTheme.themeBlackBlack,
-      icon: avatarCircle(IMAGE_DEFAULT, 20),
+      icon: Image.asset(
+        'assets/icono3.png',
+        //scale: 0.4,
+        width: 30,
+        height: 30,
+      ),
       shape: GFButtonShape.pills,
-      onPressed: () => _submitInvitado,
+      onPressed: _submitInvitado,
     );
   }
 
-  _submitInvitado() async {
+  _submitInvitado() {
+    print('entra a boton invitado');
     prefs.idPlayer = '-1';
     prefs.idLogin = '-1';
 
@@ -360,7 +365,7 @@ class _LogOnPageState extends State<LogOnPage> {
   }
 
   executeCUD(LoginService entityService, model.LoginModel entity) async {
-     try {
+    try {
       await entityService.repository(entity).then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
 

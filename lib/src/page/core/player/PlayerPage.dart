@@ -164,7 +164,8 @@ class _PlayerPageState extends State<PlayerPage> {
             CardVM(
               size: 120,
               imageAssets: 'assets/icono3.png',
-              opciones: avatarCircle((entity.foto ?? IMAGE_LOGO), 35),
+              opciones:
+                  avatarCircleTransparent((entity.foto ?? IMAGE_LOGO), 35),
               accesosRapidos: opcionesLlamada(entity),
               listWidgets: [
                 Column(

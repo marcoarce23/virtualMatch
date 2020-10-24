@@ -77,13 +77,20 @@ class _IntroPageState extends State<IntroPage> {
                       context,
                       HomePage(),
                     ),
-                    child: Text(
-                      'Iniciar',
-                      style: TextStyle(
-                        color: AppTheme.themeWhite,
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Text(
+                          'Iniciar',
+                          style: TextStyle(
+                            color: AppTheme.themeWhite,
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                         sizedBox(10.0, 0),
+                        avatarCircleTransparent(IMAGE_DEFAULT, 20),
+                      ],
                     ),
                   ),
                 ),
@@ -138,12 +145,18 @@ class _IntroPageState extends State<IntroPage> {
                                 Row(
                                   children: <Widget>[
                                     sizedBox(0, 20.0),
-                                    // Shimmer.fromColors(
-                                    //   baseColor: AppTheme.themeWhite,
-                                    //   highlightColor: AppTheme.themePurple,
+                                    //  Shimmer.fromColors(
+                                    //    baseColor: AppTheme.themeWhite,
+                                    //    highlightColor: AppTheme.themePurple,
                                     //   child:
-                                    avatarCircle(IMAGE_LOGO, 25.0),
-                                    //  ),
+                                    Image.asset(
+                                      'assets/icono3.png',
+                                      //scale: 0.4,
+                                      width: 40,
+                                      height: 40,
+                                    ),
+                                    // ),
+
                                     sizedBox(10, 15.0),
                                     Expanded(
                                       child: AutoSizeText(
@@ -168,7 +181,12 @@ class _IntroPageState extends State<IntroPage> {
                                     //       color: AppTheme.themeWhite,
                                     //       size: 35.0),
                                     // ),
-                                    avatarCircle(IMAGE_LOGO, 25.0),
+                                    Image.asset(
+                                      'assets/icono3.png',
+                                      //scale: 0.4,
+                                      width: 40,
+                                      height: 40,
+                                    ),
 
                                     sizedBox(10, 15.0),
                                     Expanded(
@@ -194,7 +212,12 @@ class _IntroPageState extends State<IntroPage> {
                                     //       color: AppTheme.themeWhite,
                                     //       size: 35.0),
                                     // ),
-                                    avatarCircle(IMAGE_LOGO, 25.0),
+                                    Image.asset(
+                                      'assets/icono3.png',
+                                      //scale: 0.4,
+                                      width: 40,
+                                      height: 40,
+                                    ),
                                     sizedBox(10, 10.0),
                                     Expanded(
                                       child: AutoSizeText(
@@ -255,7 +278,12 @@ class _IntroPageState extends State<IntroPage> {
                                     //       color: AppTheme.themeWhite,
                                     //       size: 35.0),
                                     // ),
-                                    avatarCircle(IMAGE_LOGO, 25.0),
+                                    Image.asset(
+                                      'assets/icono3.png',
+                                      //scale: 0.4,
+                                      width: 40,
+                                      height: 40,
+                                    ),
                                     sizedBox(10, 10.0),
                                     Expanded(
                                       child: AutoSizeText(
@@ -280,7 +308,12 @@ class _IntroPageState extends State<IntroPage> {
                                     //       color: AppTheme.themeWhite,
                                     //       size: 35.0),
                                     // ),
-                                    avatarCircle(IMAGE_LOGO, 25.0),
+                                    Image.asset(
+                                      'assets/icono3.png',
+                                      //scale: 0.4,
+                                      width: 40,
+                                      height: 40,
+                                    ),
                                     sizedBox(10, 10.0),
                                     Expanded(
                                       child: AutoSizeText(
@@ -305,7 +338,12 @@ class _IntroPageState extends State<IntroPage> {
                                     //       color: AppTheme.themeWhite,
                                     //       size: 35.0),
                                     // ),
-                                    avatarCircle(IMAGE_LOGO, 25.0),
+                                    Image.asset(
+                                      'assets/icono3.png',
+                                      //scale: 0.4,
+                                      width: 40,
+                                      height: 40,
+                                    ),
                                     sizedBox(10, 10.0),
                                     Expanded(
                                       child: AutoSizeText(
@@ -364,7 +402,12 @@ class _IntroPageState extends State<IntroPage> {
                                       //       color: AppTheme.themeWhite,
                                       //       size: 35.0),
                                       // ),
-                                      avatarCircle(IMAGE_LOGO, 25.0),
+                                      Image.asset(
+                                        'assets/icono3.png',
+                                        //scale: 0.4,
+                                        width: 40,
+                                        height: 40,
+                                      ),
                                       sizedBox(10.0, 0),
                                       Expanded(
                                         child: AutoSizeText(
@@ -389,7 +432,12 @@ class _IntroPageState extends State<IntroPage> {
                                       //       color: AppTheme.themeWhite,
                                       //       size: 35.0),
                                       // ),
-                                      avatarCircle(IMAGE_DEFAULT, 25.0),
+                                      Image.asset(
+                                        'assets/icono3.png',
+                                        //scale: 0.4,
+                                        width: 40,
+                                        height: 40,
+                                      ),
                                       sizedBox(10, 10.0),
                                       Expanded(
                                         child: AutoSizeText(
@@ -414,7 +462,12 @@ class _IntroPageState extends State<IntroPage> {
                                       //       color: AppTheme.themeWhite,
                                       //       size: 35.0),
                                       // ),
-                                      avatarCircle(IMAGE_LOGO, 25.0),
+                                      Image.asset(
+                                        'assets/icono3.png',
+                                        //scale: 0.4,
+                                        width: 40,
+                                        height: 40,
+                                      ),
                                       sizedBox(10, 10.0),
                                       Expanded(
                                         child: AutoSizeText(
@@ -491,7 +544,7 @@ class _IntroPageState extends State<IntroPage> {
                 ),
                 child: Center(
                   child: Padding(
-                    padding: EdgeInsets.only(bottom: 30.0),
+                    padding: EdgeInsets.only(bottom: 20.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
@@ -504,7 +557,7 @@ class _IntroPageState extends State<IntroPage> {
                           ),
                         ),
                         sizedBox(10.0, 0),
-                        avatarCircle(IMAGE_LOGO, 15),
+                        avatarCircleTransparent(IMAGE_DEFAULT, 20),
                       ],
                     ),
                   ),

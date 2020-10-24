@@ -11,7 +11,6 @@ import 'package:virtual_match/src/page/core/equipment/EquipmentLoadPage.dart';
 import 'package:virtual_match/src/page/core/equipment/EuipmentSelectionPage.dart';
 import 'package:virtual_match/src/page/core/player/PlayerLoadPage.dart';
 import 'package:virtual_match/src/page/core/player/PlayerPage.dart';
-import 'package:virtual_match/src/page/faq/FaqPage.dart';
 import 'package:virtual_match/src/page/login/LogOnPage.dart';
 import 'package:virtual_match/src/page/multimedia/MultimediaLoadPage.dart';
 import 'package:virtual_match/src/page/new/NewLoadPage.dart';
@@ -124,11 +123,11 @@ class _MyAppState extends State<MyApp> {
             //        'splash': (BuildContext context) => new SplashPage(),
             'login': (BuildContext context) => new LogOnPage(),
             'new': (BuildContext context) => new NewAllPage(),
-            'faq': (BuildContext context) => new FaqPage(),
+
             'notificationAll': (BuildContext context) =>
                 new NotificationAllPage(),
             'notificationLoad': (BuildContext context) =>
-                new NotificationLoadPage(),
+                new NotificationAllPage(),
             'playerLoad': (BuildContext context) => new PlayerLoadPage(),
             'newLoad': (BuildContext context) => new NewLoadPage(),
             'newMultimedia': (BuildContext context) => MultimediaLoadPage(),
