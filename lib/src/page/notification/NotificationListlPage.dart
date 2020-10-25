@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:virtual_match/src/model/Preference.dart';
+import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
@@ -82,7 +83,7 @@ class _NotificationListPageState extends State<NotificationListPage> {
           ),
         ),
       ),
-      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
+      floatingActionButton: floatButtonImage(Colors.transparent, context,
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }
@@ -128,12 +129,14 @@ class _NotificationListPageState extends State<NotificationListPage> {
           children: <Widget>[
             sizedBox(0, 7),
             CardVM(
-              size: 90,
+              size: 140,
               imageAssets: 'assets/icono3.png',
               opciones: _simplePopup(
                   entity, entity.idNotificacion.toString(), context),
               accesosRapidos: null,
               listWidgets: [
+                avatarCircleTransparent(IMAGE_DEFAULT, 40),
+                sizedBox(0, 7),
                 Text(
                   'TÍTULO : ${entity.titulo}',
                   style: kSubtitleStyleWhite,
@@ -148,6 +151,13 @@ class _NotificationListPageState extends State<NotificationListPage> {
                   overflow: TextOverflow.clip,
                   textAlign: TextAlign.justify,
                 ),
+                  Text(
+                      'PUBLICADO: ${entity.fechacreacion.substring(0, 10)}',
+                      style: kSubtitleStyleWhite,
+                  softWrap: true,
+                  overflow: TextOverflow.clip,
+                  textAlign: TextAlign.justify,
+                    ),
               ],
             ),
           ],

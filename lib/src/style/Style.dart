@@ -74,7 +74,7 @@ final kCamposTitleStyle = TextStyle(
 
 final kSubtitleStyle = TextStyle(
   color: Colors.white,
-  fontSize: 15.0,
+  fontSize: 16.0,
   height: 1.2,
 );
 

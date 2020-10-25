@@ -98,12 +98,12 @@ class _LogOutPageState extends State<LogOutPage> {
   Widget _buildBody() {
     if (_currentUser != null) {
       return Container(
-         decoration: new BoxDecoration(
-                  image: new DecorationImage(
-                    image: new AssetImage('assets/portada2.png'),
-                    fit: BoxFit.cover,
-                  ),
-                ),
+        decoration: new BoxDecoration(
+          image: new DecorationImage(
+            image: new AssetImage('assets/portada2.png'),
+            fit: BoxFit.cover,
+          ),
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
@@ -130,7 +130,7 @@ class _LogOutPageState extends State<LogOutPage> {
             ),
             Text(
               "Disfruta de Virtual Match!.",
-              style: kSigssTitleStyle,
+              style: kSigsTitleStyle,
             ),
             //  Text(_contactText ?? ''),
             _gmailButton(),
