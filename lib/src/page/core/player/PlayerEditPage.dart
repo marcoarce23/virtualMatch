@@ -136,7 +136,7 @@ class _PlayerEditPageState extends State<PlayerEditPage> {
             CardSlideBalckWidget(),
             sizedBox(0.0, 5.0),
             CardVM(
-              size: 330,
+              size: 300,
               imageAssets: 'assets/icono3.png',
               opciones:
                   _simplePopup(entity, entity.idJugador.toString(), context),
@@ -146,9 +146,9 @@ class _PlayerEditPageState extends State<PlayerEditPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     avatarCircle(entity.foto, 55),
-                    sizedBox(0, 7),
+                    sizedBox(0, 10),
                     Text(
-                      'FIFERO: ${entity.nombre} ${entity.apellido}',
+                      '${entity.nombre} ${entity.apellido}',
                       style: kSigsTitleStyle,
                     ),
                     sizedBox(0, 7),
@@ -162,9 +162,22 @@ class _PlayerEditPageState extends State<PlayerEditPage> {
                       style: kSigsTitleStyle,
                     ),
                     sizedBox(0, 7),
-                    Text(
-                      'Facebook: ${entity.facebook}',
-                      style: kSigsTitleStyle,
+                    Row(
+                      children: [
+                        Text(
+                          'Facebook:',
+                          style: kSigsTitleStyle,
+                        ),
+                        sizedBox(10, 0),
+                        generaHttpIcon(
+                            entity.facebook,
+                            FaIcon(
+                              FontAwesomeIcons.facebook,
+                              color: Colors.white,
+                            ),
+                            1,
+                            35),
+                      ],
                     ),
                     sizedBox(0, 7),
                     Text(
@@ -173,7 +186,12 @@ class _PlayerEditPageState extends State<PlayerEditPage> {
                     ),
                     sizedBox(0, 7),
                     Text(
-                      'Información Complementaria: ${entity.informacionComplementaria}',
+                      'Información Complementaria:',
+                      style: kSigsTitleStyle,
+                    ),
+                    sizedBox(0, 7),
+                    Text(
+                      '${entity.informacionComplementaria}',
                       style: kSigsTitleStyle,
                     ),
                   ],
@@ -198,18 +216,18 @@ class _PlayerEditPageState extends State<PlayerEditPage> {
             value: 1,
             child: Text("Edita tu Perfil"),
           ),
-          PopupMenuItem(
-            value: 2,
-            child: Text("Crea tu equipo"),
-          ),
+          // PopupMenuItem(
+          //   value: 2,
+          //   child: Text("Crea tu equipo"),
+          // ),
 
           PopupMenuItem(
-            value: 3,
+            value: 2,
             child: Text("Incribirse o salirse de un equipo"),
           ),
 
           PopupMenuItem(
-            value: 4,
+            value: 3,
             child: Text("Sobre mi equipo"),
           ),
         ],
@@ -224,16 +242,13 @@ class _PlayerEditPageState extends State<PlayerEditPage> {
             case 1:
               Navigator.pushNamed(context, 'playerLoad', arguments: entity);
               break;
+            // case 2:
+            //   Navigator.pushNamed(context, 'equipment', arguments: entity);
+            //   break;
             case 2:
-              Navigator.pushNamed(context, 'equipment', arguments: entity);
+              navegation(context, EquipmentAllListPage());
               break;
             case 3:
-              navegation(context, EquipmentAllListPage());
-
-              ///api/Equipo/SalirEquipo/{agrupador}/jugador/{idJugador}
-
-              break;
-            case 4:
               navegation(context, PlayerEquipmentPage());
 
               break;
@@ -248,30 +263,4 @@ class _PlayerEditPageState extends State<PlayerEditPage> {
         ),
         offset: Offset(0, 100),
       );
-
-  // _inscribirse(String keyId, String modalidad) {
-  //   _executeGenerator(
-  //       '/api/Torneo/execGenerarLiga/' + keyId + '/usuario/' + prefs.email);
-  // }
-
-  // _salirse(String keyId, String agrupador) {
-  //   _executeGenerator(
-  //       '/api/Equipo/SalirEquipo/' + agrupador + '/jugador/' + prefs.idPlayer);
-  // }
-
-  // void _executeGenerator(String url) async {
-  //   print('EL URLLL: $url}');
-  //   try {
-  //     // await entityService.execute(API + url).then((result) {
-  //     //   if (result["tipo_mensaje"] == '0')
-  //     //     showSnackbar(result["mensaje"], scaffoldKey);
-  //     //   else
-  //     //     showSnackbar(result["mensaje"], scaffoldKey);
-  //     // });
-  //   } catch (error) {
-  //     showSnackbar(
-  //         'No puede generar porque aun no se completo la cantidad de jugadores inscritos !!',
-  //         scaffoldKey);
-  //   }
-  // }
 }

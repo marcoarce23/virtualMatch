@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
+import 'package:virtual_match/src/page/core/equipment/EquipmentLoadPage.dart';
+import 'package:virtual_match/src/page/core/equipment/EquipmetAllListPage.dart';
 import 'package:virtual_match/src/page/core/formatTourment/FormatTourmentPage.dart';
 import 'package:virtual_match/src/page/core/miniTourment/MiniTourmentLoadPage.dart';
 import 'package:virtual_match/src/page/core/player/OnceVsOncePage.dart';
@@ -71,13 +73,10 @@ class DrawerMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     print('EL IDE PALYER EN EL DRAWER ES: ${prefs.idPlayer}');
 
+    if (prefs.idPlayer == '0' || prefs.idPlayer == '1926')
+      return drawerVirtualMatch(context);
+    if (int.parse(prefs.idPlayer) > 0) return drawerUser(context);
     if (prefs.idPlayer == '-1') return drawerAnonimus(context);
-
-    // if (prefs.idPlayer == '1' || prefs.idLogin == '9' /*COAV login*/)
-    //   return drawerVirtualMatch(context);
-
-    if (prefs.idPlayer == '0')
-      return drawerVirtualMatch(context); //drawerUser(context);
   }
 
   Drawer drawerAnonimus(BuildContext context) {
@@ -442,8 +441,21 @@ class DrawerMenu extends StatelessWidget {
               width: 30,
               height: 30,
             ),
-            '   Jugadores de la comunidad',
-            () => navegation(context, PlayerLoadPage())),
+            '     Jugador de la comunidad', () {
+          if (prefs.idPlayer != '0')
+            navegation(context, PlayerEditPage());
+          else
+            navegation(context, PlayerLoadPage());
+        }),
+        CustomListTile(
+            Image.asset(
+              'assets/image/pelota.png',
+              //scale: 0.4,
+              width: 28,
+              height: 28,
+            ),
+            '      Crear Equipo',
+            () => navegation(context, EquipmentAllPage())),
         CustomListTile(
             Image.asset(
               'assets/image/pelota.png',

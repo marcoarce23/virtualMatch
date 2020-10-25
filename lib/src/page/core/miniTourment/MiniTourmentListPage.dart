@@ -10,6 +10,7 @@ import 'package:virtual_match/src/page/core/player/PlayerSelectionPage.dart';
 import 'package:virtual_match/src/service/core/PlayerService.dart';
 import 'package:virtual_match/src/service/core/TournamentService.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
+import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/card/CardVM.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
@@ -50,7 +51,7 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
 
     return Scaffold(
       key: scaffoldKey,
-      //    appBar: appBar('MIS TORNEOS'),
+      appBar: appBar('MIS MINI TORNEOS'),
       drawer: DrawerMenu(),
       body: SafeArea(
         child: Container(
@@ -126,18 +127,21 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
       children: <Widget>[
         sizedBox(0, 7.0),
         CardVM(
-          size: 110,
+          size: 280,
           imageAssets: 'assets/icono3.png',
           opciones: _simplePopup(entity, entity.idTorneo.toString()),
           accesosRapidos: null,
           listWidgets: [
-            Text(
-              'TORNEO : ${entity.nombreTorneo}',
-              style: TextStyle(
-                color: AppTheme.themeWhite,
-              ),
-            ),
+            avatarCircle(entity.foto, 55),
+            sizedBox(0, 7),
             Text('DETALLE: ${entity.detalle}',
+                style: TextStyle(color: AppTheme.themeWhite)),
+            Text('HASTAG: ${entity.hashTag}',
+                style: TextStyle(color: AppTheme.themeWhite)),
+            Text('PREMIOS: ${entity.premios}',
+                style: TextStyle(color: AppTheme.themeWhite)),
+            Text(
+                'FECHA TORNEO: ${entity.fechaInicio.toString().substring(0, 10)}',
                 style: TextStyle(color: AppTheme.themeWhite)),
             Text(
                 'INSCRITOS: ${entity.cantidadInscritos}/${entity.cantidadJugadores}',
@@ -145,6 +149,8 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
             Text('COMPETICIÓN: ${entity.tipoCompeticion}',
                 style: TextStyle(color: AppTheme.themeWhite)),
             Text('MODALIDAD: ${entity.tipoModalidad}',
+                style: TextStyle(color: AppTheme.themeWhite)),
+            Text((entity.conBoot == 1) ? 'Generado con jugadores boots' : '',
                 style: TextStyle(color: AppTheme.themeWhite)),
           ],
         ),
@@ -166,11 +172,15 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
           ),
           PopupMenuItem(
             value: 3,
-            child: Text("Editar"),
+            child: Text("Editar Mi Torneo"),
           ),
           PopupMenuItem(
             value: 4,
-            child: Text("Eliminar"),
+            child: Text("Editar el Formato"),
+          ),
+          PopupMenuItem(
+            value: 5,
+            child: Text("Eliminar Mi Torneo"),
           ),
         ],
         onCanceled: () {},
@@ -190,14 +200,13 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
               _start(keyId, entity.idTipoCompeticion.toString());
               break;
             case 3:
-              entityModel.states = StateEntity.Update;
-              entityModel.usuarioAuditoria = prefs.email;
-              showSnackbarWithOutKey("Método por implementar", context);
+              Navigator.pushNamed(context, 'miniTourment', arguments: entity);
               break;
             case 4:
-              entityModel.states = StateEntity.Delete;
-              entityModel.usuarioAuditoria = prefs.email;
-              showSnackbarWithOutKey("Método por implementar", context);
+              Navigator.pushNamed(context, 'miniTourment', arguments: entity);
+              break;
+            case 5:
+              Navigator.pushNamed(context, 'miniTourment', arguments: entity);
               break;
             default:
               showSnackbarWithOutKey("No hay opción seleccionada", context);

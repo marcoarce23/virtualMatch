@@ -131,6 +131,7 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
   int typeMaterial = 14;
   int valueImage = 0;
   String image = IMAGE_DEFAULT;
+  int unaVez = 0;
 
   @override
   void initState() {
@@ -148,17 +149,19 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
         ModalRoute.of(context).settings.arguments;
 
     if (entityModelGet != null) {
-      entity.idMultimedia = entityModelGet.idMultimedia;
-      entity.titulo = entityModelGet.titulo;
-      entity.resumen = entityModelGet.resumen;
-      _inputFieldDateInicioController.text = entityModelGet.fechainicio;
-      _inputFieldDateFinController.text = entityModelGet.fechafin;
       entity.states = StateEntity.Update;
-      entity.foto = entityModelGet.foto;
-      print(entityModelGet.foto);
+      if (unaVez == 0) {
+        entity.idMultimedia = entityModelGet.idMultimedia;
+        entity.titulo = entityModelGet.titulo;
+        entity.resumen = entityModelGet.resumen;
+        _inputFieldDateInicioController.text = entityModelGet.fechainicio;
+        _inputFieldDateFinController.text = entityModelGet.fechafin;
+        entity.foto = entityModelGet.foto;
+        image = entityModelGet.foto;
+      }
+      print(entity.foto);
     }
-
-  //  print(entityModelGet.foto);
+    unaVez = 1;
 
     return Scaffold(
       key: scaffoldKey,
@@ -236,16 +239,6 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
       onPressed: _tomarFoto,
     );
   }
-
-  // _crearIconAppVideo() {
-  //   return IconButton(
-  //     icon: FaIcon(
-  //       FontAwesomeIcons.youtube,
-  //       color: AppTheme.themePurple,
-  //     ),
-  //     onPressed: _pickVideo,
-  //   );
-  // }
 
   Widget _fields(BuildContext context) {
     return Column(
@@ -357,36 +350,6 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
     return lista;
   }
 
-  // Widget _combox(String text) {
-  //   return Center(
-  //       child: FutureBuilder(
-  //           future: entityGet.get(new ClasificadorModel(), 13),
-  //           builder: (context, AsyncSnapshot snapshot) {
-  //             if (snapshot.hasData) {
-  //               return Row(
-  //                 children: <Widget>[
-  //                   sizedBox(15.0, 35.0),
-  //                   Text(text),
-  //                   sizedBox(10.0, 15.0),
-  //                   DropdownButton(
-  //                     icon: FaIcon(FontAwesomeIcons.sort,
-  //                         color: AppTheme.themePurple),
-  //                     value: typeMaterial.toString(), //valor
-  //                     items: getDropDown(snapshot),
-  //                     onChanged: (value) {
-  //                       setState(() {
-  //                         typeMaterial = int.parse(value);
-  //                       });
-  //                     },
-  //                   ),
-  //                 ],
-  //               );
-  //             } else {
-  //               return loading();
-  //             }
-  //           }));
-  // }
-
   _selectDateInicio(BuildContext context) async {
     DateTime picked = await showDatePicker(
         context: context,
@@ -483,7 +446,6 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
   }
 
   void loadingEntity() {
-    // entity.idMultimedia = 0;
     entity.idMultimedia =
         (entity.states == StateEntity.Insert) ? 0 : entity.idMultimedia;
     entity.idOrganizacion = 1;
