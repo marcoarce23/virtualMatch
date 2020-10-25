@@ -194,7 +194,7 @@ class _NewListPageState extends State<NewListPage> {
         onSelected: (value) {
           switch (value) {
             case 1:
-              Navigator.pushNamed(context, 'newLoad', arguments: entity);
+              Navigator.pushNamed(context, 'new', arguments: entity);
               break;
             case 2:
               entityModel.idNoticiaEvento = int.parse(keyId);

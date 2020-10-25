@@ -152,6 +152,7 @@ class _NewLoadPageState extends State<NewLoadPage> {
         _selectedRadio = entityModelGet.tipo;
 
         entity.foto = entityModelGet.foto;
+        image = entityModelGet.foto;
       }
 
       print('ddd ${entity.foto}');
@@ -478,8 +479,7 @@ class _NewLoadPageState extends State<NewLoadPage> {
   }
 
   void loadingEntity() {
-    print('xxxxxxxxxxxx: ${_inputFieldDateController.text} ');
-
+  
     entity.idNoticiaEvento =
         (entity.states == StateEntity.Insert) ? 0 : entity.idNoticiaEvento;
     entity.idOrganizacion = int.parse(prefs.idInstitution);

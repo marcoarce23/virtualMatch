@@ -5,7 +5,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:provider/provider.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/EquipoModel.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
@@ -42,7 +41,7 @@ class _EquipmentAllPageState extends State<EquipmentAllPage> {
   final List<Widget> optionPage = [
     EquipmentLoadPage(),
     EquipmentListPage(),
-    PlayerEquipmentPage()
+    //  PlayerEquipmentPage()
   ];
 
   void _onItemTapped(int index) {
@@ -60,48 +59,42 @@ class _EquipmentAllPageState extends State<EquipmentAllPage> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        // ignore: missing_required_param
-        ChangeNotifierProvider(builder: (_) => new EquipmentService()),
-      ],
-      child: Scaffold(
-        bottomNavigationBar: BottomNavigationBar(
-          elevation: 21.0,
-          backgroundColor: AppTheme.themeDefault,
-          items: [
-            BottomNavigationBarItem(
-                icon: Image.asset(
-                  'assets/image/pelota.png',
-                  //scale: 0.4,
-                  width: 28,
-                  height: 28,
-                ),
-                title: Text('Tu equipo')),
-            BottomNavigationBarItem(
-                icon: Image.asset(
-                  'assets/image/penal.png',
-                  //scale: 0.4,
-                  width: 28,
-                  height: 28,
-                ),
-                title: Text('Editar equipo')),
-            BottomNavigationBarItem(
-                icon: Image.asset(
-                  'assets/image/jugador2.png',
-                  //scale: 0.4,
-                  width: 28,
-                  height: 28,
-                ),
-                title: Text('Tus jugadores')),
-          ],
-          currentIndex: page,
-          unselectedItemColor: AppTheme.themeWhite,
-          selectedItemColor: Colors.purple,
-          onTap: _onItemTapped,
-        ),
-        body: optionPage[page],
+    return Scaffold(
+      bottomNavigationBar: BottomNavigationBar(
+        elevation: 21.0,
+        backgroundColor: AppTheme.themeDefault,
+        items: [
+          BottomNavigationBarItem(
+              icon: Image.asset(
+                'assets/image/pelota.png',
+                //scale: 0.4,
+                width: 28,
+                height: 28,
+              ),
+              title: Text('Crea tu equipo')),
+          BottomNavigationBarItem(
+              icon: Image.asset(
+                'assets/image/penal.png',
+                //scale: 0.4,
+                width: 28,
+                height: 28,
+              ),
+              title: Text('Edita tu equipo')),
+          // BottomNavigationBarItem(
+          //     icon: Image.asset(
+          //       'assets/image/jugador2.png',
+          //       //scale: 0.4,
+          //       width: 28,
+          //       height: 28,
+          //     ),
+          //     title: Text('Tus jugadores')),
+        ],
+        currentIndex: page,
+        unselectedItemColor: AppTheme.themeWhite,
+        selectedItemColor: Colors.purple,
+        onTap: _onItemTapped,
       ),
+      body: optionPage[page],
     );
   }
 }
@@ -119,11 +112,10 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final controllerNoticia = TextEditingController();
   final controllerDetalle = TextEditingController();
-  final controllerDirigidoA = TextEditingController();
-  final controllerUbicacion = TextEditingController();
+
 //DEFINICION DE BLOC Y MODEL
   gets.EquipoModel entityModelGet = new gets.EquipoModel();
-  EquipmentService entityService;
+  EquipmentService entityService = new EquipmentService();
   EquipoModel entity = new EquipoModel();
   ImageService entityImage = new ImageService();
   final prefs = new Preferense();
@@ -132,6 +124,7 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
   bool _save = false;
   File photo;
   String image = IMAGE_DEFAULT;
+  int unaVez = 0;
 
   @override
   void initState() {
@@ -145,19 +138,23 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
     entity.foto = image;
     entity.states = StateEntity.Insert;
     entity.agrupador = 0;
-    entityService = Provider.of<EquipmentService>(context);
 
-    // final gets.EquipoModel entityModelGet =
-    //     ModalRoute.of(context).settings.arguments;
+    final gets.EquipoModel entityModelGet =
+        ModalRoute.of(context).settings.arguments;
 
-    // if (entityModelGet != null) {
-    //   entity.detalle = entityModelGet.detalle;
-    //   entity.nombre = entityModelGet.nombre;
-    //   entity.foto = entityModelGet.foto;
-    //   entity.agrupador = entityModelGet.agrupador;
-    //   entity.states = StateEntity.Update;
-    //   print(entity.detalle);
-    // }
+    if (entityModelGet != null) {
+      entity.states = StateEntity.Update;
+
+      if (unaVez == 0) {
+        entity.agrupador = entityModelGet.agrupador;
+        entity.nombre = entityModelGet.nombre;
+        entity.detalle = entityModelGet.detalle;
+        image = entityModelGet.foto;
+      }
+
+      print('ddd ${entity.foto}');
+    }
+    unaVez = 1;
 
     return Scaffold(
       key: scaffoldKey,
@@ -170,8 +167,8 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
           _form(context),
         ],
       ),
-      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
-          FaIcon(FontAwesomeIcons.playstation), PlayerEditPage()),
+      floatingActionButton: floatButton(AppTheme.themePurple, context,
+          FaIcon(FontAwesomeIcons.arrowLeft), PlayerEditPage()),
     );
   }
 
@@ -347,7 +344,7 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
     entity.idEquipo =
         (entity.states == StateEntity.Insert) ? 0 : entity.idEquipo;
     entity.idJugador = int.parse(prefs.idPlayer);
-    entity.nombre = controllerNoticia.text;
+    entity.nombre = controllerNoticia.text.toUpperCase().trim();
     entity.detalle = controllerDetalle.text;
     entity.usuarioAuditoria = prefs.email;
 

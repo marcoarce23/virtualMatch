@@ -6,6 +6,7 @@ import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:virtual_match/src/model/Preference.dart';
+import 'package:virtual_match/src/model/entity/EntityFromJson/ListadoTorneoModel.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/TorneoModelo.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
@@ -25,7 +26,7 @@ import 'package:virtual_match/src/model/util/Validator.dart' as validator;
 import 'package:virtual_match/src/widget/image/ImageWidget.dart';
 
 class MiniTourmentAllPage extends StatefulWidget {
-  static final String routeName = 'tourment';
+  static final String routeName = 'miniTourment';
   const MiniTourmentAllPage({Key key}) : super(key: key);
 
   @override
@@ -57,8 +58,6 @@ class _MiniTourmentAllPageState extends State<MiniTourmentAllPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar('MINI TORNEOS'),
-      drawer: DrawerMenu(),
       bottomNavigationBar: BottomNavigationBar(
         elevation: 21.0,
         backgroundColor: AppTheme.themeDefault,
@@ -136,6 +135,7 @@ class _MiniTourmentLoadPageState extends State<MiniTourmentLoadPage> {
   TimeOfDay _time = TimeOfDay.now();
   String _fecha = DateTime.now().toString().substring(0, 10);
   String image = IMAGE_DEFAULT;
+  int unaVez = 0;
 
   @override
   void initState() {
@@ -149,15 +149,29 @@ class _MiniTourmentLoadPageState extends State<MiniTourmentLoadPage> {
     entity.states = StateEntity.Insert;
     entity.foto = image;
 
-    final TorneoModel entityModel = ModalRoute.of(context).settings.arguments;
+    final ListaTorneoModel entityModelGet =
+        ModalRoute.of(context).settings.arguments;
 
-    if (entityModel != null) {
-      entity = entityModel;
+    if (entityModelGet != null) {
       entity.states = StateEntity.Update;
+      if (unaVez == 0) {
+        entity.idTorneo = entityModelGet.idTipoTorneo;
+        entity.nombre = entityModelGet.nombreTorneo;
+        entity.detalle = entityModelGet.detalle;
+        _inputFieldDateController.text = entityModelGet.fechaInicio.toString();
+        //  DateFormat("yyyy-MM-dd").format(entityModelGet.fechaInicio);
+        _inputFieldTimeController.text = entityModelGet.horaInicio;
+        entity.foto = entityModelGet.foto;
+        image = entityModelGet.foto;
+      }
+      print(entity.foto);
     }
+    unaVez = 1;
 
     return Scaffold(
       key: scaffoldKey,
+      appBar: appBar('MINI TORNEOS'),
+      drawer: DrawerMenu(),
       body: Stack(
         children: <Widget>[
           background(context, 'IMAGE_LOGO'),
@@ -314,7 +328,7 @@ class _MiniTourmentLoadPageState extends State<MiniTourmentLoadPage> {
     DateTime picked = await showDatePicker(
         context: context,
         initialDate: new DateTime.now(),
-        firstDate: new DateTime(2020, 4),
+        firstDate: new DateTime(2020, 10),
         lastDate: new DateTime(2025, 12),
         locale: Locale('es', 'ES'));
 
@@ -359,7 +373,7 @@ class _MiniTourmentLoadPageState extends State<MiniTourmentLoadPage> {
         enableInteractiveSelection: false,
         controller: _inputFieldDateController,
         decoration: InputDecoration(
-              hintText: text,
+            hintText: text,
             labelText: text,
             //    suffixIcon: Icon(Icons.perm_contact_calendar),
             icon: FaIcon(FontAwesomeIcons.calendarAlt,
@@ -416,14 +430,15 @@ class _MiniTourmentLoadPageState extends State<MiniTourmentLoadPage> {
   }
 
   void loadingEntity() {
-    entity.idTorneo = 0;
+    entity.idTorneo =
+        (entity.states == StateEntity.Insert) ? 0 : entity.idTorneo;
     entity.idOrganizacion = 2;
     entity.nombre = controllerName.text;
     entity.detalle = controllerDetail.text;
     entity.hastag = '#VirtualMatch';
     entity.premios = '0';
     entity.organizador = '0';
-    entity.fechaInicio = _inputFieldDateController.text + ' ' + '12:00';
+    entity.fechaInicio = _inputFieldDateController.text; //+ ' ' + '12:00';
     entity.horaInicio = _inputFieldTimeController.text;
     entity.usuarioAuditoria = prefs.email;
     entity.idJugador = int.parse(prefs.idPlayer);

@@ -150,48 +150,6 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
       ],
     );
   }
-
-  // Widget _text(
-  //     TextEditingController controller,
-  //     String initialValue,
-  //     String labelText,
-  //     int maxLength,
-  //     int maxLines,
-  //     String hintText,
-  //     bool isValidate,
-  //     FaIcon icon,
-  //     Color hoverColor,
-  //     Color fillColor,
-  //     Color focusColor) {
-  //   return Padding(
-  //     padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 15.0),
-  //     child: TextFormField(
-  //       initialValue: initialValue,
-  //       textCapitalization: TextCapitalization.sentences,
-  //       enableSuggestions: true,
-  //       maxLength: maxLength,
-  //       maxLines: maxLines,
-  //       autocorrect: true,
-  //       autovalidate: false,
-  //       cursorColor: AppTheme.themeDefault,
-  //       toolbarOptions:
-  //           ToolbarOptions(copy: true, cut: true, paste: true, selectAll: true),
-  //       keyboardType: TextInputType.text,
-  //       // controller: controller,
-  //       decoration: inputDecoration(
-  //           hintText, labelText, icon, hoverColor, fillColor, focusColor),
-  //       onChanged: (value) {
-  //         setState(() {
-  //           controller.text = value;
-  //         });
-  //       },
-  //       validator: (value) =>
-  //           validator.validateTextfieldEmpty(value, isValidate),
-  //       onSaved: (value) => controller.text = value,
-  //     ),
-  //   );
-  // }
-
   Widget _comboModalidad(String _opcionTipoModalidadss) {
     return Center(
         child: FutureBuilder(

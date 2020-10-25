@@ -9,8 +9,10 @@ import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:virtual_match/src/page/core/equipment/EquipmentLoadPage.dart';
 import 'package:virtual_match/src/page/core/equipment/EuipmentSelectionPage.dart';
+import 'package:virtual_match/src/page/core/miniTourment/MiniTourmentLoadPage.dart';
 import 'package:virtual_match/src/page/core/player/PlayerLoadPage.dart';
 import 'package:virtual_match/src/page/core/player/PlayerPage.dart';
+import 'package:virtual_match/src/page/core/tourment/TourmentLoadPage.dart';
 import 'package:virtual_match/src/page/login/LogOnPage.dart';
 import 'package:virtual_match/src/page/multimedia/MultimediaLoadPage.dart';
 import 'package:virtual_match/src/page/new/NewLoadPage.dart';
@@ -122,20 +124,20 @@ class _MyAppState extends State<MyApp> {
           routes: <String, WidgetBuilder>{
             //        'splash': (BuildContext context) => new SplashPage(),
             'login': (BuildContext context) => new LogOnPage(),
-            'new': (BuildContext context) => new NewAllPage(),
-
             'notificationAll': (BuildContext context) =>
                 new NotificationAllPage(),
             'notificationLoad': (BuildContext context) =>
                 new NotificationAllPage(),
             'playerLoad': (BuildContext context) => new PlayerLoadPage(),
-            'newLoad': (BuildContext context) => new NewLoadPage(),
-            'newMultimedia': (BuildContext context) => MultimediaLoadPage(),
+            'new': (BuildContext context) => new NewAllPage(),
+            'multimedia': (BuildContext context) => MultimediaAllPage(),
             'equipment': (BuildContext context) => new EquipmentAllPage(),
             'equipmentSelection': (BuildContext context) =>
                 new EquipmentSelectionPage(),
             'playerPage': (BuildContext context) => new PlayerPage(),
             'equipmentLoad': (BuildContext context) => new EquipmentLoadPage(),
+            'tourmnetLoad' : (BuildContext context) => new TourmentLoadPage(),
+            'miniTourment': (BuildContext context) => new MiniTourmentAllPage(),
           }),
     );
   }
