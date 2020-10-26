@@ -4,7 +4,6 @@ import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/EquipoModel.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
-import 'package:virtual_match/src/page/core/equipment/EquipmentLoadPage.dart';
 import 'package:virtual_match/src/page/core/player/PlayerEditPage.dart';
 import 'package:virtual_match/src/service/core/EquipmentService.dart';
 import 'package:virtual_match/src/style/Style.dart';

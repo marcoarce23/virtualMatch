@@ -12,7 +12,7 @@ import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/page/core/equipment/EquipmentListPage.dart';
 import 'package:virtual_match/src/page/core/player/PlayerEditPage.dart';
-import 'package:virtual_match/src/page/core/player/PlayerEquipmentPage.dart';
+
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
 import 'package:virtual_match/src/service/ImageService.dart';
 import 'package:virtual_match/src/service/core/EquipmentService.dart';
@@ -343,6 +343,10 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
   void loadingEntity() {
     entity.idEquipo =
         (entity.states == StateEntity.Insert) ? 0 : entity.idEquipo;
+
+    entity.agrupador =
+        (entity.states == StateEntity.Insert) ? 0 : entity.agrupador;
+
     entity.idJugador = int.parse(prefs.idPlayer);
     entity.nombre = controllerNoticia.text.toUpperCase().trim();
     entity.detalle = controllerDetalle.text;

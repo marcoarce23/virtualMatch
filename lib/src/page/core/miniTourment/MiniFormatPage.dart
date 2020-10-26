@@ -63,7 +63,7 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
   String _opcionTipoTorneo = '23';
   String _opcionTipoModalidad = '44';
   String _opcionCodTorneo = '0';
-
+  int unaVez = 0;
   List<String> _cantidad = ['2', '3', '4', '5', '6', '7', '8'];
 
   @override
@@ -76,6 +76,21 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
   @override
   Widget build(BuildContext context) {
     entity.states = StateEntity.Insert;
+
+    final ListaTorneoModel entityModelGet =
+        ModalRoute.of(context).settings.arguments;
+
+    if (entityModelGet != null) {
+      entity.states = StateEntity.Update;
+      if (unaVez == 0) {
+        entity.idFormato = entityModelGet.idTipoTorneo;
+        typeCount = entityModelGet.cantidadJugadores.toString();
+        _opcionTipoCompeticion = entityModelGet.idTipoCompeticion.toString();
+        _opcionTipoTorneo = entityModelGet.idTorneo.toString();
+        _opcionTipoModalidad = entityModelGet.idTipoModalidad.toString();
+      }
+    }
+    unaVez = 1;
 
     return Scaffold(
       key: scaffoldKey,
@@ -150,6 +165,7 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
       ],
     );
   }
+
   Widget _comboModalidad(String _opcionTipoModalidadss) {
     return Center(
         child: FutureBuilder(

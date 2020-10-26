@@ -7,7 +7,6 @@ import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/page/core/player/PlayerEditPage.dart';
-import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/core/EquipmentService.dart';
 import 'package:virtual_match/src/service/core/PlayerService.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
