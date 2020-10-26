@@ -30,7 +30,7 @@ class _FaqListPagetate extends State<FaqListPage> {
           _form(context),
         ],
       ),
-      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
+      floatingActionButton: floatButtonImage(Colors.transparent, context,
           FaIcon(FontAwesomeIcons.futbol), HomePage()),
     );
   }

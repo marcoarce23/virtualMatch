@@ -4,7 +4,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/ListadoTorneoModel.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/JugadorModel.dart';
-import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/page/core/player/PlayerSelectionPage.dart';
@@ -39,8 +38,6 @@ class _TourmentListPageState extends State<TourmentListPage> {
   // DEFINICIOND E VARIABLES
   final prefs = new Preferense();
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  bool _save = false;
-  String _opcionJugador = '1';
   PlayerService entityGet1 = PlayerService();
 
   @override
@@ -85,7 +82,7 @@ class _TourmentListPageState extends State<TourmentListPage> {
           ),
         ),
       ),
-      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
+      floatingActionButton: floatButtonImage(Colors.transparent, context,
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }
@@ -131,6 +128,8 @@ class _TourmentListPageState extends State<TourmentListPage> {
           listWidgets: [
             avatarCircle(entity.foto, 45),
             sizedBox(0, 7),
+            Text('DETALLE: ${entity.idTorneo}',
+                style: TextStyle(color: AppTheme.themeWhite)),
             Text(
               'TORNEO : ${entity.nombreTorneo}',
               style: TextStyle(
@@ -168,7 +167,7 @@ class _TourmentListPageState extends State<TourmentListPage> {
           PopupMenuItem(
             value: -1,
             enabled: (entity.conBoot == 1) ? true : false,
-            child: Text("Cerrar torneo sin bots"),
+            child: Text("Cerrar torneo sin boots"),
           ),
           PopupMenuItem(
             value: 0,
@@ -191,7 +190,7 @@ class _TourmentListPageState extends State<TourmentListPage> {
           ),
           PopupMenuItem(
             value: 4,
-            child: Text("Eliminar"),
+            child: Text("Eliminar Torneo"),
           ),
         ],
         onCanceled: () {},
@@ -227,9 +226,8 @@ class _TourmentListPageState extends State<TourmentListPage> {
               break;
 
             case 4:
-              entityModel.states = StateEntity.Delete;
-              entityModel.usuarioAuditoria = prefs.email;
-              showSnackbarWithOutKey("Método por implementar", context);
+              entity.idTorneo = int.parse(keyId);
+              executeDelete(entity.idTorneo.toString(), prefs.email);
               break;
             default:
               showSnackbarWithOutKey("No hay opción seleccionada", context);
@@ -257,71 +255,21 @@ class _TourmentListPageState extends State<TourmentListPage> {
     return lista;
   }
 
-  _executeInscription(String idTorneo, String idJugador) async {
-    print('ENTROSSSS $idTorneo y $idJugador');
-    String respuesta;
-    String mensaje;
+  void executeDelete(String id, String usuario) async {
+    print('IDDD $id  yyyy el susuario $usuario');
     try {
-      await entityService
-          .execute(API +
-              '/api/Torneo/Inscribir/Torneo/' +
-              idTorneo +
-              '/Jugador/' +
-              idJugador)
-          .then((result) {
-        respuesta = result["tipo_mensaje"].toString();
-        mensaje = result["mensaje"].toString();
-        print('EL RESULTTTTTAAA: ${result["tipo_mensaje"]}');
-
-        if (respuesta == '0') showSnackbar(mensaje, scaffoldKey);
-        if (respuesta == '2') showSnackbar(mensaje, scaffoldKey);
+      await entityService.delete(id, usuario).then((result) {
+        if (result["tipo_mensaje"] == '0')
+          setState(() {
+            showSnackbar(STATUS_OK_DELETE, scaffoldKey);
+          });
+        else
+          showSnackbar(STATUS_ERROR, scaffoldKey);
       });
     } catch (error) {
-      showSnackbar('Usuario registrado !!!', scaffoldKey);
+      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
     }
-  }
-
-  _update() {
-    entityModel.states = StateEntity.Update;
-    entityModel.usuarioAuditoria = prefs.email;
-
-    return InkWell(
-      child: FaIcon(
-        FontAwesomeIcons.edit,
-        color: AppTheme.themeWhite,
-        size: 20,
-      ),
-      onTap: () {
-        setState(() {});
-      },
-    );
-  }
-
-  _delete(String keyId) {
-    return InkWell(
-      child: FaIcon(
-        FontAwesomeIcons.trashAlt,
-        color: AppTheme.themeWhite,
-        size: 20,
-      ),
-      onTap: () {
-        setState(() {});
-      },
-    );
-  }
-
-  _complete(String keyId) {
-    return InkWell(
-      //  key: Key(keyId),
-      child: FaIcon(
-        FontAwesomeIcons.users,
-        color: AppTheme.themeWhite,
-        size: 20,
-      ),
-      onTap: () {
-        setState(() {});
-      },
-    );
+    //   setState(() {});
   }
 
   _start(String keyId, String modalidad) {
@@ -331,9 +279,14 @@ class _TourmentListPageState extends State<TourmentListPage> {
           keyId +
           '/usuario/' +
           prefs.email);
-    else
+    else if (modalidad == '27')
       _executeGenerator(
           '/api/Torneo/execGenerarLiga/' + keyId + '/usuario/' + prefs.email);
+    else
+      _executeGenerator('/api/TorneoFaseGrupo/execGenerarLigaGrupo/' +
+          keyId +
+          '/usuario/' +
+          prefs.email);
   }
 
   void cerrarTorneo(int idTorneo) async {
@@ -376,7 +329,7 @@ class _TourmentListPageState extends State<TourmentListPage> {
       });
     } catch (error) {
       showSnackbar(
-          'No puede generar porque aun no se completo la cantidad de jugadores inscritos !!',
+          'No puede empezar el torneo porque aún no se completó la cantidad de jugadores inscritos!!',
           scaffoldKey);
     }
   }

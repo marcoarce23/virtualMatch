@@ -29,7 +29,7 @@ class _OrganizationPageState extends State<OrganizationPage> {
     return Scaffold(
         appBar: appBar('CONOCE LA COMUNIDAD'),
         drawer: DrawerMenu(),
-        floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
+        floatingActionButton: floatButtonImage(Colors.transparent, context,
             FaIcon(FontAwesomeIcons.playstation), HomePage()),
         body: SingleChildScrollView(
           child: Container(

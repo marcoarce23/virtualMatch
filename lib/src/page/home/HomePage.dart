@@ -83,7 +83,7 @@ class _HomePageState extends State<HomePage> {
                     gfCardAdvanced(
                         context,
                         "Publicado en fecha ${entity.fecha}",
-                        " ${entity.titulo}",
+                        " ${entity.titulo.toUpperCase()}",
                         "Dirigido a: ${entity.dirigidoa} \n Descripción: ${entity.dirigidoa}",
                         2,
                         entity.foto),
@@ -94,8 +94,13 @@ class _HomePageState extends State<HomePage> {
                 top: 25,
                 right: 50,
                 child: Opacity(
-                  opacity: 0.5,
-                  child: avatarCircle(IMAGE_LOGOB, 25),
+                  opacity: 0.6,
+                  child: Image.asset(
+                    'assets/image/pelota.png',
+                    //scale: 0.4,
+                    width: 30,
+                    height: 30,
+                  ),
                 ),
               ),
             ],

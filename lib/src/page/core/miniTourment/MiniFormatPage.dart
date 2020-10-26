@@ -21,6 +21,8 @@ import 'package:virtual_match/src/service/ImageService.dart';
 import 'package:virtual_match/src/service/core/TournamentService.dart';
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
+import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
+import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 
 import 'package:virtual_match/src/model/entity/EntityMap/FormatoModel.dart';
@@ -94,6 +96,8 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
 
     return Scaffold(
       key: scaffoldKey,
+      appBar: appBar('MI FORMATO'),
+      drawer: DrawerMenu(),
       body: Stack(
         children: <Widget>[
           background(context, 'IMAGE_LOGO'),
