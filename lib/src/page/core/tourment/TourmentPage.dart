@@ -98,7 +98,7 @@ class _TourmentPageState extends State<TourmentPage> {
                 ),
                 child: Text(
                   "EQUIPOS",
-                  style: TextStyle(fontSize: 11),
+                  style: TextStyle(fontSize: 9),
                 ),
               ),
               Tab(
@@ -110,14 +110,14 @@ class _TourmentPageState extends State<TourmentPage> {
                 ),
                 child: Text(
                   "Fixture".toUpperCase(),
-                  style: TextStyle(fontSize: 11),
+                  style: TextStyle(fontSize: 9),
                 ),
               ),
               Tab(
                 icon: avatarCircle(IMAGE_DEFAULT, 20),
                 child: Text(
                   "Posiciones".toUpperCase(),
-                  style: TextStyle(fontSize: 10),
+                  style: TextStyle(fontSize: 9),
                 ),
               ),
               Tab(
@@ -129,7 +129,7 @@ class _TourmentPageState extends State<TourmentPage> {
                 ),
                 child: Text(
                   "Historial".toUpperCase(),
-                  style: TextStyle(fontSize: 11),
+                  style: TextStyle(fontSize: 9),
                 ),
               ),
             ],
