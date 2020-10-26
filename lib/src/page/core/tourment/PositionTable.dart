@@ -172,16 +172,16 @@ class _PositionTableState extends State<PositionTable> {
                                 ),
                               ),
                             ),
-                          ),
-                          DataCell(
-                            Container(
-                              width: 15.0,
-                              child: Center(
-                                child: Text(
-                                  data.jugados.toString(),
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 12),
+                            DataCell(
+                              Container(
+                                width: 15.0,
+                                child: Center(
+                                  child: Text(
+                                    data.jugados.toString(),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 12),
+                                  ),
                                 ),
                               ),
                             ),

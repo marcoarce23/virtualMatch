@@ -143,7 +143,8 @@ class _TourmentListPageState extends State<TourmentListPage> {
                 style: TextStyle(color: AppTheme.themeWhite)),
             Text('PREMIOS: ${entity.premios}',
                 style: TextStyle(color: AppTheme.themeWhite)),
-            Text('FECHA TORNEO: ${entity.fechaInicio.toString().substring(0,10)}',
+            Text(
+                'FECHA TORNEO: ${entity.fechaInicio.toString().substring(0, 10)}',
                 style: TextStyle(color: AppTheme.themeWhite)),
             Text(
                 'INSCRITOS: ${entity.cantidadInscritos}/${entity.cantidadJugadores}',
@@ -338,9 +339,14 @@ class _TourmentListPageState extends State<TourmentListPage> {
           keyId +
           '/usuario/' +
           prefs.email);
-    else
+    else if (modalidad == '27')
       _executeGenerator(
           '/api/Torneo/execGenerarLiga/' + keyId + '/usuario/' + prefs.email);
+    else
+      _executeGenerator('/api/TorneoFaseGrupo/execGenerarLigaGrupo/' +
+          keyId +
+          '/usuario/' +
+          prefs.email);
   }
 
   void cerrarTorneo(int idTorneo) async {
