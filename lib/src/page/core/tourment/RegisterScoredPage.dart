@@ -110,8 +110,6 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
     );
   }
 
-  Widget body11vs11(BuildContext context) {}
-
   Widget _comboJugador() {
     return Center(
         child: FutureBuilder(
@@ -269,22 +267,42 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
       icon: FaIcon(FontAwesomeIcons.checkCircle, color: AppTheme.themeWhite),
       shape: GFButtonShape.pills,
       onPressed: () {
-        if (entity.idEliminatoria == 0) {
-          //  es para ligaº
-          entityResultado.states = StateEntity.Update;
-          entityResultado.idResultado = entity.idResultado;
-          if (entityResultado.gol1 == entityResultado.gol2) {
-            showSnackbar("No pueden empatar!", scaffoldKey);
-          } else
-            _submitLiga();
+        if (entity.tipoCompeticion == 52) {
+          if (entity.idEliminatoria == 0) {
+            //  es para ligaº
+            entityResultado.states = StateEntity.Update;
+            entityResultado.idResultado = entity.idResultado;
+            if (entityResultado.gol1 == entityResultado.gol2) {
+              showSnackbar("No pueden empatar!", scaffoldKey);
+            } else
+              _submitLigaGrupo();
+          } else {
+            // es para eliminatoria
+            entityResultado.states = StateEntity.Update;
+            entityResultado.idResultado = entity.idResultado;
+            if (entityResultado.gol1 == entityResultado.gol2) {
+              showSnackbar("No pueden empatar!", scaffoldKey);
+            } else
+              _submitGrupo();
+          }
         } else {
-          // es para eliminatoria
-          entityResultado.states = StateEntity.Update;
-          entityResultado.idResultado = entity.idResultado;
-          if (entityResultado.gol1 == entityResultado.gol2) {
-            showSnackbar("No pueden empatar!", scaffoldKey);
-          } else
-            _submit();
+          if (entity.idEliminatoria == 0) {
+            //  es para ligaº
+            entityResultado.states = StateEntity.Update;
+            entityResultado.idResultado = entity.idResultado;
+            if (entityResultado.gol1 == entityResultado.gol2) {
+              showSnackbar("No pueden empatar!", scaffoldKey);
+            } else
+              _submitLiga();
+          } else {
+            // es para eliminatoria
+            entityResultado.states = StateEntity.Update;
+            entityResultado.idResultado = entity.idResultado;
+            if (entityResultado.gol1 == entityResultado.gol2) {
+              showSnackbar("No pueden empatar!", scaffoldKey);
+            } else
+              _submit();
+          }
         }
       },
 
@@ -296,8 +314,50 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
     executeCUD(entityResultadoService, entityResultado);
   }
 
+  _submitGrupo() async {
+    executeCUDLigaGrupo(entityResultadoService, entityResultado);
+  }
+
   _submitLiga() async {
     executeCUDLiga(entityResultadoService, entityResultado);
+  }
+
+  _submitLigaGrupo() async {
+    executeCUDGrupo(entityResultadoService, entityResultado);
+  }
+
+  void executeCUDGrupo(
+      ResultadoService entityService, ResultadoModel entity) async {
+    try {
+      await entityService.updateEliminatoriaGrupo(entity).then((result) {
+        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
+        if (result["tipo_mensaje"] == '0') {
+          showSnackbar(STATUS_OK, scaffoldKey);
+          navegation(context, TourmentPage(idTorneo: widget.idTorneo));
+        } else
+          showSnackbar(STATUS_ERROR, scaffoldKey);
+      });
+    } catch (error) {
+      print('EL RESULTTTTT: ${error.toString()} ');
+      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
+    }
+  }
+
+  void executeCUDLigaGrupo(
+      ResultadoService entityService, ResultadoModel entity) async {
+    try {
+      await entityService.updateFaseGrupo(entity).then((result) {
+        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
+        if (result["tipo_mensaje"] == '0') {
+          showSnackbar(STATUS_OK, scaffoldKey);
+          navegation(context, TourmentPage(idTorneo: widget.idTorneo));
+        } else
+          showSnackbar(STATUS_ERROR, scaffoldKey);
+      });
+    } catch (error) {
+      print('EL RESULTTTTT: ${error.toString()} ');
+      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
+    }
   }
 
   void executeCUD(ResultadoService entityService, ResultadoModel entity) async {

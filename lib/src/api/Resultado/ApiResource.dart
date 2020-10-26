@@ -7,4 +7,9 @@ Map<String, List<String>> api = {
   'getId': [API + '/api/Resultado', ''],
   'update': [API + '/api/Resultado', ''],
   'updateLiga': [API + '/api/TorneoLiga/registroScored', ''],
+  'updateFaseGrupo': [API + '/api/TorneoLiga/registroScoredFaseGrupo', ''],
+  'updateEliminatoriaGrupo': [
+    API + '/api/TorneoLiga/registroScoredEliminatoriaGrupo',
+    ''
+  ],
 };

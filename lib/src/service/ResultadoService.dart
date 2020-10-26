@@ -50,6 +50,25 @@ class ResultadoService with ChangeNotifier {
     return result;
   }
 
+  Future<Map<String, dynamic>> updateFaseGrupo(IEntityMap entity) async {
+    var result;
+    isLoading = true;
+    result = await _apiUpdate.updateFaseGrupo(entity);
+    isLoading = false;
+    notifyListeners();
+    return result;
+  }
+
+  Future<Map<String, dynamic>> updateEliminatoriaGrupo(
+      IEntityMap entity) async {
+    var result;
+    isLoading = true;
+    result = await _apiUpdate.updateEliminatoriaGrupo(entity);
+    isLoading = false;
+    notifyListeners();
+    return result;
+  }
+
   Future<Map<String, dynamic>> delete(String id, String usuario) async {
     var result;
     isLoading = true;
