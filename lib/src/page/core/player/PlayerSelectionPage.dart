@@ -56,7 +56,7 @@ class _PlayerSelectionPageState extends State<PlayerSelectionPage> {
   final prefs = new Preferense();
   final scaffoldKey = GlobalKey<ScaffoldState>();
   String _opcionJugador = '1' + '|' + '71298852';
-  String _valorText;
+  //String _valorText;
 
   @override
   void initState() {
@@ -336,7 +336,7 @@ class _PlayerSelectionVMPageState extends State<PlayerSelectionVMPage> {
   final prefs = new Preferense();
   final scaffoldKey = GlobalKey<ScaffoldState>();
   String _opcionJugador = '1' + '|' + '71298852';
-  String _valorText;
+  //String _valorText;
 
   @override
   void initState() {
