@@ -4,10 +4,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/page/core/equipment/EquipmentLoadPage.dart';
-import 'package:virtual_match/src/page/core/equipment/EquipmetAllListPage.dart';
 import 'package:virtual_match/src/page/core/formatTourment/FormatTourmentPage.dart';
 import 'package:virtual_match/src/page/core/miniTourment/MiniTourmentLoadPage.dart';
-import 'package:virtual_match/src/page/core/player/OnceVsOncePage.dart';
 import 'package:virtual_match/src/page/core/player/PlayerEditPage.dart';
 import 'package:virtual_match/src/page/core/player/PlayerLoadPage.dart';
 import 'package:virtual_match/src/page/faq/FaqListPage.dart';
@@ -73,7 +71,7 @@ class DrawerMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     print('EL IDE PALYER EN EL DRAWER ES: ${prefs.idPlayer}');
 
-    if (prefs.idPlayer == '0' || prefs.idPlayer == '1926')
+    if (prefs.idPlayer == '1' || prefs.idPlayer == '1926')
       return drawerVirtualMatch(context);
     if (int.parse(prefs.idPlayer) > 0) return drawerUser(context);
     if (prefs.idPlayer == '-1') return drawerAnonimus(context);
@@ -449,7 +447,7 @@ class DrawerMenu extends StatelessWidget {
         }),
         CustomListTile(
             Image.asset(
-              'assets/image/pelota.png',
+              'assets/image/credencial.png',
               //scale: 0.4,
               width: 28,
               height: 28,

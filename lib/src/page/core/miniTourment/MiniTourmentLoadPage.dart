@@ -155,16 +155,17 @@ class _MiniTourmentLoadPageState extends State<MiniTourmentLoadPage> {
     if (entityModelGet != null) {
       entity.states = StateEntity.Update;
       if (unaVez == 0) {
-        entity.idTorneo = entityModelGet.idTipoTorneo;
+        entity.idTorneo = entityModelGet.idTorneo;
         entity.nombre = entityModelGet.nombreTorneo;
         entity.detalle = entityModelGet.detalle;
-        _inputFieldDateController.text = entityModelGet.fechaInicio.toString();
+        _inputFieldDateController.text = entityModelGet.fechaInicio.toString().substring(0,10);
         //  DateFormat("yyyy-MM-dd").format(entityModelGet.fechaInicio);
         _inputFieldTimeController.text = entityModelGet.horaInicio;
         entity.foto = entityModelGet.foto;
         image = entityModelGet.foto;
       }
       print(entity.foto);
+       print('idTORNEOOOO: ${entity.idTorneo}');
     }
     unaVez = 1;
 
@@ -430,6 +431,7 @@ class _MiniTourmentLoadPageState extends State<MiniTourmentLoadPage> {
   }
 
   void loadingEntity() {
+    print('fecgaaaa: ${_inputFieldDateController.text}');
     entity.idTorneo =
         (entity.states == StateEntity.Insert) ? 0 : entity.idTorneo;
     entity.idOrganizacion = 2;
@@ -438,7 +440,7 @@ class _MiniTourmentLoadPageState extends State<MiniTourmentLoadPage> {
     entity.hastag = '#VirtualMatch';
     entity.premios = '0';
     entity.organizador = '0';
-    entity.fechaInicio = _inputFieldDateController.text; //+ ' ' + '12:00';
+    entity.fechaInicio = _inputFieldDateController.text.substring(0,10); //+ ' ' + '12:00';
     entity.horaInicio = _inputFieldTimeController.text;
     entity.usuarioAuditoria = prefs.email;
     entity.idJugador = int.parse(prefs.idPlayer);

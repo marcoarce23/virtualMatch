@@ -134,11 +134,11 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
           listWidgets: [
             avatarCircle(entity.foto, 55),
             sizedBox(0, 7),
+            Text('TORNEO: ${entity.nombreTorneo}',
+                style: TextStyle(color: AppTheme.themeWhite)),
             Text('DETALLE: ${entity.detalle}',
                 style: TextStyle(color: AppTheme.themeWhite)),
             Text('HASTAG: ${entity.hashTag}',
-                style: TextStyle(color: AppTheme.themeWhite)),
-            Text('PREMIOS: ${entity.premios}',
                 style: TextStyle(color: AppTheme.themeWhite)),
             Text(
                 'FECHA TORNEO: ${entity.fechaInicio.toString().substring(0, 10)}',
@@ -176,10 +176,6 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
           ),
           PopupMenuItem(
             value: 4,
-            child: Text("Editar el Formato"),
-          ),
-          PopupMenuItem(
-            value: 5,
             child: Text("Eliminar Mi Torneo"),
           ),
         ],
@@ -313,20 +309,6 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
       },
     );
   }
-
-  // _complete(String keyId) {
-  //   return InkWell(
-  //     //  key: Key(keyId),
-  //     child: FaIcon(
-  //       FontAwesomeIcons.users,
-  //       color: AppTheme.themeWhite,
-  //       size: 20,
-  //     ),
-  //     onTap: () {
-  //       setState(() {});
-  //     },
-  //   );
-  // }
 
   _start(String keyId, String modalidad) {
     if (modalidad == '27')

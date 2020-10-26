@@ -9,23 +9,22 @@ class ApiUpdate {
   Future<Map<String, dynamic>> update(IEntityMap entity) async {
     String _body = json.encode(entity.toJson());
     print('body: $_body');
-    final apiRest = api['update'][0]
+    final apiRest = api['updates'][0]
         .toString(); // eventResourceAdd['add'][0].toString()   ;
     //RouteAdd().postEvent(); // METODO QUE OBTENFA EL POST DEL EVENTO; MULTIMEDIA, VOLUTNARIO; HORARIO
     print('url: $apiRest');
-    final response = await http.post(apiRest,
+    final response = await http.put(apiRest,
         headers: {"Content-Type": "application/json"}, body: _body);
     return dataMap(response);
   }
 } //FIN DE LA CLASE
 
-
 class ApiState {
   Future<Map<String, dynamic>> state(IEntityMap entity) async {
     String _body = json.encode(entity.toJson());
     print('body: $_body');
-    final apiRest = api['state'][0]
-        .toString(); // eventResourceAdd['add'][0].toString()   ;
+    final apiRest =
+        api['state'][0].toString(); // eventResourceAdd['add'][0].toString()   ;
     //RouteAdd().postEvent(); // METODO QUE OBTENFA EL POST DEL EVENTO; MULTIMEDIA, VOLUTNARIO; HORARIO
     print('url: $apiRest');
     final response = await http.put(apiRest,

@@ -23,7 +23,6 @@ import 'package:virtual_match/src/widget/general/CallWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/widget/general/SenWidget.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
-import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 
 class LogOnPage extends StatefulWidget {
   @override

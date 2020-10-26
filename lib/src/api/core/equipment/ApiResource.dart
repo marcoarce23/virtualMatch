@@ -11,4 +11,5 @@ Map<String, List<String>> api = {
   'getListaJugadores': [API + '/api/Jugador/getListaJugadores', ''],
   'getMiEquipo': [API + '/api/Equipo/getDevuelveEquipoPorIdJugador', ''],
   'getListarEquipos': [API + '/api/Equipo/getListarEquipos', ''],
+  'updates': [API + '/api/Equipo/modificar', ''],
 };

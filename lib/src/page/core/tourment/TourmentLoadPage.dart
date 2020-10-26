@@ -88,13 +88,14 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
     if (entityModelGet != null) {
       entity.states = StateEntity.Update;
       if (unaVez == 0) {
-        entity.idTorneo = entityModelGet.idTipoTorneo;
+        entity.idTorneo = entityModelGet.idTorneo;
         entity.nombre = entityModelGet.nombreTorneo;
         entity.detalle = entityModelGet.detalle;
         entity.hastag = entityModelGet.hashTag;
         entity.premios = entityModelGet.premios;
         entity.organizador = entityModelGet.organizador;
-        _inputFieldDateController.text = entityModelGet.fechaInicio.toString();
+        _inputFieldDateController.text =
+            entityModelGet.fechaInicio.toString().substring(0, 10);
         //  DateFormat("yyyy-MM-dd").format(entityModelGet.fechaInicio);
         _inputFieldTimeController.text = entityModelGet.horaInicio;
         entity.foto = entityModelGet.foto;
@@ -417,7 +418,7 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
     entity.hastag = controllerHastag.text;
     entity.premios = controllerGift.text;
     entity.organizador = controllerOrganization.text;
-    entity.fechaInicio =    _inputFieldDateController.text + ' ' + '12:00';
+    entity.fechaInicio = _inputFieldDateController.text.substring(0, 10);
     entity.horaInicio = _inputFieldTimeController.text;
     entity.usuarioAuditoria = prefs.email;
     entity.idJugador = 1;
