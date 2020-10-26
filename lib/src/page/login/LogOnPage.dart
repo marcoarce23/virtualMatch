@@ -106,9 +106,9 @@ class _LogOnPageState extends State<LogOnPage> {
           children: [
             Container(),
             Image.asset(
-              "assets/vm_queofrecemos.png",
+              "assets/vm_logo.png",
               fit: BoxFit.cover,
-              height: size.height * 0.60,
+              height: size.height * 0.63,
               width: size.width,
             ),
             Positioned(
