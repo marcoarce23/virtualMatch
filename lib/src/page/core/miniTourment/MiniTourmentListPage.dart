@@ -170,6 +170,11 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
             child: Text("Empezar el torneo"),
           ),
           PopupMenuItem(
+            enabled: (entity.idTipoCompeticion == 52) ? true : false,
+            value: 0,
+            child: Text("Empezar eliminatoria de fases"),
+          ),
+          PopupMenuItem(
             value: 3,
             child: Text("Editar Mi Torneo"),
           ),
@@ -181,6 +186,14 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
         onCanceled: () {},
         onSelected: (value) {
           switch (value) {
+            case 0:
+              _executeGenerator(
+                  '/api/TorneoFaseGrupo/execGenerarPlayOffGrupo/' +
+                      keyId +
+                      '/usuario/' +
+                      prefs.email);
+              break;
+
             case 1:
               navegation(
                   context,
@@ -231,14 +244,20 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
   }
 
   _start(String keyId, String modalidad) {
+    print('MODALIDADDD: $modalidad');
     if (modalidad == '27')
       _executeGenerator('/api/Torneo/execGenerarPlayOff/' +
           keyId +
           '/usuario/' +
           prefs.email);
-    else
+    else if (modalidad == '27')
       _executeGenerator(
           '/api/Torneo/execGenerarLiga/' + keyId + '/usuario/' + prefs.email);
+    else
+      _executeGenerator('/api/TorneoFaseGrupo/execGenerarLigaGrupo/' +
+          keyId +
+          '/usuario/' +
+          prefs.email);
   }
 
   void executeDelete(String id, String usuario) async {

@@ -71,8 +71,9 @@ class DrawerMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     print('EL IDE PALYER EN EL DRAWER ES: ${prefs.idPlayer}');
 
-    if (prefs.idPlayer == '1' || prefs.idPlayer == '1926')
-      return drawerVirtualMatch(context);
+    if (prefs.idPlayer == '1' ||
+        prefs.idPlayer == '1926' ||
+        prefs.idPlayer == '1934') return drawerVirtualMatch(context);
     if (int.parse(prefs.idPlayer) > 0 || prefs.idPlayer == '-1')
       return drawerUser(context);
     if (prefs.idPlayer == '-2') return drawerAnonimus(context);
