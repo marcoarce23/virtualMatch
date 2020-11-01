@@ -346,7 +346,7 @@ class _LogOnPageState extends State<LogOnPage> {
   _submit() async {
     print('IDPLAYERRR;; ${prefs.idPlayer.toString()}');
 
-    if (prefs.idPlayer != '-2') {
+    if (prefs.idPlayer != '-1') {
       navegation(context, HomePage());
     } else {
       loadingEntity();
