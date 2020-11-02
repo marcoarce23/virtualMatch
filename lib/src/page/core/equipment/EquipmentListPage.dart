@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:virtual_match/src/model/Preference.dart';
-import 'package:virtual_match/src/model/entity/EntityFromJson/EquipoModel.dart' as gets;
+import 'package:virtual_match/src/model/entity/EntityFromJson/EquipoModel.dart'
+    as gets;
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
-import 'package:virtual_match/src/page/core/equipment/EquipmentLoadPage.dart';
+import 'package:virtual_match/src/page/core/player/PlayerEditPage.dart';
 import 'package:virtual_match/src/service/core/EquipmentService.dart';
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
@@ -30,8 +30,8 @@ class _EquipmentListPageState extends State<EquipmentListPage> {
   //DEFINICION DE BLOC Y MODEL
   gets.EquipoModel entity = new gets.EquipoModel();
   model.EquipoModel entityModel = new model.EquipoModel();
-  EquipmentService entityService;
-  EquipmentService entityGet = EquipmentService();
+  EquipmentService entityService = new EquipmentService();
+  EquipmentService entityGet = new EquipmentService();
 
   // DEFINICIOND E VARIABLES
   final prefs = new Preferense();
@@ -46,7 +46,7 @@ class _EquipmentListPageState extends State<EquipmentListPage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    entityService = Provider.of<EquipmentService>(context);
+ //   entityService = Provider.of<EquipmentService>(context);
 
     return Scaffold(
       key: scaffoldKey,
@@ -95,8 +95,8 @@ class _EquipmentListPageState extends State<EquipmentListPage> {
           ),
         ),
       ),
-      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
-          FaIcon(FontAwesomeIcons.playstation), EquipmentAllPage()),
+      floatingActionButton: floatButton(AppTheme.themePurple, context,
+          FaIcon(FontAwesomeIcons.arrowLeft), PlayerEditPage()),
     );
   }
 
@@ -130,7 +130,8 @@ class _EquipmentListPageState extends State<EquipmentListPage> {
     );
   }
 
-  Widget _simplePopup(gets.EquipoModel entity, int keyId, BuildContext context) =>
+  Widget _simplePopup(
+          gets.EquipoModel entity, int keyId, BuildContext context) =>
       PopupMenuButton<int>(
         itemBuilder: (context) => [
           PopupMenuItem(
@@ -148,7 +149,7 @@ class _EquipmentListPageState extends State<EquipmentListPage> {
         onSelected: (value) {
           switch (value) {
             case 1:
-              Navigator.pushNamed(context, 'equipmentLoad', arguments: entity);
+              Navigator.pushNamed(context, 'equipment', arguments: entity);
               break;
             case 2:
               print('eliminar ${entity.agrupador}');
@@ -176,7 +177,7 @@ class _EquipmentListPageState extends State<EquipmentListPage> {
           children: <Widget>[
             sizedBox(0, 7),
             CardVM(
-              size: 150,
+              size: 160,
               imageAssets: 'assets/icono3.png',
               opciones: _simplePopup(entity, entity.agrupador, context),
               accesosRapidos: null,

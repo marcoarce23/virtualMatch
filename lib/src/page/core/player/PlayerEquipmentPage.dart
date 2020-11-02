@@ -6,7 +6,7 @@ import 'package:virtual_match/src/model/entity/EntityMap/EquipoModel.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
-import 'package:virtual_match/src/page/home/HomePage.dart';
+import 'package:virtual_match/src/page/core/player/PlayerEditPage.dart';
 import 'package:virtual_match/src/service/core/EquipmentService.dart';
 import 'package:virtual_match/src/service/core/PlayerService.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
@@ -22,7 +22,7 @@ class PlayerEquipmentPage extends StatefulWidget {
   @override
   _PlayerEquipmentPageState createState() => _PlayerEquipmentPageState();
 
-  int grupo;
+  int grupo = 0;
 
   PlayerEquipmentPage({this.grupo});
 }
@@ -70,11 +70,7 @@ class _PlayerEquipmentPageState extends State<PlayerEquipmentPage> {
                 margin: EdgeInsets.symmetric(vertical: 0.0),
                 child: Column(
                   children: <Widget>[
-                    showInformationBasic(
-                      context,
-                      'TUS JUGADORES PARA 11 VS. 11',
-                      'Busca, acepta y comunicate con tus jugadores.',
-                    ),
+                    title(context),
                     sizedBox(0.0, 2.0),
                     divider(),
                   ],
@@ -87,9 +83,25 @@ class _PlayerEquipmentPageState extends State<PlayerEquipmentPage> {
         ),
       ),
       //  ),
-      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
-          FaIcon(FontAwesomeIcons.futbol), HomePage()),
+      floatingActionButton: floatButton(AppTheme.themePurple, context,
+          FaIcon(FontAwesomeIcons.arrowLeft), PlayerEditPage()),
     );
+  }
+
+  Widget title(BuildContext context) {
+    print('grrupoooo: ${widget.grupo}');
+    if (widget.grupo == null)
+      return showInformationBasic(
+        context,
+        'TODAVIA NO CUENTAS CON UN EQUIPO',
+        'Busca e inscribite al equipo de tu preferencia para ser parte de un 11 Vs. 11.',
+      );
+    else
+      return showInformationBasic(
+        context,
+        'TUS JUGADORES PARA 11 VS. 11',
+        'Busca, acepta y comunicate con tus jugadores.',
+      );
   }
 
   Widget futureBuilder(BuildContext context) {

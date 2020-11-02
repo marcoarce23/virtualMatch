@@ -7,6 +7,7 @@ import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:virtual_match/src/model/Preference.dart';
+import 'package:virtual_match/src/model/entity/EntityFromJson/ListadoTorneoModel.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/TorneoModelo.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
@@ -23,76 +24,6 @@ import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/model/util/Validator.dart' as validator;
 import 'package:virtual_match/src/widget/image/ImageWidget.dart';
-
-// class TourmentAllPage extends StatefulWidget {
-//   static final String routeName = 'tourment';
-//   const TourmentAllPage({Key key}) : super(key: key);
-
-//   @override
-//   _TourmentAllPageState createState() => _TourmentAllPageState();
-// }
-
-// class _TourmentAllPageState extends State<TourmentAllPage> {
-//   int page = 0;
-//   final prefs = new Preferense();
-//   final List<Widget> optionPage = [
-//     TourmentLoadPage(),
-//     FormatLoadPage(),
-//     TourmentListPage()
-//   ];
-
-//   void _onItemTapped(int index) {
-//     setState(() {
-//       page = index;
-//     });
-//   }
-
-//   @override
-//   void initState() {
-//     prefs.lastPage = TourmentAllPage.routeName;
-//     page = 0;
-//     super.initState();
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       bottomNavigationBar: BottomNavigationBar(
-//         elevation: 21.0,
-//         backgroundColor: AppTheme.themeDefault,
-//         items: [
-//           BottomNavigationBarItem(
-//               icon: Image.asset(
-//                 'assets/image/control.png',
-//                 width: 28,
-//                 height: 28,
-//               ),
-//               title: Text('Mi torneo')),
-//           BottomNavigationBarItem(
-//               icon: Image.asset(
-//                 'assets/image/pelota.png',
-//                 width: 28,
-//                 height: 28,
-//               ),
-//               title: Text('Formato')),
-//           BottomNavigationBarItem(
-//               icon: Image.asset(
-//                 'assets/image/penal.png',
-//                 width: 28,
-//                 height: 28,
-//               ),
-//               title: Text('Torneos Virtual Match')),
-//         ],
-//         currentIndex: page,
-//         unselectedItemColor: Colors.purple,
-//         selectedItemColor: AppTheme.themeWhite,
-//         onTap: _onItemTapped,
-//       ),
-//       body: optionPage[page],
-//       //  ),
-//     );
-//   }
-// }
 
 class TourmentLoadPage extends StatefulWidget {
   static final String routeName = 'tourmnetLoad';
@@ -134,6 +65,7 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
   TimeOfDay _time = TimeOfDay.now();
   String _fecha = DateTime.now().toString().substring(0, 10);
   String image = IMAGE_DEFAULT;
+  int unaVez = 0;
 
   @override
   void initState() {
@@ -145,14 +77,33 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
   @override
   Widget build(BuildContext context) {
     entity.states = StateEntity.Insert;
+    entity.foto = image;
     // entityService = Provider.of<TourmentService>(context);
 
-    final TorneoModel entityModel = ModalRoute.of(context).settings.arguments;
+    //  final TorneoModel entityModel = ModalRoute.of(context).settings.arguments;
 
-    if (entityModel != null) {
-      entity = entityModel;
+    final ListaTorneoModel entityModelGet =
+        ModalRoute.of(context).settings.arguments;
+
+    if (entityModelGet != null) {
       entity.states = StateEntity.Update;
+      if (unaVez == 0) {
+        entity.idTorneo = entityModelGet.idTorneo;
+        entity.nombre = entityModelGet.nombreTorneo;
+        entity.detalle = entityModelGet.detalle;
+        entity.hastag = entityModelGet.hashTag;
+        entity.premios = entityModelGet.premios;
+        entity.organizador = entityModelGet.organizador;
+        _inputFieldDateController.text =
+            entityModelGet.fechaInicio.toString().substring(0, 10);
+        //  DateFormat("yyyy-MM-dd").format(entityModelGet.fechaInicio);
+        _inputFieldTimeController.text = entityModelGet.horaInicio;
+        entity.foto = entityModelGet.foto;
+        image = entityModelGet.foto;
+      }
+      print(entity.foto);
     }
+    unaVez = 1;
 
     return Scaffold(
       key: scaffoldKey,
@@ -459,15 +410,15 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
   }
 
   void loadingEntity() {
-    entity.idTorneo = 0;
+    entity.idTorneo =
+        (entity.states == StateEntity.Insert) ? 0 : entity.idTorneo;
     entity.idOrganizacion = int.parse(prefs.idInstitution);
     entity.nombre = controllerName.text;
     entity.detalle = controllerDetail.text;
     entity.hastag = controllerHastag.text;
     entity.premios = controllerGift.text;
     entity.organizador = controllerOrganization.text;
-    //  entity.foto = IMAGE_LOGO;
-    entity.fechaInicio = _inputFieldDateController.text + ' ' + '12:00';
+    entity.fechaInicio = _inputFieldDateController.text.substring(0, 10);
     entity.horaInicio = _inputFieldTimeController.text;
     entity.usuarioAuditoria = prefs.email;
     entity.idJugador = 1;

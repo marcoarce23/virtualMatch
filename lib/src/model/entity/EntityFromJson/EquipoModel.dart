@@ -5,14 +5,6 @@ class EquipoModel implements IEntityJson {
   String detalle;
   String foto;
   int agrupador;
-//   int idEquipo;
-// int
-
-// "idEquipo": 132,
-
-//       "idJugador": 1,
-//       "esCapitan": 0,
-//       "estado": 3
 
   EquipoModel({this.nombre, this.detalle, this.foto, this.agrupador});
 
@@ -33,14 +25,7 @@ class EquipoCapitanesModel implements IEntityJson {
   String telefono;
   String psdn;
   int idEquipo;
-//   int idEquipo;
-// int
 
-// "idEquipo": 132,
-
-//       "idJugador": 1,
-//       "esCapitan": 0,
-//       "estado": 3
 
   EquipoCapitanesModel(
       {this.nombre,

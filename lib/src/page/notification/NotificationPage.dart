@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:virtual_match/src/model/Preference.dart';
-import 'package:virtual_match/src/theme/Theme.dart';
+import 'package:virtual_match/src/model/util/Const.dart';
+import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/card/CardVM.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
@@ -75,7 +76,7 @@ class _NotificationPageState extends State<NotificationPage> {
           ),
         ),
       ),
-      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
+      floatingActionButton: floatButtonImage(Colors.transparent, context,
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }
@@ -117,23 +118,34 @@ class _NotificationPageState extends State<NotificationPage> {
           children: <Widget>[
             sizedBox(0, 7),
             CardVM(
-              size: 80,
+              size: 150,
               imageAssets: 'assets/icono3.png',
               listWidgets: [
+                avatarCircleTransparent(IMAGE_DEFAULT, 40),
+                sizedBox(0, 7),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      'TITULO: ${entity.titulo}',
-                      style: TextStyle(color: AppTheme.themeWhite),
+                      'TÍTULO : ${entity.titulo}',
+                      style: kSubtitleStyleWhite,
+                      softWrap: true,
+                      overflow: TextOverflow.clip,
+                      textAlign: TextAlign.justify,
                     ),
                     Text(
                       'DETALLE: ${entity.detalle}',
-                      style: TextStyle(color: AppTheme.themeWhite),
+                      style: kSubtitleStyleWhite,
+                      softWrap: true,
+                      overflow: TextOverflow.clip,
+                      textAlign: TextAlign.justify,
                     ),
                     Text(
-                      'FECHA: ${entity.fechacreacion.substring(0, 10)}',
-                      style: TextStyle(color: AppTheme.themeWhite),
+                      'PUBLICADO: ${entity.fechacreacion.substring(0, 10)}',
+                      style: kSubtitleStyleWhite,
+                      softWrap: true,
+                      overflow: TextOverflow.clip,
+                      textAlign: TextAlign.justify,
                     ),
                   ],
                 ),

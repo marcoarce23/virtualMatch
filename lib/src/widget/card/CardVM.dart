@@ -66,14 +66,14 @@ class CardVM extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
-                        flex: 7,
+                        flex: 8,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: listWidgets,
                         ),
                       ),
                       Expanded(
-                        flex: 3,
+                        flex: 2,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [

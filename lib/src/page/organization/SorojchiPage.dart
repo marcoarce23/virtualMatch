@@ -31,7 +31,7 @@ class _SorojchiPageState extends State<SorojchiPage> {
         //  backgroundColor: Colors.black87,
         appBar: appBar('Sorojchi Eclub'),
         drawer: DrawerMenu(),
-        floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
+        floatingActionButton: floatButtonImageA(AppTheme.themePurple, context,
             FaIcon(FontAwesomeIcons.playstation), HomePage()),
         body: SingleChildScrollView(
           child: Container(
@@ -135,8 +135,7 @@ class _SorojchiPageState extends State<SorojchiPage> {
             onPressed: () => navegation(
                 context,
                 ViewPage(
-                    title: 'FACEBOOK VIRTUAL MATCH'.toString(),
-                    url: instagram)),
+                    title: 'INSTAGRAM SOROJCHI'.toString(), url: instagram)),
             child: Icon(
               FontAwesomeIcons.instagram,
               color: Colors.white,
@@ -154,7 +153,7 @@ class _SorojchiPageState extends State<SorojchiPage> {
             shape: CircleBorder(),
             onPressed: () {
               callWhatsAppText(whatsApp,
-                  '*Comunidad Virtual Match:* \n Mensaje. Me gustaría ponerme en contacto. Gracias. \nEnviado desde la aplicación \n*Virtual Match Digital*.');
+                  '*Comunidad Sorojchi eClub:* \n Mensaje. Me gustaría ponerme en contacto. Gracias.\n \nEnviado desde la aplicación \n\n*Virtual Match Digital*.');
             },
             child: Icon(
               FontAwesomeIcons.whatsapp,
@@ -174,8 +173,8 @@ class _SorojchiPageState extends State<SorojchiPage> {
             onPressed: () {
               sendEmailAdvanced(
                   email,
-                  "Comunidad Virtual Match. Deseo comunicarme con usted.",
-                  "A la Comunidad Virtual Match:\n Deseo más información sobre la Comunidad y de como formar parte de FIFA BOLIVIA.\n Saludos cordiales. Gracias");
+                  "Comunidad Sorojchi eClub. Deseo comunicarme con usted.",
+                  "A la Comunidad Sorojchi eClub:\n\n Deseo más información sobre como formar parte de la comunidadSorojchi eClub.\n\n Saludos cordiales. Gracias");
             },
             child: Icon(
               FontAwesomeIcons.solidEnvelope,

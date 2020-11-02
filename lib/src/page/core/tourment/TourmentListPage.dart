@@ -124,11 +124,13 @@ class _TourmentListPageState extends State<TourmentListPage> {
       children: <Widget>[
         sizedBox(0, 7.0),
         CardVM(
-          size: 140,
+          size: 280,
           imageAssets: 'assets/icono3.png',
           opciones: _simplePopup(entity, entity.idTorneo.toString()),
           accesosRapidos: null,
           listWidgets: [
+            avatarCircle(entity.foto, 45),
+            sizedBox(0, 7),
             Text(
               'TORNEO : ${entity.nombreTorneo}',
               style: TextStyle(
@@ -136,6 +138,13 @@ class _TourmentListPageState extends State<TourmentListPage> {
               ),
             ),
             Text('DETALLE: ${entity.detalle}',
+                style: TextStyle(color: AppTheme.themeWhite)),
+            Text('HASTAG: ${entity.hashTag}',
+                style: TextStyle(color: AppTheme.themeWhite)),
+            Text('PREMIOS: ${entity.premios}',
+                style: TextStyle(color: AppTheme.themeWhite)),
+            Text(
+                'FECHA TORNEO: ${entity.fechaInicio.toString().substring(0, 10)}',
                 style: TextStyle(color: AppTheme.themeWhite)),
             Text(
                 'INSCRITOS: ${entity.cantidadInscritos}/${entity.cantidadJugadores}',
@@ -159,12 +168,12 @@ class _TourmentListPageState extends State<TourmentListPage> {
           PopupMenuItem(
             value: -1,
             enabled: (entity.conBoot == 1) ? true : false,
-            child: Text("Cerra el torneo sin bots"),
+            child: Text("Cerrar torneo sin bots"),
           ),
           PopupMenuItem(
             value: 0,
             enabled: (entity.conBoot == 1) ? true : false,
-            child: Text("Reemplazar bots"),
+            child: Text("Reemplazar boots"),
           ),
           PopupMenuItem(
             value: 1,
@@ -182,10 +191,6 @@ class _TourmentListPageState extends State<TourmentListPage> {
           ),
           PopupMenuItem(
             value: 4,
-            child: Text("Editar Formato"),
-          ),
-          PopupMenuItem(
-            value: 5,
             child: Text("Eliminar"),
           ),
         ],
@@ -218,16 +223,10 @@ class _TourmentListPageState extends State<TourmentListPage> {
               _start(keyId, entity.idTipoCompeticion.toString());
               break;
             case 3:
-              entityModel.states = StateEntity.Update;
-              entityModel.usuarioAuditoria = prefs.email;
-              showSnackbarWithOutKey("Método por implementar", context);
+              Navigator.pushNamed(context, 'tourmnetLoad', arguments: entity);
               break;
+
             case 4:
-              entityModel.states = StateEntity.Update;
-              entityModel.usuarioAuditoria = prefs.email;
-              showSnackbarWithOutKey("Método por implementar", context);
-              break;
-            case 5:
               entityModel.states = StateEntity.Delete;
               entityModel.usuarioAuditoria = prefs.email;
               showSnackbarWithOutKey("Método por implementar", context);

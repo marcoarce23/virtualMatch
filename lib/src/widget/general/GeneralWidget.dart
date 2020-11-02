@@ -42,8 +42,8 @@ Widget showInformationBasic(
   //Text(entity.nombreEquipo);
 }
 
-Widget showInformationBasicIcon(
-    BuildContext context, String title, String subTitle, String icon, double size1) {
+Widget showInformationBasicIcon(BuildContext context, String title,
+    String subTitle, String icon, double size1) {
   final size = MediaQuery.of(context).size;
   return Container(
     width: size.width * 0.95,
@@ -123,7 +123,23 @@ Widget copyRigth() {
           Text(VIRTUAL_MATCH,
               style: TextStyle(
                   color: AppTheme.themeWhite)), //style: kCopyRigthStyle),
-          avatarCircle(IMAGE_DEFAULT, 15),
+          avatarCircleTransparent(IMAGE_DEFAULT, 15),
+        ],
+      ),
+    ],
+  );
+}
+
+Widget copyRigthClear() {
+  return Column(
+    mainAxisAlignment: MainAxisAlignment.start,
+    children: <Widget>[
+      dividerBlack(),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          Text(VIRTUAL_MATCH, style: TextStyle(color: AppTheme.themeDefault)),
+          avatarCircleTransparent(IMAGE_DEFAULT, 15),
         ],
       ),
     ],
@@ -140,7 +156,7 @@ Widget copyRigthBlack() {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(VIRTUAL_MATCH, style: TextStyle(color: AppTheme.themeDefault)),
-          avatarCircle(IMAGE_DEFAULT, 15),
+          avatarCircleTransparent(IMAGE_DEFAULT, 15),
         ],
       ),
     ],
@@ -442,6 +458,22 @@ Widget floatButton(
 }
 
 Widget floatButtonImage(
+    Color color, BuildContext context, FaIcon icon, Widget page) {
+  return FloatingActionButton(
+    onPressed: () {
+      navegation(context, page);
+    },
+    elevation: 2.0,
+    child: Image.asset(
+      'assets/icono3.png',
+      height: 50.0,
+      fit: BoxFit.fill,
+    ),
+    backgroundColor: color,
+  );
+}
+
+Widget floatButtonImageA(
     Color color, BuildContext context, FaIcon icon, Widget page) {
   return FloatingActionButton(
     onPressed: () {

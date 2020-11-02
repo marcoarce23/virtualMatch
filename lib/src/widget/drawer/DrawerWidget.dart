@@ -3,14 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
+import 'package:virtual_match/src/page/core/equipment/EquipmentLoadPage.dart';
 import 'package:virtual_match/src/page/core/formatTourment/FormatTourmentPage.dart';
 import 'package:virtual_match/src/page/core/miniTourment/MiniTourmentLoadPage.dart';
-import 'package:virtual_match/src/page/core/player/OnceVsOncePage.dart';
 import 'package:virtual_match/src/page/core/player/PlayerEditPage.dart';
 import 'package:virtual_match/src/page/core/player/PlayerLoadPage.dart';
 import 'package:virtual_match/src/page/faq/FaqListPage.dart';
 import 'package:virtual_match/src/page/general/ViewPage.dart';
 import 'package:virtual_match/src/page/intro/IntroPage.dart';
+import 'package:virtual_match/src/page/login/LogOnPage.dart';
 import 'package:virtual_match/src/page/login/LogOutPage.dart';
 import 'package:virtual_match/src/page/multimedia/MultimediaLoadPage.dart';
 import 'package:virtual_match/src/page/new/NewLoadPage.dart';
@@ -68,17 +69,12 @@ class DrawerMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     print('EL IDE PALYER EN EL DRAWER ES: ${prefs.idPlayer}');
+    print('EL IDE PALYER EN EL DRAWER ES: ${prefs.idPlayer}');
 
-    // if (prefs.idPlayer == '-1' || prefs.idLogin == '-1' /*COAV login*/)
-    //   return drawerAnonimus(context);
-
-    // if (prefs.idPlayer == '1' || prefs.idLogin == '9' /*COAV login*/)
-    //   return drawerVirtualMatch(context);
-
-    // if (int.parse(prefs.idPlayer) > 1)
-
-    return drawerUser(context);
+    if (prefs.idPlayer == '1' || prefs.idPlayer == '1926')
+      return drawerVirtualMatch(context);
+    if (int.parse(prefs.idPlayer) > 0) return drawerUser(context);
+    if (prefs.idPlayer == '-1') return drawerAnonimus(context);
   }
 
   Drawer drawerAnonimus(BuildContext context) {
@@ -102,29 +98,27 @@ class DrawerMenu extends StatelessWidget {
                       elevation: 10.0,
                       child: Padding(
                         padding: const EdgeInsets.all(5.0),
-                        child: ImageOvalNetwork(
-                            imageNetworkUrl: prefs.avatarImage, //IMAGE_LOGO,
-                            sizeImage: Size.fromWidth(70)),
+                        child: Image.asset(
+                          'assets/icono1.png',
+                          //scale: 0.4,
+                          width: 75,
+                          height: 75,
+                        ),
 
                         //  child: showPictureOval(null, IMAGE_SOROJCHI, 70.0),
                       )),
+                  sizedBox(0, 10),
                   Flexible(
                     child: Column(
                       children: <Widget>[
                         Expanded(
                           child: Text(
-                            prefs.nameUser,
+                            'Visitante FIFERO',
                             style: TextStyle(
                                 color: AppTheme.themeWhite, fontSize: 18.0),
                             softWrap: true,
                             overflow: TextOverflow.clip,
                           ),
-                        ),
-                        AutoSizeText(
-                          prefs.email,
-                          style: TextStyle(
-                              color: AppTheme.themeWhite, fontSize: 16.0),
-                          maxLines: 2,
                         ),
                       ],
                     ),
@@ -202,14 +196,10 @@ class DrawerMenu extends StatelessWidget {
             '       Acerca de la APP.',
             () => navegation(context, IntroPage())),
         CustomListTile(
-            Image.asset(
-              'assets/image/casa.png',
-              //scale: 0.4,
-              width: 30,
-              height: 30,
-            ),
-            '       Cerrar Sesión',
-            () => navegation(context, LogOutPage())),
+            ImageOvalNetwork(
+                imageNetworkUrl: IMAGE_DEFAULT, sizeImage: Size.fromWidth(30)),
+            '       Salir de Virtual MAtch',
+            () => navegation(context, LogOnPage())),
       ],
     ));
   }
@@ -308,15 +298,6 @@ class DrawerMenu extends StatelessWidget {
         }),
         CustomListTile(
             Image.asset(
-              'assets/image/mensajeria.png',
-              //scale: 0.4,
-              width: 30,
-              height: 30,
-            ),
-            '       Crear Notificaciones',
-            () => navegation(context, NotificationAllPage())),
-        CustomListTile(
-            Image.asset(
               'assets/image/pelota.png',
               //scale: 0.4,
               width: 28,
@@ -326,32 +307,9 @@ class DrawerMenu extends StatelessWidget {
             () => navegation(context, MiniTourmentAllPage())),
         CustomListTile(
             ImageOvalNetwork(
-                imageNetworkUrl: IMAGE_DEFAULT, sizeImage: Size.fromWidth(30)),
-            '      Crear Torneo ',
-            () => navegation(context, TourmentAllPage())),
-        CustomListTile(
-            ImageOvalNetwork(
                 imageNetworkUrl: IMAGE_LOGO, sizeImage: Size.fromWidth(35)),
             '      Sobre Virtual Match',
             () => navegation(context, OrganizationPage())),
-        CustomListTile(
-            Image.asset(
-              'assets/image/noticias.png',
-              //scale: 0.4,
-              width: 38,
-              height: 38,
-            ),
-            '     Crear Noticias-Evento',
-            () => navegation(context, NewAllPage())),
-        CustomListTile(
-            Image.asset(
-              'assets/image/multimeda3.png',
-              //scale: 0.4,
-              width: 30,
-              height: 30,
-            ),
-            '       Cargar Multimedia',
-            () => navegation(context, MultimediaAllPage())),
         CustomListTile(
             Image.asset(
               'assets/image/jugador1.png',
@@ -439,7 +397,7 @@ class DrawerMenu extends StatelessWidget {
                       prefs.email,
                       style:
                           TextStyle(color: AppTheme.themeWhite, fontSize: 16.0),
-                      maxLines: 2,
+                      maxLines: 1,
                     ),
                   ],
                 ),
@@ -481,8 +439,21 @@ class DrawerMenu extends StatelessWidget {
               width: 30,
               height: 30,
             ),
-            '   Jugadores de la comunidad',
-            () => navegation(context, PlayerLoadPage())),
+            '     Jugador de la comunidad', () {
+          if (prefs.idPlayer != '0')
+            navegation(context, PlayerEditPage());
+          else
+            navegation(context, PlayerLoadPage());
+        }),
+        CustomListTile(
+            Image.asset(
+              'assets/image/credencial.png',
+              //scale: 0.4,
+              width: 28,
+              height: 28,
+            ),
+            '      Crear Equipo',
+            () => navegation(context, EquipmentAllPage())),
         CustomListTile(
             Image.asset(
               'assets/image/pelota.png',
@@ -497,20 +468,6 @@ class DrawerMenu extends StatelessWidget {
                 imageNetworkUrl: IMAGE_DEFAULT, sizeImage: Size.fromWidth(30)),
             '      Crear Torneo ',
             () => navegation(context, TourmentAllPage())),
-        CustomListTile(
-            ImageOvalNetwork(
-                imageNetworkUrl: IMAGE_DEFAULT, sizeImage: Size.fromWidth(30)),
-            '      Crear Torneo ',
-            () => navegation(context, TourmentAllPage())),
-        CustomListTile(
-            Image.asset(
-              'assets/image/podio.png',
-              //scale: 0.4,
-              width: 30,
-              height: 30,
-            ),
-            '       Crear 11 Vs. 11',
-            () => navegation(context, OnceVsOncePage())),
         CustomListTile(
             Image.asset(
               'assets/image/mensajeria.png',

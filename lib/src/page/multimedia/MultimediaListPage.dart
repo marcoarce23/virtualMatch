@@ -193,7 +193,7 @@ class _MultimediaListPageState extends State<MultimediaListPage> {
         onSelected: (value) {
           switch (value) {
             case 1:
-              Navigator.pushNamed(context, 'newMultimedia', arguments: entity);
+              Navigator.pushNamed(context, 'multimedia', arguments: entity);
               break;
             case 2:
               entityModel.idMultimedia = int.parse(keyId);
