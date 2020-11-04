@@ -8,7 +8,6 @@ import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/page/core/player/PlayerEditPage.dart';
 import 'package:virtual_match/src/service/core/EquipmentService.dart';
 import 'package:virtual_match/src/style/Style.dart';
-import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/card/CardVM.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
@@ -95,7 +94,7 @@ class _EquipmentListPageState extends State<EquipmentListPage> {
           ),
         ),
       ),
-      floatingActionButton: floatButton(AppTheme.themePurple, context,
+      floatingActionButton: floatButton(Colors.transparent, context,
           FaIcon(FontAwesomeIcons.arrowLeft), PlayerEditPage()),
     );
   }
@@ -182,7 +181,7 @@ class _EquipmentListPageState extends State<EquipmentListPage> {
               opciones: _simplePopup(entity, entity.agrupador, context),
               accesosRapidos: null,
               listWidgets: [
-                avatarCircle(entity.foto, 55),
+                avatarCircleTransparent(entity.foto, 55),
                 sizedBox(0, 7),
                 Text(
                   'TÍTULO : ${entity.nombre}',

@@ -71,10 +71,12 @@ class DrawerMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     print('EL IDE PALYER EN EL DRAWER ES: ${prefs.idPlayer}');
 
-    if (prefs.idPlayer == '1' || prefs.idPlayer == '1926')
-      return drawerVirtualMatch(context);
-    if (int.parse(prefs.idPlayer) > 0) return drawerUser(context);
-    if (prefs.idPlayer == '-1') return drawerAnonimus(context);
+    if (prefs.idPlayer == '1' ||
+        prefs.idPlayer == '1926' ||
+        prefs.idPlayer == '1934') return drawerVirtualMatch(context);
+    if (int.parse(prefs.idPlayer) > 0 || prefs.idPlayer == '-1')
+      return drawerUser(context);
+    if (prefs.idPlayer == '-2') return drawerAnonimus(context);
   }
 
   Drawer drawerAnonimus(BuildContext context) {
@@ -291,11 +293,20 @@ class DrawerMenu extends StatelessWidget {
               height: 30,
             ),
             '     Jugador de la comunidad', () {
-          if (prefs.idPlayer != '0')
+          if (prefs.idPlayer != '-1')
             navegation(context, PlayerEditPage());
           else
             navegation(context, PlayerLoadPage());
         }),
+        CustomListTile(
+            Image.asset(
+              'assets/image/credencial.png',
+              //scale: 0.4,
+              width: 28,
+              height: 28,
+            ),
+            '      Crear Equipo',
+            () => navegation(context, EquipmentAllPage())),
         CustomListTile(
             Image.asset(
               'assets/image/pelota.png',
@@ -440,7 +451,7 @@ class DrawerMenu extends StatelessWidget {
               height: 30,
             ),
             '     Jugador de la comunidad', () {
-          if (prefs.idPlayer != '0')
+          if (prefs.idPlayer != '-1')
             navegation(context, PlayerEditPage());
           else
             navegation(context, PlayerLoadPage());

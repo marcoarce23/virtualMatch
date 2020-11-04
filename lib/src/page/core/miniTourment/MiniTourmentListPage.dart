@@ -3,7 +3,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/ListadoTorneoModel.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/JugadorModel.dart';
-import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/page/core/player/PlayerSelectionPage.dart';
@@ -37,7 +36,7 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
   // DEFINICIOND E VARIABLES
   final prefs = new Preferense();
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  String _opcionJugador = '1';
+  //String _opcionJugador = '1';
 
   @override
   void initState() {
@@ -86,7 +85,7 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
           ),
         ),
       ),
-      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
+      floatingActionButton: floatButtonImage(Colors.transparent, context,
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }
@@ -132,7 +131,7 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
           opciones: _simplePopup(entity, entity.idTorneo.toString()),
           accesosRapidos: null,
           listWidgets: [
-            avatarCircle(entity.foto, 55),
+            avatarCircleTransparent(entity.foto, 55),
             sizedBox(0, 7),
             Text('TORNEO: ${entity.nombreTorneo}',
                 style: TextStyle(color: AppTheme.themeWhite)),
@@ -171,6 +170,11 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
             child: Text("Empezar el torneo"),
           ),
           PopupMenuItem(
+            enabled: (entity.idTipoCompeticion == 52) ? true : false,
+            value: 0,
+            child: Text("Empezar eliminatoria de fases"),
+          ),
+          PopupMenuItem(
             value: 3,
             child: Text("Editar Mi Torneo"),
           ),
@@ -182,6 +186,14 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
         onCanceled: () {},
         onSelected: (value) {
           switch (value) {
+            case 0:
+              _executeGenerator(
+                  '/api/TorneoFaseGrupo/execGenerarPlayOffGrupo/' +
+                      keyId +
+                      '/usuario/' +
+                      prefs.email);
+              break;
+
             case 1:
               navegation(
                   context,
@@ -199,7 +211,8 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
               Navigator.pushNamed(context, 'miniTourment', arguments: entity);
               break;
             case 4:
-              Navigator.pushNamed(context, 'miniTourment', arguments: entity);
+              entity.idTorneo = int.parse(keyId);
+              executeDelete(entity.idTorneo.toString(), prefs.email);
               break;
             case 5:
               Navigator.pushNamed(context, 'miniTourment', arguments: entity);
@@ -230,95 +243,21 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
     return lista;
   }
 
-  // _executeInscription(String idTorneo, String idJugador) async {
-  //   print('ENTROSSSS $idTorneo y $idJugador');
-  //   String respuesta;
-  //   String mensaje;
-  //   try {
-  //     await entityService
-  //         .execute(API +
-  //             '/api/Torneo/Inscribir/Torneo/' +
-  //             idTorneo +
-  //             '/Jugador/' +
-  //             idJugador)
-  //         .then((result) {
-  //       respuesta = result["tipo_mensaje"].toString();
-  //       mensaje = result["mensaje"].toString();
-  //       print('EL RESULTTTTTAAA: ${result["tipo_mensaje"]}');
-
-  //       if (respuesta == '0') showSnackbar(mensaje, scaffoldKey);
-  //       if (respuesta == '2') showSnackbar(mensaje, scaffoldKey);
-  //     });
-  //   } catch (error) {
-  //     showSnackbar('Usuario registrado !!!', scaffoldKey);
-  //   }
-  // }
-
-  // Widget _showAction(ListaTorneoModel entity, String keyId) {
-  //   return Column(
-  //     children: <Widget>[
-  //       Row(
-  //         children: [
-  //           Text('OPERACIONES: $keyId',
-  //               style: TextStyle(color: AppTheme.themeWhite)),
-  //           sizedBox(10, 0),
-  //           _update(),
-  //           sizedBox(10, 0),
-  //           _delete(keyId),
-  //         ],
-  //       ),
-  //       sizedBox(0, 10),
-  //       Row(
-  //         children: [
-  //           Text('$keyId', style: TextStyle(color: AppTheme.themeWhite)),
-  //           sizedBox(10, 0),
-  //           //    _complete(keyId),
-  //           // sizedBox(10, 0),
-  //           _start(keyId, entity.idTipoModalidad.toString()),
-  //         ],
-  //       ),
-  //     ],
-  //   );
-  // }
-
-  _update() {
-    entityModel.states = StateEntity.Update;
-    entityModel.usuarioAuditoria = prefs.email;
-
-    return InkWell(
-      child: FaIcon(
-        FontAwesomeIcons.edit,
-        color: AppTheme.themeWhite,
-        size: 20,
-      ),
-      onTap: () {
-        setState(() {});
-      },
-    );
-  }
-
-  _delete(String keyId) {
-    return InkWell(
-      child: FaIcon(
-        FontAwesomeIcons.trashAlt,
-        color: AppTheme.themeWhite,
-        size: 20,
-      ),
-      onTap: () {
-        setState(() {});
-      },
-    );
-  }
-
   _start(String keyId, String modalidad) {
+    print('MODALIDADDD: $modalidad');
     if (modalidad == '27')
       _executeGenerator('/api/Torneo/execGenerarPlayOff/' +
           keyId +
           '/usuario/' +
           prefs.email);
-    else
+    else if (modalidad == '27')
       _executeGenerator(
           '/api/Torneo/execGenerarLiga/' + keyId + '/usuario/' + prefs.email);
+    else
+      _executeGenerator('/api/TorneoFaseGrupo/execGenerarLigaGrupo/' +
+          keyId +
+          '/usuario/' +
+          prefs.email);
   }
 
   void executeDelete(String id, String usuario) async {
@@ -331,7 +270,7 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
           .then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0')
-          showSnackbar(STATUS_OK, scaffoldKey);
+          showSnackbar(STATUS_OK_DELETE, scaffoldKey);
         else
           showSnackbar(STATUS_ERROR, scaffoldKey);
       });

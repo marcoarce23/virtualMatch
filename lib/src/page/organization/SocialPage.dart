@@ -26,7 +26,7 @@ class _SocialPagePageState extends State<SocialPage> {
     return Scaffold(
       appBar: appBar('AYUDA SOCIAL'),
       drawer: DrawerMenu(),
-      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
+      floatingActionButton: floatButtonImage(Colors.transparent, context,
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
       body: SingleChildScrollView(child: bodyContainer(context)),
     );

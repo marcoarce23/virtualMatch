@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/NoticiaEventoModel.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/NotificacionModel.dart';
-import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
 import 'package:virtual_match/src/service/NewService.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
@@ -31,18 +30,12 @@ class _HomePageState extends State<HomePage> {
 
   File photo;
   final GlobalKey<FabCircularMenuState> fabKey = GlobalKey();
-  int _selectedRadio = 18;
+  int selectedRadio = 18;
   int _group = 0;
 
   @override
   void initState() {
-    // generic.add(
-    //     new TokenImei(
-    //         correo1: prefs.correoElectronico,
-    //         imei: prefs.imei,
-    //         token: prefs.token),
-    //     urlAddTokenImei);
-    super.initState();
+     super.initState();
   }
 
   Widget futureBuilderNoticias(BuildContext context, int grupo) {
@@ -83,7 +76,7 @@ class _HomePageState extends State<HomePage> {
                     gfCardAdvanced(
                         context,
                         "Publicado en fecha ${entity.fecha}",
-                        " ${entity.titulo}",
+                        " ${entity.titulo.toUpperCase()}",
                         "Dirigido a: ${entity.dirigidoa} \n Descripción: ${entity.dirigidoa}",
                         2,
                         entity.foto),
@@ -94,8 +87,13 @@ class _HomePageState extends State<HomePage> {
                 top: 25,
                 right: 50,
                 child: Opacity(
-                  opacity: 0.5,
-                  child: avatarCircle(IMAGE_LOGOB, 25),
+                  opacity: 0.6,
+                  child: Image.asset(
+                    'assets/image/pelota.png',
+                    //scale: 0.4,
+                    width: 30,
+                    height: 30,
+                  ),
                 ),
               ),
             ],
@@ -159,7 +157,7 @@ class _HomePageState extends State<HomePage> {
                       value: 0,
                       groupValue: _group,
                       onChanged: (T) {
-                        _selectedRadio = 18;
+                        selectedRadio = 18;
                         setState(() {
                           _group = T;
                         });
@@ -178,7 +176,7 @@ class _HomePageState extends State<HomePage> {
                       value: 1,
                       groupValue: _group,
                       onChanged: (T) {
-                        _selectedRadio = 19;
+                        selectedRadio = 19;
                         setState(() {
                           _group = T;
                         });

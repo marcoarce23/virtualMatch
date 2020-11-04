@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:virtual_match/src/api/Fcm.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/EquipoModel.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
@@ -358,10 +359,15 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
   void executeCUD(EquipmentService entityService, EquipoModel entity) async {
     try {
       await entityService.repository(entity).then((result) {
-        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
-        if (result["tipo_mensaje"] == '0')
+ 
+        if (result["tipo_mensaje"] == '0') {
           showSnackbar(STATUS_OK, scaffoldKey);
-        else
+ 
+          if (entity.states == StateEntity.Insert) {
+            enviarNotificaciones('URL', 'Equipo', 'Nuevo Equipo creado',
+                entity.nombre, 'Sobre el Equipo.', entity.detalle);
+          }
+        } else
           showSnackbar(STATUS_ERROR, scaffoldKey);
       });
     } catch (error) {

@@ -47,199 +47,202 @@ class _PositionTableState extends State<PositionTable> {
   Widget showTablePositions(List entities) {
     return SingleChildScrollView(
         scrollDirection: Axis.vertical,
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              DataTable(
-                columnSpacing: 10,
-                horizontalMargin: 10,
-                sortAscending: true,
-                columns: [
-                  DataColumn(
-                    label: Text(
-                      'NRO.'.toUpperCase(),
-                      style: TextStyle(
-                        color: AppTheme.themePurple,
-                        fontSize: 10.0,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                DataTable(
+                  columnSpacing: 10,
+                  horizontalMargin: 10,
+                  sortAscending: true,
+                  columns: [
+                    DataColumn(
+                      label: Text(
+                        'NRO.'.toUpperCase(),
+                        style: TextStyle(
+                          color: AppTheme.themePurple,
+                          fontSize: 10.0,
+                        ),
                       ),
+                      numeric: false,
+                      tooltip: "Equipos".toUpperCase(),
                     ),
-                    numeric: false,
-                    tooltip: "Equipos".toUpperCase(),
-                  ),
-                  DataColumn(
-                    label: Text(
-                      'Equipos'.toUpperCase(),
-                      style: TextStyle(
-                        color: AppTheme.themePurple,
-                        fontSize: 10.0,
+                    DataColumn(
+                      label: Text(
+                        'Equipos'.toUpperCase(),
+                        style: TextStyle(
+                          color: AppTheme.themePurple,
+                          fontSize: 10.0,
+                        ),
                       ),
+                      numeric: false,
+                      tooltip: "Equipos".toUpperCase(),
                     ),
-                    numeric: false,
-                    tooltip: "Equipos".toUpperCase(),
-                  ),
-                  DataColumn(
-                    label: Text(
-                      'PJ',
-                      style: TextStyle(
-                        color: AppTheme.themePurple,
-                        fontSize: 10.0,
+                    DataColumn(
+                      label: Text(
+                        'PJ',
+                        style: TextStyle(
+                          color: AppTheme.themePurple,
+                          fontSize: 10.0,
+                        ),
                       ),
+                      numeric: true,
+                      tooltip: "Jugados",
                     ),
-                    numeric: true,
-                    tooltip: "Jugados",
-                  ),
-                  DataColumn(
-                    label: Text(
-                      'PG',
-                      style: TextStyle(
-                        color: AppTheme.themePurple,
-                        fontSize: 10.0,
+                    DataColumn(
+                      label: Text(
+                        'PG',
+                        style: TextStyle(
+                          color: AppTheme.themePurple,
+                          fontSize: 10.0,
+                        ),
                       ),
+                      numeric: true,
+                      tooltip: "Ganados",
                     ),
-                    numeric: true,
-                    tooltip: "Ganados",
-                  ),
-                  DataColumn(
-                    label: Text(
-                      'PE',
-                      style: TextStyle(
-                        color: AppTheme.themePurple,
-                        fontSize: 10.0,
+                    DataColumn(
+                      label: Text(
+                        'PE',
+                        style: TextStyle(
+                          color: AppTheme.themePurple,
+                          fontSize: 10.0,
+                        ),
                       ),
+                      numeric: true,
+                      tooltip: "Empatados".toUpperCase(),
                     ),
-                    numeric: true,
-                    tooltip: "Empatados".toUpperCase(),
-                  ),
-                  DataColumn(
-                    label: Text(
-                      'PP',
-                      style: TextStyle(
-                        color: AppTheme.themePurple,
-                        fontSize: 10.0,
+                    DataColumn(
+                      label: Text(
+                        'PP',
+                        style: TextStyle(
+                          color: AppTheme.themePurple,
+                          fontSize: 10.0,
+                        ),
                       ),
+                      numeric: true,
+                      tooltip: "Perdidos".toUpperCase(),
                     ),
-                    numeric: true,
-                    tooltip: "Perdidos".toUpperCase(),
-                  ),
-                  DataColumn(
-                    label: Text(
-                      'PTS',
-                      style: TextStyle(
-                        color: AppTheme.themePurple,
-                        fontSize: 10.0,
+                    DataColumn(
+                      label: Text(
+                        'PTS',
+                        style: TextStyle(
+                          color: AppTheme.themePurple,
+                          fontSize: 10.0,
+                        ),
                       ),
-                    ),
-                    numeric: true,
-                    tooltip: "Puntaje total",
-                  )
-                ],
-                rows: entities
-                    .map(
-                      (data) => DataRow(
-                        cells: [
-                          DataCell(
-                            Container(
-                              width: 15.0,
-                              child: Center(
-                                child: Text(
-                                  data.nro.toString(),
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 12),
-                                ),
-                              ),
-                            ),
-                          ),
-                          DataCell(
-                            Container(
-                              width: 140.0,
-                              child: Row(
-                                children: <Widget>[
-                                  avatarCircle(data.imagenEquipo, 13.0),
-                                  Expanded(
-                                    child: AutoSizeText(
-                                      data.nombreEquipo,
-                                      overflow: TextOverflow.ellipsis,
-                                      softWrap: true,
-                                      maxLines: 3,
-                                    ),
-                                  ),
-
-                                  //Text(data.nombreEquipo),
-                                ],
-                              ),
-                            ),
-                          ),
-                          DataCell(
-                            Container(
-                              width: 15.0,
-                              child: Center(
-                                child: Text(
-                                  data.jugados.toString(),
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 12),
-                                ),
-                              ),
-                            ),
-                          ),
-                          DataCell(
-                            Container(
-                              width: 15.0,
-                              child: Center(
-                                child: Text(
-                                  data.puntaje.toString(),
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 12),
-                                ),
-                              ),
-                            ),
-                          ),
-                          DataCell(
-                            Container(
-                              width: 15.0,
-                              child: Center(
-                                child: Text(
-                                  data.empate.toString(),
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 12),
-                                ),
-                              ),
-                            ),
-                          ),
-                          DataCell(
-                            Container(
-                              width: 15.0,
-                              child: Center(
-                                child: Text(
-                                  data.perdida.toString(),
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 12),
-                                ),
-                              ),
-                            ),
-                          ),
-                          DataCell(
-                            Container(
-                              width: 15.0,
-                              child: Center(
-                                child: Text(
-                                  data.puntos.toString(),
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 12),
-                                ),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
+                      numeric: true,
+                      tooltip: "Puntaje total",
                     )
-                    .toList(),
-              )
-            ]));
+                  ],
+                  rows: entities
+                      .map(
+                        (data) => DataRow(
+                          cells: [
+                            DataCell(
+                              Container(
+                                width: 15.0,
+                                child: Center(
+                                  child: Text(
+                                    data.nro.toString(),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 12),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            DataCell(
+                              Container(
+                                width: 140.0,
+                                child: Row(
+                                  children: <Widget>[
+                                    avatarCircle(data.imagenEquipo, 13.0),
+                                    Expanded(
+                                      child: AutoSizeText(
+                                        data.nombreEquipo,
+                                        overflow: TextOverflow.ellipsis,
+                                        softWrap: true,
+                                        maxLines: 3,
+                                      ),
+                                    ),
+
+                                    //Text(data.nombreEquipo),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            DataCell(
+                              Container(
+                                width: 15.0,
+                                child: Center(
+                                  child: Text(
+                                    data.jugados.toString(),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 12),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            DataCell(
+                              Container(
+                                width: 15.0,
+                                child: Center(
+                                  child: Text(
+                                    data.puntaje.toString(),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 12),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            DataCell(
+                              Container(
+                                width: 15.0,
+                                child: Center(
+                                  child: Text(
+                                    data.empate.toString(),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 12),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            DataCell(
+                              Container(
+                                width: 15.0,
+                                child: Center(
+                                  child: Text(
+                                    data.perdida.toString(),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 12),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            DataCell(
+                              Container(
+                                width: 15.0,
+                                child: Center(
+                                  child: Text(
+                                    data.puntos.toString(),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 12),
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      )
+                      .toList(),
+                )
+              ]),
+        ));
   }
 }
