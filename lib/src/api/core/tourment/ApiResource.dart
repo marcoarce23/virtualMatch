@@ -26,4 +26,8 @@ Map<String, List<String>> api = {
   'ejecutarTorneoManual': [API + '/api/Torneo/GenerarTorneoPersonalizado', ''],
   'reemplazarFecha': [API + '/api/Torneo/ReemplazarJugadorEnTorneo', ''],
   'cerrarElTorneo': [API + '/api/Equipo/CerrarTorneo', ''],
+  'getFechasEsquemaPartidos': [
+    API + '/api/Torneo/getFechasEsquemaPartidos',
+    ''
+  ],
 };
