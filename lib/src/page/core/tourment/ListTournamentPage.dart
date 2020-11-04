@@ -266,7 +266,7 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
           ),
           PopupMenuItem(
             value: 0,
-            child: Text("modificar fechas del torneo"),
+            child: Text("Modificar fechas del torneo"),
           ),
           PopupMenuItem(
             value: 1,
