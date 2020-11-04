@@ -250,7 +250,7 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
           keyId +
           '/usuario/' +
           prefs.email);
-    else if (modalidad == '27')
+    else if (modalidad == '28')
       _executeGenerator(
           '/api/Torneo/execGenerarLiga/' + keyId + '/usuario/' + prefs.email);
     else
