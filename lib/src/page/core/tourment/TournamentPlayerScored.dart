@@ -96,9 +96,9 @@ class _TournamentPlayerScoredState extends State<TournamentPlayerScored> {
                 flex: 3,
                 child: InkWell(
                   onTap: () {
-                    if (prefs.idPlayer == 1 ||
-                        prefs.idPlayer == 1935 ||
-                        prefs.idPlayer == 1936 ||
+                    if (prefs.idPlayer == "1" ||
+                        prefs.idPlayer == "1935" ||
+                        prefs.idPlayer == "1936" ||
                         entity.iidJugador.toString() == prefs.idPlayer ||
                         entity.didJugador.toString() == prefs.idPlayer) {
                       navegation(
