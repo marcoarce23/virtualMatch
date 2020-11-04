@@ -483,15 +483,22 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
 
   void executeCUD(TourmentService entityService, FormatoModel entity) async {
     int cantidadGrupos = int.parse(controllerGrupos.text);
+    int cantidads = (int.parse(controllerCantidad.text) == 0)
+        ? 1
+        : int.parse(controllerCantidad.text);
+
+    setState(() {
+      _opcionCodTorneo = '0';
+    });
 
     try {
-      if (entity.conBoot == 1) {
-        await entityService.repositoryDetail(entity).then((result) {
-          entityService
+      if (entity.conBoot == 1 && entity.idTipoCompeticion == 28) {
+        await entityService.repositoryDetail(entity).then((result) async {
+          await entityService
               .ejecutarTorneoManual(
             entity,
             int.parse(controllerCantidad.text),
-            (cantidadGrupos ~/ int.parse(controllerCantidad.text)),
+            (cantidadGrupos ~/ cantidads),
           )
               .then((result) {
             print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
@@ -500,18 +507,20 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
 
               navegation(context, TourmentListPage());
             } else
-              showSnackbar(STATUS_ERROR, scaffoldKey);
+              showSnackbar(result["mensaje"], scaffoldKey);
+            navegation(context, TourmentListPage());
           });
         });
       } else {
-        await entityService.repositoryDetail(entity).then((result) {
+        entity.conBoot = 0;
+        await entityService.repositoryDetail(entity).then((result) async {
           print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
           if (result["tipo_mensaje"] == '0') {
             showSnackbar(STATUS_OK, scaffoldKey);
 
             navegation(context, TourmentListPage());
           } else
-            showSnackbar(STATUS_ERROR, scaffoldKey);
+            showSnackbar(result["mensaje"], scaffoldKey);
         });
       }
     } catch (error) {

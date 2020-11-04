@@ -263,8 +263,19 @@ class _TourmentPageState extends State<TourmentPage> {
                       child: Column(
                         children: <Widget>[
                           gfListTile(
-                            Text('TORNEO: ${entity.nombreTorneo.toUpperCase()}',
-                                style: TextStyle(color: AppTheme.themeWhite)),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                    'TORNEO: ${entity.nombreTorneo.toUpperCase()}',
+                                    style:
+                                        TextStyle(color: AppTheme.themeWhite)),
+                                Text(
+                                    'TIPO COMPETICION: ${entity.tipoCompeticion.toUpperCase()}',
+                                    style:
+                                        TextStyle(color: AppTheme.themeWhite)),
+                              ],
+                            ),
                             Text('DETALLE: ${entity.detalle}',
                                 style: TextStyle(color: AppTheme.themeWhite)),
                             Text(

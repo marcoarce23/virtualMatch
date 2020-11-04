@@ -6,6 +6,7 @@ import 'package:virtual_match/src/model/entity/EntityMap/JugadorModel.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/page/core/player/PlayerSelectionPage.dart';
+import 'package:virtual_match/src/page/core/tourment/EsquemaTorneoPage.dart';
 import 'package:virtual_match/src/service/core/PlayerService.dart';
 import 'package:virtual_match/src/service/core/TournamentService.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
@@ -162,6 +163,10 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
       PopupMenuButton<int>(
         itemBuilder: (context) => [
           PopupMenuItem(
+            value: -1,
+            child: Text("Ver esquema"),
+          ),
+          PopupMenuItem(
             value: 1,
             child: Text("Registrar Participantes"),
           ),
@@ -186,6 +191,14 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
         onCanceled: () {},
         onSelected: (value) {
           switch (value) {
+            case -1:
+              navegation(
+                  context,
+                  EsquemaTorneoPage(
+                    idTorneo: entity.idTorneo,
+                  ));
+              break;
+
             case 0:
               _executeGenerator(
                   '/api/TorneoFaseGrupo/execGenerarPlayOffGrupo/' +
@@ -250,7 +263,7 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
           keyId +
           '/usuario/' +
           prefs.email);
-    else if (modalidad == '27')
+    else if (modalidad == '28')
       _executeGenerator(
           '/api/Torneo/execGenerarLiga/' + keyId + '/usuario/' + prefs.email);
     else

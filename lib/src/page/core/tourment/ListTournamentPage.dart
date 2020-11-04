@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/page/core/tourment/DateTournament.dart';
+import 'package:virtual_match/src/page/core/tourment/EsquemaTorneoPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
@@ -45,7 +46,7 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
 
   @override
   Widget build(BuildContext context) {
-   // final size = MediaQuery.of(context).size;
+    // final size = MediaQuery.of(context).size;
     return SafeArea(
       maintainBottomViewPadding: true,
       child: Scaffold(
@@ -260,8 +261,12 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
       PopupMenuButton<int>(
         itemBuilder: (context) => [
           PopupMenuItem(
+            value: -1,
+            child: Text("Ver esquema"),
+          ),
+          PopupMenuItem(
             value: 0,
-            child: Text("Fechas del torneo"),
+            child: Text("Modificar fechas del torneo"),
           ),
           PopupMenuItem(
             value: 1,
@@ -281,6 +286,14 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
         },
         onSelected: (value) {
           switch (value) {
+            case -1:
+              navegation(
+                  context,
+                  EsquemaTorneoPage(
+                    idTorneo: int.parse(idTorneo),
+                  ));
+              break;
+
             case 0:
               navegation(
                   context,

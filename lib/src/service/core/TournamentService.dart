@@ -208,6 +208,16 @@ class TourmentService {
     return result;
   }
 
+  Future<List<IEntityJson>> getFechasEsquemaPartidos(
+      IEntityJson entityJson, int torneo) async {
+    var result;
+    isLoading = true;
+    result = await _apiGet.getFechasEsquemaPartidos(entityJson, torneo);
+    isLoading = false;
+    //  notifyListeners();
+    return result;
+  }
+
   Future<Map<String, dynamic>> cambiarJugadores(
       ReemplazarJugador reemplazo) async {
     var result;
