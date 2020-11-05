@@ -152,6 +152,7 @@ class _LogOnPageState extends State<LogOnPage> {
     switch (credentialState.status) {
       case CredentialStatus.authorized:
         print("getCredentialState returned authorized");
+
         break;
 
       case CredentialStatus.error:
@@ -178,9 +179,24 @@ class _LogOnPageState extends State<LogOnPage> {
       AppleIdRequest(requestedScopes: [Scope.email, Scope.fullName])
     ]);
 
+    print("Sign in EXITT: ${result.status}");
+
     switch (result.status) {
       case AuthorizationStatus.authorized:
+        print('credencial apple email: ${result.credential.email.toString()}');
+        print(
+            'credencial apple full name: ${result.credential.fullName.toString()}');
+        print(
+            'credencial apple ID Token: ${result.credential.identityToken.toString()}');
 
+        prefs.nameUser = result.credential.fullName.toString();
+        prefs.email = result.credential.email.toString();
+        prefs.avatarImage = IMAGE_LOGO;
+        prefs.userId = result.credential.identityToken.toString();
+
+        _submit();
+
+        break;
       case AuthorizationStatus.error:
         print("Sign in failed: ${result.error.localizedDescription}");
         setState(() {
