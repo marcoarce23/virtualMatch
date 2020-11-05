@@ -267,11 +267,14 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
       icon: FaIcon(FontAwesomeIcons.checkCircle, color: AppTheme.themeWhite),
       shape: GFButtonShape.pills,
       onPressed: () {
+        entityResultado.usuarioAuditoria = prefs.idPlayer;
+
         if (entity.tipoCompeticion == 52) {
           if (entity.idEliminatoria == 0) {
             //  es para ligaº
             entityResultado.states = StateEntity.Update;
             entityResultado.idResultado = entity.idResultado;
+
             if (entityResultado.gol1 == entityResultado.gol2) {
               showSnackbar("No pueden empatar!", scaffoldKey);
             } else
