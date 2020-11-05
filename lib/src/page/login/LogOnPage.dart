@@ -218,7 +218,6 @@ class _LogOnPageState extends State<LogOnPage> {
             ),
           ),
           AppleSignInButton(
-            style: ButtonStyle.black,
             type: ButtonType.continueButton,
             onPressed: appleLogIn,
           ),

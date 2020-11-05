@@ -185,6 +185,10 @@ class _TourmentListPageState extends State<TourmentListPage> {
             child: Text("Empezar el torneo"),
           ),
           PopupMenuItem(
+            value: -2,
+            child: Text("Empezar torneo elimintaria ( Fase grupo)"),
+          ),
+          PopupMenuItem(
             value: 3,
             child: Text("Editar Torneo"),
           ),
@@ -216,7 +220,13 @@ class _TourmentListPageState extends State<TourmentListPage> {
                       torneo: entity.nombreTorneo,
                       competicion: entity.tipoCompeticion,
                       modalidad: entity.tipoModalidad));
-
+              break;
+            case -2:
+              _executeGenerator(
+                  '/api/TorneoFaseGrupo/execGenerarPlayOffGrupo/' +
+                      keyId +
+                      '/usuario/' +
+                      prefs.email);
               break;
             case 2:
               _start(keyId, entity.idTipoCompeticion.toString());
@@ -279,7 +289,7 @@ class _TourmentListPageState extends State<TourmentListPage> {
           keyId +
           '/usuario/' +
           prefs.email);
-    else if (modalidad == '27')
+    else if (modalidad == '28')
       _executeGenerator(
           '/api/Torneo/execGenerarLiga/' + keyId + '/usuario/' + prefs.email);
     else
