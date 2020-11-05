@@ -136,7 +136,7 @@ class _MyAppState extends State<MyApp> {
                 new EquipmentSelectionPage(),
             'playerPage': (BuildContext context) => new PlayerPage(),
             'equipmentLoad': (BuildContext context) => new EquipmentLoadPage(),
-            'tourmnetLoad' : (BuildContext context) => new TourmentLoadPage(),
+            'tourmnetLoad': (BuildContext context) => new TourmentLoadPage(),
             'miniTourment': (BuildContext context) => new MiniTourmentAllPage(),
           }),
     );

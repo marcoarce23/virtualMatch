@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -23,6 +25,8 @@ import 'package:virtual_match/src/widget/general/CallWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/widget/general/SenWidget.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
+import 'package:apple_sign_in/apple_sign_in.dart';
+//import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class LogOnPage extends StatefulWidget {
   @override
@@ -45,6 +49,9 @@ class _LogOnPageState extends State<LogOnPage> {
   String result2;
   var result;
   var result1;
+  final Future<bool> _isAvailableFuture = AppleSignIn.isAvailable();
+
+  String errorMessage;
 
   GoogleSignIn _googleSignIn = GoogleSignIn(
     scopes: <String>[
@@ -61,6 +68,14 @@ class _LogOnPageState extends State<LogOnPage> {
     super.initState();
     // prefs.lastPage = LoginPage.routeName;
     initPlatformState();
+    checkLoggedInState();
+
+    if (Platform.isIOS) {
+      //check for ios if developing for both android & ios
+      AppleSignIn.onCredentialRevoked.listen((_) {
+        print("Credentials revoked");
+      });
+    }
 
     _googleSignIn.onCurrentUserChanged.listen((GoogleSignInAccount account) {
       setState(() {
@@ -124,6 +139,64 @@ class _LogOnPageState extends State<LogOnPage> {
     );
   }
 
+// AppleSignInButton(
+//   style: ButtonStyle.black,
+//   type: ButtonType.continueButton,
+//   onPressed: appleLogIn,
+// );
+
+  void checkLoggedInState() async {
+    final userId = '';
+
+    final credentialState = await AppleSignIn.getCredentialState(userId);
+    switch (credentialState.status) {
+      case CredentialStatus.authorized:
+        print("getCredentialState returned authorized");
+        break;
+
+      case CredentialStatus.error:
+        print(
+            "getCredentialState returned an error: ${credentialState.error.localizedDescription}");
+        break;
+
+      case CredentialStatus.revoked:
+        print("getCredentialState returned revoked");
+        break;
+
+      case CredentialStatus.notFound:
+        print("getCredentialState returned not found");
+        break;
+
+      case CredentialStatus.transferred:
+        print("getCredentialState returned not transferred");
+        break;
+    }
+  }
+
+  void appleLogIn() async {
+    final AuthorizationResult result = await AppleSignIn.performRequests([
+      AppleIdRequest(requestedScopes: [Scope.email, Scope.fullName])
+    ]);
+
+    switch (result.status) {
+      case AuthorizationStatus.authorized:
+        print('credencial apple ID: ${result.credential.email}');
+        print('credencial apple ID: ${result.credential.fullName}');
+        print('credencial apple ID: ${result.credential.identityToken}');
+        break;
+      case AuthorizationStatus.error:
+        print("Sign in failed: ${result.error.localizedDescription}");
+        setState(() {
+          errorMessage = "Sign in failed 😿";
+        });
+        break;
+
+      case AuthorizationStatus.cancelled:
+        print('User cancelled');
+        break;
+    }
+  }
+
   Container _buttonsSignUp(Size size, BuildContext context) {
     return Container(
       padding: EdgeInsets.only(top: 80),
@@ -146,6 +219,10 @@ class _LogOnPageState extends State<LogOnPage> {
                 fontWeight: FontWeight.bold,
               ),
             ),
+          ),
+          AppleSignInButton(
+            type: ButtonType.continueButton,
+            onPressed: appleLogIn,
           ),
           _gmailButton(),
           _button(context, 'Virtual Match', 18.0, 20.0),
