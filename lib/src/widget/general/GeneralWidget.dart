@@ -138,10 +138,12 @@ Widget copyRigthClear() {
       Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Text(VIRTUAL_MATCH, style: TextStyle(color: AppTheme.themeDefault)),
+          Text(VIRTUAL_MATCH,
+              style: TextStyle(fontSize: 12, color: AppTheme.themeDefault)),
           avatarCircleTransparent(IMAGE_DEFAULT, 15),
         ],
       ),
+      divider()
     ],
   );
 }

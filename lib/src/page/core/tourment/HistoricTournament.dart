@@ -108,13 +108,23 @@ class _HistoricTournamentPageState extends State<HistoricTournamentPage> {
                         cells: [
                           DataCell(
                             Container(
-                              width: 15.0,
+                              width: 50.0,
                               child: Center(
-                                child: Text(
-                                  data.nro.toString(),
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 12),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      data.nro.toString(),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 12),
+                                    ),
+                                    Text(
+                                      data.fecha.toString(),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 8),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),

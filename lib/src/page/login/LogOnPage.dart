@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide ButtonStyle;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
@@ -27,6 +27,7 @@ import 'package:virtual_match/src/widget/general/SenWidget.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:apple_sign_in/apple_sign_in.dart';
 //import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class LogOnPage extends StatefulWidget {
   @override
@@ -152,6 +153,7 @@ class _LogOnPageState extends State<LogOnPage> {
     switch (credentialState.status) {
       case CredentialStatus.authorized:
         print("getCredentialState returned authorized");
+
         break;
 
       case CredentialStatus.error:
@@ -178,11 +180,25 @@ class _LogOnPageState extends State<LogOnPage> {
       AppleIdRequest(requestedScopes: [Scope.email, Scope.fullName])
     ]);
 
+    print("Sign in EXITT: ${result.status}");
+
     switch (result.status) {
       case AuthorizationStatus.authorized:
-        print('credencial apple ID: ${result.credential.email}');
-        print('credencial apple ID: ${result.credential.fullName}');
-        print('credencial apple ID: ${result.credential.identityToken}');
+        print('credencial apple email: ${result.credential.email.toString()}');
+        print(
+            'credencial apple full name: ${result.credential.fullName.toString()}');
+        print(
+            'credencial apple ID Token: ${result.credential.identityToken.toString()}');
+
+        prefs.nameUser = result.credential.fullName.givenName.toString() +
+            ' ' +
+            result.credential.fullName.familyName;
+        prefs.email = result.credential.email.toString();
+        prefs.avatarImage = IMAGE_LOGO;
+        prefs.userId = result.credential.user.toString();
+
+        _submit();
+
         break;
       case AuthorizationStatus.error:
         print("Sign in failed: ${result.error.localizedDescription}");
@@ -199,7 +215,7 @@ class _LogOnPageState extends State<LogOnPage> {
 
   Container _buttonsSignUp(Size size, BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 80),
+      padding: EdgeInsets.only(top: 100),
       height: size.height * 0.5,
       width: size.width,
       color: Colors.white,
@@ -220,9 +236,15 @@ class _LogOnPageState extends State<LogOnPage> {
               ),
             ),
           ),
-          AppleSignInButton(
-            type: ButtonType.continueButton,
-            onPressed: appleLogIn,
+          SizedBox(
+            child: AppleSignInButton(
+              style: ButtonStyle.black,
+              cornerRadius: 20,
+              type: ButtonType.signIn,
+              onPressed: appleLogIn,
+            ),
+            height: 40,
+            width: 200,
           ),
           _gmailButton(),
           _button(context, 'Virtual Match', 18.0, 20.0),

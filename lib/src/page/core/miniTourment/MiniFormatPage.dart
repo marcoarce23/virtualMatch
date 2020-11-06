@@ -362,10 +362,12 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
 
     for (var i = 0; i < snapshot.data.length; i++) {
       ClasificadorModel item = snapshot.data[i];
-      lista.add(DropdownMenuItem(
-        child: Text(item.nombre),
-        value: item.idClasificador.toString(),
-      ));
+      if (item.idClasificador != 52) {
+        lista.add(DropdownMenuItem(
+          child: Text(item.nombre),
+          value: item.idClasificador.toString(),
+        ));
+      }
     }
     return lista;
   }
