@@ -96,6 +96,8 @@ class _TournamentPlayerScoredState extends State<TournamentPlayerScored> {
                 flex: 3,
                 child: InkWell(
                   onTap: () {
+bool bandera =entity.onVsOnce == 1 ? true : false;
+
                     if (prefs.idPlayer == "1" ||
                         prefs.idPlayer == "1935" ||
                         prefs.idPlayer == "1936" ||
@@ -104,7 +106,10 @@ class _TournamentPlayerScoredState extends State<TournamentPlayerScored> {
                       navegation(
                           context,
                           RegisterScoredPage(
-                              entity: entity, idTorneo: entity.idTorneo));
+                            entity: entity,
+                            idTorneo: entity.idTorneo,
+                            isOnceVsOnce: bandera,
+                          ));
                     } else {
                       showSnackbarWithOutKey(
                           "No puede registrar el scored a este torneo, porque no es jugador de este torneo",
