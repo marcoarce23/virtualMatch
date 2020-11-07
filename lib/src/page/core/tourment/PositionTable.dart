@@ -45,10 +45,11 @@ class _PositionTableState extends State<PositionTable> {
   }
 
   Widget showTablePositions(List entities) {
+    int nro = 0;
     return SingleChildScrollView(
-        scrollDirection: Axis.vertical,
+        scrollDirection: Axis.horizontal,
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(20.0),
           child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
@@ -57,6 +58,17 @@ class _PositionTableState extends State<PositionTable> {
                   horizontalMargin: 10,
                   sortAscending: true,
                   columns: [
+                    DataColumn(
+                      label: Text(
+                        'GRUPO.'.toUpperCase(),
+                        style: TextStyle(
+                          color: AppTheme.themePurple,
+                          fontSize: 10.0,
+                        ),
+                      ),
+                      numeric: false,
+                      tooltip: "Equipos".toUpperCase(),
+                    ),
                     DataColumn(
                       label: Text(
                         'NRO.'.toUpperCase(),
@@ -135,112 +147,134 @@ class _PositionTableState extends State<PositionTable> {
                       tooltip: "Puntaje total",
                     )
                   ],
-                  rows: entities
-                      .map(
-                        (data) => DataRow(
-                          cells: [
-                            DataCell(
-                              Container(
-                                width: 15.0,
-                                child: Center(
-                                  child: Text(
-                                    data.nro.toString(),
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 12),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            DataCell(
-                              Container(
-                                width: 140.0,
-                                child: Row(
-                                  children: <Widget>[
-                                    avatarCircle(data.imagenEquipo, 13.0),
-                                    Expanded(
-                                      child: AutoSizeText(
-                                        data.nombreEquipo,
-                                        overflow: TextOverflow.ellipsis,
-                                        softWrap: true,
-                                        maxLines: 3,
-                                      ),
-                                    ),
+                  rows: entities.map(
+                    (data) {
+                      print(data.nro.toString());
+                      String texto = data.tipoCompeticion;
+                      if (data.comodin == 52) {
+                        texto = texto + " " + data.grupo.toString();
+                      }
 
-                                    //Text(data.nombreEquipo),
-                                  ],
+                      nro = nro + 1;
+
+                      return DataRow(
+                        selected: true,
+                        cells: [
+                          DataCell(
+                            Container(
+                              width: 70.0,
+                              child: Center(
+                                child: Text(
+                                  texto,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 10),
                                 ),
                               ),
                             ),
-                            DataCell(
-                              Container(
-                                width: 15.0,
-                                child: Center(
-                                  child: Text(
-                                    data.jugados.toString(),
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 12),
-                                  ),
+                          ),
+                          DataCell(
+                            Container(
+                              width: 15.0,
+                              child: Center(
+                                child: Text(
+                                  nro.toString(),
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12),
                                 ),
                               ),
                             ),
-                            DataCell(
-                              Container(
-                                width: 15.0,
-                                child: Center(
-                                  child: Text(
-                                    data.puntaje.toString(),
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 12),
+                          ),
+                          DataCell(
+                            Container(
+                              width: 140.0,
+                              child: Row(
+                                children: <Widget>[
+                                  avatarCircle(data.imagenEquipo, 13.0),
+                                  Expanded(
+                                    child: AutoSizeText(
+                                      data.nombreEquipo,
+                                      overflow: TextOverflow.ellipsis,
+                                      softWrap: true,
+                                      maxLines: 3,
+                                    ),
                                   ),
+
+                                  //Text(data.nombreEquipo),
+                                ],
+                              ),
+                            ),
+                          ),
+                          DataCell(
+                            Container(
+                              width: 15.0,
+                              child: Center(
+                                child: Text(
+                                  data.jugados.toString(),
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12),
                                 ),
                               ),
                             ),
-                            DataCell(
-                              Container(
-                                width: 15.0,
-                                child: Center(
-                                  child: Text(
-                                    data.empate.toString(),
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 12),
-                                  ),
+                          ),
+                          DataCell(
+                            Container(
+                              width: 15.0,
+                              child: Center(
+                                child: Text(
+                                  data.puntaje.toString(),
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12),
                                 ),
                               ),
                             ),
-                            DataCell(
-                              Container(
-                                width: 15.0,
-                                child: Center(
-                                  child: Text(
-                                    data.perdida.toString(),
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 12),
-                                  ),
+                          ),
+                          DataCell(
+                            Container(
+                              width: 15.0,
+                              child: Center(
+                                child: Text(
+                                  data.empate.toString(),
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12),
                                 ),
                               ),
                             ),
-                            DataCell(
-                              Container(
-                                width: 15.0,
-                                child: Center(
-                                  child: Text(
-                                    data.puntos.toString(),
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 12),
-                                  ),
+                          ),
+                          DataCell(
+                            Container(
+                              width: 15.0,
+                              child: Center(
+                                child: Text(
+                                  data.perdida.toString(),
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12),
                                 ),
                               ),
-                            )
-                          ],
-                        ),
-                      )
-                      .toList(),
+                            ),
+                          ),
+                          DataCell(
+                            Container(
+                              width: 15.0,
+                              child: Center(
+                                child: Text(
+                                  data.puntos.toString(),
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12),
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      );
+                    },
+                  ).toList(),
                 )
               ]),
         ));

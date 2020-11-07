@@ -11,19 +11,24 @@ class TablaPosicionesModel implements IEntityJson {
   int empate;
   int perdida;
   int puntos;
+  String tipoCompeticion;
+  int grupo;
+  int comodin;
 
-  TablaPosicionesModel({
-    this.nro,
-    this.jugados,
-    this.idTorneo,
-    this.idEquipo,
-    this.imagenEquipo,
-    this.nombreEquipo,
-    this.puntaje,
-    this.empate,
-    this.perdida,
-    this.puntos,
-  });
+  TablaPosicionesModel(
+      {this.nro,
+      this.jugados,
+      this.idTorneo,
+      this.idEquipo,
+      this.imagenEquipo,
+      this.nombreEquipo,
+      this.puntaje,
+      this.empate,
+      this.perdida,
+      this.puntos,
+      this.tipoCompeticion,
+      this.grupo,
+      this.comodin});
 
   fromJson(Map<String, dynamic> json) => new TablaPosicionesModel(
         nro: json["nro"],
@@ -36,5 +41,8 @@ class TablaPosicionesModel implements IEntityJson {
         empate: json["empate"],
         perdida: json["perdida"],
         puntos: json["puntos"],
+        tipoCompeticion: json["tipoCompeticion"],
+        grupo: json["grupo"],
+        comodin: json["comodin"],
       );
 }
