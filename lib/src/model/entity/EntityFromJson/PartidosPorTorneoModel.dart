@@ -25,6 +25,7 @@ class PartidosPorTorneoModel implements IEntityJson {
   int iidJugador;
   int didJugador;
   int tipoCompeticion;
+  int onVsOnce;
 
   PartidosPorTorneoModel(
       {this.iGoles,
@@ -50,7 +51,8 @@ class PartidosPorTorneoModel implements IEntityJson {
       this.dTelefono,
       this.iidJugador,
       this.tipoCompeticion,
-      this.didJugador});
+      this.didJugador,
+      this.onVsOnce});
 
   fromJson(Map<String, dynamic> json) => new PartidosPorTorneoModel(
         iidJugador: json["iidJugador"],
@@ -77,5 +79,6 @@ class PartidosPorTorneoModel implements IEntityJson {
         dTwitter: json["dTwitter"],
         iTelefono: json["iTelefono"],
         dTelefono: json["dTelefono"],
+        onVsOnce:json["onVsOnce"],
       );
 }

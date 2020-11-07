@@ -32,9 +32,10 @@ import 'package:virtual_match/src/model/entity/EntityMap/JugadorModel.dart'
 // ignore: must_be_immutable
 class RegisterScoredPage extends StatefulWidget {
   final int idTorneo;
+  bool isOnceVsOnce = false;
   PartidosPorTorneoModel entity;
 
-  RegisterScoredPage({Key key, @required this.entity, @required this.idTorneo})
+  RegisterScoredPage({Key key, @required this.entity, @required this.idTorneo, @required this.isOnceVsOnce})
       : super(key: key);
 
   @override
@@ -108,6 +109,45 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
         bottomNavigationBar: new BottonNavigation(),
       ),
     );
+  }
+
+  Widget _onceVsOnce() {
+    bool _isOnce = widget.isOnceVsOnce;
+    bool isCaptain = widget.isOnceVsOnce;
+
+    if (_isOnce && isCaptain) {
+      return Container(
+          child: Column(
+        children: [
+
+           Text('Goleador'),
+            Radio(
+              value: 0,
+              groupValue: _group,
+              onChanged: (T) {
+                _selectedRadio = T;
+                setState(() {
+                  _group = T;
+                });
+              },
+            ),
+            Text('Asistencia'),
+            Radio(
+              value: 1,
+              groupValue: _group,
+              onChanged: (T) {
+                _selectedRadio = T;
+                setState(() {
+                  _group = T;
+                });
+              },
+            ),
+          _comboJugador(),
+          _comboGolesAsistencia(),
+          _buttonGoleadores('Registrar', 12, 20),
+        ],
+      ));
+    }
   }
 
   Widget _comboJugador() {
@@ -253,6 +293,7 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
         registerScored(widget.entity, widget.idTorneo),
         sizedBox(0, 10),
         botonRegistrarScored(widget.entity, widget.idTorneo),
+        _onceVsOnce(),
       ],
     );
   }
