@@ -35,7 +35,11 @@ class RegisterScoredPage extends StatefulWidget {
   bool isOnceVsOnce = false;
   PartidosPorTorneoModel entity;
 
-  RegisterScoredPage({Key key, @required this.entity, @required this.idTorneo, @required this.isOnceVsOnce})
+  RegisterScoredPage(
+      {Key key,
+      @required this.entity,
+      @required this.idTorneo,
+      @required this.isOnceVsOnce})
       : super(key: key);
 
   @override
@@ -119,29 +123,28 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
       return Container(
           child: Column(
         children: [
-
-           Text('Goleador'),
-            Radio(
-              value: 0,
-              groupValue: _group,
-              onChanged: (T) {
-                _selectedRadio = T;
-                setState(() {
-                  _group = T;
-                });
-              },
-            ),
-            Text('Asistencia'),
-            Radio(
-              value: 1,
-              groupValue: _group,
-              onChanged: (T) {
-                _selectedRadio = T;
-                setState(() {
-                  _group = T;
-                });
-              },
-            ),
+          Text('Goleador'),
+          Radio(
+            value: 0,
+            groupValue: _group,
+            onChanged: (T) {
+              _selectedRadio = T;
+              setState(() {
+                _group = T;
+              });
+            },
+          ),
+          Text('Asistencia'),
+          Radio(
+            value: 1,
+            groupValue: _group,
+            onChanged: (T) {
+              _selectedRadio = T;
+              setState(() {
+                _group = T;
+              });
+            },
+          ),
           _comboJugador(),
           _comboGolesAsistencia(),
           _buttonGoleadores('Registrar', 12, 20),
@@ -293,7 +296,7 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
         registerScored(widget.entity, widget.idTorneo),
         sizedBox(0, 10),
         botonRegistrarScored(widget.entity, widget.idTorneo),
-        _onceVsOnce(),
+        // _onceVsOnce(),
       ],
     );
   }
@@ -312,6 +315,14 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
 
         if (entity.tipoCompeticion == 52) {
           if (entity.idEliminatoria == 0) {
+            // es para eliminatoria
+            entityResultado.states = StateEntity.Update;
+            entityResultado.idResultado = entity.idResultado;
+            if (entityResultado.gol1 == entityResultado.gol2) {
+              showSnackbar("No pueden empatar!", scaffoldKey);
+            } else
+              _submitGrupo();
+          } else {
             //  es para ligaº
             entityResultado.states = StateEntity.Update;
             entityResultado.idResultado = entity.idResultado;
@@ -320,14 +331,6 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
               showSnackbar("No pueden empatar!", scaffoldKey);
             } else
               _submitLigaGrupo();
-          } else {
-            // es para eliminatoria
-            entityResultado.states = StateEntity.Update;
-            entityResultado.idResultado = entity.idResultado;
-            if (entityResultado.gol1 == entityResultado.gol2) {
-              showSnackbar("No pueden empatar!", scaffoldKey);
-            } else
-              _submitGrupo();
           }
         } else {
           if (entity.idEliminatoria == 0) {

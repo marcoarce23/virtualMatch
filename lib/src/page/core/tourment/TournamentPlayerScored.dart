@@ -96,7 +96,7 @@ class _TournamentPlayerScoredState extends State<TournamentPlayerScored> {
                 flex: 3,
                 child: InkWell(
                   onTap: () {
-bool bandera =entity.onVsOnce == 1 ? true : false;
+                    bool bandera = entity.onVsOnce == 1 ? true : false;
 
                     if (prefs.idPlayer == "1" ||
                         prefs.idPlayer == "1935" ||
@@ -124,7 +124,7 @@ bool bandera =entity.onVsOnce == 1 ? true : false;
                               ' - ' +
                               entity.dGoles.toString(),
                           style: TextStyle(
-                              fontSize: 40.0,
+                              fontSize: 30.0,
                               fontWeight: FontWeight.bold,
                               color: AppTheme.themeBlackBlack),
                         ),

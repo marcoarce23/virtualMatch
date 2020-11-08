@@ -145,10 +145,10 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
         _text(
             controllerCantidad,
             '0',
-            '(*) Ingrese cantidad de grupos',
+            '(*) Ingrese cantidad de jugadores por grupos',
             3,
             1,
-            'Ingrese la cantidad de grupos',
+            'Ingrese cantidad de jugadores por grupos',
             true,
             null, // FaIcon(FontAwesomeIcons.futbol, color: AppTheme.themeDefault),
             AppTheme.themeDefault,
