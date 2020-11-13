@@ -353,10 +353,10 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
         }
       },
 
-      //blockButton: true,
+      //blockButton: trueasdasdasd,
     );
   }
-
+   
   _submit() async {
     executeCUD(entityResultadoService, entityResultado);
   }
