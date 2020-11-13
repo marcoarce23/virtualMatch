@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import 'package:virtual_match/src/model/entity/EntityFromJson/PartidosPorTorneoModel.dart';
 import 'package:virtual_match/src/service/core/PartidosPorTorneoService.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
-import 'package:virtual_match/src/widget/general/CallWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 
@@ -206,65 +203,65 @@ class _TournamentPlayerScoredState extends State<TournamentPlayerScored> {
   //   );
   // }
 
-  _phoneDer(String telefono) {
-    return InkWell(
-      child: FaIcon(
-        FontAwesomeIcons.phone,
-        color: AppTheme.themeDefault,
-        size: 20,
-      ),
-      onTap: () {
-        setState(() {
-          callNumber(int.parse(telefono));
-        });
-      },
-    );
-  }
+  // _phoneDer(String telefono) {
+  //   return InkWell(
+  //     child: FaIcon(
+  //       FontAwesomeIcons.phone,
+  //       color: AppTheme.themeDefault,
+  //       size: 20,
+  //     ),
+  //     onTap: () {
+  //       setState(() {
+  //         callNumber(int.parse(telefono));
+  //       });
+  //     },
+  //   );
+  // }
 
-  _phoneIzq(String telefono) {
-    return InkWell(
-      child: FaIcon(
-        FontAwesomeIcons.phone,
-        color: AppTheme.themeDefault,
-        size: 20,
-      ),
-      onTap: () {
-        setState(() {
-          callNumber(int.parse(telefono));
-        });
-      },
-    );
-  }
+  // _phoneIzq(String telefono) {
+  //   return InkWell(
+  //     child: FaIcon(
+  //       FontAwesomeIcons.phone,
+  //       color: AppTheme.themeDefault,
+  //       size: 20,
+  //     ),
+  //     onTap: () {
+  //       setState(() {
+  //         callNumber(int.parse(telefono));
+  //       });
+  //     },
+  //   );
+  // }
 
-  _whatAppDer(String telefono) {
-    return InkWell(
-      child: FaIcon(
-        FontAwesomeIcons.whatsapp,
-        color: AppTheme.themeDefault,
-        size: 20,
-      ),
-      onTap: () {
-        setState(() {
-          callWhatsAppText(int.parse(telefono),
-              "*virtualMatch:* Hola, estas listo para jugar?");
-        });
-      },
-    );
-  }
+  // _whatAppDer(String telefono) {
+  //   return InkWell(
+  //     child: FaIcon(
+  //       FontAwesomeIcons.whatsapp,
+  //       color: AppTheme.themeDefault,
+  //       size: 20,
+  //     ),
+  //     onTap: () {
+  //       setState(() {
+  //         callWhatsAppText(int.parse(telefono),
+  //             "*virtualMatch:* Hola, estas listo para jugar?");
+  //       });
+  //     },
+  //   );
+  // }
 
-  _whatAppIzq(String telefono) {
-    return InkWell(
-      child: FaIcon(
-        FontAwesomeIcons.whatsapp,
-        color: AppTheme.themeDefault,
-        size: 20,
-      ),
-      onTap: () {
-        setState(() {
-          callWhatsAppText(int.parse(telefono),
-              "*virtualMatch:* Hola, estas listo para jugar?");
-        });
-      },
-    );
-  }
+  // _whatAppIzq(String telefono) {
+  //   return InkWell(
+  //     child: FaIcon(
+  //       FontAwesomeIcons.whatsapp,
+  //       color: AppTheme.themeDefault,
+  //       size: 20,
+  //     ),
+  //     onTap: () {
+  //       setState(() {
+  //         callWhatsAppText(int.parse(telefono),
+  //             "*virtualMatch:* Hola, estas listo para jugar?");
+  //       });
+  //     },
+  //   );
+  // }
 }

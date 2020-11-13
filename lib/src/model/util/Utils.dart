@@ -1,6 +1,5 @@
-import 'package:flutter/services.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:location/location.dart';
+// import 'package:flutter/services.dart';
+// import 'package:location/location.dart';
 
 final String userName = null;
 
@@ -47,18 +46,18 @@ int daysInMonth(int month) {
   return lastDayDateTime.day;
 }
 
-Future<LatLng> getLocation() async {
-  final Location location = Location();
-  LocationData location1;
-  LocationData locationResult;
-  try {
-    locationResult = await location.getLocation();
-  } on PlatformException catch (e) {
-    if (e.code == 'PERMISSION DENIED')
-      print('Permission denied');
-    else if (e.code == 'PERMISSION DENIED_NEVER_ASK')
-      print('Permission denied enable ask');
-  }
-  location1 = locationResult;
-  return LatLng(location1.latitude, location1.longitude);
-}
+// Future<LatLng> getLocation() async {
+//   final Location location = Location();
+//   LocationData location1;
+//   LocationData locationResult;
+//   try {
+//     locationResult = await location.getLocation();
+//   } on PlatformException catch (e) {
+//     if (e.code == 'PERMISSION DENIED')
+//       print('Permission denied');
+//     else if (e.code == 'PERMISSION DENIED_NEVER_ASK')
+//       print('Permission denied enable ask');
+//   }
+//   location1 = locationResult;
+//   return LatLng(location1.latitude, location1.longitude);
+// }

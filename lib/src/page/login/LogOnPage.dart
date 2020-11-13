@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart' hide ButtonStyle;
+import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
@@ -26,8 +27,7 @@ import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
 import 'package:virtual_match/src/widget/general/SenWidget.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:apple_sign_in/apple_sign_in.dart';
-//import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+//import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class LogOnPage extends StatefulWidget {
   @override
