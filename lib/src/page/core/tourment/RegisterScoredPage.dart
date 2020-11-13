@@ -317,7 +317,7 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
         if (entityResultado.gol2 == null) entityResultado.gol2 = 0;
 
         if (entity.tipoCompeticion == 52) {
-          if (entity.idEliminatoria == 0) {
+          if (entity.idEliminatoria >= 0) {
             // es para eliminatoria
             entityResultado.states = StateEntity.Update;
             entityResultado.idResultado = entity.idResultado;
@@ -325,7 +325,7 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
             if (entityResultado.gol1 == entityResultado.gol2) {
               showSnackbar("No pueden empatar!", scaffoldKey);
             } else
-              _submitGrupo();
+              _submitEliminatoriaGrupo();
           } else {
             //  es para ligaº
             entityResultado.states = StateEntity.Update;
@@ -365,7 +365,7 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
     executeCUD(entityResultadoService, entityResultado);
   }
 
-  _submitGrupo() async {
+  _submitLigaGrupo() async {
     executeCUDLigaGrupo(entityResultadoService, entityResultado);
   }
 
@@ -373,11 +373,11 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
     executeCUDLiga(entityResultadoService, entityResultado);
   }
 
-  _submitLigaGrupo() async {
-    executeCUDGrupo(entityResultadoService, entityResultado);
+  _submitEliminatoriaGrupo() async {
+    executeCUDEliminatoriaGrupo(entityResultadoService, entityResultado);
   }
 
-  void executeCUDGrupo(
+  void executeCUDEliminatoriaGrupo(
       ResultadoService entityService, ResultadoModel entity) async {
     try {
       await entityService.updateEliminatoriaGrupo(entity).then((result) {
@@ -564,7 +564,7 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
                         ),
                         onChanged: (value) {
                           print(value);
-                          entityResultado.gol1 = int.parse(value);
+                          entityResultado.gol2 = int.parse(value);
                         },
                       )
                     ],

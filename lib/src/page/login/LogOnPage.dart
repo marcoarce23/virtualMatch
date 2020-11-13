@@ -238,7 +238,7 @@ class _LogOnPageState extends State<LogOnPage> {
           ),
           SizedBox(
             child: AppleSignInButton(
-              style: ButtonStyle.black,
+              //style: ButtonStyle.black,
               cornerRadius: 20,
               type: ButtonType.signIn,
               onPressed: appleLogIn,
