@@ -312,12 +312,19 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
       shape: GFButtonShape.pills,
       onPressed: () {
         entityResultado.usuarioAuditoria = prefs.idPlayer;
+        if(entityResultado.gol1==null)
+          entityResultado.gol1=0;
+
+        if(entityResultado.gol2==null)
+          entityResultado.gol2=0;
+
 
         if (entity.tipoCompeticion == 52) {
           if (entity.idEliminatoria == 0) {
             // es para eliminatoria
             entityResultado.states = StateEntity.Update;
             entityResultado.idResultado = entity.idResultado;
+            
             if (entityResultado.gol1 == entityResultado.gol2) {
               showSnackbar("No pueden empatar!", scaffoldKey);
             } else
@@ -522,6 +529,7 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
                               TextStyle(fontSize: 30, color: Colors.black),
                         ),
                         onChanged: (value) {
+                          print(value);
                           entityResultado.gol1 = int.parse(value);
                         },
                       )
@@ -556,7 +564,8 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
                               TextStyle(fontSize: 30, color: Colors.black),
                         ),
                         onChanged: (value) {
-                          entityResultado.gol2 = int.parse(value);
+                          print(value);
+                          entityResultado.gol1 = int.parse(value);
                         },
                       )
                     ],
