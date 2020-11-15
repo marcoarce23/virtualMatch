@@ -46,3 +46,17 @@ class TablaPosicionesModel implements IEntityJson {
         comodin: json["comodin"],
       );
 }
+
+class TablaPosicionesAsistenciaModel implements IEntityJson {
+  String nombre;
+  int goles;
+  int asistencias;
+
+  TablaPosicionesAsistenciaModel({this.nombre, this.goles, this.asistencias});
+
+  fromJson(Map<String, dynamic> json) => new TablaPosicionesAsistenciaModel(
+        nombre: json["nombre"],
+        goles: json["goles"],
+        asistencias: json["asistencias"],
+      );
+}

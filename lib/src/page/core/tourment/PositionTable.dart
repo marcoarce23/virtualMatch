@@ -21,7 +21,15 @@ class _PositionTableState extends State<PositionTable> {
 
   @override
   Widget build(BuildContext context) {
-    return futureBuilder(context);
+    return Column(
+      children: [
+        futureBuilder(context),
+        SizedBox(
+          height: 5,
+        ),
+        futureBuilderAsistencia(context),
+      ],
+    );
   }
 
   Widget futureBuilder(BuildContext context) {
@@ -39,9 +47,127 @@ class _PositionTableState extends State<PositionTable> {
         });
   }
 
+  Widget futureBuilderAsistencia(BuildContext context) {
+    return FutureBuilder(
+        future: entityGet.getTablaPosicionesAsistencia(
+            new TablaPosicionesAsistenciaModel(), widget.idTorneo),
+        builder: (context, AsyncSnapshot snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.waiting:
+              return loading();
+              break;
+            default:
+              return listViewAsitencia(context, snapshot);
+          }
+        });
+  }
+
   Widget listView(BuildContext context, AsyncSnapshot snapshot) {
     List entities = snapshot.data;
     return showTablePositions(entities);
+  }
+
+  Widget listViewAsitencia(BuildContext context, AsyncSnapshot snapshot) {
+    List entities = snapshot.data;
+    return showTablePositionsAsistencia(entities);
+  }
+
+  Widget showTablePositionsAsistencia(List entities) {
+    return SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                DataTable(
+                  sortAscending: true,
+                  columns: [
+                    DataColumn(
+                      label: Text(
+                        'NOMBRE'.toUpperCase(),
+                        style: TextStyle(
+                          color: AppTheme.themePurple,
+                          fontSize: 10.0,
+                        ),
+                      ),
+                      numeric: false,
+                      tooltip: "Nombre jugador / Nombre equipo".toUpperCase(),
+                    ),
+                    DataColumn(
+                      label: Text(
+                        'GOLES'.toUpperCase(),
+                        style: TextStyle(
+                          color: AppTheme.themePurple,
+                          fontSize: 10.0,
+                        ),
+                      ),
+                      numeric: true,
+                      tooltip: "Goles".toUpperCase(),
+                    ),
+                    DataColumn(
+                      label: Text(
+                        'ASISTENCIA'.toUpperCase(),
+                        style: TextStyle(
+                          color: AppTheme.themePurple,
+                          fontSize: 10.0,
+                        ),
+                      ),
+                      numeric: true,
+                      tooltip: "Asistencia".toUpperCase(),
+                    ),
+                  ],
+                  rows: entities.map(
+                    (data) {
+                      return DataRow(
+                        selected: true,
+                        cells: [
+                          DataCell(
+                            Container(
+                              width: 55.0,
+                              child: Center(
+                                child: Text(
+                                  data.nombre,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12),
+                                ),
+                              ),
+                            ),
+                          ),
+                          DataCell(
+                            Container(
+                              width: 25.0,
+                              child: Center(
+                                child: Text(
+                                  data.goles.toString(),
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12),
+                                ),
+                              ),
+                            ),
+                          ),
+                          DataCell(
+                            Container(
+                              width: 25.0,
+                              child: Center(
+                                child: Text(
+                                  data.asistencias.toString(),
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  ).toList(),
+                )
+              ]),
+        ));
   }
 
   Widget showTablePositions(List entities) {
@@ -49,7 +175,7 @@ class _PositionTableState extends State<PositionTable> {
     return SingleChildScrollView(
         scrollDirection: Axis.horizontal,
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(30.0),
           child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[

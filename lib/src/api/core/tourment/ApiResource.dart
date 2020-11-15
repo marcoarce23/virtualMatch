@@ -31,4 +31,8 @@ Map<String, List<String>> api = {
     API + '/api/Torneo/getFechasEsquemaPartidos',
     ''
   ],
+  'getTablaPosicionesAsistencia': [
+    API + '/api/Torneo/GetDevuelveAsistenciasTorneo/torneo',
+    ''
+  ],
 };
