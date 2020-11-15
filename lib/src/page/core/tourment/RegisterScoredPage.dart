@@ -113,12 +113,10 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
         body: SingleChildScrollView(child: bodyContainer(context)),
         drawer: DrawerMenu(),
         bottomNavigationBar: new BottonNavigation(),
-  
-    floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
-          FaIcon(FontAwesomeIcons.futbol), ListTournamentPage()),
+        floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
+            FaIcon(FontAwesomeIcons.futbol), ListTournamentPage()),
       ),
     );
-    
   }
 
   Widget _onceVsOnce() {
