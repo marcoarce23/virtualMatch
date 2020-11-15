@@ -248,4 +248,14 @@ class TourmentService {
     //  notifyListeners();
     return result;
   }
+
+  Future<List<IEntityJson>> getTablaPosicionesAsistencia(
+      IEntityJson entityJson, int torneo) async {
+    var result;
+    isLoading = true;
+    result = await _apiGet.getTablaPosicionesAsistencia(entityJson, torneo);
+    isLoading = false;
+    //  notifyListeners();
+    return result;
+  }
 }
