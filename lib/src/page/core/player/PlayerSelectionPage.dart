@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:virtual_match/src/model/Preference.dart';
+import 'package:virtual_match/src/model/entity/EntityFromJson/EquipoModel.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/JugadorModel.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/JugadorModel.dart'
     as model;
@@ -598,7 +599,7 @@ class _PlayerSelectionVMPageState extends State<PlayerSelectionVMPage> {
   Widget _comboEquipos() {
     return Center(
         child: FutureBuilder(
-            future: entityGet1.get(new model1.JugadorEquipoModel()),
+            future: entityGet1.get(new JugadorEquipoList()),
             builder: (context, AsyncSnapshot snapshot) {
               if (snapshot.hasData) {
                 return Row(
@@ -633,10 +634,10 @@ class _PlayerSelectionVMPageState extends State<PlayerSelectionVMPage> {
     List<DropdownMenuItem<String>> lista = new List();
 
     for (var i = 0; i < snapshot.data.length; i++) {
-      JugadorEquipoModel item = snapshot.data[i];
+      JugadorEquipoList item = snapshot.data[i];
       lista.add(DropdownMenuItem(
           child:
-              Text(item.nombre, style: TextStyle(color: AppTheme.themeWhite)),
+              Text(item.nombreEquipo, style: TextStyle(color: AppTheme.themeWhite)),
           value: item.idJugador.toString()));
     }
     return lista;
