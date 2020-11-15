@@ -51,6 +51,14 @@ class PlayerService with ChangeNotifier {
     return _result;
   }
 
+Future<List<IEntityJson>> get1(IEntityJson entityJson) async {
+    var _result = await _apiGet.get1(entityJson);
+
+    isLoading = false;
+    notifyListeners();
+    return _result;
+  }
+
   Future<List<IEntityJson>> getMisJugadores(
       IEntityJson entityJson, String grupo) async {
     var _result = await _apiGet.getMisJugadores(entityJson, grupo);

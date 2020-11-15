@@ -339,7 +339,7 @@ class _PlayerSelectionVMPageState extends State<PlayerSelectionVMPage> {
   final prefs = new Preferense();
   final scaffoldKey = GlobalKey<ScaffoldState>();
   String _opcionJugador = '1' + '|' + '71298852';
-  String _opcionEquipos = '152';
+  String _opcionEquipos = '1935';
   //String _valorText;
 
   @override
@@ -536,6 +536,7 @@ class _PlayerSelectionVMPageState extends State<PlayerSelectionVMPage> {
   }
 
   Widget _combos() {
+    print('VEMOS LOS IDE: ${widget.vs11}');
     if (widget.vs11 == 0)
       return _comboJugador();
     else
@@ -599,7 +600,7 @@ class _PlayerSelectionVMPageState extends State<PlayerSelectionVMPage> {
   Widget _comboEquipos() {
     return Center(
         child: FutureBuilder(
-            future: entityGet1.get(new JugadorEquipoList()),
+            future: entityGet1.get1(new JugadorEquipoList()),
             builder: (context, AsyncSnapshot snapshot) {
               if (snapshot.hasData) {
                 return Row(
@@ -636,8 +637,8 @@ class _PlayerSelectionVMPageState extends State<PlayerSelectionVMPage> {
     for (var i = 0; i < snapshot.data.length; i++) {
       JugadorEquipoList item = snapshot.data[i];
       lista.add(DropdownMenuItem(
-          child:
-              Text(item.nombreEquipo, style: TextStyle(color: AppTheme.themeWhite)),
+          child: Text(item.nombreEquipo,
+              style: TextStyle(color: AppTheme.themeWhite)),
           value: item.idJugador.toString()));
     }
     return lista;
