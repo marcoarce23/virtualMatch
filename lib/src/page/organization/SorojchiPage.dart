@@ -31,7 +31,7 @@ class _SorojchiPageState extends State<SorojchiPage> {
         //  backgroundColor: Colors.black87,
         appBar: appBar('Sorojchi Eclub'),
         drawer: DrawerMenu(),
-        floatingActionButton: floatButtonImageA(AppTheme.themePurple, context,
+        floatingActionButton: floatButtonImageA(Colors.transparent, context,
             FaIcon(FontAwesomeIcons.playstation), HomePage()),
         body: SingleChildScrollView(
           child: Container(

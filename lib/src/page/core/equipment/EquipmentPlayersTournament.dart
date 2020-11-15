@@ -75,7 +75,7 @@ class _EquipmentPlayersTournamentState
         CardVM(
           size: 120,
           imageAssets: 'assets/icono3.png',
-          opciones: avatarCircle(
+          opciones: avatarCircleTransparent(
               (entity.fotoJugador == null ? IMAGE_LOGOB : entity.fotoJugador),
               30),
           accesosRapidos: opcionesLlamada(entity),

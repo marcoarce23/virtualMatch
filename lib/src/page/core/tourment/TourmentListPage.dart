@@ -126,7 +126,7 @@ class _TourmentListPageState extends State<TourmentListPage> {
           opciones: _simplePopup(entity, entity.idTorneo.toString()),
           accesosRapidos: null,
           listWidgets: [
-            avatarCircle(entity.foto, 45),
+            avatarCircleTransparent(entity.foto, 45),
             sizedBox(0, 7),
             Text('DETALLE: ${entity.idTorneo}',
                 style: TextStyle(color: AppTheme.themeWhite)),

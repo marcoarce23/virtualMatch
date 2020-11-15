@@ -81,7 +81,7 @@ class _NewListPageState extends State<NewListPage> {
           ),
         ),
       ),
-      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
+      floatingActionButton: floatButtonImage(Colors.transparent, context,
           FaIcon(FontAwesomeIcons.futbol), HomePage()),
     );
   }
@@ -127,7 +127,7 @@ class _NewListPageState extends State<NewListPage> {
               _simplePopup(entity, entity.idNoticiaEvento.toString(), context),
           accesosRapidos: null,
           listWidgets: [
-            avatarCircle(entity.foto, 40),
+            avatarCircleTransparent(entity.foto, 40),
             sizedBox(0, 7),
             Text(
               'TÍTULO: ${entity.titulo}',

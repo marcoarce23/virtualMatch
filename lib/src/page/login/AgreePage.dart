@@ -31,7 +31,7 @@ class _AgreePageState extends State<AgreePage> {
           _form(context),
         ],
       ),
-      floatingActionButton: floatButton(AppTheme.themePurple, context,
+      floatingActionButton: floatButton(Colors.transparent, context,
           FaIcon(FontAwesomeIcons.arrowLeft), PlayerLoadPage()),
     );
   }

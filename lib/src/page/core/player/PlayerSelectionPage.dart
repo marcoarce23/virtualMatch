@@ -132,7 +132,7 @@ class _PlayerSelectionPageState extends State<PlayerSelectionPage> {
         ),
       ),
       //  ),
-      floatingActionButton: floatButton(AppTheme.themePurple, context,
+      floatingActionButton: floatButton(Colors.transparent, context,
           FaIcon(FontAwesomeIcons.arrowLeft), MiniTourmentListPage()),
 
       // floatButton(AppTheme.themeDefault, context,
@@ -412,7 +412,7 @@ class _PlayerSelectionVMPageState extends State<PlayerSelectionVMPage> {
         ),
       ),
       //  ),
-      floatingActionButton: floatButton(AppTheme.themePurple, context,
+      floatingActionButton: floatButton(Colors.transparent, context,
           FaIcon(FontAwesomeIcons.arrowLeft), TourmentListPage()),
 
       // floatButton(AppTheme.themeDefault, context,

@@ -86,7 +86,7 @@ class _PlayState extends State<Play> {
         ),
       ),
       //  ),
-      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
+      floatingActionButton: floatButtonImage(Colors.transparent, context,
           FaIcon(FontAwesomeIcons.futbol), HomePage()),
 
       // floatButton(AppTheme.themeDefault, context,
@@ -135,7 +135,8 @@ class _PlayState extends State<Play> {
             CardVM(
               size: 120,
               imageAssets: 'assets/icono3.png',
-              opciones: avatarCircle((entity.foto ?? IMAGE_LOGO), 35),
+              opciones:
+                  avatarCircleTransparent((entity.foto ?? IMAGE_LOGO), 35),
               accesosRapidos: opcionesLlamada(entity),
               listWidgets: [
                 Text('Titulo: ${entity.nombre} ${entity.apellido} '),

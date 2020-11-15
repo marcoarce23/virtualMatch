@@ -119,7 +119,7 @@ class _PlayerWinnerPageState extends State<PlayerWinnerPage> {
           ),
         ),
       ),
-      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
+      floatingActionButton: floatButtonImage(Colors.transparent, context,
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }

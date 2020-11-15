@@ -45,7 +45,7 @@ class _ListMiniTournamentPageState extends State<ListMiniTournamentPage> {
       appBar: appBar('MIS TORNEOS.'),
       body: SingleChildScrollView(
           child: Container(
-             // height: size.height,
+              // height: size.height,
               decoration: new BoxDecoration(
                 image: new DecorationImage(
                   image: new AssetImage('assets/portada2.png'),
@@ -54,9 +54,9 @@ class _ListMiniTournamentPageState extends State<ListMiniTournamentPage> {
               ),
               child: bodyContainer(context))),
       drawer: DrawerMenu(),
-      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
+      floatingActionButton: floatButtonImage(Colors.transparent, context,
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
-       bottomNavigationBar: new BottonNavigation(),
+      bottomNavigationBar: new BottonNavigation(),
 
       //   ),
     );

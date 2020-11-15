@@ -34,7 +34,7 @@ class _EsquemaTorneoPageState extends State<EsquemaTorneoPage> {
       body: SingleChildScrollView(
           child: Container(child: bodyContainer(context))),
       drawer: DrawerMenu(),
-      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
+      floatingActionButton: floatButtonImage(Colors.transparent, context,
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }

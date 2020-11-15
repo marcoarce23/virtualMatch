@@ -83,7 +83,7 @@ class _PlayerEquipmentPageState extends State<PlayerEquipmentPage> {
         ),
       ),
       //  ),
-      floatingActionButton: floatButton(AppTheme.themePurple, context,
+      floatingActionButton: floatButton(Colors.transparent, context,
           FaIcon(FontAwesomeIcons.arrowLeft), PlayerEditPage()),
     );
   }
@@ -144,7 +144,8 @@ class _PlayerEquipmentPageState extends State<PlayerEquipmentPage> {
             CardVM(
               size: 170,
               imageAssets: 'assets/icono3.png',
-              opciones: avatarCircle((entity.foto ?? IMAGE_LOGO), 35),
+              opciones:
+                  avatarCircleTransparent((entity.foto ?? IMAGE_LOGO), 35),
               accesosRapidos: opcionesLlamada(entity),
               listWidgets: [
                 Column(

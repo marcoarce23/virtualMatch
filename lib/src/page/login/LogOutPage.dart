@@ -108,7 +108,7 @@ class _LogOutPageState extends State<LogOutPage> {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
             ListTile(
-              leading: avatarCircle(_currentUser.photoUrl, 45),
+              leading: avatarCircleTransparent(_currentUser.photoUrl, 45),
               title: Text(
                 'Nombre del usuario :\n${_currentUser.displayName}' ?? '',
                 style: kSigssTitleStyle,

@@ -77,7 +77,7 @@ class _NewPageState extends State<NewPage> {
           ),
         ),
       ),
-      floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
+      floatingActionButton: floatButtonImage(Colors.transparent, context,
           FaIcon(FontAwesomeIcons.futbol), HomePage()),
 
       // floatButton(AppTheme.themeDefault, context,
@@ -145,7 +145,7 @@ class _NewPageState extends State<NewPage> {
                   _showAction(
                       entity, entity.idNoticiaEvento.toString(), context),
                   null,
-                  avatarCircle((entity.foto ?? IMAGE_LOGO), 35),
+                  avatarCircleTransparent((entity.foto ?? IMAGE_LOGO), 35),
                   EdgeInsets.all(5.0),
                   EdgeInsets.all(3.0)),
             ],

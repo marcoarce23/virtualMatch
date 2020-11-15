@@ -27,7 +27,7 @@ class _AuspiciadorPageState extends State<AuspiciadorPage> {
     return Scaffold(
         appBar: appBar('CONOCE DXRACER'),
         drawer: DrawerMenu(),
-        floatingActionButton: floatButtonImage(AppTheme.themeDefault, context,
+        floatingActionButton: floatButtonImage(Colors.transparent, context,
             FaIcon(FontAwesomeIcons.playstation), HomePage()),
         body: SingleChildScrollView(
           child: Container(
@@ -107,8 +107,11 @@ class _AuspiciadorPageState extends State<AuspiciadorPage> {
             color: Colors.blueAccent,
             padding: EdgeInsets.all(0),
             shape: CircleBorder(),
-            onPressed: () => navegation(context,
-                ViewPage(title: 'FACEBOOK DXRACER'.toString(), url: 'www.facebook.com/TecmarkFans')),
+            onPressed: () => navegation(
+                context,
+                ViewPage(
+                    title: 'FACEBOOK DXRACER'.toString(),
+                    url: 'www.facebook.com/TecmarkFans')),
             child: Icon(
               FontAwesomeIcons.facebookF,
               color: Colors.white,
@@ -124,8 +127,11 @@ class _AuspiciadorPageState extends State<AuspiciadorPage> {
             color: Colors.red,
             padding: EdgeInsets.all(0),
             shape: CircleBorder(),
-            onPressed: () => navegation(context,
-                ViewPage(title: 'INSTAGRAM DXRACER'.toString(), url: 'tecmark_fans')),
+            onPressed: () => navegation(
+                context,
+                ViewPage(
+                    title: 'INSTAGRAM DXRACER'.toString(),
+                    url: 'tecmark_fans')),
             child: Icon(
               FontAwesomeIcons.instagram,
               color: Colors.white,

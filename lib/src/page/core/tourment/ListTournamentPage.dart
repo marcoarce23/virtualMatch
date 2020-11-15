@@ -63,7 +63,7 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
                 ),
                 child: bodyContainer(context))),
         drawer: DrawerMenu(),
-        floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
+        floatingActionButton: floatButtonImage(Colors.transparent, context,
             FaIcon(FontAwesomeIcons.playstation), HomePage()),
         //floatingActionButton: CircularMenu(),
         //floatingActionButtonLocation: FloatingActionButtonLocation.miniEndDocked,

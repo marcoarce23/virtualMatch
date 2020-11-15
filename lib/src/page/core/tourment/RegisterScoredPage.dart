@@ -478,7 +478,7 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
                                 style: TextStyle(
                                     fontWeight: FontWeight.bold, fontSize: 12)),
                             null,
-                            avatarCircle(entity.foto, 45.0),
+                            avatarCircleTransparent(entity.foto, 45.0),
                             EdgeInsets.all(3),
                             EdgeInsets.all(3),
                           ),
@@ -510,7 +510,7 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
                 child: Center(
                   child: Column(
                     children: <Widget>[
-                      avatarCircle(entity.iFoto, 35.0),
+                      avatarCircleTransparent(entity.iFoto, 35.0),
                       Text(entity.iJugador),
                       TextFormField(
                         initialValue: '0',
@@ -546,7 +546,7 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
                 child: Center(
                   child: Column(
                     children: <Widget>[
-                      avatarCircle(entity.dFoto, 35.0),
+                      avatarCircleTransparent(entity.dFoto, 35.0),
                       Text(entity.dJugador),
                       TextFormField(
                         initialValue: '0',

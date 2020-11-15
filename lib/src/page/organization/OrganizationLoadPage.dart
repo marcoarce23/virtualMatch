@@ -138,7 +138,7 @@ class _OrganizationLoadPageState extends State<OrganizationLoadPage> {
           _form(context),
         ],
       ),
-      floatingActionButton: floatButton(AppTheme.themeDefault, context,
+      floatingActionButton: floatButton(Colors.transparent, context,
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }

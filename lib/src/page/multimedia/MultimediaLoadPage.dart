@@ -174,7 +174,7 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
           _form(context),
         ],
       ),
-      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
+      floatingActionButton: floatButtonImage(Colors.transparent, context,
           FaIcon(FontAwesomeIcons.futbol), HomePage()),
     );
   }

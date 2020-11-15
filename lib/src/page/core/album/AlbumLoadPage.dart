@@ -163,7 +163,7 @@ class _AlbumLoadPagePageState extends State<AlbumLoadPage> {
           _form(context),
         ],
       ),
-      floatingActionButton: floatButton(AppTheme.themeGrey, context,
+      floatingActionButton: floatButton(Colors.transparent, context,
           FaIcon(FontAwesomeIcons.home), HomePage()),
     );
   }
@@ -362,7 +362,6 @@ class _AlbumLoadPagePageState extends State<AlbumLoadPage> {
     );
   }
 
- 
   List<DropdownMenuItem<String>> getDropDown(AsyncSnapshot snapshot) {
     List<DropdownMenuItem<String>> lista = new List();
 

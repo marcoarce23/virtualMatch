@@ -70,8 +70,8 @@ class _CustomizePlayerState extends State<CustomizePlayer> {
             ),
           ),
         ),
-           floatingActionButton: floatButton(AppTheme.themePurple, context,
-          FaIcon(FontAwesomeIcons.arrowLeft), TourmentListPage()),
+        floatingActionButton: floatButton(Colors.transparent, context,
+            FaIcon(FontAwesomeIcons.arrowLeft), TourmentListPage()),
       ),
     );
   }

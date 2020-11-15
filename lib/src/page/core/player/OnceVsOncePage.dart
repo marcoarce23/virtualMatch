@@ -26,7 +26,7 @@ class _OnceVsOncePageState extends State<OnceVsOncePage> {
     return Scaffold(
       appBar: appBar('11 VS. 11'),
       drawer: DrawerMenu(),
-      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
+      floatingActionButton: floatButtonImage(Colors.transparent, context,
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
       body: SingleChildScrollView(child: bodyContainer(context)),
     );

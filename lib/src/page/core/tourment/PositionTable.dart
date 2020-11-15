@@ -191,7 +191,8 @@ class _PositionTableState extends State<PositionTable> {
                               width: 140.0,
                               child: Row(
                                 children: <Widget>[
-                                  avatarCircle(data.imagenEquipo, 13.0),
+                                  avatarCircleTransparent(
+                                      data.imagenEquipo, 13.0),
                                   Expanded(
                                     child: AutoSizeText(
                                       data.nombreEquipo,

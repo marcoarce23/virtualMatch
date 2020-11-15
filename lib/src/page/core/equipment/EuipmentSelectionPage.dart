@@ -85,7 +85,7 @@ class _EquipmentSelectionPageState extends State<EquipmentSelectionPage> {
         ),
       ),
       //  ),
-      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
+      floatingActionButton: floatButtonImage(Colors.transparent, context,
           FaIcon(FontAwesomeIcons.futbol), HomePage()),
     );
   }
@@ -129,7 +129,8 @@ class _EquipmentSelectionPageState extends State<EquipmentSelectionPage> {
             CardVM(
               size: 130,
               imageAssets: 'assets/icono3.png',
-              opciones: avatarCircle((entity.foto ?? IMAGE_LOGO), 35),
+              opciones:
+                  avatarCircleTransparent((entity.foto ?? IMAGE_LOGO), 35),
               accesosRapidos: opcionesLlamada(entity),
               listWidgets: [
                 //  Text('EQUIPO: ${entity.nombre} ${entity.apellido} '),

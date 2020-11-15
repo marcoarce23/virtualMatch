@@ -79,7 +79,7 @@ class _TournamentPlayerScoredState extends State<TournamentPlayerScored> {
                 flex: 4,
                 child: Column(
                   children: <Widget>[
-                    avatarCircle(entity.iFoto, 35.0),
+                    avatarCircleTransparent(entity.iFoto, 35.0),
                     Text(
                       entity.iJugador,
                       textAlign: TextAlign.center,
@@ -163,7 +163,7 @@ class _TournamentPlayerScoredState extends State<TournamentPlayerScored> {
                 flex: 4,
                 child: Column(
                   children: <Widget>[
-                    avatarCircle(entity.dFoto, 35.0),
+                    avatarCircleTransparent(entity.dFoto, 35.0),
                     Text(
                       entity.dJugador,
                       textAlign: TextAlign.center,

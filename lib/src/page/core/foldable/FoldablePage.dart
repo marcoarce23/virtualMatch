@@ -50,7 +50,7 @@ class _FoldableState extends State<FoldablePage>
           )
         ],
       ),
-      floatingActionButton: floatButton(AppTheme.themeOrange, context,
+      floatingActionButton: floatButton(Colors.transparent, context,
           FaIcon(FontAwesomeIcons.home), HomePage()),
       body: Container(
         padding: const EdgeInsets.all(20.0),

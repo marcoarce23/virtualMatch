@@ -88,7 +88,7 @@ class _EquipmentAllListPageState extends State<EquipmentAllListPage> {
           ),
         ),
       ),
-     floatingActionButton: floatButton(AppTheme.themePurple, context,
+      floatingActionButton: floatButton(Colors.transparent, context,
           FaIcon(FontAwesomeIcons.arrowLeft), PlayerEditPage()),
     );
   }
@@ -182,7 +182,7 @@ class _EquipmentAllListPageState extends State<EquipmentAllListPage> {
               imageAssets: 'assets/icono3.png',
               opciones: _simplePopup(entity, entity.agrupador, context),
               listWidgets: [
-                avatarCircle(entity.foto, 55),
+                avatarCircleTransparent(entity.foto, 55),
                 sizedBox(0, 7),
                 Text(
                   'TÍTULO : ${entity.nombre}',

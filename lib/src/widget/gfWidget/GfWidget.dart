@@ -193,7 +193,7 @@ GFCard gfCardAdvanced(BuildContext context, String textContext,
           ),
         ),
         divider(),
-        SlideInUp(child: avatarCircle(imgURL, 90)),
+        SlideInUp(child: avatarCircleTransparent(imgURL, 90)),
         SlideInUp(
           child: Shimmer.fromColors(
             baseColor: AppTheme.themeWhite,

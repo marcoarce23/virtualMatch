@@ -168,7 +168,7 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
           _form(context),
         ],
       ),
-      floatingActionButton: floatButton(AppTheme.themePurple, context,
+      floatingActionButton: floatButton(Colors.transparent, context,
           FaIcon(FontAwesomeIcons.arrowLeft), PlayerEditPage()),
     );
   }
@@ -359,10 +359,9 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
   void executeCUD(EquipmentService entityService, EquipoModel entity) async {
     try {
       await entityService.repository(entity).then((result) {
- 
         if (result["tipo_mensaje"] == '0') {
           showSnackbar(STATUS_OK, scaffoldKey);
- 
+
           if (entity.states == StateEntity.Insert) {
             enviarNotificaciones('URL', 'Equipo', 'Nuevo Equipo creado',
                 entity.nombre, 'Sobre el Equipo.', entity.detalle);

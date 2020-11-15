@@ -83,7 +83,7 @@ class _PlayerEditPageState extends State<PlayerEditPage> {
         ),
       ),
       //  ),
-      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
+      floatingActionButton: floatButtonImage(Colors.transparent, context,
           FaIcon(FontAwesomeIcons.futbol), HomePage()),
     );
   }
@@ -145,7 +145,7 @@ class _PlayerEditPageState extends State<PlayerEditPage> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    avatarCircle(entity.foto, 55),
+                    avatarCircleTransparent(entity.foto, 55),
                     sizedBox(0, 10),
                     Text(
                       '${entity.nombre} ${entity.apellido}',

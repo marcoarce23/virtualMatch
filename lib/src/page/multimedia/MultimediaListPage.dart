@@ -83,7 +83,7 @@ class _MultimediaListPageState extends State<MultimediaListPage> {
           ),
         ),
       ),
-      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
+      floatingActionButton: floatButtonImage(Colors.transparent, context,
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }
@@ -129,7 +129,7 @@ class _MultimediaListPageState extends State<MultimediaListPage> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                avatarCircle(entity.foto, 45),
+                avatarCircleTransparent(entity.foto, 45),
                 sizedBox(0, 7),
                 Text(
                   'MATERIAL: ${entity.titulo}',

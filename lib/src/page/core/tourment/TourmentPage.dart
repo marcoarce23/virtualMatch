@@ -59,7 +59,7 @@ class _TourmentPageState extends State<TourmentPage> {
         appBar: appBar('TORNEOS'),
         body: SingleChildScrollView(child: bodyContainer(context)),
         drawer: DrawerMenu(),
-        floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
+        floatingActionButton: floatButtonImage(Colors.transparent, context,
             FaIcon(FontAwesomeIcons.playstation), HomePage()),
         // bottomNavigationBar: new BottonNavigation(),
       ),
@@ -114,7 +114,7 @@ class _TourmentPageState extends State<TourmentPage> {
                 ),
               ),
               Tab(
-                icon: avatarCircle(IMAGE_DEFAULT, 20),
+                icon: avatarCircleTransparent(IMAGE_DEFAULT, 20),
                 child: Text(
                   "Posiciones".toUpperCase(),
                   style: TextStyle(fontSize: 9),

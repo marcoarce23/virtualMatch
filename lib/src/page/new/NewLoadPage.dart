@@ -170,7 +170,7 @@ class _NewLoadPageState extends State<NewLoadPage> {
           _form(context),
         ],
       ),
-      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
+      floatingActionButton: floatButtonImage(Colors.transparent, context,
           FaIcon(FontAwesomeIcons.futbol), HomePage()),
     );
   }
@@ -479,7 +479,6 @@ class _NewLoadPageState extends State<NewLoadPage> {
   }
 
   void loadingEntity() {
-  
     entity.idNoticiaEvento =
         (entity.states == StateEntity.Insert) ? 0 : entity.idNoticiaEvento;
     entity.idOrganizacion = int.parse(prefs.idInstitution);
