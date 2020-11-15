@@ -67,6 +67,27 @@ class TourmentService {
     return result;
   }
 
+  Future<Map<String, dynamic>> repositoryV11(IEntityMap entity) async {
+    var result;
+    print('STATE ENTIRY: ${entity.states}');
+
+    isLoading = true;
+    switch (entity.states) {
+      case StateEntity.Insert:
+        result = await _apiAddDetail.add1(entity);
+        break;
+      case StateEntity.Update:
+        result = await _apiUpdateDetail.update(entity);
+        break;
+      default:
+    }
+
+    print('DEL VALOR DE EVENT BLOC: $result');
+    isLoading = false;
+    // notifyListeners();
+    return result;
+  }
+
   Future<Map<String, dynamic>> ejecutarTorneoManual(
       FormatoModel formato, int grupo, int jugadoresPorGrupo) async {
     var result;

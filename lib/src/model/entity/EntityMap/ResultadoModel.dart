@@ -26,3 +26,32 @@ class ResultadoModel implements IEntityMap {
         "usuarioAuditoria": usuarioAuditoria,
       };
 }
+
+
+class ResultadoGolAsistenciaModel implements IEntityMap {
+  @override
+  StateEntity states;
+  int idTorneo;
+  int idJugador;
+  int idJugadorCapitan;
+  int gol;
+  int golAsistencia;
+
+
+  ResultadoGolAsistenciaModel({
+    this.states = StateEntity.None,
+    this.idTorneo,
+    this.idJugador,
+    this.idJugadorCapitan,
+    this.gol,
+    this.golAsistencia,
+  });
+
+  Map<String, dynamic> toJson() => {
+        "idTorneo": idTorneo,
+        "idJugador": idJugador,
+        "idJugadorCapitan": idJugadorCapitan,
+        "gol": gol,
+        "golAsistencia": golAsistencia,
+      };
+}

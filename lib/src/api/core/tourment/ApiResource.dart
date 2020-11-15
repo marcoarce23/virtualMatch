@@ -2,6 +2,7 @@ import 'package:virtual_match/src/model/util/Const.dart';
 
 Map<String, List<String>> api = {
   'add': [API + '/api/Torneo', ''],
+  'add1': [API + '/api/Torneo/RegistrarAsistencia', ''],
   'get': [API + '/api/Torneo/api/Torneo/getTodosLosTorneos/jugador', ''],
   'get1': [API + '/api/Torneo/getTodosLosTorneosSinFormato', ''],
   'delete': [API + '/api/Torneo', ''],

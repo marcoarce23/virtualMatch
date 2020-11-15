@@ -13,6 +13,7 @@ import 'package:virtual_match/src/model/entity/EntityMap/ResultadoModel.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
+import 'package:virtual_match/src/page/core/tourment/ListTournamentPage.dart';
 import 'package:virtual_match/src/service/ImageService.dart';
 import 'package:virtual_match/src/service/ResultadoService.dart';
 import 'package:virtual_match/src/service/core/PlayerService.dart';
@@ -53,7 +54,7 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   ListaTorneoModel entity = new ListaTorneoModel();
-  TourmentService entityService;
+  TourmentService entityService = new TourmentService();
   ImageService entityImage = new ImageService();
   TourmentService entityGet = TourmentService();
 
@@ -63,6 +64,7 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
   String _opcionJugador = '1';
   PlayerService entityGet1 = PlayerService();
   TourmentService servicioTorneoPersonalizar = new TourmentService();
+  ResultadoGolAsistenciaModel entityV11 = new ResultadoGolAsistenciaModel();
   //JugadorModelList entity = new JugadorModelList();
   model.JugadorModel entityModel = new model.JugadorModel();
   String typeCount = '1';
@@ -111,8 +113,12 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
         body: SingleChildScrollView(child: bodyContainer(context)),
         drawer: DrawerMenu(),
         bottomNavigationBar: new BottonNavigation(),
+  
+    floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
+          FaIcon(FontAwesomeIcons.futbol), ListTournamentPage()),
       ),
     );
+    
   }
 
   Widget _onceVsOnce() {
@@ -153,8 +159,7 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
               ),
             ],
           ),
-
-           _comboJugador(),
+          _comboJugador(),
           _comboGolesAsistencia(),
           _buttonGoleadores('Registrar', 18, 30),
         ],
@@ -171,10 +176,9 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
                 return Row(
                   children: <Widget>[
                     sizedBox(15.0, 0),
-           
                     DropdownButton(
                       isExpanded: false,
-                    //  dropdownColor: AppTheme.themeBlackBlack,
+                      //  dropdownColor: AppTheme.themeBlackBlack,
                       icon: FaIcon(FontAwesomeIcons.sort,
                           color: AppTheme.themePurple),
                       value: _opcionJugador,
@@ -203,10 +207,8 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
       JugadorModelPersonalizado item = snapshot.data[i];
       lista.add(DropdownMenuItem(
           child: Text(
-                    item.nombre +
-                  ' ' +
-                  item.apellido,
-            ),
+            item.nombre + ' ' + item.apellido,
+          ),
           value: item.idJugador.toString()));
     }
     return lista;
@@ -258,10 +260,22 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
   }
 
   _submitGoleador() {
-   setState(() => _saveGoleador = true);
-    // loadingEntity();
-    // executeCUD(entityService, entity);
-     setState(() => _saveGoleador = false);
+    setState(() => _saveGoleador = true);
+    entityV11.states = StateEntity.Insert;
+    entityV11.idTorneo = widget.idTorneo;
+    entityV11.idJugador = int.parse(_opcionJugador);
+    entityV11.idJugadorCapitan = int.parse(_opcionJugador);
+
+    if (_selectedRadio == 0) {
+      entityV11.gol = int.parse(typeCount);
+      entityV11.golAsistencia = 0;
+    } else {
+      entityV11.gol = 0;
+      entityV11.golAsistencia = int.parse(typeCount);
+    }
+
+    executeDetailCUD(entityService, entityV11);
+    setState(() => _saveGoleador = false);
   }
 
   Widget bodyContainer(BuildContext context) {
@@ -382,6 +396,23 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
     executeCUDEliminatoriaGrupo(entityResultadoService, entityResultado);
   }
 
+  void executeDetailCUD(
+      TourmentService entityService, ResultadoGolAsistenciaModel entity) async {
+    try {
+      await entityService.repositoryV11(entity).then((result) {
+        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
+
+        if (result["tipo_mensaje"] == '0') {
+          showSnackbar(STATUS_OK, scaffoldKey);
+        } else
+          showSnackbar(STATUS_ERROR, scaffoldKey);
+      });
+    } catch (error) {
+      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
+    }
+    //  navegation(context, FormatLoadPage());
+  }
+
   void executeCUDEliminatoriaGrupo(
       ResultadoService entityService, ResultadoModel entity) async {
     try {
@@ -389,7 +420,7 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0') {
           showSnackbar(STATUS_OK, scaffoldKey);
-          navegation(context, TourmentPage(idTorneo: widget.idTorneo));
+          //   navegation(context, TourmentPage(idTorneo: widget.idTorneo));
         } else
           showSnackbar(STATUS_ERROR, scaffoldKey);
       });
@@ -406,7 +437,7 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0') {
           showSnackbar(STATUS_OK, scaffoldKey);
-          navegation(context, TourmentPage(idTorneo: widget.idTorneo));
+          //    navegation(context, TourmentPage(idTorneo: widget.idTorneo));
         } else
           showSnackbar(STATUS_ERROR, scaffoldKey);
       });
@@ -422,7 +453,7 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0') {
           showSnackbar(STATUS_OK, scaffoldKey);
-          navegation(context, TourmentPage(idTorneo: widget.idTorneo));
+          //    navegation(context, TourmentPage(idTorneo: widget.idTorneo));
         } else
           showSnackbar(STATUS_ERROR, scaffoldKey);
       });
@@ -439,7 +470,7 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0') {
           showSnackbar(STATUS_OK, scaffoldKey);
-          navegation(context, TourmentPage(idTorneo: widget.idTorneo));
+          //     navegation(context, TourmentPage(idTorneo: widget.idTorneo));
         } else
           showSnackbar(STATUS_ERROR, scaffoldKey);
       });

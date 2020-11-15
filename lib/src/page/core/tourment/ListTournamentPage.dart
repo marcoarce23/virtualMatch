@@ -262,7 +262,7 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
         itemBuilder: (context) => [
           PopupMenuItem(
             value: -1,
-            child: Text("Ver esquema"),
+            child: Text("Ver Esquema del torneo"),
           ),
           PopupMenuItem(
             value: 0,
@@ -270,7 +270,7 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
           ),
           PopupMenuItem(
             value: 1,
-            child: Text("Ver detalle"),
+            child: Text("Seguimiento al Torneo"),
           ),
           PopupMenuItem(
             value: 2,
@@ -278,7 +278,7 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
           ),
           PopupMenuItem(
             value: 3,
-            child: Text("Salir del torneo"),
+            child: Text("Salirse del torneo"),
           ),
         ],
         onCanceled: () {
