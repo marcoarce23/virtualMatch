@@ -60,7 +60,7 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
   ResultadoModel entityResultado = new ResultadoModel();
   ResultadoService entityResultadoService = new ResultadoService();
 
-  String _opcionJugador = '1' + '|' + '71298852';
+  String _opcionJugador = '1';
   PlayerService entityGet1 = PlayerService();
   TourmentService servicioTorneoPersonalizar = new TourmentService();
   //JugadorModelList entity = new JugadorModelList();
@@ -117,37 +117,46 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
 
   Widget _onceVsOnce() {
     bool _isOnce = widget.isOnceVsOnce;
-    bool isCaptain = widget.isOnceVsOnce;
+    //   bool isCaptain = widget.isOnceVsOnce;
+    print('Es once: $_isOnce');
 
-    if (_isOnce && isCaptain) {
+    if (_isOnce) {
       return Container(
           child: Column(
         children: [
-          Text('Goleador'),
-          Radio(
-            value: 0,
-            groupValue: _group,
-            onChanged: (T) {
-              _selectedRadio = T;
-              setState(() {
-                _group = T;
-              });
-            },
+          dividerBlack(),
+          Text('REGISTRE GOLEADORES-ASISTENCIAS'),
+          Row(
+            children: [
+              sizedBox(15.0, 0),
+              Text('Goleadores'),
+              Radio(
+                value: 0,
+                groupValue: _group,
+                onChanged: (T) {
+                  _selectedRadio = T;
+                  setState(() {
+                    _group = T;
+                  });
+                },
+              ),
+              Text('Asistencias'),
+              Radio(
+                value: 1,
+                groupValue: _group,
+                onChanged: (T) {
+                  _selectedRadio = T;
+                  setState(() {
+                    _group = T;
+                  });
+                },
+              ),
+            ],
           ),
-          Text('Asistencia'),
-          Radio(
-            value: 1,
-            groupValue: _group,
-            onChanged: (T) {
-              _selectedRadio = T;
-              setState(() {
-                _group = T;
-              });
-            },
-          ),
-          _comboJugador(),
+
+           _comboJugador(),
           _comboGolesAsistencia(),
-          _buttonGoleadores('Registrar', 12, 20),
+          _buttonGoleadores('Registrar', 18, 30),
         ],
       ));
     }
@@ -162,10 +171,10 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
                 return Row(
                   children: <Widget>[
                     sizedBox(15.0, 0),
-                    sizedBox(15.0, 0),
+           
                     DropdownButton(
                       isExpanded: false,
-                      dropdownColor: AppTheme.themePurple,
+                    //  dropdownColor: AppTheme.themeBlackBlack,
                       icon: FaIcon(FontAwesomeIcons.sort,
                           color: AppTheme.themePurple),
                       value: _opcionJugador,
@@ -191,18 +200,14 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
     List<DropdownMenuItem<String>> lista = new List();
 
     for (var i = 0; i < snapshot.data.length; i++) {
-      JugadorModel item = snapshot.data[i];
+      JugadorModelPersonalizado item = snapshot.data[i];
       lista.add(DropdownMenuItem(
           child: Text(
-              item.telefono +
-                  ' - ' +
-                  item.idPsdn +
-                  '\n - ' +
-                  item.nombre +
+                    item.nombre +
                   ' ' +
                   item.apellido,
-              style: TextStyle(color: AppTheme.themeWhite)),
-          value: item.idJugador.toString() + '|' + item.telefono));
+            ),
+          value: item.idJugador.toString()));
     }
     return lista;
   }
@@ -210,8 +215,8 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
   Widget _comboGolesAsistencia() {
     return Row(
       children: <Widget>[
-        SizedBox(width: 35.0),
-        Text('Cantidad Jugadores:'),
+        SizedBox(width: 15.0),
+        Text('Goles/Asistencias:'),
         SizedBox(width: 15.0),
         DropdownButton(
           value: typeCount,
@@ -253,10 +258,10 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
   }
 
   _submitGoleador() {
-    // setState(() => _save = true);
+   setState(() => _saveGoleador = true);
     // loadingEntity();
     // executeCUD(entityService, entity);
-    // setState(() => _save = false);
+     setState(() => _saveGoleador = false);
   }
 
   Widget bodyContainer(BuildContext context) {
@@ -296,7 +301,7 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
         registerScored(widget.entity, widget.idTorneo),
         sizedBox(0, 10),
         botonRegistrarScored(widget.entity, widget.idTorneo),
-        // _onceVsOnce(),
+        _onceVsOnce(),
       ],
     );
   }
