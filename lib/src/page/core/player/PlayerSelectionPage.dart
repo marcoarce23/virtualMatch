@@ -426,9 +426,16 @@ class _PlayerSelectionVMPageState extends State<PlayerSelectionVMPage> {
   }
 
   Widget _showAction() {
-    final list = _opcionJugador.split('|');
-    var numero = list[1].toString().trim();
-    var idJugador = list[0].toString().trim();
+    var numero = '0';
+    var idJugador = '0';
+
+    if (widget.vs11 == 0) {
+      final list = _opcionJugador.split('|');
+      numero = list[1].toString().trim();
+      idJugador = list[0].toString().trim();
+    } else {
+      idJugador = _opcionEquipos;
+    }
     return Column(
       children: <Widget>[
         Row(
@@ -554,7 +561,7 @@ class _PlayerSelectionVMPageState extends State<PlayerSelectionVMPage> {
                     sizedBox(15.0, 0),
                     sizedBox(15.0, 0),
                     DropdownButton(
-                      isExpanded: false,
+                      //   isExpanded: true,
                       dropdownColor: AppTheme.themePurple,
                       icon: FaIcon(FontAwesomeIcons.sort,
                           color: AppTheme.themePurple),
@@ -617,7 +624,7 @@ class _PlayerSelectionVMPageState extends State<PlayerSelectionVMPage> {
                       onChanged: (value) {
                         setState(() {
                           _opcionEquipos = value;
-                          print('valorrr: $_opcionJugador');
+                          print('_opcionEquipos: $_opcionEquipos');
 
                           // _showPlayer('2');
                         });
