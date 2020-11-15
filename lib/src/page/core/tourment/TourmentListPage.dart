@@ -136,6 +136,10 @@ class _TourmentListPageState extends State<TourmentListPage> {
                 color: AppTheme.themeWhite,
               ),
             ),
+            Text('COMPETICIÓN: ${entity.tipoCompeticion}',
+                style: TextStyle(color: AppTheme.themeWhite)),
+            Text('MODALIDAD: ${entity.tipoModalidad}',
+                style: TextStyle(color: AppTheme.themeWhite)),
             Text('DETALLE: ${entity.detalle}',
                 style: TextStyle(color: AppTheme.themeWhite)),
             Text('HASTAG: ${entity.hashTag}',
@@ -148,11 +152,9 @@ class _TourmentListPageState extends State<TourmentListPage> {
             Text(
                 'INSCRITOS: ${entity.cantidadInscritos}/${entity.cantidadJugadores}',
                 style: TextStyle(color: AppTheme.themeWhite)),
-            Text('COMPETICIÓN: ${entity.tipoCompeticion}',
-                style: TextStyle(color: AppTheme.themeWhite)),
-            Text('MODALIDAD: ${entity.tipoModalidad}',
-                style: TextStyle(color: AppTheme.themeWhite)),
             Text((entity.conBoot == 1) ? 'Generado con jugadores boots' : '',
+                style: TextStyle(color: AppTheme.themeWhite)),
+            Text((entity.es11vs11 == 1) ? '11 Vs. 11 : SI' : '11 Vs. 11 : NO',
                 style: TextStyle(color: AppTheme.themeWhite)),
           ],
         ),
@@ -177,7 +179,7 @@ class _TourmentListPageState extends State<TourmentListPage> {
           PopupMenuItem(
             value: 1,
             enabled: (entity.conBoot == 1) ? false : true,
-            child: Text("Registrar Participantes"),
+            child: Text("Registrar Jugadores/Equipos"),
           ),
           PopupMenuItem(
             value: 2,
@@ -219,7 +221,8 @@ class _TourmentListPageState extends State<TourmentListPage> {
                       idTorneo: entity.idTorneo,
                       torneo: entity.nombreTorneo,
                       competicion: entity.tipoCompeticion,
-                      modalidad: entity.tipoModalidad));
+                      modalidad: entity.tipoModalidad,
+                      vs11: entity.es11vs11));
               break;
             case -2:
               _executeGenerator(

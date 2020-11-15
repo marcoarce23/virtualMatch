@@ -111,6 +111,41 @@ Widget showInformation(BuildContext context, String title, String subTitle,
   //Text(entity.nombreEquipo);
 }
 
+Widget showInformationSinImage(BuildContext context, String title,
+    String subTitle, String subSubTitle, String titlePage, String url) {
+  final size = MediaQuery.of(context).size;
+  return Container(
+    width: size.width * 0.95,
+    margin: EdgeInsets.symmetric(vertical: 0.0),
+    decoration: boxDecoration(),
+    child: Column(
+      children: <Widget>[
+        gfListTile(
+            Text(title, style: TextStyle(color: AppTheme.themeWhite)),
+            Text(subTitle, style: TextStyle(color: AppTheme.themeWhite)),
+            Row(
+              children: <Widget>[
+                sizedBox(0, 4),
+                Text(
+                  subSubTitle,
+                  style: TextStyle(
+                      color: AppTheme.themeWhite,
+                      textBaseline: TextBaseline.ideographic,
+                      //   decoration: TextDecoration.underline,
+                      fontSize: 15.0),
+                ),
+              ],
+            ),
+            null,
+            null, //avatarCircle(IMAGE_LOGOB, 35),
+            EdgeInsets.all(0.0),
+            EdgeInsets.all(0.0)),
+      ],
+    ),
+  );
+  //Text(entity.nombreEquipo);
+}
+
 Widget copyRigth() {
   return Column(
     mainAxisAlignment: MainAxisAlignment.start,

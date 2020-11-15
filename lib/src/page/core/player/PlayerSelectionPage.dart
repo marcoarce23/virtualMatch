@@ -311,13 +311,15 @@ class PlayerSelectionVMPage extends StatefulWidget {
   final String torneo;
   final String competicion;
   final String modalidad;
+  final int vs11;
 
   PlayerSelectionVMPage(
       {Key key,
       @required this.idTorneo,
       @required this.torneo,
       @required this.competicion,
-      @required this.modalidad})
+      @required this.modalidad,
+      @required this.vs11})
       : super(key: key);
 
   @override
@@ -336,6 +338,7 @@ class _PlayerSelectionVMPageState extends State<PlayerSelectionVMPage> {
   final prefs = new Preferense();
   final scaffoldKey = GlobalKey<ScaffoldState>();
   String _opcionJugador = '1' + '|' + '71298852';
+  String _opcionEquipos = '152';
   //String _valorText;
 
   @override
@@ -350,7 +353,7 @@ class _PlayerSelectionVMPageState extends State<PlayerSelectionVMPage> {
 
     return Scaffold(
       key: scaffoldKey,
-      appBar: appBar('AGREGAR PARTICIPANTES'),
+      appBar: appBar('PARTICIPANTES/JUGADORES'),
       drawer: DrawerMenu(),
       body: SafeArea(
         child: Container(
@@ -372,7 +375,7 @@ class _PlayerSelectionVMPageState extends State<PlayerSelectionVMPage> {
                 margin: EdgeInsets.symmetric(vertical: 0.0),
                 child: Column(
                   children: <Widget>[
-                    showInformation(
+                    showInformationSinImage(
                       context,
                       'TORNEO:  ${widget.torneo}',
                       'COMPETICIÓN:  ${widget.competicion}',
@@ -394,14 +397,15 @@ class _PlayerSelectionVMPageState extends State<PlayerSelectionVMPage> {
                 ),
               ),
               sizedBox(0, 15.0),
-              Shimmer.fromColors(
-                  baseColor: AppTheme.themeWhite,
-                  highlightColor: AppTheme.themePurple,
-                  child: Text('Selecciona a un jugador'.toUpperCase(),
-                      style:
-                          TextStyle(color: AppTheme.themeWhite, fontSize: 19))),
+              // Shimmer.fromColors(
+              //     baseColor: AppTheme.themeWhite,
+              //     highlightColor: AppTheme.themePurple,
+              //     child:
+              Text('Selecciona jugadores/equipos',
+                  style: TextStyle(color: AppTheme.themeWhite, fontSize: 19)),
+              //),
               sizedBox(0.0, 13.0),
-              _comboJugador(),
+              _combos(),
               sizedBox(20.0, 20.0),
               _showAction(),
               //    futureBuilder(context),
@@ -454,8 +458,8 @@ class _PlayerSelectionVMPageState extends State<PlayerSelectionVMPage> {
           onTap: () {
             callNumber(int.parse(numero));
           },
-          child: FaIcon(FontAwesomeIcons.phoneSquare,
-              color: Colors.white, size: 32),
+          child:
+              FaIcon(FontAwesomeIcons.tabletAlt, color: Colors.white, size: 32),
         ),
       ],
     );
@@ -530,6 +534,13 @@ class _PlayerSelectionVMPageState extends State<PlayerSelectionVMPage> {
     }
   }
 
+  Widget _combos() {
+    if (widget.vs11 == 0)
+      return _comboJugador();
+    else
+      return _comboEquipos();
+  }
+
   Widget _comboJugador() {
     return Center(
         child: FutureBuilder(
@@ -580,6 +591,53 @@ class _PlayerSelectionVMPageState extends State<PlayerSelectionVMPage> {
                   item.apellido,
               style: TextStyle(color: AppTheme.themeWhite)),
           value: item.idJugador.toString() + '|' + item.telefono));
+    }
+    return lista;
+  }
+
+  Widget _comboEquipos() {
+    return Center(
+        child: FutureBuilder(
+            future: entityGet1.get(new model1.JugadorEquipoModel()),
+            builder: (context, AsyncSnapshot snapshot) {
+              if (snapshot.hasData) {
+                return Row(
+                  children: <Widget>[
+                    sizedBox(15.0, 0),
+                    sizedBox(15.0, 0),
+                    DropdownButton(
+                      isExpanded: false,
+                      dropdownColor: AppTheme.themePurple,
+                      icon: FaIcon(FontAwesomeIcons.sort,
+                          color: AppTheme.themePurple),
+                      value: _opcionEquipos,
+                      items: getDropDownEquipos(snapshot),
+                      onChanged: (value) {
+                        setState(() {
+                          _opcionEquipos = value;
+                          print('valorrr: $_opcionJugador');
+
+                          // _showPlayer('2');
+                        });
+                      },
+                    ),
+                  ],
+                );
+              } else {
+                return loading();
+              }
+            }));
+  }
+
+  List<DropdownMenuItem<String>> getDropDownEquipos(AsyncSnapshot snapshot) {
+    List<DropdownMenuItem<String>> lista = new List();
+
+    for (var i = 0; i < snapshot.data.length; i++) {
+      JugadorEquipoModel item = snapshot.data[i];
+      lista.add(DropdownMenuItem(
+          child:
+              Text(item.nombre, style: TextStyle(color: AppTheme.themeWhite)),
+          value: item.idJugador.toString()));
     }
     return lista;
   }

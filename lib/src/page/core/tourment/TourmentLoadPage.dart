@@ -223,10 +223,10 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
         _text(
             controllerGift,
             entity.premios,
-            '(*) Premios en Bs.',
-            5,
+            '(*) Premios y sorpresas',
+            140,
             1,
-            'Ingrese el monto el premio en Bs.',
+            'Ingrese los premios y sorpresas del torneo',
             true,
             FaIcon(FontAwesomeIcons.moneyCheck, color: AppTheme.themeDefault),
             AppTheme.themeDefault,
