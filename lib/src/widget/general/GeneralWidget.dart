@@ -174,7 +174,7 @@ Widget copyRigthClear() {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(VIRTUAL_MATCH,
-              style: TextStyle(fontSize: 12, color: AppTheme.themeDefault)),
+              style: TextStyle(fontSize: 10, color: AppTheme.themeDefault)),
           avatarCircleTransparent(IMAGE_DEFAULT, 15),
         ],
       ),

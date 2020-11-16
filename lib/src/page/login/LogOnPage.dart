@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart' hide ButtonStyle;
-import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
@@ -193,6 +192,7 @@ class _LogOnPageState extends State<LogOnPage> {
         prefs.nameUser = result.credential.fullName.givenName.toString() +
             ' ' +
             result.credential.fullName.familyName;
+
         prefs.email = result.credential.email.toString();
         prefs.avatarImage = IMAGE_LOGO;
         prefs.userId = result.credential.user.toString();
@@ -231,19 +231,19 @@ class _LogOnPageState extends State<LogOnPage> {
               maxLines: 1,
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 25.0,
+                fontSize: 21.0,
                 fontWeight: FontWeight.bold,
               ),
             ),
           ),
           SizedBox(
             child: AppleSignInButton(
-              //style: ButtonStyle.black,
+              style: ButtonStyle.black,
               cornerRadius: 20,
               type: ButtonType.signIn,
               onPressed: appleLogIn,
             ),
-            height: 40,
+            height: 35,
             width: 200,
           ),
           _gmailButton(),
@@ -313,8 +313,8 @@ class _LogOnPageState extends State<LogOnPage> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(
-          width: 40,
-          height: 40,
+          width: 30,
+          height: 30,
           child: RaisedButton(
             color: Colors.blueAccent,
             padding: EdgeInsets.all(0),
@@ -332,8 +332,8 @@ class _LogOnPageState extends State<LogOnPage> {
         ),
         sizedBox(10, 0),
         SizedBox(
-          width: 40,
-          height: 40,
+          width: 30,
+          height: 30,
           child: RaisedButton(
             color: Colors.red,
             padding: EdgeInsets.all(0),
@@ -352,8 +352,8 @@ class _LogOnPageState extends State<LogOnPage> {
         ),
         sizedBox(10, 0),
         SizedBox(
-          width: 40,
-          height: 40,
+          width: 30,
+          height: 30,
           child: RaisedButton(
             color: Colors.green,
             padding: EdgeInsets.all(0),
@@ -371,8 +371,8 @@ class _LogOnPageState extends State<LogOnPage> {
         ),
         sizedBox(10, 0),
         SizedBox(
-          width: 40,
-          height: 40,
+          width: 30,
+          height: 30,
           child: RaisedButton(
             color: Colors.grey,
             padding: EdgeInsets.all(0),
@@ -386,7 +386,7 @@ class _LogOnPageState extends State<LogOnPage> {
             child: Icon(
               FontAwesomeIcons.solidEnvelope,
               color: Colors.white,
-              size: 20,
+              size: 15,
             ),
           ),
         ),
@@ -427,7 +427,7 @@ class _LogOnPageState extends State<LogOnPage> {
         'assets/icono3.png',
         //scale: 0.4,
         width: 30,
-        height: 30,
+        height: 25,
       ),
       shape: GFButtonShape.pills,
       onPressed: _submitInvitado,
