@@ -192,6 +192,7 @@ class _LogOnPageState extends State<LogOnPage> {
         prefs.nameUser = result.credential.fullName.givenName.toString() +
             ' ' +
             result.credential.fullName.familyName;
+
         prefs.email = result.credential.email.toString();
         prefs.avatarImage = IMAGE_LOGO;
         prefs.userId = result.credential.user.toString();
@@ -230,7 +231,7 @@ class _LogOnPageState extends State<LogOnPage> {
               maxLines: 1,
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 25.0,
+                fontSize: 21.0,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -243,7 +244,7 @@ class _LogOnPageState extends State<LogOnPage> {
               onPressed: appleLogIn,
             ),
             height: 40,
-            width: 195,
+            width: 200,
           ),
           _gmailButton(),
           _button(context, 'Virtual Match', 18.0, 20.0),
@@ -313,8 +314,8 @@ class _LogOnPageState extends State<LogOnPage> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(
-          width: 35,
-          height: 35,
+          width: 40,
+          height: 40,
           child: RaisedButton(
             color: Colors.blueAccent,
             padding: EdgeInsets.all(0),
@@ -332,8 +333,8 @@ class _LogOnPageState extends State<LogOnPage> {
         ),
         sizedBox(10, 0),
         SizedBox(
-          width: 35,
-          height: 35,
+          width: 40,
+          height: 40,
           child: RaisedButton(
             color: Colors.red,
             padding: EdgeInsets.all(0),
@@ -352,8 +353,8 @@ class _LogOnPageState extends State<LogOnPage> {
         ),
         sizedBox(10, 0),
         SizedBox(
-          width: 35,
-          height: 35,
+          width: 40,
+          height: 40,
           child: RaisedButton(
             color: Colors.green,
             padding: EdgeInsets.all(0),
@@ -371,8 +372,8 @@ class _LogOnPageState extends State<LogOnPage> {
         ),
         sizedBox(10, 0),
         SizedBox(
-          width: 35,
-          height: 35,
+          width: 40,
+          height: 40,
           child: RaisedButton(
             color: Colors.grey,
             padding: EdgeInsets.all(0),
@@ -386,7 +387,7 @@ class _LogOnPageState extends State<LogOnPage> {
             child: Icon(
               FontAwesomeIcons.solidEnvelope,
               color: Colors.white,
-              size: 20,
+              size: 15,
             ),
           ),
         ),
@@ -427,7 +428,7 @@ class _LogOnPageState extends State<LogOnPage> {
         'assets/icono3.png',
         //scale: 0.4,
         width: 30,
-        height: 30,
+        height: 25,
       ),
       shape: GFButtonShape.pills,
       onPressed: _submitInvitado,
