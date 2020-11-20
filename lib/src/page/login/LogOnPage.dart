@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart' hide ButtonStyle;
-import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
@@ -215,7 +214,7 @@ class _LogOnPageState extends State<LogOnPage> {
 
   Container _buttonsSignUp(Size size, BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 100),
+      padding: EdgeInsets.only(top: 86),
       height: size.height * 0.5,
       width: size.width,
       color: Colors.white,
@@ -238,18 +237,19 @@ class _LogOnPageState extends State<LogOnPage> {
           ),
           SizedBox(
             child: AppleSignInButton(
-              //style: ButtonStyle.black,
+              style: ButtonStyle.black,
               cornerRadius: 20,
               type: ButtonType.signIn,
               onPressed: appleLogIn,
             ),
             height: 40,
-            width: 200,
+            width: 195,
           ),
           _gmailButton(),
           _button(context, 'Virtual Match', 18.0, 20.0),
           _crearAcciones(context),
-          _egree(context),
+          // dividerBlack(),
+          // _egree(context),
           copyRigthClear(),
         ],
       ),
@@ -291,7 +291,7 @@ class _LogOnPageState extends State<LogOnPage> {
           children: <Widget>[
             Image(
                 image: AssetImage("assets/general/google_logo.png"),
-                height: 20.0),
+                height: 18.0),
             Padding(
               padding: const EdgeInsets.only(left: 10),
               child: Text(
@@ -313,8 +313,8 @@ class _LogOnPageState extends State<LogOnPage> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         SizedBox(
-          width: 40,
-          height: 40,
+          width: 35,
+          height: 35,
           child: RaisedButton(
             color: Colors.blueAccent,
             padding: EdgeInsets.all(0),
@@ -332,8 +332,8 @@ class _LogOnPageState extends State<LogOnPage> {
         ),
         sizedBox(10, 0),
         SizedBox(
-          width: 40,
-          height: 40,
+          width: 35,
+          height: 35,
           child: RaisedButton(
             color: Colors.red,
             padding: EdgeInsets.all(0),
@@ -352,8 +352,8 @@ class _LogOnPageState extends State<LogOnPage> {
         ),
         sizedBox(10, 0),
         SizedBox(
-          width: 40,
-          height: 40,
+          width: 35,
+          height: 35,
           child: RaisedButton(
             color: Colors.green,
             padding: EdgeInsets.all(0),
@@ -371,8 +371,8 @@ class _LogOnPageState extends State<LogOnPage> {
         ),
         sizedBox(10, 0),
         SizedBox(
-          width: 40,
-          height: 40,
+          width: 35,
+          height: 35,
           child: RaisedButton(
             color: Colors.grey,
             padding: EdgeInsets.all(0),

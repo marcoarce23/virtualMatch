@@ -91,7 +91,7 @@ class _OrganizationPageState extends State<OrganizationPage> {
                   Shimmer.fromColors(
                     baseColor: AppTheme.themeWhite,
                     highlightColor: AppTheme.themePurple,
-                    child: Text('ACERCA DE LA COMUNIDAD FIFA BOLIVIA.',
+                    child: Text('ACERCA DE LA COMUNIDAD DE FUTBOL VIRTUAL DE BOLIVIA.',
                         style: estiloTitulo, textAlign: TextAlign.center),
                   ),
 
