@@ -6,8 +6,10 @@ import 'package:virtual_match/src/model/entity/EntityFromJson/EquipoModel.dart'
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/page/core/player/PlayerEditPage.dart';
+import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/core/EquipmentService.dart';
 import 'package:virtual_match/src/style/Style.dart';
+import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/card/CardVM.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
@@ -94,8 +96,8 @@ class _EquipmentListPageState extends State<EquipmentListPage> {
           ),
         ),
       ),
-      floatingActionButton: floatButton(Colors.transparent, context,
-          FaIcon(FontAwesomeIcons.arrowLeft), PlayerEditPage()),
+     floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
+          FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }
 

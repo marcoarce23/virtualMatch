@@ -128,7 +128,7 @@ class _NotificationListPageState extends State<NotificationListPage> {
           children: <Widget>[
             sizedBox(0, 7),
             CardVM(
-              size: 140,
+              size: 160,
               imageAssets: 'assets/icono3.png',
               opciones: _simplePopup(
                   entity, entity.idNotificacion.toString(), context),

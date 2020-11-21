@@ -118,7 +118,7 @@ class _NotificationPageState extends State<NotificationPage> {
           children: <Widget>[
             sizedBox(0, 7),
             CardVM(
-              size: 150,
+              size: 160,
               imageAssets: 'assets/icono3.png',
               listWidgets: [
                 avatarCircleTransparent(IMAGE_DEFAULT, 40),

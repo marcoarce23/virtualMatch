@@ -15,6 +15,7 @@ import 'package:virtual_match/src/page/core/equipment/EquipmentListPage.dart';
 import 'package:virtual_match/src/page/core/player/PlayerEditPage.dart';
 
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
+import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/ImageService.dart';
 import 'package:virtual_match/src/service/core/EquipmentService.dart';
 import 'package:virtual_match/src/style/Style.dart';
@@ -168,8 +169,8 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
           _form(context),
         ],
       ),
-      floatingActionButton: floatButton(Colors.transparent, context,
-          FaIcon(FontAwesomeIcons.arrowLeft), PlayerEditPage()),
+      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
+          FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }
 
@@ -247,7 +248,7 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
             2,
             'Ingrese el nombre del equipo',
             true,
-            FaIcon(FontAwesomeIcons.newspaper, color: AppTheme.themeDefault),
+            FaIcon(FontAwesomeIcons.userFriends, color: AppTheme.themeDefault),
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             Colors.red),
@@ -259,7 +260,7 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
             2,
             'Ingrese Detalle del equipo',
             true,
-            FaIcon(FontAwesomeIcons.wpforms, color: AppTheme.themeDefault),
+            FaIcon(FontAwesomeIcons.playstation, color: AppTheme.themeDefault),
             AppTheme.themeDefault,
             AppTheme.themeDefault,
             Colors.red),

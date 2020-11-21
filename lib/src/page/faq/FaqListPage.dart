@@ -30,7 +30,7 @@ class _FaqListPagetate extends State<FaqListPage> {
           _form(context),
         ],
       ),
-      floatingActionButton: floatButtonImage(Colors.transparent, context,
+      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
           FaIcon(FontAwesomeIcons.futbol), HomePage()),
     );
   }
@@ -86,7 +86,7 @@ class _FaqListPagetate extends State<FaqListPage> {
   Widget listAcordion() {
     return accordion(
         '¿Cómo puedo contactarlos?',
-        'Contamos con distintos canales de atención, cualquier duda o consulta que tengas siéntete libre de preguntar mediante: \nNuestras redes sociales: Facebook Instagram \nCorreo electrónico info@impulse.bo \nNúmero de WhatsApp +591 61677470',
+        'Contamos con distintos canales de atención, cualquier duda o consulta que tengas siéntete libre de preguntar mediante: \nNuestras redes sociales: Facebook (https://www.facebook.com/ComunidadFIFABolivia/) - Instagram (https://www.instagram.com/virtual_match_oficial/) \nCorreo electrónico comunidadfifabolivia@gmail.com \nNúmero de WhatsApp +591 71298852',
         AppTheme.themeDefault,
         AppTheme.themePurple);
   }
@@ -94,7 +94,7 @@ class _FaqListPagetate extends State<FaqListPage> {
   Widget listAcordion2() {
     return accordion(
         '¿Cuál es el horario de atención?',
-        'Puedes contactarnos en cualquier momento, para recibir respuestas más inmediatas nuestro horario es el siguiente: 9:00 AM a 8 :00 PM de lunes a viernes.',
+        'Puedes contactarnos en cualquier momento, para recibir respuestas más inmediatas nuestro horario es el siguiente: 09:00 A.M. a 20:00 P.M. de lunes a viernes.',
         AppTheme.themeDefault,
         AppTheme.themePurple);
   }

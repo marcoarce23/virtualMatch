@@ -170,7 +170,7 @@ class _NewLoadPageState extends State<NewLoadPage> {
           _form(context),
         ],
       ),
-      floatingActionButton: floatButtonImage(Colors.transparent, context,
+      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
           FaIcon(FontAwesomeIcons.futbol), HomePage()),
     );
   }
@@ -275,7 +275,7 @@ class _NewLoadPageState extends State<NewLoadPage> {
             '(*) Registre la noticia/evento',
             100,
             2,
-            'Ingrese la noticia',
+            'Ingrese la noticia/evento',
             true,
             FaIcon(FontAwesomeIcons.newspaper, color: AppTheme.themeDefault),
             AppTheme.themeDefault,
@@ -285,7 +285,7 @@ class _NewLoadPageState extends State<NewLoadPage> {
         _text(
             controllerDetalle,
             entity.objetivo,
-            '(*)  Detalle de la noticia',
+            '(*)  Detalle de la noticia/evento',
             140,
             2,
             'Ingrese Detalle de la noticia/evento',
@@ -300,7 +300,7 @@ class _NewLoadPageState extends State<NewLoadPage> {
             '(*) Dirigido a:',
             140,
             2,
-            'Ingrese quienes participan',
+            'Ingrese quienes participarán',
             true,
             FaIcon(FontAwesomeIcons.userFriends, color: AppTheme.themeDefault),
             AppTheme.themeDefault,

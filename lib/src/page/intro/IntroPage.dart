@@ -287,7 +287,7 @@ class _IntroPageState extends State<IntroPage> {
                                     sizedBox(10, 10.0),
                                     Expanded(
                                       child: AutoSizeText(
-                                        'Reunir a la mayor cantidad de FIFEROS de Bolivia, consolidando la comunidad de FIFA. ',
+                                        'Reunir a la mayor cantidad de FIFEROS de Bolivia, consolidando la comunidad de Virtual Match. ',
                                         style: kSubtitleStyle,
                                         softWrap: true,
                                         overflow: TextOverflow.clip,
