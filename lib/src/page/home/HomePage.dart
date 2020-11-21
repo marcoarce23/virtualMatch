@@ -1,10 +1,13 @@
 import 'dart:io';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/NoticiaEventoModel.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/NotificacionModel.dart';
+import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
 import 'package:virtual_match/src/service/NewService.dart';
+import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/bottonNavigationBar/BottonNavigatorWidget.dart';
@@ -24,7 +27,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   NotificacionModel entity = new NotificacionModel();
   NewService entityGet = NewService();
-
+  List<NoticiaEventoModel> listPlayers = new List<NoticiaEventoModel>();
   // DEFINICIOND E VARIABLES
   final prefs = new Preferense();
 
@@ -44,9 +47,13 @@ class _HomePageState extends State<HomePage> {
         builder: (context, AsyncSnapshot snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.waiting:
-              return Text("sss");
+              return Text(".....");
               break;
             default:
+              listPlayers.clear();
+              for (var i = 0; i < snapshot.data.length; i++) {
+                listPlayers.add(snapshot.data[i] as NoticiaEventoModel);
+              }
               return listView(grupo, context, snapshot);
           }
         });
@@ -117,7 +124,29 @@ class _HomePageState extends State<HomePage> {
       bottom: true,
       top: true,
       child: Scaffold(
-        appBar: appBar('VIRTUAL MATCH'),
+        appBar: AppBar(
+          backgroundColor: AppTheme.themeDefault,
+          //toolbarOpacity: 0.7,
+          iconTheme: IconThemeData(color: AppTheme.themeWhite, size: 16),
+          elevation: 2.0,
+          title: Text('VIRTUAL MATCH', style: kTitleAppBar),
+          actions: <Widget>[
+            IconButton(
+                icon: Icon(Icons.search),
+                onPressed: () {
+                  showSearch(
+                      context: context,
+                      delegate: SearchPlayer(list: listPlayers));
+                }),
+
+            avatarCircleDefault(IMAGE_DEFAULT, 31.0),
+            //  FaIcon(
+            //     FontAwesomeIcons.edit,
+            //     color: AppTheme.themePurple,
+            //     size: 23,
+            //   ),
+          ],
+        ),
         body: SingleChildScrollView(
           child: Container(
             decoration: new BoxDecoration(
@@ -158,5 +187,91 @@ class _HomePageState extends State<HomePage> {
         bottomNavigationBar: new BottonNavigation(),
       ),
     );
+  }
+}
+
+class SearchPlayer extends SearchDelegate {
+  List<NoticiaEventoModel> list = new List<NoticiaEventoModel>();
+
+  SearchPlayer({this.list});
+
+  String selectResult;
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    return <Widget>[
+      IconButton(
+          icon: Icon(Icons.close),
+          onPressed: () {
+            query = "";
+          }),
+    ];
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    return IconButton(
+        icon: AnimatedIcon(
+          icon: AnimatedIcons.menu_arrow,
+          progress: transitionAnimation,
+        ),
+        onPressed: () {
+          Navigator.pop(context);
+        });
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    return Container(
+      child: Center(
+        child: Text(selectResult),
+      ),
+    );
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    final suggestionList = query.isEmpty
+        ? list
+        : list
+            .where((p) =>
+                p.titulo.toUpperCase().startsWith(query.toUpperCase()) ||
+                p.objetivo.toUpperCase().startsWith(query.toUpperCase()) ||
+                p.dirigidoa.toUpperCase().startsWith(query.toUpperCase()))
+            .toList();
+
+    return ListView.builder(
+        itemCount: suggestionList.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            onTap: () {
+              print(query);
+            },
+            leading: Image.network(
+              (suggestionList[index].foto),
+              width: 15,
+            ),
+            title: Row(
+              children: [
+                AutoSizeText(
+                  suggestionList[index].titulo,
+                  style: TextStyle(color: Colors.black),
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: true,
+                  maxLines: 3,
+                  textAlign: TextAlign.left,
+                )
+              ],
+            ),
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Objetivo: " + suggestionList[index].objetivo),
+                Text("Dirigido a: " + suggestionList[index].dirigidoa),
+                Text((suggestionList[index].tipo == 0 ? 'NOTICIA' : 'EVENTO')),
+                dividerBlack()
+              ],
+            ),
+          );
+        });
   }
 }
