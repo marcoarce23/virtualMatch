@@ -99,26 +99,42 @@ class _EsquemaTorneoPageState extends State<EsquemaTorneoPage> {
   Widget showEsquemaTorneoPage(
       BuildContext context, FechaEsquemaTorneos entity) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              "Grupo / Fase",
-              style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
+            Row(
+              children: [
+                Text(
+                  "Grupo / Fase",
+                  style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
+                ),
+                Text(" "),
+                Text(entity.grupo),
+              ],
             ),
-            Text(entity.grupo),
-            Text(
-              "Fecha",
-              style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
+            Row(
+              children: [
+                Text(
+                  "Fecha",
+                  style: TextStyle(fontSize: 13, fontWeight: FontWeight.w700),
+                ),
+                Text("  "),
+                Text(entity.fecha),
+              ],
             ),
-            Text(entity.fecha),
           ],
         ),
         Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(" "),
+          ],
+        ),
+
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(entity.jugador1),

@@ -289,7 +289,7 @@ class SearchPlayer extends SearchDelegate {
                   style: TextStyle(color: Colors.black),
                   overflow: TextOverflow.ellipsis,
                   softWrap: true,
-                  maxLines: 2,
+                  maxLines: 3,
                   textAlign: TextAlign.left,
                 )
               ],
