@@ -146,7 +146,8 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
 
     if (entityModelGet != null) {
       entity.states = StateEntity.Update;
-
+        print('agrupadorrr: ${entityModelGet.agrupador}');
+ entity.agrupador = entityModelGet.agrupador;
       if (unaVez == 0) {
         entity.agrupador = entityModelGet.agrupador;
         entity.nombre = entityModelGet.nombre;
@@ -343,6 +344,7 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
   }
 
   void loadingEntity() {
+    print('agrupadorrr: ${entity.agrupador}');
     entity.idEquipo =
         (entity.states == StateEntity.Insert) ? 0 : entity.idEquipo;
 

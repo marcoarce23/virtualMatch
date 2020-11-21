@@ -283,9 +283,11 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
           .then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0')
-          showSnackbar(STATUS_OK_DELETE, scaffoldKey);
+          setState(() {
+            showSnackbar(result["mensaje"], scaffoldKey);
+          });
         else
-          showSnackbar(STATUS_ERROR, scaffoldKey);
+          showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
       showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);

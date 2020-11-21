@@ -6,7 +6,6 @@ import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/NewService.dart';
 import 'package:virtual_match/src/style/Style.dart';
-import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/card/CardVM.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
@@ -219,10 +218,10 @@ class _NewListPageState extends State<NewListPage> {
       await entityService.delete(id, usuario).then((result) {
         if (result["tipo_mensaje"] == '0') {
           setState(() {
-            showSnackbar(STATUS_OK_DELETE, scaffoldKey);
+            showSnackbar(result["mensaje"], scaffoldKey);
           });
         } else
-          showSnackbar(STATUS_ERROR, scaffoldKey);
+          showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
       showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);

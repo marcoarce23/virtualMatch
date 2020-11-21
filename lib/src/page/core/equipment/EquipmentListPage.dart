@@ -185,6 +185,13 @@ class _EquipmentListPageState extends State<EquipmentListPage> {
               listWidgets: [
                 avatarCircleTransparent(entity.foto, 55),
                 sizedBox(0, 7),
+                //  Text(
+                //   'AGRUPAAA : ${entity.agrupador}',
+                //   style: kSubtitleStyleWhite,
+                //   softWrap: true,
+                //   overflow: TextOverflow.clip,
+                //   textAlign: TextAlign.justify,
+                // ),
                 Text(
                   'TÍTULO : ${entity.nombre}',
                   style: kSubtitleStyleWhite,
@@ -213,10 +220,10 @@ class _EquipmentListPageState extends State<EquipmentListPage> {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0')
           setState(() {
-            showSnackbar(STATUS_OK_DELETE, scaffoldKey);
+            showSnackbar(result["mensaje"], scaffoldKey);
           });
         else
-          showSnackbar(STATUS_ERROR, scaffoldKey);
+          showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
       showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
@@ -229,9 +236,9 @@ class _EquipmentListPageState extends State<EquipmentListPage> {
       await entityService.repository(entity).then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0')
-          showSnackbar(STATUS_OK, scaffoldKey);
+          showSnackbar(result["mensaje"], scaffoldKey);
         else
-          showSnackbar(STATUS_ERROR, scaffoldKey);
+          showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
       showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);

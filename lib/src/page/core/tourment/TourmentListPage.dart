@@ -269,20 +269,24 @@ class _TourmentListPageState extends State<TourmentListPage> {
   }
 
   void executeDelete(String id, String usuario) async {
-    print('IDDD $id  yyyy el susuario $usuario');
     try {
-      await entityService.delete(id, usuario).then((result) {
+      await entityService
+          .delete(
+        id,
+        usuario,
+      )
+          .then((result) {
+        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0')
-          setState(() {
-            showSnackbar(STATUS_OK_DELETE, scaffoldKey);
+           setState(() {
+            showSnackbar(result["mensaje"], scaffoldKey);
           });
         else
-          showSnackbar(STATUS_ERROR, scaffoldKey);
+          showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
       showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
     }
-    //   setState(() {});
   }
 
   _start(String keyId, String modalidad) {

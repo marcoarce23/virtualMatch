@@ -49,7 +49,7 @@ dependencies:
   intro_slider: ^2.2.9
   page_transition: ^1.1.5
   imei_plugin: ^1.2.0
-  firebase_messaging: ^6.0.16
+  firebase_messaging: ^7.0.3
   firebase_analytics: ^5.0.1
   animate_do: ^1.2.1
   font_awesome_flutter: ^8.8.1
