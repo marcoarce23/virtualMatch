@@ -73,24 +73,23 @@ class _WinnerPlayerState extends State<WinnerPlayer> {
     return Column(
       children: [
         Align(
-              alignment: Alignment.center,
-              child: ConfettiWidget(
-                confettiController: _controllerCenter,
-                blastDirectionality: BlastDirectionality
-                    .explosive, // don't specify a direction, blast randomly
-                shouldLoop:
-                    true, // start again as soon as the animation is finished
-                colors: const [
-                  Colors.green,
-                  Colors.blue,
-                  Colors.pink,
-                  Colors.orange,
-                  Colors.purple
-                ], // manually specify the colors to be used
-              ),
-            ),
-
-             Align(
+          alignment: Alignment.center,
+          child: ConfettiWidget(
+            confettiController: _controllerCenter,
+            blastDirectionality: BlastDirectionality
+                .explosive, // don't specify a direction, blast randomly
+            shouldLoop:
+                true, // start again as soon as the animation is finished
+            colors: const [
+              Colors.green,
+              Colors.blue,
+              Colors.pink,
+              Colors.orange,
+              Colors.purple
+            ], // manually specify the colors to be used
+          ),
+        ),
+        Align(
           alignment: Alignment.centerRight,
           child: ConfettiWidget(
             confettiController: _controllerCenterRight,
@@ -107,7 +106,6 @@ class _WinnerPlayerState extends State<WinnerPlayer> {
             ], // manually specify the colors to be used
           ),
         ),
-        
         Container(
           child: Container(
             decoration: containerImage2(),
@@ -115,7 +113,6 @@ class _WinnerPlayerState extends State<WinnerPlayer> {
             height: 170,
             child: Stack(
               children: <Widget>[
-                
                 Positioned(
                   //left: (MediaQuery.of(context).size.width / 2) - 130,
                   top: 0,
@@ -145,19 +142,22 @@ class _WinnerPlayerState extends State<WinnerPlayer> {
                     top: 35,
                     height: 68,
                     width: 68,
-                    child: _cardJugador(false, widget.url3erGanador)), // 3er lugar
+                    child:
+                        _cardJugador(false, widget.url3erGanador)), // 3er lugar
                 Positioned(
                     left: (MediaQuery.of(context).size.width / 2) - 20,
                     top: 30,
                     height: 90,
                     width: 90,
-                    child: _cardJugador(false, widget.url2doGanador)), // 2do lugar
+                    child:
+                        _cardJugador(false, widget.url2doGanador)), // 2do lugar
                 Positioned(
                     left: (MediaQuery.of(context).size.width / 2) - 100,
                     top: 30,
                     height: 110,
                     width: 110,
-                    child: _cardJugador(true, widget.url1erGanador)), // 1erlugar
+                    child:
+                        _cardJugador(true, widget.url1erGanador)), // 1erlugar
 
                 Positioned(
                   left: (MediaQuery.of(context).size.width / 2) - 160,
@@ -260,12 +260,12 @@ class _WinnerPlayerState extends State<WinnerPlayer> {
         goalCompleted: 0.85,
         child: Container(
             child: ImageOvalNetwork(
-                imageNetworkUrl: url, sizeImage: Size(100, 100))),
+                imageNetworkUrl: url, sizeImage: Size(60, 60))),
       );
     } else {
       return ImageOvalNetwork(
         imageNetworkUrl: url,
-        sizeImage: Size(100, 100),
+        sizeImage: Size(60, 60),
       );
     }
   }

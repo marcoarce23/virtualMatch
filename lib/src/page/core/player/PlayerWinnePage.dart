@@ -1,10 +1,14 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/ListadoGanadores.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/TorneoModel.dart';
+import 'package:virtual_match/src/model/entity/EntityMap/JugadorModel.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
+import 'package:virtual_match/src/page/core/player/PlayerScoredWinnePage.dart';
 import 'package:virtual_match/src/service/core/TournamentService.dart';
+import 'package:virtual_match/src/style/Style.dart';
 import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
@@ -26,7 +30,7 @@ class _PlayerWinnerPageState extends State<PlayerWinnerPage> {
   TorneoModel entity = new TorneoModel();
   TourmentService entityService;
   TourmentService entityGet = TourmentService();
-
+  List<ListadoGanadores> listPlayers = new List<ListadoGanadores>();
   // DEFINICIOND E VARIABLES
   final prefs = new Preferense();
 
@@ -41,7 +45,29 @@ class _PlayerWinnerPageState extends State<PlayerWinnerPage> {
     final size = MediaQuery.of(context).size;
     // entityService = Provider.of<NotificationService>(context);
     return Scaffold(
-      appBar: appBar('GANADORES'),
+      appBar: AppBar(
+        backgroundColor: AppTheme.themeDefault,
+        //toolbarOpacity: 0.7,
+        iconTheme: IconThemeData(color: AppTheme.themeWhite, size: 16),
+        elevation: 2.0,
+        title: Text('GANADORES', style: kTitleAppBar),
+        actions: <Widget>[
+          IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {
+                showSearch(
+                    context: context,
+                    delegate: SearchPlayer(list: listPlayers));
+              }),
+
+          avatarCircleDefault(IMAGE_DEFAULT, 31.0),
+          //  FaIcon(
+          //     FontAwesomeIcons.edit,
+          //     color: AppTheme.themePurple,
+          //     size: 23,
+          //   ),
+        ],
+      ),
       drawer: DrawerMenu(),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -73,46 +99,6 @@ class _PlayerWinnerPageState extends State<PlayerWinnerPage> {
                 sizedBox(0.0, 10.0),
                 futureBuilder(context),
                 sizedBox(0.0, 10.0),
-
-                /*
-                WinnerPlayer(
-                  nombreTorneo: 'Los gatos rabiosos',
-                  url1erGanador:
-                      'https://www.mundodeportivo.com/r/GODO/MD/p7/Futbol/Imagenes/2020/04/06/Recortada/img_agomezo_20200326-110529_imagenes_md_otras_fuentes_gettyimages-1205035438-kT0F-U48336284567QyD-980x554@MundoDeportivo-Web.jpg',
-                  url2doGanador:
-                      'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTOPxsm3tCsTc24r9WogA7muPB-1OmYBTdkUw&usqp=CAU',
-                  url3erGanador:
-                      'https://e00-marca.uecdn.es/assets/multimedia/imagenes/2020/08/11/15971300653800.png',
-                  nombre1erGanador: 'yo',
-                  nombre2doGanador: 'tu',
-                  nombre3erGanador: 'el',
-                ),
-                sizedBox(0, 20),
-                WinnerPlayer(
-                  nombreTorneo: 'Los gatos maleantes',
-                  url1erGanador:
-                      'https://depor.com/resizer/B4EsskVwC3irlYgg6xBAs61aWWY=/580x330/smart/filters:format(jpeg):quality(75)/arc-anglerfish-arc2-prod-elcomercio.s3.amazonaws.com/public/IKWKVPLMQND27JIB7S4LCSUH3Y.jpg',
-                  url2doGanador:
-                      'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTSco3xb0fQuFLGM8lpGUATudGnJQ_gigu4eA&usqp=CAU',
-                  url3erGanador:
-                      'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTkd8vZYOqIVUFWU76e28q8phQVVrF4WCBlUQ&usqp=CAU',
-                  nombre1erGanador: 'yo',
-                  nombre2doGanador: 'tu',
-                  nombre3erGanador: 'el',
-                ),
-                WinnerPlayer(
-                  nombreTorneo: 'Los gatos maleantes',
-                  url1erGanador:
-                      'https://depor.com/resizer/B4EsskVwC3irlYgg6xBAs61aWWY=/580x330/smart/filters:format(jpeg):quality(75)/arc-anglerfish-arc2-prod-elcomercio.s3.amazonaws.com/public/IKWKVPLMQND27JIB7S4LCSUH3Y.jpg',
-                  url2doGanador:
-                      'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTSco3xb0fQuFLGM8lpGUATudGnJQ_gigu4eA&usqp=CAU',
-                  url3erGanador:
-                      'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTkd8vZYOqIVUFWU76e28q8phQVVrF4WCBlUQ&usqp=CAU',
-                  nombre1erGanador: 'yo',
-                  nombre2doGanador: 'tu',
-                  nombre3erGanador: 'el',
-                ),
-                */
                 copyRigth(),
               ],
             ),
@@ -133,6 +119,10 @@ class _PlayerWinnerPageState extends State<PlayerWinnerPage> {
               return loading();
               break;
             default:
+              listPlayers.clear();
+              for (var i = 0; i < snapshot.data.length; i++) {
+                listPlayers.add(snapshot.data[i] as ListadoGanadores);
+              }
               return listView(context, snapshot);
           }
         });
@@ -149,22 +139,99 @@ class _PlayerWinnerPageState extends State<PlayerWinnerPage> {
         return Column(
           children: [
             Center(
-              child: WinnerPlayer(
-                  nombreTorneo: "Torneo:: ${entity.nombre_torneo}",
-                  url1erGanador:
-                      (entity.foto_1 != '') ? entity.foto_1 : IMAGE_LOGO,
-                  url2doGanador:
-                      (entity.foto_2 != '') ? entity.foto_2 : IMAGE_LOGO,
-                  url3erGanador:
-                      (entity.foto_3 != '') ? entity.foto_3 : IMAGE_LOGO,
-                  nombre1erGanador: entity.jugador_1,
-                  nombre2doGanador: entity.jugador_2,
-                  nombre3erGanador: entity.jugador_3),
+              child: InkWell(
+                onTap: () {
+                  navegation(context, PlayerScoredWinnePage(entity.idtorneo));
+                },
+                child: WinnerPlayer(
+                    nombreTorneo: "Torneo:: ${entity.nombre_torneo}",
+                    url1erGanador:
+                        (entity.foto_1 != '') ? entity.foto_1 : IMAGE_LOGO,
+                    url2doGanador:
+                        (entity.foto_2 != '') ? entity.foto_2 : IMAGE_LOGO,
+                    url3erGanador:
+                        (entity.foto_3 != '') ? entity.foto_3 : IMAGE_LOGO,
+                    nombre1erGanador: entity.jugador_1,
+                    nombre2doGanador: entity.jugador_2,
+                    nombre3erGanador: entity.jugador_3),
+              ),
             ),
             divider(),
           ],
         );
       },
     );
+  }
+}
+
+class SearchPlayer extends SearchDelegate {
+  List<ListadoGanadores> list = new List<ListadoGanadores>();
+
+  SearchPlayer({this.list});
+
+  String selectResult;
+  @override
+  List<Widget> buildActions(BuildContext context) {
+    return <Widget>[
+      IconButton(
+          icon: Icon(Icons.close),
+          onPressed: () {
+            query = "";
+          }),
+    ];
+  }
+
+  @override
+  Widget buildLeading(BuildContext context) {
+    return IconButton(
+        icon: AnimatedIcon(
+          icon: AnimatedIcons.menu_arrow,
+          progress: transitionAnimation,
+        ),
+        onPressed: () {
+          Navigator.pop(context);
+        });
+  }
+
+  @override
+  Widget buildResults(BuildContext context) {
+    return Container(
+      child: Center(
+        child: Text(selectResult),
+      ),
+    );
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    final suggestionList = query.isEmpty
+        ? list
+        : list
+            .where((p) =>
+                p.nombre_torneo.toUpperCase().startsWith(query.toUpperCase()))
+            .toList();
+
+    return ListView.builder(
+        itemCount: suggestionList.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            onTap: () {
+              navegation(context,
+                  PlayerScoredWinnePage(suggestionList[index].idtorneo));
+            },
+            title: Row(
+              children: [
+                AutoSizeText(
+                  suggestionList[index].nombre_torneo,
+                  style: TextStyle(color: Colors.black),
+                  overflow: TextOverflow.ellipsis,
+                  softWrap: true,
+                  maxLines: 2,
+                  textAlign: TextAlign.left,
+                )
+              ],
+            ),
+          );
+        });
   }
 }

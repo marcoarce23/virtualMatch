@@ -87,7 +87,7 @@ class _PositionTableState extends State<PositionTable> {
                       label: Text(
                         'NOMBRE'.toUpperCase(),
                         style: TextStyle(
-                          color: AppTheme.themePurple,
+                          color: AppTheme.themeBlackGrey,
                           fontSize: 10.0,
                         ),
                       ),
@@ -98,7 +98,7 @@ class _PositionTableState extends State<PositionTable> {
                       label: Text(
                         'GOLES'.toUpperCase(),
                         style: TextStyle(
-                          color: AppTheme.themePurple,
+                          color: AppTheme.themeBlackGrey,
                           fontSize: 10.0,
                         ),
                       ),
@@ -109,7 +109,7 @@ class _PositionTableState extends State<PositionTable> {
                       label: Text(
                         'ASISTENCIA'.toUpperCase(),
                         style: TextStyle(
-                          color: AppTheme.themePurple,
+                          color: AppTheme.themeBlackGrey,
                           fontSize: 10.0,
                         ),
                       ),
@@ -188,7 +188,7 @@ class _PositionTableState extends State<PositionTable> {
                       label: Text(
                         'GRUPO.'.toUpperCase(),
                         style: TextStyle(
-                          color: AppTheme.themePurple,
+                          color: AppTheme.themeBlackGrey,
                           fontSize: 10.0,
                         ),
                       ),
@@ -199,7 +199,7 @@ class _PositionTableState extends State<PositionTable> {
                       label: Text(
                         'NRO.'.toUpperCase(),
                         style: TextStyle(
-                          color: AppTheme.themePurple,
+                          color: AppTheme.themeBlackGrey,
                           fontSize: 10.0,
                         ),
                       ),
@@ -210,7 +210,7 @@ class _PositionTableState extends State<PositionTable> {
                       label: Text(
                         'Equipos'.toUpperCase(),
                         style: TextStyle(
-                          color: AppTheme.themePurple,
+                          color: AppTheme.themeBlackGrey,
                           fontSize: 10.0,
                         ),
                       ),
@@ -221,7 +221,7 @@ class _PositionTableState extends State<PositionTable> {
                       label: Text(
                         'PJ',
                         style: TextStyle(
-                          color: AppTheme.themePurple,
+                          color: AppTheme.themeBlackGrey,
                           fontSize: 10.0,
                         ),
                       ),
@@ -232,7 +232,7 @@ class _PositionTableState extends State<PositionTable> {
                       label: Text(
                         'PG',
                         style: TextStyle(
-                          color: AppTheme.themePurple,
+                          color: AppTheme.themeBlackGrey,
                           fontSize: 10.0,
                         ),
                       ),
@@ -243,7 +243,7 @@ class _PositionTableState extends State<PositionTable> {
                       label: Text(
                         'PE',
                         style: TextStyle(
-                          color: AppTheme.themePurple,
+                          color: AppTheme.themeBlackGrey,
                           fontSize: 10.0,
                         ),
                       ),
@@ -254,7 +254,7 @@ class _PositionTableState extends State<PositionTable> {
                       label: Text(
                         'PP',
                         style: TextStyle(
-                          color: AppTheme.themePurple,
+                          color: AppTheme.themeBlackGrey,
                           fontSize: 10.0,
                         ),
                       ),
@@ -265,7 +265,7 @@ class _PositionTableState extends State<PositionTable> {
                       label: Text(
                         'PTS',
                         style: TextStyle(
-                          color: AppTheme.themePurple,
+                          color: AppTheme.themeBlackGrey,
                           fontSize: 10.0,
                         ),
                       ),

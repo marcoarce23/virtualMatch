@@ -278,9 +278,8 @@ class SearchPlayer extends SearchDelegate {
             },
             leading: Image.network(
               (suggestionList[index].foto),
-              width: 20,
+              width: 15,
             ),
-            trailing: Text(suggestionList[index].idPsdn),
             title: Row(
               children: [
                 AutoSizeText(
@@ -293,6 +292,14 @@ class SearchPlayer extends SearchDelegate {
                   maxLines: 2,
                   textAlign: TextAlign.left,
                 )
+              ],
+            ),
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Telefono: " + suggestionList[index].telefono),
+                Text("PSDN: " + suggestionList[index].idPsdn),
+                dividerBlack()
               ],
             ),
           );

@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-     super.initState();
+    super.initState();
   }
 
   Widget futureBuilderNoticias(BuildContext context, int grupo) {
@@ -61,46 +61,48 @@ class _HomePageState extends State<HomePage> {
       itemCount: snapshot.data.length,
       itemBuilder: (context, index) {
         NoticiaEventoModel entity = snapshot.data[index];
-        if (entity.tipo == grupo) {
-          return Stack(
-            children: [
-              Container(
-                alignment: Alignment.center,
-                margin: EdgeInsets.symmetric(vertical: 0.0),
-                decoration: containerImage2(),
-                width: size.width * 0.98,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    gfCardAdvanced(
-                        context,
-                        "Publicado en fecha ${entity.fecha}",
-                        " ${entity.titulo.toUpperCase()}",
-                        "Dirigido a: ${entity.dirigidoa} \n Descripción: ${entity.dirigidoa}",
-                        2,
-                        entity.foto),
-                  ],
-                ),
-              ),
-              Positioned(
-                top: 25,
-                right: 50,
-                child: Opacity(
-                  opacity: 0.6,
-                  child: Image.asset(
-                    'assets/image/pelota.png',
-                    //scale: 0.4,
-                    width: 30,
-                    height: 30,
+        String titulo = (entity.tipo == 0 ? 'NOTICIA' : 'EVENTO') +
+            "\n${entity.titulo.toUpperCase()}";
+        return Stack(
+          children: [
+            Container(
+              alignment: Alignment.center,
+              margin: EdgeInsets.symmetric(vertical: 0.0),
+              decoration: containerImage2(),
+              width: size.width * 0.98,
+              child: Column(
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      gfCardAdvanced(
+                          context,
+                          "Publicado en fecha ${entity.fecha}",
+                          titulo,
+                          "Dirigido a: ${entity.dirigidoa} \n Descripción: ${entity.dirigidoa}",
+                          2,
+                          entity.foto),
+                    ],
                   ),
+                ],
+              ),
+            ),
+            Positioned(
+              top: 25,
+              right: 50,
+              child: Opacity(
+                opacity: 0.6,
+                child: Image.asset(
+                  'assets/image/pelota.png',
+                  //scale: 0.4,
+                  width: 30,
+                  height: 30,
                 ),
               ),
-            ],
-          );
-        } else {
-          return Container();
-        }
+            ),
+          ],
+        );
       },
     );
   }
@@ -144,44 +146,6 @@ class _HomePageState extends State<HomePage> {
                     SizedBox(width: 10.0),
                     //  FaIcon(FontAwesomeIcons.male, color: AppTheme.themeVino),
                     SizedBox(width: 5.0),
-                    Text('Noticias',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 13,
-                            color: AppTheme.themeWhite)),
-                    Radio(
-                      activeColor: AppTheme.themeWhite,
-                      focusColor: AppTheme.themePurple,
-                      hoverColor: AppTheme.themePurple,
-                      //      autofocus: true,
-                      value: 0,
-                      groupValue: _group,
-                      onChanged: (T) {
-                        selectedRadio = 18;
-                        setState(() {
-                          _group = T;
-                        });
-                      },
-                    ),
-                    Text('Eventos',
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 13,
-                            color: AppTheme.themeWhite)),
-                    Radio(
-                      activeColor: AppTheme.themeWhite,
-                      focusColor: AppTheme.themePurple,
-                      hoverColor: AppTheme.themePurple,
-                      //   autofocus: true,
-                      value: 1,
-                      groupValue: _group,
-                      onChanged: (T) {
-                        selectedRadio = 19;
-                        setState(() {
-                          _group = T;
-                        });
-                      },
-                    ),
                   ],
                 ),
                 futureBuilderNoticias(context, _group),
