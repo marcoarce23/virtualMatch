@@ -11,18 +11,14 @@ enviarNotificaciones(String url, String clave, String titulo,
   print('url mensa6jesss: $url');
 
   Token entityToken;
-  final dataMapToken = entityService.get(new Token(), url);
-
-  print('dataMapToken: $dataMapToken');
-
-  dataMapToken.then((value) {
+  entityService.get(new Token(), url).then((value) {
     print('value.length: ${value.length}');
     if (value.length > 0) {
       for (int i = 0; i < value.length; i++) {
         entityToken = value[i];
-        print('entrooo las veces de: $entityToken');
-        new FCM().sebnFCM(entityToken.llaveToken, clave,
-            '$titulo - $valorTitulo - $subTitulo $subTituloValor - Fecha - ${DateTime.now()}');
+        print('entrooo las veces de: ${entityToken.llaveToken}');
+    //    new FCM().sebnFCM(entityToken.llaveToken, clave,
+      //      '$titulo - $valorTitulo - $subTitulo $subTituloValor - Fecha - ${DateTime.now()}');
       }
     }
   });
