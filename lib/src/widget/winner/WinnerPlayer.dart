@@ -140,22 +140,22 @@ class _WinnerPlayerState extends State<WinnerPlayer> {
                 Positioned(
                     left: (MediaQuery.of(context).size.width / 2) - 150,
                     top: 35,
-                    height: 68,
-                    width: 68,
+                    height: 50,
+                    width: 50,
                     child:
                         _cardJugador(false, widget.url3erGanador)), // 3er lugar
                 Positioned(
-                    left: (MediaQuery.of(context).size.width / 2) - 20,
+                    left: (MediaQuery.of(context).size.width / 2) + 20,
                     top: 30,
-                    height: 90,
-                    width: 90,
+                    height: 70,
+                    width: 70,
                     child:
                         _cardJugador(false, widget.url2doGanador)), // 2do lugar
                 Positioned(
-                    left: (MediaQuery.of(context).size.width / 2) - 100,
+                    left: (MediaQuery.of(context).size.width / 2) - 90,
                     top: 30,
-                    height: 110,
-                    width: 110,
+                    height: 90,
+                    width: 90,
                     child:
                         _cardJugador(true, widget.url1erGanador)), // 1erlugar
 
