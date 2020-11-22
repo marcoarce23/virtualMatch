@@ -7,7 +7,6 @@ import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/page/core/player/PlayerEditPage.dart';
 import 'package:virtual_match/src/service/core/EquipmentService.dart';
 import 'package:virtual_match/src/style/Style.dart';
-import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/card/CardVM.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
@@ -253,10 +252,10 @@ class _EquipmentAllListPageState extends State<EquipmentAllListPage> {
               'Su solictud para salirse del equipo fue enviado con éxito!',
               scaffoldKey);
         else
-          showSnackbar(STATUS_ERROR, scaffoldKey);
+          showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
-      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
+      showSnackbar(STATUS_ERROR+ ' ${error.toString()} ', scaffoldKey);
     }
   }
 
@@ -266,12 +265,12 @@ class _EquipmentAllListPageState extends State<EquipmentAllListPage> {
       await entityService.repository(entity).then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0')
-          showSnackbar(STATUS_OK, scaffoldKey);
+          showSnackbar(result["mensaje"], scaffoldKey);
         else
-          showSnackbar(STATUS_ERROR, scaffoldKey);
+          showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
-      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
+      showSnackbar(STATUS_ERROR+ ' ${error.toString()} ', scaffoldKey);
     }
   }
 
@@ -280,12 +279,12 @@ class _EquipmentAllListPageState extends State<EquipmentAllListPage> {
       await entityService.delete(id, usuario).then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0')
-          showSnackbar(STATUS_OK, scaffoldKey);
+          showSnackbar(result["mensaje"], scaffoldKey);
         else
-          showSnackbar(STATUS_ERROR, scaffoldKey);
+          showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
-      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
+      showSnackbar(STATUS_ERROR+ ' ${error.toString()} ', scaffoldKey);
     }
     setState(() {});
   }
@@ -296,9 +295,9 @@ class _EquipmentAllListPageState extends State<EquipmentAllListPage> {
       await entityService.repository(entity).then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0')
-          showSnackbar(STATUS_OK, scaffoldKey);
+          showSnackbar(result["mensaje"], scaffoldKey);
         else
-          showSnackbar(STATUS_ERROR, scaffoldKey);
+          showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
       showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);

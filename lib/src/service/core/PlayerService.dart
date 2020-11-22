@@ -15,7 +15,6 @@ class PlayerService with ChangeNotifier {
 
   Future<Map<String, dynamic>> repository(IEntityMap entity) async {
     var result;
-    print('STATE ENTIRY: ${entity.states}');
 
     isLoading = true;
     switch (entity.states) {
@@ -28,7 +27,6 @@ class PlayerService with ChangeNotifier {
       default:
     }
 
-    print('DEL VALOR DE EVENT BLOC: $result');
     isLoading = false;
     notifyListeners();
     return result;
@@ -51,7 +49,7 @@ class PlayerService with ChangeNotifier {
     return _result;
   }
 
-Future<List<IEntityJson>> get1(IEntityJson entityJson) async {
+  Future<List<IEntityJson>> get1(IEntityJson entityJson) async {
     var _result = await _apiGet.get1(entityJson);
 
     isLoading = false;

@@ -5,7 +5,6 @@ import 'package:virtual_match/src/model/entity/EntityFromJson/MultimediaModel.da
 import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/service/MultimediaService.dart';
 import 'package:virtual_match/src/style/Style.dart';
-import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/card/CardVM.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
@@ -216,10 +215,10 @@ class _MultimediaListPageState extends State<MultimediaListPage> {
       await entityService.delete(id, usuario).then((result) {
         if (result["tipo_mensaje"] == '0')
           setState(() {
-            showSnackbar(STATUS_OK_DELETE, scaffoldKey);
+            showSnackbar(result["mensaje"], scaffoldKey);
           });
         else
-          showSnackbar(STATUS_ERROR, scaffoldKey);
+          showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
       showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
@@ -232,12 +231,12 @@ class _MultimediaListPageState extends State<MultimediaListPage> {
     try {
       await entityService.repository(entity).then((result) {
         if (result["tipo_mensaje"] == '0')
-          showSnackbar(STATUS_OK_UPDATE, scaffoldKey);
+          showSnackbar(result["mensaje"], scaffoldKey);
         else
-          showSnackbar(STATUS_ERROR, scaffoldKey);
+          showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
-      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
+      showSnackbar(STATUS_ERROR+ ' ${error.toString()} ', scaffoldKey);
     }
   }
 } // FIN DE LA CLASE

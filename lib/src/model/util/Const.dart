@@ -40,3 +40,6 @@ const String FONT_FAMILY_DANCING = 'Dancing';
 const String VIRTUAL_MATCH = 'Virtual Match 2020. ';
 const String ASSETS_ICON = 'assets/ico/ico.png';
 const String TITLE = 'VIRTUAL MATCH';
+
+const String urlNotification =
+    'https://virtualmatch.neuronatexnology.com/api/Imei/GetTokensAll';

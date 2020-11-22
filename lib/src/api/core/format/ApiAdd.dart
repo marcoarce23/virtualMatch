@@ -8,7 +8,7 @@ import 'package:virtual_match/src/api/dataMap.dart';
 class ApiAdd {
   Future<Map<String, dynamic>> add(IEntityMap entity) async {
     String _body = json.encode(entity.toJson());
-    print('body: $_body');
+
     final apiRest =
         api['add'][0].toString(); // eventResourceAdd['add'][0].toString()   ;
     //RouteAdd().postEvent(); // METODO QUE OBTENFA EL POST DEL EVENTO; MULTIMEDIA, VOLUTNARIO; HORARIO
@@ -20,7 +20,7 @@ class ApiAdd {
 
   Future<Map<String, dynamic>> add1(IEntityMap entity) async {
     String _body = json.encode(entity.toJson());
-    print('body: $_body');
+
     final apiRest =
         api['add1'][0].toString(); // eventResourceAdd['add'][0].toString()   ;
     //RouteAdd().postEvent(); // METODO QUE OBTENFA EL POST DEL EVENTO; MULTIMEDIA, VOLUTNARIO; HORARIO
@@ -30,13 +30,13 @@ class ApiAdd {
     return dataMap(response);
   }
 
-    Future<Map<String, dynamic>> update(IEntityMap entity) async {
+  Future<Map<String, dynamic>> update(IEntityMap entity) async {
     String _body = json.encode(entity.toJson());
-    print('body: $_body');
+
     final apiRest = api['update'][0]
         .toString(); // eventResourceAdd['add'][0].toString()   ;
     //RouteAdd().postEvent(); // METODO QUE OBTENFA EL POST DEL EVENTO; MULTIMEDIA, VOLUTNARIO; HORARIO
-    print('url: $apiRest');
+
     final response = await http.post(apiRest,
         headers: {"Content-Type": "application/json"}, body: _body);
     return dataMap(response);

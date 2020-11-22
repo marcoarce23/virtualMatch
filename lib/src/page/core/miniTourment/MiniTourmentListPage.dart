@@ -290,7 +290,7 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
           showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
-      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
+      showSnackbar(STATUS_ERROR+ ' ${error.toString()} ', scaffoldKey);
     }
   }
 

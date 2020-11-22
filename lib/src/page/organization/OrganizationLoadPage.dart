@@ -356,9 +356,9 @@ class _OrganizationLoadPageState extends State<OrganizationLoadPage> {
     try {
       await entityService.repository(entity).then((result) {
         if (result["TIPO_RESPUESTA"] == '0')
-          showSnackbar(STATUS_OK, scaffoldKey);
+          showSnackbar(result["mensaje"], scaffoldKey);
         else
-          showSnackbar(STATUS_ERROR, scaffoldKey);
+          showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
       showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
@@ -377,7 +377,6 @@ class _OrganizationLoadPageState extends State<OrganizationLoadPage> {
     final photo = await ImagePicker().getImage(source: origen);
     if (photo != null) {
       image = await entityImage.uploadImage(photo.path);
-      print('imagennnnn $image');
       setState(() {
         entity.foto = image;
 

@@ -18,7 +18,7 @@ class EquipmentService with ChangeNotifier {
 
   Future<Map<String, dynamic>> repository(IEntityMap entity) async {
     var result;
-    print('STATE ENTIRY: ${entity.states}');
+
 
     isLoading = true;
     switch (entity.states) {
@@ -34,7 +34,7 @@ class EquipmentService with ChangeNotifier {
       default:
     }
 
-    print('DEL VALOR DE EVENT BLOC: $result');
+
     isLoading = false;
     notifyListeners();
     return result;

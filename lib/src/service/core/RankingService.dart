@@ -6,7 +6,7 @@ import 'package:virtual_match/src/api/core/ranking/ApiUpdate.dart';
 import 'package:virtual_match/src/api/core/ranking/ApiDelete.dart';
 
 class RankingService with ChangeNotifier {
- bool isLoading = true;
+  bool isLoading = true;
 
   final _apiAdd = new ApiAdd();
   final _apiDelete = new ApiDelete();
@@ -15,7 +15,6 @@ class RankingService with ChangeNotifier {
 
   Future<Map<String, dynamic>> repository(IEntityMap entity) async {
     var result;
-    print('STATE ENTIRY: ${entity.states}');
 
     isLoading = true;
     switch (entity.states) {
@@ -28,7 +27,6 @@ class RankingService with ChangeNotifier {
       default:
     }
 
-    print('DEL VALOR DE EVENT BLOC: $result');
     isLoading = false;
     notifyListeners();
     return result;

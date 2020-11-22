@@ -8,7 +8,7 @@ import 'package:virtual_match/src/api/dataMap.dart';
 class ApiAdd {
   Future<Map<String, dynamic>> add(IEntityMap entity) async {
     String _body = json.encode(entity.toJson());
-    print('body: $_body');
+
     final apiRest =
         api['add'][0].toString(); // eventResourceAdd['add'][0].toString()   ;
     //RouteAdd().postEvent(); // METODO QUE OBTENFA EL POST DEL EVENTO; MULTIMEDIA, VOLUTNARIO; HORARIO

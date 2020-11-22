@@ -9,7 +9,7 @@ class ApiDelete {
         id +
         '/usuario/' +
         usuario; // eventResourceAdd['add'][0].toString()   ;
-    print('url: $apiRest');
+
     final response = await http
         .delete(apiRest, headers: {"Content-Type": "application/json"});
     return dataMap(response);

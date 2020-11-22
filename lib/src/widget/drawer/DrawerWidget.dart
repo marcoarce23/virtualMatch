@@ -12,7 +12,6 @@ import 'package:virtual_match/src/page/faq/FaqListPage.dart';
 import 'package:virtual_match/src/page/general/ViewPage.dart';
 import 'package:virtual_match/src/page/intro/IntroPage.dart';
 import 'package:virtual_match/src/page/login/LogOnPage.dart';
-import 'package:virtual_match/src/page/login/LogOutPage.dart';
 import 'package:virtual_match/src/page/multimedia/MultimediaLoadPage.dart';
 import 'package:virtual_match/src/page/new/NewLoadPage.dart';
 import 'package:virtual_match/src/page/notification/NotificationLoadPage.dart';
@@ -365,8 +364,14 @@ class DrawerMenu extends StatelessWidget {
               width: 30,
               height: 30,
             ),
-            '       Cerrar Sesión',
-            () => navegation(context, LogOutPage())),
+            '       Cerrar Sesión', () {
+          // if (Platform.isAndroid) {
+          //   navegation(context, LogOutPage());
+
+          // } else {
+          navegation(context, LogOnPage());
+          //       }
+        }),
       ],
     ));
   }
@@ -555,8 +560,13 @@ class DrawerMenu extends StatelessWidget {
               width: 30,
               height: 30,
             ),
-            '       Cerrar Sesión',
-            () => navegation(context, LogOutPage())),
+            '       Cerrar Sesión', () {
+          //  if (Platform.isAndroid) {
+          //    navegation(context, LogOutPage());
+          //  } else {
+          navegation(context, LogOnPage());
+          //  }
+        }),
       ],
     ));
   }

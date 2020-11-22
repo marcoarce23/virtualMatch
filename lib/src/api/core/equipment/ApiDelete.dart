@@ -9,7 +9,7 @@ class ApiDelete {
         agrupador +
         '/jugador/' +
         jugador; // eventResourceAdd['add'][0].toString()   ;
-    print('url: $apiRest');
+ 
     final response = await http
         .delete(apiRest, headers: {"Content-Type": "application/json"});
     return dataMap(response);

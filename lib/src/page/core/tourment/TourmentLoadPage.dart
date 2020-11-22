@@ -427,20 +427,15 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
   void executeCUD(TourmentService entityService, TorneoModel entity) async {
     try {
       await entityService.repository(entity).then((result) {
-        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
-
+    
         if (result["tipo_mensaje"] == '0') {
-          showSnackbar(STATUS_OK, scaffoldKey);
-
-          // navigation(
-          //   context, TourmentListPage()
-          // );
+          showSnackbar(result["mensaje"], scaffoldKey);
 
         } else
-          showSnackbar(STATUS_ERROR, scaffoldKey);
+          showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
-      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
+      showSnackbar(STATUS_ERROR+ ' ${error.toString()} ', scaffoldKey);
     }
     //  navegation(context, FormatLoadPage());
   }

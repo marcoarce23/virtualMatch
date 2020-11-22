@@ -14,7 +14,6 @@ import 'package:virtual_match/src/model/entity/EntityFromJson/LogOnModel.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/LogOnModel.dart'
     as model;
 import 'package:virtual_match/src/model/entity/IEntity.dart';
-import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/page/general/ViewPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/page/intro/IntroPage.dart';
@@ -491,10 +490,10 @@ class _LogOnPageState extends State<LogOnPage> {
 
           navegation(context, IntroPage());
         } else
-          showSnackbar(STATUS_ERROR, scaffoldKey);
+          showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
-      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
+      showSnackbar(result["mensaje"] + ' ${error.toString()} ', scaffoldKey);
     }
   }
 }

@@ -220,13 +220,13 @@ class _NotificationListPageState extends State<NotificationListPage> {
       await entityService.delete(id, usuario).then((result) {
         if (result["tipo_mensaje"] == '0') {
           setState(() {
-            showSnackbar(STATUS_OK_DELETE, scaffoldKey);
+            showSnackbar(result["mensaje"], scaffoldKey);
           });
         } else
-          showSnackbar(STATUS_ERROR, scaffoldKey);
+          showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
-      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
+      showSnackbar(STATUS_ERROR+ ' ${error.toString()} ', scaffoldKey);
     }
   }
 } // FIN DE LA CLASE

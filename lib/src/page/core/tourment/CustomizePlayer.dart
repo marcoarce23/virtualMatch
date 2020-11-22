@@ -262,7 +262,8 @@ class _CustomizePlayerState extends State<CustomizePlayer> {
           showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
-      showSnackbar(STATUS_ERROR + ' ${error.toString()} dddddddd', scaffoldKey);
+      showSnackbar(
+          STATUS_ERROR + ' ${error.toString()} dddddddd', scaffoldKey);
     }
   }
 }

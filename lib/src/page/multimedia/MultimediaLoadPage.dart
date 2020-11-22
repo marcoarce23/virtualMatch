@@ -465,12 +465,11 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
       MultimediaService entityService, MultimediaModel entity) async {
     try {
       await entityService.repository(entity).then((result) {
-        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
-
+    
         if (result["tipo_mensaje"] == '0')
-          showSnackbar(STATUS_OK, scaffoldKey);
+          showSnackbar(result["mensaje"], scaffoldKey);
         else
-          showSnackbar(STATUS_ERROR, scaffoldKey);
+          showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
       showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
@@ -489,41 +488,9 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
     final photo = await ImagePicker().getImage(source: origen);
     if (photo != null) {
       image = await entityImage.uploadImage(photo.path);
-      print('imagennnnn $image');
-      setState(() {
+       setState(() {
         entity.foto = image;
-
-        print('cargadod e iagen ${entity.foto}');
       });
     }
   }
-
-  // _procesarVideo2(String file) async {
-  //   valueImage = 2;
-
-  //   image = await entityImage.uploadVideo(file);
-  //   setState(() {
-  //     entity.foto = IMAGE_LOGO;
-  //     print('cargadod e iagen ${entity.foto}');
-  //   });
-  // }
-
-  // void _pickVideo() async {
-  //   try {
-  //     var _extension = 'MP4';
-  //     _pdfPath = await FilePicker.getFilePath(
-  //         type: FileType.custom,
-  //         allowedExtensions: (_extension?.isNotEmpty ?? false)
-  //             ? _extension?.replaceAll(' ', '')?.split(',')
-  //             : null);
-
-  //     setState(() {});
-  //     if (_pdfPath == '') {
-  //       return;
-  //     }
-  //     _procesarVideo2(_pdfPath);
-  //   } on PlatformException catch (exception) {
-  //     showSnackbar('Se produjo un error. $exception', scaffoldKey);
-  //   }
-  // }
 }

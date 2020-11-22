@@ -276,21 +276,21 @@ class _TourmentListPageState extends State<TourmentListPage> {
         usuario,
       )
           .then((result) {
-        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
+     
         if (result["tipo_mensaje"] == '0')
-           setState(() {
+          setState(() {
             showSnackbar(result["mensaje"], scaffoldKey);
           });
         else
           showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
-      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
+      showSnackbar(STATUS_ERROR+ ' ${error.toString()} ', scaffoldKey);
     }
   }
 
   _start(String keyId, String modalidad) {
-    print('MODALIDADDD: $modalidad');
+  
     if (modalidad == '27')
       _executeGenerator('/api/Torneo/execGenerarPlayOff/' +
           keyId +
@@ -309,7 +309,7 @@ class _TourmentListPageState extends State<TourmentListPage> {
   void cerrarTorneo(int idTorneo) async {
     try {
       await entityService.cerrarElTorneo(idTorneo).then((result) {
-        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
+      
         if (result["tipo_mensaje"] == '0')
           showSnackbar(result["mensaje"], scaffoldKey);
         else
@@ -324,7 +324,7 @@ class _TourmentListPageState extends State<TourmentListPage> {
       TourmentService entityService, model.TorneoModel entity) async {
     try {
       await entityService.repository(entity).then((result) {
-        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
+     
         if (result["tipo_mensaje"] == '0')
           showSnackbar(result["mensaje"], scaffoldKey);
         else
@@ -336,8 +336,7 @@ class _TourmentListPageState extends State<TourmentListPage> {
   }
 
   void _executeGenerator(String url) async {
-    print('EL URLLL: $url}');
-    try {
+     try {
       await entityService.execute(API + url).then((result) {
         if (result["tipo_mensaje"] == '0')
           showSnackbar(result["mensaje"], scaffoldKey);

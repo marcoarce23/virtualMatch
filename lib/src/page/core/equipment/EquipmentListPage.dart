@@ -5,7 +5,6 @@ import 'package:virtual_match/src/model/entity/EntityFromJson/EquipoModel.dart'
     as gets;
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
-import 'package:virtual_match/src/page/core/player/PlayerEditPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/core/EquipmentService.dart';
 import 'package:virtual_match/src/style/Style.dart';
@@ -47,7 +46,7 @@ class _EquipmentListPageState extends State<EquipmentListPage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
- //   entityService = Provider.of<EquipmentService>(context);
+    //   entityService = Provider.of<EquipmentService>(context);
 
     return Scaffold(
       key: scaffoldKey,
@@ -96,7 +95,7 @@ class _EquipmentListPageState extends State<EquipmentListPage> {
           ),
         ),
       ),
-     floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
+      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }
@@ -241,7 +240,7 @@ class _EquipmentListPageState extends State<EquipmentListPage> {
           showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
-      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
+      showSnackbar(STATUS_ERROR+ ' ${error.toString()} ', scaffoldKey);
     }
   }
 } // FIN DE LA CLASE

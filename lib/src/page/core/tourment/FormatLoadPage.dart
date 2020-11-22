@@ -503,7 +503,7 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
               .then((result) {
             print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
             if (result["tipo_mensaje"] == '0') {
-              showSnackbar(STATUS_OK, scaffoldKey);
+              showSnackbar(result["mensaje"], scaffoldKey);
 
               navegation(context, TourmentListPage());
             } else
@@ -516,7 +516,7 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
         await entityService.repositoryDetail(entity).then((result) async {
           print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
           if (result["tipo_mensaje"] == '0') {
-            showSnackbar(STATUS_OK, scaffoldKey);
+            showSnackbar(result["mensaje"], scaffoldKey);
 
             navegation(context, TourmentListPage());
           } else
@@ -524,7 +524,7 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
         });
       }
     } catch (error) {
-      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
+      showSnackbar(STATUS_ERROR+ ' ${error.toString()} ', scaffoldKey);
     }
     //  navegation(context, FormatLoadPage());
   }

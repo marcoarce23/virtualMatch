@@ -8,10 +8,15 @@ CrudService entityService = new CrudService();
 
 enviarNotificaciones(String url, String clave, String titulo,
     String valorTitulo, String subTitulo, String subTituloValor) {
+  print('url mensa6jesss: $url');
+
   Token entityToken;
   final dataMapToken = entityService.get(new Token(), url);
 
+  print('dataMapToken: $dataMapToken');
+
   dataMapToken.then((value) {
+    print('value.length: ${value.length}');
     if (value.length > 0) {
       for (int i = 0; i < value.length; i++) {
         entityToken = value[i];

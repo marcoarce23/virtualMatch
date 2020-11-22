@@ -425,14 +425,14 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
       await entityService.repositoryDetail(entity).then((result) {
         print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0') {
-          showSnackbar(STATUS_OK, scaffoldKey);
+          showSnackbar(result["mensaje"], scaffoldKey);
 
           navegation(context, MiniTourmentListPage());
         } else
-          showSnackbar(STATUS_ERROR, scaffoldKey);
+          showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
-      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
+      showSnackbar(STATUS_ERROR+ ' ${error.toString()} ', scaffoldKey);
     }
     //  navegation(context, FormatLoadPage());
   }

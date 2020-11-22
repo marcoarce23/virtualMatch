@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
+import 'package:virtual_match/src/api/Fcm.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/NotificacionModel.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/NotificacionModel.dart'
@@ -296,10 +297,19 @@ class _NotificationLoadPageState extends State<NotificationLoadPage> {
       NotificationService entityService, NotificacionModel entity) async {
     try {
       await entityService.repository(entity).then((result) {
-        if (result["tipo_mensaje"] == '0')
-          showSnackbar(STATUS_OK, scaffoldKey);
-        else
-          showSnackbar(STATUS_ERROR, scaffoldKey);
+        if (result["tipo_mensaje"] == '0') {
+          showSnackbar(result["mensaje"], scaffoldKey);
+          if (entity.states == StateEntity.Insert) {
+            enviarNotificaciones(
+                urlNotification,
+                'Notificacion',
+                'Nueva notificación.',
+                entity.titulo,
+                'Sobre el Equipo.',
+                entity.detalle);
+          }
+        } else
+          showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
       showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);

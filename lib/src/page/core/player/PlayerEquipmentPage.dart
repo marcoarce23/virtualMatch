@@ -233,9 +233,9 @@ class _PlayerEquipmentPageState extends State<PlayerEquipmentPage> {
       await entityService.repository(entity).then((result) {
         print('EL RESULTTTTT CAMBIO ESTADO: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0')
-          showSnackbar(STATUS_OK, scaffoldKey);
+          showSnackbar(result["mensaje"], scaffoldKey);
         else
-          showSnackbar(STATUS_ERROR, scaffoldKey);
+          showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
       showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);

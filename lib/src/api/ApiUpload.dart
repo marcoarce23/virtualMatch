@@ -11,12 +11,12 @@ class ApiUpload {
 
   dynamic respData(http.Response resp) {
     if (resp.statusCode != STATUSCODE200 && resp.statusCode != STATUSCODE201) {
-      print('Algo salio mal PDF ${resp.body}');
+  
       return null;
     }
 
     final respData = json.decode(resp.body);
-    print(respData);
+  
     return respData[_secureUrl];
   }
 
@@ -32,14 +32,7 @@ class ApiUpload {
     final streamResponse = await imageUploadRequest.send();
     final resp = await http.Response.fromStream(streamResponse);
 
-    // if (resp.statusCode != 200 && resp.statusCode != 201) {
-    //   print('Algo salio mal IMAGENNNN ${resp.body}');
-    //   return null;
-    // }
-
-    // final respData = json.decode(resp.body);
-    // print(respData);
-    // return respData['secure_url'];
+  
     return respData(resp);
   }
 
@@ -55,14 +48,7 @@ class ApiUpload {
     final streamResponse = await imageUploadRequest.send();
     final resp = await http.Response.fromStream(streamResponse);
 
-    // if (resp.statusCode != 200 && resp.statusCode != 201) {
-    //   print('Algo salio mal PDF ${resp.body}');
-    //   return null;
-    // }
-
-    // final respData = json.decode(resp.body);
-    // print(respData);
-    // return respData['secure_url'];
+  
     return respData(resp);
   }
 
@@ -78,14 +64,7 @@ class ApiUpload {
     final streamResponse = await imageUploadRequest.send();
     final resp = await http.Response.fromStream(streamResponse);
 
-    // if (resp.statusCode != 200 && resp.statusCode != 201) {
-    //   print('Algo salio mal videooo ${resp.body}');
-    //   return null;
-    // }
 
-    // final respData = json.decode(resp.body);
-    // print(respData);
-    // return respData['secure_url'];
     return respData(resp);
   }
 }

@@ -19,14 +19,7 @@ class ApiDownload {
     final resp = await http.Response.fromStream(streamResponse);
 
     return respData(resp);
-    // if (resp.statusCode != 200 && resp.statusCode != 201) {
-    //   print('Algo salio mal IMAGENNNN ${resp.body}');
-    //   return null;
-    // }
-
-    // final respData = json.decode(resp.body);
-    // print(respData);
-    // return respData['secure_url'];
+ 
   }
 
   Future<String> uploadImagenFile(String imagen) async {
@@ -42,14 +35,7 @@ class ApiDownload {
     final resp = await http.Response.fromStream(streamResponse);
 
     return respData(resp);
-    // if (resp.statusCode != 200 && resp.statusCode != 201) {
-    //   print('Algo salio mal PDF ${resp.body}');
-    //   return null;
-    // }
-
-    // final respData = json.decode(resp.body);
-    // print(respData);
-    // return respData['secure_url'];
+  
   }
 
   Future<String> uploadVideo(String imagen) async {
@@ -65,25 +51,14 @@ class ApiDownload {
     final resp = await http.Response.fromStream(streamResponse);
 
     return respData(resp);
-
-    // if (resp.statusCode != 200 && resp.statusCode != 201) {
-    //   print('Algo salio mal videooo ${resp.body}');
-    //   return null;
-    // }
-
-    // final respData = json.decode(resp.body);
-    // print(respData);
-    // return respData['secure_url'];
   }
 
   dynamic respData(http.Response resp) {
     if (resp.statusCode != 200 && resp.statusCode != 201) {
-      print('Algo salio mal videooo ${resp.body}');
       return null;
     }
 
     final respData = json.decode(resp.body);
-    print(respData);
     return respData['secure_url'];
   }
 }

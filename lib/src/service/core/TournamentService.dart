@@ -27,8 +27,7 @@ class TourmentService {
 
   Future<Map<String, dynamic>> repository(IEntityMap entity) async {
     var result;
-    print('STATE ENTIRY: ${entity.states}');
-
+   
     isLoading = true;
     switch (entity.states) {
       case StateEntity.Insert:
@@ -40,7 +39,7 @@ class TourmentService {
       default:
     }
 
-    print('DEL VALOR DE EVENT BLOC: $result');
+
     isLoading = false;
     //  notifyListeners();
     return result;
@@ -48,7 +47,7 @@ class TourmentService {
 
   Future<Map<String, dynamic>> repositoryDetail(IEntityMap entity) async {
     var result;
-    print('STATE ENTIRY: ${entity.states}');
+   
 
     isLoading = true;
     switch (entity.states) {
@@ -61,7 +60,7 @@ class TourmentService {
       default:
     }
 
-    print('DEL VALOR DE EVENT BLOC: $result');
+  
     isLoading = false;
     // notifyListeners();
     return result;
@@ -69,7 +68,7 @@ class TourmentService {
 
   Future<Map<String, dynamic>> repositoryV11(IEntityMap entity) async {
     var result;
-    print('STATE ENTIRY: ${entity.states}');
+  
 
     isLoading = true;
     switch (entity.states) {
@@ -82,7 +81,7 @@ class TourmentService {
       default:
     }
 
-    print('DEL VALOR DE EVENT BLOC: $result');
+
     isLoading = false;
     // notifyListeners();
     return result;
@@ -162,19 +161,11 @@ class TourmentService {
     //notifyListeners();
     return _result;
   }
-/*
-  Future<List<IEntityJson>> getTodosLosTorneosPersona1(
-      IEntityJson entityJson) async {
-    var _result = await _apiGet.getTodosLosTorneos(entityJson);
-    isLoading = false;
-    //  notifyListeners();
-    return _result;
-  }
-  */
+
 
   Future<Map<String, dynamic>> execute(String url) async {
     final apiRest = url; // eventResourceAdd['add'][0].toString()   ;
-    print('urlvvvvvvuuuuuuuuuu: $apiRest');
+ 
     final response = await http.post(apiRest);
 
     isLoading = false;

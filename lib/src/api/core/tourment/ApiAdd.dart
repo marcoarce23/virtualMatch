@@ -10,23 +10,23 @@ import 'package:virtual_match/src/api/dataMap.dart';
 class ApiAdd {
   Future<Map<String, dynamic>> add(IEntityMap entity) async {
     String _body = json.encode(entity.toJson());
-    print('body: $_body');
+
     final apiRest =
         api['add'][0].toString(); // eventResourceAdd['add'][0].toString()   ;
     //RouteAdd().postEvent(); // METODO QUE OBTENFA EL POST DEL EVENTO; MULTIMEDIA, VOLUTNARIO; HORARIO
-    print('url: $apiRest');
+
     final response = await http.post(apiRest,
         headers: {"Content-Type": "application/json"}, body: _body);
     return dataMap(response);
   }
 
- Future<Map<String, dynamic>> add1(IEntityMap entity) async {
+  Future<Map<String, dynamic>> add1(IEntityMap entity) async {
     String _body = json.encode(entity.toJson());
-    print('body: $_body');
+
     final apiRest =
         api['add1'][0].toString(); // eventResourceAdd['add'][0].toString()   ;
     //RouteAdd().postEvent(); // METODO QUE OBTENFA EL POST DEL EVENTO; MULTIMEDIA, VOLUTNARIO; HORARIO
-    print('url: $apiRest');
+
     final response = await http.post(apiRest,
         headers: {"Content-Type": "application/json"}, body: _body);
     return dataMap(response);
@@ -35,11 +35,11 @@ class ApiAdd {
   Future<Map<String, dynamic>> changeDate(IEntityMap entity) async {
     print(entity.toJson());
     String _body = json.encode(entity.toJson());
-    print('body: $_body');
+
     final apiRest = api['updateFecha'][0]
         .toString(); // eventResourceAdd['add'][0].toString()   ;
     //RouteAdd().postEvent(); // METODO QUE OBTENFA EL POST DEL EVENTO; MULTIMEDIA, VOLUTNARIO; HORARIO
-    print('url: $apiRest');
+
     final response = await http.post(apiRest,
         headers: {"Content-Type": "application/json"}, body: _body);
     return dataMap(response);
@@ -47,7 +47,7 @@ class ApiAdd {
 
   Future<Map<String, dynamic>> cerrarElTorneo(int idTorneo) async {
     final apiRest = api['cerrarElTorneo'][0] + '/' + idTorneo.toString();
-    print('url: $apiRest');
+
     final response = await http.put(
       apiRest,
       headers: {"Content-Type": "application/json"},
@@ -59,7 +59,7 @@ class ApiAdd {
       ReemplazarJugador entity) async {
     print(entity.toJson());
     String _body = json.encode(entity.toJson());
-    print('body: $_body');
+
     final apiRest = api['reemplazarFecha'][0].toString() +
         "/Torneo/" +
         entity.idTorneo.toString() +
@@ -69,7 +69,7 @@ class ApiAdd {
         entity.idPartido.toString() +
         "/Reemplazo/" +
         entity.idJugadorReemplazo.toString();
-    print('url: $apiRest');
+
     final response = await http.post(apiRest,
         headers: {"Content-Type": "application/json"}, body: _body);
     return dataMap(response);
@@ -79,7 +79,7 @@ class ApiAdd {
       FormatoModel entity, int grupo, int jugadoresPorGrupo) async {
     print(entity.toJson());
     String _body = json.encode(entity.toJson());
-    print('body: $_body');
+
     final apiRest = api['ejecutarTorneoManual'][0].toString() +
         "/Torneo/" +
         entity.idTorneo.toString() +
@@ -88,7 +88,6 @@ class ApiAdd {
         "/jugadores/" +
         jugadoresPorGrupo.toString();
 
-    print('url: $apiRest');
     final response = await http.post(apiRest,
         headers: {"Content-Type": "application/json"}, body: _body);
     return dataMap(response);

@@ -5,12 +5,7 @@ const int STATUSCODE401 = 401;
 const int STATUSCODE500 = 500;
 const int STATUSCODE501 = 501;
 
-
-const String STATUS_OK = 'Registro con éxito.';
-const String STATUS_OK_ADD = 'El Registro fue registrado con éxito.';
-const String STATUS_OK_DELETE = 'El Registro fue eliminado con éxito.';
-const String STATUS_OK_UPDATE = 'El Registro fue actualizado con éxito.';
-const String STATUS_ERROR = 'Se produjo un error. Vuelva a intentarlo';
+const String STATUS_ERROR= 'Se produjo un error. Vuelva a intentarlo';
 const String STATUS_CATCH = 'Se produjo un error. Vuelva a intentarlo';
 
 

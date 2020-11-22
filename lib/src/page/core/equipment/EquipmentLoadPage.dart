@@ -12,8 +12,6 @@ import 'package:virtual_match/src/model/entity/IEntity.dart';
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
 import 'package:virtual_match/src/page/core/equipment/EquipmentListPage.dart';
-import 'package:virtual_match/src/page/core/player/PlayerEditPage.dart';
-
 import 'package:virtual_match/src/page/home/CircularMenuPage.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/ImageService.dart';
@@ -146,8 +144,8 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
 
     if (entityModelGet != null) {
       entity.states = StateEntity.Update;
-        print('agrupadorrr: ${entityModelGet.agrupador}');
- entity.agrupador = entityModelGet.agrupador;
+      print('agrupadorrr: ${entityModelGet.agrupador}');
+      entity.agrupador = entityModelGet.agrupador;
       if (unaVez == 0) {
         entity.agrupador = entityModelGet.agrupador;
         entity.nombre = entityModelGet.nombre;
@@ -363,17 +361,22 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
     try {
       await entityService.repository(entity).then((result) {
         if (result["tipo_mensaje"] == '0') {
-          showSnackbar(STATUS_OK, scaffoldKey);
+          showSnackbar(result["mensaje"], scaffoldKey);
 
           if (entity.states == StateEntity.Insert) {
-            enviarNotificaciones('URL', 'Equipo', 'Nuevo Equipo creado',
-                entity.nombre, 'Sobre el Equipo.', entity.detalle);
+            enviarNotificaciones(
+                urlNotification,
+                'Equipo',
+                'Nuevo Equipo creado.',
+                entity.nombre,
+                'Sobre el Equipo.',
+                entity.detalle);
           }
         } else
-          showSnackbar(STATUS_ERROR, scaffoldKey);
+          showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
-      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
+      showSnackbar(STATUS_ERROR+ ' ${error.toString()} ', scaffoldKey);
     }
   }
 
