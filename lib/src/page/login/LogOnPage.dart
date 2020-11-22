@@ -74,14 +74,15 @@ class _LogOnPageState extends State<LogOnPage> {
       AppleSignIn.onCredentialRevoked.listen((_) {
         print("Credentials revoked");
       });
-    } else {
+    } 
+
       _googleSignIn.onCurrentUserChanged.listen((GoogleSignInAccount account) {
         setState(() {
           currentUser = account;
         });
       });
       _googleSignIn.signInSilently();
-    }
+   
   }
 
   Future<void> initPlatformState() async {

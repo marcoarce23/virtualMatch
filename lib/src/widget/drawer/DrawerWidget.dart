@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -12,6 +14,7 @@ import 'package:virtual_match/src/page/faq/FaqListPage.dart';
 import 'package:virtual_match/src/page/general/ViewPage.dart';
 import 'package:virtual_match/src/page/intro/IntroPage.dart';
 import 'package:virtual_match/src/page/login/LogOnPage.dart';
+import 'package:virtual_match/src/page/login/LogOutPage.dart';
 import 'package:virtual_match/src/page/multimedia/MultimediaLoadPage.dart';
 import 'package:virtual_match/src/page/new/NewLoadPage.dart';
 import 'package:virtual_match/src/page/notification/NotificationLoadPage.dart';
@@ -206,7 +209,6 @@ class DrawerMenu extends StatelessWidget {
   }
 
   Drawer drawerUser(BuildContext context) {
-   
     return Drawer(
         child: ListView(
       children: <Widget>[
@@ -365,12 +367,11 @@ class DrawerMenu extends StatelessWidget {
               height: 30,
             ),
             '       Cerrar Sesión', () {
-          // if (Platform.isAndroid) {
-          //   navegation(context, LogOutPage());
-
-          // } else {
-          navegation(context, LogOnPage());
-          //       }
+          if (Platform.isAndroid) {
+            navegation(context, LogOutPage());
+          } else {
+            navegation(context, LogOnPage());
+          }
         }),
       ],
     ));
@@ -561,11 +562,11 @@ class DrawerMenu extends StatelessWidget {
               height: 30,
             ),
             '       Cerrar Sesión', () {
-          //  if (Platform.isAndroid) {
-          //    navegation(context, LogOutPage());
-          //  } else {
-          navegation(context, LogOnPage());
-          //  }
+          if (Platform.isAndroid) {
+            navegation(context, LogOutPage());
+          } else {
+            navegation(context, LogOnPage());
+          }
         }),
       ],
     ));
