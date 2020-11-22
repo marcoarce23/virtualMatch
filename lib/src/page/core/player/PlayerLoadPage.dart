@@ -6,6 +6,7 @@ import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/getwidget.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:virtual_match/src/api/Fcm.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/ClasificadorModel.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/JugadorModel.dart';
@@ -93,7 +94,7 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
           _form(context),
         ],
       ),
-      floatingActionButton: floatButtonImage(Colors.transparent, context,
+      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }
@@ -441,14 +442,19 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
 
     try {
       await entityService.repository(entity, API + _url).then((result) {
-        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
 
         if (result["tipo_mensaje"] == '0') {
           if (entity.states == StateEntity.Insert) {
             prefs.idPlayer = result["data"].toString();
           }
-          print('EL ID USUARIO ESSS: ${prefs.idPlayer}');
-          showSnackbar(result["mensaje"].toString(), scaffoldKey);
+            showSnackbar(result["mensaje"].toString(), scaffoldKey);
+          enviarNotificaciones(
+              urlNotification,
+              'Jugador',
+              'Nuevo Jugador',
+              entity.nombre + ' ' + entity.apellido,
+              'PSDN.',
+              entity.idPsdn + ' WhatsApp: ' + entity.telefono);
         } else
           showSnackbar(result["mensaje"].toString(), scaffoldKey);
       });

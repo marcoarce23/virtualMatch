@@ -42,4 +42,4 @@ const String ASSETS_ICON = 'assets/ico/ico.png';
 const String TITLE = 'VIRTUAL MATCH';
 
 const String urlNotification =
-    'https://virtualmatch.neuronatexnology.com/api/Imei/GetTokensAll';
+    'http://virtualmatch.neuronatexnology.com/api/Imei/GetTokensAll';

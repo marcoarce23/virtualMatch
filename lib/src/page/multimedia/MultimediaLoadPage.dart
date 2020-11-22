@@ -6,6 +6,7 @@ import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:virtual_match/src/api/Fcm.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/ClasificadorModel.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/MultimediaModel.dart';
 import 'package:virtual_match/src/model/Preference.dart';
@@ -174,7 +175,7 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
           _form(context),
         ],
       ),
-      floatingActionButton: floatButtonImage(Colors.transparent, context,
+      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
           FaIcon(FontAwesomeIcons.futbol), HomePage()),
     );
   }
@@ -467,7 +468,18 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
       await entityService.repository(entity).then((result) {
     
         if (result["tipo_mensaje"] == '0')
+          if (result["tipo_mensaje"] == '0') {
           showSnackbar(result["mensaje"], scaffoldKey);
+          if (entity.states == StateEntity.Insert) {
+            enviarNotificaciones(
+                urlNotification,
+                'Multimedia',
+                'Nueva galería de imágenes',
+                entity.titulo,
+                'Tipo.',
+                entity.resumen);
+          }
+        } 
         else
           showSnackbar(result["mensaje"], scaffoldKey);
       });

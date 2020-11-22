@@ -8,17 +8,16 @@ CrudService entityService = new CrudService();
 
 enviarNotificaciones(String url, String clave, String titulo,
     String valorTitulo, String subTitulo, String subTituloValor) {
-  print('url mensa6jesss: $url');
-
-  Token entityToken;
+  Token _entityToken;
   entityService.get(new Token(), url).then((value) {
-    print('value.length: ${value.length}');
     if (value.length > 0) {
       for (int i = 0; i < value.length; i++) {
-        entityToken = value[i];
-        print('entrooo las veces de: ${entityToken.llaveToken}');
-    //    new FCM().sebnFCM(entityToken.llaveToken, clave,
-      //      '$titulo - $valorTitulo - $subTitulo $subTituloValor - Fecha - ${DateTime.now()}');
+        _entityToken = value[i];
+
+        new FCM().sebnFCM(
+            _entityToken.llaveToken, //entityToken.llaveToken,
+            clave,
+            '$titulo: $valorTitulo - $subTitulo: $subTituloValor - Fecha: ${DateTime.now().toString().substring(0,10)}');
       }
     }
   });
@@ -28,12 +27,13 @@ class FCM {
   Future<Map<String, dynamic>> sebnFCM(
       String token, String body, String data) async {
     String sJSON =
-        '{"to": "$token","notification": {"title": Comunidad Virtual Match, "body": "$body"}, "data":{"data": "$data"}}';
+        '{"to": "$token","notification": {"title": "Virtual Match", "body": "$data"}, "data":{"data": "$data"}}';
     String _body = sJSON;
-
+  //  print('body: $_body');
     final response = await http.post(urlFCM,
         headers: {"Authorization": keyFCM, "Content-Type": contentTypeJSON},
         body: _body);
+
     if (response.statusCode == 200) {
     } else {}
     print(

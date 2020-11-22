@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:virtual_match/src/api/Fcm.dart';
 
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/ListadoTorneoModel.dart';
@@ -229,10 +230,11 @@ class _TourmentListPageState extends State<TourmentListPage> {
                   '/api/TorneoFaseGrupo/execGenerarPlayOffGrupo/' +
                       keyId +
                       '/usuario/' +
-                      prefs.email);
+                      prefs.email,
+                  entity);
               break;
             case 2:
-              _start(keyId, entity.idTipoCompeticion.toString());
+              _start(keyId, entity.idTipoCompeticion.toString(), entity);
               break;
             case 3:
               Navigator.pushNamed(context, 'tourmnetLoad', arguments: entity);
@@ -276,7 +278,6 @@ class _TourmentListPageState extends State<TourmentListPage> {
         usuario,
       )
           .then((result) {
-     
         if (result["tipo_mensaje"] == '0')
           setState(() {
             showSnackbar(result["mensaje"], scaffoldKey);
@@ -285,31 +286,31 @@ class _TourmentListPageState extends State<TourmentListPage> {
           showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
-      showSnackbar(STATUS_ERROR+ ' ${error.toString()} ', scaffoldKey);
+      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
     }
   }
 
-  _start(String keyId, String modalidad) {
-  
+  _start(String keyId, String modalidad, ListaTorneoModel entity) {
     if (modalidad == '27')
-      _executeGenerator('/api/Torneo/execGenerarPlayOff/' +
-          keyId +
-          '/usuario/' +
-          prefs.email);
+      _executeGenerator(
+          '/api/Torneo/execGenerarPlayOff/' + keyId + '/usuario/' + prefs.email,
+          entity);
     else if (modalidad == '28')
       _executeGenerator(
-          '/api/Torneo/execGenerarLiga/' + keyId + '/usuario/' + prefs.email);
+          '/api/Torneo/execGenerarLiga/' + keyId + '/usuario/' + prefs.email,
+          entity);
     else
-      _executeGenerator('/api/TorneoFaseGrupo/execGenerarLigaGrupo/' +
-          keyId +
-          '/usuario/' +
-          prefs.email);
+      _executeGenerator(
+          '/api/TorneoFaseGrupo/execGenerarLigaGrupo/' +
+              keyId +
+              '/usuario/' +
+              prefs.email,
+          entity);
   }
 
   void cerrarTorneo(int idTorneo) async {
     try {
       await entityService.cerrarElTorneo(idTorneo).then((result) {
-      
         if (result["tipo_mensaje"] == '0')
           showSnackbar(result["mensaje"], scaffoldKey);
         else
@@ -324,7 +325,6 @@ class _TourmentListPageState extends State<TourmentListPage> {
       TourmentService entityService, model.TorneoModel entity) async {
     try {
       await entityService.repository(entity).then((result) {
-     
         if (result["tipo_mensaje"] == '0')
           showSnackbar(result["mensaje"], scaffoldKey);
         else
@@ -335,12 +335,24 @@ class _TourmentListPageState extends State<TourmentListPage> {
     }
   }
 
-  void _executeGenerator(String url) async {
-     try {
+  void _executeGenerator(String url, ListaTorneoModel entity) async {
+    try {
       await entityService.execute(API + url).then((result) {
-        if (result["tipo_mensaje"] == '0')
+        if (result["tipo_mensaje"] == '0') {
           showSnackbar(result["mensaje"], scaffoldKey);
-        else
+
+          enviarNotificaciones(
+              urlNotification,
+              'Torneo',
+              'Nuevo Torneo creado.',
+              entity.nombreTorneo,
+              'Modalidad:',
+              entity.tipoModalidad +
+                  ' Competición:' +
+                  entity.tipoCompeticion +
+                  ' Torneo:' +
+                  entity.tipoTorneo);
+        } else
           showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {

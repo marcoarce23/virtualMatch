@@ -141,7 +141,7 @@ class _NotificationLoadPageState extends State<NotificationLoadPage> {
           _form(context),
         ],
       ),
-      floatingActionButton: floatButtonImage(Colors.transparent, context,
+      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
           FaIcon(FontAwesomeIcons.futbol), HomePage()),
     );
   }

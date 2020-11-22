@@ -6,6 +6,7 @@ import 'package:getwidget/components/button/gf_button.dart';
 import 'package:getwidget/shape/gf_button_shape.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
+import 'package:virtual_match/src/api/Fcm.dart';
 import 'package:virtual_match/src/model/entity/EntityMap/NoticiaEventoModel.dart';
 import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/IEntity.dart';
@@ -496,8 +497,18 @@ class _NewLoadPageState extends State<NewLoadPage> {
   void executeCUD(NewService entityBloc, NoticiaEventoModel entity) async {
     try {
       await entityService.repository(entity).then((result) {
-         if (result["tipo_mensaje"] == '0')
+         if (result["tipo_mensaje"] == '0') {
           showSnackbar(result["mensaje"], scaffoldKey);
+          if (entity.states == StateEntity.Insert) {
+            enviarNotificaciones(
+                urlNotification,
+                'Noticia',
+                'Nueva noticia/evento.',
+                entity.titulo,
+                'Tipo.',
+                entity.objetivo);
+          }
+        } 
         else
           showSnackbar(result["mensaje"], scaffoldKey);
       });

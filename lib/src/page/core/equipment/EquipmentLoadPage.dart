@@ -80,14 +80,7 @@ class _EquipmentAllPageState extends State<EquipmentAllPage> {
                 height: 28,
               ),
               title: Text('Edita tu equipo')),
-          // BottomNavigationBarItem(
-          //     icon: Image.asset(
-          //       'assets/image/jugador2.png',
-          //       //scale: 0.4,
-          //       width: 28,
-          //       height: 28,
-          //     ),
-          //     title: Text('Tus jugadores')),
+
         ],
         currentIndex: page,
         unselectedItemColor: AppTheme.themeWhite,
@@ -153,7 +146,6 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
         image = entityModelGet.foto;
       }
 
-      print('ddd ${entity.foto}');
     }
     unaVez = 1;
 
@@ -333,8 +325,7 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
     if (!formKey.currentState.validate()) return;
     formKey.currentState.save();
 
-    print('myControllerSOY EL VALOR DE ' + controllerDetalle.text);
-
+    
     setState(() => _save = true);
     loadingEntity();
     executeCUD(entityService, entity);
