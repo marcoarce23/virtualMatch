@@ -275,7 +275,7 @@ class _PositionTableState extends State<PositionTable> {
                   ],
                   rows: entities.map(
                     (data) {
-                      print(data.nro.toString());
+               
                       String texto = data.tipoCompeticion;
                       if (data.comodin == 52) {
                         texto = texto + " " + data.grupo.toString();

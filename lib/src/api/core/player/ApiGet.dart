@@ -11,8 +11,6 @@ class ApiGet {
     final _apiRest = api['get'][0].toString();
     final response = await http.get(_apiRest);
 
-    print(_apiRest);
-
     return getListIEntityJson(response, entity, decodeData, list);
   }
 
@@ -22,8 +20,6 @@ class ApiGet {
 
     final _apiRest = api['get1'][0].toString();
     final response = await http.get(_apiRest);
-
-    print(_apiRest);
 
     return getListIEntityJson(response, entity, decodeData, list);
   }
@@ -35,8 +31,6 @@ class ApiGet {
 
     final _apiRest = api['getMisJugadores'][0].toString() + '/' + agrupador;
     final response = await http.get(_apiRest);
-
-    print(_apiRest);
 
     return getListIEntityJson(response, entity, decodeData, list);
   }

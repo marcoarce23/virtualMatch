@@ -160,7 +160,6 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
         entity.foto = entityModelGet.foto;
         image = entityModelGet.foto;
       }
-      print(entity.foto);
     }
     unaVez = 1;
 
@@ -466,9 +465,7 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
       MultimediaService entityService, MultimediaModel entity) async {
     try {
       await entityService.repository(entity).then((result) {
-    
-        if (result["tipo_mensaje"] == '0')
-          if (result["tipo_mensaje"] == '0') {
+        if (result["tipo_mensaje"] == '0') if (result["tipo_mensaje"] == '0') {
           showSnackbar(result["mensaje"], scaffoldKey);
           if (entity.states == StateEntity.Insert) {
             enviarNotificaciones(
@@ -479,8 +476,7 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
                 'Tipo.',
                 entity.resumen);
           }
-        } 
-        else
+        } else
           showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
@@ -500,7 +496,7 @@ class _MultimediaLoadPageState extends State<MultimediaLoadPage> {
     final photo = await ImagePicker().getImage(source: origen);
     if (photo != null) {
       image = await entityImage.uploadImage(photo.path);
-       setState(() {
+      setState(() {
         entity.foto = image;
       });
     }

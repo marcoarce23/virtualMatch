@@ -181,7 +181,7 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
                       onChanged: (value) {
                         setState(() {
                           _opcionJugador = value;
-                          });
+                        });
                       },
                     ),
                   ],
@@ -545,7 +545,6 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
                               TextStyle(fontSize: 30, color: Colors.black),
                         ),
                         onChanged: (value) {
-                          print(value);
                           entityResultado.gol1 = int.parse(value);
                         },
                       )
@@ -581,7 +580,6 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
                               TextStyle(fontSize: 30, color: Colors.black),
                         ),
                         onChanged: (value) {
-                          print(value);
                           entityResultado.gol2 = int.parse(value);
                         },
                       )

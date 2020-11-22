@@ -11,8 +11,6 @@ class ApiGet {
     final _apiRest = api['get'][0].toString() + '/' + value.toString();
     final response = await http.get(_apiRest);
 
-    print(_apiRest);
-
     return getListIEntityJson(response, entity, decodeData, list);
   }
 }

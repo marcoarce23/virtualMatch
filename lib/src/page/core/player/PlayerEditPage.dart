@@ -229,9 +229,7 @@ class _PlayerEditPageState extends State<PlayerEditPage> {
             child: Text("Sobre mi equipo"),
           ),
         ],
-        onCanceled: () {
-          print("You have canceled the menu.");
-        },
+        onCanceled: () {},
         onSelected: (value) {
           switch (value) {
             // case 1:

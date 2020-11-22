@@ -150,13 +150,13 @@ class _NotificationListPageState extends State<NotificationListPage> {
                   overflow: TextOverflow.clip,
                   textAlign: TextAlign.justify,
                 ),
-                  Text(
-                      'PUBLICADO: ${entity.fechacreacion.substring(0, 10)}',
-                      style: kSubtitleStyleWhite,
+                Text(
+                  'PUBLICADO: ${entity.fechacreacion.substring(0, 10)}',
+                  style: kSubtitleStyleWhite,
                   softWrap: true,
                   overflow: TextOverflow.clip,
                   textAlign: TextAlign.justify,
-                    ),
+                ),
               ],
             ),
           ],
@@ -182,9 +182,7 @@ class _NotificationListPageState extends State<NotificationListPage> {
             child: Text("Eliminar"),
           ),
         ],
-        onCanceled: () {
-          print("You have canceled the menu.");
-        },
+        onCanceled: () {},
         onSelected: (value) {
           switch (value) {
             case 1:
@@ -226,7 +224,7 @@ class _NotificationListPageState extends State<NotificationListPage> {
           showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
-      showSnackbar(STATUS_ERROR+ ' ${error.toString()} ', scaffoldKey);
+      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
     }
   }
 } // FIN DE LA CLASE

@@ -187,9 +187,7 @@ class _NewListPageState extends State<NewListPage> {
             child: Text("Eliminar"),
           ),
         ],
-        onCanceled: () {
-          print("You have canceled the menu.");
-        },
+        onCanceled: () {},
         onSelected: (value) {
           switch (value) {
             case 1:

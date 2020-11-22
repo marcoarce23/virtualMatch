@@ -277,9 +277,7 @@ class _ListTournamentPageState extends State<ListTournamentPage> {
             child: Text("Salirse del torneo"),
           ),
         ],
-        onCanceled: () {
-          print("You have canceled the menu.");
-        },
+        onCanceled: () {},
         onSelected: (value) {
           switch (value) {
             case -1:

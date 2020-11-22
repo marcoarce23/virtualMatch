@@ -389,7 +389,7 @@ class _NewLoadPageState extends State<NewLoadPage> {
         _fecha = DateFormat("dd/MM/yyyy").format(picked);
         _inputFieldDateController.text = _fecha;
         entity.fecha = _inputFieldDateController.text;
-        print(_inputFieldDateController.text);
+   
       });
     }
   }

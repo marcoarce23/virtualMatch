@@ -101,7 +101,6 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
         entity.foto = entityModelGet.foto;
         image = entityModelGet.foto;
       }
-      print(entity.foto);
     }
     unaVez = 1;
 
@@ -401,8 +400,6 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
     if (!formKey.currentState.validate()) return;
     formKey.currentState.save();
 
-   
-
     setState(() => _save = true);
     loadingEntity();
     executeCUD(entityService, entity);
@@ -453,7 +450,6 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
 
       setState(() {
         entity.foto = image;
-
       });
     }
   }

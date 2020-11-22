@@ -186,9 +186,7 @@ class _MultimediaListPageState extends State<MultimediaListPage> {
             child: Text("Eliminar"),
           ),
         ],
-        onCanceled: () {
-          print("You have canceled the menu.");
-        },
+        onCanceled: () {},
         onSelected: (value) {
           switch (value) {
             case 1:
@@ -236,7 +234,7 @@ class _MultimediaListPageState extends State<MultimediaListPage> {
           showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
-      showSnackbar(STATUS_ERROR+ ' ${error.toString()} ', scaffoldKey);
+      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
     }
   }
 } // FIN DE LA CLASE

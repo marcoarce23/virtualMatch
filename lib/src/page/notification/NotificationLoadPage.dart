@@ -128,7 +128,7 @@ class _NotificationLoadPageState extends State<NotificationLoadPage> {
       entity.titulo = entityModelGet.titulo;
       entity.idNotificacion = entityModelGet.idNotificacion;
       entity.states = StateEntity.Update;
-      print(entityModelGet.detalle);
+
     }
 
     return Scaffold(
