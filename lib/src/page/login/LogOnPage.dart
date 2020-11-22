@@ -67,21 +67,21 @@ class _LogOnPageState extends State<LogOnPage> {
     super.initState();
     // prefs.lastPage = LoginPage.routeName;
     initPlatformState();
-    checkLoggedInState();
 
     if (Platform.isIOS) {
+      checkLoggedInState();
       //check for ios if developing for both android & ios
       AppleSignIn.onCredentialRevoked.listen((_) {
         print("Credentials revoked");
       });
-    }
-
-    _googleSignIn.onCurrentUserChanged.listen((GoogleSignInAccount account) {
-      setState(() {
-        currentUser = account;
+    } else {
+      _googleSignIn.onCurrentUserChanged.listen((GoogleSignInAccount account) {
+        setState(() {
+          currentUser = account;
+        });
       });
-    });
-    _googleSignIn.signInSilently();
+      _googleSignIn.signInSilently();
+    }
   }
 
   Future<void> initPlatformState() async {
