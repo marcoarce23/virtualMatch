@@ -59,7 +59,7 @@ class _TourmentPageState extends State<TourmentPage> {
         appBar: appBar('TORNEOS'),
         body: SingleChildScrollView(child: bodyContainer(context)),
         drawer: DrawerMenu(),
-        floatingActionButton: floatButtonImage(Colors.transparent, context,
+        floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
             FaIcon(FontAwesomeIcons.playstation), HomePage()),
         // bottomNavigationBar: new BottonNavigation(),
       ),
@@ -235,6 +235,7 @@ class _TourmentPageState extends State<TourmentPage> {
             ),
           ),
         ),
+        copyRigthBlack(),
       ],
     );
   }

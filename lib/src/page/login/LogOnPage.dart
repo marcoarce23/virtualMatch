@@ -74,15 +74,14 @@ class _LogOnPageState extends State<LogOnPage> {
       AppleSignIn.onCredentialRevoked.listen((_) {
         print("Credentials revoked");
       });
-    } 
+    }
 
-      _googleSignIn.onCurrentUserChanged.listen((GoogleSignInAccount account) {
-        setState(() {
-          currentUser = account;
-        });
+    _googleSignIn.onCurrentUserChanged.listen((GoogleSignInAccount account) {
+      setState(() {
+        currentUser = account;
       });
-      _googleSignIn.signInSilently();
-   
+    });
+    _googleSignIn.signInSilently();
   }
 
   Future<void> initPlatformState() async {
@@ -183,7 +182,6 @@ class _LogOnPageState extends State<LogOnPage> {
 
     switch (result.status) {
       case AuthorizationStatus.authorized:
-       
         prefs.nameUser = result.credential.fullName.givenName.toString() +
             ' ' +
             result.credential.fullName.familyName;
@@ -254,21 +252,29 @@ class _LogOnPageState extends State<LogOnPage> {
 
   Future<void> handleSignIn() async {
     try {
-      await _googleSignIn.signIn();
-      _crearInformacion();
+      await _googleSignIn.signIn().then((value) {
+        _crearInformacion();
+      });
     } catch (error) {
-      showSnackbar(
-          result["mensaje"].toString() + error.toString(), scaffoldKey);
+      showSnackbar(error.toString(), scaffoldKey);
     }
   }
 
   _crearInformacion() async {
-    _googleSignIn.signIn().then((value) {
+    await _googleSignIn.signIn().then((value) {
       prefs.nameUser = currentUser.displayName;
       prefs.email = currentUser.email;
       prefs.avatarImage = currentUser.photoUrl;
       prefs.userId = currentUser.displayName;
       _submit();
+    }).catchError(() {
+      _googleSignIn.signIn().then((value) {
+        prefs.nameUser = currentUser.displayName;
+        prefs.email = currentUser.email;
+        prefs.avatarImage = currentUser.photoUrl;
+        prefs.userId = currentUser.displayName;
+        _submit();
+      });
     });
   }
 
@@ -431,7 +437,6 @@ class _LogOnPageState extends State<LogOnPage> {
   }
 
   _submitInvitado() {
-
     prefs.idPlayer = '-1';
     prefs.idLogin = '-1';
 
@@ -439,7 +444,7 @@ class _LogOnPageState extends State<LogOnPage> {
   }
 
   _submit() async {
-     if (prefs.idPlayer != '-1') {
+    if (prefs.idPlayer != '-1') {
       navegation(context, HomePage());
     } else {
       loadingEntity();

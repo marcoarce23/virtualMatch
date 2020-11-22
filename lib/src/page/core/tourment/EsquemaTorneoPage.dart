@@ -4,6 +4,7 @@ import 'package:virtual_match/src/model/Preference.dart';
 import 'package:virtual_match/src/model/entity/EntityFromJson/FechaEsquemaTorneos.dart';
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/core/TournamentService.dart';
+import 'package:virtual_match/src/theme/Theme.dart';
 import 'package:virtual_match/src/widget/appBar/AppBarWidget.dart';
 import 'package:virtual_match/src/widget/drawer/DrawerWidget.dart';
 import 'package:virtual_match/src/widget/general/GeneralWidget.dart';
@@ -33,14 +34,19 @@ class _EsquemaTorneoPageState extends State<EsquemaTorneoPage> {
       body: SingleChildScrollView(
           child: Container(child: bodyContainer(context))),
       drawer: DrawerMenu(),
-      floatingActionButton: floatButtonImage(Colors.transparent, context,
+      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }
 
   Widget bodyContainer(BuildContext context) {
     sizedBox(0, 7);
-    return futureBuilder(context);
+    return Column(
+      children: [
+        futureBuilder(context),
+        copyRigthBlack(),
+      ],
+    );
   }
 
   Widget futureBuilder(BuildContext context) {
@@ -74,6 +80,12 @@ class _EsquemaTorneoPageState extends State<EsquemaTorneoPage> {
   Widget listView(BuildContext context, AsyncSnapshot snapshot) {
     final size = MediaQuery.of(context).size;
     return Container(
+      decoration: new BoxDecoration(
+        image: new DecorationImage(
+          image: new AssetImage('assets/portada1.png'),
+          fit: BoxFit.cover,
+        ),
+      ),
       width: size.width * 0.95,
       child: ListView.builder(
         shrinkWrap: true,

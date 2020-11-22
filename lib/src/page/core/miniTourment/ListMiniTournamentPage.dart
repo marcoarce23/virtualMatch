@@ -54,7 +54,7 @@ class _ListMiniTournamentPageState extends State<ListMiniTournamentPage> {
               ),
               child: bodyContainer(context))),
       drawer: DrawerMenu(),
-      floatingActionButton: floatButtonImage(Colors.transparent, context,
+      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
       bottomNavigationBar: new BottonNavigation(),
 
@@ -64,7 +64,12 @@ class _ListMiniTournamentPageState extends State<ListMiniTournamentPage> {
 
   Widget bodyContainer(BuildContext context) {
     sizedBox(0, 7);
-    return futureBuilder(context);
+    return Column(
+      children: [
+        futureBuilder(context),
+        copyRigth(),
+      ],
+    );
   }
 
   Widget futureBuilder(BuildContext context) {

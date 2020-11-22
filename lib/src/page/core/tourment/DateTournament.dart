@@ -39,16 +39,28 @@ class _DateTournamentState extends State<DateTournament> {
       key: scaffoldKey,
       appBar: appBar('FECHAS DE TORNEO'),
       body: SingleChildScrollView(
-          child: Container(child: bodyContainer(context))),
+          child: Container(
+              decoration: new BoxDecoration(
+                image: new DecorationImage(
+                  image: new AssetImage('assets/portada1.png'),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              child: bodyContainer(context))),
       drawer: DrawerMenu(),
-      floatingActionButton: floatButtonImage(Colors.transparent, context,
+      floatingActionButton: floatButtonImage(AppTheme.themePurple, context,
           FaIcon(FontAwesomeIcons.playstation), HomePage()),
     );
   }
 
   Widget bodyContainer(BuildContext context) {
     sizedBox(0, 7);
-    return futureBuilder(context);
+    return Column(
+      children: [
+        futureBuilder(context),
+        copyRigthBlack(),
+      ],
+    );
   }
 
   Widget futureBuilder(BuildContext context) {
