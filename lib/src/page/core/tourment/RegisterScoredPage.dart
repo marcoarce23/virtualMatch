@@ -159,6 +159,8 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
           _buttonGoleadores('Registrar', 18, 30),
         ],
       ));
+    } else {
+      return Container();
     }
   }
 
