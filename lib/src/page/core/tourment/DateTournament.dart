@@ -82,7 +82,7 @@ class _DateTournamentState extends State<DateTournament> {
                     '',
                   ),
                   sizedBox(0, 5.0),
-                  divider(),
+                  dividerBlack(),
                   listView(context, snapshot),
                   //     copyRigthBlack(),
                 ],

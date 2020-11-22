@@ -120,7 +120,7 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
 
   Widget _onceVsOnce() {
     bool _isOnce = widget.isOnceVsOnce;
-
+    print('es con 11vv11: $_isOnce');
     if (_isOnce) {
       return Container(
           child: Column(
@@ -159,7 +159,8 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
           _buttonGoleadores('Registrar', 18, 30),
         ],
       ));
-    }
+    } else
+      return [];
   }
 
   Widget _comboJugador() {

@@ -69,7 +69,7 @@ class _EsquemaTorneoPageState extends State<EsquemaTorneoPage> {
                     '',
                   ),
                   sizedBox(0, 5.0),
-                  divider(),
+                  dividerBlack(),
                   listView(context, snapshot),
                   //     copyRigthBlack(),
                 ],
