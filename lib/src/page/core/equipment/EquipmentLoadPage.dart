@@ -80,7 +80,6 @@ class _EquipmentAllPageState extends State<EquipmentAllPage> {
                 height: 28,
               ),
               title: Text('Edita tu equipo')),
-
         ],
         currentIndex: page,
         unselectedItemColor: AppTheme.themeWhite,
@@ -137,7 +136,6 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
 
     if (entityModelGet != null) {
       entity.states = StateEntity.Update;
-      print('agrupadorrr: ${entityModelGet.agrupador}');
       entity.agrupador = entityModelGet.agrupador;
       if (unaVez == 0) {
         entity.agrupador = entityModelGet.agrupador;
@@ -145,7 +143,6 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
         entity.detalle = entityModelGet.detalle;
         image = entityModelGet.foto;
       }
-
     }
     unaVez = 1;
 
@@ -325,7 +322,6 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
     if (!formKey.currentState.validate()) return;
     formKey.currentState.save();
 
-    
     setState(() => _save = true);
     loadingEntity();
     executeCUD(entityService, entity);
@@ -333,7 +329,7 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
   }
 
   void loadingEntity() {
-    print('agrupadorrr: ${entity.agrupador}');
+  
     entity.idEquipo =
         (entity.states == StateEntity.Insert) ? 0 : entity.idEquipo;
 
@@ -367,7 +363,7 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
           showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
-      showSnackbar(STATUS_ERROR+ ' ${error.toString()} ', scaffoldKey);
+      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
     }
   }
 
@@ -383,10 +379,9 @@ class _EquipmentLoadPageState extends State<EquipmentLoadPage> {
     final photo = await ImagePicker().getImage(source: origen);
     if (photo != null) {
       image = await entityImage.uploadImage(photo.path);
-      print('imagennnnn $image');
+
       setState(() {
         entity.foto = image;
-        //print('cargadod e iagen ${entity.foto}');
       });
     }
   }

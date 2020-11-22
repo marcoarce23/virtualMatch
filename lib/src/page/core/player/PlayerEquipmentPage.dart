@@ -89,7 +89,7 @@ class _PlayerEquipmentPageState extends State<PlayerEquipmentPage> {
   }
 
   Widget title(BuildContext context) {
-    print('grrupoooo: ${widget.grupo}');
+ 
     if (widget.grupo == null)
       return showInformationBasic(
         context,
@@ -231,7 +231,6 @@ class _PlayerEquipmentPageState extends State<PlayerEquipmentPage> {
       EquipmentService entityService, EquipoStateModel entity) async {
     try {
       await entityService.repository(entity).then((result) {
-        print('EL RESULTTTTT CAMBIO ESTADO: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0')
           showSnackbar(result["mensaje"], scaffoldKey);
         else

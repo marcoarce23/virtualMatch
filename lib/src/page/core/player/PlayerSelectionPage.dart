@@ -228,7 +228,6 @@ class _PlayerSelectionPageState extends State<PlayerSelectionPage> {
   }
 
   _executeInscription(String idTorneo, String idJugador) async {
-    print('ENTROSSSS $idTorneo y $idJugador');
     String respuesta;
     String mensaje;
     try {
@@ -241,7 +240,7 @@ class _PlayerSelectionPageState extends State<PlayerSelectionPage> {
           .then((result) {
         respuesta = result["tipo_mensaje"].toString();
         mensaje = result["mensaje"].toString();
-        print('EL RESULTTTTTAAA: ${result["tipo_mensaje"]}');
+      
 
         if (respuesta == '0') showSnackbar(mensaje, scaffoldKey);
         if (respuesta == '2') showSnackbar(mensaje, scaffoldKey);
@@ -271,9 +270,7 @@ class _PlayerSelectionPageState extends State<PlayerSelectionPage> {
                       onChanged: (value) {
                         setState(() {
                           _opcionJugador = value;
-                          print('valorrr: $_opcionJugador');
-
-                          // _showPlayer('2');
+ 
                         });
                       },
                     ),
@@ -519,7 +516,6 @@ class _PlayerSelectionVMPageState extends State<PlayerSelectionVMPage> {
   }
 
   _executeInscription(String idTorneo, String idJugador) async {
-    print('ENTROSSSS $idTorneo y $idJugador');
     String respuesta;
     String mensaje;
     try {
@@ -532,7 +528,7 @@ class _PlayerSelectionVMPageState extends State<PlayerSelectionVMPage> {
           .then((result) {
         respuesta = result["tipo_mensaje"].toString();
         mensaje = result["mensaje"].toString();
-        print('EL RESULTTTTTAAA: ${result["tipo_mensaje"]}');
+     
 
         if (respuesta == '0') showSnackbar(mensaje, scaffoldKey);
         if (respuesta == '2') showSnackbar(mensaje, scaffoldKey);
@@ -543,7 +539,7 @@ class _PlayerSelectionVMPageState extends State<PlayerSelectionVMPage> {
   }
 
   Widget _combos() {
-    print('VEMOS LOS IDE: ${widget.vs11}');
+   
     if (widget.vs11 == 0)
       return _comboJugador();
     else
@@ -570,9 +566,7 @@ class _PlayerSelectionVMPageState extends State<PlayerSelectionVMPage> {
                       onChanged: (value) {
                         setState(() {
                           _opcionJugador = value;
-                          print('valorrr: $_opcionJugador');
-
-                          // _showPlayer('2');
+    
                         });
                       },
                     ),
@@ -624,9 +618,6 @@ class _PlayerSelectionVMPageState extends State<PlayerSelectionVMPage> {
                       onChanged: (value) {
                         setState(() {
                           _opcionEquipos = value;
-                          print('_opcionEquipos: $_opcionEquipos');
-
-                          // _showPlayer('2');
                         });
                       },
                     ),

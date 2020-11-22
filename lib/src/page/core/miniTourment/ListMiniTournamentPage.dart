@@ -241,7 +241,6 @@ class _ListMiniTournamentPageState extends State<ListMiniTournamentPage> {
   }
 
   void _executeInscription(String idTorneo, String idJugador) async {
-    print('ENTROSSSS $idTorneo y $idJugador');
     String respuesta;
     String mensaje;
     try {
@@ -254,7 +253,6 @@ class _ListMiniTournamentPageState extends State<ListMiniTournamentPage> {
           .then((result) {
         respuesta = result["tipo_mensaje"].toString();
         mensaje = result["mensaje"].toString();
-        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
 
         if (respuesta == '0') showSnackbar(mensaje, scaffoldKey);
         if (respuesta == '2') showSnackbar(mensaje, scaffoldKey);
@@ -265,7 +263,6 @@ class _ListMiniTournamentPageState extends State<ListMiniTournamentPage> {
   }
 
   void _executeUnsuscription(String idTorneo, String idJugador) async {
-    print('ENTROSSSS $idTorneo y $idJugador');
     try {
       await entityService
           .execute(API +
@@ -274,7 +271,6 @@ class _ListMiniTournamentPageState extends State<ListMiniTournamentPage> {
               '/Jugador/' +
               idJugador)
           .then((result) {
-        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0')
           showSnackbar(result["mensaje"], scaffoldKey);
         if (result["tipo_mensaje"] == '2')

@@ -257,7 +257,7 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
   }
 
   _start(String keyId, String modalidad) {
-    print('MODALIDADDD: $modalidad');
+   
     if (modalidad == '27')
       _executeGenerator('/api/Torneo/execGenerarPlayOff/' +
           keyId +
@@ -281,7 +281,6 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
         usuario,
       )
           .then((result) {
-        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0')
           setState(() {
             showSnackbar(result["mensaje"], scaffoldKey);
@@ -290,7 +289,7 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
           showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
-      showSnackbar(STATUS_ERROR+ ' ${error.toString()} ', scaffoldKey);
+      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
     }
   }
 
@@ -298,7 +297,6 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
       TourmentService entityService, model.TorneoModel entity) async {
     try {
       await entityService.repository(entity).then((result) {
-        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0')
           showSnackbar(result["mensaje"], scaffoldKey);
         else
@@ -310,7 +308,7 @@ class _MiniTourmentListPageState extends State<MiniTourmentListPage> {
   }
 
   void _executeGenerator(String url) async {
-    print('EL URLLL: $url}');
+  
     try {
       await entityService.execute(API + url).then((result) {
         if (result["tipo_mensaje"] == '0')

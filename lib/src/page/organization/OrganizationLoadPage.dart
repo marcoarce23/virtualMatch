@@ -327,8 +327,6 @@ class _OrganizationLoadPageState extends State<OrganizationLoadPage> {
     if (!formKey.currentState.validate()) return;
     formKey.currentState.save();
 
-    print('myControllerSOY EL VALOR DE ' + controllerDetalle.text);
-
     setState(() => _save = true);
     loadingEntity();
     executeCUD(entityBloc, entity);
@@ -379,8 +377,6 @@ class _OrganizationLoadPageState extends State<OrganizationLoadPage> {
       image = await entityImage.uploadImage(photo.path);
       setState(() {
         entity.foto = image;
-
-        //print('cargadod e iagen ${entity.foto}');
       });
     }
   }

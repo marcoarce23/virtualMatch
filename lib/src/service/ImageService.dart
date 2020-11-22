@@ -13,7 +13,7 @@ class ImageService {
 
   dynamic respData(http.Response resp) {
     if (resp.statusCode != STATUSCODE200 && resp.statusCode != STATUSCODE201) {
-      print('Algo salio mal IMAGENNNN ${resp.body}');
+     
       return 'Algo salio mal PDF ${resp.body}';
     }
 
@@ -34,14 +34,9 @@ class ImageService {
     final streamResponse = await imageUploadRequest.send();
     final resp = await http.Response.fromStream(streamResponse);
 
-    // if (resp.statusCode != STATUSCODE200 && resp.statusCode != STATUSCODE201) {
-    //   print('Algo salio mal IMAGENNNN ${resp.body}');
+    
     return respData(resp);
-    // }
-
-    //   final respData = json.decode(resp.body);
-    // print(respData);
-    // return respData[SECURE_URL];
+ 
   }
 
   Future<String> uploadImage(String imagen) async {
@@ -56,14 +51,7 @@ class ImageService {
     final streamResponse = await imageUploadRequest.send();
     final resp = await http.Response.fromStream(streamResponse);
 
-    // if (resp.statusCode != STATUSCODE200 && resp.statusCode != STATUSCODE201) {
-    //   print('Algo salio mal PDF ${resp.body}');
-    //   return 'Algo salio mal PDF ${resp.body}';
-    // }
-
-    // final respData = json.decode(resp.body);
-    // print(respData);
-    // return respData[SECURE_URL];
+  
     return respData(resp);
   }
 
@@ -81,13 +69,6 @@ class ImageService {
     final resp = await http.Response.fromStream(streamResponse);
 
     return respData(resp);
-    // if (resp.statusCode != STATUSCODE200 && resp.statusCode != STATUSCODE201) {
-    //   print('Algo salio mal videooo ${resp.body}');
-    //   return 'Algo salio mal PDF ${resp.body}';
-    // }
 
-    // final respData = json.decode(resp.body);
-    // print(respData);
-    // return respData[SECURE_URL];
   }
 }

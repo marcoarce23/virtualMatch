@@ -49,7 +49,7 @@ class _MyAppState extends State<MyApp> {
     final pushProvider = new PushNotificationProvider();
     pushProvider.initNotifications();
     pushProvider.mensajes.listen((data) {
-      print('Argumento del Push: $data');
+      // print('Argumento del Push: $data');
 
       if (data == 'ayudaPersona')
         navigatorKey.currentState

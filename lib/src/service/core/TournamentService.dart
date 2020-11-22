@@ -27,7 +27,7 @@ class TourmentService {
 
   Future<Map<String, dynamic>> repository(IEntityMap entity) async {
     var result;
-   
+
     isLoading = true;
     switch (entity.states) {
       case StateEntity.Insert:
@@ -39,7 +39,6 @@ class TourmentService {
       default:
     }
 
-
     isLoading = false;
     //  notifyListeners();
     return result;
@@ -47,7 +46,6 @@ class TourmentService {
 
   Future<Map<String, dynamic>> repositoryDetail(IEntityMap entity) async {
     var result;
-   
 
     isLoading = true;
     switch (entity.states) {
@@ -60,7 +58,6 @@ class TourmentService {
       default:
     }
 
-  
     isLoading = false;
     // notifyListeners();
     return result;
@@ -68,7 +65,6 @@ class TourmentService {
 
   Future<Map<String, dynamic>> repositoryV11(IEntityMap entity) async {
     var result;
-  
 
     isLoading = true;
     switch (entity.states) {
@@ -80,7 +76,6 @@ class TourmentService {
         break;
       default:
     }
-
 
     isLoading = false;
     // notifyListeners();
@@ -162,10 +157,9 @@ class TourmentService {
     return _result;
   }
 
-
   Future<Map<String, dynamic>> execute(String url) async {
     final apiRest = url; // eventResourceAdd['add'][0].toString()   ;
- 
+
     final response = await http.post(apiRest);
 
     isLoading = false;

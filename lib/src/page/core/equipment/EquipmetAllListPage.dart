@@ -128,11 +128,11 @@ class _EquipmentAllListPageState extends State<EquipmentAllListPage> {
         itemBuilder: (context) => [
           PopupMenuItem(
             value: 1,
-            child: Text("Llamar por WhatsApp"),
+            child: Text("Llamar por WhatsApp al Capitán"),
           ),
           PopupMenuItem(
             value: 2,
-            child: Text("Inscribirse a un equipos"),
+            child: Text("Inscribirse a un equipo"),
           ),
           PopupMenuItem(
             value: 3,
@@ -177,7 +177,7 @@ class _EquipmentAllListPageState extends State<EquipmentAllListPage> {
           children: <Widget>[
             sizedBox(0, 7),
             CardVM(
-              size: 180,
+              size: 215,
               imageAssets: 'assets/icono3.png',
               opciones: _simplePopup(entity, entity.agrupador, context),
               listWidgets: [
@@ -198,7 +198,7 @@ class _EquipmentAllListPageState extends State<EquipmentAllListPage> {
                   textAlign: TextAlign.justify,
                 ),
                 Text(
-                  'CAPITAN: ${entity.nombre}',
+                  'CAPITAN: ${entity.jugadorCapitan}',
                   style: kSubtitleStyleWhite,
                   softWrap: true,
                   overflow: TextOverflow.clip,
@@ -246,7 +246,7 @@ class _EquipmentAllListPageState extends State<EquipmentAllListPage> {
       EquipmentService entityService, EquipoStateModel entity) async {
     try {
       await entityService.repository(entity).then((result) {
-        print('EL RESULTTTTT CAMBIO ESTADO: ${result["tipo_mensaje"]}');
+        
         if (result["tipo_mensaje"] == '0')
           showSnackbar(
               'Su solictud para salirse del equipo fue enviado con éxito!',
@@ -255,7 +255,7 @@ class _EquipmentAllListPageState extends State<EquipmentAllListPage> {
           showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
-      showSnackbar(STATUS_ERROR+ ' ${error.toString()} ', scaffoldKey);
+      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
     }
   }
 
@@ -263,28 +263,26 @@ class _EquipmentAllListPageState extends State<EquipmentAllListPage> {
       EquipmentService entityService, model.EquipoModel entity) async {
     try {
       await entityService.repository(entity).then((result) {
-        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0')
           showSnackbar(result["mensaje"], scaffoldKey);
         else
           showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
-      showSnackbar(STATUS_ERROR+ ' ${error.toString()} ', scaffoldKey);
+      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
     }
   }
 
   void executeDelete(String id, String usuario) async {
     try {
       await entityService.delete(id, usuario).then((result) {
-        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0')
           showSnackbar(result["mensaje"], scaffoldKey);
         else
           showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
-      showSnackbar(STATUS_ERROR+ ' ${error.toString()} ', scaffoldKey);
+      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
     }
     setState(() {});
   }
@@ -293,7 +291,6 @@ class _EquipmentAllListPageState extends State<EquipmentAllListPage> {
       NotificationService entityService, model.EquipoModel entity) async {
     try {
       await entityService.repository(entity).then((result) {
-        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0')
           showSnackbar(result["mensaje"], scaffoldKey);
         else

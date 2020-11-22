@@ -10,7 +10,6 @@ Future<File> loadImage(ImageSource image) async {
   final _foto = await ImagePicker().getImage(source: image)
       as File; // ESTO REVISAR SI DA ERROR
 
-  print('uploadImage: $_foto');
   return _foto;
 }
 

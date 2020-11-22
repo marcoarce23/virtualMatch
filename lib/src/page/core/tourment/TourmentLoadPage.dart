@@ -401,7 +401,7 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
     if (!formKey.currentState.validate()) return;
     formKey.currentState.save();
 
-    print('myControllerSOY EL VALOR DE ' + controllerDetail.text);
+   
 
     setState(() => _save = true);
     loadingEntity();
@@ -427,15 +427,13 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
   void executeCUD(TourmentService entityService, TorneoModel entity) async {
     try {
       await entityService.repository(entity).then((result) {
-    
         if (result["tipo_mensaje"] == '0') {
           showSnackbar(result["mensaje"], scaffoldKey);
-
         } else
           showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
-      showSnackbar(STATUS_ERROR+ ' ${error.toString()} ', scaffoldKey);
+      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
     }
     //  navegation(context, FormatLoadPage());
   }
@@ -452,11 +450,10 @@ class _TourmentLoadPageState extends State<TourmentLoadPage> {
     final photo = await ImagePicker().getImage(source: origen);
     if (photo != null) {
       image = await entityImage.uploadImage(photo.path);
-      print('imagennnnn $image');
+
       setState(() {
         entity.foto = image;
 
-        print('cargadod e iagen ${entity.foto}');
       });
     }
   }

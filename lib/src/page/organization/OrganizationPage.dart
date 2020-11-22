@@ -98,7 +98,7 @@ class _OrganizationPageState extends State<OrganizationPage> {
                   // Text('Terrasur, haciendo tus sueños realidad',
                   //     style: estiloTitulo),
                   sizedBox(0, 7.0),
-                  //Text('Fecha: XXXXX', style: estiloSubTitulo ),
+            
                 ],
               ),
             ),

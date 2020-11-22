@@ -206,7 +206,7 @@ class DrawerMenu extends StatelessWidget {
   }
 
   Drawer drawerUser(BuildContext context) {
-    print('EL IDE PALYER EN EL DRAWER ES: ${prefs.idPlayer}');
+   
     return Drawer(
         child: ListView(
       children: <Widget>[

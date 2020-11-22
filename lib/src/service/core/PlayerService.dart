@@ -67,7 +67,7 @@ class PlayerService with ChangeNotifier {
   }
 
   Future<List<IEntityJson>> getId(IEntityJson entityJson, int value) async {
-    print('111');
+   
     var _result = await _apiGet.getId(entityJson, value);
 
     isLoading = false;

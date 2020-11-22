@@ -96,8 +96,7 @@ class _CustomizePlayerState extends State<CustomizePlayer> {
                       onChanged: (value) {
                         setState(() {
                           _opcionJugador = value;
-                          print('valorrr: $_opcionJugador');
-                          // _showPlayer('2');
+ 
                         });
                       },
                     ),
@@ -253,7 +252,6 @@ class _CustomizePlayerState extends State<CustomizePlayer> {
   _cambiarJugadores(ReemplazarJugador entity) async {
     try {
       await servicioTorneoPersonalizar.cambiarJugadores(entity).then((result) {
-        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0')
           setState(() {
             showSnackbar(result["mensaje"], scaffoldKey);
@@ -262,8 +260,7 @@ class _CustomizePlayerState extends State<CustomizePlayer> {
           showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
-      showSnackbar(
-          STATUS_ERROR + ' ${error.toString()} dddddddd', scaffoldKey);
+      showSnackbar(STATUS_ERROR + ' ${error.toString()} dddddddd', scaffoldKey);
     }
   }
 }
