@@ -285,7 +285,7 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
         context,
         ViewPage(
             title: 'Políticas de Privacidad',
-            url: 'https://www.virtual_match.bo/politicas-de-privacidad'),
+            url: 'https://www.neuronatexnology.com/virtual_match_privacidad.html'),
       ),
     );
   }

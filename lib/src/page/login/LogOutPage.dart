@@ -58,7 +58,7 @@ class _LogOutPageState extends State<LogOutPage> {
         _contactText = "People API gave a ${response.statusCode} "
             "response. Check logs for details.";
       });
-     
+
       return;
     }
     final Map<String, dynamic> data = json.decode(response.body);
@@ -151,7 +151,8 @@ class _LogOutPageState extends State<LogOutPage> {
             ListTile(
               leading: avatarCircleTransparent(prefs.avatarImage, 45),
               title: Text(
-                'Nombre del usuario :\n${prefs.nameUser}  ${prefs.nameUser}' ?? '',
+                'Nombre del usuario :\n${prefs.nameUser}  ${prefs.nameUser}' ??
+                    '',
                 style: kSigssTitleStyle,
               ),
               subtitle: Text(
