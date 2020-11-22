@@ -273,9 +273,7 @@ class SearchPlayer extends SearchDelegate {
         itemCount: suggestionList.length,
         itemBuilder: (context, index) {
           return ListTile(
-            onTap: () {
-              print(query);
-            },
+            onTap: () {},
             leading: Image.network(
               (suggestionList[index].foto),
               width: 15,

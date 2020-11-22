@@ -185,9 +185,7 @@ class _ListMiniTournamentPageState extends State<ListMiniTournamentPage> {
             child: Text("Salir del torneo"),
           ),
         ],
-        onCanceled: () {
-          print("You have canceled the menu.");
-        },
+        onCanceled: () {},
         onSelected: (value) {
           switch (value) {
             case 1:

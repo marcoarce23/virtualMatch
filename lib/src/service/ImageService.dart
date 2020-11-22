@@ -18,7 +18,7 @@ class ImageService {
     }
 
     final respData = json.decode(resp.body);
-    print(respData);
+
     return respData[SECURE_URL];
   }
 

@@ -33,7 +33,7 @@ class ApiAdd {
   }
 
   Future<Map<String, dynamic>> changeDate(IEntityMap entity) async {
-    print(entity.toJson());
+    
     String _body = json.encode(entity.toJson());
 
     final apiRest = api['updateFecha'][0]
@@ -57,7 +57,7 @@ class ApiAdd {
 
   Future<Map<String, dynamic>> reemplazarJugador(
       ReemplazarJugador entity) async {
-    print(entity.toJson());
+
     String _body = json.encode(entity.toJson());
 
     final apiRest = api['reemplazarFecha'][0].toString() +
@@ -77,7 +77,7 @@ class ApiAdd {
 
   Future<Map<String, dynamic>> ejecutarTorneoManual(
       FormatoModel entity, int grupo, int jugadoresPorGrupo) async {
-    print(entity.toJson());
+   
     String _body = json.encode(entity.toJson());
 
     final apiRest = api['ejecutarTorneoManual'][0].toString() +

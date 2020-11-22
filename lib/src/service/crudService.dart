@@ -59,7 +59,7 @@ class CrudService with ChangeNotifier {
 
     isLoading = false;
     notifyListeners();
-    print(getListIEntityJson(response, entityJson, decodeData, list));
+
     return getListIEntityJson(response, entityJson, decodeData, list);
   }
 

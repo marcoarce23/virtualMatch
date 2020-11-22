@@ -139,9 +139,7 @@ class _EquipmentAllListPageState extends State<EquipmentAllListPage> {
             child: Text("Salirme de mi equipo"),
           ),
         ],
-        onCanceled: () {
-          print("You have canceled the menu.");
-        },
+        onCanceled: () {},
         onSelected: (value) {
           switch (value) {
             case 1:
@@ -246,7 +244,6 @@ class _EquipmentAllListPageState extends State<EquipmentAllListPage> {
       EquipmentService entityService, EquipoStateModel entity) async {
     try {
       await entityService.repository(entity).then((result) {
-        
         if (result["tipo_mensaje"] == '0')
           showSnackbar(
               'Su solictud para salirse del equipo fue enviado con éxito!',

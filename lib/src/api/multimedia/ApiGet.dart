@@ -11,8 +11,6 @@ class ApiGet {
     final _apiRest = api['get'][0].toString();
     final response = await http.get(_apiRest);
 
-    print(_apiRest);
-
     return getListIEntityJson(response, entity, decodeData, list);
   }
 
@@ -23,8 +21,6 @@ class ApiGet {
     final _apiRest = api['getId'][0].toString() + '/' + value.toString();
     final response = await http.get(_apiRest);
 
-    print(_apiRest);
-
     return getListIEntityJson(response, entity, decodeData, list);
   }
 
@@ -34,8 +30,6 @@ class ApiGet {
 
     final _apiRest = api['patrocinador'][0].toString();
     final response = await http.get(_apiRest);
-
-    print(_apiRest);
 
     return getListIEntityJson(response, entity, decodeData, list);
   }

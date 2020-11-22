@@ -12,8 +12,6 @@ class ApiGet {
         api['getTodosLosTorneos'][0].toString() + '/' + idJugador.toString();
     final response = await http.get(_apiRest);
 
-    print(_apiRest);
-
     return getListIEntityJson(response, entity, decodeData, list);
   }
 
@@ -23,8 +21,6 @@ class ApiGet {
 
     final _apiRest = api['get1'][0].toString() + '/' + idJugador.toString();
     final response = await http.get(_apiRest);
-
-    print(_apiRest);
 
     return getListIEntityJson(response, entity, decodeData, list);
   }
@@ -36,8 +32,6 @@ class ApiGet {
     final _apiRest = api['getId1'][0].toString() + '/' + value.toString();
     final response = await http.get(_apiRest);
 
-    print(_apiRest);
-
     return getListIEntityJson(response, entity, decodeData, list);
   }
 
@@ -47,8 +41,6 @@ class ApiGet {
 
     final _apiRest = api['getGanadores'][0].toString();
     final response = await http.get(_apiRest);
-
-    print(_apiRest);
 
     return getListIEntityJson(response, entity, decodeData, list);
   }
@@ -62,8 +54,6 @@ class ApiGet {
         api['getPartidosPorTorneo'][0].toString() + '/' + value.toString();
     final response = await http.get(_apiRest);
 
-    print(_apiRest);
-
     return getListIEntityJson(response, entity, decodeData, list);
   }
 
@@ -75,8 +65,6 @@ class ApiGet {
     final _apiRest =
         api['getTablaPosiciones'][0].toString() + '/' + value.toString();
     final response = await http.get(_apiRest);
-
-    print(_apiRest);
 
     return getListIEntityJson(response, entity, decodeData, list);
   }
@@ -90,8 +78,6 @@ class ApiGet {
         api['getTodosLosTorneos'][0].toString() + '/' + idJugador.toString();
     final response = await http.get(_apiRest);
 
-    print(_apiRest);
-
     return getListIEntityJson(response, entity, decodeData, list);
   }
 
@@ -103,8 +89,6 @@ class ApiGet {
     final _apiRest = api['getTodosLosTorneosIniciados'][0].toString();
     final response = await http.get(_apiRest);
 
-    print(_apiRest);
-
     return getListIEntityJson(response, entity, decodeData, list);
   }
 
@@ -115,7 +99,7 @@ class ApiGet {
 
     final _apiRest =
         api['getHistoricoTorneo'][0].toString() + '/' + idtorneo.toString();
-    print(_apiRest);
+
     final response = await http.get(_apiRest);
 
     return getListIEntityJson(response, entity, decodeData, list);
@@ -131,7 +115,7 @@ class ApiGet {
         idTorneo.toString() +
         '/Jugador/' +
         idJugador.toString();
-    print(_apiRest);
+
     final response = await http.get(_apiRest);
 
     return getListIEntityJson(response, entity, decodeData, list);
@@ -146,7 +130,6 @@ class ApiGet {
         '/' +
         idTorneo.toString();
 
-    print(_apiRest);
     final response = await http.get(_apiRest);
 
     return getListIEntityJson(response, entity, decodeData, list);
@@ -160,7 +143,7 @@ class ApiGet {
     final _apiRest = api['getDevuelveTorneoParaPersonalizar'][0].toString() +
         "/" +
         idTorneo.toString();
-    print(_apiRest);
+
     final response = await http.get(_apiRest);
 
     return getListIEntityJson(response, entity, decodeData, list);
@@ -174,7 +157,7 @@ class ApiGet {
     final _apiRest = api['getTablaPosicionesAsistencia'][0].toString() +
         "/" +
         idTorneo.toString();
-    print(_apiRest);
+
     final response = await http.get(_apiRest);
 
     return getListIEntityJson(response, entity, decodeData, list);

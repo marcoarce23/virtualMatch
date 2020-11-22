@@ -74,14 +74,15 @@ class _LogOnPageState extends State<LogOnPage> {
       AppleSignIn.onCredentialRevoked.listen((_) {
         print("Credentials revoked");
       });
-    } else {
+    } 
+
       _googleSignIn.onCurrentUserChanged.listen((GoogleSignInAccount account) {
         setState(() {
           currentUser = account;
         });
       });
       _googleSignIn.signInSilently();
-    }
+   
   }
 
   Future<void> initPlatformState() async {
@@ -182,12 +183,7 @@ class _LogOnPageState extends State<LogOnPage> {
 
     switch (result.status) {
       case AuthorizationStatus.authorized:
-        print('credencial apple email: ${result.credential.email.toString()}');
-        print(
-            'credencial apple full name: ${result.credential.fullName.toString()}');
-        print(
-            'credencial apple ID Token: ${result.credential.identityToken.toString()}');
-
+       
         prefs.nameUser = result.credential.fullName.givenName.toString() +
             ' ' +
             result.credential.fullName.familyName;
@@ -443,9 +439,7 @@ class _LogOnPageState extends State<LogOnPage> {
   }
 
   _submit() async {
-   // print('IDPLAYERRR;; ${prefs.idPlayer.toString()}');
-
-    if (prefs.idPlayer != '-1') {
+     if (prefs.idPlayer != '-1') {
       navegation(context, HomePage());
     } else {
       loadingEntity();

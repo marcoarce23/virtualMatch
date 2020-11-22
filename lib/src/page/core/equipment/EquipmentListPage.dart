@@ -144,16 +144,13 @@ class _EquipmentListPageState extends State<EquipmentListPage> {
             child: Text("Eliminar"),
           ),
         ],
-        onCanceled: () {
-          print("You have canceled the menu.");
-        },
+        onCanceled: () {},
         onSelected: (value) {
           switch (value) {
             case 1:
               Navigator.pushNamed(context, 'equipment', arguments: entity);
               break;
             case 2:
-             
               setState(() {
                 executeDelete(
                     entity.agrupador.toString(), prefs.idPlayer.toString());
