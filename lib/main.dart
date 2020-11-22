@@ -13,6 +13,7 @@ import 'package:virtual_match/src/page/core/miniTourment/MiniTourmentLoadPage.da
 import 'package:virtual_match/src/page/core/player/PlayerLoadPage.dart';
 import 'package:virtual_match/src/page/core/player/PlayerPage.dart';
 import 'package:virtual_match/src/page/core/tourment/TourmentLoadPage.dart';
+import 'package:virtual_match/src/page/intro/SplashPage.dart';
 import 'package:virtual_match/src/page/login/LogOnPage.dart';
 import 'package:virtual_match/src/page/multimedia/MultimediaLoadPage.dart';
 import 'package:virtual_match/src/page/new/NewLoadPage.dart';
@@ -118,7 +119,7 @@ class _MyAppState extends State<MyApp> {
             outputAndHome: option,
           ),  
           */
-          home: LogOnPage(),
+          home: SplashPage(),
           //new HomePage(), //MapAdressModule(),
 
           routes: <String, WidgetBuilder>{
