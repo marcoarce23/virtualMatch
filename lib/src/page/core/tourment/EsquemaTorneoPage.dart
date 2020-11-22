@@ -12,6 +12,7 @@ import 'package:virtual_match/src/widget/gfWidget/GfWidget.dart';
 
 class EsquemaTorneoPage extends StatefulWidget {
   final int idTorneo;
+//nuevos cambios
 
   EsquemaTorneoPage({@required this.idTorneo});
 
