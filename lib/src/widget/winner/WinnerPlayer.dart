@@ -110,7 +110,7 @@ class _WinnerPlayerState extends State<WinnerPlayer> {
           child: Container(
             decoration: containerImage2(),
             width: MediaQuery.of(context).size.width - 75,
-            height: 170,
+            height: 190,
             child: Stack(
               children: <Widget>[
                 Positioned(
@@ -186,57 +186,61 @@ class _WinnerPlayerState extends State<WinnerPlayer> {
                   ),
                 ), // 3er lugar
                 Positioned(
-                    left: (MediaQuery.of(context).size.width / 2) - 10,
+                    left: (MediaQuery.of(context).size.width / 2) + 10,
                     top: 125,
                     height: 90,
                     width: 90,
-                    child: Column(
-                      children: [
-                        AutoSizeText(
-                          '2º LUGAR',
-                          maxLines: 2,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 13.0,
-                            color: AppTheme.themeWhite,
-                            fontWeight: FontWeight.bold,
+                    child: Center(
+                      child: Column(
+                        children: [
+                          AutoSizeText(
+                            '2º LUGAR',
+                            maxLines: 2,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 02.0,
+                              color: AppTheme.themeWhite,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                        Text(
-                          widget.nombre2doGanador,
-                          style: TextStyle(
-                            color: AppTheme.themeWhite,
+                          Text(
+                            widget.nombre2doGanador,
+                            style: TextStyle(
+                              color: AppTheme.themeWhite,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     )), // 2do lugar
                 Positioned(
                     left: (MediaQuery.of(context).size.width / 2) - 90,
                     top: 140,
                     height: 110,
                     width: 100,
-                    child: Column(
-                      children: [
-                        Shimmer.fromColors(
-                          baseColor: AppTheme.themeWhite,
-                          highlightColor: AppTheme.themePurple,
-                          child: AutoSizeText(
-                            '1º LUGAR',
-                            maxLines: 2,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 15.0,
-                              fontWeight: FontWeight.bold,
+                    child: Center(
+                      child: Column(
+                        children: [
+                          Shimmer.fromColors(
+                            baseColor: AppTheme.themeWhite,
+                            highlightColor: AppTheme.themePurple,
+                            child: AutoSizeText(
+                              '1º LUGAR',
+                              maxLines: 2,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 15.0,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
-                        ),
-                        Text(
-                          widget.nombre1erGanador,
-                          style: TextStyle(
-                            color: AppTheme.themeWhite,
+                          Text(
+                            widget.nombre1erGanador,
+                            style: TextStyle(
+                              color: AppTheme.themeWhite,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     )),
 
                 //Positioned(                          left: (MediaQuery.of(context).size.width / 2) - 50,                          child: _cardJugador()), //2do lugar
@@ -256,7 +260,7 @@ class _WinnerPlayerState extends State<WinnerPlayer> {
       return RadialProgress(
         progressColor: Colors.purple,
         progressBackgroundColor: AppTheme.themeDefault,
-        width: 4,
+        width: 5,
         goalCompleted: 0.85,
         child: Container(
             child: ImageOvalNetwork(
