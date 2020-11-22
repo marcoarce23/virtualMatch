@@ -138,18 +138,45 @@ class _LogOutPageState extends State<LogOutPage> {
         ),
       );
     } else {
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: <Widget>[
-          _gmailButton(),
-          //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-          //   children: <Widget>[
-          // //    const Text("You are not currently signed in."),
-          //     RaisedButton(
-          //       child: const Text('Cerrar Session'),
-          //       onPressed: _handleSignOut,
-          //     ),
-        ],
+      return Container(
+        decoration: new BoxDecoration(
+          image: new DecorationImage(
+            image: new AssetImage('assets/portada2.png'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            ListTile(
+              leading: avatarCircleTransparent(prefs.avatarImage, 45),
+              title: Text(
+                'Nombre del usuario :\n${prefs.nameUser}  ${prefs.nameUser}' ?? '',
+                style: kSigssTitleStyle,
+              ),
+              subtitle: Text(
+                'Correo logeado :\n${prefs.email}' ?? '',
+                style: kSigssTitleStyle,
+              ),
+            ),
+            Text(
+              "Logueo exitoso.!.",
+              style: kSigssTitleStyle,
+            ),
+            Image.asset(
+              'assets/icono3.png',
+              //scale: 0.4,
+              width: 180,
+              height: 180,
+            ),
+            Text(
+              "Disfruta de Virtual Match!.",
+              style: kSigsTitleStyle,
+            ),
+            //  Text(_contactText ?? ''),
+            _gmailButton(),
+          ],
+        ),
       );
     }
   }
