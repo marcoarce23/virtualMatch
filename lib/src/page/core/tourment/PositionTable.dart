@@ -69,7 +69,11 @@ class _PositionTableState extends State<PositionTable> {
 
   Widget listViewAsitencia(BuildContext context, AsyncSnapshot snapshot) {
     List entities = snapshot.data;
-    return showTablePositionsAsistencia(entities);
+    if (entities.length > 0) {
+      return showTablePositionsAsistencia(entities);
+    } else {
+      return Container();
+    }
   }
 
   Widget showTablePositionsAsistencia(List entities) {
@@ -275,7 +279,6 @@ class _PositionTableState extends State<PositionTable> {
                   ],
                   rows: entities.map(
                     (data) {
-               
                       String texto = data.tipoCompeticion;
                       if (data.comodin == 52) {
                         texto = texto + " " + data.grupo.toString();
