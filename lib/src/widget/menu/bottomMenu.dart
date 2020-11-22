@@ -20,17 +20,17 @@ class _BottomMenuState extends State<BottomMenu> {
     ItemBottomMenu(
         icon: Icons.search,
         onPressed: () {
-          print('search');
+        
         }),
     ItemBottomMenu(
         icon: Icons.access_alarm,
         onPressed: () {
-          print('alarm');
+         
         }),
     ItemBottomMenu(
         icon: Icons.access_time,
         onPressed: () {
-          print('time');
+      
         }),
   ];
 

@@ -240,38 +240,7 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
             }));
   }
 
-  // Widget _comboTorneoCreado(String _opcionTipoCompeticionss) {
-  //   return Center(
-  //       child: FutureBuilder(
-  //           future: entityGet.get(new ClasificadorModel(), 26),
-  //           builder: (context, AsyncSnapshot snapshot) {
-  //             if (snapshot.hasData) {
-  //               return Row(
-  //                 children: <Widget>[
-  //                   sizedBox(15.0, 0),
-  //                   Text('Selecciones el torneo:'),
-  //                   sizedBox(15.0, 0),
-  //                   DropdownButton(
-  //                     icon: FaIcon(FontAwesomeIcons.sort,
-  //                         color: AppTheme.themePurple),
-  //                     value: _opcionTipoCompeticion,
-  //                     items: getDropDown(snapshot),
-  //                     onChanged: (value) {
-  //                       setState(() {
-  //                         _opcionTipoCompeticion = value;
-  //                         print('ddddd: $_opcionTipoCompeticion');
-  //                       });
-  //                     },
-  //                   ),
-  //                 ],
-  //               );
-  //             } else {
-  //               return GFLoader(type: GFLoaderType.circle, size: 35.0);
-  //             }
-  //           }));
-  // }
-
-  Widget _comboCompeticion(String _opcionTipoCompeticionss) {
+   Widget _comboCompeticion(String _opcionTipoCompeticionss) {
     return Center(
         child: FutureBuilder(
             future: entityGet.get(new ClasificadorModel(), 26),
@@ -453,9 +422,7 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
     if (!formKey.currentState.validate()) return;
     formKey.currentState.save();
 
-    //print('myControllerSOY EL VALOR DE ' + controllerDetail.text);
-
-    setState(() => _save = true);
+      setState(() => _save = true);
     loadingEntity();
     executeCUD(entityGet1, entity);
     setState(() => _save = false);
@@ -501,7 +468,6 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
             (cantidadGrupos ~/ cantidads),
           )
               .then((result) {
-            print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
             if (result["tipo_mensaje"] == '0') {
               showSnackbar(result["mensaje"], scaffoldKey);
 
@@ -514,7 +480,6 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
       } else {
         entity.conBoot = 0;
         await entityService.repositoryDetail(entity).then((result) async {
-          print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
           if (result["tipo_mensaje"] == '0') {
             showSnackbar(result["mensaje"], scaffoldKey);
 
@@ -524,7 +489,7 @@ class _FormatLoadPageState extends State<FormatLoadPage> {
         });
       }
     } catch (error) {
-      showSnackbar(STATUS_ERROR+ ' ${error.toString()} ', scaffoldKey);
+      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
     }
     //  navegation(context, FormatLoadPage());
   }

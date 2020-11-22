@@ -280,7 +280,6 @@ class _FormatTourmentPageState extends State<FormatTourmentPage> {
     if (!formKey.currentState.validate()) return;
     formKey.currentState.save();
 
-    print('myControllerSOY EL VALOR DE ' + controllerTitulo.text);
 
     setState(() => _save = true);
     loadingEntity();
@@ -296,21 +295,20 @@ class _FormatTourmentPageState extends State<FormatTourmentPage> {
     entity.usuarioAuditoria = prefs.email;
     entity.foto = IMAGE_LOGO;
 
-    print('EL ENTITY NOTIFICA: ${entity.detalle}');
+   
   }
 
   void executeCUD(
       NotificationService entityService, NotificacionModel entity) async {
     try {
       await entityService.repository(entity).then((result) {
-        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0')
           showSnackbar(result["mensaje"], scaffoldKey);
         else
           showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
-      showSnackbar(STATUS_ERROR+ ' ${error.toString()} ', scaffoldKey);
+      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
     }
   }
 }

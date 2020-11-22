@@ -12,7 +12,7 @@ class ApiAdd {
     final apiRest =
         api['add'][0].toString(); // eventResourceAdd['add'][0].toString()   ;
     //RouteAdd().postEvent(); // METODO QUE OBTENFA EL POST DEL EVENTO; MULTIMEDIA, VOLUTNARIO; HORARIO
-    print('urlDDDDDDD: $apiRest');
+
     final response = await http.post(apiRest,
         headers: {"Content-Type": "application/json"}, body: _body);
     return dataMap(response);
@@ -24,7 +24,7 @@ class ApiAdd {
     final apiRest =
         api['add1'][0].toString(); // eventResourceAdd['add'][0].toString()   ;
     //RouteAdd().postEvent(); // METODO QUE OBTENFA EL POST DEL EVENTO; MULTIMEDIA, VOLUTNARIO; HORARIO
-    print('urlDDDDDDD: $apiRest');
+
     final response = await http.post(apiRest,
         headers: {"Content-Type": "application/json"}, body: _body);
     return dataMap(response);

@@ -53,7 +53,7 @@ class CrudService with ChangeNotifier {
   Future<List<IEntityJson>> get(IEntityJson entityJson, String url) async {
     final List<IEntityJson> list = new List();
     Map<String, dynamic> decodeData;
-    print('URLLLL URLLL: $url');
+
     final _apiRest = url;
     final response = await http.get(_apiRest);
 

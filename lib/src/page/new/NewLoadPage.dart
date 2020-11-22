@@ -156,7 +156,7 @@ class _NewLoadPageState extends State<NewLoadPage> {
         image = entityModelGet.foto;
       }
 
-      print('ddd ${entity.foto}');
+ 
     }
     unaVez = 1;
 

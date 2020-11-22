@@ -120,8 +120,6 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
 
   Widget _onceVsOnce() {
     bool _isOnce = widget.isOnceVsOnce;
-    //   bool isCaptain = widget.isOnceVsOnce;
-    print('Es once: $_isOnce');
 
     if (_isOnce) {
       return Container(
@@ -183,10 +181,7 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
                       onChanged: (value) {
                         setState(() {
                           _opcionJugador = value;
-                          print('valorrr: $_opcionJugador');
-
-                          // _showPlayer('2');
-                        });
+                          });
                       },
                     ),
                   ],
@@ -397,15 +392,13 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
       TourmentService entityService, ResultadoGolAsistenciaModel entity) async {
     try {
       await entityService.repositoryV11(entity).then((result) {
-        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
-
         if (result["tipo_mensaje"] == '0') {
           showSnackbar(result["mensaje"], scaffoldKey);
         } else
           showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
-      showSnackbar(STATUS_ERROR+ ' ${error.toString()} ', scaffoldKey);
+      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
     }
     //  navegation(context, FormatLoadPage());
   }
@@ -414,7 +407,6 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
       ResultadoService entityService, ResultadoModel entity) async {
     try {
       await entityService.updateEliminatoriaGrupo(entity).then((result) {
-
         if (result["tipo_mensaje"] == '0') {
           showSnackbar(result["mensaje"], scaffoldKey);
           //   navegation(context, TourmentPage(idTorneo: widget.idTorneo));
@@ -422,7 +414,6 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
           showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
-
       showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
     }
   }
@@ -431,7 +422,6 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
       ResultadoService entityService, ResultadoModel entity) async {
     try {
       await entityService.updateFaseGrupo(entity).then((result) {
-    
         if (result["tipo_mensaje"] == '0') {
           showSnackbar(result["mensaje"], scaffoldKey);
           //    navegation(context, TourmentPage(idTorneo: widget.idTorneo));
@@ -439,15 +429,13 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
           showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
-   
-      showSnackbar(STATUS_ERROR+ ' ${error.toString()} ', scaffoldKey);
+      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
     }
   }
 
   void executeCUD(ResultadoService entityService, ResultadoModel entity) async {
     try {
       await entityService.update(entity, entity.idResultado).then((result) {
- 
         if (result["tipo_mensaje"] == '0') {
           showSnackbar(result["mensaje"], scaffoldKey);
           //    navegation(context, TourmentPage(idTorneo: widget.idTorneo));
@@ -455,7 +443,6 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
           showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
- 
       showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
     }
   }
@@ -464,7 +451,6 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
       ResultadoService entityService, ResultadoModel entity) async {
     try {
       await entityService.updateLiga(entity).then((result) {
-
         if (result["tipo_mensaje"] == '0') {
           showSnackbar(result["mensaje"], scaffoldKey);
           //     navegation(context, TourmentPage(idTorneo: widget.idTorneo));
@@ -472,8 +458,7 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
           showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
-
-      showSnackbar(STATUS_ERROR+ ' ${error.toString()} ', scaffoldKey);
+      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
     }
   }
 

@@ -58,7 +58,7 @@ class _LogOutPageState extends State<LogOutPage> {
         _contactText = "People API gave a ${response.statusCode} "
             "response. Check logs for details.";
       });
-      //print('People API ${response.statusCode} response: ${response.body}');
+     
       return;
     }
     final Map<String, dynamic> data = json.decode(response.body);

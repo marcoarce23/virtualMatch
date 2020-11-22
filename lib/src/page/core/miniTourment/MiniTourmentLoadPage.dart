@@ -165,8 +165,6 @@ class _MiniTourmentLoadPageState extends State<MiniTourmentLoadPage> {
         entity.foto = entityModelGet.foto;
         image = entityModelGet.foto;
       }
-      print(entity.foto);
-      print('idTORNEOOOO: ${entity.idTorneo}');
     }
     unaVez = 1;
 
@@ -423,8 +421,6 @@ class _MiniTourmentLoadPageState extends State<MiniTourmentLoadPage> {
     if (!formKey.currentState.validate()) return;
     formKey.currentState.save();
 
-    print('myControllerSOY EL VALOR DE ' + controllerDetail.text);
-    print('ID PLAYERRR ' + prefs.idPlayer);
     setState(() => _save = true);
     loadingEntity();
     executeCUD(entityService, entity);
@@ -432,7 +428,7 @@ class _MiniTourmentLoadPageState extends State<MiniTourmentLoadPage> {
   }
 
   void loadingEntity() {
-    print('fecgaaaa: ${_inputFieldDateController.text}');
+  
     entity.idTorneo =
         (entity.states == StateEntity.Insert) ? 0 : entity.idTorneo;
     entity.idOrganizacion = 2;
@@ -451,15 +447,13 @@ class _MiniTourmentLoadPageState extends State<MiniTourmentLoadPage> {
   void executeCUD(TourmentService entityService, TorneoModel entity) async {
     try {
       await entityService.repository(entity).then((result) {
-        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
-
         if (result["tipo_mensaje"] == '0') {
           showSnackbar(result["mensaje"], scaffoldKey);
         } else
           showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
-      showSnackbar(STATUS_ERROR+ ' ${error.toString()} ', scaffoldKey);
+      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
     }
   }
 
@@ -475,10 +469,10 @@ class _MiniTourmentLoadPageState extends State<MiniTourmentLoadPage> {
     final photo = await ImagePicker().getImage(source: origen);
     if (photo != null) {
       image = await entityImage.uploadImage(photo.path);
-      print('imagennnnn $image');
+
       setState(() {
         entity.foto = image;
-        print('cargadod e iagen ${entity.foto}');
+       
       });
     }
   }

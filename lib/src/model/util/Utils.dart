@@ -18,23 +18,7 @@ String obtenerDepartamento(int idDepto) {
   return _departamento;
 }
 
-// enviarNotificaciones(String urlGetToken, String clave, String titulo,
-//     String valorTitulo, String subTitulo, String subTituloValor) {
-//   Token entityToken;
-//   final dataMapToken =
-//       new Generic().getAll(new Token(), urlGetToken, primaryKeyGetToken);
 
-//   dataMapToken.then((value) {
-//     if (value.length > 0) {
-//       for (int i = 0; i < value.length; i++) {
-//         entityToken = value[i];
-//         //    //print('entrooo las veces de: $entityToken');
-//         new Generic().sebnFCM(entityToken.llaveToken, clave,
-//             '$titulo - $valorTitulo - $subTitulo $subTituloValor - Fecha - ${DateTime.now()}');
-//       }
-//     }
-//   });
-// }
 
 int daysInMonth(int month) {
   var now = DateTime.now();
@@ -46,18 +30,3 @@ int daysInMonth(int month) {
   return lastDayDateTime.day;
 }
 
-// Future<LatLng> getLocation() async {
-//   final Location location = Location();
-//   LocationData location1;
-//   LocationData locationResult;
-//   try {
-//     locationResult = await location.getLocation();
-//   } on PlatformException catch (e) {
-//     if (e.code == 'PERMISSION DENIED')
-//       print('Permission denied');
-//     else if (e.code == 'PERMISSION DENIED_NEVER_ASK')
-//       print('Permission denied enable ask');
-//   }
-//   location1 = locationResult;
-//   return LatLng(location1.latitude, location1.longitude);
-// }

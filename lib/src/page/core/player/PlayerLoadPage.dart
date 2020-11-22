@@ -71,7 +71,7 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
 
   @override
   Widget build(BuildContext context) {
-    print('ID PALYER: ${prefs.idPlayer.toString()}');
+  
     entity.states = StateEntity.Insert;
     entity.foto = image;
 
@@ -157,7 +157,6 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
   }
 
   Widget _fields(BuildContext context) {
-    print('DEBERIA SETEAR EL PDSN ${entity.idPsdn}');
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
@@ -391,9 +390,6 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
 
     if (!formKey.currentState.validate()) return;
     formKey.currentState.save();
-
-    print('myControllerSOY EL VALOR DE  ${prefs.idPlayer.toString()}');
-
     setState(() => _save = true);
     loadingEntity(_result);
 
@@ -442,12 +438,11 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
 
     try {
       await entityService.repository(entity, API + _url).then((result) {
-
         if (result["tipo_mensaje"] == '0') {
           if (entity.states == StateEntity.Insert) {
             prefs.idPlayer = result["data"].toString();
           }
-            showSnackbar(result["mensaje"].toString(), scaffoldKey);
+          showSnackbar(result["mensaje"].toString(), scaffoldKey);
           enviarNotificaciones(
               urlNotification,
               'Jugador',
@@ -477,8 +472,6 @@ class _PlayerLoadPageState extends State<PlayerLoadPage> {
       image = await entityImage.uploadImage(photo.path);
       setState(() {
         entity.foto = image;
-
-        //print('cargadod e iagen ${entity.foto}');
       });
     }
   }

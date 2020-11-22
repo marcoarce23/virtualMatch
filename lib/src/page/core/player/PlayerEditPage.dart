@@ -88,7 +88,6 @@ class _PlayerEditPageState extends State<PlayerEditPage> {
   }
 
   Widget futureBuilder(BuildContext context) {
-    print('XXXXX: ${prefs.idPlayer}');
     return FutureBuilder(
         future: entityGet.getId(
             new model.JugadorModel(), int.parse(prefs.idPlayer)),
@@ -213,7 +212,7 @@ class _PlayerEditPageState extends State<PlayerEditPage> {
           // ),
           PopupMenuItem(
             value: 1,
-            child: Text("Edita tu Perfil"),
+            child: Text("Edita tu Perfil de Jugador"),
           ),
           // PopupMenuItem(
           //   value: 2,

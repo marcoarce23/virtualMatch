@@ -5,6 +5,7 @@ import 'package:virtual_match/src/model/entity/EntityFromJson/EquipoModel.dart'
     as gets;
 import 'package:virtual_match/src/model/util/Const.dart';
 import 'package:virtual_match/src/model/util/StatusCode.dart';
+
 import 'package:virtual_match/src/page/home/HomePage.dart';
 import 'package:virtual_match/src/service/core/EquipmentService.dart';
 import 'package:virtual_match/src/style/Style.dart';
@@ -152,7 +153,7 @@ class _EquipmentListPageState extends State<EquipmentListPage> {
               Navigator.pushNamed(context, 'equipment', arguments: entity);
               break;
             case 2:
-              print('eliminar ${entity.agrupador}');
+             
               setState(() {
                 executeDelete(
                     entity.agrupador.toString(), prefs.idPlayer.toString());
@@ -216,7 +217,6 @@ class _EquipmentListPageState extends State<EquipmentListPage> {
   void executeDelete(String agrupador, String jugador) async {
     try {
       await entityService.delete(agrupador, jugador).then((result) {
-        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0')
           setState(() {
             showSnackbar(result["mensaje"], scaffoldKey);
@@ -233,14 +233,13 @@ class _EquipmentListPageState extends State<EquipmentListPage> {
       NotificationService entityService, model.EquipoModel entity) async {
     try {
       await entityService.repository(entity).then((result) {
-        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0')
           showSnackbar(result["mensaje"], scaffoldKey);
         else
           showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
-      showSnackbar(STATUS_ERROR+ ' ${error.toString()} ', scaffoldKey);
+      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
     }
   }
 } // FIN DE LA CLASE

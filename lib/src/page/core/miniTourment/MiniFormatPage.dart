@@ -189,7 +189,7 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
                       onChanged: (value) {
                         setState(() {
                           _opcionTipoModalidad = value;
-                          print('OPCION MOALDIDAD $_opcionTipoModalidad');
+     
                         });
                       },
                     ),
@@ -202,8 +202,7 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
   }
 
   Widget _comboCodTroneo(String _opcionCodTorneos) {
-    print("prefsss:${prefs.idPlayer.toString()}");
-
+  
     return Center(
         child: FutureBuilder(
             future: entityGet1.get1(
@@ -401,7 +400,7 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
     if (!formKey.currentState.validate()) return;
     formKey.currentState.save();
 
-    //print('myControllerSOY EL VALOR DE ' + controllerDetail.text);
+  
 
     setState(() => _save = true);
     loadingEntity();
@@ -423,7 +422,6 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
   void executeCUD(TourmentService entityService, FormatoModel entity) async {
     try {
       await entityService.repositoryDetail(entity).then((result) {
-        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
         if (result["tipo_mensaje"] == '0') {
           showSnackbar(result["mensaje"], scaffoldKey);
 
@@ -432,7 +430,7 @@ class _MiniFormatLoadPageState extends State<MiniFormatLoadPage> {
           showSnackbar(result["mensaje"], scaffoldKey);
       });
     } catch (error) {
-      showSnackbar(STATUS_ERROR+ ' ${error.toString()} ', scaffoldKey);
+      showSnackbar(STATUS_ERROR + ' ${error.toString()} ', scaffoldKey);
     }
     //  navegation(context, FormatLoadPage());
   }

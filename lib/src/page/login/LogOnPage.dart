@@ -435,7 +435,7 @@ class _LogOnPageState extends State<LogOnPage> {
   }
 
   _submitInvitado() {
-    print('entra a boton invitado');
+
     prefs.idPlayer = '-1';
     prefs.idLogin = '-1';
 
@@ -443,7 +443,7 @@ class _LogOnPageState extends State<LogOnPage> {
   }
 
   _submit() async {
-    print('IDPLAYERRR;; ${prefs.idPlayer.toString()}');
+   // print('IDPLAYERRR;; ${prefs.idPlayer.toString()}');
 
     if (prefs.idPlayer != '-1') {
       navegation(context, HomePage());
@@ -465,8 +465,6 @@ class _LogOnPageState extends State<LogOnPage> {
   executeCUD(LoginService entityService, model.LoginModel entity) async {
     try {
       await entityService.repository(entity).then((result) {
-        print('EL RESULTTTTT: ${result["tipo_mensaje"]}');
-
         if (result["tipo_mensaje"] == '0') {
           prefs.idLogin = result["data"]["idLogin"].toString();
           prefs.idPlayer = result["data"]["idPlayer"].toString();

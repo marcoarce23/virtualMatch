@@ -395,9 +395,7 @@ class _AlbumLoadPagePageState extends State<AlbumLoadPage> {
     if (!formKey.currentState.validate()) return;
     formKey.currentState.save();
 
-    print('myControllerSOY EL VALOR DE ' + myController.text);
-
-    setState(() => _save = true);
+      setState(() => _save = true);
     loadingEntity();
     executeCUD(entityBloc, entity, _result);
     setState(() => _save = false);
@@ -451,73 +449,10 @@ class _AlbumLoadPagePageState extends State<AlbumLoadPage> {
       setState(() {
         entity.foto = image;
 
-        //print('cargadod e iagen ${entity.foto}');
+   
       });
     }
   }
 
-  // _procesarFile(String file) async {
-  //   valueImage = 1;
-
-  //   if (photo != null) {
-  //     image = await entityImage.uploadImage(file);
-  //     setState(() {
-  //       entity.foto = image;
-  //       //print('cargadod e iagen ${entity.foto}');
-  //     });
-  //   }
-  // }
-
-  // _procesarVideo2(String file) async {
-  //   valueImage = 2;
-
-  //   image = await entityImage.uploadVideo(file);
-  //   setState(() {
-  //     entity.foto = image;
-  //     //print('cargadod e iagen ${entity.foto}');
-  //   });
-  // }
-
-  // void _pickPDF() async {
-  //   try {
-  //     var _extension = 'PDF';
-  //     _pdfPath = await FilePicker.getFilePath(
-  //         type: FileType.custom,
-  //         allowedExtensions: (_extension?.isNotEmpty ?? false)
-  //             ? _extension?.replaceAll(' ', '')?.split(',')
-  //             : null);
-
-  //     setState(() {});
-  //     if (_pdfPath == '') {
-  //       return;
-  //     }
-  //     valueImage = 1;
-  //     _procesarFile(_pdfPath);
-  //   } on PlatformException catch (exception) {
-  //     showSnackbar('Se produjo un error. $exception', scaffoldKey);
-  //   }
-  // }
-
-  // void _pickVideo() async {
-  //   try {
-  //     var _extension = 'MP4';
-  //     _pdfPath = await FilePicker.getFilePath(
-  //         type: FileType.custom,
-  //         allowedExtensions: (_extension?.isNotEmpty ?? false)
-  //             ? _extension?.replaceAll(' ', '')?.split(',')
-  //             : null);
-
-  //     setState(() {});
-  //     if (_pdfPath == '') {
-  //       return;
-  //     }
-  //     //print("File path11: " + _pdfPath);
-  //     _procesarVideo2(_pdfPath);
-  //     // setState(() {
-  //     //   _isLoading = true;
-  //     // });
-  //   } on PlatformException catch (exception) {
-  //     showSnackbar('Se produjo un error. $exception', scaffoldKey);
-  //   }
-  // }
+  
 }

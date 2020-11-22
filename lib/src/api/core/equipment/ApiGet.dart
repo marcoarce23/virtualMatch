@@ -72,7 +72,7 @@ class ApiGet {
     Map<String, dynamic> decodeData;
 
     final _apiRest = api['getMiEquipo'][0].toString() + '/' + idPlayer;
-    print('SSSSSSSS: $_apiRest');
+    
     final response = await http.get(_apiRest);
 
     print(_apiRest);

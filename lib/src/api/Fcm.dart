@@ -29,15 +29,14 @@ class FCM {
     String sJSON =
         '{"to": "$token","notification": {"title": "Virtual Match", "body": "$data"}, "data":{"data": "$data"}}';
     String _body = sJSON;
-  //  print('body: $_body');
+  
     final response = await http.post(urlFCM,
         headers: {"Authorization": keyFCM, "Content-Type": contentTypeJSON},
         body: _body);
 
     if (response.statusCode == 200) {
     } else {}
-    print(
-        'ENvio FCM ------: ${response.headers} ---- ${response.body} ----  ${response.statusCode} ---- ${response.request}');
+   
     return dataMap(response);
   }
 }
