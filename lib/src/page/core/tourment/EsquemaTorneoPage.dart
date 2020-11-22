@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:virtual_match/src/model/Preference.dart';
@@ -149,8 +150,20 @@ class _EsquemaTorneoPageState extends State<EsquemaTorneoPage> {
           crossAxisAlignment: CrossAxisAlignment.end,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(entity.jugador1),
-            Text(entity.jugador2),
+            AutoSizeText(
+              entity.jugador1,
+              overflow: TextOverflow.ellipsis,
+              softWrap: true,
+              maxLines: 2,
+              textAlign: TextAlign.left,
+            ),
+            AutoSizeText(
+              entity.jugador2,
+              overflow: TextOverflow.ellipsis,
+              softWrap: true,
+              maxLines: 2,
+              textAlign: TextAlign.left,
+            )
           ],
         ),
 
