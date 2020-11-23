@@ -93,7 +93,7 @@ class _LogOnPageState extends State<LogOnPage> {
           await ImeiPlugin.getImei(shouldShowRequestPermissionRationale: false);
       idunique = await ImeiPlugin.getId();
     } catch (exception) {
-      showSnackbar('Se produjo un error. $exception', scaffoldKey);
+      //showSnackbar('Se produjo un error. $exception', scaffoldKey);
     }
 
     // If the widget was removed from the tree while the asynchronous platform
