@@ -470,19 +470,21 @@ class _LogOnPageState extends State<LogOnPage> {
 
           if (int.parse(prefs.idPlayer) > 0) {
             prefs.idOrganization =
-                result["jugador"]["idOrganizacion"].toString();
-            prefs.idDepartament =
-                int.parse(result["jugador"]["idaDepartamento"].toString());
-            prefs.nameUser = result["jugador"]["nombre"].toString();
-            prefs.apellido = result["jugador"]["apellido"].toString();
-            prefs.avatarImage = result["jugador"]["foto"].toString();
-            prefs.idPsdn = result["jugador"]["idPsdn"].toString();
-            prefs.telefono = result["jugador"]["telefono"].toString();
-            prefs.idaSexo = int.parse(result["jugador"]["idaSexo"].toString());
-            prefs.informacionComplementaria =
-                result["jugador"]["informacionComplementaria"].toString();
-            prefs.facebook = result["jugador"]["facebook"].toString();
-            prefs.twitter = result["jugador"]["twitter"].toString();
+                result["data"]["jugador"]["idOrganizacion"].toString();
+            prefs.idDepartament = int.parse(
+                result["data"]["jugador"]["idaDepartamento"].toString());
+            prefs.nameUser = result["data"]["jugador"]["nombre"].toString();
+            prefs.apellido = result["data"]["jugador"]["apellido"].toString();
+            prefs.avatarImage = result["data"]["jugador"]["foto"].toString();
+            prefs.idPsdn = result["data"]["jugador"]["idPsdn"].toString();
+            prefs.telefono = result["data"]["jugador"]["telefono"].toString();
+            prefs.idaSexo =
+                int.parse(result["data"]["jugador"]["idaSexo"].toString());
+            prefs.informacionComplementaria = result["data"]["jugador"]
+                    ["informacionComplementaria"]
+                .toString();
+            prefs.facebook = result["data"]["jugador"]["facebook"].toString();
+            prefs.twitter = result["data"]["jugador"]["twitter"].toString();
           }
 
           navegation(context, IntroPage());

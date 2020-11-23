@@ -159,14 +159,9 @@ class _RegisterScoredPageState extends State<RegisterScoredPage> {
           _buttonGoleadores('Registrar', 18, 30),
         ],
       ));
-<<<<<<< HEAD
-    } else
-      return [];
-=======
     } else {
       return Container();
     }
->>>>>>> master11
   }
 
   Widget _comboJugador() {
