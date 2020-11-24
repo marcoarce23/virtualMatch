@@ -182,14 +182,14 @@ class _LogOnPageState extends State<LogOnPage> {
 
     switch (result.status) {
       case AuthorizationStatus.authorized:
-        prefs.nameUser = (result.credential.fullName == null)
-            ? 'user apple'
+        prefs.nameUser = (result.credential.fullName.familyName == null)
+            ? result.credential.user.toString()
             : result.credential.fullName.givenName.toString() +
-                ' user apple' +
+                ' ' +
                 result.credential.fullName.familyName;
 
         prefs.email = (result.credential.email == null)
-            ? 'email apple'
+            ? ''
             : result.credential.email.toString();
         prefs.avatarImage = IMAGE_LOGO;
         prefs.userId = result.credential.user.toString();
